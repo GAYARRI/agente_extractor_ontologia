@@ -1,217 +1,212 @@
 import os
+from dotenv import load_dotenv
 
 from src.site_crawler import SiteCrawler
 from src.ner_extractor import NERExtractor
-from src.embedding_entity_linker import EmbeddingEntityLinker
+from src.ontology_loader import OntologyLoader
+from src.ontology_entity_linker import OntologyEntityLinker
 from src.relation_extractor import RelationExtractor
 from src.tourism_property_extractor import TourismPropertyExtractor
 from src.rdf_builder import RDFBuilder
-from src.ontology_entity_linker import OntologyEntityLinker
-from src.ontology_loader import OntologyLoader
 
 
+def normalize_entity_key(text: str) -> str:
+    return " ".join(text.strip().lower().split())
 
-START_URL = "https://webtenerife.com"
 
-BASE_URI = "http://tourismkg.com/entity/"
+def get_entity_text(entity):
+    if hasattr(entity, "text"):
+        return entity.text
+    if isinstance(entity, dict):
+        return entity.get("text")
+    return None
 
 
-ONTOLOGY_PATH = "ontology/core.ttl" 
+def main():
+    load_dotenv()
 
+    seed_urls = [
+        "https://www.visitmadrid.es/donde-ir/area-metropolitana/rivas-vaciamadrid",
+    ]
 
-ontology = OntologyLoader(ONTOLOGY_PATH)
+    crawler = SiteCrawler(max_pages=10)
 
-ontology_classes = ontology.get_classes()
 
-ontology_properties = ontology.get_properties()
+    pages = crawler.crawl(seed_urls)
+        
+    print(f"Total de páginas recuperadas: {len(pages)}")
 
-# -----------------------------
-# Inicializar componentes
-# -----------------------------
+    ner_extractor = NERExtractor()
+    relation_extractor = RelationExtractor()
+    property_extractor = TourismPropertyExtractor()
+    rdf_builder = RDFBuilder()
 
-crawler = SiteCrawler(START_URL, max_pages=None)
-
-ner = NERExtractor()
-
-entity_linker = EmbeddingEntityLinker()
-
-relation_extractor = RelationExtractor()
-
-property_extractor = TourismPropertyExtractor()
-
-builder = RDFBuilder(BASE_URI)
-
-
-# almacenar entidades para markdown
-all_entities = []
-
-
-# -----------------------------
-# CRAWL
-# -----------------------------
-
-pages = crawler.crawl_site()
-
-print("\nNúmero de páginas encontradas:", len(pages))
-
-
-# -----------------------------
-# ANALIZAR PAGINAS
-# -----------------------------
-
-for page in pages:
-
-    url = page["url"]
-    html = page["html"]
-    text = page["text"]
-
-    print("\n==============================")
-    print("Analizando página:", url)
-    print("==============================")
-
-    print("HTML length:", len(html))
-    print("TEXT length:", len(text))
-
-    # -----------------------------
-    # NER
-    # -----------------------------
-
-    candidates = ner.extract(text)
-
-    print("\nEntidades candidatas:\n")
-    print(candidates)
-
-    if not candidates:
-        continue
-
-    # -----------------------------
-    # ENTITY LINKING
-    # -----------------------------
-
-    linked_entities = entity_linker.link(candidates)
-
-    print("\nEntidades detectadas:\n")
-    print(linked_entities)
-
-    # -----------------------------
-    # PROCESAR ENTIDADES
-    # -----------------------------
-
-    for entity in linked_entities:
-
-        name = entity["name"]
-        ont_class = entity["class"]
-
-        uri = builder.create_uri(name)
-
-        # guardar instancia RDF
-        builder.add_instance(uri, ont_class)
-
-        # -----------------------------
-        # PROPIEDADES
-        # -----------------------------
-
-        properties = property_extractor.extract(html, text, url, name)
-
-        if isinstance(properties, dict):
-
-            builder.add_properties(uri, properties)
-
-        elif isinstance(properties, list):
-
-            for p in properties:
-
-                if isinstance(p, dict):
-
-                    predicate = p.get("property")
-                    value = p.get("value")
-
-                    if predicate and value:
-
-                        builder.add_property(uri, predicate, value)
-
-        # -----------------------------
-        # almacenar entidad para markdown
-        # -----------------------------
-
-        entity_data = {
-            "name": name,
-            "class": ont_class,
-            "properties": properties
-        }
-
-        all_entities.append(entity_data)
-
-    # -----------------------------
-    # RELACIONES
-    # -----------------------------
-
-    relations = relation_extractor.extract(text, linked_entities)
-
-    if relations:
-
-        for rel in relations:
-
-            builder.add_relation(rel)
-
-
-# -----------------------------
-# GUARDAR RDF
-# -----------------------------
-
-builder.save("knowledge_graph.ttl")
-
-print("\nKnowledge Graph guardado en knowledge_graph.ttl")
-
-
-# -----------------------------
-# GENERAR MARKDOWN
-# -----------------------------
-
-print("\nGenerando markdown de entidades...")
-
-with open("entities.md", "w", encoding="utf-8") as f:
-
-    f.write("# Tourism Knowledge Graph Entities\n\n")
-
-    classes = {}
-
-    for entity in all_entities:
-
-        cls = entity["class"]
-
-        if cls not in classes:
-            classes[cls] = []
-
-        classes[cls].append(entity)
-
-    for cls, ents in classes.items():
-
-        f.write(f"## {cls}\n\n")
-
-        for e in ents:
-
-            f.write(f"- **{e['name']}**\n")
-
-            props = e["properties"]
-
-            if isinstance(props, dict):
-
-                for p, v in props.items():
-
-                    f.write(f"  - {p}: {v}\n")
-
-            elif isinstance(props, list):
-
-                for p in props:
-
-                    if isinstance(p, dict):
-
-                        f.write(
-                            f"  - {p.get('property')} : {p.get('value')}\n"
-                        )
-
-            f.write("\n")
-
-
-print("Markdown generado: entities.md")
+    ontology_loader = OntologyLoader("ontology/core.ttl")
+    ontology_data = ontology_loader.load()
+
+    entity_linker = OntologyEntityLinker(ontology_data["classes"])
+
+    pages = crawler.crawl(seed_urls)
+    print(f"Total de páginas recuperadas: {len(pages)}")
+
+    # Índice global para no duplicar entidades en todo el KG
+    entity_index = {}
+
+    for page in pages:
+        try:
+            url = page.get("url")
+            text = page.get("text", "")
+            html = page.get("html", "")
+
+            if not text or len(text.strip()) < 50:
+                continue
+
+            print(f"\nProcesando página: {url}")
+
+            entities = ner_extractor.extract(text)
+            print("Entidades detectadas:")
+            print("Entidades detectadas:")
+            for e in entities[:10]:
+                print(e)
+
+            page_entities = []
+
+            for entity in entities:
+                entity_text = get_entity_text(entity)
+
+                if not entity_text:
+                    continue
+
+                entity_text = entity_text.strip()
+                if not entity_text:
+                    continue
+
+                entity_key = normalize_entity_key(entity_text)
+
+                # 1. Clasificación ontológica
+                result = entity_linker.classify(entity_text)
+                ontology_class = result["class"]
+                confidence = result["confidence"]
+
+                # filtro de confianza
+                if confidence < 0.45:
+                    continue
+
+                # Guardar sobre el objeto si existe el atributo
+                if hasattr(entity, "ontology_class"):
+                    entity.ontology_class = ontology_class
+                if hasattr(entity, "confidence"):
+                    entity.confidence = confidence
+
+                # 2. Crear instancia RDF una sola vez
+                if entity_key not in entity_index:
+                    entity_uri = rdf_builder.add_instance(
+                        entity_name=entity_text,
+                        ont_class=ontology_class,
+                        label=entity_text,
+                    )
+
+                    rdf_builder.add_provenance(
+                        entity_uri,
+                        source_url=url,
+                        confidence=confidence,
+                        extractor="ontology_entity_linker",
+                    )
+
+                    entity_index[entity_key] = {
+                        "text": entity_text,
+                        "uri": entity_uri,
+                        "class": ontology_class,
+                        "confidence": confidence,
+                    }
+                else:
+                    entity_uri = entity_index[entity_key]["uri"]
+
+                page_entities.append(
+                    {
+                        "text": entity_text,
+                        "key": entity_key,
+                        "uri": entity_uri,
+                        "class": ontology_class,
+                        "confidence": confidence,
+                    }
+                )
+
+                # 3. Extraer propiedades
+                
+                try:
+                    html = page.get("html", "")
+
+                    extracted_properties = property_extractor.extract(
+                        html=html,
+                        text=text,
+                        url=url,
+                        entity=entity_text,
+                    )
+
+                    if isinstance(extracted_properties, dict):
+                        for prop_name, prop_value in extracted_properties.items():
+                            if prop_value is None or prop_value == "":
+                                continue
+
+                            rdf_builder.add_data_property(
+                                subject=entity_uri,
+                                prop_name=prop_name,
+                                value=prop_value,
+                            )
+
+                except Exception as prop_error:
+                    print(f"  [WARN] Error extrayendo propiedades para '{entity_text}': {prop_error}")    
+                    
+
+            # 4. Extraer relaciones entre entidades
+            try:
+                relations = relation_extractor.extract(page_entities, text)
+            except Exception as rel_error:
+                print(f"  [WARN] Error extrayendo relaciones en {url}: {rel_error}")
+                relations = []
+
+            for rel in relations:
+                subject_text = rel.get("subject")
+                predicate = rel.get("predicate")
+                object_text = rel.get("object")
+                rel_confidence = rel.get("confidence", 0.0)
+
+                if not subject_text or not predicate or not object_text:
+                    continue
+
+                subject_key = normalize_entity_key(subject_text)
+                object_key = normalize_entity_key(object_text)
+
+                if subject_key not in entity_index or object_key not in entity_index:
+                    continue
+
+                subject_uri = entity_index[subject_key]["uri"]
+                object_uri = entity_index[object_key]["uri"]
+
+                rdf_builder.add_object_property(
+                    subject=subject_uri,
+                    prop_name=predicate,
+                    obj=object_uri,
+                )
+
+                rdf_builder.add_provenance(
+                    subject_uri,
+                    source_url=url,
+                    confidence=rel_confidence,
+                    extractor="relation_extractor",
+                )
+
+        except Exception as page_error:
+            print(f"[ERROR] Fallo procesando página {page.get('url', 'unknown')}: {page_error}")
+            continue
+
+    output_path = "knowledge_graph.ttl"
+    rdf_builder.save(output_path)
+
+    print(f"\nKG generado correctamente en: {output_path}")
+    print(f"Total de triples: {rdf_builder.size()}")
+
+
+if __name__ == "__main__":
+    main()

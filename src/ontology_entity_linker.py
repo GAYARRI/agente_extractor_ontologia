@@ -1,47 +1,78 @@
 from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
+from rapidfuzz import fuzz
+import numpy as np
 
 
 class OntologyEntityLinker:
+    """
+    Clasifica entidades usando las clases de la ontología.
+    Combina:
+        - similitud semántica (embeddings)
+        - similitud léxica
+    """
 
     def __init__(self, ontology_classes):
+        """
+        ontology_classes debe ser un dict tipo:
 
-        print("Cargando modelo de embeddings...")
+        {
+            "Hotel": {
+                "label": "Hotel",
+                "description": "Tourist accommodation establishment",
+                "aliases": ["hotel", "resort", "hostel"]
+            },
+            ...
+        }
+        """
 
         self.model = SentenceTransformer("all-MiniLM-L6-v2")
 
-        self.ontology_classes = ontology_classes
+        self.classes = ontology_classes
+        self.class_names = list(ontology_classes.keys())
 
-        print("Generando embeddings de clases ontológicas...")
+        # Construir textos de referencia
+        self.class_texts = []
+        for cname, data in ontology_classes.items():
 
-        self.class_embeddings = self.model.encode(self.ontology_classes)
+            parts = [data.get("label", cname)]
 
+            if data.get("description"):
+                parts.append(data["description"])
 
-    def classify(self, entity):
+            if data.get("aliases"):
+                parts.extend(data["aliases"])
 
-        entity_embedding = self.model.encode([entity])
+            self.class_texts.append(" ".join(parts))
 
-        similarity = cosine_similarity(
-            entity_embedding,
-            self.class_embeddings
-        )
+        self.class_embeddings = self.model.encode(self.class_texts)
 
-        best_index = similarity.argmax()
+    def classify(self, entity_text):
+        """
+        Devuelve:
+            clase ontológica
+            score
+        """
 
-        return self.ontology_classes[best_index]
+        entity_embedding = self.model.encode([entity_text])[0]
 
+        # Similaridad semántica
+        semantic_scores = np.dot(self.class_embeddings, entity_embedding)
 
-    def link(self, entities):
+        # Similaridad léxica
+        lexical_scores = []
+        for cname in self.class_names:
+            lexical_scores.append(
+                fuzz.token_set_ratio(entity_text.lower(), cname.lower()) / 100
+            )
 
-        results = []
+        lexical_scores = np.array(lexical_scores)
 
-        for entity in entities:
+        # combinación híbrida
+        scores = 0.7 * semantic_scores + 0.3 * lexical_scores
 
-            ont_class = self.classify(entity)
+        best_idx = int(np.argmax(scores))
 
-            results.append({
-                "name": entity,
-                "class": ont_class
-            })
-
-        return results
+        return {
+            "class": self.class_names[best_idx],
+            "confidence": float(scores[best_idx])
+        }

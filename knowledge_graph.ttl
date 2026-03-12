@@ -1,596 +1,2471 @@
-@prefix ns1: <http://tourismkg.com/property/> .
-
-<http://tourismkg.com/entity/Abama> a ns1:Mountain ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Abama_El_Spa> a ns1:Place ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Abama_The_Ritz-Carlton_Tenerife> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Adeje> a ns1:Event ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/AdejeLa> a ns1:Event ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Albergue_Bolico_Situado> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Andy_Timmons> a ns1:Mountain ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Andy_Timmons_Band> a ns1:Place ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Antropologia> a ns1:Theater ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Antropologia_de_Tenerife> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Apartamentos_Andorra_III> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Arca_de_Noe> a ns1:Monument ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Arico> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Arte> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ascension> a ns1:Mountain ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Aullidos_Tour_2526> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Avistamiento_de_aves_Escondido> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Avistamiento_de_cetaceos_Especies> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Barranco_del_Infierno> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Blog_6> a ns1:Place ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Bodegas> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Bolico> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Buenavista_del_Norte> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Buenavista_del_Playas_Playa_de_Abama> a ns1:Theater ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Canarias> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Carnaval> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Carnaval_Carnaval> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Carnaval_Internacional_de_Los_Cristianos> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casa_Carta> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casa_Las_Perez> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casa_Lercaro> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casa_Rural_Las_Perez_Situada> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casa_de_Carta> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casa_de_Los_Balcones> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casa_de_los_Balcones> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casa_del_Vino> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Casas_bioclimaticas_Pensiones_Silene_Orotava_Pension_Silene_Orotava> a ns1:NaturalResource ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Charco_del_Viento> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Climatologia> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Consejos> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Corona_Forestal> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Costa_Adeje> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/De_pronto_se_posa_justo_a_dos_metros_delante_de_ti:_su_plumaje…_Rutas_Ruta_autoguiada_para_conocer_la_historia_de_las…_​​Tienes_la_opción_de_realizar_un_recorrido_autoguiado_por_un_total_de_siete_puntos_dentro_del_Parque_Nacional_del_Teide_en_el_que_te_mostramos_la…_Ruta_de_la_Miel_en_Tenerife_Durante_el_segundo_fin_de_semana_de_mayo_se> ns1:hasEvent <http://tourismkg.com/entity/una_caminata_por_la_zona_alta_del_municipio_de_Arico> .
-
-<http://tourismkg.com/entity/Deportes_Ciclismo> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Desilena> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Direcciones> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Diviertete> a ns1:TouristInformationOffice ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Don_Carnal> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Donde> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Drago_Milenario> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/El_Guincho> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/El_Hierro> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/El_Sauzal> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/English_Deutsch_francais> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Escuela> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Espana> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Este_inmueble_está> ns1:locatedIn <http://tourismkg.com/entity/el_centro_del…_Ir_a_Qué_visitar_Playa_de_Abama_Si_buscas_un_lugar_tranquilo_donde_relajarte_y_desconectar,_la_playa_de_Abama_es_tu_lugar_ideal> .
-
-<http://tourismkg.com/entity/Estrellas_Michelin> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Feria_de_Artesania_de_Pinolere> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Festival_Internacional_de_Los_Cristianos> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Festival_Internacional_de_Musica_de_Canarias> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Fiesta_de_las_Tradiciones_En_Garachico> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Fiji_Beach_Club> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Fito__Fitipaldis> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Flor> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Garachico> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Gastronomia_Restaurantes> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Gobierno_de_Canarias> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Golf_Luxury_collection_Salud> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Granadilla> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Granadilla_de_Abona> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Guachinches> a ns1:Mountain ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Hotel_Apartamentos_Andorra_III> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Hoteles_The_Ritz-Carlton_Tenerife> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Icod_de_Los_Vinos> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Icod_el_Alto> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ifonche> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ifonche_Municipio> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Iglesia_Parroquial_de_San_Marcos> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Iglesia_de_San_Antonio> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Imprescindibles_Acantilados_de_Isorana> a ns1:NaturalResource ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Isla> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ismael_Serrano> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Jardin_Botanico_de_la_Aclimatacion_de_La_Orotava_EI_Jardin_de_Aclimatacion> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Jardin_de_Orquideas_Sitio_Litre> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_Casa_del_Vino> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_Gomera> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_Hoya> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_La_Casa_Lercaro> a ns1:Place ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_Laguna> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_Museo_de_Historia> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_Orotava> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_Palma> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/La_Villa_de_La_Orotava> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Las_Portelas> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Las_Tradiciones> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Las_Vegas> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Le_Club_Beach_Club_Le_Club> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Loro_Parque_Loro_Parque> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Los_Realejos> a ns1:Place ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Los_Silos> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/MHA> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Mar_de_nubes> a ns1:Monument ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Medano> a ns1:Mountain ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Media_Tipo_de_Volcanes_de_Tenerife_Volcanes_Legendarios> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Mejor_Parque_Zoologico> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Mercado_de_La_Laguna> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Mercados_de_Tenerife> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Mesa_del_Mar> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ministerio_de_Observacion_de_aves_Canario> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Mirador_de_El_Lance> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Mirador_de_Humboldt> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Miradores_Mirador> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Moverse> a ns1:Mountain ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Museo_de_Historia> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Museos_Centro_de_Interpretacion_de_las_Ruinas_del_El_Centro_de_Interpretacion_Castillo_de_San_Cristobal> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Nederlands> a ns1:Place ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Nederlands_Tenerife> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Observatorio_del_Teide_Origenes_Historicos> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ocio_Ocio_Beach> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Oficinas> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Padua> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Paraninfo_de_la_Universidad_de_La_Laguna> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parapente> a ns1:NaturalResource ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parque_Nacional_del_Los_Dos_Valles> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parque_Nacional_del_Teide> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parque_Nacional_del_Teide_Fauna_del_Teide_Caminas> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parque_Natural_de_la_Corona> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parque_Rural_de_Anaga> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parque_Rural_de_Teno> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parque_acuatico_Aqualand_Costa_Adeje_Aqualand> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Parque_del_Drago_Milenario> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Patrimonio_de_la_Humanidad> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Pico_del_Teide> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Pinares_de_Vilaflor> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Playa_de_Abama> a ns1:Theater ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Playa_de_El_Medano> a ns1:Theater ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Playa_de_El_Socorro> a ns1:Theater ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Playa_de_El_Socorro_Estado> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Playa_de_El_Socorro_Fin> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Playa_de_La_Arena> a ns1:Theater ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Plaza_del_Cristo> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Proyecto_Cultural> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Puerto_Colon> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Puerto_de_la> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Puerto_de_la_Pueblos> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Puertos> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Purpurina> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Real_Orden_del_Rey_Carlos_III> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Recinto_Ferial_de_Tenerife> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Reina_Sofia> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Reserva_de_la_Biosfera> a ns1:NaturalResource ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Roque> a ns1:Event ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ruta_Norte> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ruta_de_la_Miel> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Ruta_de_los_Almendros> a ns1:Mountain ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/San_Miguel_de_Abona> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/San_Miguel_de_AbonaEs> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/San_Roque> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Santa_Cruz> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Santa_Cruz_de_Tenerife> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Santa_Cruz_de_TenerifeEl> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Santiago> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Se_trata_de_un_espectáculo_en_el_que_se_exhibe_lo…_Festival_Internacional_de_Música_de_Canarias_Organizado_por_el_Gobierno_de_Canarias,_este_festival_se> ns1:hasEvent <http://tourismkg.com/entity/de_enero_a_febrero_(es_el_único_que_tiene_lugar_durante_los_meses_de_invierno)_y…_Feria_de_Artesanía_de_Pinolere_La_Feria_de_Artesanía_de_Pinolere_es_parte_de_las_iniciativas_de_la_difusión_de_la_cultura_canaria_denominado_“Proyecto_Cultural”_de_la_Asociación…_Carnaval_Carnaval_de_calle_en_Santa_Cruz_de_Tenerife_Las_impresionantes_fantasías_e_interpretaciones_de_los_grupos_del_Carnaval_a_lo_largo_del_proceso_de_concursos_no_llegarían_a_su_máxima_expresión_sin…_Entierro_de_la_sardina_Una_de_las_celebraciones_más_pintorescas_y_arraigadas_del_Carnaval_es_la_despedida_que_los_carnavaleros_le_hacen_a_Don_Carnal_en_el_entierro_de_la…_Excursiones_Excursiones_aéreas_en_Tenerife_Excursiones_terrestres_en_Tenerife_Excursiones_marítimas_en_Tenerife_Ocio_Ocio_Beach_clubs_Fiji_Beach_Club_Un_lugar_en_la_playa_a_favor_de_la_diversidad> .
-
-<http://tourismkg.com/entity/Senderismo> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Senderismo_PR-TF> a ns1:Event ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Sendero_del_Paisaje_Lunar> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Serinus> a ns1:Monument ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Servicios_Blog_Agenda_de_eventos_RSS_Blog_El_tiempo_Profesionales_Convention_Bureau_Film_Commission_Corporativa_Investigacion_Turismo_de_Tenerife_Aviso_legal_Declaracion_de_accesibilidad_Proteccion_de_datos_Transparencia_Sistema_Interno_de_Informacion_Politica> a ns1:TouristInformationOffice ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Silos> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Sur> a ns1:Mountain ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Surf> a ns1:Beach ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Tacoronte> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Taganana> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Taganana_Municipio> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Taucho> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Teatro_Leal> a ns1:Theater ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Teide> a ns1:Event ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Teleferico_del_Teide> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Tenerife> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Tenerife_Deporte> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Tenerife_Destino_Accesible_Siguenos_Sobre_Tenerife_Arquitectura_Climatologia_Gastronomia_Medios_de_comunicacion_La_isla_Multimedia_Galeria_Multimedia_Folletos_Mapas_Material_Interactivo_Videos_Webcams_Visita_Tenerife> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Tenerife_Respira> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/The_Ritz-Carlton_Spa> a ns1:Hotel ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/The_Ritz-Carlton_Tenerife> a ns1:Restaurant ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Tijoco> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Tratamiento_natural_de_Vinoterapia> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/TripAdvisor> a ns1:TourismDestination ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Tropico> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/UNESCO> a ns1:Monument ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Valle_de_Guerra> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Valle_de_La_Orotava> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Vilaflor> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Vilaflor_Estado> a ns1:Bar ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Villa_de_La_Orotava> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Volcanes_de_Tenerife> a ns1:Volcano ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Webcams> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/Webcams_Turismo_Convention_Bureau_Film_Commission_Corporativa_Investigacion_Web> a ns1:Museum ;
-    ns1:url "https://webtenerife.com" .
-
-<http://tourismkg.com/entity/parque_del_Drago> a ns1:CafeOrCoffeeShop ;
-    ns1:url "https://webtenerife.com" .
+@prefix onto: <http://tourismkg.com/ontology/> .
+@prefix prov1: <http://tourismkg.com/provenance/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix res: <http://tourismkg.com/resource/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+res:aktivitäten_für_kinder_und_familien_wie_zoo_aquarium a onto:zoo ;
+    rdfs:label "Aktivitäten für Kinder und Familien wie Zoo Aquarium" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:offers res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.6883234262466431"^^xsd:float,
+        "0.8"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:alcalá_de_henares a onto:alcazar ;
+    rdfs:label "Alcalá de Henares" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Official Tourism Portal of the Government of the Region of Madrid",
+        "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid,
+        res:httptourismkgcomresourcein_der_comunidad_de_madrid,
+        res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:name "Madrid, la capital de España",
+        "Tourism Portal of the Region of Madrid",
+        "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana",
+        "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.49615814685821535"^^xsd:float,
+        "0.9"^^xsd:float,
+        "0.95"^^xsd:float,
+        "1.0"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana",
+        "https://www.visitmadrid.es/en/" .
+
+res:alcázar_de_madrid a onto:alcazar ;
+    rdfs:label "Alcázar de Madrid" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5646133363246918"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:apresentou_inspirese a onto:tourismresource ;
+    rdfs:label "Apresentou Inspire-se" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4715005695819855"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:aproveite a onto:oliveoilmill ;
+    rdfs:label "Aproveite" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:partof res:httptourismkgcomresourcecidade_planos ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4670611390045711"^^xsd:float,
+        "0.8"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:aranjuez_alcalá_de_henares_vilas a onto:valley ;
+    rdfs:label "Aranjuez Alcalá de Henares Vilas" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidade_de_madrid_madri ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4504564191165723"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:aranjuez_palacio_real a onto:palace ;
+    rdfs:label "Aranjuez Palacio Real" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.45125199158986407"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:aranjuez_royal_palace a onto:palace ;
+    rdfs:label "Aranjuez Royal Palace" ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.6285515904426575"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:archivos_de_la_villa a onto:valley ;
+    rdfs:label "Archivos de la Villa" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5130108351890857"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:arco_del_triunfo a onto:monthoftheyear ;
+    rdfs:label "Arco del Triunfo" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45243099093437195"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:art_inscrit_au_patrimoine_culturel_immatériel_de_lhumanité a onto:leisureandculturefacility ;
+    rdfs:label "art inscrit au patrimoine culturel immatériel de l’humanité" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.5085373435701642"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:barrio_de_las_letras a onto:minaret ;
+    rdfs:label "Barrio de las Letras" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4805737488799625"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:barrio_de_latina a onto:urbanviewpoint ;
+    rdfs:label "barrio de Latina" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4919608187675476"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:basílica_de_san_francisco a onto:basilica ;
+    rdfs:label "Basílica de San Francisco" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4901676199652932"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:basílica_de_san_miguel a onto:basilica ;
+    rdfs:label "basílica de San Miguel" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5506921255588532"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:belleza_de_la_naturaleza_ornitología a onto:beautycentre ;
+    rdfs:label "Belleza de la Naturaleza Ornitología" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.45258880257606504"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:biblioteca_musical_víctor_espinós a onto:musicvenue ;
+    rdfs:label "Biblioteca Musical Víctor Espinós" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4536849934001302"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:bien_de_interés_cultural a onto:culturecentre ;
+    rdfs:label "Bien de Interés Cultural" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5483069194329752"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:bike_routes_in_the_region_of_madrid_natural_spaces_in_madrid_discover_the_beauty_of_nature_birdwatching_in_madrid_bird_and_nature_observation_mountain_and_winter_sports_water_sports_in a onto:mountain ;
+    rdfs:label "Bike Routes in the Region of Madrid Natural Spaces in Madrid: Discover the Beauty of Nature Birdwatching in Madrid: Bird and Nature Observation Mountain and Winter Sports Water Sports in" ;
+    onto:belongstocategory res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.5072301656007767"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:calle_de_preciados a onto:playroom ;
+    rdfs:label "calle de Preciados" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45378721172993"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:calle_zurbano a onto:callshop ;
+    rdfs:label "calle Zurbano" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4601688768182482"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:cambio_de_guardia a onto:exchangebureau ;
+    rdfs:label "Cambio de Guardia" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.541562787179024"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:camino_de_las_exquisiteces_de_la_princesa a onto:racetrack ;
+    rdfs:label "Camino de las Exquisiteces de la Princesa" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.48202881977913226"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:campo_del_moro a onto:monthoftheyear ;
+    rdfs:label "Campo del Moro" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.503291552407401"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:canal_de_isabel_ii a onto:canal ;
+    rdfs:label "Canal de Isabel II" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5862971425056458"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:capilla_del_obispo a onto:chapel ;
+    rdfs:label "Capilla del Obispo" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcela_latina ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.6012539565563202"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:casa_de_alba a onto:palace ;
+    rdfs:label "Casa de Alba" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5170956949392954"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:casa_encendida a onto:exchangebureau ;
+    rdfs:label "Casa Encendida" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4740741465772901"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:casa_museo_de_lope_de_vega a onto:exchangebureau ;
+    rdfs:label "Casa Museo de Lope de Vega" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.48197998243409235"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:catedral_de_la_almudena a onto:cathedral ;
+    rdfs:label "Catedral de La Almudena" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.6069896757602692"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:centro a onto:multiadventurecentre ;
+    rdfs:label "Centro" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.516402549468554"^^xsd:float,
+        "1.0"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:centro_cultural_coreano a onto:culturecentre ;
+    rdfs:label "Centro Cultural Coreano" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5153733273347219"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:centro_cultural_de_la_villa a onto:culturecentre ;
+    rdfs:label "Centro Cultural de la Villa" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5173027920722961"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:centro_dramático_nacional a onto:educationalcentre ;
+    rdfs:label "Centro Dramático Nacional" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4981024648462023"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:cerca_cosa a onto:waterfall ;
+    rdfs:label "Cerca Cosa" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.4533154346440968"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:chueca a onto:churroshop ;
+    rdfs:label "Chueca" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:name "Madrid, la capital de España",
+        "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5111646234989167"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:chuecasalesas a onto:churroshop ;
+    rdfs:label "Chueca-Salesas" ;
+    onto:belongstocategory res:httptourismkgcomresourcefiestas_del_orgullo_lgtbiqa_madrid ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.49104118943214414"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:cidade_planos a onto:ciderbar ;
+    rdfs:label "cidade Planos" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.47786364810807364"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:colegiata_de_san_isidro a onto:cloister ;
+    rdfs:label "Colegiata de San Isidro" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46366982806113455"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:colegio_de_ingenieros_de_caminos a onto:trailmtb ;
+    rdfs:label "Colegio de Ingenieros de Caminos" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5056829682878545"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:communauté_de_madrid a onto:monastery ;
+    rdfs:label "Communauté de Madrid" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.4816813101028574"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:comunidad_de_madrid a onto:monastery ;
+    rdfs:label "Comunidad de Madrid" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Madrid, la capital de España",
+        "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5128854428018842"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:comunidad_de_madrid_camino_de_santiago a onto:exchangebureau ;
+    rdfs:label "Comunidad de Madrid Camino de Santiago" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.510050552353567"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:comunidade_de_madri a onto:monastery ;
+    rdfs:label "Comunidade de Madri" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4538039181913648"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:comunidade_de_madrid_esporte a onto:monastery ;
+    rdfs:label "Comunidade de Madrid Esporte" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:offers res:httptourismkgcomresourceesporte,
+        res:httptourismkgcomresourceturismo_ativo_experiências_únicas_gastronomia_planos ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.509506954856821"^^xsd:float,
+        "0.95"^^xsd:float,
+        "0.97"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:comunidade_de_madrid_madri a onto:monastery ;
+    rdfs:label "Comunidade de Madrid Madri" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.47117129479135783"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:comunità_di_madrid a onto:monastery ;
+    rdfs:label "Comunità di Madrid" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.46713069611125524"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:convento_de_las_comendadoras a onto:convent ;
+    rdfs:label "convento de las Comendadoras" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5189617228507996"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:crea_tu_itinerario_profesionales_español_qué_hacer_dónde_ir_planifica_tu_viaje_agenda_crea_tu_itinerario_cerrar_cerrar a onto:agenda ;
+    rdfs:label "Crea tu itinerario Profesionales Español Qué hacer Dónde ir Planifica tu viaje Agenda Crea tu itinerario Cerrar Cerrar" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.5990918159484864"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:crea_tu_itinerario_profesionales_español_qué_hacer_dónde_ir_planifica_tu_viaje_agenda_inicio_dónde_ir_en_la_comunidad_de_madrid_inicio_dónde_ir_en_la_comunidad_de_madrid a onto:agenda ;
+    rdfs:label "Crea tu itinerario Profesionales Español Qué hacer Dónde ir Planifica tu viaje Agenda Inicio Dónde ir en la Comunidad de Madrid Inicio Dónde ir en la Comunidad de Madrid" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5610711753368378"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:crie_seu_itinerário_profissionais_português a onto:itinerary ;
+    rdfs:label "Crie seu itinerário Profissionais Português" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.5633031028967637"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:cuartel_general_del_ejército_del_aire a onto:campsite ;
+    rdfs:label "Cuartel General del Ejército del Aire" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4836102825839345"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:da_comunidade_de_madrid_todos_os_direitos_reservados a onto:retailandfashion ;
+    rdfs:label "da Comunidade de Madrid Todos os direitos reservados" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.47951634701560525"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:defensor_del_pueblo a onto:urbanviewpoint ;
+    rdfs:label "Defensor del Pueblo" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45629737756469035"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:deportes a onto:sportfacility ;
+    rdfs:label "Deportes" ;
+    onto:belongstocategory res:httptourismkgcomresourcerutas_compras_cultura_deporte ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.47865227546010697"^^xsd:float,
+        "0.8"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:deportes_náuticos a onto:wintersportsresort ;
+    rdfs:label "Deportes Náuticos" ;
+    onto:belongstocategory res:httptourismkgcomresourcedeportes ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.4741996429647718"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:destinazioni_esplora a onto:tourismdestination ;
+    rdfs:label "Destinazioni Esplora" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunità_di_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.5090297225274538"^^xsd:float,
+        "0.8"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:die_gran_vía_überrascht_mit_prächtiger_architektur_und_musicaltheatern a onto:musicvenue ;
+    rdfs:label "Die Gran Vía überrascht mit prächtiger Architektur und Musical-Theatern" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.4630452732245127"^^xsd:float,
+        "0.8"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:découvrez_la_communauté_de_madrid_tourisme a onto:exchangebureau ;
+    rdfs:label "Découvrez la Communauté de Madrid Tourisme" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecommunauté_de_madrid ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.4637861004897526"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:edificio_cuzco_iv a onto:chapel ;
+    rdfs:label "Edificio Cuzco IV" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4630064075407775"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:edificio_españa a onto:itinerary ;
+    rdfs:label "Edificio España" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4839920163154602"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:einzigartige_erlebnisse_gastronomía_angebote_für_kinder_und_familien_rutas_einkaufen_kultur_sport_und_aktivtourismus_einzigartige_erlebnisse_gastronomía_angebote_für_kinder_und_familien_rutas_einkaufen_kultur_ciclamadrid a onto:gastronomicresource ;
+    rdfs:label "Einzigartige Erlebnisse Gastronomía Angebote für Kinder und Familien Rutas Einkaufen Kultur Sport und Aktivtourismus Einzigartige Erlebnisse Gastronomía Angebote für Kinder und Familien Rutas Einkaufen Kultur CiclaMadrid" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.4985091260679952"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:el_corte_inglés a onto:hairdressing ;
+    rdfs:label "El Corte Inglés" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4781093961662716"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:el_escorial_collège_universitaire_san_ildefonso a onto:educationalcentre ;
+    rdfs:label "El Escorial Collège Universitaire San Ildefonso" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecommunauté_de_madrid ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.45970463156700136"^^xsd:float,
+        "0.85"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:el_escorial_colégio_san_ildefonso a onto:tourismresource ;
+    rdfs:label "El Escorial Colégio San Ildefonso" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidade_de_madrid_madri ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4632506608963013"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:el_escorial_ville_di_madrid a onto:square ;
+    rdfs:label "El Escorial Ville di Madrid" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunità_di_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.48658029220320964"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:el_mercado_de_san_fernando a onto:urbanviewpoint ;
+    rdfs:label "El Mercado de San Fernando" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4533049428462982"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:enjoy_water_and_nature_golf_in_the_region_of_madrid_0 a onto:golfcourse ;
+    rdfs:label "Enjoy Water and Nature Golf in the Region of Madrid 0" ;
+    onto:belongstocategory res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.4730972687403361"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:espacio_coam a onto:tourismdestination ;
+    rdfs:label "Espacio COAM" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46821086049079896"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:esperienze a onto:singularexperience ;
+    rdfs:label "Esperienze" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.4644415778773172"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:esporte a onto:sportfacility ;
+    rdfs:label "Esporte" ;
+    onto:belongstocategory res:httptourismkgcomresourcecomunidade_de_madrid_esporte ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4816956162452698"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:estación_de_chamberí a onto:chapel ;
+    rdfs:label "Estación de Chamberí" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.47131240918086126"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:estadio_santiago_bernabéu_flamenco a onto:stadium ;
+    rdfs:label "Estadio Santiago Bernabéu Flamenco" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.47515606313216974"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:estatua_del_oso a onto:sanctuary ;
+    rdfs:label "estatua del Oso" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcepuerta_del_sol ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5144361555576324"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:estádio_santiago_bernabéu_flamenco a onto:stadium ;
+    rdfs:label "Estádio Santiago Bernabéu Flamenco" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidade_de_madrid_madri ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.46052191679070636"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:expériences a onto:singularexperience ;
+    rdfs:label "Expériences" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.4886825575910766"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:expériences_uniques_gastronomie_loisirs a onto:gastronomicresource ;
+    rdfs:label "Expériences uniques Gastronomie Loisirs" ;
+    onto:belongstocategory res:httptourismkgcomresourceexpériences ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.5748406467766597"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:fiestas_del_orgullo_lgtbiqa_madrid a onto:square ;
+    rdfs:label "Fiestas del Orgullo LGTBIQA+ Madrid" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5319597683301787"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:fuente_de_la_concha a onto:minaret ;
+    rdfs:label "Fuente de la Concha" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4737207944576557"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:fundación_canal a onto:canal ;
+    rdfs:label "Fundación Canal" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.6195028007030488"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:fundación_fernando_de_castro a onto:castle ;
+    rdfs:label "Fundación Fernando de Castro" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcechueca ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4654307418009814"^^xsd:float,
+        "0.85"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:gabinete_de_historia_natural a onto:historicalorculturalresource ;
+    rdfs:label "Gabinete de Historia Natural" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcepaseo_del_arte ;
+    onto:name "Madrid, la capital de España" ;
+    onto:partof res:httptourismkgcomresourcemuseo_del_prado ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5228957840374537"^^xsd:float,
+        "0.9"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:gasset a onto:gasstation ;
+    rdfs:label "Gasset" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4530685245990753"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:gastronomie_loisirs a onto:gastronomicresource ;
+    rdfs:label "Gastronomie Loisirs" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.6117693386579814"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:gastronomie_traditionnelle a onto:gastronomicresource ;
+    rdfs:label "Gastronomie traditionnelle" ;
+    onto:belongstocategory res:httptourismkgcomresourcegastronomie_loisirs ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.6526858075459798"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:golf a onto:golfcourse ;
+    rdfs:label "Golf" ;
+    onto:belongstocategory res:httptourismkgcomresourcedeportes ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.550566623892103"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:hayedo_de_montejo a onto:monastery ;
+    rdfs:label "Hayedo de Montejo" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5043034026255975"^^xsd:float,
+        "1.0"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:hipódromo_de_la_castellana a onto:racetrack ;
+    rdfs:label "Hipódromo de la Castellana" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5193942289693015"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:hospicio_de_san_fernando a onto:urbanviewpoint ;
+    rdfs:label "Hospicio de San Fernando" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45598271269547314"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:hospital_de_la_latina a onto:publichospital ;
+    rdfs:label "Hospital de La Latina" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcela_latina ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5335136256899152"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:hotel_santo_mauro a onto:hotel ;
+    rdfs:label "Hotel Santo Mauro" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5703253626823426"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:hotel_wellington a onto:hotel ;
+    rdfs:label "hotel Wellington" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5663187980651856"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:hotel_único a onto:hotel ;
+    rdfs:label "hotel Único" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.6595361411571503"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:iglesia_de_montserrat a onto:basilica ;
+    rdfs:label "iglesia de Montserrat" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4595576378805884"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:iglesia_de_san_andrés a onto:basilica ;
+    rdfs:label "iglesia de San Andrés" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5130097796177042"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:iglesia_de_san_antonio a onto:basilica ;
+    rdfs:label "Iglesia de San Antonio" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45866466164588926"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:iglesia_de_san_josé a onto:basilica ;
+    rdfs:label "iglesia de San José" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4715655201011234"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:iglesia_de_san_manuel a onto:basilica ;
+    rdfs:label "Iglesia de San Manuel" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4950432631476172"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:iglesia_de_san_martín a onto:basilica ;
+    rdfs:label "Iglesia de San Martín" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46790911288096987"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:in_der_comunidad_de_madrid a onto:monastery ;
+    rdfs:label "In der Comunidad de Madrid" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.48831069980348857"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:isabel_la_católica a onto:cathedral ;
+    rdfs:label "Isabel la Católica" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4881138569778866"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:itinéraires a onto:itinerary ;
+    rdfs:label "Itinéraires" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.5149114346504211"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:jardines_del_descubrimiento a onto:sportscentre ;
+    rdfs:label "Jardines del Descubrimiento" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46077523277356075"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:jefes_de_estado a onto:retailandfashion ;
+    rdfs:label "Jefes de Estado" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46292408454802725"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:jours_agenda_des_événements a onto:agenda ;
+    rdfs:label "jours Agenda des événements" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.6919808566570282"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:kommen_im_pradomuseum_und_reina_sofía_auf_ihre_kosten a onto:museum ;
+    rdfs:label "kommen im Prado-Museum und Reina Sofía auf ihre Kosten" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.5102449333667756"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:la_culture_et_la_passion_espagnole a onto:leisureandculturefacility ;
+    rdfs:label "la culture et la passion espagnole" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.5496810291494642"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:la_latina a onto:waterfall ;
+    rdfs:label "La Latina" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecentro,
+        res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:name "Madrid, la capital de España",
+        "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4708013594150543"^^xsd:float,
+        "0.9"^^xsd:float,
+        "1.0"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:la_tasquería a onto:square ;
+    rdfs:label "La Tasquería" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5026718457539876"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:las_escuelas_pías_de_san_fernando a onto:square ;
+    rdfs:label "Las Escuelas Pías de San Fernando" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.48102486500373254"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:las_ventas a onto:cloister ;
+    rdfs:label "Las Ventas" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.47803319096565244"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:latina_la_latina a onto:waterfall ;
+    rdfs:label "Latina La Latina" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.47247633934020994"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:madrid_san_lorenzo_de_el_escorial a onto:square ;
+    rdfs:label "Madrid San Lorenzo de El Escorial" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcein_der_comunidad_de_madrid,
+        res:httptourismkgcomresourcesan_ildefonso ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.48581803211799035"^^xsd:float,
+        "0.8"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:madrid_sierra_de_guadarrama a onto:waterfall ;
+    rdfs:label "Madrid Sierra de Guadarrama" ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.4724834303061167"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:madrid_sport a onto:yatchingport ;
+    rdfs:label "Madrid Sport" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.4587979555130005"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:mercado_de_la_cebada a onto:paddlecourt ;
+    rdfs:label "mercado de La Cebada" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5094635586584768"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:mercado_de_san_antón a onto:cloister ;
+    rdfs:label "Mercado de San Antón" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcechueca ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45549105490956987"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:mercado_de_san_fernando a onto:traditionalmarket ;
+    rdfs:label "Mercado de San Fernando" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.462667521238327"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:mercado_de_san_ildefonso a onto:cloister ;
+    rdfs:label "Mercado de San Ildefonso" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.48595577478408813"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:mercado_de_san_miguel a onto:palace ;
+    rdfs:label "Mercado de San Miguel" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Madrid, la capital de España",
+        "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:offers res:httptourismkgcomresourcela_latina ;
+    onto:url "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.47127813498179116"^^xsd:float,
+        "0.85"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:milla_de_oro a onto:oliveoilmill ;
+    rdfs:label "Milla de Oro" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4800322353839874"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:ministerio_de_asuntos_exteriores a onto:tourismdestination ;
+    rdfs:label "Ministerio de Asuntos Exteriores" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcepalacio_de_santa_cruz ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.47878763151168824"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:monasterio_de_la_encarnación a onto:monastery ;
+    rdfs:label "Monasterio de la Encarnación" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5194675741968928"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:monasterio_de_las_mercedarias_descalzas a onto:monastery ;
+    rdfs:label "monasterio de las Mercedarias Descalzas" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.463483190536499"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo a onto:museum ;
+    rdfs:label "Museo" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.709186195785349"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_arqueológico_nacional a onto:museum ;
+    rdfs:label "Museo Arqueológico Nacional" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcepaseo_de_recoletos ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5671480991623619"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_casa a onto:museum ;
+    rdfs:label "Museo Casa" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5698549091815949"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_casa_de_la_moneda a onto:museum ;
+    rdfs:label "Museo Casa de la Moneda" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5284958633883247"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_de_américa a onto:museum ;
+    rdfs:label "Museo de América" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5533176210793582"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_de_arte_contemporáneo a onto:museum ;
+    rdfs:label "Museo de Arte Contemporáneo" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5575829841873863"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_de_cera a onto:museum ;
+    rdfs:label "Museo de Cera" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5998033752566889"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_de_escultura_al_aire_libre a onto:museum ;
+    rdfs:label "Museo de Escultura al Aire Libre" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.48779720914991276"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_de_historia_de_madrid a onto:museum ;
+    rdfs:label "Museo de Historia de Madrid" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5402580964565278"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_de_la_emt a onto:museum ;
+    rdfs:label "Museo de la EMT" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5341018804482052"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_del_prado a onto:museum ;
+    rdfs:label "Museo del Prado",
+        "Museo del Prado—" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5976750102910129"^^xsd:float,
+        "0.6061689623764583"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_del_romanticismo a onto:museum ;
+    rdfs:label "Museo del Romanticismo" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5203852866377149"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_del_traje a onto:museum ;
+    rdfs:label "Museo del Traje" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5633578964642116"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_geominero a onto:museum ;
+    rdfs:label "Museo Geominero" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.49274901236806595"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_lázaro_galdiano a onto:museum ;
+    rdfs:label "Museo Lázaro Galdiano" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5086755209498935"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_nacional a onto:museum ;
+    rdfs:label "Museo Nacional" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5966108989715576"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_nacional_de_ciencias_naturales a onto:museum ;
+    rdfs:label "Museo Nacional de Ciencias Naturales" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5507313353674752"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_nacional_del_prado a onto:museum ;
+    rdfs:label "Museo Nacional del Prado" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5773399043083192"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_sorolla a onto:museum ;
+    rdfs:label "Museo Sorolla" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5599492957717493"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:museo_taurino a onto:museum ;
+    rdfs:label "Museo Taurino" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcelas_ventas ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4899420800961946"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:national_park a onto:amusementpark ;
+    rdfs:label "National Park" ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:near res:httptourismkgcomresourcemadrid_sierra_de_guadarrama ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.4735641860044919"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:nossa_região_conseguiu a onto:tourismdestination ;
+    rdfs:label "Nossa região conseguiu" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidade_de_madri ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.46326812624931335"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:obelisco_de_la_caja a onto:cloister ;
+    rdfs:label "Obelisco de la Caja" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46490562624401516"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:observação_de_aves a onto:cathedral ;
+    rdfs:label "Observação de Aves" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:offers res:httptourismkgcomresourceturismo_ativo_experiências_únicas_gastronomia_planos ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.49028170771068996"^^xsd:float,
+        "0.85"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:oder_klettern_in_der_casa_de_campo a onto:monastery ;
+    rdfs:label "oder Klettern in der Casa de Campo" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:offers res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.481986958897391"^^xsd:float,
+        "0.75"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:palacio_de_buenavista a onto:palace ;
+    rdfs:label "palacio de Buenavista" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5148290461964078"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:palacio_de_congresos a onto:congresscentre ;
+    rdfs:label "Palacio de Congresos" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5397243892445284"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:palacio_de_la_moncloa a onto:palace ;
+    rdfs:label "Palacio de la Moncloa" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46761951512760586"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:palacio_de_laso_de_castilla a onto:palace ;
+    rdfs:label "Palacio de Laso de Castilla" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcela_latina ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5037928581237793"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:palacio_de_linares a onto:palace ;
+    rdfs:label "Palacio de Linares" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.49192583560943604"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:palacio_de_longoria a onto:palace ;
+    rdfs:label "palacio de Longoria" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.48392366886138916"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:palacio_de_santa_cruz a onto:palace ;
+    rdfs:label "Palacio de Santa Cruz" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5131147868103452"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:palacio_gaviria a onto:palace ;
+    rdfs:label "Palacio Gaviria" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5064219917569841"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:palacio_real a onto:palace ;
+    rdfs:label "Palacio Real" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:name "Madrid, la capital de España",
+        "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5310100734233856"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:palacio_real_de_aranjuez a onto:palace ;
+    rdfs:label "Palacio Real de Aranjuez" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.517155225276947"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:palacio_real_de_madrid a onto:palace ;
+    rdfs:label "Palacio Real de Madrid" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Madrid, la capital de España",
+        "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5362943189484732"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:parco_del_retiro_monastero_reale_di_san_lorenzo a onto:monastery ;
+    rdfs:label "Parco del Retiro Monastero reale di San Lorenzo" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunità_di_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.4641701928206852"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:parque_de_santander a onto:cloister ;
+    rdfs:label "Parque de Santander" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4635805242591434"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:parque_del_buen_retiro a onto:playroom ;
+    rdfs:label "Parque del Buen Retiro" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4533203709125519"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:parque_del_buen_retiro_real_monasterio_de_san_lorenzo a onto:monastery ;
+    rdfs:label "Parque del Buen Retiro Real Monasterio de San Lorenzo" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.4809049212163495"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:parque_del_cuartel_de_la_montaña a onto:mountain ;
+    rdfs:label "Parque del Cuartel de la Montaña" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5817182183265686"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:parque_del_oeste a onto:monthoftheyear ;
+    rdfs:label "parque del Oeste" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4871627151966095"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:parque_nacional a onto:itinerary ;
+    rdfs:label "Parque Nacional" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.47397825717926023"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:paseo_de_eduardo_dato a onto:monthoftheyear ;
+    rdfs:label "paseo de Eduardo Dato" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45978352444512505"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:paseo_de_la_castellana a onto:castle ;
+    rdfs:label "paseo de la Castellana" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45884964636393955"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:paseo_de_recoletos a onto:tourismresource ;
+    rdfs:label "Paseo de Recoletos" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.48214603933421046"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:paseo_del_arte a onto:artgallery ;
+    rdfs:label "Paseo del Arte" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Madrid, la capital de España",
+        "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4659558832645416"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:paseo_del_prado a onto:playroom ;
+    rdfs:label "paseo del Prado" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4535873840684476"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:patrimoine_culturel a onto:culturecentre ;
+    rdfs:label "Patrimoine culturel" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.5066775977611542"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:patrimonio_mundial_por_la_unesco a onto:historicalorculturalresource ;
+    rdfs:label "Patrimonio Mundial por la Unesco" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45396018624305723"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:pequeño_cine_estudio a onto:interpretationcentre ;
+    rdfs:label "Pequeño Cine Estudio" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46388263463974"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:pianifica_il_tuo_viaggio_itinerari_mappe_dove a onto:itinerary ;
+    rdfs:label "Pianifica il tuo viaggio Itinerari Mappe Dove" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:offers res:httptourismkgcomresourcetop_10_cultura_gastronomia_shopping_attività ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.46243021421962316"^^xsd:float,
+        "0.7"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:plaza_de_castilla a onto:castle ;
+    rdfs:label "plaza de Castilla" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4660410896591518"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:plaza_de_la_armería a onto:square ;
+    rdfs:label "Plaza de la Armería" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:near res:httptourismkgcomresourcepalacio_real ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4614687592983246"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:plaza_de_los_carros a onto:square ;
+    rdfs:label "Plaza de Los Carros" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcela_latina ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4687728018760681"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:primer_depósito_elevado a onto:lake ;
+    rdfs:label "Primer Depósito Elevado" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.49526134530703225"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:privacidade_acessibilidade_mapa a onto:embassyandconsulate ;
+    rdfs:label "Privacidade Acessibilidade Mapa" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4745704970359802"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:puerta_de_alcalá a onto:alcazar ;
+    rdfs:label "Puerta de Alcalá" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4638327671133954"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:puerta_del_sol a onto:waterfall ;
+    rdfs:label "Puerta del Sol" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46673411234565404"^^xsd:float,
+        "1.0"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:real_basílica_de_san_francisco_el_grande a onto:basilica ;
+    rdfs:label "Real Basílica de San Francisco el Grande" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcela_latina ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4624659478664398"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:real_casa_de_correos a onto:exchangebureau ;
+    rdfs:label "Real Casa de Correos" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcepuerta_del_sol ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4806199434925528"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:real_observatorio_astronómico a onto:planetarium ;
+    rdfs:label "Real Observatorio Astronómico" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:locatedin res:httptourismkgcomresourcepaseo_del_arte ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4805275464057922"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:residencia_de_estudiantes a onto:residence ;
+    rdfs:label "Residencia de Estudiantes" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5353745008216184"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:rotas_compras_cultura_ciclamadrid_espaços a onto:leisureandculturefacility ;
+    rdfs:label "Rotas Compras Cultura CiclaMadrid Espaços" ;
+    onto:belongstocategory res:httptourismkgcomresourcerotas_compras_cultura_esporte ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4510703617876226"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:rotas_compras_cultura_esporte a onto:leisureandculturefacility ;
+    rdfs:label "Rotas Compras Cultura Esporte" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.457982814974255"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:route_shopping_culture_ciclamadrid a onto:route ;
+    rdfs:label "Route Shopping Culture CiclaMadrid" ;
+    onto:belongstocategory res:httptourismkgcomresourceitinéraires ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.47976287007331847"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:route_shopping_culture_tourisme a onto:route ;
+    rdfs:label "Route Shopping Culture Tourisme" ;
+    onto:belongstocategory res:httptourismkgcomresourceitinéraires ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.5544795870780945"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:rutas_compras_cultura_deporte a onto:monastery ;
+    rdfs:label "Rutas Compras Cultura Deporte" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.4798788406346974"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:salesas_chueca a onto:churroshop ;
+    rdfs:label "Salesas Chueca" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5070448577404022"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:salón_del_trono a onto:hairdressing ;
+    rdfs:label "Salón del Trono" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.4721954815917545"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:san_ildefonso a onto:monthoftheyear ;
+    rdfs:label "San Ildefonso" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.4630312376552158"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:san_lorenzo_de_el_escorial a onto:square ;
+    rdfs:label "San Lorenzo de El Escorial" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidad_de_madrid ;
+    onto:name "Madrid, la capital de España",
+        "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.45369757413864137"^^xsd:float,
+        "0.95"^^xsd:float,
+        "1.0"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:santiago_bernabeu_tour__while_those_looking_to_venture_further a onto:tour ;
+    rdfs:label "Santiago Bernabeu Tour , while those looking to venture further" ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.521841186285019"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:santiago_bernabéu_tour_und_real_madrid_stadionführung_für_fußballfans a onto:tour ;
+    rdfs:label "Santiago Bernabéu Tour und Real Madrid Stadionführung für Fußballfans" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:offers res:httptourismkgcomresourcesantiagobernabéustadion_flamenco_villen ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.5058821916580201"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:santiagobernabéustadion_flamenco_villen a onto:footballfield ;
+    rdfs:label "Santiago-Bernabéu-Stadion Flamenco Villen" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.4826356225543552"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:secretaría_de_estado_de_función_pública a onto:publicservice ;
+    rdfs:label "Secretaría de Estado de Función Pública" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5073461044807823"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:select_your_profile_live_a_new_experience_choose_your_experience_search_places_to_visit_in_madrid_madrid_in_2_days_madrid_in_5_days_madrid_in_7_days_full_itinerary_madrid_events_calendar_2026_children_and_families_do_you_have_any_questions a onto:itinerary ;
+    rdfs:label "Select your profile Live a new experience Choose your experience Search Places to visit in Madrid Madrid in 2 days Madrid in 5 days Madrid in 7 Days: Full Itinerary Madrid Events Calendar 2026 Children and families Do you have any questions?" ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:offers res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.45924327075481414"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:severo_ochoa a onto:monthoftheyear ;
+    rdfs:label "Severo Ochoa" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5088250719583951"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:sierra_de_guadarrama a onto:waterfall ;
+    rdfs:label "Sierra de Guadarrama" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid",
+        "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecommunauté_de_madrid,
+        res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:name "Portail touristique de la Communauté de Madrid",
+        "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.4563433083994635"^^xsd:float,
+        "0.9"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/fr/" .
+
+res:sua_viagem_agenda_crie_seu_itinerário_fechar_fechar_crie_seu_itinerário_personalize_sua_experiência_personalize_sua_experiência_top_10_o_que_não_pode_perder_na_comunidade_de_madrid a onto:agenda ;
+    rdfs:label "sua viagem Agenda Crie seu itinerário Fechar Fechar Crie seu itinerário Personalize sua experiência Personalize sua experiência Top 10 O que não pode perder na Comunidade de Madrid" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.6049047887325287"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:tablaos_vilas a onto:valley ;
+    rdfs:label "Tablaos Vilas" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidade_de_madrid_madri ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4742521919702229"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:teatro_amaya a onto:theater ;
+    rdfs:label "Teatro Amaya" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5265622499742006"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:teatro_de_la_abadía a onto:theater ;
+    rdfs:label "Teatro de la Abadía" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.518326080762423"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:teatro_español a onto:theater ;
+    rdfs:label "Teatro Español" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5641999031816209"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:teatro_quique_san_francisco a onto:theater ;
+    rdfs:label "Teatro Quique San Francisco" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.46923047830076775"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:teatro_real a onto:theater ;
+    rdfs:label "Teatro Real" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.6141490439573923"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:teatro_valle_inclán a onto:valley ;
+    rdfs:label "Teatro Valle Inclán" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5034388554096222"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:teatros_del_canal a onto:canal ;
+    rdfs:label "Teatros del Canal" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5682716548442841"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:teatros_luchana a onto:theater ;
+    rdfs:label "Teatros Luchana" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5168748308311809"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:the_landscape_of_light_a_journey_through_the_art_walk_and_buen_retiro_park_royal_monastery_of_san_lorenzo a onto:monastery ;
+    rdfs:label "The Landscape of Light: A Journey Through the Art Walk and Buen Retiro Park Royal Monastery of San Lorenzo" ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.48591541051864623"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:top_10_cultura_gastronomia_shopping_attività a onto:gastronomicmarket ;
+    rdfs:label "Top 10 Cultura Gastronomia Shopping Attività" ;
+    onto:belongstocategory res:httptourismkgcomresourcetop_10_i_luoghi_imperdibili_della_comunità_di_madrid_il_paesaggio_della_luce_un_tour_del_paseo_del_arte ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.5231563187036358"^^xsd:float,
+        "0.7"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:top_10_i_luoghi_imperdibili_della_comunità_di_madrid_il_paesaggio_della_luce_un_tour_del_paseo_del_arte a onto:tour ;
+    rdfs:label "Top 10 I luoghi imperdibili della Comunità di Madrid Il paesaggio della luce: un tour del Paseo del Arte" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunità_di_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.5806382477283478"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:touren_und_23tageitinerare a onto:itinerary ;
+    rdfs:label "Touren und 2/3-Tage-Itinerare" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:offers res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.45605527068439283"^^xsd:float,
+        "0.85"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:tourismus_in_der_region_madrid_alle_rechte_vorbehalten a onto:vehicleexperience ;
+    rdfs:label "Tourismus in der Region Madrid Alle Rechte vorbehalten" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.4557243949930433"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:traditionelle_gastronomie_die_autonome_gemeinschaft_madrid a onto:gastronomicresource ;
+    rdfs:label "Traditionelle Gastronomie Die Autonome Gemeinschaft Madrid" ;
+    onto:belongstocategory res:httptourismkgcomresourcein_der_comunidad_de_madrid ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.47613580497828395"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:turismo a onto:tourismresource ;
+    rdfs:label "Turismo" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid",
+        "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid",
+        "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:url "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.513867321881381"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:turismo_activo_experiencias_únicas_gastronomía_planes a onto:gastronomicresource ;
+    rdfs:label "Turismo activo Experiencias únicas Gastronomía Planes" ;
+    onto:belongstocategory res:httptourismkgcomresourceturismo ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.5289181689421336"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:turismo_ativo_além a onto:tourismresource ;
+    rdfs:label "Turismo Ativo Além" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidade_de_madrid_madri ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:offers res:httptourismkgcomresourceesporte ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.5129309789700942"^^xsd:float,
+        "0.85"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:turismo_ativo_experiências_únicas_gastronomia_planos a onto:gastronomicresource ;
+    rdfs:label "Turismo Ativo Experiências únicas Gastronomia Planos" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.5799371637089151"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:turismomadrid a onto:tourismresource ;
+    rdfs:label "TurismoMadrid" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía.",
+        "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid",
+        "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid",
+        "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Madrid, la capital de España",
+        "Portail touristique de la Communauté de Madrid",
+        "Portal de turismo de la Comunidad de Madrid",
+        "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:partof res:httptourismkgcomresourcetourismus_in_der_region_madrid_alle_rechte_vorbehalten ;
+    onto:url "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/de/",
+        "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana",
+        "https://www.visitmadrid.es/fr/",
+        "https://www.visitmadrid.es/it/",
+        "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.48486135431698396"^^xsd:float,
+        "0.85"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/",
+        "https://www.visitmadrid.es/de/" .
+
+res:um_passeio_pelo_paseo_del_arte a onto:racetrack ;
+    rdfs:label "Um passeio pelo Paseo del Arte" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunidade_de_madrid_madri ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.4577688611470736"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:uma_nova_experiência_escolha_sua_experiência_pesquisar_descubra_os_destinos_de_madrid_madri_em_2_dias_madri_em_5_dias_madri_em_7_dias_agenda_crianças_e_famílias_você_tem_alguma_pergunta a onto:agenda ;
+    rdfs:label "uma nova experiência Escolha sua experiência Pesquisar Descubra os destinos de Madrid Madri em 2 dias Madri em 5 dias Madri em 7 dias Agenda Crianças e famílias Você tem alguma pergunta?" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/pt-pt/" ;
+    prov1:confidence "0.5470945566892624"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/pt-pt/" .
+
+res:uniche_gastronomia_piani a onto:gastronomicresource ;
+    rdfs:label "uniche Gastronomia Piani" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.6134323447249657"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:uniche_gastronomia_piani_per_bambini a onto:gastronomicresource ;
+    rdfs:label "uniche Gastronomia Piani per bambini" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.6292048659107902"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:universidad_nacional_de_educación_a_distancia a onto:educationalcentre ;
+    rdfs:label "Universidad Nacional de Educación a Distancia" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5323489223757097"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:university_of_alcalá_royal_palace a onto:palace ;
+    rdfs:label "University of Alcalá Royal Palace" ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcevisitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.5765162885189057"^^xsd:float,
+        "0.95"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:unsere_mitarbeiter_der_touristinformation a onto:temporarytouristinformationpoint ;
+    rdfs:label "Unsere Mitarbeiter der Tourist-Information" ;
+    onto:description "Offizielles Tourismusportal der Regierung der Autonomen Gemeinschaft Madrid" ;
+    onto:name "Tourismusportal der Autonomen Gemeinschaft Madrid" ;
+    onto:partof res:httptourismkgcomresourceturismomadrid ;
+    onto:url "https://www.visitmadrid.es/de/" ;
+    prov1:confidence "0.553562257579855"^^xsd:float,
+        "0.8"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/de/" .
+
+res:vallehermoso a onto:valley ;
+    rdfs:label "Vallehermoso" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5861615637938181"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:valleinclán a onto:valley ;
+    rdfs:label "Valle-Inclán" ;
+    onto:description "Explora Madrid, su historia, cultura y ocio. Descubre sus monumentos, plazas emblemáticas y su gastronomía." ;
+    onto:name "Madrid, la capital de España" ;
+    onto:url "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" ;
+    prov1:confidence "0.5538994173208872"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/donde-ir-comunidad-madrid/madrid-capital-espana" .
+
+res:villas_de_madrid a onto:palace ;
+    rdfs:label "Villas de Madrid" ;
+    onto:description "Portail officiel du tourisme du Gouvernement de la Communauté de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecommunauté_de_madrid ;
+    onto:name "Portail touristique de la Communauté de Madrid" ;
+    onto:url "https://www.visitmadrid.es/fr/" ;
+    prov1:confidence "0.4630647485906427"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/fr/" .
+
+res:ville_di_madrid_parco_nazionale_della_sierra_di_guadarrama a onto:urbanviewpoint ;
+    rdfs:label "Ville di Madrid Parco Nazionale della Sierra di Guadarrama" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:locatedin res:httptourismkgcomresourcecomunità_di_madrid ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.4551354654457258"^^xsd:float,
+        "0.9"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker",
+        "relation_extractor" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
+
+res:vinos_de_madrid a onto:winery ;
+    rdfs:label "Vinos de Madrid" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/" ;
+    prov1:confidence "0.48196006161826"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/" .
+
+res:visitmadrid__visitmadrid_skip_to_main_content_create_your_itinerary_professionals_english_what_to_do_where_to_go_plan_your_trip_whats_on_create_your_itinerary_close_close_create_your_itinerary_customise_your_experience_customise_your_experience_visitmadrid_official_madrid_tourism_guide_top_10_mustsee_places_in_madrid_region_welcome_to_the_official_portal_of_madrid_tourism__your_comprehensive_guide_to_exploring_not_just_the_vibrant_capital_but_the_diverse_treasures a onto:itinerary ;
+    rdfs:label "VisitMadrid | VisitMadrid Skip to main content Create your itinerary Professionals English What to do Where to go Plan your trip What's On Create your itinerary Close Close Create your itinerary Customise your experience Customise your experience VisitMadrid: Official Madrid Tourism Guide Top 10 Must-See Places in Madrid Region Welcome to the official portal of Madrid tourism , your comprehensive guide to exploring not just the vibrant capital, but the diverse treasures" ;
+    onto:description "Official Tourism Portal of the Government of the Region of Madrid" ;
+    onto:name "Tourism Portal of the Region of Madrid" ;
+    onto:url "https://www.visitmadrid.es/en/" ;
+    prov1:confidence "0.5201375812292099"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/en/" .
+
+res:visitmadrid_vai a onto:vatrefund ;
+    rdfs:label "VisitMadrid Vai" ;
+    onto:description "Portal oficial de turismo del Gobierno de la Comunidad de Madrid" ;
+    onto:name "Portal de turismo de la Comunidad de Madrid" ;
+    onto:url "https://www.visitmadrid.es/it/" ;
+    prov1:confidence "0.4512771666049957"^^xsd:float ;
+    prov1:extractor "ontology_entity_linker" ;
+    prov1:source "https://www.visitmadrid.es/it/" .
 

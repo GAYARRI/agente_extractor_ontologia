@@ -1,106 +1,137 @@
-from rdflib import Graph, URIRef, Literal, RDF
+from rdflib import Graph, Namespace, RDF, RDFS, Literal, URIRef
+from rdflib.namespace import XSD
 import re
-import urllib.parse
 
 
 class RDFBuilder:
+    """
+    Construye el grafo RDF del Knowledge Graph turístico.
+    Separa claramente:
+        - clases ontológicas
+        - propiedades
+        - instancias
+    """
 
-    def __init__(self, base_uri="http://tourismkg.com/entity/"):
-
+    def __init__(self):
         self.graph = Graph()
 
-        self.base_uri = base_uri
-        self.property_uri = "http://tourismkg.com/property/"
+        # Namespaces
+        self.ONTO = Namespace("http://tourismkg.com/ontology/")
+        self.RES = Namespace("http://tourismkg.com/resource/")
+        self.PROV = Namespace("http://tourismkg.com/provenance/")
 
-    # -----------------------------
-    # añadir instancia
-    # -----------------------------
+        # Bind prefixes
+        self.graph.bind("onto", self.ONTO)
+        self.graph.bind("res", self.RES)
+        self.graph.bind("prov", self.PROV)
+        self.graph.bind("rdfs", RDFS)
 
-    def add_instance(self, uri, ont_class):
+    # -------------------------------------------------
+    # Helpers
+    # -------------------------------------------------
 
-        subject = URIRef(uri)
+    def _normalize_uri(self, text: str) -> str:
+        """Convierte texto en identificador URI-safe"""
+        text = text.strip().lower()
+        text = re.sub(r"\s+", "_", text)
+        text = re.sub(r"[^\w_]", "", text)
+        return text
 
-        class_uri = URIRef(self.property_uri + ont_class)
+    def _entity_uri(self, name: str):
+        return self.RES[self._normalize_uri(name)]
 
-        self.graph.add((subject, RDF.type, class_uri))
+    def _class_uri(self, class_name: str):
+        return self.ONTO[self._normalize_uri(class_name)]
 
+    def _property_uri(self, prop_name: str):
+        return self.ONTO[self._normalize_uri(prop_name)]
 
-    # -----------------------------
-    # añadir propiedad
-    # -----------------------------
+    # -------------------------------------------------
+    # Instancias
+    # -------------------------------------------------
 
-    def add_property(self, uri, prop, value):
+    def add_instance(self, entity_name: str, ont_class: str, label=None):
+        """
+        Crea una instancia tipada.
+        """
 
-        subject = URIRef(uri)
+        entity_uri = self._entity_uri(entity_name)
+        class_uri = self._class_uri(ont_class)
 
-        predicate = URIRef(self.property_uri + prop)
+        self.graph.add((entity_uri, RDF.type, class_uri))
 
-        self.graph.add((subject, predicate, Literal(value)))
+        if label:
+            self.graph.add((entity_uri, RDFS.label, Literal(label)))
 
+        return entity_uri
 
-    # -----------------------------
-    # añadir propiedades
-    # -----------------------------
+    # -------------------------------------------------
+    # Propiedades de datos
+    # -------------------------------------------------
 
-    def add_properties(self, uri, properties):
+    def add_data_property(self, subject, prop_name, value, datatype=None, lang=None):
+        """
+        Añade propiedad literal.
+        """
 
-        for p, v in properties.items():
+        prop_uri = self._property_uri(prop_name)
 
-            self.add_property(uri, p, v)
+        if datatype:
+            literal = Literal(value, datatype=datatype)
+        elif lang:
+            literal = Literal(value, lang=lang)
+        else:
+            literal = Literal(value)
 
+        self.graph.add((subject, prop_uri, literal))
 
-    # -----------------------------
-    # añadir relación
-    # -----------------------------
+    # -------------------------------------------------
+    # Propiedades objeto
+    # -------------------------------------------------
 
-    def add_relation(self, relation):
+    def add_object_property(self, subject, prop_name, obj):
+        """
+        Añade relación entre entidades.
+        """
 
-        subject = URIRef(self.base_uri + relation["subject"].replace(" ", "_"))
+        prop_uri = self._property_uri(prop_name)
 
-        predicate = URIRef(self.property_uri + relation["predicate"])
+        if isinstance(obj, str):
+            obj = self._entity_uri(obj)
 
-        obj = URIRef(self.base_uri + relation["object"].replace(" ", "_"))
+        self.graph.add((subject, prop_uri, obj))
 
-        self.graph.add((subject, predicate, obj))
+    # -------------------------------------------------
+    # Metadatos de extracción
+    # -------------------------------------------------
 
+    def add_provenance(self, subject, source_url=None, confidence=None, extractor=None):
+        """
+        Guarda metadatos de extracción.
+        """
 
-    # -----------------------------
-    # guardar grafo
-    # -----------------------------
+        if source_url:
+            self.graph.add(
+                (subject, self.PROV.source, Literal(source_url))
+            )
 
-    def save(self, filename):
+        if confidence:
+            self.graph.add(
+                (subject, self.PROV.confidence, Literal(confidence, datatype=XSD.float))
+            )
 
-        self.graph.serialize(filename, format="turtle")
-        
+        if extractor:
+            self.graph.add(
+                (subject, self.PROV.extractor, Literal(extractor))
+            )
 
-    def clean_uri(self,text):
-    
+    # -------------------------------------------------
+    # Serialización
+    # -------------------------------------------------
 
-        import re
-        import urllib.parse
+    def save(self, path="knowledge_graph.ttl"):
+        self.graph.serialize(path, format="turtle")
+        print(f"Knowledge Graph guardado en {path}")
 
-        # quitar comillas
-        text = text.replace('"', "")
-
-        # eliminar caracteres raros
-        text = re.sub(r"[^\w\s-]", "", text)
-
-        # espacios → _
-        text = text.strip().replace(" ", "_")
-
-        # codificar URI
-        text = urllib.parse.quote(text)
-
-        return text    
-
-        
-    
-    def create_uri(self, name):
-        import unicodedata
-        
-
-        name = unicodedata.normalize("NFKD", name)
-
-        name = self.clean_uri(name)
-
-        return self.base_uri + name
+    def size(self):
+        return len(self.graph)
