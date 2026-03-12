@@ -4,7 +4,9 @@ from bs4 import BeautifulSoup
 
 
 class TourismPropertyExtractor:
-    def __init__(self, properties=None, ontology_properties=None):
+
+    def __init__(self, properties=None):
+
         if properties is None:
             properties = [
                 "name",
@@ -15,52 +17,114 @@ class TourismPropertyExtractor:
                 "latitude",
                 "longitude",
                 "openingHours",
+                "image",
             ]
 
         self.properties = properties
-        self.ontology_properties = ontology_properties or {}
 
-    # -----------------------------
-    # Helpers
-    # -----------------------------
+    # --------------------------------------------------
+    # helpers
+    # --------------------------------------------------
 
     def _normalize(self, text: str) -> str:
         return " ".join(text.strip().lower().split())
 
-    def _matches_entity(self, entity: str, candidate_name: str) -> bool:
-        if not entity or not candidate_name:
+    def _matches_entity(self, entity: str, candidate: str) -> bool:
+        if not entity or not candidate:
             return False
 
-        entity_norm = self._normalize(entity)
-        candidate_norm = self._normalize(candidate_name)
+        e = self._normalize(entity)
+        c = self._normalize(candidate)
 
-        return entity_norm in candidate_norm or candidate_norm in entity_norm
+        return e == c or e in c or c in e
 
-    def _safe_get_nested(self, data, *keys):
-        current = data
-        for key in keys:
-            if not isinstance(current, dict):
-                return None
-            current = current.get(key)
-            if current is None:
-                return None
-        return current
+    def _clean_text(self, text: str) -> str:
+        return " ".join(text.strip().split())
 
-    def _filter_allowed_properties(self, properties: dict) -> dict:
-        clean = {}
+    # --------------------------------------------------
+    # block extraction
+    # --------------------------------------------------
 
-        for k, v in properties.items():
-            if v is None or v == "":
+    def extract_blocks(self, soup):
+        blocks = []
+
+        candidates = soup.find_all(["section", "article", "div", "li"])
+
+        for node in candidates:
+            text = self._clean_text(node.get_text(" ", strip=True))
+
+            if len(text) < 60:
                 continue
 
-            if k in self.properties:
-                clean[k] = v
+            heading_tag = node.find(["h1", "h2", "h3", "h4"])
+            heading = self._clean_text(heading_tag.get_text(" ", strip=True)) if heading_tag else ""
 
-        return clean
+            img = node.find("img")
+            image = img.get("src") if img and img.get("src") else None
 
-    # -----------------------------
+            blocks.append({
+                "heading": heading,
+                "text": text,
+                "image": image,
+                "node": node,
+            })
+
+        return blocks
+
+    def score_block_for_entity(self, block, entity):
+        score = 0.0
+        entity_n = self._normalize(entity)
+        heading_n = self._normalize(block.get("heading", ""))
+        text_n = self._normalize(block.get("text", ""))
+
+        if heading_n:
+            if entity_n == heading_n:
+                score += 1.0
+            elif entity_n in heading_n or heading_n in entity_n:
+                score += 0.7
+
+        if entity_n in text_n:
+            score += 0.4
+
+        # penalizar bloques claramente colectivos
+        collective_patterns = [
+            "desde ",
+            "hasta ",
+            "entre ",
+            "como ",
+            "rincones ",
+            "playas vírgenes",
+            "playas naturales",
+        ]
+
+        if any(p in text_n for p in collective_patterns):
+            score -= 0.3
+
+        return score
+
+    def find_best_block_for_entity(self, soup, entity):
+        blocks = self.extract_blocks(soup)
+
+        if not blocks:
+            return None
+
+        best_block = None
+        best_score = -999
+
+        for block in blocks:
+            score = self.score_block_for_entity(block, entity)
+            if score > best_score:
+                best_score = score
+                best_block = block
+
+        if best_score < 0.35:
+            return None
+
+        return best_block
+
+    # --------------------------------------------------
     # JSON-LD extraction
-    # -----------------------------
+    # --------------------------------------------------
 
     def extract_jsonld(self, soup):
         results = []
@@ -76,7 +140,6 @@ class TourismPropertyExtractor:
                 data = json.loads(raw)
 
                 if isinstance(data, dict):
-                    # algunos JSON-LD meten @graph
                     if "@graph" in data and isinstance(data["@graph"], list):
                         results.extend(data["@graph"])
                     else:
@@ -90,9 +153,9 @@ class TourismPropertyExtractor:
 
         return results
 
-    # -----------------------------
-    # Meta tags extraction
-    # -----------------------------
+    # --------------------------------------------------
+    # meta
+    # --------------------------------------------------
 
     def extract_meta(self, soup):
         props = {}
@@ -105,19 +168,58 @@ class TourismPropertyExtractor:
                 continue
 
             if prop == "og:title":
-                props["name"] = content
+                props["name"] = content.strip()
 
             elif prop == "og:description":
-                props["description"] = content
+                props["description"] = content.strip()
 
             elif prop == "description" and "description" not in props:
-                props["description"] = content
+                props["description"] = content.strip()
+
+            elif prop == "og:image":
+                props["image"] = content.strip()
+
+            elif prop == "twitter:image" and "image" not in props:
+                props["image"] = content.strip()
 
         return props
 
-    # -----------------------------
-    # GEO extraction
-    # -----------------------------
+    # --------------------------------------------------
+    # block-level extraction
+    # --------------------------------------------------
+
+    def extract_block_description(self, block):
+        if not block:
+            return None
+
+        text = block.get("text", "")
+        heading = block.get("heading", "")
+
+        if heading and text.startswith(heading):
+            text = text[len(heading):].strip()
+
+        if len(text) > 500:
+            text = text[:500].rsplit(" ", 1)[0]
+
+        return text if len(text) > 50 else None
+
+    def extract_block_image(self, block):
+        if not block:
+            return None
+
+        image = block.get("image")
+        if not image:
+            return None
+
+        image_l = image.lower()
+        if "logo" in image_l:
+            return None
+
+        return image
+
+    # --------------------------------------------------
+    # fallback extraction
+    # --------------------------------------------------
 
     def extract_geo(self, text):
         geo = {}
@@ -130,42 +232,147 @@ class TourismPropertyExtractor:
 
         return geo
 
-    # -----------------------------
-    # Address / phone fallback
-    # -----------------------------
+    def extract_phone(self, text):
+        if not text:
+            return None
 
-    def extract_contact_fallbacks(self, text):
-        props = {}
+        matches = re.findall(r"(?:\+34\s*)?(?:\(?\d{2,3}\)?[\s\-]*){3,5}", text)
 
-        phone_match = re.search(r"(\+?\d[\d\s\-\(\)]{7,}\d)", text)
-        if phone_match:
-            props["telephone"] = phone_match.group(1).strip()
+        for match in matches:
+            digits = re.sub(r"\D", "", match)
 
-        return props
+            # teléfono español razonable: 9 dígitos o 11 con prefijo 34
+            if len(digits) == 9 or (len(digits) == 11 and digits.startswith("34")):
+                return match.strip()
 
-    # -----------------------------
-    # Main extraction
-    # -----------------------------
+        return None
+    
+    def clean_description_text(self, text: str) -> str:
+        if not text:
+            return ""
+
+        # quitar imágenes markdown
+        text = re.sub(r"!\[[^\]]*\]\([^)]+\)", " ", text)
+
+        # quitar enlaces markdown, dejando solo el texto visible
+        text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+
+        # quitar headings markdown
+        text = re.sub(r"^#+\s*", "", text, flags=re.MULTILINE)
+
+        # quitar líneas típicas de UI / vídeo
+        noise_lines = [
+            "watch later",
+            "share",
+            "copy link",
+            "tap to unmute",
+            "youtube",
+            "subscribers",
+            "ver video",
+        ]
+
+        lines = []
+        for line in text.splitlines():
+            clean_line = line.strip()
+            if not clean_line:
+                continue
+            if any(n in clean_line.lower() for n in noise_lines):
+                continue
+            lines.append(clean_line)
+
+        text = " ".join(lines)
+        text = re.sub(r"\s+", " ", text).strip()
+
+        return text
+
+
+
+
+    # --------------------------------------------------
+    # extracción por bloque
+    # --------------------------------------------------
+
+    def extract_from_block(self, block, entity, block_is_collective=False):
+        properties = {}
+
+        heading = block.get("heading", "")
+        text = block.get("text", "")
+        image = block.get("image")
+        page_url = block.get("page_url", "")
+
+        # nombre desde heading si coincide
+        if heading and self._matches_entity(entity, heading):
+            properties["name"] = heading
+
+        # descripción solo si el bloque NO es colectivo
+        
+        if text:
+            desc = text
+        if heading and desc.startswith(heading):
+            desc = desc[len(heading):].strip()
+
+        if len(desc) > 500:
+            desc = desc[:500].rsplit(" ", 1)[0]
+
+        desc = self.clean_description_text(desc)
+
+        if not block_is_collective and len(desc) > 50:
+            properties["description"] = desc
+
+        # imagen solo si el bloque NO es colectivo y no parece logo
+        if image and "logo" not in image.lower() and not block_is_collective:
+            properties["image"] = image
+
+        # url de página
+        if page_url:
+            properties["url"] = page_url
+
+        # teléfono si aparece dentro del bloque
+        phone = self.extract_phone(text)
+        if phone:
+            properties["telephone"] = phone
+
+
+        geo = self.extract_geo(text)
+        for k, v in geo.items():
+            properties[k] = v
+
+        return properties
+    
+
+
+
+
+    # --------------------------------------------------
+    # main page-level fallback
+    # --------------------------------------------------
 
     def extract(self, html, text, url, entity):
         soup = BeautifulSoup(html, "html.parser")
         properties = {}
 
-        # -----------------------------
-        # JSON-LD
-        # -----------------------------
+        # 1. JSON-LD específico de entidad
         jsonld_data = self.extract_jsonld(soup)
 
         for item in jsonld_data:
             if not isinstance(item, dict):
                 continue
 
-            item_name = item.get("name")
+            name = item.get("name")
 
-            if item_name and self._matches_entity(entity, item_name):
+            if name and self._matches_entity(entity, name):
                 for prop in self.properties:
                     if prop in item:
                         properties[prop] = item[prop]
+
+                if "description" in item and "description" not in properties:
+                    properties["description"] = item["description"]
+
+                if "image" in item and "image" not in properties:
+                    if isinstance(item["image"], str):
+                        properties["image"] = item["image"]
+                    elif isinstance(item["image"], list) and item["image"]:
+                        properties["image"] = item["image"][0]
 
                 geo = item.get("geo")
                 if isinstance(geo, dict):
@@ -174,46 +381,40 @@ class TourismPropertyExtractor:
                     if "longitude" in geo:
                         properties["longitude"] = geo["longitude"]
 
-                address = item.get("address")
-                if isinstance(address, dict):
-                    address_parts = [
-                        address.get("streetAddress"),
-                        address.get("addressLocality"),
-                        address.get("addressRegion"),
-                        address.get("postalCode"),
-                        address.get("addressCountry"),
-                    ]
-                    address_text = ", ".join([p for p in address_parts if p])
-                    if address_text:
-                        properties["address"] = address_text
+        # 2. bloque HTML más probable para la entidad
+        best_block = self.find_best_block_for_entity(soup, entity)
 
-        # -----------------------------
-        # META tags
-        # -----------------------------
+        if best_block:
+            block_desc = self.extract_block_description(best_block)
+            if block_desc and "description" not in properties:
+                properties["description"] = block_desc
+
+            block_image = self.extract_block_image(best_block)
+            if block_image and "image" not in properties:
+                properties["image"] = block_image
+
+            if best_block.get("heading") and "name" not in properties:
+                properties["name"] = best_block["heading"]
+
+        # 3. meta como fallback suave
         meta_props = self.extract_meta(soup)
+
         for k, v in meta_props.items():
             if k not in properties and v:
                 properties[k] = v
 
-        # -----------------------------
-        # GEO fallback
-        # -----------------------------
+        # 4. geolocalización fallback
         geo = self.extract_geo(text)
         for k, v in geo.items():
             if k not in properties:
                 properties[k] = v
 
-        # -----------------------------
-        # Contact fallback
-        # -----------------------------
-        contact_props = self.extract_contact_fallbacks(text)
-        for k, v in contact_props.items():
-            if k not in properties:
-                properties[k] = v
+        # 5. teléfono fallback
+        phone = self.extract_phone(text)
+        if phone and "telephone" not in properties:
+            properties["telephone"] = phone
 
-        # -----------------------------
-        # URL siempre presente
-        # -----------------------------
+        # 6. url siempre
         properties["url"] = url
 
-        return self._filter_allowed_properties(properties)
+        return properties

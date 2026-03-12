@@ -13,22 +13,62 @@ class NERExtractor:
         self.allowed_labels = allowed_labels or {"LOC", "ORG", "MISC", "PER"}
 
         self.tourism_patterns = [
-            r"\b[Mm]useo(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)*(?:\s+del\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)?\b",
-            r"\b[Pp]arque(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)+\b",
-            r"\b[Pp]alacio\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+(?:\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)?\b",
-            r"\b[Pp]uerta\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+\b",
-            r"\b[Pp]laza\s+(?:de\s+)?[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)*\b",
-            r"\b[Tt]eatro\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)*\b",
-            r"\b[Hh]otel\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)*\b",
-            r"\b[Rr]estaurante\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)*\b",
-            r"\b[Mm]ercado\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)*\b",
-            r"\b[Cc]atedral\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)*\b",
-            r"\b[Bb]asílica\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑñ\-]+)*\b",
-            
+            r"\b[Pp]laya\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Dd]unas\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Ff]aro\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Pp]uerto\s+deportivo\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Pp]uertos?\s+deportivos?\b",
+            r"\b[Pp]arque\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Pp]alacio\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Mm]useo\s+(?:del|de la|de los|de las|de)?\s*[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Rr]estaurante\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Hh]otel\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Bb]arranco\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
+            r"\b[Ll]ago\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+(?:\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚñÑ\-]+)*\b",
         ]
 
-    def _normalize(self, text: str) -> str:
+        self.invalid_exact = {
+            "inicio",
+            "contacto",
+            "cookies",
+            "buscar",
+            "mapa",
+            "sur",
+            "gran",
+            "tranquila",
+        }
+
+    def _normalize_spaces(self, text: str) -> str:
         return " ".join(text.strip().split())
+
+    def _clean_entity_text(self, text: str) -> str:
+        text = self._normalize_spaces(text)
+
+        # limpiar puntuación periférica
+        text = text.strip(" ,;:()[]{}\"'")
+
+        # quitar duplicados accidentales de espacios
+        text = re.sub(r"\s+", " ", text)
+
+        return text
+
+    def _is_valid_candidate(self, text: str) -> bool:
+        if not text:
+            return False
+
+        clean = text.strip().lower()
+
+        if len(clean) < 3:
+            return False
+
+        if clean in self.invalid_exact:
+            return False
+
+        # evitar entidades solo numéricas
+        if re.fullmatch(r"[\d\W_]+", clean):
+            return False
+
+        return True
 
     def extract_stanza_entities(self, text):
         doc = self.nlp(text)
@@ -39,16 +79,17 @@ class NERExtractor:
                 if ent.type not in self.allowed_labels:
                     continue
 
-                entity_text = self._normalize(ent.text)
+                entity_text = self._clean_entity_text(ent.text)
 
-                if len(entity_text) < 3:
+                if not self._is_valid_candidate(entity_text):
                     continue
 
                 entities.append({
                     "text": entity_text,
+                    "normalized_text": entity_text,
                     "source": "stanza",
                     "ner_label": ent.type,
-                    "confidence": None
+                    "confidence": None,
                 })
 
         return entities
@@ -58,32 +99,74 @@ class NERExtractor:
 
         for pattern in self.tourism_patterns:
             for match in re.finditer(pattern, text):
-                entity_text = self._normalize(match.group(0))
+                entity_text = self._clean_entity_text(match.group(0))
 
-                if len(entity_text) < 3:
+                if not self._is_valid_candidate(entity_text):
                     continue
 
                 entities.append({
                     "text": entity_text,
+                    "normalized_text": entity_text,
                     "source": "heuristic",
                     "ner_label": "TOURISM_CANDIDATE",
-                    "confidence": None
+                    "confidence": None,
                 })
 
         return entities
 
     def merge_entities(self, entities):
-        merged = []
-        seen = set()
+        merged = {}
+        protected_prefixes = (
+            "playa de",
+            "dunas de",
+            "faro de",
+            "puerto deportivo",
+            "parque ",
+            "palacio de",
+            "museo ",
+            "hotel ",
+            "restaurante ",
+            "barranco de",
+        )
 
-        for ent in entities:
-            key = ent["text"].strip().lower()
-            if key in seen:
+        # prioridad a entidades más largas y heurísticas bien formadas
+        entities_sorted = sorted(
+            entities,
+            key=lambda e: (
+                len(e["text"].split()),
+                len(e["text"]),
+                1 if e.get("source") == "heuristic" else 0,
+            ),
+            reverse=True,
+        )
+
+        for ent in entities_sorted:
+            text = ent["text"]
+            key = text.lower()
+
+            # si ya existe exacta, saltar
+            if key in merged:
                 continue
-            seen.add(key)
-            merged.append(ent)
 
-        return merged
+            # evitar que entre una subentidad si ya hay una entidad compuesta mayor
+            is_subentity = False
+            for existing_key, existing in merged.items():
+                existing_text = existing["text"].lower()
+
+                if key == existing_key:
+                    is_subentity = True
+                    break
+
+                if key in existing_text and existing_text.startswith(protected_prefixes):
+                    is_subentity = True
+                    break
+
+            if is_subentity:
+                continue
+
+            merged[key] = ent
+
+        return list(merged.values())
 
     def extract(self, text):
         stanza_entities = self.extract_stanza_entities(text)
@@ -91,3 +174,27 @@ class NERExtractor:
 
         all_entities = stanza_entities + heuristic_entities
         return self.merge_entities(all_entities)
+    
+    def extract_from_block(self, block):
+        text = block.get("text", "")
+        entities = self.extract(text)
+        enriched = []
+        for ent in entities:
+            if isinstance(ent, dict):
+                item = dict(ent)
+                item["block_id"] = block.get("block_id")
+                item["block_heading"] = block.get("heading", "")
+                item["block_image"] = block.get("image")
+                item["page_url"] = block.get("page_url", "")
+                enriched.append(item)
+            else:
+                enriched.append({
+                    "text": str(ent),
+                    "block_id": block.get("block_id"),
+                    "block_heading": block.get("heading", ""),
+                    "block_image": block.get("image"),
+                    "page_url": block.get("page_url", ""),
+                })
+
+        return enriched
+    

@@ -1,5 +1,6 @@
 from rdflib import Graph, Namespace, RDF, RDFS, Literal, URIRef
 from rdflib.namespace import XSD
+from rdflib import URIRef
 import re
 
 
@@ -89,17 +90,19 @@ class RDFBuilder:
     # Propiedades objeto
     # -------------------------------------------------
 
-    def add_object_property(self, subject, prop_name, obj):
-        """
-        Añade relación entre entidades.
-        """
+    
 
+    def add_object_property(self, subject, prop_name, obj):
         prop_uri = self._property_uri(prop_name)
 
-        if isinstance(obj, str):
-            obj = self._entity_uri(obj)
+        if isinstance(obj, URIRef):
+            obj_uri = obj
+        elif isinstance(obj, str) and (obj.startswith("http://") or obj.startswith("https://")):
+            obj_uri = URIRef(obj)
+        else:
+            obj_uri = self._entity_uri(obj)
 
-        self.graph.add((subject, prop_uri, obj))
+        self.graph.add((subject, prop_uri, obj_uri))
 
     # -------------------------------------------------
     # Metadatos de extracción
