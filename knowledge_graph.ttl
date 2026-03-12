@@ -1,0 +1,596 @@
+@prefix ns1: <http://tourismkg.com/property/> .
+
+<http://tourismkg.com/entity/Abama> a ns1:Mountain ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Abama_El_Spa> a ns1:Place ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Abama_The_Ritz-Carlton_Tenerife> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Adeje> a ns1:Event ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/AdejeLa> a ns1:Event ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Albergue_Bolico_Situado> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Andy_Timmons> a ns1:Mountain ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Andy_Timmons_Band> a ns1:Place ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Antropologia> a ns1:Theater ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Antropologia_de_Tenerife> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Apartamentos_Andorra_III> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Arca_de_Noe> a ns1:Monument ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Arico> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Arte> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ascension> a ns1:Mountain ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Aullidos_Tour_2526> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Avistamiento_de_aves_Escondido> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Avistamiento_de_cetaceos_Especies> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Barranco_del_Infierno> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Blog_6> a ns1:Place ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Bodegas> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Bolico> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Buenavista_del_Norte> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Buenavista_del_Playas_Playa_de_Abama> a ns1:Theater ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Canarias> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Carnaval> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Carnaval_Carnaval> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Carnaval_Internacional_de_Los_Cristianos> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casa_Carta> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casa_Las_Perez> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casa_Lercaro> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casa_Rural_Las_Perez_Situada> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casa_de_Carta> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casa_de_Los_Balcones> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casa_de_los_Balcones> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casa_del_Vino> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Casas_bioclimaticas_Pensiones_Silene_Orotava_Pension_Silene_Orotava> a ns1:NaturalResource ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Charco_del_Viento> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Climatologia> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Consejos> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Corona_Forestal> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Costa_Adeje> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/De_pronto_se_posa_justo_a_dos_metros_delante_de_ti:_su_plumaje…_Rutas_Ruta_autoguiada_para_conocer_la_historia_de_las…_​​Tienes_la_opción_de_realizar_un_recorrido_autoguiado_por_un_total_de_siete_puntos_dentro_del_Parque_Nacional_del_Teide_en_el_que_te_mostramos_la…_Ruta_de_la_Miel_en_Tenerife_Durante_el_segundo_fin_de_semana_de_mayo_se> ns1:hasEvent <http://tourismkg.com/entity/una_caminata_por_la_zona_alta_del_municipio_de_Arico> .
+
+<http://tourismkg.com/entity/Deportes_Ciclismo> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Desilena> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Direcciones> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Diviertete> a ns1:TouristInformationOffice ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Don_Carnal> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Donde> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Drago_Milenario> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/El_Guincho> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/El_Hierro> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/El_Sauzal> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/English_Deutsch_francais> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Escuela> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Espana> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Este_inmueble_está> ns1:locatedIn <http://tourismkg.com/entity/el_centro_del…_Ir_a_Qué_visitar_Playa_de_Abama_Si_buscas_un_lugar_tranquilo_donde_relajarte_y_desconectar,_la_playa_de_Abama_es_tu_lugar_ideal> .
+
+<http://tourismkg.com/entity/Estrellas_Michelin> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Feria_de_Artesania_de_Pinolere> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Festival_Internacional_de_Los_Cristianos> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Festival_Internacional_de_Musica_de_Canarias> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Fiesta_de_las_Tradiciones_En_Garachico> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Fiji_Beach_Club> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Fito__Fitipaldis> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Flor> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Garachico> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Gastronomia_Restaurantes> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Gobierno_de_Canarias> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Golf_Luxury_collection_Salud> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Granadilla> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Granadilla_de_Abona> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Guachinches> a ns1:Mountain ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Hotel_Apartamentos_Andorra_III> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Hoteles_The_Ritz-Carlton_Tenerife> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Icod_de_Los_Vinos> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Icod_el_Alto> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ifonche> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ifonche_Municipio> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Iglesia_Parroquial_de_San_Marcos> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Iglesia_de_San_Antonio> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Imprescindibles_Acantilados_de_Isorana> a ns1:NaturalResource ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Isla> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ismael_Serrano> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Jardin_Botanico_de_la_Aclimatacion_de_La_Orotava_EI_Jardin_de_Aclimatacion> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Jardin_de_Orquideas_Sitio_Litre> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_Casa_del_Vino> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_Gomera> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_Hoya> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_La_Casa_Lercaro> a ns1:Place ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_Laguna> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_Museo_de_Historia> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_Orotava> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_Palma> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/La_Villa_de_La_Orotava> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Las_Portelas> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Las_Tradiciones> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Las_Vegas> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Le_Club_Beach_Club_Le_Club> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Loro_Parque_Loro_Parque> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Los_Realejos> a ns1:Place ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Los_Silos> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/MHA> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Mar_de_nubes> a ns1:Monument ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Medano> a ns1:Mountain ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Media_Tipo_de_Volcanes_de_Tenerife_Volcanes_Legendarios> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Mejor_Parque_Zoologico> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Mercado_de_La_Laguna> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Mercados_de_Tenerife> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Mesa_del_Mar> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ministerio_de_Observacion_de_aves_Canario> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Mirador_de_El_Lance> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Mirador_de_Humboldt> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Miradores_Mirador> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Moverse> a ns1:Mountain ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Museo_de_Historia> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Museos_Centro_de_Interpretacion_de_las_Ruinas_del_El_Centro_de_Interpretacion_Castillo_de_San_Cristobal> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Nederlands> a ns1:Place ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Nederlands_Tenerife> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Observatorio_del_Teide_Origenes_Historicos> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ocio_Ocio_Beach> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Oficinas> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Padua> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Paraninfo_de_la_Universidad_de_La_Laguna> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parapente> a ns1:NaturalResource ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parque_Nacional_del_Los_Dos_Valles> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parque_Nacional_del_Teide> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parque_Nacional_del_Teide_Fauna_del_Teide_Caminas> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parque_Natural_de_la_Corona> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parque_Rural_de_Anaga> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parque_Rural_de_Teno> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parque_acuatico_Aqualand_Costa_Adeje_Aqualand> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Parque_del_Drago_Milenario> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Patrimonio_de_la_Humanidad> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Pico_del_Teide> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Pinares_de_Vilaflor> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Playa_de_Abama> a ns1:Theater ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Playa_de_El_Medano> a ns1:Theater ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Playa_de_El_Socorro> a ns1:Theater ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Playa_de_El_Socorro_Estado> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Playa_de_El_Socorro_Fin> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Playa_de_La_Arena> a ns1:Theater ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Plaza_del_Cristo> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Proyecto_Cultural> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Puerto_Colon> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Puerto_de_la> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Puerto_de_la_Pueblos> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Puertos> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Purpurina> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Real_Orden_del_Rey_Carlos_III> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Recinto_Ferial_de_Tenerife> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Reina_Sofia> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Reserva_de_la_Biosfera> a ns1:NaturalResource ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Roque> a ns1:Event ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ruta_Norte> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ruta_de_la_Miel> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Ruta_de_los_Almendros> a ns1:Mountain ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/San_Miguel_de_Abona> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/San_Miguel_de_AbonaEs> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/San_Roque> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Santa_Cruz> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Santa_Cruz_de_Tenerife> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Santa_Cruz_de_TenerifeEl> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Santiago> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Se_trata_de_un_espectáculo_en_el_que_se_exhibe_lo…_Festival_Internacional_de_Música_de_Canarias_Organizado_por_el_Gobierno_de_Canarias,_este_festival_se> ns1:hasEvent <http://tourismkg.com/entity/de_enero_a_febrero_(es_el_único_que_tiene_lugar_durante_los_meses_de_invierno)_y…_Feria_de_Artesanía_de_Pinolere_La_Feria_de_Artesanía_de_Pinolere_es_parte_de_las_iniciativas_de_la_difusión_de_la_cultura_canaria_denominado_“Proyecto_Cultural”_de_la_Asociación…_Carnaval_Carnaval_de_calle_en_Santa_Cruz_de_Tenerife_Las_impresionantes_fantasías_e_interpretaciones_de_los_grupos_del_Carnaval_a_lo_largo_del_proceso_de_concursos_no_llegarían_a_su_máxima_expresión_sin…_Entierro_de_la_sardina_Una_de_las_celebraciones_más_pintorescas_y_arraigadas_del_Carnaval_es_la_despedida_que_los_carnavaleros_le_hacen_a_Don_Carnal_en_el_entierro_de_la…_Excursiones_Excursiones_aéreas_en_Tenerife_Excursiones_terrestres_en_Tenerife_Excursiones_marítimas_en_Tenerife_Ocio_Ocio_Beach_clubs_Fiji_Beach_Club_Un_lugar_en_la_playa_a_favor_de_la_diversidad> .
+
+<http://tourismkg.com/entity/Senderismo> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Senderismo_PR-TF> a ns1:Event ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Sendero_del_Paisaje_Lunar> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Serinus> a ns1:Monument ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Servicios_Blog_Agenda_de_eventos_RSS_Blog_El_tiempo_Profesionales_Convention_Bureau_Film_Commission_Corporativa_Investigacion_Turismo_de_Tenerife_Aviso_legal_Declaracion_de_accesibilidad_Proteccion_de_datos_Transparencia_Sistema_Interno_de_Informacion_Politica> a ns1:TouristInformationOffice ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Silos> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Sur> a ns1:Mountain ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Surf> a ns1:Beach ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Tacoronte> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Taganana> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Taganana_Municipio> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Taucho> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Teatro_Leal> a ns1:Theater ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Teide> a ns1:Event ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Teleferico_del_Teide> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Tenerife> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Tenerife_Deporte> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Tenerife_Destino_Accesible_Siguenos_Sobre_Tenerife_Arquitectura_Climatologia_Gastronomia_Medios_de_comunicacion_La_isla_Multimedia_Galeria_Multimedia_Folletos_Mapas_Material_Interactivo_Videos_Webcams_Visita_Tenerife> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Tenerife_Respira> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/The_Ritz-Carlton_Spa> a ns1:Hotel ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/The_Ritz-Carlton_Tenerife> a ns1:Restaurant ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Tijoco> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Tratamiento_natural_de_Vinoterapia> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/TripAdvisor> a ns1:TourismDestination ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Tropico> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/UNESCO> a ns1:Monument ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Valle_de_Guerra> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Valle_de_La_Orotava> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Vilaflor> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Vilaflor_Estado> a ns1:Bar ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Villa_de_La_Orotava> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Volcanes_de_Tenerife> a ns1:Volcano ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Webcams> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/Webcams_Turismo_Convention_Bureau_Film_Commission_Corporativa_Investigacion_Web> a ns1:Museum ;
+    ns1:url "https://webtenerife.com" .
+
+<http://tourismkg.com/entity/parque_del_Drago> a ns1:CafeOrCoffeeShop ;
+    ns1:url "https://webtenerife.com" .
+

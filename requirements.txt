@@ -1,0 +1,6 @@
+rdflib
+trafilatura
+beautifulsoup4
+openai
+python-dotenv
+requests
