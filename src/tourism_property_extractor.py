@@ -288,43 +288,7 @@ class TourismPropertyExtractor:
         return text
 
     
-    def clean_description_text(self, text: str) -> str:
-        if not text:
-            return ""
-
-        # quitar imágenes markdown
-        text = re.sub(r"!\[[^\]]*\]\([^)]+\)", " ", text)
-
-        # quitar enlaces markdown, dejando solo el texto visible
-        text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
-
-        # quitar headings markdown
-        text = re.sub(r"^#+\s*", "", text, flags=re.MULTILINE)
-
-        # quitar líneas típicas de UI / vídeo
-        noise_lines = [
-            "watch later",
-            "share",
-            "copy link",
-            "tap to unmute",
-            "youtube",
-            "subscribers",
-            "ver video",
-        ]
-
-        lines = []
-        for line in text.splitlines():
-            clean_line = line.strip()
-            if not clean_line:
-                continue
-            if any(n in clean_line.lower() for n in noise_lines):
-                continue
-            lines.append(clean_line)
-
-        text = " ".join(lines)
-        text = re.sub(r"\s+", " ", text).strip()
-
-        return text
+    
 
 
 
@@ -369,9 +333,24 @@ class TourismPropertyExtractor:
             properties["url"] = page_url
 
         # teléfono si aparece dentro del bloque
+
+        # teléfono si aparece dentro del texto
         phone = self.extract_phone(text)
+
+        # buscar también enlaces tel:
+
+        node = block.get("node")
+
+        if not phone and node:
+            for a in node.find_all("a", href=True):
+                href = a.get("href", "")
+                if "tel:" in href:
+                    phone = href.replace("tel:", "").strip()
+                    break
+
         if phone:
             properties["telephone"] = phone
+        
 
 
         geo = self.extract_geo(text)

@@ -1,18 +1,27 @@
 import time
 from dotenv import load_dotenv
+import os
 
+from src import site_crawler
+from src import playwright_crawler
 from src.firecrawl_client import FirecrawlClient
 from src.site_crawler import SiteCrawler
+from firecrawl import FirecrawlApp
+
+
+
+
 
 from src.html_block_extractor import HTMLBlockExtractor
 from src.block_classifier import BlockClassifier
 
 from src.ner_extractor import NERExtractor
-from src.entity_type_resolver import EntityTypeResolver
 from src.relation_extractor import RelationExtractor
 from src.tourism_property_extractor import TourismPropertyExtractor
 from src.rdf_builder import RDFBuilder
 from src.ontology_loader import OntologyLoader
+from src.playwright_crawler import PlaywrightCrawler
+from src.entity_type_resolver import EntityTypeResolver
 
 
 # --------------------------------------------------
@@ -27,10 +36,6 @@ STOP_ENTITIES = {
     "watch later",
     "tap to unmute",
     "youtube",
-    "please try again later",
-    "photo image of maspalomas",
-    "wtm teaser not sub",
-    "shopping",
 }
 
 
@@ -59,58 +64,7 @@ def is_valid_entity_candidate(text: str) -> bool:
     if clean in STOP_ENTITIES:
         return False
 
-    banned_fragments = [
-        "watch later",
-        "copy link",
-        "tap to unmute",
-        "youtube",
-        "photo image",
-        "please try again later",
-        "teaser not sub",
-    ]
-
-    if any(b in clean for b in banned_fragments):
-        return False
-
     return True
-
-
-# --------------------------------------------------
-# CLASE TURÍSTICA SEGURA
-# --------------------------------------------------
-
-def force_safe_tourism_class(entity_text: str, current_class: str, confidence: float) -> str:
-
-    t = entity_text.lower()
-
-    if "playa" in t:
-        return "Cove"
-
-    if "sendero" in t or "camino" in t or "ruta" in t:
-        return "Trail"
-
-    if "puerto" in t:
-        return "YatchingPort"
-
-    if "hotel" in t:
-        return "Hotel"
-
-    if "restaurante" in t:
-        return "Restaurant"
-
-    if "valle" in t:
-        return "Valley"
-
-    if "jardin" in t or "jardín" in t:
-        return "Garden"
-
-    if "carnaval" in t or "festival" in t:
-        return "Event"
-
-    if confidence < 0.32:
-        return "Place"
-
-    return current_class
 
 
 # --------------------------------------------------
@@ -140,13 +94,15 @@ def main():
 
     start_time = time.time()
 
-    seed_url = "https://turismo.maspalomas.com/"
+    seed_url = "https://turismoapps.dip-badajoz.es/"
 
     print("\n=== INICIALIZANDO COMPONENTES ===")
 
     fc = FirecrawlClient()
 
     crawler = SiteCrawler(max_pages=50)
+
+    playwright_crawler = PlaywrightCrawler(max_pages=1000)
 
     block_extractor = HTMLBlockExtractor()
 
@@ -166,13 +122,19 @@ def main():
 
     ontology_data = ontology_loader.load()
 
-    entity_resolver = EntityTypeResolver(ontology_data["classes"])
+    entity_resolver = EntityTypeResolver()
 
     # --------------------------------------------------
     # CRAWL
     # --------------------------------------------------
 
-    print("\n=== CRAWLING CON FIRECRAWL ===")
+    print("\n=== CRAWLING ===")
+
+    pages = None
+
+    # --------------------------------------------------
+    # 1️⃣ FIRECRAWL
+    # --------------------------------------------------
 
     try:
 
@@ -180,32 +142,65 @@ def main():
 
         pages = []
 
-        for item in crawl_result:
+        FIRECRAWL_API_KEY = os.getenv("FIRECRAWL_API_KEY")
 
-            html = getattr(item, "content", None)
+        fc = FirecrawlApp(api_key=FIRECRAWL_API_KEY)
 
-            if not html:
-                continue
+        if crawl_result and hasattr(crawl_result, "__iter__"):
 
-            pages.append({
-                "url": item.metadata.get("sourceURL", ""),
-                "html": html,
-                "text": html
-            })
+            for item in crawl_result:
+
+                html = getattr(item, "content", None)
+
+                if not html:
+                    continue
+
+                pages.append({
+                    "url": item.metadata.get("sourceURL", ""),
+                    "html": html,
+                    "text": html
+                })
+
+        if not pages:
+            
+            raise Exception("Firecrawl no devolvió páginas")
+
+        print(f"[INFO] Firecrawl recuperó {len(pages)} páginas")
 
     except Exception as e:
 
-        print("[WARN] Error SSL en Firecrawl:", e)
-        print("[INFO] Activando fallback con SiteCrawler...")
+        print("[WARN] Firecrawl falló:", e)
 
-        pages = crawler.crawl([seed_url])
+        # --------------------------------------------------
+        # 2️⃣ PLAYWRIGHT
+        # --------------------------------------------------
 
-    total_pages = len(pages)
+        try:
 
-    print(f"\nTotal de páginas recuperadas: {total_pages}")
+            print("[INFO] Activando Playwright crawler...")
 
-    if total_pages == 0:
-        return
+            pages = playwright_crawler.crawl(seed_url)
+            
+
+            if not pages:
+                raise Exception("Playwright no devolvió páginas")
+            total_pages = len(pages)
+
+            print(f"[INFO] Playwright recuperó {len(pages)} páginas")
+
+        except Exception as e:
+
+            print("[WARN] Playwright falló:", e)
+
+            # --------------------------------------------------
+            # 3️⃣ SITECRAWLER
+            # --------------------------------------------------
+
+            print("[INFO] Activando fallback con SiteCrawler...")
+
+            pages = site_crawler.crawl_site(seed_url)
+
+            print(f"[INFO] SiteCrawler recuperó {len(pages)} páginas")
 
     # --------------------------------------------------
     # INDICE DE ENTIDADES
@@ -223,6 +218,8 @@ def main():
 
     for idx, page in enumerate(pages, start=1):
 
+        page_entities=[]
+
         url = page.get("url")
 
         html = page.get("html")
@@ -235,126 +232,126 @@ def main():
         print(f"Procesando: {url}")
 
         blocks = block_extractor.extract_blocks(html)
-        
-
-        page_entities = []
 
         for block in blocks:
 
             block_html = block.get("html")
 
-            # evitar bloques inválidos
-            if not block_html or not isinstance(block_html, str):
+            entities = []
+
+            # --------------------------------------------------
+            # 1. CLASIFICADOR
+            # --------------------------------------------------
+
+            result = block_classifier.classify_block(block_html)
+
+            if result:
+
+                entity_text = result["entity_candidate"]
+
+                if is_valid_entity_candidate(entity_text):
+                    entities.append(entity_text)
+
+            # --------------------------------------------------
+            # 2. FALLBACK NER
+            # --------------------------------------------------
+
+            if not entities:
+
+                ner_entities = ner_extractor.extract(block.get("text", ""))
+
+                for ent in ner_entities:
+
+                    entity_text = ent["text"]
+
+                    if is_valid_entity_candidate(entity_text):
+                        entities.append(entity_text)
+
+            if not entities:
                 continue
 
-            result = block_classifier.classify_block(block_html)            
+            # --------------------------------------------------
+            # PROCESAR ENTIDADES
+            # --------------------------------------------------
 
-            if not result:
-                continue
+            for entity_text in entities:
 
-            entity_text = result["entity_candidate"]
+                total_detected_entities += 1
 
-            if not is_valid_entity_candidate(entity_text):
-                continue
-
-            total_detected_entities += 1
-
-            # ------------------------------------------
-            # EXTRAER PROPIEDADES
-            # ------------------------------------------
-
-            properties = property_extractor.extract_from_block(
-                html_block=block_html,
-                url=url,
-                entity_name=entity_text
-            )
-
-            context = result.get("text", "")
-
-            description_hint = properties.get("description", "")
-
-            # ------------------------------------------
-            # RESOLVER TIPO
-            # ------------------------------------------
-            
-            resolution = entity_resolver.resolve(
-            mention=entity_text,
-            context=context,
-            description=description_hint,
-            url=url,
-            properties=properties,
-            block_text=context
-        )
-
-
-            ontology_class = resolution["class"]
-
-            confidence = resolution["confidence"]
-
-            if confidence < 0.18:
-                continue
-
-            ontology_class = force_safe_tourism_class(
-                entity_text,
-                ontology_class,
-                confidence
-            )
-
-            print(f"[ENTITY] {entity_text} -> {ontology_class} ({confidence:.3f})")
-
-            total_linked_entities += 1
-
-            entity_key = normalize_entity_key(entity_text)
-
-            # ------------------------------------------
-            # CREAR RDF
-            # ------------------------------------------
-
-            if entity_key not in entity_index:
-
-                entity_uri = rdf_builder.add_instance(
-                    entity_name=entity_text,
-                    ont_class=ontology_class,
-                    label=entity_text
+                properties = property_extractor.extract_from_block(
+                    block,
+                    entity_text
                 )
 
-                rdf_builder.add_provenance(
-                    entity_uri,
-                    source_url=url,
-                    confidence=confidence,
-                    extractor="entity_type_resolver_block"
+                context = block.get("text", "")
+
+                resolution = entity_resolver.resolve(
+                    mention=entity_text,
+                    context=url,
+                    block_text=context
+                    
                 )
+                 
+                ontology_class = resolution["class"].lower()
+                confidence = resolution["confidence"]
 
-                entity_index[entity_key] = {
-                    "uri": entity_uri,
-                    "class": ontology_class,
-                    "confidence": confidence
-                }
-
-            else:
-
-                entity_uri = entity_index[entity_key]["uri"]
-
-            page_entities.append({
-                "text": entity_text,
-                "key": entity_key,
-                "uri": entity_uri,
-            })
-
-            # ------------------------------------------
-            # PROPIEDADES RDF
-            # ------------------------------------------
-
-            for prop_name, prop_value in properties.items():
-
-                if not prop_value:
+                # filtrar entidades con poca confianza
+                if confidence < 0.4:
                     continue
 
-                rdf_builder.add_data_property(
-                    subject=entity_uri,
-                    prop_name=prop_name,
-                    value=prop_value
-                )
+                entity_key = normalize_entity_key(entity_text)
+
+                if len(entity_key) < 3:
+                    continue
+
+                print(f"[ENTITY] {entity_text} -> {ontology_class} ({confidence:.3f})")
+
+                total_linked_entities += 1
+
+                if entity_key not in entity_index:
+
+                    entity_uri = rdf_builder.add_instance(
+                        entity_name=entity_text,
+                        ont_class=ontology_class,
+                        label=entity_text
+                    )
+
+                    page_entities.append({
+                        "text": entity_text,
+                        "uri": entity_uri
+                    })                      
+
+
+                    rdf_builder.add_provenance(
+                        entity_uri,
+                        source_url=url,
+                        confidence=confidence,
+                        extractor="hybrid_extractor"
+                    )
+
+                    entity_index[entity_key] = {
+                        "uri": entity_uri,
+                        "class": ontology_class,
+                        "confidence": confidence
+                    } 
+                
+
+                else:
+
+                    entity_uri = entity_index[entity_key]["uri"]
+
+                # propiedades RDF
+
+                for prop_name, prop_value in properties.items():
+
+                    if not prop_value:
+                        continue
+
+                    rdf_builder.add_data_property(
+                        subject=entity_uri,
+                        prop_name=prop_name,
+                        value=prop_value
+                    )
 
         # --------------------------------------------------
         # RELACIONES

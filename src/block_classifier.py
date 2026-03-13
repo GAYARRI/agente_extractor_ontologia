@@ -6,166 +6,121 @@ class BlockClassifier:
 
     def __init__(self):
 
-        # palabras típicas del dominio turismo
+        self.stop_entities = {
+
+            "ver más",
+            "copyright",
+            "aviso legal",
+            "política de privacidad",
+            "contacto",
+            "agenda",
+            "organiza tu viaje",
+            "qué hacer",
+            "qué puedes hacer"
+        }
+
         self.tourism_keywords = [
+
             "playa",
-            "sendero",
             "ruta",
+            "sendero",
             "hotel",
-            "puerto",
-            "valle",
-            "parque",
-            "monumento",
-            "iglesia",
-            "catedral",
-            "museo",
-            "jardín",
-            "jardin",
+            "evento",
             "festival",
             "carnaval",
+            "parque",
             "naturaleza",
-            "montaña",
             "mirador",
-            "dunas",
             "isla",
+            "pueblo",
+            "ciudad",
+            "mar",
+            "atlántico",
+            "buceo",
+            "surf",
+            "senderismo",
+            "gastronomía"
         ]
 
-        # ruido típico de interfaz web
-        self.ui_noise = [
-            "share",
-            "copy link",
-            "watch later",
-            "tap to unmute",
-            "youtube",
-            "search",
-            "cookie",
-            "cookies",
-            "login",
-            "newsletter",
-            "subscribe",
-        ]
 
-    # --------------------------------------------------
-    # LIMPIAR TEXTO
-    # --------------------------------------------------
-
-    def clean_text(self, text):
+    def clean_entity(self, text):
 
         text = re.sub(r"\s+", " ", text)
 
-        return text.strip()
-
-    # --------------------------------------------------
-    # DETECTAR HEADING
-    # --------------------------------------------------
-
-    def extract_heading(self, soup):
-
-        for tag in ["h1", "h2", "h3", "h4"]:
-            h = soup.find(tag)
-            if h:
-                return h.get_text(strip=True)
-
-        return None
-
-    # --------------------------------------------------
-    # DETECTAR CANDIDATO DESDE TEXTO
-    # --------------------------------------------------
-
-    def guess_entity_from_text(self, text):
-
-        if not text:
-            return None
-
         text = text.strip()
 
-        if len(text) < 10:
-            return None
+        return text
 
-        # usar primera frase
-        sentence = text.split(".")[0]
 
-        if len(sentence) < 5:
-            return None
+    def is_valid_entity(self, text):
 
-        return sentence[:80]
+        if not text:
+            return False
 
-    # --------------------------------------------------
-    # CLASIFICAR BLOQUE
-    # --------------------------------------------------
+        text = text.lower().strip()
 
-    def classify_block(self, html_block):
+        if len(text) < 3:
+            return False
 
-        if not html_block or not isinstance(html_block, str):
-            return None
+        if text in self.stop_entities:
+            return False
 
-        soup = BeautifulSoup(html_block, "html.parser")
+        return True
+
+
+    def keyword_score(self, text):
+
+        score = 0
+
+        text = text.lower()
+
+        for k in self.tourism_keywords:
+
+            if k in text:
+                score += 1
+
+        return score
+
+
+    def classify_block(self, block_html):
+
+        soup = BeautifulSoup(block_html, "html.parser")
 
         text = soup.get_text(" ", strip=True)
 
         if not text:
             return None
 
-        text = self.clean_text(text)
+        heading = soup.find(["h1", "h2", "h3"])
 
-        text_lower = text.lower()
+        entity_candidate = None
 
-        # -----------------------------------------
-        # FILTRO DE UI
-        # -----------------------------------------
+        if heading:
 
-        for noise in self.ui_noise:
-            if noise in text_lower:
-                return None
+            entity_candidate = heading.get_text(strip=True)
 
-        # -----------------------------------------
-        # DETECTAR HEADING
-        # -----------------------------------------
+        else:
 
-        heading = self.extract_heading(soup)
+            words = text.split(" ")
 
-        # -----------------------------------------
-        # SI NO HAY HEADING, USAR TEXTO
-        # -----------------------------------------
+            entity_candidate = " ".join(words[:6])
 
-        if not heading:
+        entity_candidate = self.clean_entity(entity_candidate)
 
-            heading = self.guess_entity_from_text(text)
-
-            if not heading:
-                return None
-
-        # -----------------------------------------
-        # VALIDAR LONGITUD
-        # -----------------------------------------
-
-        if len(heading) < 3:
+        if not self.is_valid_entity(entity_candidate):
             return None
 
-        # -----------------------------------------
-        # SCORE POR KEYWORDS TURÍSTICAS
-        # -----------------------------------------
-
-        keyword_score = 0
-
-        for kw in self.tourism_keywords:
-
-            if kw in text_lower:
-                keyword_score += 1
-
-        # -----------------------------------------
-        # FILTRO DE BLOQUES DEMASIADO PEQUEÑOS
-        # -----------------------------------------
+        keyword_score = self.keyword_score(text)
 
         if keyword_score == 0 and len(text) < 80:
             return None
 
-        # -----------------------------------------
-        # RESULTADO
-        # -----------------------------------------
-
         return {
-            "entity_candidate": heading.strip(),
+
+            "entity_candidate": entity_candidate,
+
             "score": keyword_score,
-            "text": text[:800],
+
+            "text": text
+
         }

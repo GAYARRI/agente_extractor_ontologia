@@ -2,42 +2,87 @@ from bs4 import BeautifulSoup
 
 
 class HTMLBlockExtractor:
-    def __init__(self, min_text_length=60):
-        self.min_text_length = min_text_length
 
-    def _clean_text(self, text: str) -> str:
-        return " ".join(text.strip().split())
+    def __init__(self):
+        pass
 
-    def extract_blocks(self, html, page_url=""):
+
+    def clean_dom(self, soup):
+
+        # eliminar ruido de navegación
+        for tag in soup(["nav", "footer", "header", "script", "style", "noscript"]):
+            tag.decompose()
+
+        return soup
+
+
+    def extract_blocks(self, html, page_url=None):
+
         soup = BeautifulSoup(html, "html.parser")
+
+        soup = self.clean_dom(soup)
+
         blocks = []
 
-        candidates = soup.find_all(["section", "article", "div", "li"])
+        candidates = soup.find_all([
+            "section",
+            "article",
+            "div"
+        ])
 
-        for idx, node in enumerate(candidates):
-            text = self._clean_text(node.get_text(" ", strip=True))
-            if len(text) < self.min_text_length:
+        idx = 0
+
+        for node in candidates:
+
+            text = node.get_text(separator=" ", strip=True)
+
+            if not text:
                 continue
 
-            heading_tag = node.find(["h1", "h2", "h3", "h4"])
-            heading = self._clean_text(heading_tag.get_text(" ", strip=True)) if heading_tag else ""
+            if len(text) < 40:
+                continue
+
+            heading = None
+
+            h = node.find(["h1", "h2", "h3"])
+
+            if h:
+                heading = h.get_text(strip=True)
+
+            image = None
 
             img = node.find("img")
-            image = img.get("src") if img and img.get("src") else None
+
+            if img and img.get("src"):
+                image = img.get("src")
 
             links = []
+
             for a in node.find_all("a", href=True):
-                href = a.get("href", "").strip()
-                if href:
+
+                href = a["href"]
+
+                if href.startswith("/"):
                     links.append(href)
 
             blocks.append({
+
                 "block_id": f"block_{idx}",
+
                 "heading": heading,
+
                 "text": text,
+
+                "html": str(node),
+
                 "image": image,
+
                 "links": links,
-                "page_url": page_url,
+
+                "page_url": page_url
+
             })
+
+            idx += 1
 
         return blocks
