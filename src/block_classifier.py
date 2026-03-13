@@ -1,71 +1,171 @@
+from bs4 import BeautifulSoup
 import re
 
 
 class BlockClassifier:
+
     def __init__(self):
-        self.collective_patterns = [
-            r"\bdesde\b.*\bhasta\b",
-            r"\bentre\b.*\by\b",
-            r"\bcomo\b\s+.+",
-            r"\brincones\b",
-            r"\bplayas vírgenes\b",
-            r"\bplayas naturales\b",
-            r"\bconjunto de\b",
-            r"\bvarias\b",
-            r"\bdistintas\b",
-            r"\balgunas de\b",
-            r"\buna selección de\b",
-            r"\blista de\b",
-            r"\bgrupo de\b",
+
+        # palabras típicas del dominio turismo
+        self.tourism_keywords = [
+            "playa",
+            "sendero",
+            "ruta",
+            "hotel",
+            "puerto",
+            "valle",
+            "parque",
+            "monumento",
+            "iglesia",
+            "catedral",
+            "museo",
+            "jardín",
+            "jardin",
+            "festival",
+            "carnaval",
+            "naturaleza",
+            "montaña",
+            "mirador",
+            "dunas",
+            "isla",
         ]
 
-        self.collective_headings = {
-            "playas",
-            "museos",
-            "rutas",
-            "hoteles",
-            "restaurantes",
-            "puertos deportivos",
-            "naturaleza",
-            "actividades",
-            "lugares de interés",
-            "qué ver",
-            "qué hacer",
-        }
+        # ruido típico de interfaz web
+        self.ui_noise = [
+            "share",
+            "copy link",
+            "watch later",
+            "tap to unmute",
+            "youtube",
+            "search",
+            "cookie",
+            "cookies",
+            "login",
+            "newsletter",
+            "subscribe",
+        ]
 
-    def _normalize(self, text: str) -> str:
-        return " ".join(text.strip().lower().split())
+    # --------------------------------------------------
+    # LIMPIAR TEXTO
+    # --------------------------------------------------
 
-    def classify_block(self, block: dict) -> dict:
-        heading = self._normalize(block.get("heading", ""))
-        text = self._normalize(block.get("text", ""))
+    def clean_text(self, text):
 
-        score = 0.0
-        reasons = []
+        text = re.sub(r"\s+", " ", text)
 
-        if heading in self.collective_headings:
-            score += 0.5
-            reasons.append("heading_colectivo")
+        return text.strip()
 
-        for pattern in self.collective_patterns:
-            if re.search(pattern, text):
-                score += 0.4
-                reasons.append(f"pattern:{pattern}")
+    # --------------------------------------------------
+    # DETECTAR HEADING
+    # --------------------------------------------------
 
-        # si el heading es corto y genérico
-        if heading and len(heading.split()) <= 3 and any(word in heading for word in ["playas", "museos", "rutas", "actividades"]):
-            score += 0.2
-            reasons.append("heading_generico")
+    def extract_heading(self, soup):
 
-        # si parece una ficha específica, restar
-        if heading and len(heading.split()) >= 2 and heading not in self.collective_headings:
-            score -= 0.2
-            reasons.append("heading_especifico")
+        for tag in ["h1", "h2", "h3", "h4"]:
+            h = soup.find(tag)
+            if h:
+                return h.get_text(strip=True)
 
-        is_collective = score >= 0.5
+        return None
+
+    # --------------------------------------------------
+    # DETECTAR CANDIDATO DESDE TEXTO
+    # --------------------------------------------------
+
+    def guess_entity_from_text(self, text):
+
+        if not text:
+            return None
+
+        text = text.strip()
+
+        if len(text) < 10:
+            return None
+
+        # usar primera frase
+        sentence = text.split(".")[0]
+
+        if len(sentence) < 5:
+            return None
+
+        return sentence[:80]
+
+    # --------------------------------------------------
+    # CLASIFICAR BLOQUE
+    # --------------------------------------------------
+
+    def classify_block(self, html_block):
+
+        if not html_block or not isinstance(html_block, str):
+            return None
+
+        soup = BeautifulSoup(html_block, "html.parser")
+
+        text = soup.get_text(" ", strip=True)
+
+        if not text:
+            return None
+
+        text = self.clean_text(text)
+
+        text_lower = text.lower()
+
+        # -----------------------------------------
+        # FILTRO DE UI
+        # -----------------------------------------
+
+        for noise in self.ui_noise:
+            if noise in text_lower:
+                return None
+
+        # -----------------------------------------
+        # DETECTAR HEADING
+        # -----------------------------------------
+
+        heading = self.extract_heading(soup)
+
+        # -----------------------------------------
+        # SI NO HAY HEADING, USAR TEXTO
+        # -----------------------------------------
+
+        if not heading:
+
+            heading = self.guess_entity_from_text(text)
+
+            if not heading:
+                return None
+
+        # -----------------------------------------
+        # VALIDAR LONGITUD
+        # -----------------------------------------
+
+        if len(heading) < 3:
+            return None
+
+        # -----------------------------------------
+        # SCORE POR KEYWORDS TURÍSTICAS
+        # -----------------------------------------
+
+        keyword_score = 0
+
+        for kw in self.tourism_keywords:
+
+            if kw in text_lower:
+                keyword_score += 1
+
+        # -----------------------------------------
+        # FILTRO DE BLOQUES DEMASIADO PEQUEÑOS
+        # -----------------------------------------
+
+        if keyword_score == 0 and len(text) < 80:
+            return None
+
+        # -----------------------------------------
+        # RESULTADO
+        # -----------------------------------------
 
         return {
-            "is_collective": is_collective,
-            "score": score,
-            "reasons": reasons,
+            "entity_candidate": heading.strip(),
+            "score": keyword_score,
+            "text": text[:800],
         }

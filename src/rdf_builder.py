@@ -1,6 +1,8 @@
 from rdflib import Graph, Namespace, RDF, RDFS, Literal, URIRef
 from rdflib.namespace import XSD
 from rdflib import URIRef
+from rdflib import URIRef
+
 import re
 
 
@@ -92,6 +94,8 @@ class RDFBuilder:
 
     
 
+    
+        
     def add_object_property(self, subject, prop_name, obj):
         prop_uri = self._property_uri(prop_name)
 
@@ -103,6 +107,7 @@ class RDFBuilder:
             obj_uri = self._entity_uri(obj)
 
         self.graph.add((subject, prop_uri, obj_uri))
+        
 
     # -------------------------------------------------
     # Metadatos de extracción

@@ -232,6 +232,7 @@ class TourismPropertyExtractor:
 
         return geo
 
+    
     def extract_phone(self, text):
         if not text:
             return None
@@ -245,7 +246,47 @@ class TourismPropertyExtractor:
             if len(digits) == 9 or (len(digits) == 11 and digits.startswith("34")):
                 return match.strip()
 
-        return None
+        return None    
+    
+    def clean_description_text(self, text: str) -> str:
+        if not text:
+            return ""
+
+        # quitar imágenes markdown
+        text = re.sub(r"!\[[^\]]*\]\([^)]+\)", " ", text)
+
+        # quitar enlaces markdown dejando el texto visible
+        text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+
+        # quitar headings markdown
+        text = re.sub(r"^#+\s*", "", text, flags=re.MULTILINE)
+
+        noise_lines = [
+            "watch later",
+            "share",
+            "copy link",
+            "tap to unmute",
+            "youtube",
+            "subscribers",
+            "ver video",
+            "photo image",
+            "wtm teaser not sub",
+        ]
+
+        lines = []
+        for line in text.splitlines():
+            clean_line = line.strip()
+            if not clean_line:
+                continue
+            if any(n in clean_line.lower() for n in noise_lines):
+                continue
+            lines.append(clean_line)
+
+        text = " ".join(lines)
+        text = re.sub(r"\s+", " ", text).strip()
+
+        return text
+
     
     def clean_description_text(self, text: str) -> str:
         if not text:
@@ -308,16 +349,16 @@ class TourismPropertyExtractor:
         
         if text:
             desc = text
-        if heading and desc.startswith(heading):
-            desc = desc[len(heading):].strip()
+            if heading and desc.startswith(heading):
+                desc = desc[len(heading):].strip()
 
-        if len(desc) > 500:
-            desc = desc[:500].rsplit(" ", 1)[0]
+            if len(desc) > 500:
+                desc = desc[:500].rsplit(" ", 1)[0]
 
-        desc = self.clean_description_text(desc)
+            desc = self.clean_description_text(desc)
 
-        if not block_is_collective and len(desc) > 50:
-            properties["description"] = desc
+            if not block_is_collective and len(desc) > 50:
+                properties["description"] = desc
 
         # imagen solo si el bloque NO es colectivo y no parece logo
         if image and "logo" not in image.lower() and not block_is_collective:
