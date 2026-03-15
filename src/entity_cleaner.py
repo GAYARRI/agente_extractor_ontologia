@@ -1,39 +1,54 @@
 import re
 
 
+STOP_WORDS = [
+    "portada",
+    "inicio",
+    "home",
+    "menu",
+    "buscar",
+    "contacto",
+    "mapa",
+    "cookies",
+    "facebook",
+    "instagram",
+    "youtube",
+    "rss",
+    "twitter",
+    "agenda",
+    "eventos",
+    "turismo",
+]
+
+
 class EntityCleaner:
 
-    def __init__(self):
+    def clean(self, entities):
 
-        self.noise_patterns = [
-            r"disfruta.*",
-            r"descubre.*",
-            r"vive.*",
-            r"más info.*",
-            r"utilizamos cookies.*",
-            r"haz clic.*",
-        ]
+        clean_entities = []
 
-    def clean(self, text):
+        for e in entities:
 
-        if not text:
-            return None
+            text = e.get("entity")
 
-        text = text.strip()
+            if not text:
+                continue
 
-        # eliminar frases ruido
-        for pattern in self.noise_patterns:
-            text = re.sub(pattern, "", text, flags=re.IGNORECASE)
+            text = text.strip()
 
-        # eliminar puntuación final
-        text = re.sub(r"[^\w\sáéíóúñÁÉÍÓÚÑ]", "", text)
+            if len(text) < 4:
+                continue
 
-        # colapsar espacios
-        text = re.sub(r"\s+", " ", text)
+            text_lower = text.lower()
 
-        text = text.strip()
+            # eliminar palabras de navegación
+            if any(w in text_lower for w in STOP_WORDS):
+                continue
 
-        if len(text) < 3:
-            return None
+            # eliminar entidades con números
+            if re.search(r"\d", text):
+                continue
 
-        return text
+            clean_entities.append(e)
+
+        return clean_entities

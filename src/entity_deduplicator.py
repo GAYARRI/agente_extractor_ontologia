@@ -50,3 +50,31 @@ class EntityDeduplicator:
         self.embeddings.append(emb)
 
         return entity
+
+    def deduplicate(self, results):
+
+        seen = set()
+        clean_results = []
+
+        for block in results:
+
+            new_entities = []
+
+            for e in block["entities"]:
+
+                key = e["entity"].lower()
+
+                if key in seen:
+                    continue
+
+                seen.add(key)
+
+                new_entities.append(e)
+
+            if new_entities:
+
+                block["entities"] = new_entities
+                clean_results.append(block)
+
+        return clean_results
+    

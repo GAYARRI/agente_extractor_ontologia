@@ -1,17 +1,10 @@
 from bs4 import BeautifulSoup
 
 
+MIN_TEXT_LENGTH = 20
+
+
 class HTMLBlockExtractor:
-
-    def __init__(self):
-
-        self.block_tags = [
-            "section",
-            "article",
-            "div",
-            "li"
-        ]
-
 
     def extract(self, html):
 
@@ -19,29 +12,28 @@ class HTMLBlockExtractor:
 
         blocks = []
 
-        for tag in self.block_tags:
+        # eliminar elementos de ruido
+        for tag in soup(["script", "style", "nav", "footer", "header"]):
+            tag.decompose()
 
-            elements = soup.find_all(tag)
+        # extraer TODO el texto visible
+        text = soup.get_text("\n")
 
-            for el in elements:
+        lines = text.split("\n")
 
-                text = el.get_text(" ", strip=True)
+        for line in lines:
 
-                if not text:
-                    continue
+            line = line.strip()
 
-                img = None
+            if not line:
+                continue
 
-                img_tag = el.find("img")
+            if len(line) < MIN_TEXT_LENGTH:
+                continue
 
-                if img_tag and img_tag.get("src"):
-                    img = img_tag["src"]
-
-                block = {
-                    "text": text,
-                    "image": img
-                }
-
-                blocks.append(block)
+            blocks.append({
+                "text": line,
+                "image": None
+            })
 
         return blocks

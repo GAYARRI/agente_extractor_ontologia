@@ -1,267 +1,65 @@
-@prefix onto: <http://tourismkg.com/ontology/> .
-@prefix prov1: <http://tourismkg.com/provenance/> .
+@prefix ex: <http://example.org/resource/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix res: <http://tourismkg.com/resource/> .
+@prefix tour: <http://example.org/tourism/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-res:ayagaures_entre a onto:naturalarea ;
-    rdfs:label "Ayagaures Entre" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+ex:Abre_los a tour:opens_at ;
+    rdfs:label "Abre los" ;
+    tour:confidence 7.850486e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:bartolomé_de_tirajana a onto:naturalarea ;
-    rdfs:label "Bartolomé de Tirajana" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
+ex:Admira_la a tour:reconocido_por ;
+    rdfs:label "Admira la" ;
+    tour:confidence 7.952107e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:caldera_de_tirajana a onto:naturalarea ;
-    rdfs:label "Caldera de Tirajana" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+ex:Comunicaci%C3%B3n_de a tour:Paqueter%C3%ADa_y_mensajer%C3%ADa ;
+    rdfs:label "Comunicación de" ;
+    tour:confidence 7.601263e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:camino_de_ayagaures a onto:naturalarea ;
-    rdfs:label "Camino de Ayagaures" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+ex:De_la a <https://ontologia.segittur.es/turismo/def/core#Place> ;
+    rdfs:label "De la" ;
+    tour:confidence 7.59711e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:camino_de_fataga a onto:naturalarea ;
-    rdfs:label "Camino de Fataga" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+ex:Disfruta_de a tour:TouristRoute ;
+    rdfs:label "Disfruta de" ;
+    tour:confidence 9e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:carnaval_internacional a onto:naturalarea ;
-    rdfs:label "Carnaval Internacional" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
+ex:Dispone_de a <https://ontologia.segittur.es/turismo/def/core#GuestHouse> ;
+    rdfs:label "Dispone de" ;
+    tour:confidence 8.931963e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:contacto_oficinas a onto:activity ;
-    rdfs:label "Contacto Oficinas" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
+ex:Entre_Iglesias_y_Dehesa a <https://ontologia.segittur.es/turismo/def/core#Church> ;
+    rdfs:label "Entre Iglesias y Dehesa" ;
+    tour:confidence 9e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:desde_montaña a onto:naturalarea ;
-    rdfs:label "Desde Montaña" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
+ex:La_Fuga_de_la_Diabla a tour:Pista_de_p%C3%A1del ;
+    rdfs:label "La Fuga de la Diabla" ;
+    tour:confidence 7.811579e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:en_maspalomas a onto:naturalarea ;
-    rdfs:label "En Maspalomas" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+ex:Playa_de_Peloche a <https://ontologia.segittur.es/turismo/def/core#BeachBar> ;
+    rdfs:label "Playa de Peloche" ;
+    tour:confidence 9e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:fataga_una a onto:naturalarea ;
-    rdfs:label "Fataga Una" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+ex:Ruta_de_la_Plata_La a tour:TouristRoute ;
+    rdfs:label "Ruta de la Plata La" ;
+    tour:confidence 9e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:fernando_de_maspalomas a onto:activity ;
-    rdfs:label "Fernando de Maspalomas" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
+ex:Sabores_y a <https://ontologia.segittur.es/turismo/def/core#Groceries> ;
+    rdfs:label "Sabores y" ;
+    tour:confidence 7.634953e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
-res:gran_canaria a onto:naturalarea ;
-    rdfs:label "Gran Canaria" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:ilustre_ayuntamiento a onto:activity ;
-    rdfs:label "Ilustre Ayuntamiento" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:imágenes_aviso a onto:activity ;
-    rdfs:label "Imágenes Aviso" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:inglés_vibrante a onto:naturalarea ;
-    rdfs:label "Inglés Vibrante" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:internacional_de_maspalomas a onto:naturalarea ;
-    rdfs:label "Internacional de Maspalomas" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:los_bigotes a onto:naturalarea ;
-    rdfs:label "Los Bigotes" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:mar a onto:naturalarea ;
-    rdfs:label "Mar" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
-
-res:maspalomas_famosa a onto:naturalarea ;
-    rdfs:label "Maspalomas Famosa" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:maspalomas_telefono a onto:activity ;
-    rdfs:label "Maspalomas Telefono" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:maspalomas_un a onto:activity ;
-    rdfs:label "Maspalomas Un" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:meloneras_elegante a onto:hotel ;
-    rdfs:label "Meloneras Elegante" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:mil_palmeras a onto:naturalarea ;
-    rdfs:label "Mil Palmeras" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
-
-res:montaña_de_arena a onto:naturalarea ;
-    rdfs:label "Montaña de Arena" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:naturaleza_donde a onto:naturalarea ;
-    rdfs:label "Naturaleza Donde" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/naturaleza" .
-
-res:oficinas_plaza a onto:hotel ;
-    rdfs:label "Oficinas Plaza" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:pasito_blanco a onto:naturalarea ;
-    rdfs:label "Pasito Blanco" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
-
-res:pilancones_rutas a onto:naturalarea ;
-    rdfs:label "Pilancones Rutas" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
-
-res:playa_de_maspalomas a onto:naturalarea ;
-    rdfs:label "Playa de Maspalomas" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playa_de_meloneras a onto:hotel ;
-    rdfs:label "Playa de Meloneras" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playa_de_san a onto:naturalarea ;
-    rdfs:label "Playa de San" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playas_arena a onto:naturalarea ;
-    rdfs:label "Playas Arena" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:plaza_de_timanfaya a onto:naturalarea ;
-    rdfs:label "Plaza de Timanfaya" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:san_agustín a onto:naturalarea ;
-    rdfs:label "San Agustín" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:san_bartolomé a onto:naturalarea ;
-    rdfs:label "San Bartolomé" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:san_fernando a onto:naturalarea ;
-    rdfs:label "San Fernando" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:senderos_de_pilancones a onto:naturalarea ;
-    rdfs:label "Senderos de Pilancones" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
-
-res:submarinismo_explora a onto:naturalarea ;
-    rdfs:label "Submarinismo Explora" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
-
-res:tirajana_un a onto:naturalarea ;
-    rdfs:label "Tirajana Un" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
-
-res:villa_de_san a onto:naturalarea ;
-    rdfs:label "Villa de San" ;
-    onto:locatedin res:maspalomas ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:maspalomas a onto:naturalarea ;
-    rdfs:label "Maspalomas" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
+ex:Termas_y_Castillo_de_Alange a <https://ontologia.segittur.es/turismo/def/core#Castle> ;
+    rdfs:label "Termas y Castillo de Alange" ;
+    tour:confidence 9e-01 ;
+    tour:sourcePage "https://turismoapps.dip-badajoz.es/" .
 
