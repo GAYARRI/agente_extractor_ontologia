@@ -4,351 +4,264 @@
 @prefix res: <http://tourismkg.com/resource/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-res:actividades_en_el_mar_disfruta_del a onto:trail ;
-    rdfs:label "Actividades en el Mar Disfruta del" ;
-    onto:description "Actividades en el Mar Disfruta del Atlántico en todo su esplendor: navega, bucea o surfea entre aguas cristalinas y paisajes únicos. Maspalomas te invita a vivir el mar como nunca antes.",
-        "Actividades en el Mar Disfruta del Atlántico en todo su esplendor: navega, bucea o surfea entre aguas cristalinas y paisajes únicos. Maspalomas te invita a vivir el mar como nunca antes. Deportes náuticos Maspalomas es el paraíso del mar en movimiento: viento constante, aguas cálidas y un clima perfecto todo el año. Practica windsurf, vela, buceo o esquí acuático en un entorno natural único y lleno de energía atlántica. Observación de cetáceos Navega por las aguas del sur de Gran Canaria y" ;
-    onto:image "/uploads/bg_video_2d80688385.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
-
-res:actividades_recomendadas_submarinismo_explora_un_mundo a onto:activity ;
-    rdfs:label "actividades recomendadas Submarinismo Explora un mundo" ;
-    onto:description "actividades recomendadas Submarinismo Explora un mundo de vida y color bajo el Atlántico. Practica buceo, snorkel o fotografía submarina y descubre los fondos volcánicos y la fauna marina de Maspalomas." ;
-    onto:image "/uploads/buceo2_31737ad5c2.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
-
-res:aventura_y_ocio_camellos_senderismo_karting a onto:activity ;
-    rdfs:label "Aventura y ocio Camellos, senderismo, karting," ;
-    onto:description "Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos." ;
-    onto:image "/uploads/cetaceos_ba28c5584f.webp" ;
-    onto:offers res:camellos ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:caldera_de_tirajana_un_paisaje_volcánico a onto:trail ;
-    rdfs:label "Caldera de Tirajana Un paisaje volcánico" ;
-    onto:description "Caldera de Tirajana Un paisaje volcánico de formas imponentes, donde la historia geológica y la huella aborigen se entrelazan con el presente." ;
-    onto:image "/uploads/senderos_537bf60d0e.jpg" ;
-    onto:partof res:rutas_de_senderos_caminos_que_unen ;
+res:ayagaures_entre a onto:naturalarea ;
+    rdfs:label "Ayagaures Entre" ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
 
-res:camino_de_ayagaures_entre_presas_pinares a onto:trail ;
-    rdfs:label "Camino de Ayagaures Entre presas, pinares" ;
-    onto:description "Camino de Ayagaures Entre presas, pinares y suaves lomas, este recorrido combina naturaleza, silencio y vistas espectaculares." ;
-    onto:image "/uploads/naturaleza2_530d4ce224.jpg" ;
-    onto:partof res:rutas_de_senderos_caminos_que_unen ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
-
-res:camino_de_fataga_una_de_las a onto:trail ;
-    rdfs:label "Camino de Fataga Una de las" ;
-    onto:description "Camino de Fataga Una de las rutas más emblemáticas: serpentea entre palmerales y riscos hasta el “Valle de las Mil Palmeras”." ;
-    onto:image "/uploads/fataga_11f534673f.jpg" ;
-    onto:partof res:rutas_de_senderos_caminos_que_unen ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
-
-res:carnaval_internacional_de_maspalomas a onto:event ;
-    rdfs:label "Carnaval Internacional de Maspalomas" ;
-    onto:description "Que esta pasando Carnaval Internacional de Maspalomas Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria! Más info Más info",
-        "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!",
-        "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria! Más info",
-        "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria! Más info Más info" ;
-    onto:hasevent res:maspalomas ;
-    onto:image "/uploads/carnaval_maspalomas_dunas_c662794db6.png" ;
-    onto:name "Carnaval Internacional de Maspalomas" ;
+res:bartolomé_de_tirajana a onto:naturalarea ;
+    rdfs:label "Bartolomé de Tirajana" ;
+    onto:locatedin res:maspalomas ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com" .
 
-res:cultura_historia_y_tradiciones_un_municipio a onto:municipality ;
-    rdfs:label "Cultura, historia y tradiciones Un municipio" ;
-    onto:description "Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar." ;
-    onto:image "/uploads/romeria_7fe1ad6c98.jpg" ;
+res:caldera_de_tirajana a onto:naturalarea ;
+    rdfs:label "Caldera de Tirajana" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:camino_de_ayagaures a onto:naturalarea ;
+    rdfs:label "Camino de Ayagaures" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:camino_de_fataga a onto:naturalarea ;
+    rdfs:label "Camino de Fataga" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:carnaval_internacional a onto:naturalarea ;
+    rdfs:label "Carnaval Internacional" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:contacto_oficinas a onto:activity ;
+    rdfs:label "Contacto Oficinas" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:desde_montaña a onto:naturalarea ;
+    rdfs:label "Desde Montaña" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:en_maspalomas a onto:naturalarea ;
+    rdfs:label "En Maspalomas" ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
 
-res:deportes_náuticos_maspalomas_es_el_paraíso a onto:activity ;
-    rdfs:label "Deportes náuticos Maspalomas es el paraíso" ;
-    onto:description "Deportes náuticos Maspalomas es el paraíso del mar en movimiento: viento constante, aguas cálidas y un clima perfecto todo el año. Practica windsurf, vela, buceo o esquí acuático en un entorno natural único y lleno de energía atlántica." ;
-    onto:image "/uploads/surf_d2fc6c7a24.jpg" ;
+res:fataga_una a onto:naturalarea ;
+    rdfs:label "Fataga Una" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:fernando_de_maspalomas a onto:activity ;
+    rdfs:label "Fernando de Maspalomas" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:gran_canaria a onto:naturalarea ;
+    rdfs:label "Gran Canaria" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:ilustre_ayuntamiento a onto:activity ;
+    rdfs:label "Ilustre Ayuntamiento" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:imágenes_aviso a onto:activity ;
+    rdfs:label "Imágenes Aviso" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:inglés_vibrante a onto:naturalarea ;
+    rdfs:label "Inglés Vibrante" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:internacional_de_maspalomas a onto:naturalarea ;
+    rdfs:label "Internacional de Maspalomas" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:los_bigotes a onto:naturalarea ;
+    rdfs:label "Los Bigotes" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:mar a onto:naturalarea ;
+    rdfs:label "Mar" ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
 
-res:entorno_natural_un_territorio_de_contrastes a onto:place ;
-    rdfs:label "Entorno natural Un territorio de contrastes" ;
-    onto:description "Entorno natural Un territorio de contrastes donde las cumbres volcánicas se funden con el litoral atlántico, creando paisajes únicos y llenos de vida." ;
-    onto:image "/uploads/naturaleza3_be65b39827.jpg" ;
-    prov1:confidence "0.5"^^xsd:float ;
+res:maspalomas_famosa a onto:naturalarea ;
+    rdfs:label "Maspalomas Famosa" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:maspalomas_telefono a onto:activity ;
+    rdfs:label "Maspalomas Telefono" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:maspalomas_un a onto:activity ;
+    rdfs:label "Maspalomas Un" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:meloneras_elegante a onto:hotel ;
+    rdfs:label "Meloneras Elegante" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:mil_palmeras a onto:naturalarea ;
+    rdfs:label "Mil Palmeras" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:montaña_de_arena a onto:naturalarea ;
+    rdfs:label "Montaña de Arena" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:naturaleza_donde a onto:naturalarea ;
+    rdfs:label "Naturaleza Donde" ;
+    prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com/naturaleza" .
 
-res:flora_y_palmerales_la_palmera_canaria a onto:naturalarea ;
-    rdfs:label "Flora y palmerales La palmera canaria" ;
-    onto:description "Flora y palmerales La palmera canaria y la flora endémica aportan color y sombra a barrancos y oasis, símbolos del equilibrio entre desierto y verdor." ;
-    onto:image "/uploads/palmera_a981b371b6.jpg" ;
+res:oficinas_plaza a onto:hotel ;
+    rdfs:label "Oficinas Plaza" ;
+    onto:locatedin res:maspalomas ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/naturaleza" .
+    prov1:source "https://turismo.maspalomas.com" .
 
-res:hospitalidad_y_bienestar_hoteles_con_encanto a onto:trail ;
-    rdfs:label "Hospitalidad y bienestar Hoteles con encanto," ;
-    onto:description "Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
-    onto:image "/uploads/gastronomia_8608477d07.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:naturaleza_donde_el_paisaje_cambia_a a onto:naturalarea ;
-    rdfs:label "Naturaleza Donde el paisaje cambia a" ;
-    onto:description "Naturaleza Donde el paisaje cambia a cada paso: del azul del mar al verde de las cumbres",
-        "Naturaleza Donde el paisaje cambia a cada paso: del azul del mar al verde de las cumbres Entorno natural Un territorio de contrastes donde las cumbres volcánicas se funden con el litoral atlántico, creando paisajes únicos y llenos de vida. Flora y palmerales La palmera canaria y la flora endémica aportan color y sombra a barrancos y oasis, símbolos del equilibrio entre desierto y verdor.",
-        "Naturaleza Donde el paisaje cambia a cada paso: del azul del mar al verde de las cumbres Entorno natural Un territorio de contrastes donde las cumbres volcánicas se funden con el litoral atlántico, creando paisajes únicos y llenos de vida. Flora y palmerales La palmera canaria y la flora endémica aportan color y sombra a barrancos y oasis, símbolos del equilibrio entre desierto y verdor. Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada" ;
-    onto:image "/uploads/naturaleza2_530d4ce224.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/naturaleza" .
-
-res:naturaleza_y_paisajes_únicos_barrancos_palmerales a onto:naturalarea ;
-    rdfs:label "Naturaleza y paisajes únicos Barrancos, palmerales," ;
-    onto:description "Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros." ;
-    onto:image "/uploads/naturaleza2_530d4ce224.jpg" ;
-    onto:locatedin res:barrancos ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:observación_de_cetáceos_navega_por_las a onto:island ;
-    rdfs:label "Observación de cetáceos Navega por las" ;
-    onto:description "Observación de cetáceos Navega por las aguas del sur de Gran Canaria y contempla delfines, calderones y ballenas en libertad. Una experiencia inolvidable para conectar con la naturaleza en su estado más puro." ;
-    onto:image "/uploads/cetaceos_ba28c5584f.webp" ;
+res:pasito_blanco a onto:naturalarea ;
+    rdfs:label "Pasito Blanco" ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
 
-res:pesca_de_altura_vive_la_emoción a onto:activity ;
-    rdfs:label "Pesca de altura Vive la emoción" ;
-    onto:description "Pesca de altura Vive la emoción del Atlántico en su máxima expresión. Zarpa desde Pasito Blanco y desafía a gigantes del mar como el atún, el pez espada o el marlín azul." ;
-    onto:image "/uploads/pesca_ca6dbe25c1.jpg" ;
+res:pilancones_rutas a onto:naturalarea ;
+    rdfs:label "Pilancones Rutas" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:playa_de_maspalomas a onto:naturalarea ;
+    rdfs:label "Playa de Maspalomas" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:playa_de_meloneras a onto:hotel ;
+    rdfs:label "Playa de Meloneras" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:playa_de_san a onto:naturalarea ;
+    rdfs:label "Playa de San" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:playas_arena a onto:naturalarea ;
+    rdfs:label "Playas Arena" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:plaza_de_timanfaya a onto:naturalarea ;
+    rdfs:label "Plaza de Timanfaya" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:san_agustín a onto:naturalarea ;
+    rdfs:label "San Agustín" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:san_bartolomé a onto:naturalarea ;
+    rdfs:label "San Bartolomé" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:san_fernando a onto:naturalarea ;
+    rdfs:label "San Fernando" ;
+    onto:locatedin res:maspalomas ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com" .
+
+res:senderos_de_pilancones a onto:naturalarea ;
+    rdfs:label "Senderos de Pilancones" ;
+    prov1:confidence "0.85"^^xsd:float ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:submarinismo_explora a onto:naturalarea ;
+    rdfs:label "Submarinismo Explora" ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
 
-res:playa_de_las_mujeres_y_pasito a onto:beach ;
-    rdfs:label "Playa de las Mujeres y Pasito" ;
-    onto:description "Playa de las Mujeres y Pasito Blanco Pequeñas, acogedoras y más reservadas. Perfectas para quienes buscan paz, buen baño y vistas privilegiadas del litoral del sur." ;
-    onto:image "/uploads/playa_mujeres_181c7fbb0d.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playa_de_maspalomas_famosa_por_sus a onto:beach ;
-    rdfs:label "Playa de Maspalomas Famosa por sus" ;
-    onto:description "Playa de Maspalomas Famosa por sus dunas y su icónico faro, combina naturaleza, relax y estilo. Perfecta para caminar junto al mar o contemplar uno de los atardeceres más bellos de Canarias." ;
-    onto:image "/uploads/playa_maspalomas_a5d5846eb7.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playa_de_meloneras_elegante_y_moderna a onto:beach ;
-    rdfs:label "Playa de Meloneras Elegante y moderna," ;
-    onto:description "Playa de Meloneras Elegante y moderna, rodeada de hoteles y terrazas frente al mar. Ideal para disfrutar del sol, una comida junto al paseo o un baño relajado al atardecer." ;
-    onto:image "/uploads/playa_meloneras_7fb1342165.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playa_de_san_agustín_tranquila_y a onto:beach ;
-    rdfs:label "Playa de San Agustín Tranquila y" ;
-    onto:description "Playa de San Agustín Tranquila y familiar, con aguas calmadas y todos los servicios. Una opción perfecta para quienes buscan descansar sin renunciar a la comodidad." ;
-    onto:image "/uploads/playa_san_agustin_83ceae42a3.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playa_del_inglés_vibrante_y_extensa a onto:beach ;
-    rdfs:label "Playa del Inglés Vibrante y extensa," ;
-    onto:description "Playa del Inglés Vibrante y extensa, es el epicentro del turismo en el sur de Gran Canaria. Ideal para nadar, practicar deportes acuáticos o disfrutar del ambiente junto a su animado paseo marítimo." ;
-    onto:image "/uploads/playa_del_ingles_024bb5a9d0.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playas_arena_dorada_sol_eterno_y a onto:beach ;
-    rdfs:label "Playas Arena dorada, sol eterno y" ;
-    onto:description "Playas Arena dorada, sol eterno y el Atlántico en calma.",
-        "Playas Arena dorada, sol eterno y el Atlántico en calma. Playa del Inglés Vibrante y extensa, es el epicentro del turismo en el sur de Gran Canaria. Ideal para nadar, practicar deportes acuáticos o disfrutar del ambiente junto a su animado paseo marítimo. Playa de Maspalomas Famosa por sus dunas y su icónico faro, combina naturaleza, relax y estilo. Perfecta para caminar junto al mar o contemplar uno de los atardeceres más bellos de Canarias. Playa de San Agustín Tranquila y familiar, con aguas" ;
-    onto:image "/uploads/playas_2b5350faff.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:playas_para_todos_los_gustos_desde a onto:beach ;
-    rdfs:label "Playas para todos los gustos Desde" ;
-    onto:description "Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín." ;
-    onto:image "/uploads/playa_virgenes_314662cd01.jpg" ;
-    onto:near res:lsan_agustín,
-        res:meloneras ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:playas_vírgenes_y_naturales_desde_montaña a onto:beach ;
-    rdfs:label "Playas vírgenes y naturales Desde Montaña" ;
-    onto:description "Playas vírgenes y naturales Desde Montaña de Arena hasta Los Bigotes, la costa esconde rincones salvajes de belleza intacta, ideales para los amantes de la naturaleza y el silencio del mar." ;
-    onto:image "/uploads/playa_virgenes_314662cd01.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/playas" .
-
-res:qué_hacer_en_maspalomas a onto:beach ;
-    rdfs:label "¿Qué hacer en Maspalomas?" ;
-    onto:description "Descubre qué visitar o posibles actividades. !Todo lo que necesitas!",
-        "Descubre qué visitar o posibles actividades. !Todo lo que necesitas! ¿Que puedes hacer? Descubre qué visitar o posibles actividades ¿Qué puedes visitar? Descubre qué visitar o posibles actividades Disfruta del sol y de la playa Descubre qué visitar o posibles actividades. !Todo lo que necesitas! La magia del carnaval Descubre qué visitar o posibles actividades Agenda de eventos Descubre todos los eventos Guías turísticas Descubre todo lo que necesitas en nuestras guías" ;
-    onto:image "/uploads/surf_d2fc6c7a24.jpg" ;
-    onto:name "¿Qué hacer en Maspalomas?" ;
-    onto:offers res:agenda_de_eventos_descubre_todos_los,
-        res:disfruta_del_sol_y_de_la,
-        res:la_magia_del_carnaval_descubre_qué,
-        res:que_puedes_hacer_descubre_qué_visitar ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:senderos_de_pilancones_rutas_frescas_y a onto:trail ;
-    rdfs:label "Senderos de Pilancones Rutas frescas y" ;
-    onto:description "Senderos de Pilancones Rutas frescas y sombreadas por pinares centenarios, ideales para el senderismo y la observación de fauna." ;
-    onto:image "/uploads/naturaleza_947f430970.jpg" ;
-    onto:partof res:rutas_de_senderos_caminos_que_unen ;
+res:tirajana_un a onto:naturalarea ;
+    rdfs:label "Tirajana Un" ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
 
-res:un_clima_perfecto_todo_el_año a onto:beach ;
-    rdfs:label "Un clima perfecto todo el año" ;
-    onto:description "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul.",
-        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de" ;
-    onto:image "/uploads/6razones1_bb090ccc2f.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:utilizamos_cookies_propias_y_de_terceros a onto:place ;
-    rdfs:label "Utilizamos cookies propias y de terceros" ;
-    onto:description "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continua navegando, consideramos que acepta su uso.",
-        "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continua navegando, consideramos que acepta su uso. No, gracias Estoy de acuerdo" ;
-    prov1:confidence "0.5"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:agenda_de_eventos_descubre_todos_los a onto:event ;
-    rdfs:label "Agenda de eventos Descubre todos los" ;
-    onto:image "/uploads/eventos_1be526f276.jpg" ;
+res:villa_de_san a onto:naturalarea ;
+    rdfs:label "Villa de San" ;
+    onto:locatedin res:maspalomas ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com" .
 
-res:barrancos a onto:beach ;
-    rdfs:label "Barrancos" ;
-    onto:description "6 razones para visitarnos Un entorno lleno de posibilidades Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales,",
-        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de" ;
-    onto:image "/uploads/6razones1_bb090ccc2f.jpg",
-        "/uploads/dunas_maspalomas_cec522efd3.jpeg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:camellos a onto:beach ;
-    rdfs:label "Camellos" ;
-    onto:description "6 razones para visitarnos Un entorno lleno de posibilidades Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales,",
-        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de" ;
-    onto:image "/uploads/6razones1_bb090ccc2f.jpg",
-        "/uploads/dunas_maspalomas_cec522efd3.jpeg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:de_la_costa_a_la_cumbre a onto:beach ;
-    rdfs:label "De la costa a la cumbre" ;
-    onto:description "De la costa a la cumbre Senderos que ascienden desde las playas hasta las montañas, atravesando barrancos, miradores y pueblos con encanto." ;
-    onto:image "/uploads/naturaleza3_be65b39827.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
-
-res:disfruta_del_sol_y_de_la a onto:beach ;
-    rdfs:label "Disfruta del sol y de la" ;
-    onto:description "Disfruta del sol y de la playa Descubre qué visitar o posibles actividades. !Todo lo que necesitas!" ;
-    onto:image "/uploads/playa_del_ingles_024bb5a9d0.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:la_magia_del_carnaval_descubre_qué a onto:event ;
-    rdfs:label "La magia del carnaval Descubre qué" ;
-    onto:description "La magia del carnaval Descubre qué visitar o posibles actividades" ;
-    onto:image "/uploads/carnaval_18c4a8e267.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:lsan_agustín a onto:beach ;
-    rdfs:label "lSan Agustín" ;
-    onto:description "6 razones para visitarnos Un entorno lleno de posibilidades Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales,",
-        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de" ;
-    onto:image "/uploads/6razones1_bb090ccc2f.jpg",
-        "/uploads/dunas_maspalomas_cec522efd3.jpeg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:maspalomas a onto:beach ;
+res:maspalomas a onto:naturalarea ;
     rdfs:label "Maspalomas" ;
-    onto:description "6 razones para visitarnos Un entorno lleno de posibilidades Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales,",
-        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de" ;
-    onto:image "/uploads/6razones1_bb090ccc2f.jpg",
-        "/uploads/dunas_maspalomas_cec522efd3.jpeg" ;
-    onto:name "Maspalomas" ;
     prov1:confidence "0.85"^^xsd:float ;
     prov1:extractor "hybrid_extractor" ;
     prov1:source "https://turismo.maspalomas.com" .
-
-res:meloneras a onto:beach ;
-    rdfs:label "Meloneras" ;
-    onto:description "6 razones para visitarnos Un entorno lleno de posibilidades Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales,",
-        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de" ;
-    onto:image "/uploads/6razones1_bb090ccc2f.jpg",
-        "/uploads/dunas_maspalomas_cec522efd3.jpeg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
-
-res:que_puedes_hacer_descubre_qué_visitar a onto:beach ;
-    rdfs:label "¿Que puedes hacer? Descubre qué visitar" ;
-    onto:description "¿Que puedes hacer? Descubre qué visitar o posibles actividades ¿Qué puedes visitar? Descubre qué visitar o posibles actividades Disfruta del sol y de la playa Descubre qué visitar o posibles actividades. !Todo lo que necesitas! La magia del carnaval Descubre qué visitar o posibles actividades Agenda de eventos Descubre todos los eventos Guías turísticas Descubre todo lo que necesitas en nuestras guías" ;
-    onto:image "/uploads/surf_d2fc6c7a24.jpg" ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com" .
-
-res:rutas_de_senderos_caminos_que_unen a onto:beach ;
-    rdfs:label "Rutas de senderos Caminos que unen" ;
-    onto:description "Rutas de senderos Caminos que unen el mar y las cumbres, entre paisajes cambiantes y huellas de historia.",
-        "Rutas de senderos Caminos que unen el mar y las cumbres, entre paisajes cambiantes y huellas de historia. De la costa a la cumbre Senderos que ascienden desde las playas hasta las montañas, atravesando barrancos, miradores y pueblos con encanto. Camino de Fataga Una de las rutas más emblemáticas: serpentea entre palmerales y riscos hasta el “Valle de las Mil Palmeras”. Camino de Ayagaures Entre presas, pinares y suaves lomas, este recorrido combina naturaleza, silencio y vistas espectaculares." ;
-    onto:image "/uploads/guias_d8708e64fe.jpg" ;
-    onto:offers res:de_la_costa_a_la_cumbre ;
-    prov1:confidence "0.85"^^xsd:float ;
-    prov1:extractor "hybrid_extractor" ;
-    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
 

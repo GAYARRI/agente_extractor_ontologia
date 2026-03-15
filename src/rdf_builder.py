@@ -2,6 +2,7 @@ from rdflib import Graph, Namespace, RDF, RDFS, Literal, URIRef
 from rdflib.namespace import XSD
 from rdflib import URIRef
 from rdflib import URIRef
+from rdflib.namespace import OWL
 
 import re
 
@@ -107,31 +108,38 @@ class RDFBuilder:
             obj_uri = self._entity_uri(obj)
 
         self.graph.add((subject, prop_uri, obj_uri))
-        
+
+   
 
     # -------------------------------------------------
     # Metadatos de extracción
     # -------------------------------------------------
+    
+    def add_provenance(self, entity_uri, source=None, confidence=None, extractor=None):
 
-    def add_provenance(self, subject, source_url=None, confidence=None, extractor=None):
-        """
-        Guarda metadatos de extracción.
-        """
+        from rdflib import Literal
+        from rdflib.namespace import XSD
 
-        if source_url:
-            self.graph.add(
-                (subject, self.PROV.source, Literal(source_url))
-            )
+        if source:
+            self.graph.add((
+                entity_uri,
+                self.PROV.source,
+                Literal(source)
+            ))
 
         if confidence:
-            self.graph.add(
-                (subject, self.PROV.confidence, Literal(confidence, datatype=XSD.float))
-            )
+            self.graph.add((
+                entity_uri,
+                self.PROV.confidence,
+                Literal(confidence, datatype=XSD.float)
+            ))
 
         if extractor:
-            self.graph.add(
-                (subject, self.PROV.extractor, Literal(extractor))
-            )
+            self.graph.add((
+                entity_uri,
+                self.PROV.extractor,
+                Literal(extractor)
+            ))    
 
     # -------------------------------------------------
     # Serialización
@@ -143,3 +151,15 @@ class RDFBuilder:
 
     def size(self):
         return len(self.graph)
+    
+
+
+    def add_same_as(self, subject_uri, external_uri):
+
+        self.graph.add(
+            (
+                subject_uri,
+                OWL.sameAs,
+                URIRef(external_uri)
+            )
+        )

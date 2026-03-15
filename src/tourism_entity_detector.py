@@ -1,45 +1,57 @@
+import spacy
 import re
 
-
-class TourismEntityDetector:
+class TourismEntityExtractor:
 
     def __init__(self):
 
-        # patrones típicos de entidades turísticas
-        self.patterns = [
+        self.nlp = spacy.load("es_core_news_md")
 
-            r"(Museo\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)",
-            r"(Catedral\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)",
-            r"(Iglesia\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)",
-            r"(Palacio\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)",
-            r"(Castillo\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)",
-            r"(Parque\s+(?:Nacional|Natural)\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)",
-            r"(Playa\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)",
-            r"(Ruta\s+de\s+(?:la|las|los)?\s*[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)",
-            r"(Monasterio\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)",
-            r"(Basílica\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)",
-            r"(Parque\s+de\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)",
+        self.bad_words = {
+            "aquí","ideal","perfecta","perfectas","desde","practica",
+            "navega","zarpa","utilizamos","disfruta","más","todo",
+            "nuestro","nuestra","este","esta","estos","estas"
+        }
+
+        self.bad_patterns = [
+            r"utilizamos cookies",
+            r"más info",
+            r"leer más",
+            r"todo lo que necesitas"
         ]
 
 
-    def detect(self, text):
+    def clean_text(self, text):
+
+        text = re.sub(r"\s+", " ", text)
+
+        for p in self.bad_patterns:
+            text = re.sub(p, "", text, flags=re.IGNORECASE)
+
+        return text.strip()
+
+
+    def extract(self, text):
+
+        text = self.clean_text(text)
+
+        doc = self.nlp(text)
 
         entities = []
 
-        for pattern in self.patterns:
+        for ent in doc.ents:
 
-            matches = re.findall(pattern, text)
+            entity = ent.text.strip()
 
-            for match in matches:
+            if entity.lower() in self.bad_words:
+                continue
 
-                entities.append({
-                    "name": match.strip(),
-                    "type": "TouristAttraction"
-                })
+            if len(entity) < 3:
+                continue
 
-        # eliminar duplicados
-        unique = {}
-        for e in entities:
-            unique[e["name"]] = e
+            if len(entity.split()) < 2:
+                continue
 
-        return list(unique.values())
+            entities.append(entity)
+
+        return list(set(entities))

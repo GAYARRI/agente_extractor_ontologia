@@ -1,0 +1,770 @@
+@prefix onto: <http://tourismkg.com/ontology/> .
+@prefix prov1: <http://tourismkg.com/provenance/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix res: <http://tourismkg.com/resource/> .
+
+res:actividades a onto:activity ;
+    rdfs:label "Actividades" ;
+    onto:description "Actividades en el Mar Disfruta del Atlántico en todo su esplendor: navega, bucea o surfea entre aguas cristalinas y paisajes únicos. Maspalomas te invita a vivir el mar como nunca antes." ;
+    onto:image "https://turismo.maspalomas.com/uploads/bg_video_2d80688385.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:aquí a onto:hotel,
+        onto:naturalarea ;
+    rdfs:label "Aquí" ;
+    onto:description "Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/gastronomia_8608477d07.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:atlántico a onto:naturalarea ;
+    rdfs:label "Atlántico" ;
+    onto:description "Actividades en el Mar Disfruta del Atlántico en todo su esplendor: navega, bucea o surfea entre aguas cristalinas y paisajes únicos. Maspalomas te invita a vivir el mar como nunca antes.",
+        "Pesca de altura Vive la emoción del Atlántico en su máxima expresión. Zarpa desde Pasito Blanco y desafía a gigantes del mar como el atún, el pez espada o el marlín azul.",
+        "Playas Arena dorada, sol eterno y el Atlántico en calma." ;
+    onto:image "https://turismo.maspalomas.com/uploads/bg_video_2d80688385.jpg",
+        "https://turismo.maspalomas.com/uploads/pesca_ca6dbe25c1.jpg",
+        "https://turismo.maspalomas.com/uploads/playas_2b5350faff.jpg" ;
+    onto:locatedin res:pasito_blanco ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/playas" .
+
+res:aventura a onto:naturalarea ;
+    rdfs:label "Aventura" ;
+    onto:description "Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/cetaceos_ba28c5584f.webp" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:barrancos a onto:naturalarea ;
+    rdfs:label "Barrancos" ;
+    onto:description "Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/naturaleza2_530d4ce224.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:caldera a onto:naturalarea ;
+    rdfs:label "Caldera" ;
+    onto:description "Caldera de Tirajana Un paisaje volcánico de formas imponentes, donde la historia geológica y la huella aborigen se entrelazan con el presente." ;
+    onto:image "https://turismo.maspalomas.com/uploads/senderos_537bf60d0e.jpg" ;
+    onto:locatedin res:tirajana,
+        res:tirajana_un ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:camellos a onto:naturalarea ;
+    rdfs:label "Camellos" ;
+    onto:description "Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/cetaceos_ba28c5584f.webp" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:caminos a onto:naturalarea ;
+    rdfs:label "Caminos" ;
+    onto:description "Camino de Ayagaures Entre presas, pinares y suaves lomas, este recorrido combina naturaleza, silencio y vistas espectaculares.",
+        "Camino de Fataga Una de las rutas más emblemáticas: serpentea entre palmerales y riscos hasta el “Valle de las Mil Palmeras”.",
+        "Rutas de senderos Caminos que unen el mar y las cumbres, entre paisajes cambiantes y huellas de historia." ;
+    onto:image "https://turismo.maspalomas.com/uploads/fataga_11f534673f.jpg",
+        "https://turismo.maspalomas.com/uploads/guias_d8708e64fe.jpg",
+        "https://turismo.maspalomas.com/uploads/naturaleza2_530d4ce224.jpg" ;
+    onto:locatedin res:ayagaures_entre,
+        res:fataga_una ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:carnaval_internacional a onto:naturalarea ;
+    rdfs:label "Carnaval Internacional" ;
+    onto:description "Carnaval Internacional de Maspalomas Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!" ;
+    onto:locatedin res:gran_canaria,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:tirajana,
+        res:tirajana_un ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/" .
+
+res:cultura a onto:naturalarea ;
+    rdfs:label "Cultura" ;
+    onto:description "Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/romeria_7fe1ad6c98.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:deportes a onto:naturalarea ;
+    rdfs:label "Deportes" ;
+    onto:description "Deportes náuticos Maspalomas es el paraíso del mar en movimiento: viento constante, aguas cálidas y un clima perfecto todo el año. Practica windsurf, vela, buceo o esquí acuático en un entorno natural único y lleno de energía atlántica." ;
+    onto:image "https://turismo.maspalomas.com/uploads/surf_d2fc6c7a24.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:desde a onto:naturalarea ;
+    rdfs:label "Desde" ;
+    onto:description "Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_virgenes_314662cd01.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:entorno a onto:naturalarea ;
+    rdfs:label "Entorno" ;
+    onto:description "Entorno natural Un territorio de contrastes donde las cumbres volcánicas se funden con el litoral atlántico, creando paisajes únicos y llenos de vida." ;
+    onto:image "https://turismo.maspalomas.com/uploads/naturaleza3_be65b39827.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/naturaleza" .
+
+res:estoy a onto:naturalarea,
+        onto:restaurant ;
+    rdfs:label "Estoy" ;
+    onto:description "No, gracias Estoy de acuerdo",
+        "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continua navegando, consideramos que acepta su uso. No, gracias Estoy de acuerdo" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/naturaleza",
+        "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/rutas-de-senderos",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:flora a onto:naturalarea ;
+    rdfs:label "Flora" ;
+    onto:description "Flora y palmerales La palmera canaria y la flora endémica aportan color y sombra a barrancos y oasis, símbolos del equilibrio entre desierto y verdor." ;
+    onto:image "https://turismo.maspalomas.com/uploads/palmera_a981b371b6.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/naturaleza" .
+
+res:hospitalidad a onto:hotel,
+        onto:naturalarea ;
+    rdfs:label "Hospitalidad" ;
+    onto:description "Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/gastronomia_8608477d07.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:hoteles a onto:hotel,
+        onto:naturalarea ;
+    rdfs:label "Hoteles" ;
+    onto:description "Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/gastronomia_8608477d07.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:ideal a onto:hotel,
+        onto:naturalarea ;
+    rdfs:label "Ideal" ;
+    onto:description "Playa de Meloneras Elegante y moderna, rodeada de hoteles y terrazas frente al mar. Ideal para disfrutar del sol, una comida junto al paseo o un baño relajado al atardecer.",
+        "Playa del Inglés Vibrante y extensa, es el epicentro del turismo en el sur de Gran Canaria. Ideal para nadar, practicar deportes acuáticos o disfrutar del ambiente junto a su animado paseo marítimo.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_del_ingles_024bb5a9d0.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_meloneras_7fb1342165.jpg" ;
+    onto:locatedin res:gran_canaria,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:inglés_vibrante a onto:naturalarea ;
+    rdfs:label "Inglés Vibrante" ;
+    onto:description "Playa del Inglés Vibrante y extensa, es el epicentro del turismo en el sur de Gran Canaria. Ideal para nadar, practicar deportes acuáticos o disfrutar del ambiente junto a su animado paseo marítimo." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_del_ingles_024bb5a9d0.jpg" ;
+    onto:locatedin res:gran_canaria ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:los_bigotes a onto:naturalarea ;
+    rdfs:label "Los Bigotes" ;
+    onto:description "Playas vírgenes y naturales Desde Montaña de Arena hasta Los Bigotes, la costa esconde rincones salvajes de belleza intacta, ideales para los amantes de la naturaleza y el silencio del mar." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_virgenes_314662cd01.jpg" ;
+    onto:locatedin res:arena,
+        res:desde_montaña,
+        res:playas_arena ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:mar_disfruta a onto:naturalarea ;
+    rdfs:label "Mar Disfruta" ;
+    onto:description "Actividades en el Mar Disfruta del Atlántico en todo su esplendor: navega, bucea o surfea entre aguas cristalinas y paisajes únicos. Maspalomas te invita a vivir el mar como nunca antes." ;
+    onto:image "https://turismo.maspalomas.com/uploads/bg_video_2d80688385.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:mil_palmeras a onto:naturalarea ;
+    rdfs:label "Mil Palmeras" ;
+    onto:description "Camino de Fataga Una de las rutas más emblemáticas: serpentea entre palmerales y riscos hasta el “Valle de las Mil Palmeras”." ;
+    onto:image "https://turismo.maspalomas.com/uploads/fataga_11f534673f.jpg" ;
+    onto:locatedin res:fataga_una ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:mujeres a onto:naturalarea ;
+    rdfs:label "Mujeres" ;
+    onto:description "Playa de las Mujeres y Pasito Blanco Pequeñas, acogedoras y más reservadas. Perfectas para quienes buscan paz, buen baño y vistas privilegiadas del litoral del sur." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_mujeres_181c7fbb0d.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:naturaleza_donde a onto:naturalarea ;
+    rdfs:label "Naturaleza Donde" ;
+    onto:description "Naturaleza Donde el paisaje cambia a cada paso: del azul del mar al verde de las cumbres",
+        "Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/naturaleza2_530d4ce224.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/naturaleza",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:navega a onto:naturalarea ;
+    rdfs:label "Navega" ;
+    onto:description "Observación de cetáceos Navega por las aguas del sur de Gran Canaria y contempla delfines, calderones y ballenas en libertad. Una experiencia inolvidable para conectar con la naturaleza en su estado más puro." ;
+    onto:image "https://turismo.maspalomas.com/uploads/cetaceos_ba28c5584f.webp" ;
+    onto:locatedin res:gran_canaria ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:observación a onto:naturalarea ;
+    rdfs:label "Observación" ;
+    onto:description "Observación de cetáceos Navega por las aguas del sur de Gran Canaria y contempla delfines, calderones y ballenas en libertad. Una experiencia inolvidable para conectar con la naturaleza en su estado más puro." ;
+    onto:image "https://turismo.maspalomas.com/uploads/cetaceos_ba28c5584f.webp" ;
+    onto:locatedin res:gran_canaria ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:oficinas_plaza a onto:hotel ;
+    rdfs:label "Oficinas Plaza" ;
+    onto:description "Oficinas Plaza de Timanfaya s/n. San Fernando de Maspalomas" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:timanfaya ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/naturaleza",
+        "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/rutas-de-senderos",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:perfecta a onto:naturalarea ;
+    rdfs:label "Perfecta" ;
+    onto:description "Playa de Maspalomas Famosa por sus dunas y su icónico faro, combina naturaleza, relax y estilo. Perfecta para caminar junto al mar o contemplar uno de los atardeceres más bellos de Canarias.",
+        "Playa de las Mujeres y Pasito Blanco Pequeñas, acogedoras y más reservadas. Perfectas para quienes buscan paz, buen baño y vistas privilegiadas del litoral del sur." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_maspalomas_a5d5846eb7.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_mujeres_181c7fbb0d.jpg" ;
+    onto:locatedin res:canarias,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:pesca a onto:naturalarea ;
+    rdfs:label "Pesca" ;
+    onto:description "Pesca de altura Vive la emoción del Atlántico en su máxima expresión. Zarpa desde Pasito Blanco y desafía a gigantes del mar como el atún, el pez espada o el marlín azul." ;
+    onto:image "https://turismo.maspalomas.com/uploads/pesca_ca6dbe25c1.jpg" ;
+    onto:locatedin res:pasito_blanco ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:playa a onto:activity,
+        onto:hotel,
+        onto:naturalarea ;
+    rdfs:label "Playa" ;
+    onto:description "Playa de Maspalomas Famosa por sus dunas y su icónico faro, combina naturaleza, relax y estilo. Perfecta para caminar junto al mar o contemplar uno de los atardeceres más bellos de Canarias.",
+        "Playa de Meloneras Elegante y moderna, rodeada de hoteles y terrazas frente al mar. Ideal para disfrutar del sol, una comida junto al paseo o un baño relajado al atardecer.",
+        "Playa de San Agustín Tranquila y familiar, con aguas calmadas y todos los servicios. Una opción perfecta para quienes buscan descansar sin renunciar a la comodidad.",
+        "Playa de las Mujeres y Pasito Blanco Pequeñas, acogedoras y más reservadas. Perfectas para quienes buscan paz, buen baño y vistas privilegiadas del litoral del sur.",
+        "Playa del Inglés Vibrante y extensa, es el epicentro del turismo en el sur de Gran Canaria. Ideal para nadar, practicar deportes acuáticos o disfrutar del ambiente junto a su animado paseo marítimo.",
+        "Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín.",
+        "Playas vírgenes y naturales Desde Montaña de Arena hasta Los Bigotes, la costa esconde rincones salvajes de belleza intacta, ideales para los amantes de la naturaleza y el silencio del mar.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_del_ingles_024bb5a9d0.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_maspalomas_a5d5846eb7.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_meloneras_7fb1342165.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_mujeres_181c7fbb0d.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_san_agustin_83ceae42a3.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_virgenes_314662cd01.jpg" ;
+    onto:locatedin res:arena,
+        res:canarias,
+        res:desde_montaña,
+        res:gran_canaria,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante,
+        res:playas_arena,
+        res:san_agustín_tranquila,
+        res:san_bartolomé,
+        res:san_fernando ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:practica a onto:naturalarea ;
+    rdfs:label "Practica" ;
+    onto:description "Deportes náuticos Maspalomas es el paraíso del mar en movimiento: viento constante, aguas cálidas y un clima perfecto todo el año. Practica windsurf, vela, buceo o esquí acuático en un entorno natural único y lleno de energía atlántica." ;
+    onto:image "https://turismo.maspalomas.com/uploads/surf_d2fc6c7a24.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:romerías a onto:naturalarea ;
+    rdfs:label "Romerías" ;
+    onto:description "Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/romeria_7fe1ad6c98.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:rutas a onto:naturalarea ;
+    rdfs:label "Rutas" ;
+    onto:description "Rutas de senderos Caminos que unen el mar y las cumbres, entre paisajes cambiantes y huellas de historia." ;
+    onto:image "https://turismo.maspalomas.com/uploads/guias_d8708e64fe.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:san_agustín a onto:naturalarea ;
+    rdfs:label "San Agustín" ;
+    onto:description "Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_virgenes_314662cd01.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:senderos a onto:naturalarea ;
+    rdfs:label "Senderos" ;
+    onto:description "De la costa a la cumbre Senderos que ascienden desde las playas hasta las montañas, atravesando barrancos, miradores y pueblos con encanto.",
+        "Senderos de Pilancones Rutas frescas y sombreadas por pinares centenarios, ideales para el senderismo y la observación de fauna." ;
+    onto:image "https://turismo.maspalomas.com/uploads/naturaleza3_be65b39827.jpg",
+        "https://turismo.maspalomas.com/uploads/naturaleza_947f430970.jpg" ;
+    onto:locatedin res:pilancones_rutas ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:telefono a onto:restaurant ;
+    rdfs:label "Telefono" ;
+    onto:description "Telefono (+34) 928 723 400" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/naturaleza",
+        "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/rutas-de-senderos",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:utilizamos a onto:restaurant ;
+    rdfs:label "Utilizamos" ;
+    onto:description "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continua navegando, consideramos que acepta su uso.",
+        "Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continua navegando, consideramos que acepta su uso. No, gracias Estoy de acuerdo" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/naturaleza",
+        "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/rutas-de-senderos",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:valle a onto:naturalarea ;
+    rdfs:label "Valle" ;
+    onto:description "Camino de Fataga Una de las rutas más emblemáticas: serpentea entre palmerales y riscos hasta el “Valle de las Mil Palmeras”." ;
+    onto:image "https://turismo.maspalomas.com/uploads/fataga_11f534673f.jpg" ;
+    onto:locatedin res:fataga_una ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:vive a onto:naturalarea ;
+    rdfs:label "Vive" ;
+    onto:description "Pesca de altura Vive la emoción del Atlántico en su máxima expresión. Zarpa desde Pasito Blanco y desafía a gigantes del mar como el atún, el pez espada o el marlín azul." ;
+    onto:image "https://turismo.maspalomas.com/uploads/pesca_ca6dbe25c1.jpg" ;
+    onto:locatedin res:pasito_blanco ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:zarpa a onto:naturalarea ;
+    rdfs:label "Zarpa" ;
+    onto:description "Pesca de altura Vive la emoción del Atlántico en su máxima expresión. Zarpa desde Pasito Blanco y desafía a gigantes del mar como el atún, el pez espada o el marlín azul." ;
+    onto:image "https://turismo.maspalomas.com/uploads/pesca_ca6dbe25c1.jpg" ;
+    onto:locatedin res:pasito_blanco ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar" .
+
+res:ayagaures_entre a onto:naturalarea ;
+    rdfs:label "Ayagaures Entre" ;
+    onto:description "Camino de Ayagaures Entre presas, pinares y suaves lomas, este recorrido combina naturaleza, silencio y vistas espectaculares." ;
+    onto:image "https://turismo.maspalomas.com/uploads/naturaleza2_530d4ce224.jpg" ;
+    onto:locatedin res:ayagaures_entre ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:pilancones_rutas a onto:naturalarea ;
+    rdfs:label "Pilancones Rutas" ;
+    onto:description "Senderos de Pilancones Rutas frescas y sombreadas por pinares centenarios, ideales para el senderismo y la observación de fauna." ;
+    onto:image "https://turismo.maspalomas.com/uploads/naturaleza_947f430970.jpg" ;
+    onto:locatedin res:pilancones_rutas ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:san_agustín_tranquila a onto:naturalarea ;
+    rdfs:label "San Agustín Tranquila" ;
+    onto:description "Playa de San Agustín Tranquila y familiar, con aguas calmadas y todos los servicios. Una opción perfecta para quienes buscan descansar sin renunciar a la comodidad." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_san_agustin_83ceae42a3.jpg" ;
+    onto:locatedin res:san_agustín_tranquila,
+        res:san_bartolomé,
+        res:san_fernando ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:san_bartolomé a onto:naturalarea ;
+    rdfs:label "San Bartolomé" ;
+    onto:description "Carnaval Internacional de Maspalomas Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!" ;
+    onto:locatedin res:gran_canaria,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:tirajana,
+        res:tirajana_un ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/" .
+
+res:san_fernando a onto:hotel ;
+    rdfs:label "San Fernando" ;
+    onto:description "Oficinas Plaza de Timanfaya s/n. San Fernando de Maspalomas" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:timanfaya ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/naturaleza",
+        "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/rutas-de-senderos",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:arena a onto:naturalarea ;
+    rdfs:label "Arena" ;
+    onto:description "Playas vírgenes y naturales Desde Montaña de Arena hasta Los Bigotes, la costa esconde rincones salvajes de belleza intacta, ideales para los amantes de la naturaleza y el silencio del mar." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_virgenes_314662cd01.jpg" ;
+    onto:locatedin res:arena,
+        res:desde_montaña,
+        res:playas_arena ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:canarias a onto:naturalarea ;
+    rdfs:label "Canarias" ;
+    onto:description "Playa de Maspalomas Famosa por sus dunas y su icónico faro, combina naturaleza, relax y estilo. Perfecta para caminar junto al mar o contemplar uno de los atardeceres más bellos de Canarias." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_maspalomas_a5d5846eb7.jpg" ;
+    onto:locatedin res:canarias,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:desde_montaña a onto:naturalarea ;
+    rdfs:label "Desde Montaña" ;
+    onto:description "Playas vírgenes y naturales Desde Montaña de Arena hasta Los Bigotes, la costa esconde rincones salvajes de belleza intacta, ideales para los amantes de la naturaleza y el silencio del mar." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_virgenes_314662cd01.jpg" ;
+    onto:locatedin res:arena,
+        res:desde_montaña,
+        res:playas_arena ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:fataga_una a onto:naturalarea ;
+    rdfs:label "Fataga Una" ;
+    onto:description "Camino de Fataga Una de las rutas más emblemáticas: serpentea entre palmerales y riscos hasta el “Valle de las Mil Palmeras”." ;
+    onto:image "https://turismo.maspalomas.com/uploads/fataga_11f534673f.jpg" ;
+    onto:locatedin res:fataga_una ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:playas_arena a onto:naturalarea ;
+    rdfs:label "Playas Arena" ;
+    onto:description "Playas Arena dorada, sol eterno y el Atlántico en calma." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playas_2b5350faff.jpg" ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:timanfaya a onto:hotel ;
+    rdfs:label "Timanfaya" ;
+    onto:description "Oficinas Plaza de Timanfaya s/n. San Fernando de Maspalomas" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:timanfaya ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/naturaleza",
+        "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/rutas-de-senderos",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:pasito_blanco a onto:naturalarea ;
+    rdfs:label "Pasito Blanco" ;
+    onto:description "Pesca de altura Vive la emoción del Atlántico en su máxima expresión. Zarpa desde Pasito Blanco y desafía a gigantes del mar como el atún, el pez espada o el marlín azul.",
+        "Playa de las Mujeres y Pasito Blanco Pequeñas, acogedoras y más reservadas. Perfectas para quienes buscan paz, buen baño y vistas privilegiadas del litoral del sur." ;
+    onto:image "https://turismo.maspalomas.com/uploads/pesca_ca6dbe25c1.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_mujeres_181c7fbb0d.jpg" ;
+    onto:locatedin res:pasito_blanco ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/playas" .
+
+res:tirajana a onto:naturalarea ;
+    rdfs:label "Tirajana" ;
+    onto:description "Carnaval Internacional de Maspalomas Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!" ;
+    onto:locatedin res:gran_canaria,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:tirajana,
+        res:tirajana_un ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/" .
+
+res:tirajana_un a onto:naturalarea ;
+    rdfs:label "Tirajana Un" ;
+    onto:description "Caldera de Tirajana Un paisaje volcánico de formas imponentes, donde la historia geológica y la huella aborigen se entrelazan con el presente." ;
+    onto:image "https://turismo.maspalomas.com/uploads/senderos_537bf60d0e.jpg" ;
+    onto:locatedin res:tirajana,
+        res:tirajana_un ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/rutas-de-senderos" .
+
+res:gran_canaria a onto:naturalarea ;
+    rdfs:label "Gran Canaria" ;
+    onto:description "Carnaval Internacional de Maspalomas Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!",
+        "Observación de cetáceos Navega por las aguas del sur de Gran Canaria y contempla delfines, calderones y ballenas en libertad. Una experiencia inolvidable para conectar con la naturaleza en su estado más puro.",
+        "Playa del Inglés Vibrante y extensa, es el epicentro del turismo en el sur de Gran Canaria. Ideal para nadar, practicar deportes acuáticos o disfrutar del ambiente junto a su animado paseo marítimo." ;
+    onto:image "https://turismo.maspalomas.com/uploads/cetaceos_ba28c5584f.webp",
+        "https://turismo.maspalomas.com/uploads/playa_del_ingles_024bb5a9d0.jpg" ;
+    onto:locatedin res:gran_canaria,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:tirajana,
+        res:tirajana_un ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/playas" .
+
+res:meloneras a onto:naturalarea ;
+    rdfs:label "Meloneras" ;
+    onto:description "Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/playa_virgenes_314662cd01.jpg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:meloneras_elegante a onto:hotel ;
+    rdfs:label "Meloneras Elegante" ;
+    onto:description "Playa de Meloneras Elegante y moderna, rodeada de hoteles y terrazas frente al mar. Ideal para disfrutar del sol, una comida junto al paseo o un baño relajado al atardecer." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_meloneras_7fb1342165.jpg" ;
+    onto:locatedin res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:maspalomas a onto:naturalarea,
+        onto:place ;
+    rdfs:label "Maspalomas" ;
+    onto:description "Actividades en el Mar Disfruta del Atlántico en todo su esplendor: navega, bucea o surfea entre aguas cristalinas y paisajes únicos. Maspalomas te invita a vivir el mar como nunca antes.",
+        "Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos.",
+        "Carnaval Internacional de Maspalomas Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!",
+        "Deportes náuticos Maspalomas es el paraíso del mar en movimiento: viento constante, aguas cálidas y un clima perfecto todo el año. Practica windsurf, vela, buceo o esquí acuático en un entorno natural único y lleno de energía atlántica.",
+        "Oficinas Plaza de Timanfaya s/n. San Fernando de Maspalomas",
+        "Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/bg_video_2d80688385.jpg",
+        "https://turismo.maspalomas.com/uploads/cetaceos_ba28c5584f.webp",
+        "https://turismo.maspalomas.com/uploads/playa_virgenes_314662cd01.jpg",
+        "https://turismo.maspalomas.com/uploads/surf_d2fc6c7a24.jpg" ;
+    onto:locatedin res:gran_canaria,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante,
+        res:timanfaya,
+        res:tirajana,
+        res:tirajana_un ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/actividades-en-el-mar",
+        "https://turismo.maspalomas.com/naturaleza",
+        "https://turismo.maspalomas.com/playas",
+        "https://turismo.maspalomas.com/rutas-de-senderos",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:maspalomas_famosa a onto:naturalarea ;
+    rdfs:label "Maspalomas Famosa" ;
+    onto:description "Playa de Maspalomas Famosa por sus dunas y su icónico faro, combina naturaleza, relax y estilo. Perfecta para caminar junto al mar o contemplar uno de los atardeceres más bellos de Canarias." ;
+    onto:image "https://turismo.maspalomas.com/uploads/playa_maspalomas_a5d5846eb7.jpg" ;
+    onto:locatedin res:canarias,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com/playas" .
+
+res:maspalomas_un a onto:activity,
+        onto:naturalarea ;
+    rdfs:label "Maspalomas Un" ;
+    onto:description "Maspalomas Un entorno lleno de posibilidades",
+        "Maspalomas Un entorno lleno de posibilidades Ver video",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul.",
+        "Un clima perfecto todo el año Más de 300 días de sol y temperaturas suaves entre 21 y 25 °C. En Maspalomas, el invierno se siente como verano y el verano nunca es extremo. Ideal para disfrutar del mar, la montaña o simplemente desconectar bajo el cielo azul. Playas para todos los gustos Desde las dunas infinitas de Maspalomas hasta las calas tranquilas de Meloneras o lSan Agustín. Naturaleza y paisajes únicos Barrancos, palmerales, pinares y acantilados volcánicos crean un mosaico de ecosistemas en pocos kilómetros. Aventura y ocio Camellos, senderismo, karting, buceo, golf o parques temáticos. Maspalomas ofrece diversión sin límites, combinando adrenalina, naturaleza y experiencias en familia o con amigos. Cultura, historia y tradiciones Un municipio que ha sabido crecer sin perder sus raíces. Romerías, artesanía, folclore y una gastronomía con alma canaria te harán sentir la autenticidad del lugar. Hospitalidad y bienestar Hoteles con encanto, centros de bienestar, gastronomía local y un trato cercano. Aquí el visitante no solo descansa, sino que se siente parte de un lugar donde la vida se disfruta sin prisas." ;
+    onto:image "https://turismo.maspalomas.com/uploads/6razones1_bb090ccc2f.jpg",
+        "https://turismo.maspalomas.com/uploads/dunas_maspalomas_cec522efd3.jpeg" ;
+    onto:locatedin res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:meloneras,
+        res:meloneras_elegante ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/",
+        "https://turismo.maspalomas.com/seis-razones-para-visitarnos" .
+
+res:maspalomas_vive a onto:naturalarea ;
+    rdfs:label "Maspalomas Vive" ;
+    onto:description "Carnaval Internacional de Maspalomas Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!" ;
+    onto:locatedin res:gran_canaria,
+        res:maspalomas,
+        res:maspalomas_famosa,
+        res:maspalomas_un,
+        res:maspalomas_vive,
+        res:tirajana,
+        res:tirajana_un ;
+    prov1:extractor "hybrid_extractor" ;
+    prov1:source "https://turismo.maspalomas.com",
+        "https://turismo.maspalomas.com/" .
+

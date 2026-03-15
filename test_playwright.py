@@ -1,17 +1,19 @@
-from playwright.sync_api import sync_playwright
+# debug_ttl.py
+from rdflib import Graph
 
-with sync_playwright() as p:
+path = "ontology/core.ttl"
 
-    browser = p.chromium.launch(
-        executable_path="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-        headless=True,
-        args=["--no-sandbox"]
-    )
+with open(path, "r", encoding="utf-8") as f:
+    lines = f.readlines()
 
-    page = browser.new_page()
+buffer = ""
 
-    page.goto("https://example.com")
-
-    print(page.title())
-
-    browser.close()
+for i, line in enumerate(lines, 1):
+    buffer += line
+    try:
+        g = Graph()
+        g.parse(data=buffer, format="turtle")
+    except Exception as e:
+        print("Error cerca de la línea:", i)
+        print(line)
+        break

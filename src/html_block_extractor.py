@@ -4,85 +4,44 @@ from bs4 import BeautifulSoup
 class HTMLBlockExtractor:
 
     def __init__(self):
-        pass
+
+        self.block_tags = [
+            "section",
+            "article",
+            "div",
+            "li"
+        ]
 
 
-    def clean_dom(self, soup):
-
-        # eliminar ruido de navegación
-        for tag in soup(["nav", "footer", "header", "script", "style", "noscript"]):
-            tag.decompose()
-
-        return soup
-
-
-    def extract_blocks(self, html, page_url=None):
+    def extract(self, html):
 
         soup = BeautifulSoup(html, "html.parser")
 
-        soup = self.clean_dom(soup)
-
         blocks = []
 
-        candidates = soup.find_all([
-            "section",
-            "article",
-            "div"
-        ])
+        for tag in self.block_tags:
 
-        idx = 0
+            elements = soup.find_all(tag)
 
-        for node in candidates:
+            for el in elements:
 
-            text = node.get_text(separator=" ", strip=True)
+                text = el.get_text(" ", strip=True)
 
-            if not text:
-                continue
+                if not text:
+                    continue
 
-            if len(text) < 40:
-                continue
+                img = None
 
-            heading = None
+                img_tag = el.find("img")
 
-            h = node.find(["h1", "h2", "h3"])
+                if img_tag and img_tag.get("src"):
+                    img = img_tag["src"]
 
-            if h:
-                heading = h.get_text(strip=True)
+                block = {
+                    "text": text,
+                    "image": img
+                }
 
-            image = None
-
-            img = node.find("img")
-
-            if img and img.get("src"):
-                image = img.get("src")
-
-            links = []
-
-            for a in node.find_all("a", href=True):
-
-                href = a["href"]
-
-                if href.startswith("/"):
-                    links.append(href)
-
-            blocks.append({
-
-                "block_id": f"block_{idx}",
-
-                "heading": heading,
-
-                "text": text,
-
-                "html": str(node),
-
-                "image": image,
-
-                "links": links,
-
-                "page_url": page_url
-
-            })
-
-            idx += 1
+                blocks.append(block)
 
         return blocks
