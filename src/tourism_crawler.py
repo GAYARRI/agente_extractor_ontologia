@@ -1,10 +1,35 @@
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+
+
+VALID_PATH_KEYWORDS = [
+    "destino",
+    "destinos",
+    "experiencia",
+    "experiencias",
+    "agenda",
+    "evento",
+    "que-no-te-lo-cuenten",
+    "naturaleza",
+    "cultura",
+    "patrimonio"
+]
+
+INVALID_PATH_KEYWORDS = [
+    "login",
+    "contacto",
+    "mapa",
+    "mapas",
+    "folletos",
+    "privacidad",
+    "cookies"
+]
 
 
 class TourismCrawler:
 
-    def __init__(self, start_url, max_pages=5):
+    def __init__(self, start_url, max_pages=1000):
 
         self.start_url = start_url
         self.max_pages = max_pages
@@ -18,14 +43,8 @@ class TourismCrawler:
         pages = []
 
         headers = {
-            "User-Agent": (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/120.0.0.0 Safari/537.36"
-            ),
-            "Accept-Language": "es-ES,es;q=0.9",
-            "Accept": "text/html,application/xhtml+xml",
-            "Connection": "keep-alive"
+            "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
 
         session = requests.Session()
@@ -46,7 +65,6 @@ class TourismCrawler:
 
                 html = response.text
 
-                # evitar páginas bloqueadas
                 if "requested url was rejected" in html.lower():
                     print("⚠️ Página bloqueada:", url)
                     continue
@@ -64,11 +82,23 @@ class TourismCrawler:
                     if not href:
                         continue
 
-                    if href.startswith("/"):
+                    href = urljoin(self.start_url, href)
 
-                        href = self.start_url.rstrip("/") + href
+                    if href in visited:
+                        continue
 
-                    if href.startswith(self.start_url) and href not in visited:
+                    href_lower = href.lower()
+
+                    # evitar páginas irrelevantes
+                    if any(x in href_lower for x in INVALID_PATH_KEYWORDS):
+                        continue
+
+                    # priorizar páginas turísticas
+                    if any(x in href_lower for x in VALID_PATH_KEYWORDS):
+
+                        to_visit.insert(0, href)
+
+                    else:
 
                         to_visit.append(href)
 

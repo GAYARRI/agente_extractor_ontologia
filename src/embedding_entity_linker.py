@@ -1,57 +1,53 @@
-from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.cluster import DBSCAN
+import numpy as np
 
 
-class EmbeddingEntityLinker:
+class DestinationDiscovery:
 
-    def __init__(self):
+    def __init__(self, model):
 
-        print("Cargando modelo de embeddings...")
+        self.model = model
 
-        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+        # distancia semántica
+        self.eps = 0.35
 
-        # Clases de la ontología (puedes ampliarlas)
-        self.ontology_classes = [
-            "Beach",
-            "Museum",
-            "Hotel",
-            "Restaurant",
-            "Bar",
-            "CafeOrCoffeeShop",
-            "TouristInformationOffice",
-            "Theater",
-            "Monument",
-            "NaturalResource",
-            "Mountain",
-            "Volcano",
-            "TourismDestination",
-            "TourismOrganisation",
-            "Event",
-            "EventAttendanceFacility",
-            "Place"
-        ]
+        # tamaño mínimo cluster
+        self.min_samples = 2
 
-        print("Generando embeddings de clases...")
 
-        self.class_embeddings = self.model.encode(self.ontology_classes)
+    def discover(self, entities):
 
-    def link(self, entities):
+        if not entities:
+            return []
 
-        results = []
+        names = [e["entity"] for e in entities]
 
-        for entity in entities:
+        embeddings = self.model.encode(names)
 
-            entity_embedding = self.model.encode([entity])
+        clustering = DBSCAN(
+            eps=self.eps,
+            min_samples=self.min_samples,
+            metric="cosine"
+        ).fit(embeddings)
 
-            similarity = cosine_similarity(entity_embedding, self.class_embeddings)
+        labels = clustering.labels_
 
-            best_index = similarity.argmax()
+        clusters = {}
 
-            best_class = self.ontology_classes[best_index]
+        for label, name in zip(labels, names):
 
-            results.append({
-                "name": entity,
-                "class": best_class
-            })
+            if label == -1:
+                continue
 
-        return results
+            clusters.setdefault(label, []).append(name)
+
+        destinations = []
+
+        for cluster in clusters.values():
+
+            # elegimos el nombre más largo
+            destination = max(cluster, key=len)
+
+            destinations.append(destination)
+
+        return list(set(destinations))

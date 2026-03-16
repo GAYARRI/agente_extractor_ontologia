@@ -13,14 +13,7 @@ class EntityNormalizer:
         # eliminar dobles espacios
         entity = re.sub(r"\s+", " ", entity)
 
-        # eliminar prefijos comunes
+        # normalización básica
         entity = entity.replace("Provincia de ", "")
-
-        # capitalización correcta
-        entity = entity.title()
-
-        entity = entity.replace(" De ", " de ")
-        entity = entity.replace(" Del ", " del ")
-        entity = entity.replace(" La ", " la ")
 
         return entity.strip()

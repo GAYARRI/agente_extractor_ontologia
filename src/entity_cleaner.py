@@ -1,54 +1,76 @@
 import re
 
 
-STOP_WORDS = [
-    "portada",
-    "inicio",
-    "home",
-    "menu",
-    "buscar",
-    "contacto",
-    "mapa",
-    "cookies",
-    "facebook",
-    "instagram",
-    "youtube",
-    "rss",
-    "twitter",
-    "agenda",
-    "eventos",
-    "turismo",
-]
-
-
 class EntityCleaner:
+
+    def __init__(self):
+
+        # palabras que suelen aparecer en menús web
+        self.stopwords = {
+            "inicio",
+            "agenda",
+            "eventos",
+            "contenido",
+            "principal",
+            "planifica",
+            "visita",
+            "dónde",
+            "donde",
+            "qué",
+            "que",
+            "hacer",
+            "comer",
+            "dormir",
+            "mapa",
+            "interactivo",
+            "noticias",
+            "utilidades",
+            "encuestas"
+        }
+
 
     def clean(self, entities):
 
-        clean_entities = []
+        cleaned = []
 
-        for e in entities:
+        for entity in entities:
 
-            text = e.get("entity")
-
-            if not text:
+            if not entity:
                 continue
 
-            text = text.strip()
+            text = entity.strip()
 
+            # eliminar puntuación final
+            text = re.sub(r"[^\w\sáéíóúÁÉÍÓÚñÑ]", "", text)
+
+            # evitar entidades demasiado cortas
             if len(text) < 4:
                 continue
 
-            text_lower = text.lower()
+            words = text.lower().split()
 
-            # eliminar palabras de navegación
-            if any(w in text_lower for w in STOP_WORDS):
+            # eliminar menús web
+            if any(w in self.stopwords for w in words):
                 continue
 
-            # eliminar entidades con números
-            if re.search(r"\d", text):
+            # evitar combinaciones incorrectas de eventos
+            # ej: "Chanfaina Romería"
+            if text.lower().startswith(("romería", "fiesta", "semana")) and " de " not in text.lower():
                 continue
 
-            clean_entities.append(e)
+            # evitar entidades solo numéricas
+            if text.isdigit():
+                continue
 
-        return clean_entities
+            # capitalización simple
+            text = text.title()
+
+            if entity.endswith("Ideal"):
+                continue
+
+            if entity.startswith("Copyright"):
+                continue
+
+            cleaned.append(text)
+
+        return cleaned

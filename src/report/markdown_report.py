@@ -1,37 +1,51 @@
-class MarkdownReport:
+def generate_markdown_report(results, output_path, ontology_index):
 
-    def save(self, results, path="entities_report.md"):
+    lines = []
 
-        with open(path, "w", encoding="utf-8") as f:
+    lines.append("# Clasificación de entidades turísticas\n")
 
-            f.write("# Clasificación de entidades turísticas\n\n")
+    block_id = 1
 
-            if not results:
-                f.write("No se detectaron bloques procesables.\n")
-                return
+    for block in results:
 
-            for i, block in enumerate(results, 1):
+        text = block.get("text", "")
+        entities = block.get("entities", [])
 
-                text = block.get("text", "")[:300]
+        if not entities:
+            continue
 
-                f.write(f"## Bloque {i}\n\n")
-                f.write(f"> {text}\n\n")
+        lines.append(f"## Bloque {block_id}\n")
 
-                entities = block.get("entities", [])
+        preview = text.replace("\n", " ")[:200]
 
-                if not entities:
-                    f.write("No se detectaron entidades.\n\n")
-                    continue
+        lines.append(f"> {preview}\n")
 
-                f.write("| Entidad | Clase | Score |\n")
-                f.write("|--------|-------|-------|\n")
+        lines.append("| Entidad | Clase | Score | Propiedades ontológicas |")
+        lines.append("|--------|-------|-------|-------------------------|")
 
-                for e in entities:
+        for entity in entities:
 
-                    entity = e["entity"]
-                    label = e["class"]
-                    score = f'{e["score"]:.2f}'
+            name = entity.get("entity", "")
+            label = entity.get("class", "")
+            score = entity.get("score", 0.0)
 
-                    f.write(f"| {entity} | {label} | {score} |\n")
+            props = ""
 
-                f.write("\n")
+            # obtener propiedades ontológicas si la clase existe
+            if label and label != "Unknown":
+
+                class_props = ontology_index.get_class_properties(label)
+
+                if class_props:
+                    props = ", ".join(class_props)
+
+            lines.append(
+                f"| {name} | {label} | {score:.2f} | {props} |"
+            )
+
+        lines.append("\n")
+
+        block_id += 1
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))

@@ -1,16 +1,13 @@
-from rdflib import Graph, Namespace, Literal, URIRef
+from rdflib import Graph, URIRef, Literal, Namespace
 from rdflib.namespace import RDF, RDFS
-from urllib.parse import quote
-
-
-MIN_CONFIDENCE = 0.75
 
 
 class KnowledgeGraphBuilder:
 
-    def __init__(self, ontology_index, source_page=None):
+    def __init__(self, ontology_index):
 
         self.graph = Graph()
+        self.ontology_index = ontology_index
 
         self.EX = Namespace("http://example.org/resource/")
         self.TOUR = Namespace("http://example.org/tourism/")
@@ -19,93 +16,43 @@ class KnowledgeGraphBuilder:
         self.graph.bind("tour", self.TOUR)
         self.graph.bind("rdfs", RDFS)
 
-        self.source_page = source_page
-        self.ontology_index = ontology_index
 
-        # evitar duplicados
-        self.seen_entities = set()
+    # ------------------------------------------------
+    # construir KG desde resultados del pipeline
+    # ------------------------------------------------
 
-
-    def _create_uri(self, label):
-        """
-        Crear URI limpia para la entidad
-        """
-
-        clean_label = label.strip().replace(" ", "_")
-        clean_label = quote(clean_label)
-
-        return self.EX[clean_label]
-
-
-    def _create_class_uri(self, class_label):
-        """
-        Obtener URI real de la ontología
-        """
-
-        for uri, label in zip(
-            self.ontology_index.uris,
-            self.ontology_index.labels
-        ):
-
-            # label puede contener contexto, tomamos el nombre base
-            base_label = label.split(" ")[0]
-
-            if base_label.lower() == class_label.lower():
-                return URIRef(uri)
-
-        # fallback si no se encuentra
-        clean_class = quote(class_label.replace(" ", "_"))
-        return self.TOUR[clean_class]
-
-
-    def add_results(self, results):
+    def build(self, results):
 
         for block in results:
 
-            for e in block["entities"]:
+            for entity in block.get("entities", []):
 
-                entity_label = e["entity"].strip()
-                class_label = e["class"]
-                score = float(e["score"])
+                name = entity.get("entity")
+                cls = entity.get("class")
+                score = entity.get("score")
 
-                # filtrar baja confianza
-                if score < MIN_CONFIDENCE:
+                if not name:
                     continue
 
-                key = entity_label.lower()
+                uri = URIRef(self.EX[name.replace(" ", "_")])
 
-                # evitar duplicados
-                if key in self.seen_entities:
-                    continue
-
-                self.seen_entities.add(key)
-
-                subject = self._create_uri(entity_label)
-                class_uri = self._create_class_uri(class_label)
-
-                # tipo RDF
-                self.graph.add((subject, RDF.type, class_uri))
+                # tipo
+                if cls:
+                    class_uri = URIRef(cls)
+                    self.graph.add((uri, RDF.type, class_uri))
 
                 # etiqueta
-                self.graph.add((subject, RDFS.label, Literal(entity_label)))
+                self.graph.add((uri, RDFS.label, Literal(name)))
 
                 # confianza
-                self.graph.add(
-                    (subject, self.TOUR.confidence, Literal(score))
-                )
-
-                # página fuente
-                if self.source_page:
-
-                    self.graph.add(
-                        (
-                            subject,
-                            self.TOUR.sourcePage,
-                            Literal(self.source_page)
-                        )
-                    )
+                if score is not None:
+                    self.graph.add((uri, self.TOUR.confidence, Literal(score)))
 
 
-    def save(self, path="knowledge_graph.ttl"):
+    # ------------------------------------------------
+    # guardar KG
+    # ------------------------------------------------
+
+    def save(self, path):
 
         self.graph.serialize(destination=path, format="turtle")

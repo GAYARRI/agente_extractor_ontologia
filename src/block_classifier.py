@@ -1,14 +1,9 @@
-from src.tourism_entity_extractor import TourismEntityExtractor
-
-
 class BlockClassifier:
 
-    def __init__(self, matcher):
-        """
-        matcher: OntologyMatcher
-        """
+    def __init__(self, entity_extractor, matcher):
+
+        self.extractor = entity_extractor
         self.matcher = matcher
-        self.extractor = TourismEntityExtractor()
 
 
     def classify(self, block):
@@ -18,20 +13,19 @@ class BlockClassifier:
         if not text:
             return None
 
-        # extraer entidades del texto
         entities = self.extractor.extract(text)
 
         if not entities:
-            return {
-                "text": text,
-                "entities": []
-            }
+            return None
 
         results = []
 
         for entity in entities:
 
-            match = self.matcher.match(entity)
+            # 🔵 CONTEXTO SEMÁNTICO
+            context = f"{entity} {text}"
+
+            match = self.matcher.match(context)
 
             if not match:
                 continue
@@ -42,6 +36,9 @@ class BlockClassifier:
                 "uri": match["uri"],
                 "score": match["score"]
             })
+
+        if not results:
+            return None
 
         return {
             "text": text,

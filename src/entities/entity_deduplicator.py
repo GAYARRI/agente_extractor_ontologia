@@ -1,28 +1,22 @@
 class EntityDeduplicator:
 
-    def deduplicate(self, results):
+    def deduplicate(self, entities):
 
-        seen = {}
-        clean_results = []
+        entities = list(set(entities))
 
-        for block in results:
+        result = []
 
-            new_entities = []
+        for e in entities:
 
-            for e in block["entities"]:
+            contained = False
 
-                label = e["entity"].lower()
+            for other in entities:
 
-                if label in seen:
-                    continue
+                if e != other and e in other:
+                    contained = True
+                    break
 
-                seen[label] = True
+            if not contained:
+                result.append(e)
 
-                new_entities.append(e)
-
-            if new_entities:
-
-                block["entities"] = new_entities
-                clean_results.append(block)
-
-        return clean_results
+        return result

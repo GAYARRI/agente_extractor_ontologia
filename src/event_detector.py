@@ -1,4 +1,4 @@
-EVENT_WORDS = [
+EVENT_KEYWORDS = [
     "Carnaval",
     "Semana Santa",
     "Festival",
@@ -10,13 +10,15 @@ EVENT_WORDS = [
 
 class EventDetector:
 
-    def detect(self, text):
+    def detect(self, entity):
 
-        events = []
+        for word in EVENT_KEYWORDS:
 
-        for word in EVENT_WORDS:
+            if word.lower() in entity.lower():
 
-            if word in text:
-                events.append(word)
+                return {
+                    "type": "Event",
+                    "label": entity
+                }
 
-        return events
+        return None

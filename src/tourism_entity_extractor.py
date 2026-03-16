@@ -1,50 +1,159 @@
 import re
 
-CONNECTORS = {"de", "del", "la", "las", "los", "y", "e"}
-
-MAX_WORDS = 6
-
 
 class TourismEntityExtractor:
 
-    def extract(self, text):
+    def __init__(self):
 
-        tokens = text.split()
+        # -------------------------
+        # eventos turísticos
+        # -------------------------
 
-        entities = []
-        current = []
+        self.event_patterns = [
+            r"Fiesta de [A-ZÁÉÍÓÚÑ][a-záéíóúñ]+",
+            r"Romería de [A-ZÁÉÍÓÚÑ][a-záéíóúñ]+",
+            r"Semana Santa",
+            r"Feria de [A-ZÁÉÍÓÚÑ][a-záéíóúñ]+",
+            r"Festival de [A-ZÁÉÍÓÚÑ][a-záéíóúñ]+",
+            r"Carnaval de [A-ZÁÉÍÓÚÑ][a-záéíóúñ]+"
+        ]
 
-        for token in tokens:
+        # -------------------------
+        # keywords de POI
+        # -------------------------
 
-            word = token.strip(".,;:!?")
+        self.poi_keywords = [
+            "Playa",
+            "Castillo",
+            "Museo",
+            "Iglesia",
+            "Parque",
+            "Observatorio",
+            "Ruta",
+            "Puerto",
+            "Mirador",
+            "Cueva",
+            "Faro",
+            "Laguna"
+        ]
 
-            if not word:
+        # palabras basura frecuentes en NER
+        self.bad_words = {
+            "Ideal",
+            "Turísticos",
+            "Turisticos",
+            "Únicos",
+            "Unicos"
+        }
+
+
+    def tokenize(self, text):
+
+        words = text.split()
+
+        cleaned = []
+
+        for w in words:
+
+            w = re.sub(r"[^\wáéíóúÁÉÍÓÚñÑ]", "", w)
+
+            if not w:
                 continue
 
-            if word[0].isupper():
+            cleaned.append(w)
 
-                current.append(word)
+        return cleaned
 
-            elif word.lower() in CONNECTORS and current:
 
-                current.append(word)
+    def extract(self, text):
 
-            else:
+        entities = []
 
-                if len(current) >= 2:
+        # -------------------------
+        # 1️⃣ detectar eventos
+        # -------------------------
 
-                    entity = " ".join(current)
+        for pattern in self.event_patterns:
 
-                    if len(entity.split()) <= MAX_WORDS:
-                        entities.append(entity)
+            matches = re.findall(pattern, text)
 
-                current = []
+            for m in matches:
+                entities.append(m.strip())
 
-        if len(current) >= 2:
 
-            entity = " ".join(current)
+        # -------------------------
+        # 2️⃣ tokenizar texto
+        # -------------------------
 
-            if len(entity.split()) <= MAX_WORDS:
-                entities.append(entity)
+        words = self.tokenize(text)
 
-        return list(set(entities))
+
+        # -------------------------
+        # 3️⃣ detectar bigramas
+        # -------------------------
+
+        for i in range(len(words) - 1):
+
+            w1 = words[i]
+            w2 = words[i + 1]
+
+            if w1.istitle() and w2.istitle():
+
+                if w2 in self.bad_words:
+                    continue
+
+                candidate = f"{w1} {w2}"
+
+                entities.append(candidate)
+
+
+        # -------------------------
+        # 4️⃣ detectar trigramas
+        # -------------------------
+
+        for i in range(len(words) - 2):
+
+            w1 = words[i]
+            w2 = words[i + 1]
+            w3 = words[i + 2]
+
+            if w1.istitle() and w2.istitle() and w3.istitle():
+
+                if w3 in self.bad_words:
+                    continue
+
+                candidate = f"{w1} {w2} {w3}"
+
+                entities.append(candidate)
+
+
+        # -------------------------
+        # 5️⃣ detectar POIs
+        # -------------------------
+
+        for keyword in self.poi_keywords:
+
+            matches = re.findall(
+                rf"{keyword} de [A-ZÁÉÍÓÚÑ][a-záéíóúñ]+",
+                text
+            )
+
+            for m in matches:
+                entities.append(m.strip())
+
+
+        # -------------------------
+        # 6️⃣ caso especial
+        # -------------------------
+
+        if "fuga de la diabla" in text.lower():
+            entities.append("La Fuga de la Diabla")
+
+
+        # -------------------------
+        # eliminar duplicados
+        # -------------------------
+
+        entities = list(set(entities))
+
+        return entities

@@ -1,10 +1,49 @@
 from bs4 import BeautifulSoup
 
 
-MIN_TEXT_LENGTH = 20
+NAVIGATION_WORDS = {
+    "utilidades",
+    "encuestas",
+    "recomendador",
+    "incidencias",
+    "noticias",
+    "mapa",
+    "inicio"
+}
+
+
+NOISE_PATTERNS = [
+    "copyright",
+    "todos los derechos reservados",
+    "política de privacidad",
+    "cookies",
+    "aviso legal"
+]
 
 
 class HTMLBlockExtractor:
+
+    def is_noise(self, text):
+
+        t = text.lower()
+
+        for p in NOISE_PATTERNS:
+            if p in t:
+                return True
+
+        return False
+
+
+    def is_navigation(self, text):
+
+        t = text.lower()
+
+        for word in NAVIGATION_WORDS:
+            if word in t:
+                return True
+
+        return False
+
 
     def extract(self, html):
 
@@ -12,28 +51,40 @@ class HTMLBlockExtractor:
 
         blocks = []
 
-        # eliminar elementos de ruido
-        for tag in soup(["script", "style", "nav", "footer", "header"]):
-            tag.decompose()
+        seen = set()
 
-        # extraer TODO el texto visible
-        text = soup.get_text("\n")
+        # ❗ quitamos <a> para evitar ruido
+        for tag in soup.find_all(["h1", "h2", "h3", "p", "li"]):
 
-        lines = text.split("\n")
+            text = tag.get_text(" ", strip=True)
 
-        for line in lines:
-
-            line = line.strip()
-
-            if not line:
+            if not text:
                 continue
 
-            if len(line) < MIN_TEXT_LENGTH:
+            # tamaño mínimo
+            if len(text) < 25:
                 continue
+
+            # evitar bloques gigantes
+            if len(text) > 300:
+                continue
+
+            # navegación
+            if self.is_navigation(text):
+                continue
+
+            # ruido
+            if self.is_noise(text):
+                continue
+
+            # evitar duplicados
+            if text in seen:
+                continue
+
+            seen.add(text)
 
             blocks.append({
-                "text": line,
-                "image": None
+                "text": text
             })
 
         return blocks
