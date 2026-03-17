@@ -1,76 +1,58 @@
 import re
 
+STOPWORDS_START = {
+    "Desde", "Vive", "Explora", "Navega",
+    "Practica", "Descubre", "Una", "Un",
+    "La", "El"
+}
+
+BAD_TOKENS = {
+    "Practica", "Vive", "Explora"
+}
+
 
 class EntityCleaner:
-
-    def __init__(self):
-
-        # palabras que suelen aparecer en menús web
-        self.stopwords = {
-            "inicio",
-            "agenda",
-            "eventos",
-            "contenido",
-            "principal",
-            "planifica",
-            "visita",
-            "dónde",
-            "donde",
-            "qué",
-            "que",
-            "hacer",
-            "comer",
-            "dormir",
-            "mapa",
-            "interactivo",
-            "noticias",
-            "utilidades",
-            "encuestas"
-        }
-
 
     def clean(self, entities):
 
         cleaned = []
 
-        for entity in entities:
+        for e in entities:
 
-            if not entity:
+            if not e:
                 continue
 
-            text = entity.strip()
+            text = e.strip()
 
-            # eliminar puntuación final
+            # -----------------------------
+            # eliminar stopwords iniciales
+            # -----------------------------
+            words = text.split()
+
+            while words and words[0] in STOPWORDS_START:
+                words.pop(0)
+
+            text = " ".join(words)
+
+            # -----------------------------
+            # eliminar tokens basura
+            # -----------------------------
+            text = " ".join(
+                w for w in text.split()
+                if w not in BAD_TOKENS
+            )
+
+            # -----------------------------
+            # limpiar símbolos
+            # -----------------------------
             text = re.sub(r"[^\w\sáéíóúÁÉÍÓÚñÑ]", "", text)
 
-            # evitar entidades demasiado cortas
-            if len(text) < 4:
+            # -----------------------------
+            # evitar cosas muy cortas
+            # -----------------------------
+            if len(text) < 3:
                 continue
 
-            words = text.lower().split()
-
-            # eliminar menús web
-            if any(w in self.stopwords for w in words):
-                continue
-
-            # evitar combinaciones incorrectas de eventos
-            # ej: "Chanfaina Romería"
-            if text.lower().startswith(("romería", "fiesta", "semana")) and " de " not in text.lower():
-                continue
-
-            # evitar entidades solo numéricas
-            if text.isdigit():
-                continue
-
-            # capitalización simple
-            text = text.title()
-
-            if entity.endswith("Ideal"):
-                continue
-
-            if entity.startswith("Copyright"):
-                continue
-
-            cleaned.append(text)
+            cleaned.append(text.strip())
 
         return cleaned

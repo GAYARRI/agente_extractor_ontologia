@@ -1,51 +1,69 @@
-def generate_markdown_report(results, output_path, ontology_index):
+class EntitiesReporter:
 
-    lines = []
+    def __init__(self, ontology_index):
+        self.ontology_index = ontology_index
 
-    lines.append("# Clasificación de entidades turísticas\n")
+    def generate_markdown_report(self, results, output_file):
 
-    block_id = 1
+        print("🔥 USING report_markdown_report")
 
-    for block in results:
+        md = "# Clasificación de entidades turísticas\n\n"
 
-        text = block.get("text", "")
-        entities = block.get("entities", [])
+        block_id = 1
 
-        if not entities:
-            continue
+        for block in results:
 
-        lines.append(f"## Bloque {block_id}\n")
+            text = block.get("text", "")[:200]
 
-        preview = text.replace("\n", " ")[:200]
+            md += f"## Bloque {block_id}\n\n"
+            md += f"> {text}\n\n"
 
-        lines.append(f"> {preview}\n")
+            md += "| Entidad | Clase | Score | Propiedades ontológicas |\n"
+            md += "|--------|-------|-------|--------------------------|\n"
 
-        lines.append("| Entidad | Clase | Score | Propiedades ontológicas |")
-        lines.append("|--------|-------|-------|-------------------------|")
+            for entity in block.get("entities", []):
 
-        for entity in entities:
+                label = entity.get("entity", "")
+                cls = entity.get("class", "")
+                score = entity.get("score", 0)
 
-            name = entity.get("entity", "")
-            label = entity.get("class", "")
-            score = entity.get("score", 0.0)
+                properties = []
 
-            props = ""
+                # ==================================================
+                # 🔥 1. PROPIEDADES DEL PIPELINE (PRINCIPAL)
+                # ==================================================
+                props_dict = entity.get("properties", {})
 
-            # obtener propiedades ontológicas si la clase existe
-            if label and label != "Unknown":
+                if isinstance(props_dict, dict):
+                    for k, v in props_dict.items():
+                        properties.append(f"{k}: {v}")
 
-                class_props = ontology_index.get_class_properties(label)
+                # ==================================================
+                # 🔥 2. PROPIEDADES DE ONTOLOGÍA (OPCIONAL)
+                # ==================================================
+                uri = entity.get("uri")
 
-                if class_props:
-                    props = ", ".join(class_props)
+                if uri and self.ontology_index:
+                    try:
+                        ont_props = self.ontology_index.get_class_properties(uri)
+                        for p in ont_props:
+                            prop_name = p["property"].split("#")[-1]
 
-            lines.append(
-                f"| {name} | {label} | {score:.2f} | {props} |"
-            )
+                            # evitar duplicados
+                            if prop_name not in properties:
+                                properties.append(prop_name)
+                    except Exception as e:
+                        print("Ontology error:", e)
 
-        lines.append("\n")
+                # ==================================================
+                # FORMATO FINAL
+                # ==================================================
+                props_str = ", ".join(properties)
 
-        block_id += 1
+                md += f"| {label} | {cls} | {score:.2f} | {props_str} |\n"
 
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines))
+            md += "\n"
+            block_id += 1
+
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(md)

@@ -2,21 +2,15 @@ class EntityDeduplicator:
 
     def deduplicate(self, entities):
 
-        entities = list(set(entities))
-
+        seen = set()
         result = []
 
         for e in entities:
 
-            contained = False
+            key = e.lower().strip()
 
-            for other in entities:
-
-                if e != other and e in other:
-                    contained = True
-                    break
-
-            if not contained:
+            if key not in seen:
+                seen.add(key)
                 result.append(e)
 
         return result

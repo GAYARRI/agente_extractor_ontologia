@@ -48,11 +48,13 @@ class KnowledgeGraphBuilder:
                 if score is not None:
                     self.graph.add((uri, self.TOUR.confidence, Literal(score)))
 
+                # 🔥 PROPIEDADES (AQUÍ dentro del loop)
+                props = entity.get("properties", {})
 
-    # ------------------------------------------------
-    # guardar KG
-    # ------------------------------------------------
+                for k, v in props.items():
+                    pred = self.TOUR[k]
+                    self.graph.add((uri, pred, Literal(v)))
 
+    # 🔥 ESTE MÉTODO FALTABA
     def save(self, path):
-
-        self.graph.serialize(destination=path, format="turtle")
+        self.graph.serialize(destination=path, format="turtle")                
