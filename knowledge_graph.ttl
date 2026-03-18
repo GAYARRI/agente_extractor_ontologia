@@ -1,46 +1,54 @@
 @prefix ex: <http://example.org/resource/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix tour: <http://example.org/tourism/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:Atlántico a <Ocean> ;
-    rdfs:label "Atlántico" ;
-    tour:confidence 9e-01 ;
-    tour:nearWater "Atlantic Ocean" ;
-    tour:type "WaterBody" .
+ex:atlántico tour:image "https://upload.wikimedia.org/wikipedia/commons/9/9e/Playa_Maspalomas.jpg" ;
+    tour:longDescription "Explora un mundo de vida y color bajo el Atlántico. Practica buceo, snorkel o fotografía submarina y descubre los fondos volcánicos y la fauna marina de Maspalomas." ;
+    tour:shortDescription "Explora un mundo de vida y color bajo el Atlántico" ;
+    tour:type "Ocean",
+        "WaterBody" ;
+    tour:visualType "Beach" .
 
-ex:Carnaval_Internacional a <Festival> ;
-    rdfs:label "Carnaval Internacional" ;
-    tour:confidence 9e-01 ;
-    tour:eventType "CulturalEvent" ;
-    tour:locatedIn "Gran Canaria" .
+ex:carnaval_internacional tour:eventType "CulturalEvent" ;
+    tour:locatedIn "Gran Canaria" ;
+    tour:longDescription "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!" ;
+    tour:shortDescription "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad" ;
+    tour:type "Festival" .
 
-ex:Gran_Canaria a <Island> ;
-    rdfs:label "Gran Canaria" ;
-    tour:category "GeographicalFeature" ;
-    tour:confidence 9e-01 ;
+ex:gran_canaria tour:category "GeographicalFeature" ;
     tour:hasWildlife "Cetaceans" ;
+    tour:image "https://upload.wikimedia.org/wikipedia/commons/9/9e/Playa_Maspalomas.jpg" ;
     tour:locatedIn "Gran Canaria" ;
-    tour:type "Island" .
+    tour:longDescription "Navega por las aguas del sur de Gran Canaria y contempla delfines, calderones y ballenas en libertad. Una experiencia inolvidable para conectar con la naturaleza en su estado más puro.",
+        "Vibrante y extensa, es el epicentro del turismo en el sur de Gran Canaria. Ideal para nadar, practicar deportes acuáticos o disfrutar del ambiente junto a su animado paseo marítimo.",
+        "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!" ;
+    tour:shortDescription "Navega por las aguas del sur de Gran Canaria y contempla delfines, calderones y ballenas en libertad",
+        "Vibrante y extensa, es el epicentro del turismo en el sur de Gran Canaria",
+        "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad" ;
+    tour:type "Island" ;
+    tour:visualType "Beach" .
 
-ex:Los_Bigotes a <Place> ;
-    rdfs:label "Los Bigotes" ;
-    tour:confidence 3e-01 ;
-    tour:type "Location" .
+ex:los_bigotes tour:image "https://upload.wikimedia.org/wikipedia/commons/9/9e/Playa_Maspalomas.jpg" ;
+    tour:longDescription "Desde Montaña de Arena hasta Los Bigotes, la costa esconde rincones salvajes de belleza intacta, ideales para los amantes de la naturaleza y el silencio del mar." ;
+    tour:shortDescription "Desde Montaña de Arena hasta Los Bigotes, la costa esconde rincones salvajes de belleza intacta, ideales para los amantes de la naturaleza y el silencio del mar" ;
+    tour:type "Location",
+        "Place" ;
+    tour:visualType "Beach" .
 
-ex:Montaña a <NaturalArea> ;
-    rdfs:label "Montaña" ;
-    tour:confidence 9e-01 ;
-    tour:type "NaturalArea" .
+ex:pasito_blanco tour:image "https://upload.wikimedia.org/wikipedia/commons/9/9e/Playa_Maspalomas.jpg" ;
+    tour:longDescription "Vive la emoción del Atlántico en su máxima expresión. Zarpa desde Pasito Blanco y desafía a gigantes del mar como el atún, el pez espada o el marlín azul." ;
+    tour:shortDescription "Vive la emoción del Atlántico en su máxima expresión" ;
+    tour:type "Location",
+        "Marina" ;
+    tour:visualType "Beach" .
 
-ex:San_Bartolomé a <Municipality> ;
-    rdfs:label "San Bartolomé" ;
-    tour:confidence 9e-01 ;
-    tour:locatedIn "Gran Canaria" ;
-    tour:type "AdministrativeArea" .
+ex:san_bartolomé tour:locatedIn "Gran Canaria" ;
+    tour:longDescription "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad. ¡Una fiesta inolvidable bajo el sol de Gran Canaria!" ;
+    tour:shortDescription "Vive la alegría y el color del Carnaval Internacional de Maspalomas, donde la música, los desfiles y la diversión llenan San Bartolomé de Tirajana de magia y diversidad" ;
+    tour:type "AdministrativeArea",
+        "Municipality" .
 
-ex:Valle_de_las_Mil_Palmeras a <Valley> ;
-    rdfs:label "Valle de las Mil Palmeras" ;
-    tour:confidence 9e-01 ;
-    tour:type "NaturalFormation" .
+ex:valle_de_las_mil_palmeras tour:longDescription "Una de las rutas más emblemáticas: serpentea entre palmerales y riscos hasta el “Valle de las Mil Palmeras”." ;
+    tour:shortDescription "Una de las rutas más emblemáticas: serpentea entre palmerales y riscos hasta el “Valle de las Mil Palmeras”" ;
+    tour:type "NaturalFormation",
+        "Valley" .
 

@@ -1,9 +1,14 @@
+import os
+import certifi
+os.environ["SSL_CERT_FILE"] = certifi.where()
+
 print("🔥 ESTE ES MI MAIN.PY REAL")
 
 from src.site_crawler import SiteCrawler
 from src.tourism_pipeline import TourismPipeline
 from src.graph.kg_builder import KnowledgeGraphBuilder
 from src.report.markdown_report import EntitiesReporter
+from src.entity_description_consolidator import EntityDescriptionConsolidator
 
 
 def main():
@@ -37,6 +42,28 @@ def main():
     print(f"\n🧠 Total bloques procesados: {len(all_results)}")
 
     # ---------------------------
+    # CONSOLIDACIÓN GLOBAL
+    # ---------------------------
+
+    consolidator = EntityDescriptionConsolidator()
+    global_entities = consolidator.consolidate(all_results)
+
+    print("\n🌍 ENTIDADES GLOBALES:", len(global_entities))
+
+    # 🔥 RESUMEN GLOBAL (AQUÍ)
+    for e in global_entities[:10]:   # limitar a 10 para no saturar
+        print("\n---")
+        print("Entidad:", e["entity"])
+        print("Clase:", e["class"])
+        print("Descripción:", e["short_description"])
+
+
+    consolidator = EntityDescriptionConsolidator()
+    global_entities = consolidator.consolidate(all_results)
+
+    print("🌍 ENTIDADES GLOBALES:", len(global_entities))
+
+    # ---------------------------
     # construir Knowledge Graph
     # ---------------------------
 
@@ -53,7 +80,7 @@ def main():
 
     reporter = EntitiesReporter(pipeline.ontology_index)
 
-    reporter.generate_markdown_report(all_results, "entities_report.md")
+    reporter.generate_markdown(all_results, "entities_report.md")
 
 
 

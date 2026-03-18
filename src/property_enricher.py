@@ -1,31 +1,25 @@
 class PropertyEnricher:
 
+    def __init__(self, ontology_index=None):
+        self.ontology_index = ontology_index
+
     def enrich(self, entity, entity_class, text):
 
         props = {}
 
         # -------------------------
-        # PROPIEDADES POR CLASE
+        # 🔥 PROPIEDADES BASE
         # -------------------------
 
-        if entity_class == "Festival":
-            props["eventType"] = "CulturalEvent"
-
-        elif entity_class == "ReligiousEvent":
-            props["eventType"] = "ReligiousEvent"
-
-        elif entity_class == "Island":
+        if entity_class == "Island":
             props["type"] = "Island"
             props["category"] = "GeographicalFeature"
 
         elif entity_class == "Municipality":
             props["type"] = "AdministrativeArea"
 
-        elif entity_class == "NaturalArea":
-            props["type"] = "NaturalArea"
-
-        elif entity_class == "Marina":
-            props["type"] = "Port"
+        elif entity_class == "Festival":
+            props["eventType"] = "CulturalEvent"
 
         elif entity_class == "Ocean":
             props["type"] = "WaterBody"
@@ -33,29 +27,35 @@ class PropertyEnricher:
         elif entity_class == "Valley":
             props["type"] = "NaturalFormation"
 
-        elif entity_class == "Place":
+        else:
             props["type"] = "Location"
 
         # -------------------------
-        # CONTEXTO
+        # 🔥 CONTEXTO (MUY IMPORTANTE)
         # -------------------------
 
-        t = text.lower()
-
-        if "gran canaria" in t:
+        if "gran canaria" in text.lower():
             props["locatedIn"] = "Gran Canaria"
 
-        if "atlántico" in t:
-            props["nearWater"] = "Atlantic Ocean"
-
-        if "delfines" in t or "ballenas" in t:
+        if any(x in text.lower() for x in ["delfines", "ballenas", "cetáceos"]):
             props["hasWildlife"] = "Cetaceans"
 
         # -------------------------
-        # FALLBACK
+        # 🔥 ONTOLOGÍA (NUEVO)
         # -------------------------
 
-        if not props:
-            props["type"] = "Thing"
+        if self.ontology_index and entity_class:
+
+            uri = self.ontology_index.get_class_uri(entity_class)
+
+            if uri:
+                ontology_props = self.ontology_index.get_class_properties(uri)
+
+                for p in ontology_props:
+                    prop_name = p["property"].split("#")[-1]
+
+                    # evitar sobreescribir
+                    if prop_name not in props:
+                        props[prop_name] = "ontology"
 
         return props

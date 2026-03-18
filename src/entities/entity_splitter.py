@@ -1,19 +1,24 @@
 import re
 
-
 class EntitySplitter:
 
     def split(self, entity):
 
-        # dividir por conectores
-        parts = re.split(r'hasta|y|,', entity, flags=re.IGNORECASE)
+        if not entity:
+            return []
 
-        cleaned = []
+        # 🔥 detectar múltiples entidades típicas
+        parts = re.split(
+            r"(Semana Santa|Romería de Piedraescrita|Fiesta de la Chanfaina)",
+            entity
+        )
+
+        results = []
 
         for p in parts:
             p = p.strip()
 
-            if len(p.split()) <= 6:
-                cleaned.append(p)
+            if len(p) > 3:
+                results.append(p)
 
-        return cleaned if len(cleaned) > 1 else [entity]
+        return list(set(results))

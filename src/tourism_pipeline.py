@@ -21,6 +21,10 @@ from src.ontology.ontology_auto_expander import TourismOntologyAutoExpander
 
 from src.property_enricher import PropertyEnricher
 from src.linking.wikidata_linker import WikidataLinker
+from src.description_extractor import DescriptionExtractor
+from src.image_enricher import ImageEnricher
+from src.llm.llm_supervisor import LLMSupervisor
+
 
 
 # ==================================================
@@ -115,8 +119,12 @@ class TourismPipeline:
         self.relation_extractor = RelationExtractor()
         self.ontology_expander = TourismOntologyAutoExpander()
 
-        self.property_enricher = PropertyEnricher()
+        self.property_enricher = PropertyEnricher(self.ontology_index)
         self.wikidata_linker = WikidataLinker()
+        self.description_extractor = DescriptionExtractor()
+        self.image_enricher = ImageEnricher()
+        
+        self.llm_supervisor = LLMSupervisor()
 
     # ==================================================
     # FILTRO DE ENTIDADES
@@ -136,35 +144,16 @@ class TourismPipeline:
         if len(entity) < 4:
             return False
 
-        if len(words) == 1:
-            if e in ["atlántico", "gran canaria"]:
-                return True
-            return True   # 🔥 permitir palabras simples (clave)
-
-        # ruido web
+        # 🔥 eliminar basura real
         if any(x in e for x in [
-            "indicadores",
-            "calidad del aire",
-            "flujos turísticos",
-            "maps and brochures",
-            "how to get"
+            "agenda y eventos",
+            "piedraescrita semana",
+            "piedraescrita fiesta"
         ]):
             return False
 
-        # multilenguaje basura
-        if any(x in e for x in [
-            "wenn", "sie", "und", "der",
-            "les", "des", "ne", "pas",
-            "comment", "arriver",
-            "aktivitäten", "umfragen"
-        ]):
-            return False
-
-        # frases con verbos
-        if any(v in e for v in [
-            "vive", "explora", "descubre",
-            "disfruta", "navega", "zarpa"
-        ]):
+        # 🔥 evitar genéricos inútiles
+        if e in ["montaña", "playa", "mar"]:
             return False
 
         return True
@@ -188,7 +177,7 @@ class TourismPipeline:
             print("\n--- TEXTO BLOQUE ---")
             print(text[:120])
 
-            # 1️⃣ extracción base
+            # 1️⃣ extracción
             entities = self.entity_extractor.extract(text)
 
             # eventos
@@ -216,14 +205,18 @@ class TourismPipeline:
             # 6️⃣ normalizar eventos
             entities = [normalize_event(e) for e in entities]
 
-            # 7️⃣ expansión
+            # 7️⃣ expansión CONTROLADA
             expanded = []
-
             for e in entities:
+
+                # 🔥 NO expandir eventos
+                if any(x in e.lower() for x in ["fiesta", "romería", "semana santa"]):
+                    expanded.append(e)
+                    continue
+
                 try:
                     exp = self.expander.expand(e, text)
 
-                    # 🔥 solo aceptar si no se vuelve frase gigante
                     if exp and len(exp.split()) <= 6:
                         expanded.append(exp)
                     else:
@@ -233,9 +226,9 @@ class TourismPipeline:
                     expanded.append(e)
 
             entities = expanded
+
             # 8️⃣ split
             split_entities = []
-        
 
             for e in entities:
                 try:
@@ -251,8 +244,7 @@ class TourismPipeline:
 
             entities = split_entities
 
-
-            # 9️⃣ trim final
+            # 9️⃣ trim
             entities = [smart_trim(e) for e in entities]
 
             print("ENTIDADES POST-PROCESO:", entities)
@@ -260,7 +252,38 @@ class TourismPipeline:
             if not entities:
                 continue
 
+            # 🔥 LLM SUPERVISIÓN
+            llm_entities = self.llm_supervisor.analyze_entities(entities, text)
+
             classified_entities = []
+
+            for e in llm_entities:
+
+                entity = e.get("entity")
+                label = e.get("class", "Place")
+                score = e.get("score", 0.8)
+
+                # propiedades clásicas
+                props = self.property_enricher.enrich(entity, label, text)
+
+                # imagen
+                image_props = self.image_enricher.enrich(entity, text)
+                props.update(image_props)
+
+                # fallback imagen
+                if "image" not in props:
+                    props["image"] = ""
+
+                classified_entities.append({
+                    "entity": entity,
+                    "class": label,
+                    "score": score,
+                    "properties": props,
+                    "short_description": e.get("short_description", ""),
+                    "long_description": e.get("long_description", "")
+                })
+
+
 
             # 🔟 clasificación + enriquecimiento
             for entity in entities:
@@ -268,16 +291,6 @@ class TourismPipeline:
                 context = f"{entity} {text[:120]}"
 
                 guessed = heuristic_class(entity) or self.type_guesser.guess(entity)
-
-                link = self.wikidata_linker.link(entity)
-                wikidata_props = {}
-
-                if link:
-                    wikidata_props = self.wikidata_linker.get_entity_data(link["id"])
-
-
-
-
 
                 if guessed:
                     label = guessed
@@ -292,32 +305,39 @@ class TourismPipeline:
                         label = "Place"
                         score = 0.3
 
-                # 🔥 PROPIEDADES SIEMPRE
+                # propiedades
                 props = self.property_enricher.enrich(entity, label, text)
 
-                # 🔥 añadir propiedades Wikidata
-                if wikidata_props:
-                    props.update(wikidata_props)
+                # 🔥 imágenes
+                image_props = self.image_enricher.enrich(entity, text)
+                props.update(image_props)
 
-                def resolve_qid(qid):
-                    return f"https://www.wikidata.org/wiki/{qid}"
-                
+                # 🔥 fallback imagen
+                if "image" not in props:
+                    props["image"] = ""
+
+                # descripciones
+                descriptions = self.description_extractor.extract(entity, text)
+
+                # wikidata
+                link = self.wikidata_linker.link(entity)
+                if link:
+                    props["wikidata"] = link["id"]
+
                 print("DEBUG ENTITY:", entity)
                 print("DEBUG CLASS:", label)
-                print("DEBUG PROPS:", props) 
-
-
-
+                print("DEBUG PROPS:", props)
 
                 classified_entities.append({
                     "entity": entity,
                     "class": label,
                     "score": score,
                     "properties": props,
-                    "wikidata_id": link["id"] if link else None
+                    "short_description": descriptions["short_description"],
+                    "long_description": descriptions["long_description"]
                 })
 
-            # 🔥 deduplicación final
+            # deduplicación final
             unique = {}
             for e in classified_entities:
                 key = e["entity"].lower()
@@ -326,17 +346,12 @@ class TourismPipeline:
 
             classified_entities = list(unique.values())
 
-            # relaciones
             relations = self.relation_extractor.extract(text)
-
-            # expansión ontológica
-            suggested_classes = self.ontology_expander.discover_classes(text)
 
             results.append({
                 "text": text,
                 "entities": classified_entities,
-                "relations": relations,
-                "suggested_classes": suggested_classes
+                "relations": relations
             })
 
         return results

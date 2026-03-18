@@ -109,3 +109,14 @@ class OntologyIndex:
     def get_label(self, uri):
 
         return uri.split("#")[-1]
+    
+    def get_class_uri(self, class_name):
+
+        for uri, data in self.classes.items():
+
+            label = data.get("label", "").lower()
+
+            if label == class_name.lower():
+                return uri
+
+        return None

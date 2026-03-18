@@ -3,9 +3,7 @@ class EntitiesReporter:
     def __init__(self, ontology_index):
         self.ontology_index = ontology_index
 
-    def generate_markdown_report(self, results, output_file):
-
-        print("🔥 USING report_markdown_report")
+    def generate_markdown(self, results, output_file):
 
         md = "# Clasificación de entidades turísticas\n\n"
 
@@ -18,49 +16,40 @@ class EntitiesReporter:
             md += f"## Bloque {block_id}\n\n"
             md += f"> {text}\n\n"
 
-            md += "| Entidad | Clase | Score | Propiedades ontológicas |\n"
-            md += "|--------|-------|-------|--------------------------|\n"
+            md += "| Entidad | Clase | Imagen | Score | Descripcion corta | Propiedades ontológicas |\n"
+            md += "|--------|-------|--------|-------|------------------|--------------------------|\n"
 
-            for entity in block.get("entities", []):
+            for entity in block["entities"]:
 
                 label = entity.get("entity", "")
                 cls = entity.get("class", "")
                 score = entity.get("score", 0)
 
+                props = entity.get("properties", {})
+
+                # 🔥 EXTRAER IMAGEN
+                image_url = props.get("image", "")
+
+                if image_url:
+                    image_md = f"![img]({image_url})"
+                else:
+                    image_md = ""
+
+                # 🔥 DESCRIPCIÓN
+                short_desc = entity.get("short_description", "")
+
+                # 🔥 PROPIEDADES SIN IMAGE
                 properties = []
+                for k, v in props.items():
 
-                # ==================================================
-                # 🔥 1. PROPIEDADES DEL PIPELINE (PRINCIPAL)
-                # ==================================================
-                props_dict = entity.get("properties", {})
+                    if k == "image":
+                        continue
 
-                if isinstance(props_dict, dict):
-                    for k, v in props_dict.items():
-                        properties.append(f"{k}: {v}")
+                    properties.append(f"{k}: {v}")
 
-                # ==================================================
-                # 🔥 2. PROPIEDADES DE ONTOLOGÍA (OPCIONAL)
-                # ==================================================
-                uri = entity.get("uri")
-
-                if uri and self.ontology_index:
-                    try:
-                        ont_props = self.ontology_index.get_class_properties(uri)
-                        for p in ont_props:
-                            prop_name = p["property"].split("#")[-1]
-
-                            # evitar duplicados
-                            if prop_name not in properties:
-                                properties.append(prop_name)
-                    except Exception as e:
-                        print("Ontology error:", e)
-
-                # ==================================================
-                # FORMATO FINAL
-                # ==================================================
                 props_str = ", ".join(properties)
 
-                md += f"| {label} | {cls} | {score:.2f} | {props_str} |\n"
+                md += f"| {label} | {cls} | {image_md} | {score:.2f} | {short_desc} | {props_str} |\n"
 
             md += "\n"
             block_id += 1

@@ -1,60 +1,138 @@
-from rdflib import Graph, URIRef, Literal, Namespace
-from rdflib.namespace import RDF, RDFS
+from rdflib import Graph, Namespace, URIRef, Literal
+import re
 
 
 class KnowledgeGraphBuilder:
 
-    def __init__(self, ontology_index):
+    def __init__(self, ontology_index=None):
 
         self.graph = Graph()
-        self.ontology_index = ontology_index
 
+        # Namespaces
         self.EX = Namespace("http://example.org/resource/")
         self.TOUR = Namespace("http://example.org/tourism/")
 
         self.graph.bind("ex", self.EX)
         self.graph.bind("tour", self.TOUR)
-        self.graph.bind("rdfs", RDFS)
 
+        self.ontology_index = ontology_index
 
-    # ------------------------------------------------
-    # construir KG desde resultados del pipeline
-    # ------------------------------------------------
+    # ==================================================
+    # NORMALIZACIÓN DE ENTIDADES (CLAVE)
+    # ==================================================
+
+    def normalize_entity(self, label):
+
+        if not label:
+            return ""
+
+        label = label.lower().strip()
+
+        # quitar caracteres raros
+        label = re.sub(r"[^\w\s]", "", label)
+
+        # espacios → _
+        label = label.replace(" ", "_")
+
+        return label
+
+    # ==================================================
+    # BUILD DEL GRAFO
+    # ==================================================
 
     def build(self, results):
 
         for block in results:
 
-            for entity in block.get("entities", []):
+            entities = block.get("entities", [])
 
-                name = entity.get("entity")
-                cls = entity.get("class")
-                score = entity.get("score")
+            for entity in entities:
 
-                if not name:
+                label = entity.get("entity")
+
+                if not label:
                     continue
 
-                uri = URIRef(self.EX[name.replace(" ", "_")])
+                # 🔥 SUBJECT NORMALIZADO (evita duplicados)
+                normalized = self.normalize_entity(label)
 
-                # tipo
-                if cls:
-                    class_uri = URIRef(cls)
-                    self.graph.add((uri, RDF.type, class_uri))
+                if not normalized:
+                    continue
 
-                # etiqueta
-                self.graph.add((uri, RDFS.label, Literal(name)))
+                subject = URIRef(self.EX[normalized])
 
-                # confianza
-                if score is not None:
-                    self.graph.add((uri, self.TOUR.confidence, Literal(score)))
+                # -------------------------
+                # TIPO
+                # -------------------------
 
-                # 🔥 PROPIEDADES (AQUÍ dentro del loop)
+                entity_class = entity.get("class", "Place")
+
+                self.graph.add((
+                    subject,
+                    self.TOUR.type,
+                    Literal(entity_class)
+                ))
+
+                # -------------------------
+                # PROPIEDADES
+                # -------------------------
+
                 props = entity.get("properties", {})
 
                 for k, v in props.items():
-                    pred = self.TOUR[k]
-                    self.graph.add((uri, pred, Literal(v)))
 
-    # 🔥 ESTE MÉTODO FALTABA
+                    if not k or not v:
+                        continue
+
+                    # normalizar propiedad
+                    pred = self.TOUR[k.replace(" ", "_")]
+
+                    self.graph.add((
+                        subject,
+                        pred,
+                        Literal(v)
+                    ))
+
+                # -------------------------
+                # DESCRIPCIONES (NUEVO 🔥)
+                # -------------------------
+
+                short_desc = entity.get("short_description")
+                long_desc = entity.get("long_description")
+
+                if short_desc:
+                    self.graph.add((
+                        subject,
+                        self.TOUR.shortDescription,
+                        Literal(short_desc)
+                    ))
+
+                if long_desc:
+                    self.graph.add((
+                        subject,
+                        self.TOUR.longDescription,
+                        Literal(long_desc)
+                    ))
+
+                # -------------------------
+                # WIKIDATA LINK (si existe)
+                # -------------------------
+
+                wikidata_id = entity.get("wikidata_id")
+
+                if wikidata_id:
+                    wikidata_url = f"https://www.wikidata.org/wiki/{wikidata_id}"
+
+                    self.graph.add((
+                        subject,
+                        self.TOUR.wikidata,
+                        Literal(wikidata_url)
+                    ))
+
+    # ==================================================
+    # GUARDAR
+    # ==================================================
+
     def save(self, path):
-        self.graph.serialize(destination=path, format="turtle")                
+
+        self.graph.serialize(destination=path, format="turtle")           
