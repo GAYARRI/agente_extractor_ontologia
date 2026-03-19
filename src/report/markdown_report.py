@@ -3,56 +3,52 @@ class EntitiesReporter:
     def __init__(self, ontology_index):
         self.ontology_index = ontology_index
 
-    def generate_markdown(self, results, output_file):
+    def generate_markdown_report(self, results, output_file):
 
         md = "# Clasificación de entidades turísticas\n\n"
 
-        block_id = 1
-
-        for block in results:
+        for i, block in enumerate(results, 1):
 
             text = block.get("text", "")[:200]
 
-            md += f"## Bloque {block_id}\n\n"
+            md += f"## Bloque {i}\n\n"
             md += f"> {text}\n\n"
 
-            md += "| Entidad | Clase | Imagen | Score | Descripcion corta | Propiedades ontológicas |\n"
-            md += "|--------|-------|--------|-------|------------------|--------------------------|\n"
+            md += "| Entidad | Clase | Imagen | Score | Descripción corta | Descripción larga | Propiedades |\n"
+            md += "|--------|-------|--------|-------|------------------|------------------|-------------|\n"
 
             for entity in block["entities"]:
 
-                label = entity.get("entity", "")
+                name = entity.get("entity", "")
                 cls = entity.get("class", "")
                 score = entity.get("score", 0)
 
                 props = entity.get("properties", {})
 
-                # 🔥 EXTRAER IMAGEN
-                image_url = props.get("image", "")
+                # 🔥 imagen
+                image = props.get("image", "")
+                image_md = f"![img]({image})" if image else ""
 
-                if image_url:
-                    image_md = f"![img]({image_url})"
-                else:
-                    image_md = ""
-
-                # 🔥 DESCRIPCIÓN
+                # 🔥 descripciones
                 short_desc = entity.get("short_description", "")
+                long_desc = entity.get("long_description", "")
 
-                # 🔥 PROPIEDADES SIN IMAGE
-                properties = []
-                for k, v in props.items():
+                # 🔥 fallback (MUY IMPORTANTE)
+                if not short_desc:
+                    short_desc = text[:120]
 
-                    if k == "image":
-                        continue
+                if not long_desc:
+                    long_desc = text[:200]
 
-                    properties.append(f"{k}: {v}")
+                # 🔥 propiedades
+                props_str = ", ".join([
+                    f"{k}: {v}" for k, v in props.items() if k != "image"
+                ])
 
-                props_str = ", ".join(properties)
-
-                md += f"| {label} | {cls} | {image_md} | {score:.2f} | {short_desc} | {props_str} |\n"
+                # 🔥 FIX AQUÍ (incluye long_desc)
+                md += f"| {name} | {cls} | {image_md} | {score:.2f} | {short_desc} | {long_desc} | {props_str} |\n"
 
             md += "\n"
-            block_id += 1
 
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(md)

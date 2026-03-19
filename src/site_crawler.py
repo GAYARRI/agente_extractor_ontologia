@@ -1,239 +1,107 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
-import xml.etree.ElementTree as ET
 
 
 class SiteCrawler:
 
-    def __init__(self, start_url, max_pages=100):
+    def __init__(self, start_url, max_pages=50):
 
         self.start_url = start_url
         self.max_pages = max_pages
 
-        parsed = urlparse(start_url)
-        self.domain = parsed.netloc
-
         self.visited = set()
-        self.queue = []
+        self.to_visit = [start_url]
 
-        # rutas candidatas cuando no hay sitemap
-        self.auto_paths = [
-            "",
-            "agenda",
-            "eventos",
-            "rutas",
-            "destinos",
-            "experiencias",
-            "playas",
-            "mapa",
-            "mapa-interactivo",
-            "mapas-y-folletos",
-            "que-no-te-lo-cuenten",
-            "como-llegar",
-            "donde-dormir",
-            "donde-comer",
-            "que-hacer",
-            "que-visitar"
-        ]
+    # ==================================================
+    # LIMPIAR URL (QUITAR PARAMS)
+    # ==================================================
 
+    def clean_url(self, url):
+        return url.split("?")[0]
 
-    # ---------------------------------------------------
-    # normalizar URLs
-    # ---------------------------------------------------
+    # ==================================================
+    # FILTRO DE URLS
+    # ==================================================
 
-    def normalize_url(self, url):
+    def is_valid_url(self, url):
 
-        url = url.split("#")[0]
-        url = url.rstrip("/")
+        if not url:
+            return False
 
-        return url
+        # evitar anchors
+        if "#" in url:
+            return False
 
+        # evitar archivos
+        if any(url.endswith(ext) for ext in [".jpg", ".png", ".pdf"]):
+            return False
 
-    # ---------------------------------------------------
-    # descarga página
-    # ---------------------------------------------------
+        # 🔥 evitar loops típicos
+        if any(x in url for x in [
+            "author",
+            "login",
+            "register",
+            "review=",
+            "service=",
+            "wp-json",
+            "feed"
+        ]):
+            return False
 
-    def fetch(self, url):
+        return True
 
-        try:
+    # ==================================================
+    # CRAWL
+    # ==================================================
 
-            response = requests.get(url, timeout=10)
+    def crawl(self):
 
-            if response.status_code != 200:
-                return None
+        pages = []
 
-            # ✅ corrección encoding
-            html = response.content.decode("utf-8", errors="ignore")
+        while self.to_visit and len(pages) < self.max_pages:
 
-            return html
+            url = self.to_visit.pop(0)
+            clean = self.clean_url(url)
 
-        except Exception as e:
+            # 🔥 permitir SIEMPRE la URL inicial
+            if clean != self.start_url:
+                if clean in self.visited:
+                    continue
 
-            print("Error descargando:", url, e)
+                if not self.is_valid_url(clean):
+                    continue
 
-            return None
-
-
-    # ---------------------------------------------------
-    # leer sitemap
-    # ---------------------------------------------------
-
-    def get_sitemap_links(self):
-
-        sitemap_urls = [
-            urljoin(self.start_url, "sitemap.xml"),
-            urljoin(self.start_url, "sitemap_index.xml")
-        ]
-
-        links = []
-
-        for sitemap in sitemap_urls:
+            print(f"\n🌐 Procesando página {len(pages)+1}: {clean}")
 
             try:
-
-                print(f"Buscando sitemap: {sitemap}")
-
-                response = requests.get(sitemap, timeout=10)
+                headers = {"User-Agent": "Mozilla/5.0"}
+                response = requests.get(clean, headers=headers, timeout=10)
 
                 if response.status_code != 200:
                     continue
 
-                root = ET.fromstring(response.text)
+                html = response.content.decode("utf-8", errors="ignore")
 
-                for loc in root.iter("{http://www.sitemaps.org/schemas/sitemap/0.9}loc"):
+                # 🔥 AÑADIR SIEMPRE
+                pages.append((clean, html))
 
-                    url = self.normalize_url(loc.text)
+                self.visited.add(clean)
 
-                    links.append(url)
+                from bs4 import BeautifulSoup
+                soup = BeautifulSoup(html, "html.parser")
+
+                for link in soup.find_all("a", href=True):
+
+                    href = link.get("href")
+                    full_url = urljoin(clean, href)
+                    full_url = self.clean_url(full_url)
+
+                    # 🔥 evitar duplicados y basura
+                    if full_url not in self.visited and self.is_valid_url(full_url):
+                        self.to_visit.append(full_url)
 
             except Exception as e:
-
-                print(f"Error leyendo sitemap {sitemap}: {e}")
-
-        print(f"Links encontrados en sitemap: {len(links)}")
-
-        return links
-
-
-    # ---------------------------------------------------
-    # generar rutas automáticas
-    # ---------------------------------------------------
-
-    def generate_candidate_urls(self):
-
-        candidates = []
-
-        for path in self.auto_paths:
-
-            url = urljoin(self.start_url, path)
-
-            url = self.normalize_url(url)
-
-            candidates.append(url)
-
-        return candidates
-
-
-    # ---------------------------------------------------
-    # extraer enlaces internos
-    # ---------------------------------------------------
-
-    def extract_links(self, base_url, html):
-
-        soup = BeautifulSoup(html, "html.parser")
-
-        links = []
-
-        for tag in soup.find_all("a", href=True):
-
-            href = tag["href"]
-
-            if href.startswith(("mailto:", "tel:", "javascript:")):
-                continue
-
-            full_url = urljoin(base_url, href)
-
-            full_url = self.normalize_url(full_url)
-
-            parsed = urlparse(full_url)
-
-            # solo mismo dominio
-            if parsed.netloc != self.domain:
-                continue
-
-            # evitar archivos
-            if full_url.endswith((
-                ".pdf",
-                ".jpg",
-                ".jpeg",
-                ".png",
-                ".gif",
-                ".svg",
-                ".zip"
-            )):
-                continue
-
-            links.append(full_url)
-
-        return links
-
-
-    # ---------------------------------------------------
-    # crawler principal
-    # ---------------------------------------------------
-
-    def crawl(self, seed_urls=None):
-
-        if seed_urls is None:
-            seed_urls = [self.start_url]
-
-        seed_urls = [self.normalize_url(u) for u in seed_urls]
-
-        self.queue.extend(seed_urls)
-
-        # intentar sitemap
-        sitemap_links = self.get_sitemap_links()
-
-        if sitemap_links:
-            self.queue.extend(sitemap_links)
-        else:
-            print("Generando URLs candidatas...")
-            self.queue.extend(self.generate_candidate_urls())
-
-        pages = []
-
-        while self.queue and len(self.visited) < self.max_pages:
-
-            url = self.queue.pop(0)
-
-            url = self.normalize_url(url)
-
-            if url in self.visited:
-                continue
-
-            print(f"\n🌐 Procesando página {len(self.visited)+1}: {url}")
-
-            html = self.fetch(url)
-
-            if not html:
-                continue
-
-            print(f"   📄 HTML descargado: {len(html)} caracteres")
-
-            pages.append((url, html))
-
-            self.visited.add(url)
-
-            links = self.extract_links(url, html)
-
-            print(f"   🔎 Enlaces encontrados: {len(links)}")
-
-            for link in links:
-
-                if link not in self.visited and link not in self.queue:
-                    self.queue.append(link)
-
-        print(f"\nTotal páginas visitadas: {len(self.visited)}")
+                print(f"❌ Error descargando {clean}: {e}")
 
         return pages

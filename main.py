@@ -17,6 +17,9 @@ def main():
 
     start_url = "https://turismo.maspalomas.com/"
     ###start_url = "https://turismoapps.dip-badajoz.es/"
+    ###start_url = "https://visitsevilla.es/"
+    
+
 
     print("\n🌍 Iniciando crawling del sitio...\n")
 
@@ -80,7 +83,7 @@ def main():
 
     reporter = EntitiesReporter(pipeline.ontology_index)
 
-    reporter.generate_markdown(all_results, "entities_report.md")
+    reporter.generate_markdown_report(all_results, "entities_report.md")
 
 
 

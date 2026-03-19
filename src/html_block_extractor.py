@@ -1,87 +1,87 @@
 from bs4 import BeautifulSoup
 
 
-NAVIGATION_WORDS = {
-    "utilidades",
-    "encuestas",
-    "recomendador",
-    "incidencias",
-    "noticias",
-    "mapa",
-    "inicio"
-}
-
-
-NOISE_PATTERNS = [
-    "copyright",
-    "todos los derechos reservados",
-    "política de privacidad",
-    "cookies",
-    "aviso legal"
-]
-
-
 class HTMLBlockExtractor:
 
-    def is_noise(self, text):
+    def __init__(self):
+        pass
 
-        t = text.lower()
+    # ==================================================
+    # FILTRO DE TAGS BASURA
+    # ==================================================
 
-        for p in NOISE_PATTERNS:
-            if p in t:
-                return True
+    def remove_noise(self, soup):
+
+        # ❌ eliminar completamente
+        for tag in soup([
+            "script", "style", "nav", "header", "footer",
+            "aside", "form", "noscript"
+        ]):
+            tag.decompose()
+
+        return soup
+
+    # ==================================================
+    # FILTRO DE CLASES HTML
+    # ==================================================
+
+    def is_noise_block(self, element):
+
+        if not element:
+            return True
+
+        classes = " ".join(element.get("class", [])).lower()
+
+        noise_keywords = [
+            "menu", "nav", "header", "footer",
+            "sidebar", "cookie", "banner",
+            "login", "form", "search"
+        ]
+
+        if any(k in classes for k in noise_keywords):
+            return True
 
         return False
 
-
-    def is_navigation(self, text):
-
-        t = text.lower()
-
-        for word in NAVIGATION_WORDS:
-            if word in t:
-                return True
-
-        return False
-
+    # ==================================================
+    # BLOQUES DE CONTENIDO
+    # ==================================================
 
     def extract(self, html):
 
         soup = BeautifulSoup(html, "html.parser")
 
+        soup = self.remove_noise(soup)
+
         blocks = []
 
-        seen = set()
+        # 🔥 SOLO CONTENIDO REAL
+        candidates = soup.find_all(["section", "article", "div", "p"])
 
-        # ❗ quitamos <a> para evitar ruido
-        for tag in soup.find_all(["h1", "h2", "h3", "p", "li"]):
+        for el in candidates:
 
-            text = tag.get_text(" ", strip=True)
+            if self.is_noise_block(el):
+                continue
 
+            text = el.get_text(" ", strip=True)
+
+            # 🔥 FILTROS CLAVE
             if not text:
                 continue
 
-            # tamaño mínimo
-            if len(text) < 25:
+            if len(text) < 60:
                 continue
 
-            # evitar bloques gigantes
-            if len(text) > 300:
+            # ❌ evitar navegación / UI
+            if any(x in text.lower() for x in [
+                "phone number",
+                "email",
+                "login",
+                "register",
+                "password",
+                "cookies"
+            ]):
                 continue
-
-            # navegación
-            if self.is_navigation(text):
-                continue
-
-            # ruido
-            if self.is_noise(text):
-                continue
-
-            # evitar duplicados
-            if text in seen:
-                continue
-
-            seen.add(text)
 
             blocks.append({
                 "text": text

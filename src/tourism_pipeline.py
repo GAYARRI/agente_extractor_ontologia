@@ -8,91 +8,70 @@ from src.entity_expander import EntityExpander
 from src.entities.entity_splitter import EntitySplitter
 
 from src.ontology_index import OntologyIndex
-from src.ontology_matcher import OntologyMatcher
 
 from src.poi.poi_discovery import POIDiscovery
 from src.events.event_detector import EventDetector
 
 from src.semantic.semantic_type_guesser import SemanticTypeGuesser
 from src.semantic.semantic_similarity_matcher import SemanticSimilarityMatcher
-from src.semantic.relation_extractor import RelationExtractor
 
-from src.ontology.ontology_auto_expander import TourismOntologyAutoExpander
+from src.semantic.relation_extractor import RelationExtractor
 
 from src.property_enricher import PropertyEnricher
 from src.linking.wikidata_linker import WikidataLinker
 from src.description_extractor import DescriptionExtractor
 from src.image_enricher import ImageEnricher
+
 from src.llm.llm_supervisor import LLMSupervisor
+from src.entities.entity_ranker import EntityRanker
+from src.entities.entity_clusterer import EntityClusterer
+
+from src.entities.entity_scorer import EntityScorer
+from src.entities.global_entity_memory import GlobalEntityMemory
+from src.entities.entity_graph_builder import EntityGraphBuilder
+
+import re
+import hashlib
+from difflib import SequenceMatcher
+
+
+def normalize_text(text):
+    text = text.lower()
+    text = text.strip()
+    text = re.sub(r"\s+", " ", text)
+    return text
+
+
+def text_hash(text):
+    return hashlib.md5(text.encode("utf-8")).hexdigest()
+
+
+def is_similar(a, b, threshold=0.90):
+    return SequenceMatcher(None, a, b).ratio() > threshold
 
 
 
 # ==================================================
-# HEURÍSTICA SIMPLE
+# FIX ENCODING 🔥
 # ==================================================
-
-def heuristic_class(entity):
-
-    e = entity.lower()
-
-    if "carnaval" in e:
-        return "Festival"
-    if "valle" in e:
-        return "Valley"
-    if "montaña" in e:
-        return "NaturalArea"
-    if "playa" in e:
-        return "Beach"
-    if "puerto" in e or "marina" in e:
-        return "Marina"
-    if "san bartolomé" in e:
-        return "Municipality"
-    if "atlántico" in e:
-        return "Ocean"
-
-    return None
+def fix_encoding(text):
+    try:
+        return text.encode("latin1").decode("utf-8")
+    except:
+        return text
 
 
 # ==================================================
-# NORMALIZACIÓN EVENTOS
+# TRIM
 # ==================================================
-
-def normalize_event(entity):
-
-    e = entity.lower()
-
-    if "romería" in e:
-        return "Romería de Piedraescrita"
-
-    if "chanfaina" in e:
-        return "Fiesta de la Chanfaina"
-
-    if "semana santa" in e:
-        return "Semana Santa"
-
-    return entity
-
-
-# ==================================================
-# TRIM INTELIGENTE
-# ==================================================
-
 def smart_trim(entity):
-
     words = entity.split()
-
     if len(words) <= 4:
         return entity
-
     if "de" in words:
         return entity
-
     return " ".join(words[-4:])
 
-
-# ==================================================
-# PIPELINE
-# ==================================================
 
 class TourismPipeline:
 
@@ -108,28 +87,31 @@ class TourismPipeline:
         self.splitter = EntitySplitter()
 
         self.ontology_index = OntologyIndex(ontology_path)
-        self.matcher = OntologyMatcher(self.ontology_index)
 
         self.poi_discovery = POIDiscovery()
         self.event_detector = EventDetector()
-        self.type_guesser = SemanticTypeGuesser()
 
+        self.type_guesser = SemanticTypeGuesser()
         self.semantic_matcher = SemanticSimilarityMatcher(self.ontology_index)
 
         self.relation_extractor = RelationExtractor()
-        self.ontology_expander = TourismOntologyAutoExpander()
 
         self.property_enricher = PropertyEnricher(self.ontology_index)
         self.wikidata_linker = WikidataLinker()
         self.description_extractor = DescriptionExtractor()
         self.image_enricher = ImageEnricher()
-        
-        self.llm_supervisor = LLMSupervisor()
+
+        self.llm_supervisor = LLMSupervisor(self.ontology_index)
+        self.ranker = EntityRanker()
+        self.clusterer = EntityClusterer()
+
+        self.global_memory = GlobalEntityMemory()
+        self.entity_scorer = EntityScorer()
+        self.graph_builder = EntityGraphBuilder()
 
     # ==================================================
-    # FILTRO DE ENTIDADES
+    # FILTRO ENTIDAD
     # ==================================================
-
     def is_valid_entity(self, entity):
 
         if not entity:
@@ -138,220 +120,223 @@ class TourismPipeline:
         e = entity.lower()
         words = entity.split()
 
-        if len(words) > 6:
-            return False
-
         if len(entity) < 4:
             return False
 
-        # 🔥 eliminar basura real
+        if len(words) > 6:
+            return False
+
+        # 🔥 basura típica
         if any(x in e for x in [
-            "agenda y eventos",
-            "piedraescrita semana",
-            "piedraescrita fiesta"
+            "agenda",
+            "eventos",
+            "disfruta",
+            "descubre",
+            "todo lo que necesitas"
         ]):
             return False
 
-        # 🔥 evitar genéricos inútiles
-        if e in ["montaña", "playa", "mar"]:
+        # 🔥 basura encoding
+        if "Ã" in entity:
             return False
 
         return True
 
     # ==================================================
-    # PIPELINE PRINCIPAL
+    # FILTRO BLOQUES
     # ==================================================
+    def is_valid_block(self, text):
 
+        if not text:
+            return False
+
+        t = text.lower()
+
+        if any(x in t for x in [
+            "phone number",
+            "id card",
+            "correo",
+            "social media",
+            "password",
+            "login",
+            "register"
+        ]):
+            return False
+
+        if len(text) < 40:
+            return False
+
+        return True
+
+    # ==================================================
+    # PIPELINE
+    # ==================================================
     def run(self, html):
 
         blocks = self.block_extractor.extract(html)
         results = []
+        
+        seen_texts = []
 
         for block in blocks:
 
             text = block.get("text", "") if isinstance(block, dict) else block
 
-            if not text or len(text) < 40:
+            # 🔥 normalizar texto
+            normalized = normalize_text(text)
+
+            # 🔥 evitar duplicados similares
+            skip = False
+            for seen in seen_texts:
+                if is_similar(normalized, seen):
+                    skip = True
+                    break
+
+            if skip:
+                continue
+
+            seen_texts.append(normalized)
+
+
+            # 🔥 FIX encoding
+            text = fix_encoding(text)
+
+            
+            if not self.is_valid_block(text):
                 continue
 
             print("\n--- TEXTO BLOQUE ---")
             print(text[:120])
 
-            # 1️⃣ extracción
+            # =========================================
+            # 1️⃣ EXTRACCIÓN HÍBRIDA
+            # =========================================
+
             entities = self.entity_extractor.extract(text)
 
-            # eventos
-            for e in self.event_detector.detect(text):
-                if e not in entities:
-                    entities.append(e)
+            # LLM extracción
+            try:
+                llm_entities = self.llm_supervisor.extract_entities(text)
+                entities.extend(llm_entities)
+            except:
+                pass
 
-            # POIs
-            for p in self.poi_discovery.discover(text):
-                if p not in entities:
-                    entities.append(p)
+            entities.extend(self.event_detector.detect(text))
+            entities.extend(self.poi_discovery.discover(text))
 
-            # 2️⃣ limpieza
+            # =========================================
+            # 2️⃣ LIMPIEZA
+            # =========================================
+
             entities = self.cleaner.clean(entities)
-
-            # 3️⃣ filtro
             entities = [e for e in entities if self.is_valid_entity(e)]
-
-            # 4️⃣ deduplicación
             entities = self.deduplicator.deduplicate(entities)
-
-            # 5️⃣ normalización
             entities = self.normalizer.normalize(entities)
 
-            # 6️⃣ normalizar eventos
-            entities = [normalize_event(e) for e in entities]
-
-            # 7️⃣ expansión CONTROLADA
-            expanded = []
-            for e in entities:
-
-                # 🔥 NO expandir eventos
-                if any(x in e.lower() for x in ["fiesta", "romería", "semana santa"]):
-                    expanded.append(e)
-                    continue
-
-                try:
-                    exp = self.expander.expand(e, text)
-
-                    if exp and len(exp.split()) <= 6:
-                        expanded.append(exp)
-                    else:
-                        expanded.append(e)
-
-                except:
-                    expanded.append(e)
-
-            entities = expanded
-
-            # 8️⃣ split
+            # split controlado
             split_entities = []
-
             for e in entities:
-                try:
-                    parts = self.splitter.split(e)
-
-                    if parts:
-                        split_entities.extend(parts)
-                    else:
-                        split_entities.append(e)
-
-                except:
-                    split_entities.append(e)
+                parts = self.splitter.split(e)
+                split_entities.extend(parts if parts else [e])
 
             entities = split_entities
 
-            # 9️⃣ trim
+            # trim
             entities = [smart_trim(e) for e in entities]
 
-            print("ENTIDADES POST-PROCESO:", entities)
+            # deduplicación final 🔥
+            entities = list(set(entities))
+
+            print("ENTIDADES FINAL:", entities)
 
             if not entities:
                 continue
 
-            # 🔥 LLM SUPERVISIÓN
-            llm_entities = self.llm_supervisor.analyze_entities(entities, text)
+            # =========================================
+            # 3️⃣ LLM SUPERVISOR
+            # =========================================
 
             classified_entities = []
 
-            for e in llm_entities:
+            try:
+                llm_entities = self.llm_supervisor.analyze_entities(entities, text)
+            except:
+                llm_entities = []
 
-                entity = e.get("entity")
-                label = e.get("class", "Place")
-                score = e.get("score", 0.8)
+            # 🔥 fallback si LLM falla
+            if not llm_entities:
+                for entity in entities:
+                    classified_entities.append({
+                        "entity": entity,
+                        "class": "Place",
+                        "score": 0.5,
+                        "properties": {},
+                        "short_description": "",
+                        "long_description": ""
+                    })
+            else:
+                for e in llm_entities:
 
-                # propiedades clásicas
-                props = self.property_enricher.enrich(entity, label, text)
+                    entity = e.get("entity")
+                    label = e.get("class", "Place")
+                    score = e.get("score", 0.8)
 
-                # imagen
-                image_props = self.image_enricher.enrich(entity, text)
-                props.update(image_props)
+                    props = self.property_enricher.enrich(entity, label, text)
 
-                # fallback imagen
-                if "image" not in props:
-                    props["image"] = ""
+                    # imagen
+                    props.update(self.image_enricher.enrich(entity, text))
 
-                classified_entities.append({
-                    "entity": entity,
-                    "class": label,
-                    "score": score,
-                    "properties": props,
-                    "short_description": e.get("short_description", ""),
-                    "long_description": e.get("long_description", "")
-                })
+                    # wikidata
+                    link = self.wikidata_linker.link(entity)
+                    if link:
+                        wikidata_props = self.wikidata_linker.get_entity_data(link["id"])
+                        props.update(wikidata_props)
+
+                        if "image" in wikidata_props:
+                            props["image"] = wikidata_props["image"]
+
+                    classified_entities.append({
+                        "entity": entity,
+                        "class": label,
+                        "score": score,
+                        "properties": props,
+                        "short_description": e.get("short_description", ""),
+                        "long_description": e.get("long_description", "")
+                    })
+            classified_entities = self.ranker.rank(classified_entities, text)
+            classified_entities = self.clusterer.merge_clusters(classified_entities)
 
 
+            # actualizar memoria global
+            self.global_memory.update(classified_entities)
 
-            # 🔟 clasificación + enriquecimiento
-            for entity in entities:
+            global_counts = self.global_memory.get_counts()
 
-                context = f"{entity} {text[:120]}"
-
-                guessed = heuristic_class(entity) or self.type_guesser.guess(entity)
-
-                if guessed:
-                    label = guessed
-                    score = 0.90
-                else:
-                    match = self.semantic_matcher.match(context)
-
-                    if match:
-                        label = match.get("label", "Place")
-                        score = match.get("score", 0.5)
-                    else:
-                        label = "Place"
-                        score = 0.3
-
-                # propiedades
-                props = self.property_enricher.enrich(entity, label, text)
-
-                # 🔥 imágenes
-                image_props = self.image_enricher.enrich(entity, text)
-                props.update(image_props)
-
-                # 🔥 fallback imagen
-                if "image" not in props:
-                    props["image"] = ""
-
-                # descripciones
-                descriptions = self.description_extractor.extract(entity, text)
-
-                # wikidata
-                link = self.wikidata_linker.link(entity)
-                if link:
-                    props["wikidata"] = link["id"]
-
-                print("DEBUG ENTITY:", entity)
-                print("DEBUG CLASS:", label)
-                print("DEBUG PROPS:", props)
-
-                classified_entities.append({
-                    "entity": entity,
-                    "class": label,
-                    "score": score,
-                    "properties": props,
-                    "short_description": descriptions["short_description"],
-                    "long_description": descriptions["long_description"]
-                })
-
-            # deduplicación final
-            unique = {}
+            # recalcular score PRO
             for e in classified_entities:
-                key = e["entity"].lower()
-                if key not in unique or e["score"] > unique[key]["score"]:
-                    unique[key] = e
+                e["score"] = self.entity_scorer.compute_importance(e, text, global_counts)
 
-            classified_entities = list(unique.values())
+            # ordenar final
+            classified_entities = sorted(
+                classified_entities,
+                key=lambda x: x["score"],
+                reverse=True
+            )
 
+
+            # 🔥 EXTRAER RELACIONES
             relations = self.relation_extractor.extract(text)
 
+            # 🔥 AÑADIR AL GRAFO (nivel DIOS)
+            self.graph_builder.add_relations(relations)
+
+            # 🔥 GUARDAR RESULTADO
             results.append({
                 "text": text,
                 "entities": classified_entities,
                 "relations": relations
             })
+            
+            print("Relaciones:", relations)
 
         return results
