@@ -21,7 +21,7 @@ def main():
 
     print(f"\n🌐 Iniciando crawling del sitio: {start_url}\n")
 
-    crawler = SiteCrawler(start_url, max_pages=500)
+    crawler = SiteCrawler(start_url, max_pages=5)
     pages = crawler.crawl()
 
     print(f"\n📄 Páginas encontradas: {len(pages)}")
@@ -52,6 +52,10 @@ def main():
         print("Entidad:", e.get("entity"))
         print("Clase:", e.get("class"))
         print("Descripción:", e.get("short_description"))
+        print("Dirección:", e.get("address", ""))
+        print("Teléfono:", e.get("phone", ""))
+        print("Email:", e.get("email", ""))
+        print("Coordenadas:", e.get("coordinates", {"lat": None, "lng": None}))
 
     # ---------------------------
     # CONSTRUIR KNOWLEDGE GRAPH

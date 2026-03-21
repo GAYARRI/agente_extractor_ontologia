@@ -28,6 +28,7 @@ import hashlib
 import os
 from urllib.parse import urlparse, urlunparse, unquote
 from difflib import SequenceMatcher
+from bs4 import BeautifulSoup
 
 
 def normalize_text(text):
@@ -211,7 +212,6 @@ class TourismPipeline:
 
         local_images = []
 
-        # Solo imágenes locales/no-wiki para main/additional
         for key in ("mainImage", "image"):
             value = props.get(key)
             if value and not self._is_wikimedia_url(value):
@@ -240,7 +240,6 @@ class TourismPipeline:
             props.pop("image", None)
             props.pop("additionalImages", None)
 
-        # wikidataImage separado y sin duplicar contra local
         wikidata_image = props.get("wikidataImage")
         if wikidata_image:
             wikidata_norm = self._normalize_image_url(wikidata_image)
@@ -256,6 +255,127 @@ class TourismPipeline:
             props.pop("wikidataImage", None)
 
         return props
+
+    # ==================================================
+    # NUEVOS HELPERS OUTPUT
+    # ==================================================
+
+    def _safe_string(self, value):
+        if value is None:
+            return ""
+        if isinstance(value, str):
+            return value.strip()
+        return str(value).strip()
+
+    def _safe_float(self, value):
+        if value is None or value == "":
+            return None
+        try:
+            return float(value)
+        except Exception:
+            return None
+
+    def _looks_like_email(self, value):
+        if not value:
+            return False
+
+        return re.fullmatch(
+            r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}",
+            value.strip()
+        ) is not None
+
+    def _extract_email_from_text(self, text):
+        if not text:
+            return ""
+
+        match = re.search(
+            r"\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}\b",
+            text,
+            flags=re.IGNORECASE,
+        )
+        return match.group(0).strip() if match else ""
+
+    def _extract_email_from_html(self, html):
+        if not html:
+            return ""
+
+        try:
+            soup = BeautifulSoup(html, "html.parser")
+        except Exception:
+            return ""
+
+        for a in soup.find_all("a", href=True):
+            href = (a.get("href") or "").strip()
+            if href.lower().startswith("mailto:"):
+                email = href[7:].split("?")[0].strip()
+                if self._looks_like_email(email):
+                    return email
+
+        visible_text = soup.get_text(" ", strip=True)
+        return self._extract_email_from_text(visible_text)
+
+    def _build_coordinates(self, props):
+        lat = self._safe_float(props.get("latitude"))
+        lng = self._safe_float(props.get("longitude"))
+
+        if lat is not None and not (-90 <= lat <= 90):
+            lat = None
+
+        if lng is not None and not (-180 <= lng <= 180):
+            lng = None
+
+        return {
+            "lat": lat,
+            "lng": lng
+        }
+
+    def _build_output_entity(
+        self,
+        entity,
+        label,
+        score,
+        props,
+        short_description="",
+        long_description="",
+        wikidata_id=None,
+        html=""
+    ):
+        short_description = self._safe_string(short_description)
+        long_description = self._safe_string(long_description)
+
+        fallback_desc = self._safe_string(props.get("description"))
+
+        if not short_description:
+            short_description = fallback_desc[:180] if fallback_desc else ""
+
+        if not long_description:
+            long_description = fallback_desc
+
+        email = (
+            self._safe_string(props.get("email"))
+            or self._safe_string(props.get("correo"))
+            or self._extract_email_from_html(html)
+        )
+
+        if not self._looks_like_email(email):
+            email = ""
+
+        return {
+            "entity": self._safe_string(entity),
+            "entity_name": self._safe_string(entity),
+            "class": self._safe_string(label) or "Place",
+            "score": float(score) if score is not None else 0.0,
+            "verisimilitude_score": float(score) if score is not None else 0.0,
+            "properties": props if isinstance(props, dict) else {},
+            "short_description": short_description,
+            "long_description": long_description,
+            "address": self._safe_string(props.get("address")),
+            "phone": self._safe_string(props.get("telephone") or props.get("phone")),
+            "email": email,
+            "coordinates": self._build_coordinates(props),
+            "wikidata_id": wikidata_id,
+        }
+
     # ==================================================
     # VALIDACIÓN GENERAL
     # ==================================================
@@ -547,13 +667,11 @@ class TourismPipeline:
                 if value is None or value == "":
                     continue
 
-                # separar la imagen wikidata
                 if key == "wikidataImage":
                     if value and not wikidata_image:
                         wikidata_image = value
                     continue
 
-                # imágenes locales
                 if key in local_image_keys:
                     if isinstance(value, list):
                         local_images.extend(value)
@@ -586,7 +704,6 @@ class TourismPipeline:
 
                 merged[key] = existing
 
-        # deduplicar imágenes locales
         local_images = [
             img for img in local_images
             if img and not self._is_wikimedia_url(img)
@@ -760,7 +877,7 @@ class TourismPipeline:
                         text=text,
                         url=url,
                         entity=entity,
-                    )
+                    ) or {}
 
                     image_props = self.image_enricher.enrich(entity, text) or {}
                     props = self._merge_properties(
@@ -772,14 +889,16 @@ class TourismPipeline:
                     desc = page_props.get("description", "")
 
                     classified_entities.append(
-                        {
-                            "entity": entity,
-                            "class": "Place",
-                            "score": 0.5,
-                            "properties": props,
-                            "short_description": desc[:180] if desc else "",
-                            "long_description": desc,
-                        }
+                        self._build_output_entity(
+                            entity=entity,
+                            label="Place",
+                            score=0.5,
+                            props=props,
+                            short_description=desc[:180] if desc else "",
+                            long_description=desc,
+                            wikidata_id=None,
+                            html=html,
+                        )
                     )
             else:
                 for e in llm_entities:
@@ -797,7 +916,7 @@ class TourismPipeline:
                         text=text,
                         url=url,
                         entity=entity,
-                    )
+                    ) or {}
                     image_props = self.image_enricher.enrich(entity, text) or {}
 
                     wikidata_props = {}
@@ -822,15 +941,16 @@ class TourismPipeline:
                     long_description = e.get("long_description", "") or page_props.get("description", "")
 
                     classified_entities.append(
-                        {
-                            "entity": entity,
-                            "class": label,
-                            "score": score,
-                            "properties": props,
-                            "short_description": short_description,
-                            "long_description": long_description,
-                            "wikidata_id": wikidata_id,
-                        }
+                        self._build_output_entity(
+                            entity=entity,
+                            label=label,
+                            score=score,
+                            props=props,
+                            short_description=short_description,
+                            long_description=long_description,
+                            wikidata_id=wikidata_id,
+                            html=html,
+                        )
                     )
 
             cleaned_classified = []
@@ -849,7 +969,31 @@ class TourismPipeline:
                     continue
 
                 item["entity"] = entity_name
+                item["entity_name"] = entity_name
                 item["properties"] = self._normalize_final_image_props(item.get("properties", {}))
+
+                if "verisimilitude_score" not in item:
+                    item["verisimilitude_score"] = item.get("score", 0.0)
+
+                if "address" not in item:
+                    item["address"] = self._safe_string(item["properties"].get("address"))
+
+                if "phone" not in item:
+                    item["phone"] = self._safe_string(
+                        item["properties"].get("telephone") or item["properties"].get("phone")
+                    )
+
+                if "email" not in item:
+                    extracted_email = (
+                        self._safe_string(item["properties"].get("email"))
+                        or self._safe_string(item["properties"].get("correo"))
+                        or self._extract_email_from_html(html)
+                    )
+                    item["email"] = extracted_email if self._looks_like_email(extracted_email) else ""
+
+                if "coordinates" not in item:
+                    item["coordinates"] = self._build_coordinates(item["properties"])
+
                 seen_classified.add(key)
                 cleaned_classified.append(item)
 
@@ -865,7 +1009,9 @@ class TourismPipeline:
             global_counts = self.global_memory.get_counts()
 
             for e in classified_entities:
-                e["score"] = self.entity_scorer.compute_importance(e, text, global_counts)
+                recomputed_score = self.entity_scorer.compute_importance(e, text, global_counts)
+                e["score"] = recomputed_score
+                e["verisimilitude_score"] = recomputed_score
 
             classified_entities = sorted(
                 classified_entities,
@@ -889,7 +1035,7 @@ class TourismPipeline:
             print("Relaciones:", relations)
 
         return results
-    
+
     def _is_wikimedia_url(self, url):
         if not url:
             return False
