@@ -18,10 +18,17 @@ def main():
     start_url = "https://visitasevilla.es/"
     # start_url = "https://turismo.maspalomas.com/"
     # start_url = "https://turismoapps.dip-badajoz.es/"
+    # start_url = "# start_url = "2https://www.info.valladolid.es/"
+    # start_url = "# start_url = "3https://www.turismourense.com/"
+    # start_url = "# start_url = "4https://www.costablanca.org/"
+    
+    
+    
+    
 
     print(f"\n🌐 Iniciando crawling del sitio: {start_url}\n")
 
-    crawler = SiteCrawler(start_url, max_pages=5)
+    crawler = SiteCrawler(start_url, max_pages=400)
     pages = crawler.crawl()
 
     print(f"\n📄 Páginas encontradas: {len(pages)}")
