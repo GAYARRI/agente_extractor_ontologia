@@ -32,26 +32,37 @@ class TourismPropertyExtractor:
     def _normalize(self, text: str) -> str:
         return " ".join((text or "").strip().lower().split())
 
-    def _normalize_image_url(self, url):
+    def _tokenize(self, text: str):
+        text = self._normalize(text)
+        text = re.sub(r"[^a-z0-9áéíóúñü\s/_\-]", " ", text)
+        return {t for t in text.replace("/", " ").replace("-", " ").split() if len(t) >= 3}
+
+    def _normalize_url(self, url):
         if not url:
             return None
 
-        url = url.strip()
+        url = str(url).strip()
         if not url:
             return None
 
         parsed = urlparse(url)
 
+        if parsed.scheme not in ("http", "https"):
+            return None
+
         clean = urlunparse((
-            parsed.scheme,
-            parsed.netloc,
+            parsed.scheme.lower(),
+            parsed.netloc.lower(),
             parsed.path,
             "",
             "",
             ""
         ))
 
-        return unquote(clean)
+        return unquote(clean.rstrip("/"))
+
+    def _normalize_image_url(self, url):
+        return self._normalize_url(url)
 
     def _image_signature(self, url):
         if not url:
@@ -102,9 +113,21 @@ class TourismPropertyExtractor:
     def _matches_entity(self, entity: str, candidate: str) -> bool:
         if not entity or not candidate:
             return False
+
         e = self._normalize(entity)
         c = self._normalize(candidate)
-        return e == c or e in c or c in e
+
+        if e == c or e in c or c in e:
+            return True
+
+        e_tokens = self._tokenize(entity)
+        c_tokens = self._tokenize(candidate)
+
+        if not e_tokens or not c_tokens:
+            return False
+
+        overlap = len(e_tokens & c_tokens)
+        return overlap >= max(1, min(2, len(e_tokens)))
 
     def _clean_text(self, text: str) -> str:
         return " ".join((text or "").strip().split())
@@ -112,21 +135,34 @@ class TourismPropertyExtractor:
     def _add_unique(self, container, value):
         if value is None:
             return
+
         if isinstance(value, str):
             value = value.strip()
             if not value:
                 return
+
         if value not in container:
             container.append(value)
 
     def _abs_url(self, base_url, maybe_url):
         if not maybe_url:
             return None
-        return urljoin(base_url, maybe_url.strip())
+
+        maybe_url = str(maybe_url).strip()
+        if not maybe_url:
+            return None
+
+        if maybe_url.startswith(("mailto:", "tel:")):
+            return maybe_url
+
+        abs_url = urljoin(base_url, maybe_url)
+        return self._normalize_url(abs_url)
 
     def _same_domain(self, base_url, other_url):
         try:
-            return urlparse(base_url).netloc == urlparse(other_url).netloc
+            base_host = (urlparse(base_url).hostname or "").lower().removeprefix("www.")
+            other_host = (urlparse(other_url).hostname or "").lower().removeprefix("www.")
+            return base_host == other_host
         except Exception:
             return False
 
@@ -171,6 +207,7 @@ class TourismPropertyExtractor:
                     self._add_unique(images, self._abs_url(base_url, item))
                 elif isinstance(item, dict):
                     self._add_unique(images, self._abs_url(base_url, item.get("url")))
+                    self._add_unique(images, self._abs_url(base_url, item.get("contentUrl")))
 
         elif isinstance(image_value, dict):
             self._add_unique(images, self._abs_url(base_url, image_value.get("url")))
@@ -182,7 +219,9 @@ class TourismPropertyExtractor:
         if not url:
             return False
         value = url.lower()
-        return any(x in value for x in ["logo", "icon", "sprite", "avatar"])
+        return any(x in value for x in [
+            "logo", "icon", "sprite", "avatar", "favicon", "placeholder", "brand"
+        ])
 
     def _is_contact_url(self, url):
         if not url:
@@ -205,6 +244,99 @@ class TourismPropertyExtractor:
             ]
         )
 
+    def _looks_generic_url(self, url):
+        if not url or url.startswith(("mailto:", "tel:")):
+            return False
+
+        value = url.lower()
+        return any(
+            x in value for x in [
+                "/contact",
+                "/contacto",
+                "/cookies",
+                "/cookie",
+                "/privacy",
+                "/privacidad",
+                "/legal",
+                "/aviso-legal",
+                "/mapa-web",
+                "/sitemap",
+                "/author/",
+                "/tag/",
+                "/feed",
+                "/wp-json",
+            ]
+        )
+
+    def _url_relevance_score(self, entity, candidate_url, anchor_text="", context_text=""):
+        if not candidate_url or candidate_url.startswith(("mailto:", "tel:")):
+            return 0
+
+        entity_tokens = self._tokenize(entity)
+        url_tokens = self._tokenize(candidate_url)
+        anchor_tokens = self._tokenize(anchor_text)
+        context_tokens = self._tokenize(context_text)
+
+        score = 0
+        score += 3 * len(entity_tokens & url_tokens)
+        score += 4 * len(entity_tokens & anchor_tokens)
+        score += 1 * len(entity_tokens & context_tokens)
+
+        if self._looks_generic_url(candidate_url):
+            score -= 5
+
+        return score
+
+    def _image_relevance_score(self, entity, image_url, alt_text="", context_text=""):
+        if not image_url:
+            return -10
+
+        if self._is_probably_logo(image_url):
+            return -10
+
+        entity_tokens = self._tokenize(entity)
+        image_tokens = self._tokenize(image_url)
+        alt_tokens = self._tokenize(alt_text)
+        context_tokens = self._tokenize(context_text)
+
+        score = 0
+        score += 3 * len(entity_tokens & image_tokens)
+        score += 4 * len(entity_tokens & alt_tokens)
+        score += 1 * len(entity_tokens & context_tokens)
+
+        return score
+
+    def _clean_urls_for_entity(self, urls, entity, page_url, limit=10):
+        cleaned = []
+        seen = set()
+
+        for url in urls:
+            if not url:
+                continue
+
+            norm = url if str(url).startswith(("mailto:", "tel:")) else self._normalize_url(url)
+            if not norm:
+                continue
+
+            if norm in seen:
+                continue
+
+            if norm.startswith(("http://", "https://")):
+                if not self._same_domain(page_url, norm):
+                    continue
+                if self._looks_generic_url(norm):
+                    continue
+                if self._url_relevance_score(entity, norm) < 2:
+                    continue
+
+            seen.add(norm)
+            cleaned.append(norm)
+
+            if len(cleaned) >= limit:
+                break
+
+        return cleaned
+
     # --------------------------------------------------
     # block extraction
     # --------------------------------------------------
@@ -222,17 +354,20 @@ class TourismPropertyExtractor:
 
             img = node.find("img")
             image = None
+            image_alt = ""
             if img:
                 image = img.get("src") or img.get("data-src") or img.get("srcset")
                 if image and "," in image and " " in image:
                     image = image.split(",")[0].strip().split(" ")[0]
                 image = self._abs_url(page_url, image)
+                image_alt = self._clean_text(img.get("alt", ""))
 
             blocks.append(
                 {
                     "heading": heading,
                     "text": text,
                     "image": image,
+                    "image_alt": image_alt,
                     "node": node,
                     "page_url": page_url,
                 }
@@ -254,6 +389,10 @@ class TourismPropertyExtractor:
 
         if entity_n in text_n:
             score += 0.4
+
+        entity_tokens = self._tokenize(entity)
+        block_tokens = self._tokenize(heading_n) | self._tokenize(text_n)
+        score += min(0.4, 0.1 * len(entity_tokens & block_tokens))
 
         collective_patterns = [
             "desde ",
@@ -338,14 +477,11 @@ class TourismPropertyExtractor:
             elif prop == "description" and "description" not in props:
                 props["description"] = content.strip()
 
-            elif prop == "og:image":
-                props["image"] = self._abs_url(page_url, content.strip())
+            # No cogemos og:image / twitter:image:
+            # suelen ser imágenes globales de la página, no de la instancia
 
-            elif prop == "twitter:image" and "image" not in props:
-                props["image"] = self._abs_url(page_url, content.strip())
-
-            elif prop in ("og:url", "twitter:url"):
-                props["url"] = self._abs_url(page_url, content.strip())
+            # No cogemos og:url / twitter:url:
+            # suelen ser la URL de la página, no necesariamente de la entidad
 
         return props
 
@@ -427,15 +563,18 @@ class TourismPropertyExtractor:
     # --------------------------------------------------
     # links and images
     # --------------------------------------------------
-    def extract_links_from_node(self, node, page_url):
+    def extract_links_from_node(self, node, page_url, entity):
         related_urls = []
         contact_urls = []
 
         if not node:
             return related_urls, contact_urls
 
+        context_text = self._clean_text(node.get_text(" ", strip=True))
+
         for a in node.find_all("a", href=True):
             href = a.get("href", "").strip()
+            anchor_text = self._clean_text(a.get_text(" ", strip=True))
             abs_href = self._abs_url(page_url, href)
 
             if not abs_href:
@@ -444,43 +583,29 @@ class TourismPropertyExtractor:
             if href.startswith("#"):
                 continue
 
-            if abs_href == page_url:
+            if abs_href == self._normalize_url(page_url):
                 continue
 
-            if self._same_domain(page_url, abs_href):
-                self._add_unique(related_urls, abs_href)
-
-            if self._is_contact_url(abs_href) or href.startswith("tel:") or href.startswith("mailto:"):
+            if href.startswith("tel:") or href.startswith("mailto:"):
                 self._add_unique(contact_urls, abs_href)
+                continue
+
+            if not self._same_domain(page_url, abs_href):
+                continue
+
+            score = self._url_relevance_score(entity, abs_href, anchor_text, context_text)
+
+            if self._is_contact_url(abs_href):
+                if score >= 1:
+                    self._add_unique(contact_urls, abs_href)
+                continue
+
+            if score >= 3:
+                self._add_unique(related_urls, abs_href)
 
         return related_urls, contact_urls
 
-    def extract_page_links(self, soup, page_url):
-        related_urls = []
-        contact_urls = []
-
-        for a in soup.find_all("a", href=True):
-            href = a.get("href", "").strip()
-            abs_href = self._abs_url(page_url, href)
-
-            if not abs_href:
-                continue
-
-            if href.startswith("#"):
-                continue
-
-            if abs_href == page_url:
-                continue
-
-            if self._same_domain(page_url, abs_href):
-                self._add_unique(related_urls, abs_href)
-
-            if self._is_contact_url(abs_href) or href.startswith("tel:") or href.startswith("mailto:"):
-                self._add_unique(contact_urls, abs_href)
-
-        return related_urls, contact_urls
-
-    def extract_images_from_block(self, block, page_url):
+    def extract_images_from_block(self, block, page_url, entity):
         images = []
 
         if not block:
@@ -490,23 +615,33 @@ class TourismPropertyExtractor:
         if not node:
             return images
 
+        context_text = block.get("text", "")
+
         for img in node.find_all("img"):
             src = img.get("src") or img.get("data-src")
+            alt = self._clean_text(img.get("alt", ""))
+
             if not src:
                 continue
 
             src = self._abs_url(page_url, src)
+            if not src:
+                continue
+
             if self._is_probably_logo(src):
                 continue
 
-            self._add_unique(images, src)
+            score = self._image_relevance_score(entity, src, alt_text=alt, context_text=context_text)
+
+            if score >= 1:
+                self._add_unique(images, src)
 
         return images
 
     # --------------------------------------------------
     # structured entity extraction
     # --------------------------------------------------
-    def extract_entity_jsonld_properties(self, item, page_url):
+    def extract_entity_jsonld_properties(self, item, page_url, entity=None):
         props = {}
         related_urls = []
         contact_urls = []
@@ -522,15 +657,21 @@ class TourismPropertyExtractor:
             props["description"] = self.clean_description_text(str(item["description"]))
 
         if item.get("url"):
-            props["url"] = self._abs_url(page_url, str(item["url"]))
+            candidate = self._abs_url(page_url, str(item["url"]))
+            if candidate and (entity is None or self._url_relevance_score(entity, candidate, props.get("name", "")) >= 2):
+                props["url"] = candidate
 
         same_as = item.get("sameAs")
         if isinstance(same_as, list):
             for candidate in same_as:
                 if isinstance(candidate, str):
-                    self._add_unique(related_urls, candidate)
+                    abs_candidate = self._abs_url(page_url, candidate)
+                    if abs_candidate and entity and self._url_relevance_score(entity, abs_candidate, props.get("name", "")) >= 2:
+                        self._add_unique(related_urls, abs_candidate)
         elif isinstance(same_as, str):
-            self._add_unique(related_urls, same_as)
+            abs_candidate = self._abs_url(page_url, same_as)
+            if abs_candidate and entity and self._url_relevance_score(entity, abs_candidate, props.get("name", "")) >= 2:
+                self._add_unique(related_urls, abs_candidate)
 
         if item.get("telephone"):
             props["telephone"] = self._clean_phone(str(item["telephone"]))
@@ -550,10 +691,13 @@ class TourismPropertyExtractor:
             props["openingHours"] = item.get("openingHours")
 
         for image in self._extract_image_values(item.get("image"), page_url):
-            self._add_unique(images, image)
+            if entity is None or self._image_relevance_score(entity, image, props.get("name", ""), props.get("description", "")) >= 1:
+                self._add_unique(images, image)
 
         if item.get("@id") and isinstance(item["@id"], str) and item["@id"].startswith("http"):
-            self._add_unique(related_urls, item["@id"])
+            abs_id = self._abs_url(page_url, item["@id"])
+            if abs_id and entity and self._url_relevance_score(entity, abs_id, props.get("name", "")) >= 2:
+                self._add_unique(related_urls, abs_id)
 
         if related_urls:
             props["relatedUrls"] = related_urls
@@ -567,7 +711,7 @@ class TourismPropertyExtractor:
                 props["image"] = images[0]
                 props["mainImage"] = images[0]
                 if len(images) > 1:
-                    props["additionalImages"] = images[1:]
+                    props["additionalImages"] = images[1:4]
 
         return props
 
@@ -577,6 +721,8 @@ class TourismPropertyExtractor:
     def extract(self, html, text, url, entity):
         soup = BeautifulSoup(html, "html.parser")
         properties = {}
+        candidate_urls = []
+        candidate_images = []
 
         # 1) JSON-LD específico de entidad
         jsonld_data = self.extract_jsonld(soup)
@@ -586,8 +732,23 @@ class TourismPropertyExtractor:
 
             name = item.get("name")
             if name and self._matches_entity(entity, str(name)):
-                jsonld_props = self.extract_entity_jsonld_properties(item, url)
-                properties.update(jsonld_props)
+                jsonld_props = self.extract_entity_jsonld_properties(item, url, entity=entity)
+
+                for key, value in jsonld_props.items():
+                    if key == "url":
+                        candidate_urls.append(value)
+                    elif key in ("image", "mainImage"):
+                        candidate_images.append(value)
+                    elif key == "additionalImages":
+                        candidate_images.extend(value if isinstance(value, list) else [value])
+                    elif key in ("relatedUrls", "contactUrls"):
+                        existing = properties.get(key, [])
+                        incoming = value if isinstance(value, list) else [value]
+                        for v in incoming:
+                            self._add_unique(existing, v)
+                        properties[key] = existing
+                    else:
+                        properties[key] = value
 
         # 2) bloque HTML más probable
         best_block = self.find_best_block_for_entity(soup, entity, page_url=url)
@@ -631,39 +792,29 @@ class TourismPropertyExtractor:
             if "longitude" not in properties and geo.get("longitude"):
                 properties["longitude"] = geo["longitude"]
 
-            block_related, block_contact = self.extract_links_from_node(best_block.get("node"), url)
+            block_related, block_contact = self.extract_links_from_node(best_block.get("node"), url, entity)
             if block_related:
-                properties["relatedUrls"] = block_related
+                existing = properties.get("relatedUrls", [])
+                for v in block_related:
+                    self._add_unique(existing, v)
+                properties["relatedUrls"] = existing
+
             if block_contact:
-                properties["contactUrls"] = block_contact
+                existing = properties.get("contactUrls", [])
+                for v in block_contact:
+                    self._add_unique(existing, v)
+                properties["contactUrls"] = existing
 
-            block_images = self.extract_images_from_block(best_block, url)
-            if block_images and "image" not in properties:
-                 # solo si el bloque menciona claramente la entidad
-                block_images = self._dedupe_images(block_images)
-                if block_images:
-                    properties["image"] = block_images[0]
-                    properties["mainImage"] = block_images[0]
-                    if len(block_images) > 1:
-                        properties["additionalImages"] = block_images[1:]
+            block_images = self.extract_images_from_block(best_block, url, entity)
+            candidate_images.extend(block_images)
 
-        # 3) meta fallback (SIN imagen global)
-            meta_props = self.extract_meta(soup, page_url=url)
+        # 3) meta fallback solo para nombre/descripcion
+        meta_props = self.extract_meta(soup, page_url=url)
+        for k, v in meta_props.items():
+            if k not in properties and v:
+                properties[k] = v
 
-            for k, v in meta_props.items():
-                if k in ("image", "mainImage"):
-                    continue  # ❌ NO usar imagen global
-
-                if k not in properties and v:
-                    properties[k] = v
-
-        # 4) fallback de página
-        page_related, page_contact = self.extract_page_links(soup, url)
-        if "relatedUrls" not in properties and page_related:
-            properties["relatedUrls"] = page_related[:15]
-        if "contactUrls" not in properties and page_contact:
-            properties["contactUrls"] = page_contact[:10]
-
+        # 4) fallback global mínimo: solo geo / teléfono / dirección del texto
         geo = self.extract_geo(text)
         if geo.get("latitude") and "latitude" not in properties:
             properties["latitude"] = geo["latitude"]
@@ -680,32 +831,67 @@ class TourismPropertyExtractor:
             if address:
                 properties["address"] = address
 
-        # 5) url principal siempre
-        properties["url"] = properties.get("url") or url
+        # 5) URL principal: solo si realmente corresponde a la entidad
+        cleaned_candidate_urls = self._clean_urls_for_entity(candidate_urls, entity, url, limit=10)
+        if cleaned_candidate_urls:
+            best_url = sorted(
+                cleaned_candidate_urls,
+                key=lambda u: (-self._url_relevance_score(entity, u), len(u))
+            )[0]
+            properties["url"] = best_url
+        else:
+            properties.pop("url", None)
 
-        # 6) consistencia y deduplicación fuerte de imágenes
-        all_images = []
+        # 6) related/contact URLs limpias
+        if "relatedUrls" in properties:
+            related = self._clean_urls_for_entity(properties["relatedUrls"], entity, url, limit=10)
+            if properties.get("url"):
+                related = [u for u in related if u != properties["url"]]
+            if related:
+                properties["relatedUrls"] = related
+            else:
+                properties.pop("relatedUrls", None)
 
-        if properties.get("mainImage"):
-            all_images.append(properties["mainImage"])
+        if "contactUrls" in properties:
+            contact = []
+            seen = set()
+            for item in properties["contactUrls"]:
+                norm = item if str(item).startswith(("mailto:", "tel:")) else self._normalize_url(item)
+                if not norm or norm in seen:
+                    continue
+                seen.add(norm)
+                contact.append(norm)
+            if contact:
+                properties["contactUrls"] = contact[:10]
+            else:
+                properties.pop("contactUrls", None)
 
-        if properties.get("image"):
-            all_images.append(properties["image"])
+        # 7) consistencia y deduplicación fuerte de imágenes
+        filtered_images = []
+        for img in candidate_images:
+            norm = self._normalize_image_url(img)
+            if not norm:
+                continue
+            if self._is_probably_logo(norm):
+                continue
 
-        additional = properties.get("additionalImages")
-        if isinstance(additional, list):
-            all_images.extend(additional)
-        elif additional:
-            all_images.append(additional)
+            score = self._image_relevance_score(
+                entity,
+                norm,
+                alt_text=properties.get("name", ""),
+                context_text=properties.get("description", "")
+            )
+            if score >= 1:
+                filtered_images.append(norm)
 
-        deduped_images = self._dedupe_images(all_images)
+        deduped_images = self._dedupe_images(filtered_images)
 
         if deduped_images:
             properties["mainImage"] = deduped_images[0]
             properties["image"] = deduped_images[0]
 
             if len(deduped_images) > 1:
-                properties["additionalImages"] = deduped_images[1:]
+                properties["additionalImages"] = deduped_images[1:4]
             else:
                 properties.pop("additionalImages", None)
         else:
@@ -713,7 +899,7 @@ class TourismPropertyExtractor:
             properties.pop("image", None)
             properties.pop("additionalImages", None)
 
-        # 7) serialización limpia
+        # 8) serialización limpia
         serialized = {}
         for key, value in properties.items():
             if value is None or value == "":

@@ -1,11 +1,56 @@
 class EntityDescriptionConsolidator:
-
     def _safe_text(self, value):
         if value is None:
             return ""
         if isinstance(value, str):
             return value.strip()
         return str(value).strip()
+
+    def _to_list(self, value):
+        if value is None:
+            return []
+
+        if isinstance(value, list):
+            return value
+
+        if isinstance(value, (tuple, set)):
+            return list(value)
+
+        if isinstance(value, str):
+            value = value.strip()
+            return [value] if value else []
+
+        return [value]
+
+    def _merge_list_unique(self, current, candidate):
+        current_list = self._to_list(current)
+        candidate_list = self._to_list(candidate)
+
+        seen = set()
+        merged = []
+
+        for item in current_list + candidate_list:
+            if item is None:
+                continue
+
+            if isinstance(item, str):
+                norm = item.strip()
+                if not norm:
+                    continue
+                key = norm.lower()
+                value = norm
+            else:
+                norm = str(item).strip()
+                if not norm:
+                    continue
+                key = norm.lower()
+                value = item
+
+            if key not in seen:
+                seen.add(key)
+                merged.append(value)
+
+        return merged
 
     def _merge_string_field(self, current, candidate):
         current = self._safe_text(current)
@@ -31,36 +76,63 @@ class EntityDescriptionConsolidator:
 
         return current
 
-    def _merge_properties(self, current, candidate):
+    def _merge_properties(self, entity_name, current, candidate):
         current = current or {}
         candidate = candidate or {}
-
         merged = dict(current)
 
-        for key, value in candidate.items():
-            if value is None:
+        for key, incoming in candidate.items():
+            if incoming is None:
                 continue
 
-            if isinstance(value, str) and not value.strip():
+            if isinstance(incoming, str) and not incoming.strip():
                 continue
 
             if key not in merged:
-                merged[key] = value
+                merged[key] = incoming
                 continue
 
-            if isinstance(merged[key], list) and isinstance(value, list):
-                seen = set()
-                merged_list = []
+            existing = merged[key]
 
-                for item in merged[key] + value:
-                    norm = str(item).strip()
-                    if norm and norm not in seen:
-                        seen.add(norm)
-                        merged_list.append(item)
+            # Si alguno de los dos lados ya es lista/tupla/set, unificamos como lista única
+            if isinstance(existing, (list, tuple, set)) or isinstance(incoming, (list, tuple, set)):
+                merged[key] = self._merge_list_unique(existing, incoming)
+                continue
 
-                merged[key] = merged_list
+            # string + string
+            if isinstance(existing, str) and isinstance(incoming, str):
+                existing_clean = existing.strip()
+                incoming_clean = incoming.strip()
+
+                if existing_clean.lower() == incoming_clean.lower():
+                    merged[key] = existing_clean
+                else:
+                    merged[key] = self._merge_list_unique(existing_clean, incoming_clean)
+                continue
+
+            # dict + dict -> merge superficial conservador
+            if isinstance(existing, dict) and isinstance(incoming, dict):
+                new_dict = dict(existing)
+                for sub_key, sub_value in incoming.items():
+                    if sub_key not in new_dict or new_dict[sub_key] in (None, "", []):
+                        new_dict[sub_key] = sub_value
+                merged[key] = new_dict
+                continue
+
+            # Si son iguales, mantener el existente
+            if existing == incoming:
+                merged[key] = existing
+                continue
+
+            # Caso mixto genérico -> normalizar a lista única
+            merged[key] = self._merge_list_unique(existing, incoming)
 
         return merged
+
+    def _select_best(self, descriptions):
+        if not descriptions:
+            return ""
+        return sorted(descriptions, key=len, reverse=True)[0]
 
     def consolidate(self, results):
         entity_map = {}
@@ -101,6 +173,7 @@ class EntityDescriptionConsolidator:
                 )
 
                 entity_map[key]["properties"] = self._merge_properties(
+                    entity_name,
                     entity_map[key].get("properties", {}),
                     e.get("properties", {})
                 )
@@ -165,9 +238,3 @@ class EntityDescriptionConsolidator:
 
         consolidated.sort(key=lambda x: x.get("score", 0.0), reverse=True)
         return consolidated
-
-    def _select_best(self, descriptions):
-        if not descriptions:
-            return ""
-
-        return sorted(descriptions, key=len, reverse=True)[0]
