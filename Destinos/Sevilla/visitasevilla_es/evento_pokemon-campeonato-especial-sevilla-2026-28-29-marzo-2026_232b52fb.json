@@ -1,0 +1,222 @@
+{
+  "url": "https://visitasevilla.es/evento/pokemon-campeonato-especial-sevilla-2026-28-29-marzo-2026",
+  "tracking_id": "232b52fb-ac76-4b66-b725-3eb760082965",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 686,
+    "url": "https://visitasevilla.es/evento/pokemon-campeonato-especial-sevilla-2026-28-29-marzo-2026",
+    "markdown": "Pokémon- Campeonato Especial Sevilla 2026 – 28-29 marzo 2026\n============================================================\n\n[Ver todos los eventos](https://visitasevilla.es/ahora-en-sevilla/)\n\n28.03.26-29.03.26 ![](http://tic.visitasevilla.es/vsev/web_php/imatges/esdeveniments/312796980863a75ca4161228053.png)\n\nCampeonato Regional de JCC Pokémon, Videojuegos y _Pokémon GO_ en Sevilla\n\n28-29 marzo\n\nFibes- Palacio de Congresos de Sevilla\n\n[Tickets](https://championships.pokemon.com/es-es/events/regionals/2026/seville)\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "ogSiteName": "Visita Sevilla",
+      "viewport": "width=device-width, initial-scale=1",
+      "og:title": "Pokémon- Campeonato Especial Sevilla 2026 - 28-29 marzo 2026 - Visita Sevilla",
+      "twitter:card": "summary_large_image",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "twitter:site": "@sevillaciudad",
+      "article:publisher": "https://www.facebook.com/Sevilla",
+      "og:type": "article",
+      "ogUrl": "https://visitasevilla.es/evento/pokemon-campeonato-especial-sevilla-2026-28-29-marzo-2026/",
+      "title": "Pokémon- Campeonato Especial Sevilla 2026 - 28-29 marzo 2026 - Visita Sevilla",
+      "og:url": "https://visitasevilla.es/evento/pokemon-campeonato-especial-sevilla-2026-28-29-marzo-2026/",
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "language": "es-ES",
+      "ogTitle": "Pokémon- Campeonato Especial Sevilla 2026 - 28-29 marzo 2026 - Visita Sevilla",
+      "og:locale": "es_ES",
+      "og:site_name": "Visita Sevilla",
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "ogLocale": "es_ES",
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f12-7aa38d319b96",
+      "sourceURL": "https://visitasevilla.es/evento/pokemon-campeonato-especial-sevilla-2026-28-29-marzo-2026",
+      "url": "https://visitasevilla.es/evento/pokemon-campeonato-especial-sevilla-2026-28-29-marzo-2026",
+      "statusCode": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 200,
+    "timestamp": "2026-03-18T16:35:44.849991"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Event": {
+          "availableLanguage": "en",
+          "eventSchedule": {
+            "byDay": "Saturday, Sunday",
+            "byMonth": "March",
+            "byMonthDay": 28,
+            "byMonthWeek": 4,
+            "duration": "2 days",
+            "hasDescription": {
+              "keyword": "Regional Championship of Pokémon TCG",
+              "longDescription": "Regional Championship of Pokémon TCG, Video Games, and Pokémon GO in Seville.",
+              "shortDescription": "Special Championship Seville 2026"
+            },
+            "repeatCount": 1
+          },
+          "eventType": "Tournament",
+          "hasAcknowledgement": "Information sent",
+          "hasAdditionalInformation": {
+            "accessTip": "What you need to know is in your email.",
+            "conditions": "I accept the sending of commercial communications.",
+            "curiosities": "Participate in the Pokémon championship.",
+            "frequentlyAskedQuestion": {
+              "answer": "Information will be sent by email.",
+              "question": "How will I be kept informed?"
+            },
+            "remarks": "Subscribe to the newsletter for more information."
+          },
+          "hasAdditionalType": "Gaming Event",
+          "hasAgenda": {
+            "position": 1,
+            "subEvent": {
+              "availableLanguage": "en",
+              "eventSchedule": {
+                "byDay": "Saturday, Sunday",
+                "byMonth": "March",
+                "byMonthDay": 29,
+                "byMonthWeek": 4,
+                "duration": "2 days",
+                "hasDescription": {
+                  "keyword": "Regional Championship of Pokémon TCG",
+                  "longDescription": "Participate in the Regional Championship of Pokémon TCG, Video Games, and Pokémon GO.",
+                  "shortDescription": "Special Championship Seville 2026"
+                },
+                "repeatCount": 1
+              },
+              "eventType": "Tournament",
+              "hasAdditionalInformation": {
+                "accessTip": "What you need to know is in your email.",
+                "conditions": "I accept the sending of commercial communications.",
+                "curiosities": "Participate in the Pokémon championship.",
+                "frequentlyAskedQuestion": {
+                  "answer": "Information will be sent by email.",
+                  "question": "How will I be kept informed?"
+                },
+                "remarks": "Subscribe to the newsletter for more information."
+              },
+              "hasAdditionalType": "Gaming Event"
+            }
+          },
+          "hasDescription": {
+            "keyword": "Pokémon Championship",
+            "longDescription": "Regional Championship of Pokémon TCG, Video Games, and Pokémon GO in Seville.",
+            "shortDescription": "Special Championship Seville 2026"
+          },
+          "hasLocation": {
+            "autonomousCommunity": "Andalusia",
+            "country": "Spain",
+            "county": "Seville",
+            "locality": "Seville",
+            "postalCode": "41000",
+            "province": "Seville",
+            "streetAddress": "Fibes- Congress Palace of Seville"
+          },
+          "hasPriceSpecification": {
+            "currency": "EUR",
+            "eligibleQuantity": "1",
+            "isAccessibleForFree": true,
+            "priceSchedule": {
+              "byDay": "Saturday, Sunday",
+              "byMonth": "March",
+              "byMonthDay": 28,
+              "byMonthWeek": 4,
+              "duration": "2 days",
+              "hasDescription": {
+                "keyword": "Free entry",
+                "longDescription": "Entry is free but must be reserved.",
+                "shortDescription": "Free entry"
+              },
+              "repeatCount": 1
+            },
+            "targetAudience": "Pokémon Players"
+          },
+          "maximumAttendeeCapacity": 1000,
+          "name": "Special Championship Seville 2026",
+          "offersAdditionalEventService": "Newsletter",
+          "refPointOfInterest": {
+            "hasAdditionalInformation": {
+              "accessTip": "What you need to know is in your email.",
+              "conditions": "I accept the sending of commercial communications.",
+              "curiosities": "Participate in the Pokémon championship.",
+              "frequentlyAskedQuestion": {
+                "answer": "Information will be sent by email.",
+                "question": "How will I be kept informed?"
+              },
+              "remarks": "Subscribe to the newsletter for more information."
+            },
+            "hasLocation": {
+              "autonomousCommunity": "Andalusia",
+              "country": "Spain",
+              "county": "Seville",
+              "locality": "Seville",
+              "postalCode": "41000",
+              "province": "Seville",
+              "streetAddress": "Fibes- Congress Palace of Seville"
+            },
+            "hasOpeningHours": {
+              "closesAt": "23:59:59",
+              "dayOfTheWeek": "Saturday, Sunday",
+              "hasDescription": {
+                "keyword": "Event schedule",
+                "longDescription": "The event will take place from 9:00 to 23:59.",
+                "shortDescription": "Event schedule"
+              },
+              "opensAt": "09:00:00"
+            },
+            "keyword": "Pokémon Championship",
+            "longDescription": "Regional Championship of Pokémon TCG, Video Games, and Pokémon GO in Seville.",
+            "shortDescription": "Special Championship Seville 2026"
+          },
+          "touristType": "Event"
+        }
+      },
+      "classes": [
+        {
+          "score": 0.9,
+          "classname": "CultureCentre"
+        },
+        {
+          "score": 0.7,
+          "classname": "TouristAttractionSite"
+        },
+        {
+          "score": 0.8,
+          "classname": "CongressCentre"
+        },
+        {
+          "score": 0.9,
+          "classname": "Event"
+        }
+      ],
+      "original_content": "Pokémon- Campeonato Especial Sevilla 2026 – 28-29 marzo 2026\n============================================================\n\n28.03.26-29.03.26 \n\nCampeonato Regional de JCC Pokémon, Videojuegos y _Pokémon GO_ en Sevilla\n\n28-29 marzo\n\nFibes- Palacio de Congresos de Sevilla\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: CultureCentreRefInput!) {\n          x: createCulturecentre(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "Seville",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "pokemon campeonato especial sevilla 2026 28 29 marzo 2026",
+              "lang": "es"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

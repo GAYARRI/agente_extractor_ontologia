@@ -93,14 +93,20 @@ class ImageEnricher:
 
         return False
 
-    def _is_probably_logo(self, url):
+    def _is_probably_logo(self, url: str) -> bool:
         if not url:
-            return False
+            return True
 
-        low = url.lower()
-        return any(token in low for token in [
-            "logo", "icon", "avatar", "sprite", "favicon", "placeholder"
-        ])
+        u = url.lower()
+
+        bad_patterns = [
+            "logo", "icon", "sprite", "banner", "placeholder",
+            "default", "avatar", "marca", "brand", "header",
+            "footer", "og-image", "share", "social"
+        ]
+
+        return any(p in u for p in bad_patterns)    
+        
 
     def _dedupe_images(self, urls):
         result = []
@@ -156,57 +162,103 @@ class ImageEnricher:
     # EXTRACT
     # ==================================================
 
-    def enrich(self, entity, text):
+    def enrich(self, entity, text="", html="", url=""):
         """
-        Este enriquecedor NO debe volver a meter las imágenes locales de la página.
-        Su misión aquí será, sobre todo:
-        - detectar URLs explícitas de imagen en el texto
-        - separar imágenes Wikimedia/Wikidata en wikidataImage
-        - dejar otras imágenes externas como fallback en additionalImages
+        Devuelve una imagen razonable para la entidad.
+        Prioridad:
+        1) imágenes explícitas en el texto
+        2) JSON-LD / schema.org
+        3) og:image SOLO como fallback débil
         """
 
-        if not text:
-            return {}
+        candidates = []
 
-        urls = re.findall(r'https?://[^\s<>"\']+', text)
-        image_urls = [u for u in urls if self._is_probably_image_url(u)]
+        if text:
+            urls = re.findall(r'https?://[^\s<>"\']+', text)
+            text_images = [u for u in urls if self._is_probably_image_url(u)]
+            candidates.extend(text_images)
 
-        if not image_urls:
-            return {}
+        jsonld_images = []
+        og_image = ""
 
-        image_urls = self._dedupe_images(image_urls)
+        if html:
+            jsonld_images = self._extract_jsonld_images(html)
+            og_image = self._extract_og_image(html)
 
-        # filtrar logos / iconos / imágenes claramente irrelevantes
-        filtered_images = []
-        for img in image_urls:
+        # Primero intentamos con imágenes más específicas
+        candidates.extend(jsonld_images)
+        candidates = self._dedupe_images(candidates)
+
+        best = self._choose_best_image(entity, candidates, text=text)
+        if best:
+            return {"image": best}
+
+        # og:image solo como fallback
+        if og_image and not self._is_probably_logo(og_image):
+            return {"image": og_image}
+
+        return {}
+    
+        
+    
+
+    def _extract_og_image(self, html: str) -> str:
+        if not html:
+            return ""
+        m = re.search(
+            r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
+            html,
+            re.IGNORECASE
+        )
+        return m.group(1).strip() if m else ""
+
+    def _extract_jsonld_images(self, html: str) -> list:
+        if not html:
+            return []
+        matches = re.findall(r'"image"\s*:\s*"([^"]+)"', html, re.IGNORECASE)
+        return [m.strip() for m in matches if m.strip()]
+
+    def _choose_best_image(self, entity: str, candidates: list, text: str = "") -> str:
+        valid = []
+
+        entity_norm = (entity or "").strip().lower()
+
+        for img in candidates:
+            if not img:
+                continue
             if self._is_probably_logo(img):
                 continue
 
             score = self._image_relevance_score(entity, img, text=text)
 
-            # Wikimedia se permite incluso con score bajo porque suele ser externa y útil
+            u = img.lower()
+
             if self._is_wikimedia_url(img):
-                filtered_images.append(img)
-                continue
+                score += 1
 
-            # Para el resto, exigir algo mínimo de relación
-            if score >= 1:
-                filtered_images.append(img)
+            # penalizaciones por imagen demasiado genérica
+            generic_hits = [
+                "visitasevilla",
+                "cabecera",
+                "header",
+                "home",
+                "portada",
+                "generic",
+                "default",
+                "banner"
+            ]
+            if any(g in u for g in generic_hits):
+                score -= 3
 
-        if not filtered_images:
-            return {}
+            # premio si el nombre de la entidad aparece en la URL
+            tokens = [t for t in re.split(r"[\s\-_]+", entity_norm) if len(t) > 3]
+            if tokens and any(t in u for t in tokens):
+                score += 3
 
-        wikimedia_images = [u for u in filtered_images if self._is_wikimedia_url(u)]
-        local_or_other_images = [u for u in filtered_images if not self._is_wikimedia_url(u)]
+            valid.append((img, score))
 
-        props = {}
+        if not valid:
+            return ""
 
-        # Mantener separada la imagen de Wikidata/Wikimedia
-        if wikimedia_images:
-            props["wikidataImage"] = wikimedia_images[0]
-
-        # Solo como fallback, no demasiadas
-        if local_or_other_images:
-            props["additionalImages"] = local_or_other_images[:3]
-
-        return props
+        valid.sort(key=lambda x: x[1], reverse=True)
+        return valid[0][0]

@@ -1,0 +1,443 @@
+{
+  "url": "https://visitasevilla.es/evento/suede",
+  "tracking_id": "60d29ae4-3960-4ee4-ad11-d35cde47119d",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 252,
+    "url": "https://visitasevilla.es/evento/suede",
+    "markdown": "Suede\n=====\n\n[Ver todos los eventos](https://visitasevilla.es/ahora-en-sevilla/)\n\n21.03.26 ![](http://tic.visitasevilla.es/vsev/web_php/imatges/esdeveniments/19178698db10a041da359004722.jpg)\n\nEl grupo británico Suede llega a Sevilla con su esperado décimo álbum de estudio, Antidepressants, tras girar en 2025 por todo Reino Unido. El álbum ya ha recibido una gran aclamación, con cinco estrellas en MOJO, que lo describe como «un disco desafiante, que desafía a la muerte, tan emocionante como un memento mori». Estarán acompañados por Swim School como teloneros.\n\n[Tickets](https://insolitosevilla.com/conference-event/suede/)\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "ogLocale": "es_ES",
+      "og:title": "Suede - Visita Sevilla",
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "og:url": "https://visitasevilla.es/evento/suede/",
+      "twitter:card": "summary_large_image",
+      "language": "es-ES",
+      "ogUrl": "https://visitasevilla.es/evento/suede/",
+      "viewport": "width=device-width, initial-scale=1",
+      "ogSiteName": "Visita Sevilla",
+      "title": "Suede - Visita Sevilla",
+      "twitter:site": "@sevillaciudad",
+      "og:site_name": "Visita Sevilla",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "og:type": "article",
+      "ogTitle": "Suede - Visita Sevilla",
+      "og:locale": "es_ES",
+      "article:publisher": "https://www.facebook.com/Sevilla",
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f11-a13c9ec80f0d",
+      "sourceURL": "https://visitasevilla.es/evento/suede",
+      "url": "https://visitasevilla.es/evento/suede",
+      "statusCode": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 200,
+    "timestamp": "2026-03-18T16:33:39.643316"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Event": {
+          "availableLanguage": "en",
+          "eventSchedule": {
+            "byDay": "Monday",
+            "byMonth": "March",
+            "byMonthDay": 21,
+            "byMonthWeek": 3,
+            "duration": "3 hours",
+            "hasDescription": {
+              "keyword": "concert",
+              "longDescription": "The British band Suede arrives in Seville with their highly anticipated tenth studio album, Antidepressants, after touring across the UK in 2025. The album has already received great acclaim, with five stars from MOJO, which describes it as \"a challenging record, defying death, as exciting as a memento mori.\" They will be accompanied by Swim School as the opening act.",
+              "shortDescription": "Concert by Suede in Seville."
+            },
+            "repeatCount": 1
+          },
+          "eventType": "Concert",
+          "hasAcknowledgement": "Advance reservation is required.",
+          "hasAdditionalInformation": {
+            "accessTip": "We recommend arriving early.",
+            "conditions": "Limited tickets.",
+            "curiosities": "Suede has been acclaimed for their innovative sound.",
+            "frequentlyAskedQuestion": {
+              "answer": "Tickets can be purchased online.",
+              "question": "Where can I buy tickets?"
+            },
+            "remarks": "Mask usage is recommended at the event."
+          },
+          "hasAdditionalType": "MusicalEvent",
+          "hasAgenda": {
+            "position": 1,
+            "subEvent": {
+              "availableLanguage": "en",
+              "eventSchedule": {
+                "byDay": "Monday",
+                "byMonth": "March",
+                "byMonthDay": 21,
+                "byMonthWeek": 3,
+                "duration": "3 hours",
+                "hasDescription": {
+                  "keyword": "opening act",
+                  "longDescription": "Swim School will be the opening act for Suede.",
+                  "shortDescription": "Performance by Swim School."
+                },
+                "repeatCount": 1
+              },
+              "eventType": "OpeningAct",
+              "hasAdditionalInformation": {
+                "accessTip": "Arrive early to secure a good spot.",
+                "conditions": "Open to all attendees.",
+                "curiosities": "Swim School is known for their energy on stage.",
+                "frequentlyAskedQuestion": {
+                  "answer": "Yes, the tickets are valid for both acts.",
+                  "question": "Does the ticket include the opening act?"
+                },
+                "remarks": "Professional cameras are not allowed."
+              },
+              "hasDescription": {
+                "keyword": "opening act",
+                "longDescription": "Swim School will be the opening act for Suede.",
+                "shortDescription": "Performance by Swim School."
+              },
+              "hasLocation": {
+                "autonomousCommunity": "Andalusia",
+                "country": "Spain",
+                "county": "Sevilla",
+                "locality": "Sevilla",
+                "postalCode": "41001",
+                "province": "Sevilla",
+                "streetAddress": "Avenida de la Constitución"
+              },
+              "hasPriceSpecification": {
+                "currency": "EUR",
+                "eligibleQuantity": "1",
+                "maxPrice": 50.0,
+                "minPrice": 30.0,
+                "price": 40.0,
+                "priceSchedule": {
+                  "byDay": "Monday",
+                  "byMonth": "March",
+                  "byMonthDay": 21,
+                  "byMonthWeek": 3,
+                  "duration": "3 hours",
+                  "hasDescription": {
+                    "keyword": "ticket",
+                    "longDescription": "Tickets are available online.",
+                    "shortDescription": "Buy your tickets now."
+                  }
+                }
+              }
+            }
+          },
+          "hasDescription": {
+            "keyword": "Suede",
+            "longDescription": "The British band Suede arrives in Seville with their highly anticipated tenth studio album, Antidepressants.",
+            "shortDescription": "Concert by Suede in Seville."
+          },
+          "hasLocation": {
+            "autonomousCommunity": "Andalusia",
+            "country": "Spain",
+            "county": "Sevilla",
+            "locality": "Sevilla",
+            "postalCode": "41001",
+            "province": "Sevilla",
+            "streetAddress": "Avenida de la Constitución"
+          },
+          "hasPriceSpecification": {
+            "currency": "EUR",
+            "eligibleQuantity": "1",
+            "maxPrice": 50.0,
+            "minPrice": 30.0,
+            "price": 40.0,
+            "priceSchedule": {
+              "byDay": "Monday",
+              "byMonth": "March",
+              "byMonthDay": 21,
+              "byMonthWeek": 3,
+              "duration": "3 hours",
+              "hasDescription": {
+                "keyword": "ticket",
+                "longDescription": "Tickets are available online.",
+                "shortDescription": "Buy your tickets now."
+              }
+            }
+          },
+          "touristType": "Cultural"
+        }
+      },
+      "classes": [
+        {
+          "score": 0.9,
+          "classname": "Event"
+        }
+      ],
+      "original_content": "Suede\n=====\n\n21.03.26 \n\nEl grupo británico Suede llega a Sevilla con su esperado décimo álbum de estudio, Antidepressants, tras girar en 2025 por todo Reino Unido. El álbum ya ha recibido una gran aclamación, con cinco estrellas en MOJO, que lo describe como «un disco desafiante, que desafía a la muerte, tan emocionante como un memento mori». Estarán acompañados por Swim School como teloneros.\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: EventRefInput!) {\n          x: createEvent(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "Sevilla",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "suede",
+              "lang": "es"
+            }
+          ],
+          "hasDescription": [
+            {
+              "object": {
+                "keyword": [
+                  "Suede"
+                ],
+                "shortDescription": [
+                  {
+                    "value": "Concert by Suede in Seville.",
+                    "lang": "es"
+                  }
+                ],
+                "longDescription": [
+                  {
+                    "value": "The British band Suede arrives in Seville with their highly anticipated tenth studio album, Antidepressants.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "hasLocation": [
+            {
+              "object": {
+                "province": "Sevilla",
+                "streetAddress": "Avenida de la Constitución",
+                "postalCode": "41001",
+                "locality": "Sevilla",
+                "country": "Spain",
+                "autonomousCommunity": "Andalusia",
+                "municipality": "Sevilla"
+              }
+            }
+          ],
+          "hasAdditionalInformation": {
+            "object": {
+              "accessTip": "We recommend arriving early.",
+              "conditions": "Limited tickets.",
+              "curiosities": "Suede has been acclaimed for their innovative sound.",
+              "frequentlyAskedQuestion": {
+                "object": {
+                  "answer": "Tickets can be purchased online.",
+                  "question": "Where can I buy tickets?"
+                }
+              },
+              "remarks": "Mask usage is recommended at the event."
+            }
+          },
+          "hasPriceSpecification": {
+            "object": {
+              "currency": "EUR",
+              "eligibleQuantity": "1",
+              "maxPrice": 50.0,
+              "minPrice": 30.0,
+              "price": 40.0,
+              "priceSchedule": {
+                "object": {
+                  "byDay": "Monday",
+                  "byMonth": "March",
+                  "byMonthDay": 21,
+                  "byMonthWeek": 3,
+                  "duration": "3 hours",
+                  "hasDescription": [
+                    {
+                      "object": {
+                        "keyword": [
+                          "ticket"
+                        ],
+                        "shortDescription": [
+                          {
+                            "value": "Buy your tickets now.",
+                            "lang": "es"
+                          }
+                        ],
+                        "longDescription": [
+                          {
+                            "value": "Tickets are available online.",
+                            "lang": "es"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "hasAcknowledgement": [
+            {
+              "object": {
+                "name": [
+                  {
+                    "value": "Advance reservation is required.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "availableLanguage": [
+            {
+              "uri": "http://vocab.segittur.es/language/en"
+            }
+          ],
+          "hasAdditionalType": "MusicalEvent",
+          "hasAgenda": [
+            {
+              "object": {
+                "position": 1,
+                "subEvent": {
+                  "object": {
+                    "availableLanguage": {
+                      "uri": "http://vocab.segittur.es/language/en"
+                    },
+                    "eventSchedule": {
+                      "object": {
+                        "byDay": "Monday",
+                        "byMonth": "March",
+                        "byMonthDay": 21,
+                        "byMonthWeek": 3,
+                        "duration": "3 hours",
+                        "hasDescription": [
+                          {
+                            "object": {
+                              "keyword": [
+                                "opening act"
+                              ],
+                              "shortDescription": [
+                                {
+                                  "value": "Performance by Swim School.",
+                                  "lang": "es"
+                                }
+                              ],
+                              "longDescription": [
+                                {
+                                  "value": "Swim School will be the opening act for Suede.",
+                                  "lang": "es"
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "repeatCount": 1
+                      }
+                    },
+                    "eventType": "OpeningAct",
+                    "hasAdditionalInformation": {
+                      "object": {
+                        "accessTip": "Arrive early to secure a good spot.",
+                        "conditions": "Open to all attendees.",
+                        "curiosities": "Swim School is known for their energy on stage.",
+                        "frequentlyAskedQuestion": {
+                          "object": {
+                            "answer": "Yes, the tickets are valid for both acts.",
+                            "question": "Does the ticket include the opening act?"
+                          }
+                        },
+                        "remarks": "Professional cameras are not allowed."
+                      }
+                    },
+                    "hasDescription": [
+                      {
+                        "object": {
+                          "keyword": [
+                            "opening act"
+                          ],
+                          "shortDescription": [
+                            {
+                              "value": "Performance by Swim School.",
+                              "lang": "es"
+                            }
+                          ],
+                          "longDescription": [
+                            {
+                              "value": "Swim School will be the opening act for Suede.",
+                              "lang": "es"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "hasLocation": [
+                      {
+                        "object": {
+                          "province": "Sevilla",
+                          "streetAddress": "Avenida de la Constitución",
+                          "postalCode": "41001",
+                          "locality": "Sevilla",
+                          "country": "Spain",
+                          "autonomousCommunity": "Andalusia",
+                          "municipality": "Sevilla"
+                        }
+                      }
+                    ],
+                    "hasPriceSpecification": {
+                      "object": {
+                        "currency": "EUR",
+                        "eligibleQuantity": "1",
+                        "maxPrice": 50.0,
+                        "minPrice": 30.0,
+                        "price": 40.0,
+                        "priceSchedule": {
+                          "object": {
+                            "byDay": "Monday",
+                            "byMonth": "March",
+                            "byMonthDay": 21,
+                            "byMonthWeek": 3,
+                            "duration": "3 hours",
+                            "hasDescription": [
+                              {
+                                "object": {
+                                  "keyword": [
+                                    "ticket"
+                                  ],
+                                  "shortDescription": [
+                                    {
+                                      "value": "Buy your tickets now.",
+                                      "lang": "es"
+                                    }
+                                  ],
+                                  "longDescription": [
+                                    {
+                                      "value": "Tickets are available online.",
+                                      "lang": "es"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

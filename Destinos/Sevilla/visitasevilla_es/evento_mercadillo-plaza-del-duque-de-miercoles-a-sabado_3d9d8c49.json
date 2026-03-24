@@ -1,0 +1,152 @@
+{
+  "url": "https://visitasevilla.es/evento/mercadillo-plaza-del-duque-de-miercoles-a-sabado",
+  "tracking_id": "3d9d8c49-dcb5-4285-b583-147ff4f07082",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 1654,
+    "url": "https://visitasevilla.es/evento/mercadillo-plaza-del-duque-de-miercoles-a-sabado",
+    "markdown": "MERCADILLO PLAZA DEL DUQUE. De miércoles a sábado.\n==================================================\n\n[Ver todos los eventos](https://visitasevilla.es/ahora-en-sevilla/)\n\n24.06.24-27.01.29 ![](http://tic.visitasevilla.es/vsev/web_php/imatges/esdeveniments/31003667956b80d30b393593740.jpg)\n\n**Dirección**: Plaza del Duque\n\n**Cuándo**: Todos lo miércoles, jueves, vierens y sábado del año\n\n**Hora**: de 9 a 21:00h\n\n**Precio**: gratuito\n\n**Información**:\n\nMercadillo de artesanía, bisutería y cuero, junto a El Corte Inglés del Duque y la Campana.\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "ogUrl": "https://visitasevilla.es/evento/mercadillo-plaza-del-duque-de-miercoles-a-sabado/",
+      "og:site_name": "Visita Sevilla",
+      "ogSiteName": "Visita Sevilla",
+      "twitter:site": "@sevillaciudad",
+      "viewport": "width=device-width, initial-scale=1",
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "ogLocale": "es_ES",
+      "article:publisher": "https://www.facebook.com/Sevilla",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "twitter:card": "summary_large_image",
+      "title": "MERCADILLO PLAZA DEL DUQUE. De miércoles a sábado. - Visita Sevilla",
+      "language": "es-ES",
+      "og:locale": "es_ES",
+      "og:title": "MERCADILLO PLAZA DEL DUQUE. De miércoles a sábado. - Visita Sevilla",
+      "og:url": "https://visitasevilla.es/evento/mercadillo-plaza-del-duque-de-miercoles-a-sabado/",
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "og:type": "article",
+      "ogTitle": "MERCADILLO PLAZA DEL DUQUE. De miércoles a sábado. - Visita Sevilla",
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f14-192d0a5717b1",
+      "sourceURL": "https://visitasevilla.es/evento/mercadillo-plaza-del-duque-de-miercoles-a-sabado",
+      "url": "https://visitasevilla.es/evento/mercadillo-plaza-del-duque-de-miercoles-a-sabado",
+      "statusCode": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 200,
+    "timestamp": "2026-03-18T16:40:11.153259"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Location": {
+          "province": "Sevilla",
+          "streetAddress": "Plaza del Duque"
+        },
+        "Description": {
+          "keyword": "craft market jewelry leather",
+          "longDescription": "Craft market for handicrafts, jewelry, and leather, next to El Corte Inglés del Duque and La Campana.",
+          "shortDescription": "Craft market in Plaza del Duque."
+        },
+        "OpeningHours": {
+          "opensAt": "09:00",
+          "closesAt": "21:00"
+        },
+        "AdditionalInformation": {
+          "conditions": "Free entry",
+          "remarks": "Information available by email."
+        }
+      },
+      "classes": [
+        {
+          "score": 0.7,
+          "classname": "CultureCentre"
+        },
+        {
+          "score": 0.9,
+          "classname": "TraditionalMarket"
+        },
+        {
+          "score": 0.9,
+          "classname": "Event"
+        }
+      ],
+      "original_content": "MERCADILLO PLAZA DEL DUQUE. De miércoles a sábado.\n==================================================\n\n24.06.24-27.01.29 \n\n**Dirección**: Plaza del Duque\n\n**Cuándo**: Todos lo miércoles, jueves, vierens y sábado del año\n\n**Hora**: de 9 a 21:00h\n\n**Precio**: gratuito\n\n**Información**:\n\nMercadillo de artesanía, bisutería y cuero, junto a El Corte Inglés del Duque y la Campana.\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: TraditionalMarketRefInput!) {\n          x: createTraditionalmarket(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "sevilla",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "craft market jewelry leather",
+              "lang": "es"
+            }
+          ],
+          "hasDescription": [
+            {
+              "object": {
+                "keyword": [
+                  "craft market jewelry leather"
+                ],
+                "shortDescription": [
+                  {
+                    "value": "Craft market in Plaza del Duque.",
+                    "lang": "es"
+                  }
+                ],
+                "longDescription": [
+                  {
+                    "value": "Craft market for handicrafts, jewelry, and leather, next to El Corte Inglés del Duque and La Campana.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "hasLocation": [
+            {
+              "object": {
+                "province": "Sevilla",
+                "streetAddress": "Plaza del Duque",
+                "postalCode": "Unknown",
+                "locality": "Sevilla",
+                "country": "Spain",
+                "autonomousCommunity": "Sevilla",
+                "municipality": "Sevilla"
+              }
+            }
+          ],
+          "hasAdditionalInformation": {
+            "object": {
+              "conditions": "Free entry",
+              "remarks": "Information available by email."
+            }
+          },
+          "hasOpeningHours": [
+            {
+              "object": {
+                "opensAt": "09:00",
+                "closesAt": "21:00"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

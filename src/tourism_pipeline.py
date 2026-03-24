@@ -22,6 +22,8 @@ from src.entities.entity_scorer import EntityScorer
 from src.entities.global_entity_memory import GlobalEntityMemory
 from src.entities.entity_graph_builder import EntityGraphBuilder
 from src.tourism_property_extractor import TourismPropertyExtractor
+from src.page_entity_resolver import PageEntityResolver
+from src.dom_image_resolver import DOMImageResolver
 
 import re
 import hashlib
@@ -79,6 +81,8 @@ class TourismPipeline:
         self.entity_scorer = EntityScorer()
         self.graph_builder = EntityGraphBuilder()
         self.tourism_property_extractor = TourismPropertyExtractor()
+        self.page_entity_resolver = PageEntityResolver()
+        self.dom_image_resolver = DOMImageResolver()
 
         self.edge_stopwords = {
             "de", "del", "la", "las", "el", "los", "y", "e", "en", "por",
@@ -256,6 +260,43 @@ class TourismPipeline:
 
         return props
 
+    def _resolve_dom_image(self, html, entity, url=""):
+        """
+        Devuelve (image_url, score)
+        """
+        try:
+            if hasattr(self.dom_image_resolver, "resolve_with_score"):
+                return self.dom_image_resolver.resolve_with_score(
+                    html=html,
+                    entity_name=entity,
+                    base_url=url,
+                    min_score=0,
+                )
+        except Exception:
+            pass
+
+        try:
+            if hasattr(self.dom_image_resolver, "resolve"):
+                img = self.dom_image_resolver.resolve(
+                    html=html,
+                    entity_name=entity,
+                    base_url=url,
+                    min_score=0,
+                )
+                return img, 3 if img else 0
+        except Exception:
+            pass
+
+        try:
+            if hasattr(self.dom_image_resolver, "resolve_image_for_entity"):
+                img = self.dom_image_resolver.resolve_image_for_entity(html, entity)
+                return img, 3 if img else 0
+        except Exception:
+            pass
+
+        return "", 0    
+        
+
     # ==================================================
     # NUEVOS HELPERS OUTPUT
     # ==================================================
@@ -338,7 +379,9 @@ class TourismPipeline:
         short_description="",
         long_description="",
         wikidata_id=None,
-        html=""
+        html="",
+        text="",
+        url=""
     ):
         short_description = self._safe_string(short_description)
         long_description = self._safe_string(long_description)
@@ -351,29 +394,44 @@ class TourismPipeline:
         if not long_description:
             long_description = fallback_desc
 
+    
         email = (
             self._safe_string(props.get("email"))
             or self._safe_string(props.get("correo"))
-            or self._extract_email_from_html(html)
         )
+
+        if not self._looks_like_email(email):
+            email = ""    
+        
 
         if not self._looks_like_email(email):
             email = ""
 
+        props = self._normalize_final_image_props(props if isinstance(props, dict) else {})
+
         return {
             "entity": self._safe_string(entity),
             "entity_name": self._safe_string(entity),
+            "label": self._safe_string(entity),
+            "name": self._safe_string(entity),
             "class": self._safe_string(label) or "Place",
+            "type": [self._safe_string(label) or "Place", "Location"],
             "score": float(score) if score is not None else 0.0,
             "verisimilitude_score": float(score) if score is not None else 0.0,
-            "properties": props if isinstance(props, dict) else {},
+            "sourceUrl": self._safe_string(url),
+            "properties": props,
             "short_description": short_description,
             "long_description": long_description,
+            "description": fallback_desc,
             "address": self._safe_string(props.get("address")),
             "phone": self._safe_string(props.get("telephone") or props.get("phone")),
             "email": email,
             "coordinates": self._build_coordinates(props),
             "wikidata_id": wikidata_id,
+            "image": self._safe_string(props.get("image")),
+            "mainImage": self._safe_string(props.get("mainImage")),
+            "relatedUrls": self._safe_string(props.get("relatedUrls")),
+            "url": self._safe_string(props.get("url")),
         }
 
     # ==================================================
@@ -706,8 +764,14 @@ class TourismPipeline:
 
         local_images = [
             img for img in local_images
-            if img and not self._is_wikimedia_url(img)
-        ]
+            if img
+            and not self._is_wikimedia_url(img)
+            and "separador" not in str(img).lower()
+            and "separator" not in str(img).lower()
+            and "logo" not in str(img).lower()
+            and "banner" not in str(img).lower()
+        ]    
+            
         local_images = self._dedupe_images(local_images)
 
         if local_images:
@@ -783,22 +847,19 @@ class TourismPipeline:
             normalized = normalize_text(text)
             h = text_hash(normalized)
 
-            if h in seen_hashes:
-                continue
-
-            skip = False
-            for seen in seen_texts:
-                if is_similar(normalized, seen):
-                    skip = True
-                    break
-
-            if skip:
-                continue
+            is_exact_dup = h in seen_hashes
+            is_near_dup = any(is_similar(normalized, seen) for seen in seen_texts)
 
             seen_texts.append(normalized)
             seen_hashes.add(h)
 
-            if not self.is_valid_block(text):
+            if is_exact_dup and not self.has_entity_signal(text):
+                continue
+
+            if is_near_dup and not self.has_entity_signal(text):
+                continue
+
+            if not self.is_valid_block(text) and not self.has_entity_signal(text):
                 continue
 
             if self.is_cookie_or_ui_block(text):
@@ -817,17 +878,47 @@ class TourismPipeline:
                 if primary:
                     entities.append(primary)
 
-            ner_entities = self.entity_extractor.extract(text)
-            entities.extend(ner_entities)
-
             try:
-                llm_entities_raw = self.llm_supervisor.extract_and_validate_entities(text)
-                entities.extend(llm_entities_raw)
+                ner_entities = self.entity_extractor.extract(text) or []
+                entities.extend(ner_entities)
             except Exception:
                 pass
 
-            entities.extend(self.event_detector.detect(text))
-            entities.extend(self.poi_discovery.discover(text))
+            try:
+                llm_entities_raw = self.llm_supervisor.extract_and_validate_entities(text) or []
+                for item in llm_entities_raw:
+                    if isinstance(item, dict):
+                        value = item.get("entity") or item.get("name") or item.get("label")
+                        if value:
+                            entities.append(value)
+                    elif isinstance(item, str):
+                        entities.append(item)
+            except Exception:
+                pass
+
+            try:
+                detected_events = self.event_detector.detect(text) or []
+                for item in detected_events:
+                    if isinstance(item, dict):
+                        value = item.get("entity") or item.get("name") or item.get("label")
+                        if value:
+                            entities.append(value)
+                    elif isinstance(item, str):
+                        entities.append(item)
+            except Exception:
+                pass
+
+            try:
+                detected_pois = self.poi_discovery.discover(text) or []
+                for item in detected_pois:
+                    if isinstance(item, dict):
+                        value = item.get("entity") or item.get("name") or item.get("label")
+                        if value:
+                            entities.append(value)
+                    elif isinstance(item, str):
+                        entities.append(item)
+            except Exception:
+                pass
 
             entities = self.cleaner.clean(entities)
             entities = [self.clean_entity_edges(e) for e in entities if self.is_valid_entity(e)]
@@ -879,7 +970,23 @@ class TourismPipeline:
                         entity=entity,
                     ) or {}
 
-                    image_props = self.image_enricher.enrich(entity, text) or {}
+                    try:
+                        image_props = self.image_enricher.enrich(
+                            entity=entity,
+                            text=text,
+                            html=html,
+                        ) or {}
+                    except Exception:
+                        image_props = {}
+
+                    dom_image, dom_score = self._resolve_dom_image(html, entity, url=url)
+                    
+                    if dom_image and dom_score >= 3:
+                        image_props["image"] = dom_image
+                        image_props["mainImage"] = dom_image
+                    elif dom_image and dom_score == 2:
+                        image_props["candidateImage"] = dom_image
+
                     props = self._merge_properties(
                         self.property_enricher.enrich(entity, "Place", text),
                         page_props,
@@ -898,8 +1005,13 @@ class TourismPipeline:
                             long_description=desc,
                             wikidata_id=None,
                             html=html,
+                            text=text,
+                            url=url,
                         )
                     )
+                    print("\n=== TRAS _build_output_entity ===")
+                    if classified_entities:
+                        print(classified_entities[0])
             else:
                 for e in llm_entities:
                     entity = self.clean_entity_edges(e.get("entity", ""))
@@ -917,15 +1029,36 @@ class TourismPipeline:
                         url=url,
                         entity=entity,
                     ) or {}
-                    image_props = self.image_enricher.enrich(entity, text) or {}
+
+                    try:
+                        image_props = self.image_enricher.enrich(
+                            entity=entity,
+                            text=text,
+                            html=html,
+                        ) or {}
+                    except Exception:
+                        image_props = {}
+
+                    dom_image, dom_score = self._resolve_dom_image(html, entity, url=url)
+                    
+                    if dom_image and dom_score >= 3:
+                        image_props["image"] = dom_image
+                        image_props["mainImage"] = dom_image
+                    elif dom_image and dom_score == 2:
+                        image_props["candidateImage"] = dom_image
+                    
 
                     wikidata_props = {}
                     wikidata_id = None
 
                     try:
                         link = self.wikidata_linker.link(entity)
-                        if link:
+                        if isinstance(link, dict):
                             wikidata_id = link.get("id")
+                        elif isinstance(link, str):
+                            wikidata_id = link
+
+                        if wikidata_id:
                             wikidata_props = self.wikidata_linker.get_entity_data(wikidata_id) or {}
                     except Exception:
                         wikidata_props = {}
@@ -950,8 +1083,13 @@ class TourismPipeline:
                             long_description=long_description,
                             wikidata_id=wikidata_id,
                             html=html,
+                            text=text,
+                            url=url,
                         )
                     )
+                    print("\n=== TRAS _build_output_entity ===")
+                    if classified_entities:
+                        print(classified_entities[0])
 
             cleaned_classified = []
             seen_classified = set()
@@ -970,7 +1108,15 @@ class TourismPipeline:
 
                 item["entity"] = entity_name
                 item["entity_name"] = entity_name
+                item["label"] = item.get("label") or entity_name
+                item["name"] = item.get("name") or entity_name
                 item["properties"] = self._normalize_final_image_props(item.get("properties", {}))
+
+                if "image" not in item:
+                    item["image"] = self._safe_string(item["properties"].get("image"))
+
+                if "mainImage" not in item:
+                    item["mainImage"] = self._safe_string(item["properties"].get("mainImage"))
 
                 if "verisimilitude_score" not in item:
                     item["verisimilitude_score"] = item.get("score", 0.0)
@@ -994,8 +1140,17 @@ class TourismPipeline:
                 if "coordinates" not in item:
                     item["coordinates"] = self._build_coordinates(item["properties"])
 
-                seen_classified.add(key)
+                    print("\n=== TRAS _build_output_entity ===")
+                    if classified_entities:
+                        print(classified_entities[0])
+
                 cleaned_classified.append(item)
+                seen_classified.add(key)
+
+            cleaned_classified = self.page_entity_resolver.resolve(cleaned_classified)
+            print("\n=== TRAS PageEntityResolver ===")
+            if cleaned_classified:
+                print(cleaned_classified[0])
 
             classified_entities = cleaned_classified
 
@@ -1047,3 +1202,24 @@ class TourismPipeline:
             or "wikidata.org" in low
             or "commons.wikimedia.org" in low
         )
+
+    def has_entity_signal(self, text: str) -> bool:
+        t = (text or "").strip()
+        if not t:
+            return False
+
+        patterns = [
+            r"\b\d{9}\b",
+            r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
+            r"\b(calle|plaza|avenida|avda|camino|carretera)\b",
+            r"\b(museo|hotel|restaurante|iglesia|monumento|evento|festival|mercado|ruta|barrio)\b",
+        ]
+
+        if any(re.search(p, t, re.IGNORECASE) for p in patterns):
+            return True
+
+        words = t.split()
+        if len(words) >= 2 and any(w[:1].isupper() for w in words):
+            return True
+
+        return False

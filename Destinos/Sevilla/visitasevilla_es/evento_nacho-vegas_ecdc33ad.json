@@ -1,0 +1,346 @@
+{
+  "url": "https://visitasevilla.es/evento/nacho-vegas",
+  "tracking_id": "ecdc33ad-dcac-4c7f-b472-e412dfd97833",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 438,
+    "url": "https://visitasevilla.es/evento/nacho-vegas",
+    "markdown": "Nacho Vegas\n===========\n\n[Ver todos los eventos](https://visitasevilla.es/ahora-en-sevilla/)\n\n19.02.29 ![](http://tic.visitasevilla.es/vsev/web_php/imatges/esdeveniments/4495698da6d6f181e457224320.jpg)\n\nNacho Vegas, músico y escritor nacido en Gijón, es una de las voces más singulares de la música independiente en España y Latinoamérica. El próximo 19 de febrero visitará Sevilla con su nuevo álbum, que se estrenará en enero de 2026 y del que ya puedes disfrutar de su adelanto «Alivio».\n\n[Tickets](https://insolitosevilla.com/conference-event/nacho-vegas/)\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "title": "Nacho Vegas - Visita Sevilla",
+      "twitter:site": "@sevillaciudad",
+      "article:publisher": "https://www.facebook.com/Sevilla",
+      "og:site_name": "Visita Sevilla",
+      "language": "es-ES",
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "ogUrl": "https://visitasevilla.es/evento/nacho-vegas/",
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "og:type": "article",
+      "ogTitle": "Nacho Vegas - Visita Sevilla",
+      "ogSiteName": "Visita Sevilla",
+      "viewport": "width=device-width, initial-scale=1",
+      "og:title": "Nacho Vegas - Visita Sevilla",
+      "ogLocale": "es_ES",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "og:url": "https://visitasevilla.es/evento/nacho-vegas/",
+      "twitter:card": "summary_large_image",
+      "og:locale": "es_ES",
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f12-13839d9e3274",
+      "sourceURL": "https://visitasevilla.es/evento/nacho-vegas",
+      "url": "https://visitasevilla.es/evento/nacho-vegas",
+      "statusCode": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 200,
+    "timestamp": "2026-03-18T16:34:52.772622"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Event": {
+          "availableLanguage": "en",
+          "eventSchedule": {
+            "byDay": "19",
+            "byMonth": "02",
+            "byMonthDay": 19,
+            "duration": "1 day",
+            "hasDescription": {
+              "keyword": "Nacho Vegas in Seville",
+              "longDescription": "Nacho Vegas, musician and writer born in Gijón, is one of the most unique voices in independent music in Spain and Latin America. On February 19, he will visit Seville with his new album, which will be released in January 2026, and of which you can already enjoy the preview \"Alivio\".",
+              "shortDescription": "Concert by Nacho Vegas in Seville"
+            }
+          },
+          "eventType": "Concert",
+          "hasAcknowledgement": "I accept the sending of commercial communications.",
+          "hasAdditionalInformation": {
+            "accessTip": "Make sure you are subscribed to the newsletter to receive updates.",
+            "conditions": "Prior registration is required for the event.",
+            "curiosities": "Nacho Vegas is known for his unique style in independent music.",
+            "frequentlyAskedQuestion": {
+              "question": "Do you need to buy tickets?",
+              "answer": "There is no mention of needing to buy tickets, but registration is recommended."
+            },
+            "remarks": "The new album will be released in January 2026."
+          },
+          "hasAdditionalType": "Music",
+          "hasAgenda": {
+            "position": 1,
+            "subEvent": {
+              "availableLanguage": "en",
+              "eventSchedule": {
+                "byDay": "19",
+                "byMonth": "02",
+                "byMonthDay": 19,
+                "duration": "1 day",
+                "hasDescription": {
+                  "keyword": "Concert by Nacho Vegas",
+                  "longDescription": "Concert to present Nacho Vegas's new album.",
+                  "shortDescription": "Presentation of new album"
+                }
+              },
+              "eventType": "Concert",
+              "hasAdditionalInformation": {
+                "accessTip": "Make sure you are subscribed to the newsletter.",
+                "conditions": "Prior registration required.",
+                "curiosities": "Nacho Vegas is a reference in indie music.",
+                "frequentlyAskedQuestion": {
+                  "question": "Where is the concert held?",
+                  "answer": "In Seville."
+                },
+                "remarks": "The album will be released in January 2026."
+              },
+              "hasAdditionalType": "Music",
+              "hasDescription": {
+                "keyword": "Concert by Nacho Vegas",
+                "longDescription": "Concert to present Nacho Vegas's new album.",
+                "shortDescription": "Presentation of new album"
+              },
+              "hasLocation": {
+                "autonomousCommunity": "Andalusia",
+                "country": "Spain",
+                "locality": "Seville",
+                "province": "Seville"
+              },
+              "hasPriceSpecification": {
+                "currency": "EUR",
+                "isAccessibleForFree": true,
+                "taxesAndFessIncluded": true
+              },
+              "maximumAttendeeCapacity": 1000,
+              "name": "Concert by Nacho Vegas"
+            }
+          },
+          "hasDescription": {
+            "keyword": "Nacho Vegas",
+            "longDescription": "Nacho Vegas is one of the most unique voices in independent music in Spain and Latin America.",
+            "shortDescription": "Musician and writer"
+          },
+          "hasLocation": {
+            "autonomousCommunity": "Andalusia",
+            "country": "Spain",
+            "locality": "Seville",
+            "province": "Seville"
+          },
+          "hasPriceSpecification": {
+            "currency": "EUR",
+            "isAccessibleForFree": true,
+            "taxesAndFessIncluded": true
+          },
+          "maximumAttendeeCapacity": 1000,
+          "name": "Concert by Nacho Vegas"
+        }
+      },
+      "classes": [
+        {
+          "score": 0.9,
+          "classname": "Event"
+        }
+      ],
+      "original_content": "Nacho Vegas\n===========\n\n19.02.29 \n\nNacho Vegas, músico y escritor nacido en Gijón, es una de las voces más singulares de la música independiente en España y Latinoamérica. El próximo 19 de febrero visitará Sevilla con su nuevo álbum, que se estrenará en enero de 2026 y del que ya puedes disfrutar de su adelanto «Alivio».\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: EventRefInput!) {\n          x: createEvent(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "Seville",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "Concert by Nacho Vegas",
+              "lang": "es"
+            }
+          ],
+          "hasDescription": [
+            {
+              "object": {
+                "keyword": [
+                  "Nacho Vegas"
+                ],
+                "shortDescription": [
+                  {
+                    "value": "Musician and writer",
+                    "lang": "es"
+                  }
+                ],
+                "longDescription": [
+                  {
+                    "value": "Nacho Vegas is one of the most unique voices in independent music in Spain and Latin America.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "hasLocation": [
+            {
+              "object": {
+                "province": "Seville",
+                "streetAddress": "Unknown",
+                "postalCode": "Unknown",
+                "locality": "Seville",
+                "country": "Spain",
+                "autonomousCommunity": "Andalusia",
+                "municipality": "Seville"
+              }
+            }
+          ],
+          "hasAdditionalInformation": {
+            "object": {
+              "accessTip": "Make sure you are subscribed to the newsletter to receive updates.",
+              "conditions": "Prior registration is required for the event.",
+              "curiosities": "Nacho Vegas is known for his unique style in independent music.",
+              "frequentlyAskedQuestion": {
+                "object": {
+                  "question": "Do you need to buy tickets?",
+                  "answer": "There is no mention of needing to buy tickets, but registration is recommended."
+                }
+              },
+              "remarks": "The new album will be released in January 2026."
+            }
+          },
+          "hasPriceSpecification": {
+            "object": {
+              "currency": "EUR",
+              "isAccessibleForFree": true,
+              "taxesAndFessIncluded": true
+            }
+          },
+          "hasAcknowledgement": [
+            {
+              "object": {
+                "name": [
+                  {
+                    "value": "I accept the sending of commercial communications.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "availableLanguage": [
+            {
+              "uri": "http://vocab.segittur.es/language/en"
+            }
+          ],
+          "hasAdditionalType": "Music",
+          "hasAgenda": [
+            {
+              "object": {
+                "position": 1,
+                "subEvent": {
+                  "object": {
+                    "availableLanguage": {
+                      "uri": "http://vocab.segittur.es/language/en"
+                    },
+                    "eventSchedule": {
+                      "object": {
+                        "byDay": "19",
+                        "byMonth": "02",
+                        "byMonthDay": 19,
+                        "duration": "1 day",
+                        "hasDescription": [
+                          {
+                            "object": {
+                              "keyword": [
+                                "Concert by Nacho Vegas"
+                              ],
+                              "shortDescription": [
+                                {
+                                  "value": "Presentation of new album",
+                                  "lang": "es"
+                                }
+                              ],
+                              "longDescription": [
+                                {
+                                  "value": "Concert to present Nacho Vegas's new album.",
+                                  "lang": "es"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "eventType": "Concert",
+                    "hasAdditionalInformation": {
+                      "object": {
+                        "accessTip": "Make sure you are subscribed to the newsletter.",
+                        "conditions": "Prior registration required.",
+                        "curiosities": "Nacho Vegas is a reference in indie music.",
+                        "frequentlyAskedQuestion": {
+                          "object": {
+                            "question": "Where is the concert held?",
+                            "answer": "In Seville."
+                          }
+                        },
+                        "remarks": "The album will be released in January 2026."
+                      }
+                    },
+                    "hasAdditionalType": "Music",
+                    "hasDescription": [
+                      {
+                        "object": {
+                          "keyword": [
+                            "Concert by Nacho Vegas"
+                          ],
+                          "shortDescription": [
+                            {
+                              "value": "Presentation of new album",
+                              "lang": "es"
+                            }
+                          ],
+                          "longDescription": [
+                            {
+                              "value": "Concert to present Nacho Vegas's new album.",
+                              "lang": "es"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "hasLocation": [
+                      {
+                        "object": {
+                          "province": "Seville",
+                          "streetAddress": "Unknown",
+                          "postalCode": "Unknown",
+                          "locality": "Seville",
+                          "country": "Spain",
+                          "autonomousCommunity": "Andalusia",
+                          "municipality": "Seville"
+                        }
+                      }
+                    ],
+                    "hasPriceSpecification": {
+                      "object": {
+                        "currency": "EUR",
+                        "isAccessibleForFree": true,
+                        "taxesAndFessIncluded": true
+                      }
+                    },
+                    "maximumAttendeeCapacity": 1000,
+                    "name": "Concert by Nacho Vegas"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,488 @@
+[
+  {
+    "name": "Sevilla",
+    "types": [
+      "Place",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es",
+    "url": "https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla",
+    "relatedUrls": [
+      "https://visitasevilla.es/que-hacer-en-sevilla",
+      "https://visitasevilla.es/comer-salir-sevilla",
+      "https://visitasevilla.es/sevilla-de-opera",
+      "https://visitasevilla.es/ahora-en-sevilla",
+      "https://visitasevilla.es/que-hacer-en-sevilla/en-familia",
+      "https://visitasevilla.es/sevilla-es-una-ciudad-para-el-deporte",
+      "https://visitasevilla.es/estudia-en-sevilla",
+      "https://visitasevilla.es/sharm-sevilla",
+      "https://visitasevilla.es/sabias-que-curiosidades-e-historias-sorprendentes-de-sevilla",
+      "https://visitasevilla.es/mapa-interactivo-sevilla",
+      "https://visitasevilla.es/cuaresma-sevilla",
+      "https://visitasevilla.es/la-semana-santa-de-sevilla",
+      "https://visitasevilla.es/sabias-que-la-navidad-en-sevilla-esconde-tradiciones-con-siglos-de-historia",
+      "https://visitasevilla.es/sabias-que-la-vela-de-triana-en-honor-a-santa-ana-es-la-fiesta-mas-antigua-de-sevilla",
+      "https://visitasevilla.es/sabias-que-la-portada-de-la-feria-de-sevilla-tiene-mas-bombillas-que-la-torre-eiffel",
+      "https://visitasevilla.es/celebra-el-dia-mundial-del-flamenco-en-sevilla",
+      "https://visitasevilla.es/octubre-en-sevilla-descubre-todos-los-planes-que-ofrece-la-ciudad",
+      "https://visitasevilla.es/culmina-la-temporada-taurina-en-sevilla-un-tributo-al-arte-de-torear",
+      "https://visitasevilla.es/orgullo-sevilla"
+    ],
+    "address": "Alcalde Marqués de Contadero s/n",
+    "phone": "34) 955 471 232",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Ciudad andaluza famosa por su cultura y tradiciones.",
+    "longDescription": "Sevilla es una ciudad situada en el sur de España, conocida por su rica historia, arquitectura impresionante y vibrante vida cultural. Es un destino turístico popular que ofrece una mezcla de experiencias tradicionales y modernas, incluyendo su famosa artesanía, festivales y monumentos emblemáticos como la Giralda y la Catedral de Sevilla.",
+    "description": "Turismo de Sevilla, descubre la muy famosa y muy desconocida ciudad de Sevilla. Admirada y amada por lo que se ve, inolvidable y eterna por lo que no se ve.",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Registro Mercantil",
+    "types": [
+      "Organization",
+      "Location"
+    ],
+    "score": 0.95,
+    "sourceUrl": "https://visitasevilla.es/aviso-legal",
+    "url": "",
+    "relatedUrls": [],
+    "address": "Alcalde Luis Uruñuela nº1 C",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Institución que registra y regula las sociedades comerciales.",
+    "longDescription": "El Registro Mercantil es una institución que se encarga de la inscripción de las sociedades comerciales y otros actos relacionados, proporcionando transparencia y seguridad jurídica en el ámbito empresarial.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Feria de Abril",
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/la-feria-de-abril",
+      "https://visitasevilla.es/sabias-que-la-portada-de-la-feria-de-sevilla-tiene-mas-bombillas-que-la-torre-eiffel",
+      "https://visitasevilla.es/cuaresma-y-semana-santa",
+      "https://visitasevilla.es/la-semana-santa-de-sevilla",
+      "https://visitasevilla.es/sabias-que-la-vela-de-triana-en-honor-a-santa-ana-es-la-fiesta-mas-antigua-de-sevilla",
+      "https://visitasevilla.es/cuaresma-sevilla",
+      "https://visitasevilla.es/el-flamenco",
+      "https://visitasevilla.es/celebra-el-dia-mundial-del-flamenco-en-sevilla",
+      "https://visitasevilla.es/corpus-christi"
+    ],
+    "address": "Alcalde Marqués de Contadero s/n",
+    "phone": "34) 955 471 232",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Famosa feria de Sevilla con atracciones y tradiciones.",
+    "longDescription": "La Feria de Abril es una de las festividades más emblemáticas de Sevilla, donde se celebran diversas actividades, atracciones y tradiciones que atraen a miles de visitantes cada año.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Velá de Triana",
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/sabias-que-la-vela-de-triana-en-honor-a-santa-ana-es-la-fiesta-mas-antigua-de-sevilla"
+    ],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Fiesta tradicional en honor a Santa Ana en Sevilla.",
+    "longDescription": "La Velá de Triana es una festividad que se celebra en el barrio de Triana en Sevilla, dedicada a Santa Ana. Es conocida por sus actividades culturales, gastronómicas y religiosas, y es una de las fiestas más antiguas de la ciudad, atrayendo tanto a locales como a turistas.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "festividad de la Virgen de los Reyes",
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/la-festividad-de-la-virgen-de-los-reyes-una-tradicion-sevillana-llena-de-pasion"
+    ],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Celebración en honor a la Virgen de los Reyes en Sevilla.",
+    "longDescription": "La festividad de la Virgen de los Reyes es una celebración religiosa en Sevilla que rinde homenaje a la patrona de la ciudad, con procesiones y actos litúrgicos que atraen a numerosos fieles y turistas, destacando la devoción hacia esta figura religiosa.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Temporada Taurina",
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/culmina-la-temporada-taurina-en-sevilla-un-tributo-al-arte-de-torear"
+    ],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Evento que celebra el arte de torear en Sevilla.",
+    "longDescription": "La Temporada Taurina en Sevilla es un evento anual que culmina con una serie de corridas de toros, donde se rinde homenaje a la tradición y el arte de la tauromaquia. Este evento atrae a numerosos turistas y aficionados, convirtiéndose en un punto de interés cultural y social en la ciudad.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Cuaresma",
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/cuaresma-y-semana-santa",
+      "https://visitasevilla.es/cuaresma-sevilla",
+      "https://visitasevilla.es/el-flamenco",
+      "https://visitasevilla.es/celebra-el-dia-mundial-del-flamenco-en-sevilla",
+      "https://visitasevilla.es/la-feria-de-abril",
+      "https://visitasevilla.es/sabias-que-la-portada-de-la-feria-de-sevilla-tiene-mas-bombillas-que-la-torre-eiffel",
+      "https://visitasevilla.es/la-semana-santa-de-sevilla",
+      "https://visitasevilla.es/sabias-que-la-vela-de-triana-en-honor-a-santa-ana-es-la-fiesta-mas-antigua-de-sevilla",
+      "https://visitasevilla.es/corpus-christi"
+    ],
+    "address": "Alcalde Marqués de Contadero s/n",
+    "phone": "34) 955 471 232",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Periodo de preparación para la Semana Santa.",
+    "longDescription": "La Cuaresma es un periodo de 40 días que precede a la Semana Santa, caracterizado por la reflexión y la preparación espiritual en la tradición cristiana, especialmente en Sevilla, donde se celebran diversas actividades y procesiones.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Feria de Sevilla",
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/sabias-que-la-portada-de-la-feria-de-sevilla-tiene-mas-bombillas-que-la-torre-eiffel"
+    ],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Feria anual con atracciones y actividades culturales en Sevilla.",
+    "longDescription": "La Feria de Sevilla es un evento anual que se celebra en la ciudad de Sevilla, España. Es conocida por su ambiente festivo, con casetas, música, baile y gastronomía típica. La feria atrae a miles de visitantes cada año, quienes disfrutan de actividades culturales y sociales, convirtiéndola en una de las festividades más emblemáticas de la región.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Sevilla Sevilla Desconocida",
+    "types": [
+      "Place",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/guias-mapas-y-monumentos",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/que-hacer-en-sevilla",
+      "https://visitasevilla.es/comer-salir-sevilla",
+      "https://visitasevilla.es/sevilla-de-opera",
+      "https://visitasevilla.es/ahora-en-sevilla",
+      "https://visitasevilla.es/que-hacer-en-sevilla/en-familia",
+      "https://visitasevilla.es/sevilla-es-una-ciudad-para-el-deporte",
+      "https://visitasevilla.es/estudia-en-sevilla",
+      "https://visitasevilla.es/sharm-sevilla",
+      "https://visitasevilla.es/sabias-que-curiosidades-e-historias-sorprendentes-de-sevilla",
+      "https://visitasevilla.es/mapa-interactivo-sevilla"
+    ],
+    "address": "Alcalde Marqués de Contadero s/n",
+    "phone": "34) 955 471 232",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Ciudad de Sevilla con aspectos menos conocidos.",
+    "longDescription": "Sevilla Sevilla Desconocida se refiere a la ciudad de Sevilla, destacando sus rincones y aspectos menos explorados por los turistas. Es un lugar lleno de historia, cultura y monumentos que merecen ser visitados.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Monumentos de Sevilla",
+    "types": [
+      "TouristAttraction",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/guias-mapas-y-monumentos",
+    "url": "https://visitasevilla.es/guias-mapas-y-monumentos",
+    "relatedUrls": [
+      "https://visitasevilla.es/wp-content/uploads/2025/06/Monumentos-ES-27062025.pdf"
+    ],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Conjunto de atracciones monumentales en Sevilla.",
+    "longDescription": "Los Monumentos de Sevilla son una serie de atracciones turísticas que destacan el patrimonio histórico y cultural de la ciudad. Incluyen catedrales, palacios y otros edificios emblemáticos que son imprescindibles para cualquier visitante.",
+    "description": "El patrimonio monumental de Sevilla es impresionante. Para que aproveches al máximo tu estancia en la ciudad, y puedas planificar tu visita a los lugares que más te interesen, te facilitamos los horarios de los monumentos, sus precios y su localización dentro de los mapas turísticos. Monumentos de Sevilla Sevilla Desconocida",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Guía Sevilla",
+    "types": [
+      "Service",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/guias-mapas-y-monumentos",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/que-hacer-en-sevilla",
+      "https://visitasevilla.es/comer-salir-sevilla",
+      "https://visitasevilla.es/sevilla-de-opera",
+      "https://visitasevilla.es/ahora-en-sevilla",
+      "https://visitasevilla.es/que-hacer-en-sevilla/en-familia",
+      "https://visitasevilla.es/sevilla-es-una-ciudad-para-el-deporte",
+      "https://visitasevilla.es/estudia-en-sevilla",
+      "https://visitasevilla.es/sharm-sevilla",
+      "https://visitasevilla.es/sabias-que-curiosidades-e-historias-sorprendentes-de-sevilla",
+      "https://visitasevilla.es/mapa-interactivo-sevilla"
+    ],
+    "address": "Alcalde Marqués de Contadero s/n",
+    "phone": "34) 955 471 232",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Guía turística para planificar la estancia en Sevilla.",
+    "longDescription": "Guía Sevilla es un servicio que ofrece información útil y recomendaciones sobre los lugares de interés en Sevilla, ayudando a los turistas a planificar su visita de manera efectiva.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Triana Mapa",
+    "types": [
+      "Route",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/guias-mapas-y-monumentos",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/mapa-interactivo-sevilla",
+      "https://visitasevilla.es/que-hacer-en-sevilla",
+      "https://visitasevilla.es/comer-salir-sevilla",
+      "https://visitasevilla.es/sevilla-de-opera",
+      "https://visitasevilla.es/ahora-en-sevilla",
+      "https://visitasevilla.es/que-hacer-en-sevilla/en-familia",
+      "https://visitasevilla.es/sevilla-es-una-ciudad-para-el-deporte",
+      "https://visitasevilla.es/estudia-en-sevilla",
+      "https://visitasevilla.es/sharm-sevilla",
+      "https://visitasevilla.es/sabias-que-curiosidades-e-historias-sorprendentes-de-sevilla",
+      "https://visitasevilla.es/wp-content/uploads/2026/02/Cartuja.pdf"
+    ],
+    "address": "Alcalde Marqués de Contadero s/n",
+    "phone": "34) 955 471 232",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Mapa turístico de la zona de Triana en Sevilla.",
+    "longDescription": "El Triana Mapa es un recurso útil para los turistas que desean explorar la zona de Triana en Sevilla, ofreciendo información sobre puntos de interés y detalles prácticos para la visita.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Sevilla Desconocida",
+    "types": [
+      "TouristAttraction",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/guias-mapas-y-monumentos",
+    "url": "",
+    "relatedUrls": [
+      "https://visitasevilla.es/que-hacer-en-sevilla",
+      "https://visitasevilla.es/comer-salir-sevilla",
+      "https://visitasevilla.es/sevilla-de-opera",
+      "https://visitasevilla.es/ahora-en-sevilla",
+      "https://visitasevilla.es/que-hacer-en-sevilla/en-familia",
+      "https://visitasevilla.es/sevilla-es-una-ciudad-para-el-deporte",
+      "https://visitasevilla.es/estudia-en-sevilla",
+      "https://visitasevilla.es/sharm-sevilla",
+      "https://visitasevilla.es/sabias-que-curiosidades-e-historias-sorprendentes-de-sevilla",
+      "https://visitasevilla.es/mapa-interactivo-sevilla"
+    ],
+    "address": "Alcalde Marqués de Contadero s/n",
+    "phone": "34) 955 471 232",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Visitas guiadas a los monumentos de Sevilla.",
+    "longDescription": "Sevilla Desconocida ofrece recorridos por el patrimonio monumental de Sevilla, destacando la riqueza cultural y arquitectónica de la ciudad. Ideal para turistas que desean explorar los monumentos menos conocidos y disfrutar de una experiencia única en la capital andaluza.",
+    "description": "",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Sevilla Sevicios",
+    "types": [
+      "Service",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/sharm-sevilla",
+    "url": "",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Servicios profesionales destacados en Sevilla.",
+    "longDescription": "Para preparar el viaje, puedes acudir a los servicios profesionales más destacados de Sevilla, que ofrecen soluciones personalizadas con excelencia y dedicación.",
+    "description": "Acércate al encanto de Sevilla aún por descubrir. Sharm, un talismán de experiencias únicas.",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Dormir Descubre",
+    "types": [
+      "Accommodation",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/sharm-sevilla",
+    "url": "",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Alojamientos únicos en Sevilla.",
+    "longDescription": "Dormir Descubre ofrece una selección de alojamientos únicos en Sevilla, destacando por su comodidad y elegancia. Es un recurso ideal para turistas que buscan hospedarse en espacios que reflejan la esencia y encanto de la ciudad.",
+    "description": "Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Comprar Sumérgete",
+    "types": [
+      "LocalBusiness",
+      "Location"
+    ],
+    "score": 1,
+    "sourceUrl": "https://visitasevilla.es/sharm-sevilla",
+    "url": "",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Moda y creatividad en Sevilla.",
+    "longDescription": "Sumérgete en el vibrante mundo de la moda en Sevilla, donde la tradición y la historia se fusionan en creaciones únicas que reflejan la idiosincrasia sevillana.",
+    "description": "Sumérgete en el vibrante mundo de la moda en Sevilla, donde se revela la fusión perfecta entre creatividad y estilo. La tradición y la historia milenaria de la ciudad se encuentran en creaciones cuidadas y diferentes, que reflejan la idisosincrasia sevillana. Conoce la moda de Sevilla",
+    "images": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Experimentar",
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "score": 0.9999999999999999,
+    "sourceUrl": "https://visitasevilla.es/sharm-sevilla",
+    "url": "",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Experiencias fascinantes en Sevilla.",
+    "longDescription": "Explora las experiencias más fascinantes de Sevilla, donde cada instante se convierte en un momento inolvidable, desde la artesanía hasta vivencias sofisticadas.",
+    "description": "Explora las experiencias más fascinantes de Sevilla, donde cada instante se convierte en un momento inolvidable. Acércate a la artesanía sevillana, conozca enclaves únicos de la ciudad… desde lo más tradicional hasta la pura sofisticación, Sevilla ofrece vivencias que dejan sin aliento. Adéntrate en el alma de la ciudad",
+    "images": [],
+    "wikidataId": ""
+  }
+]

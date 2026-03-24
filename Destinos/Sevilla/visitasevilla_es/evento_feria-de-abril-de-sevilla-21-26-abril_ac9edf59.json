@@ -1,0 +1,153 @@
+{
+  "url": "https://visitasevilla.es/evento/feria-de-abril-de-sevilla-21-26-abril",
+  "tracking_id": "ac9edf59-8cc0-4b2f-b64a-27dff04daf92",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 1740,
+    "url": "https://visitasevilla.es/evento/feria-de-abril-de-sevilla-21-26-abril",
+    "markdown": "Feria de Abril de Sevilla 21-26 abril\n=====================================\n\n[Ver todos los eventos](https://visitasevilla.es/ahora-en-sevilla/)\n\n21.04.26-26.04.26 ![](http://tic.visitasevilla.es/vsev/web_php/imatges/esdeveniments/637069931c6c4858c992161166.jpg)\n\n21-26 abril 2026\n\nAcceso gratuito\n\nInauguración la noche del 20 de abril con espectáculo en la Portada iluminada. \n\n[Saber más](https://visitasevilla.es/la-feria-de-abril/)\n\n[](http://tic.visitasevilla.es/vsev/gestion/documentos/10241e96eb5ea9c5da020adaf5c6b25e1b67d6ee6684a4e14fd7c33e82be3447.pdf)\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "og:title": "Feria de Abril de Sevilla 21-26 abril - Visita Sevilla",
+      "ogTitle": "Feria de Abril de Sevilla 21-26 abril - Visita Sevilla",
+      "ogSiteName": "Visita Sevilla",
+      "og:locale": "es_ES",
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "og:url": "https://visitasevilla.es/evento/feria-de-abril-de-sevilla-21-26-abril/",
+      "og:type": "article",
+      "language": "es-ES",
+      "viewport": "width=device-width, initial-scale=1",
+      "ogLocale": "es_ES",
+      "ogUrl": "https://visitasevilla.es/evento/feria-de-abril-de-sevilla-21-26-abril/",
+      "article:publisher": "https://www.facebook.com/Sevilla",
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "og:site_name": "Visita Sevilla",
+      "twitter:card": "summary_large_image",
+      "title": "Feria de Abril de Sevilla 21-26 abril - Visita Sevilla",
+      "twitter:site": "@sevillaciudad",
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f14-391bdbc6f369",
+      "sourceURL": "https://visitasevilla.es/evento/feria-de-abril-de-sevilla-21-26-abril",
+      "url": "https://visitasevilla.es/evento/feria-de-abril-de-sevilla-21-26-abril",
+      "statusCode": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 200,
+    "timestamp": "2026-03-18T16:40:20.371023"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Event": {
+          "availableLanguage": "en",
+          "eventSchedule": {
+            "byDay": "April 21-26",
+            "byMonth": "04",
+            "byMonthDay": 21,
+            "byMonthWeek": 4,
+            "duration": "6 days",
+            "hasDescription": {
+              "keyword": "April Fair",
+              "longDescription": "Inauguration on the night of April 20 with a show at the illuminated Entrance.",
+              "shortDescription": "Free access"
+            },
+            "repeatCount": 1
+          },
+          "eventType": "Fair",
+          "hasAcknowledgement": "Free access",
+          "hasAdditionalInformation": {
+            "accessTip": "Free access",
+            "conditions": "What you need to know is in your email",
+            "curiosities": "Opening show at the illuminated Entrance",
+            "frequentlyAskedQuestion": {
+              "question": "How can I get more information?",
+              "answer": "What you need to know is in your email"
+            },
+            "remarks": "I accept the sending of commercial communications."
+          },
+          "hasAdditionalType": "Festival",
+          "maximumAttendeeCapacity": 10000,
+          "name": "Seville April Fair",
+          "offersAdditionalEventService": "Newsletter for updates",
+          "outdoorEvent": true,
+          "relatedTourismDestination": "Seville"
+        }
+      },
+      "classes": [
+        {
+          "score": 0.8,
+          "classname": "TouristAttractionSite"
+        },
+        {
+          "score": 0.7,
+          "classname": "TraditionalMarket"
+        },
+        {
+          "score": 0.9,
+          "classname": "Event"
+        }
+      ],
+      "original_content": "Feria de Abril de Sevilla 21-26 abril\n=====================================\n\n21.04.26-26.04.26 \n\n21-26 abril 2026\n\nAcceso gratuito\n\nInauguración la noche del 20 de abril con espectáculo en la Portada iluminada. \n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: EventRefInput!) {\n          x: createEvent(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "sevilla",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "Seville April Fair",
+              "lang": "es"
+            }
+          ],
+          "hasAdditionalInformation": {
+            "object": {
+              "accessTip": "Free access",
+              "conditions": "What you need to know is in your email",
+              "curiosities": "Opening show at the illuminated Entrance",
+              "frequentlyAskedQuestion": {
+                "object": {
+                  "question": "How can I get more information?",
+                  "answer": "What you need to know is in your email"
+                }
+              },
+              "remarks": "I accept the sending of commercial communications."
+            }
+          },
+          "hasAcknowledgement": [
+            {
+              "object": {
+                "name": [
+                  {
+                    "value": "Free access",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "availableLanguage": [
+            {
+              "uri": "http://vocab.segittur.es/language/en"
+            }
+          ],
+          "hasAdditionalType": "Festival"
+        }
+      }
+    }
+  }
+}

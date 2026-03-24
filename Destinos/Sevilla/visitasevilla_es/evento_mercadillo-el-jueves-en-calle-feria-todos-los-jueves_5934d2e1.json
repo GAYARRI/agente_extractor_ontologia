@@ -1,0 +1,390 @@
+{
+  "url": "https://visitasevilla.es/evento/mercadillo-el-jueves-en-calle-feria-todos-los-jueves",
+  "tracking_id": "5934d2e1-95ac-4a13-86f6-cae9d59afbc4",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 982,
+    "url": "https://visitasevilla.es/evento/mercadillo-el-jueves-en-calle-feria-todos-los-jueves",
+    "markdown": "Mercadillo El Jueves en calle Feria. Todos los jueves\n=====================================================\n\n[Ver todos los eventos](https://visitasevilla.es/ahora-en-sevilla/)\n\n24.06.24-28.01.29 ![](http://tic.visitasevilla.es/vsev/web_php/imatges/esdeveniments/186246679547cb2f7f097250656.jpg)\n\n**Dónde**: Calle Feria\n\n**Cuándo**: Todos los jueves\n\n**Hora**: de 8:00h a 151.00h\n\n**Precio**: gratuito\n\n**Información**:\n\nMercadillo de antiguedades y segunda mano\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "ogUrl": "https://visitasevilla.es/evento/mercadillo-el-jueves-en-calle-feria-todos-los-jueves/",
+      "language": "es-ES",
+      "article:publisher": "https://www.facebook.com/Sevilla",
+      "ogTitle": "Mercadillo El Jueves en calle Feria. Todos los jueves - Visita Sevilla",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "viewport": "width=device-width, initial-scale=1",
+      "title": "Mercadillo El Jueves en calle Feria. Todos los jueves - Visita Sevilla",
+      "og:locale": "es_ES",
+      "ogLocale": "es_ES",
+      "ogSiteName": "Visita Sevilla",
+      "og:type": "article",
+      "og:title": "Mercadillo El Jueves en calle Feria. Todos los jueves - Visita Sevilla",
+      "og:site_name": "Visita Sevilla",
+      "og:url": "https://visitasevilla.es/evento/mercadillo-el-jueves-en-calle-feria-todos-los-jueves/",
+      "twitter:card": "summary_large_image",
+      "twitter:site": "@sevillaciudad",
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f12-d93b86c3e18a",
+      "sourceURL": "https://visitasevilla.es/evento/mercadillo-el-jueves-en-calle-feria-todos-los-jueves",
+      "url": "https://visitasevilla.es/evento/mercadillo-el-jueves-en-calle-feria-todos-los-jueves",
+      "statusCode": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 200,
+    "timestamp": "2026-03-18T16:36:34.887667"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Event": {
+          "availableLanguage": "en",
+          "eventSchedule": {
+            "byDay": "Thursday",
+            "byMonth": "June",
+            "byMonthDay": 24,
+            "byMonthWeek": 1,
+            "duration": "7 hours",
+            "hasDescription": {
+              "keyword": "market, antiques, second hand",
+              "longDescription": "Antiques and second-hand market",
+              "shortDescription": "Market El Jueves on Calle Feria"
+            },
+            "repeatCount": 30
+          },
+          "eventType": "Market",
+          "hasAcknowledgement": "I accept the sending of commercial communications.",
+          "hasAdditionalInformation": {
+            "accessTip": "Information available via email",
+            "conditions": "Free",
+            "curiosities": "Antiques and second-hand market",
+            "frequentlyAskedQuestion": {
+              "answer": "The information will be sent to your email.",
+              "question": "How will I receive the information?"
+            },
+            "remarks": "The information provided will be used for personalized marketing."
+          },
+          "hasAdditionalType": "Market",
+          "hasAgenda": {
+            "position": 1,
+            "subEvent": {
+              "availableLanguage": "en",
+              "eventSchedule": {
+                "byDay": "Thursday",
+                "byMonth": "June",
+                "byMonthDay": 24,
+                "byMonthWeek": 1,
+                "duration": "7 hours",
+                "hasDescription": {
+                  "keyword": "market, antiques, second hand",
+                  "longDescription": "Antiques and second-hand market",
+                  "shortDescription": "Market El Jueves on Calle Feria"
+                },
+                "repeatCount": 30
+              },
+              "eventType": "Market",
+              "hasAdditionalInformation": {
+                "accessTip": "Information available via email",
+                "conditions": "Free",
+                "curiosities": "Antiques and second-hand market",
+                "frequentlyAskedQuestion": {
+                  "answer": "The information will be sent to your email.",
+                  "question": "How will I receive the information?"
+                },
+                "remarks": "The information provided will be used for personalized marketing."
+              },
+              "hasAdditionalType": "Market",
+              "name": "Market El Jueves"
+            }
+          },
+          "hasDescription": {
+            "keyword": "market, antiques, second hand",
+            "longDescription": "Antiques and second-hand market",
+            "shortDescription": "Market El Jueves on Calle Feria"
+          },
+          "hasLocation": {
+            "autonomousCommunity": "Andalusia",
+            "country": "Spain",
+            "county": "Sevilla",
+            "locality": "Sevilla",
+            "province": "Sevilla",
+            "streetAddress": "Calle Feria"
+          },
+          "hasPriceSpecification": {
+            "currency": "EUR",
+            "eligibleQuantity": "1",
+            "isAccessibleForFree": true,
+            "priceSchedule": {
+              "byDay": "Thursday",
+              "byMonth": "June",
+              "byMonthDay": 24,
+              "byMonthWeek": 1,
+              "duration": "7 hours",
+              "hasDescription": {
+                "keyword": "market, antiques, second hand",
+                "longDescription": "Antiques and second-hand market",
+                "shortDescription": "Market El Jueves on Calle Feria"
+              }
+            },
+            "targetAudience": "Everyone",
+            "taxesAndFessIncluded": true
+          },
+          "maximumAttendeeCapacity": 1000,
+          "name": "Market El Jueves",
+          "outdoorEvent": true,
+          "refPointOfInterest": {
+            "hasAdditionalInformation": {
+              "accessTip": "Information available via email",
+              "conditions": "Free",
+              "curiosities": "Antiques and second-hand market",
+              "frequentlyAskedQuestion": {
+                "answer": "The information will be sent to your email.",
+                "question": "How will I receive the information?"
+              },
+              "remarks": "The information provided will be used for personalized marketing."
+            },
+            "hasLocation": {
+              "autonomousCommunity": "Andalusia",
+              "country": "Spain",
+              "county": "Sevilla",
+              "locality": "Sevilla",
+              "province": "Sevilla",
+              "streetAddress": "Calle Feria"
+            },
+            "hasOpeningHours": {
+              "closesAt": "15:00",
+              "dayOfTheWeek": "Thursday",
+              "hasDescription": {
+                "keyword": "market, antiques, second hand",
+                "longDescription": "Antiques and second-hand market",
+                "shortDescription": "Market El Jueves on Calle Feria"
+              },
+              "opensAt": "08:00"
+            },
+            "keyword": "market, antiques, second hand",
+            "longDescription": "Antiques and second-hand market",
+            "shortDescription": "Market El Jueves on Calle Feria"
+          },
+          "touristType": "local"
+        }
+      },
+      "classes": [
+        {
+          "score": 0.85,
+          "classname": "TraditionalMarket"
+        },
+        {
+          "score": 0.6,
+          "classname": "TouristInformationOffice"
+        },
+        {
+          "score": 0.9,
+          "classname": "Event"
+        }
+      ],
+      "original_content": "Mercadillo El Jueves en calle Feria. Todos los jueves\n=====================================================\n\n24.06.24-28.01.29 \n\n**Dónde**: Calle Feria\n\n**Cuándo**: Todos los jueves\n\n**Hora**: de 8:00h a 151.00h\n\n**Precio**: gratuito\n\n**Información**:\n\nMercadillo de antiguedades y segunda mano\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: EventRefInput!) {\n          x: createEvent(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "Sevilla",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "Market El Jueves",
+              "lang": "es"
+            }
+          ],
+          "hasDescription": [
+            {
+              "object": {
+                "keyword": [
+                  "market",
+                  "antiques",
+                  "second hand"
+                ],
+                "shortDescription": [
+                  {
+                    "value": "Market El Jueves on Calle Feria",
+                    "lang": "es"
+                  }
+                ],
+                "longDescription": [
+                  {
+                    "value": "Antiques and second-hand market",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "hasLocation": [
+            {
+              "object": {
+                "province": "Sevilla",
+                "streetAddress": "Calle Feria",
+                "postalCode": "Unknown",
+                "locality": "Sevilla",
+                "country": "Spain",
+                "autonomousCommunity": "Andalusia",
+                "municipality": "Sevilla"
+              }
+            }
+          ],
+          "hasAdditionalInformation": {
+            "object": {
+              "accessTip": "Information available via email",
+              "conditions": "Free",
+              "curiosities": "Antiques and second-hand market",
+              "frequentlyAskedQuestion": {
+                "object": {
+                  "answer": "The information will be sent to your email.",
+                  "question": "How will I receive the information?"
+                }
+              },
+              "remarks": "The information provided will be used for personalized marketing."
+            }
+          },
+          "hasPriceSpecification": {
+            "object": {
+              "currency": "EUR",
+              "eligibleQuantity": "1",
+              "isAccessibleForFree": true,
+              "priceSchedule": {
+                "object": {
+                  "byDay": "Thursday",
+                  "byMonth": "June",
+                  "byMonthDay": 24,
+                  "byMonthWeek": 1,
+                  "duration": "7 hours",
+                  "hasDescription": [
+                    {
+                      "object": {
+                        "keyword": [
+                          "market",
+                          "antiques",
+                          "second hand"
+                        ],
+                        "shortDescription": [
+                          {
+                            "value": "Market El Jueves on Calle Feria",
+                            "lang": "es"
+                          }
+                        ],
+                        "longDescription": [
+                          {
+                            "value": "Antiques and second-hand market",
+                            "lang": "es"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "targetAudience": "Everyone",
+              "taxesAndFessIncluded": true
+            }
+          },
+          "hasAcknowledgement": [
+            {
+              "object": {
+                "name": [
+                  {
+                    "value": "I accept the sending of commercial communications.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "availableLanguage": [
+            {
+              "uri": "http://vocab.segittur.es/language/en"
+            }
+          ],
+          "hasAdditionalType": "Market",
+          "hasAgenda": [
+            {
+              "object": {
+                "position": 1,
+                "subEvent": {
+                  "object": {
+                    "availableLanguage": {
+                      "uri": "http://vocab.segittur.es/language/en"
+                    },
+                    "eventSchedule": {
+                      "object": {
+                        "byDay": "Thursday",
+                        "byMonth": "June",
+                        "byMonthDay": 24,
+                        "byMonthWeek": 1,
+                        "duration": "7 hours",
+                        "hasDescription": [
+                          {
+                            "object": {
+                              "keyword": [
+                                "market",
+                                "antiques",
+                                "second hand"
+                              ],
+                              "shortDescription": [
+                                {
+                                  "value": "Market El Jueves on Calle Feria",
+                                  "lang": "es"
+                                }
+                              ],
+                              "longDescription": [
+                                {
+                                  "value": "Antiques and second-hand market",
+                                  "lang": "es"
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "repeatCount": 30
+                      }
+                    },
+                    "eventType": "Market",
+                    "hasAdditionalInformation": {
+                      "object": {
+                        "accessTip": "Information available via email",
+                        "conditions": "Free",
+                        "curiosities": "Antiques and second-hand market",
+                        "frequentlyAskedQuestion": {
+                          "object": {
+                            "answer": "The information will be sent to your email.",
+                            "question": "How will I receive the information?"
+                          }
+                        },
+                        "remarks": "The information provided will be used for personalized marketing."
+                      }
+                    },
+                    "hasAdditionalType": "Market",
+                    "name": "Market El Jueves"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

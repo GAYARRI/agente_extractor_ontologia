@@ -1,0 +1,398 @@
+{
+  "url": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/reserva-ruta-en-bici",
+  "tracking_id": "7beace2d-11e0-4236-bd26-84ea8ac89e88",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 346,
+    "url": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/reserva-ruta-en-bici",
+    "markdown": "Rutas Día mundial del turismo\n\nReserva ruta en bici\n====================\n\nReserva tu plaza\n----------------\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "twitter:site": "@sevillaciudad",
+      "ogSiteName": "Visita Sevilla",
+      "title": "Reserva ruta en bici - Visita Sevilla",
+      "viewport": "width=device-width, initial-scale=1",
+      "article:modified_time": "2023-09-19T15:12:05+00:00",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "article:publisher": "https://www.facebook.com/Sevilla",
+      "og:locale": "es_ES",
+      "modifiedTime": "2023-09-19T15:12:05+00:00",
+      "ogLocale": "es_ES",
+      "og:type": "article",
+      "og:site_name": "Visita Sevilla",
+      "og:title": "Reserva ruta en bici - Visita Sevilla",
+      "ogUrl": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/reserva-ruta-en-bici/",
+      "language": "es-ES",
+      "og:url": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/reserva-ruta-en-bici/",
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "twitter:card": "summary_large_image",
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "ogTitle": "Reserva ruta en bici - Visita Sevilla",
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f11-e5b30916814d",
+      "sourceURL": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/reserva-ruta-en-bici",
+      "url": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/reserva-ruta-en-bici",
+      "statusCode": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 200,
+    "timestamp": "2026-03-18T16:34:34.743132"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Event": {
+          "availableLanguage": "en",
+          "eventSchedule": {
+            "byDay": "27",
+            "byMonth": "9",
+            "byMonthDay": 27,
+            "duration": "8 hours",
+            "hasDescription": {
+              "keyword": "bike route",
+              "longDescription": "Reserve your spot for the bike route on World Tourism Day. What you need to know is in your email.",
+              "shortDescription": "Join the bike route to celebrate World Tourism Day."
+            },
+            "repeatCount": 1
+          },
+          "eventType": "Cultural",
+          "hasAcknowledgement": "Email confirmation required",
+          "hasAdditionalInformation": {
+            "accessTip": "Bring your own bike",
+            "conditions": "Spaces are limited, reservation required.",
+            "curiosities": "This event promotes sustainable tourism.",
+            "frequentlyAskedQuestion": {
+              "question": "Do I need to bring my own bike?",
+              "answer": "Yes, participants must bring their own bicycles."
+            },
+            "remarks": "Participants will receive a newsletter with further information."
+          },
+          "hasAdditionalType": "Outdoor Event",
+          "hasAgenda": {
+            "position": 1,
+            "subEvent": {
+              "availableLanguage": "en",
+              "eventSchedule": {
+                "byDay": "27",
+                "byMonth": "9",
+                "byMonthDay": 27,
+                "duration": "8 hours",
+                "hasDescription": {
+                  "keyword": "bike route",
+                  "longDescription": "Reserve your spot for the bike route on World Tourism Day. What you need to know is in your email.",
+                  "shortDescription": "Join the bike route to celebrate World Tourism Day."
+                },
+                "repeatCount": 1
+              },
+              "eventType": "Cultural",
+              "hasAdditionalInformation": {
+                "accessTip": "Bring your own bike",
+                "conditions": "Spaces are limited, reservation required.",
+                "curiosities": "This event promotes sustainable tourism.",
+                "frequentlyAskedQuestion": {
+                  "question": "Do I need to bring my own bike?",
+                  "answer": "Yes, participants must bring their own bicycles."
+                },
+                "remarks": "Participants will receive a newsletter with further information."
+              },
+              "hasAdditionalType": "Outdoor Event",
+              "name": "Bike Route",
+              "offersAdditionalEventService": "Newsletter subscription available",
+              "outdoorEvent": true,
+              "maximumAttendeeCapacity": 50
+            }
+          },
+          "hasContactPoint": {
+            "email": "info@eventos.com",
+            "telephone": "+34 123 456 789",
+            "url": "https://visitasevilla.es"
+          },
+          "hasDescription": {
+            "keyword": "bike route",
+            "longDescription": "Reserve your spot for the bike route on World Tourism Day. What you need to know is in your email.",
+            "shortDescription": "Join the bike route to celebrate World Tourism Day."
+          },
+          "hasLocation": {
+            "autonomousCommunity": "Andalusia",
+            "country": "Spain",
+            "county": "Sevilla",
+            "locality": "Sevilla",
+            "postalCode": "41001",
+            "province": "Sevilla",
+            "streetAddress": "Calle de la Feria"
+          },
+          "hasMultimedia": {
+            "mainImage": "https://example.com/main_image.jpg",
+            "secondaryImage": "https://example.com/secondary_image.jpg",
+            "text": "Join us for a bike ride!",
+            "url": "https://example.com/event"
+          },
+          "hasPriceSpecification": {
+            "currency": "EUR",
+            "eligibleQuantity": "1",
+            "isAccessibleForFree": true,
+            "priceSchedule": {
+              "byDay": "27",
+              "byMonth": "9",
+              "byMonthDay": 27,
+              "duration": "8 hours",
+              "hasDescription": {
+                "keyword": "free route",
+                "longDescription": "The route is free but requires reservation.",
+                "shortDescription": "Free bike route."
+              }
+            }
+          },
+          "hasSocialMediaProfile": {
+            "socialMediaPlatform": "Twitter",
+            "socialMediaUser": "@eventosevilla"
+          },
+          "maximumAttendeeCapacity": 50,
+          "name": "World Tourism Day Bike Route",
+          "offersAdditionalEventService": "Newsletter subscription available",
+          "outdoorEvent": true,
+          "touristType": "Cultural"
+        }
+      },
+      "classes": [
+        {
+          "score": 0.8,
+          "classname": "Event"
+        },
+        {
+          "score": 0.8,
+          "classname": "CateringService"
+        },
+        {
+          "score": 0.6,
+          "classname": "GastronomicMarket"
+        }
+      ],
+      "original_content": "Rutas Día mundial del turismo\n\nReserva ruta en bici\n====================\n\nReserva tu plaza\n----------------\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: EventRefInput!) {\n          x: createEvent(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "Sevilla",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "World Tourism Day Bike Route",
+              "lang": "es"
+            }
+          ],
+          "hasDescription": [
+            {
+              "object": {
+                "keyword": [
+                  "bike route"
+                ],
+                "shortDescription": [
+                  {
+                    "value": "Join the bike route to celebrate World Tourism Day.",
+                    "lang": "es"
+                  }
+                ],
+                "longDescription": [
+                  {
+                    "value": "Reserve your spot for the bike route on World Tourism Day. What you need to know is in your email.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "hasLocation": [
+            {
+              "object": {
+                "province": "Sevilla",
+                "streetAddress": "Calle de la Feria",
+                "postalCode": "41001",
+                "locality": "Sevilla",
+                "country": "Spain",
+                "autonomousCommunity": "Andalusia",
+                "municipality": "Sevilla"
+              }
+            }
+          ],
+          "hasAdditionalInformation": {
+            "object": {
+              "accessTip": "Bring your own bike",
+              "conditions": "Spaces are limited, reservation required.",
+              "curiosities": "This event promotes sustainable tourism.",
+              "frequentlyAskedQuestion": {
+                "object": {
+                  "question": "Do I need to bring my own bike?",
+                  "answer": "Yes, participants must bring their own bicycles."
+                }
+              },
+              "remarks": "Participants will receive a newsletter with further information."
+            }
+          },
+          "hasContactPoint": [
+            {
+              "object": {
+                "url": "https://visitasevilla.es",
+                "email": "info@eventos.com",
+                "telephone": [
+                  "+34 123 456 789"
+                ]
+              }
+            }
+          ],
+          "hasPriceSpecification": {
+            "object": {
+              "currency": "EUR",
+              "eligibleQuantity": "1",
+              "isAccessibleForFree": true,
+              "priceSchedule": {
+                "object": {
+                  "byDay": "27",
+                  "byMonth": "9",
+                  "byMonthDay": 27,
+                  "duration": "8 hours",
+                  "hasDescription": [
+                    {
+                      "object": {
+                        "keyword": [
+                          "free route"
+                        ],
+                        "shortDescription": [
+                          {
+                            "value": "Free bike route.",
+                            "lang": "es"
+                          }
+                        ],
+                        "longDescription": [
+                          {
+                            "value": "The route is free but requires reservation.",
+                            "lang": "es"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "hasAcknowledgement": [
+            {
+              "object": {
+                "name": [
+                  {
+                    "value": "Email confirmation required",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "hasSocialMediaProfile": [
+            {
+              "object": {
+                "socialMediaPlatform": {
+                  "uri": "http://vocab.segittur.es/social/twitter"
+                },
+                "socialMediaUser": "@eventosevilla"
+              }
+            }
+          ],
+          "availableLanguage": [
+            {
+              "uri": "http://vocab.segittur.es/language/en"
+            }
+          ],
+          "hasAdditionalType": "Outdoor Event",
+          "hasAgenda": [
+            {
+              "object": {
+                "position": 1,
+                "subEvent": {
+                  "object": {
+                    "availableLanguage": {
+                      "uri": "http://vocab.segittur.es/language/en"
+                    },
+                    "eventSchedule": {
+                      "object": {
+                        "byDay": "27",
+                        "byMonth": "9",
+                        "byMonthDay": 27,
+                        "duration": "8 hours",
+                        "hasDescription": [
+                          {
+                            "object": {
+                              "keyword": [
+                                "bike route"
+                              ],
+                              "shortDescription": [
+                                {
+                                  "value": "Join the bike route to celebrate World Tourism Day.",
+                                  "lang": "es"
+                                }
+                              ],
+                              "longDescription": [
+                                {
+                                  "value": "Reserve your spot for the bike route on World Tourism Day. What you need to know is in your email.",
+                                  "lang": "es"
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "repeatCount": 1
+                      }
+                    },
+                    "eventType": "Cultural",
+                    "hasAdditionalInformation": {
+                      "object": {
+                        "accessTip": "Bring your own bike",
+                        "conditions": "Spaces are limited, reservation required.",
+                        "curiosities": "This event promotes sustainable tourism.",
+                        "frequentlyAskedQuestion": {
+                          "object": {
+                            "question": "Do I need to bring my own bike?",
+                            "answer": "Yes, participants must bring their own bicycles."
+                          }
+                        },
+                        "remarks": "Participants will receive a newsletter with further information."
+                      }
+                    },
+                    "hasAdditionalType": "Outdoor Event",
+                    "name": "Bike Route",
+                    "offersAdditionalEventService": "Newsletter subscription available",
+                    "outdoorEvent": true,
+                    "maximumAttendeeCapacity": 50
+                  }
+                }
+              }
+            }
+          ],
+          "hasMultimedia": [
+            {
+              "object": {
+                "mainImage": "https://example.com/main_image.jpg",
+                "secondaryImage": "https://example.com/secondary_image.jpg",
+                "text": "Join us for a bike ride!",
+                "url": "https://example.com/event"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

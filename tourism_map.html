@@ -17,7 +17,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_6a02a9bba71da11cab30622f50d8dd51 {
+                #map_0b04e653babcdf6f5a52217a9cecb802 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -54,19 +54,19 @@
 <body>
     
     
-            <div class="folium-map" id="map_6a02a9bba71da11cab30622f50d8dd51" ></div>
+            <div class="folium-map" id="map_0b04e653babcdf6f5a52217a9cecb802" ></div>
         
 </body>
 <script>
     
     
-            var map_6a02a9bba71da11cab30622f50d8dd51 = L.map(
-                "map_6a02a9bba71da11cab30622f50d8dd51",
+            var map_0b04e653babcdf6f5a52217a9cecb802 = L.map(
+                "map_0b04e653babcdf6f5a52217a9cecb802",
                 {
-                    center: [28.3, -16.6],
+                    center: [37.3891, -5.9845],
                     crs: L.CRS.EPSG3857,
                     ...{
-  "zoom": 10,
+  "zoom": 12,
   "zoomControl": true,
   "preferCanvas": false,
 }
@@ -78,7 +78,7 @@
 
         
     
-            var tile_layer_54bcc705c083cb9df584c15965456966 = L.tileLayer(
+            var tile_layer_c4f448c62c2fd27970fd2c8b657552ff = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -95,7 +95,41 @@
             );
         
     
-            tile_layer_54bcc705c083cb9df584c15965456966.addTo(map_6a02a9bba71da11cab30622f50d8dd51);
+            tile_layer_c4f448c62c2fd27970fd2c8b657552ff.addTo(map_0b04e653babcdf6f5a52217a9cecb802);
+        
+    
+            var marker_583f7de9741d97d64ca1f40696c6efe3 = L.marker(
+                [37.3891, -5.9845],
+                {
+}
+            ).addTo(map_0b04e653babcdf6f5a52217a9cecb802);
+        
+    
+        var popup_f08affd34e8f7754b3e8a5d56b9fa699 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ca181f0ee4047e0fa1be54647e4b3a68 = $(`<div id="html_ca181f0ee4047e0fa1be54647e4b3a68" style="width: 100.0%; height: 100.0%;">No hay entidades con coordenadas disponibles</div>`)[0];
+                popup_f08affd34e8f7754b3e8a5d56b9fa699.setContent(html_ca181f0ee4047e0fa1be54647e4b3a68);
+            
+        
+
+        marker_583f7de9741d97d64ca1f40696c6efe3.bindPopup(popup_f08affd34e8f7754b3e8a5d56b9fa699)
+        ;
+
+        
+    
+    
+            marker_583f7de9741d97d64ca1f40696c6efe3.bindTooltip(
+                `<div>
+                     Sin coordenadas
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
         
 </script>
 </html>

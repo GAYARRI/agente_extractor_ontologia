@@ -1,240 +1,280 @@
-class EntityDescriptionConsolidator:
-    def _safe_text(self, value):
-        if value is None:
-            return ""
-        if isinstance(value, str):
-            return value.strip()
-        return str(value).strip()
+# src/entity_description_consolidator.py
 
-    def _to_list(self, value):
+import re
+import unicodedata
+
+
+class EntityDescriptionConsolidator:
+    def __init__(self):
+        pass
+
+    # =========================================================
+    # Helpers
+    # =========================================================
+
+    def _normalize_entity_key(self, text: str) -> str:
+        text = text or ""
+        text = text.strip().lower()
+        text = unicodedata.normalize("NFKD", text)
+        text = "".join(c for c in text if not unicodedata.combining(c))
+        text = re.sub(r"[^\w\s]", " ", text)
+        text = re.sub(r"\s+", " ", text).strip()
+        return text
+
+    def _as_list(self, value):
         if value is None:
             return []
-
         if isinstance(value, list):
             return value
-
-        if isinstance(value, (tuple, set)):
+        if isinstance(value, tuple):
             return list(value)
-
-        if isinstance(value, str):
-            value = value.strip()
-            return [value] if value else []
-
         return [value]
 
-    def _merge_list_unique(self, current, candidate):
-        current_list = self._to_list(current)
-        candidate_list = self._to_list(candidate)
-
+    def _dedupe_preserve_order(self, values):
         seen = set()
-        merged = []
+        out = []
+        for v in values:
+            key = str(v).strip()
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            out.append(v)
+        return out
 
-        for item in current_list + candidate_list:
-            if item is None:
+    def _clean_text(self, text: str) -> str:
+        text = (text or "").strip()
+        text = re.sub(r"\s+", " ", text)
+
+        noisy_markers = [
+            " Leer más",
+            " leer más",
+            " Mostrar más",
+            " mostrar más",
+        ]
+        for marker in noisy_markers:
+            idx = text.find(marker)
+            if idx > 0:
+                text = text[:idx].strip(" -|,.;:")
+
+        return text.strip()
+
+    def _normalize_related_urls(self, value):
+        items = []
+
+        if isinstance(value, list):
+            items.extend(value)
+        elif isinstance(value, str):
+            if "|" in value:
+                items.extend([x.strip() for x in value.split("|") if x.strip()])
+            elif "\n" in value:
+                items.extend([x.strip() for x in value.splitlines() if x.strip()])
+            elif value.strip():
+                items.append(value.strip())
+
+        items = [x for x in items if str(x).startswith("http://") or str(x).startswith("https://")]
+        return self._dedupe_preserve_order(items)
+
+    def _merge_properties(self, base: dict, extra: dict) -> dict:
+        out = dict(base or {})
+
+        for k, v in (extra or {}).items():
+            if v in (None, "", [], {}):
                 continue
 
-            if isinstance(item, str):
-                norm = item.strip()
-                if not norm:
-                    continue
-                key = norm.lower()
-                value = norm
-            else:
-                norm = str(item).strip()
-                if not norm:
-                    continue
-                key = norm.lower()
-                value = item
+            if k not in out or out[k] in (None, "", [], {}):
+                out[k] = v
+                continue
 
-            if key not in seen:
-                seen.add(key)
-                merged.append(value)
+            if out[k] == v:
+                continue
 
-        return merged
+            old_val = out[k]
+            old_list = old_val if isinstance(old_val, list) else [old_val]
+            new_list = v if isinstance(v, list) else [v]
+            out[k] = self._dedupe_preserve_order(old_list + new_list)
 
-    def _merge_string_field(self, current, candidate):
-        current = self._safe_text(current)
-        candidate = self._safe_text(candidate)
+        return out
 
-        if not current and candidate:
-            return candidate
-
-        if candidate and len(candidate) > len(current):
-            return candidate
-
+    def _merge_field(self, current, incoming):
+        if current in (None, "", [], {}):
+            return incoming
         return current
 
-    def _merge_coordinates(self, current, candidate):
-        current = current or {"lat": None, "lng": None}
-        candidate = candidate or {"lat": None, "lng": None}
+    def _merge_text_field(self, current: str, incoming: str) -> str:
+        current = self._clean_text(current or "")
+        incoming = self._clean_text(incoming or "")
 
-        if current.get("lat") is None and candidate.get("lat") is not None:
-            current["lat"] = candidate.get("lat")
+        if not current:
+            return incoming
+        if not incoming:
+            return current
 
-        if current.get("lng") is None and candidate.get("lng") is not None:
-            current["lng"] = candidate.get("lng")
+        # conservar el más largo
+        return incoming if len(incoming) > len(current) else current
 
-        return current
+    def _merge_coordinates(self, c1: dict, c2: dict) -> dict:
+        c1 = c1 or {}
+        c2 = c2 or {}
 
-    def _merge_properties(self, entity_name, current, candidate):
-        current = current or {}
-        candidate = candidate or {}
-        merged = dict(current)
+        lat1, lng1 = c1.get("lat"), c1.get("lng")
+        lat2, lng2 = c2.get("lat"), c2.get("lng")
 
-        for key, incoming in candidate.items():
-            if incoming is None:
+        if lat1 is not None and lng1 is not None:
+            return {"lat": lat1, "lng": lng1}
+        if lat2 is not None and lng2 is not None:
+            return {"lat": lat2, "lng": lng2}
+
+        return {"lat": None, "lng": None}
+
+    # =========================================================
+    # API pública
+    # =========================================================
+
+    def consolidate(self, all_results: list) -> list:
+        """
+        all_results puede venir como lista de:
+        - entidades directas
+        - resultados de página con {"entities": [...]}
+        """
+        entities = []
+
+        for item in all_results or []:
+            if not item:
                 continue
 
-            if isinstance(incoming, str) and not incoming.strip():
+            if isinstance(item, dict) and "entities" in item:
+                ents = item.get("entities") or []
+                for e in ents:
+                    if isinstance(e, dict):
+                        entities.append(e)
+            elif isinstance(item, dict):
+                entities.append(item)
+
+        grouped = {}
+
+        for e in entities:
+            name = (
+                e.get("entity_name")
+                or e.get("entity")
+                or e.get("label")
+                or e.get("name")
+                or ""
+            ).strip()
+
+            if not name:
                 continue
 
-            if key not in merged:
-                merged[key] = incoming
+            key = self._normalize_entity_key(name)
+
+            if key not in grouped:
+                grouped[key] = {
+                    "entity": e.get("entity", name),
+                    "entity_name": e.get("entity_name", name),
+                    "label": e.get("label", name),
+                    "name": e.get("name", name),
+                    "class": e.get("class", ""),
+                    "type": e.get("type", e.get("class", "")),
+                    "score": e.get("score", 0.0),
+                    "verisimilitude_score": e.get("verisimilitude_score", e.get("score", 0.0)),
+                    "properties": e.get("properties", {}) or {},
+                    "short_description": e.get("short_description", ""),
+                    "long_description": e.get("long_description", ""),
+                    "description": e.get("description", ""),
+                    "address": e.get("address", ""),
+                    "phone": e.get("phone", ""),
+                    "email": e.get("email", ""),
+                    "coordinates": e.get("coordinates", {"lat": None, "lng": None}),
+                    "wikidata_id": e.get("wikidata_id", ""),
+                    "sourceUrl": e.get("sourceUrl", ""),
+                    "url": e.get("url", ""),
+                    "relatedUrls": self._normalize_related_urls(e.get("relatedUrls", "")),
+                    "image": e.get("image", ""),
+                    "mainImage": e.get("mainImage", ""),
+                }
                 continue
 
-            existing = merged[key]
+            merged = grouped[key]
 
-            # Si alguno de los dos lados ya es lista/tupla/set, unificamos como lista única
-            if isinstance(existing, (list, tuple, set)) or isinstance(incoming, (list, tuple, set)):
-                merged[key] = self._merge_list_unique(existing, incoming)
-                continue
+            merged["score"] = max(merged.get("score", 0.0), e.get("score", 0.0))
+            merged["verisimilitude_score"] = max(
+                merged.get("verisimilitude_score", 0.0),
+                e.get("verisimilitude_score", e.get("score", 0.0))
+            )
 
-            # string + string
-            if isinstance(existing, str) and isinstance(incoming, str):
-                existing_clean = existing.strip()
-                incoming_clean = incoming.strip()
+            if not merged.get("class") and e.get("class"):
+                merged["class"] = e.get("class")
 
-                if existing_clean.lower() == incoming_clean.lower():
-                    merged[key] = existing_clean
-                else:
-                    merged[key] = self._merge_list_unique(existing_clean, incoming_clean)
-                continue
+            if not merged.get("type") and e.get("type"):
+                merged["type"] = e.get("type")
 
-            # dict + dict -> merge superficial conservador
-            if isinstance(existing, dict) and isinstance(incoming, dict):
-                new_dict = dict(existing)
-                for sub_key, sub_value in incoming.items():
-                    if sub_key not in new_dict or new_dict[sub_key] in (None, "", []):
-                        new_dict[sub_key] = sub_value
-                merged[key] = new_dict
-                continue
+            merged["properties"] = self._merge_properties(
+                merged.get("properties", {}),
+                e.get("properties", {}) or {}
+            )
 
-            # Si son iguales, mantener el existente
-            if existing == incoming:
-                merged[key] = existing
-                continue
+            merged["short_description"] = self._merge_text_field(
+                merged.get("short_description", ""),
+                e.get("short_description", "")
+            )
 
-            # Caso mixto genérico -> normalizar a lista única
-            merged[key] = self._merge_list_unique(existing, incoming)
+            merged["long_description"] = self._merge_text_field(
+                merged.get("long_description", ""),
+                e.get("long_description", "")
+            )
 
-        return merged
+            merged["description"] = self._merge_text_field(
+                merged.get("description", ""),
+                e.get("description", "")
+            )
 
-    def _select_best(self, descriptions):
-        if not descriptions:
-            return ""
-        return sorted(descriptions, key=len, reverse=True)[0]
+            merged["address"] = self._merge_text_field(
+                merged.get("address", ""),
+                e.get("address", "")
+            )
 
-    def consolidate(self, results):
-        entity_map = {}
+            merged["phone"] = self._merge_field(
+                merged.get("phone", ""),
+                e.get("phone", "")
+            )
 
-        for block in results:
-            for e in block.get("entities", []):
-                entity_name = e.get("entity_name") or e.get("entity") or ""
-                if not entity_name:
-                    continue
+            merged["email"] = self._merge_field(
+                merged.get("email", ""),
+                e.get("email", "")
+            )
 
-                key = entity_name.lower()
+            merged["coordinates"] = self._merge_coordinates(
+                merged.get("coordinates"),
+                e.get("coordinates")
+            )
 
-                if key not in entity_map:
-                    entity_map[key] = {
-                        "entity": e.get("entity", entity_name),
-                        "entity_name": entity_name,
-                        "class": e.get("class", ""),
-                        "score": e.get("score", 0.0),
-                        "verisimilitude_score": e.get("verisimilitude_score", e.get("score", 0.0)),
-                        "properties": e.get("properties", {}),
-                        "address": e.get("address", ""),
-                        "phone": e.get("phone", ""),
-                        "email": e.get("email", ""),
-                        "coordinates": e.get("coordinates", {"lat": None, "lng": None}),
-                        "short_descriptions": [],
-                        "long_descriptions": [],
-                        "wikidata_id": e.get("wikidata_id", ""),
-                    }
+            merged["wikidata_id"] = self._merge_field(
+                merged.get("wikidata_id", ""),
+                e.get("wikidata_id", "")
+            )
 
-                entity_map[key]["score"] = max(
-                    entity_map[key]["score"],
-                    e.get("score", 0.0)
-                )
+            # >>> AQUÍ ESTABA TU PROBLEMA PRINCIPAL <<<
+            merged["sourceUrl"] = self._merge_field(
+                merged.get("sourceUrl", ""),
+                e.get("sourceUrl", "")
+            )
 
-                entity_map[key]["verisimilitude_score"] = max(
-                    entity_map[key]["verisimilitude_score"],
-                    e.get("verisimilitude_score", e.get("score", 0.0))
-                )
+            merged["url"] = self._merge_field(
+                merged.get("url", ""),
+                e.get("url", "")
+            )
 
-                entity_map[key]["properties"] = self._merge_properties(
-                    entity_name,
-                    entity_map[key].get("properties", {}),
-                    e.get("properties", {})
-                )
+            old_related = merged.get("relatedUrls", [])
+            new_related = self._normalize_related_urls(e.get("relatedUrls", ""))
+            merged["relatedUrls"] = self._dedupe_preserve_order(old_related + new_related)
 
-                entity_map[key]["address"] = self._merge_string_field(
-                    entity_map[key].get("address", ""),
-                    e.get("address", "")
-                )
+            merged["image"] = self._merge_field(
+                merged.get("image", ""),
+                e.get("image", "")
+            )
 
-                entity_map[key]["phone"] = self._merge_string_field(
-                    entity_map[key].get("phone", ""),
-                    e.get("phone", "")
-                )
+            merged["mainImage"] = self._merge_field(
+                merged.get("mainImage", ""),
+                e.get("mainImage", "")
+            )
 
-                entity_map[key]["email"] = self._merge_string_field(
-                    entity_map[key].get("email", ""),
-                    e.get("email", "")
-                )
-
-                entity_map[key]["coordinates"] = self._merge_coordinates(
-                    entity_map[key].get("coordinates", {"lat": None, "lng": None}),
-                    e.get("coordinates", {"lat": None, "lng": None})
-                )
-
-                if not entity_map[key].get("wikidata_id") and e.get("wikidata_id"):
-                    entity_map[key]["wikidata_id"] = e.get("wikidata_id")
-
-                sd = e.get("short_description")
-                ld = e.get("long_description")
-
-                if sd:
-                    entity_map[key]["short_descriptions"].append(sd)
-
-                if ld:
-                    entity_map[key]["long_descriptions"].append(ld)
-
-        consolidated = []
-
-        for e in entity_map.values():
-            best_short = self._select_best(e["short_descriptions"])
-            best_long = self._select_best(e["long_descriptions"])
-
-            item = {
-                "entity": e["entity"],
-                "entity_name": e["entity_name"],
-                "class": e["class"],
-                "score": e["score"],
-                "verisimilitude_score": e["verisimilitude_score"],
-                "properties": e["properties"],
-                "short_description": best_short,
-                "long_description": best_long,
-                "address": e["address"],
-                "phone": e["phone"],
-                "email": e["email"],
-                "coordinates": e["coordinates"],
-            }
-
-            if e.get("wikidata_id"):
-                item["wikidata_id"] = e["wikidata_id"]
-
-            consolidated.append(item)
-
-        consolidated.sort(key=lambda x: x.get("score", 0.0), reverse=True)
-        return consolidated
+        return list(grouped.values())

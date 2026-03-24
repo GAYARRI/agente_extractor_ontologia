@@ -1,0 +1,544 @@
+{
+  "url": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/rutas-dia-mundial-del-turismo-reserva-realizada",
+  "tracking_id": "025e06df-45c3-431e-9426-287d28132173",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 138,
+    "url": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/rutas-dia-mundial-del-turismo-reserva-realizada",
+    "markdown": "Rutas Día Mundial del Turismo\n=============================\n\nHemos recibido tu reserva. Recibirás un correo de confirmación en breve.\n------------------------------------------------------------------------\n\n[Volver](https://visitasevilla.es/rutas-dia-mundial-del-turismo/)\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "og:locale": "es_ES",
+      "og:type": "article",
+      "ogTitle": "Rutas Día mundial del turismo reserva realizada - Visita Sevilla",
+      "twitter:card": "summary_large_image",
+      "modifiedTime": "2023-09-22T09:15:14+00:00",
+      "og:title": "Rutas Día mundial del turismo reserva realizada - Visita Sevilla",
+      "og:site_name": "Visita Sevilla",
+      "article:modified_time": "2023-09-22T09:15:14+00:00",
+      "twitter:site": "@sevillaciudad",
+      "ogSiteName": "Visita Sevilla",
+      "title": "Rutas Día mundial del turismo reserva realizada - Visita Sevilla",
+      "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "ogUrl": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/rutas-dia-mundial-del-turismo-reserva-realizada/",
+      "language": "es-ES",
+      "ogLocale": "es_ES",
+      "og:url": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/rutas-dia-mundial-del-turismo-reserva-realizada/",
+      "viewport": "width=device-width, initial-scale=1",
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "article:publisher": "https://www.facebook.com/Sevilla",
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f11-a8d0d88892f8",
+      "sourceURL": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/rutas-dia-mundial-del-turismo-reserva-realizada",
+      "url": "https://visitasevilla.es/rutas-dia-mundial-del-turismo/rutas-dia-mundial-del-turismo-reserva-realizada",
+      "statusCode": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 200,
+    "timestamp": "2026-03-18T16:33:43.772237"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Event": {
+          "availableLanguage": "en",
+          "eventSchedule": {
+            "byDay": "27",
+            "byMonth": "9",
+            "byMonthDay": 27,
+            "byMonthWeek": 1,
+            "duration": "1 day",
+            "hasDescription": {
+              "keyword": "World Tourism Day",
+              "longDescription": "Celebration of World Tourism Day with various activities and routes in the city.",
+              "shortDescription": "Routes and activities to celebrate World Tourism Day."
+            }
+          },
+          "eventType": "Cultural",
+          "hasAcknowledgement": "Reservation confirmed",
+          "hasAdditionalInformation": {
+            "accessTip": "Check the confirmation email for more details.",
+            "conditions": "Prior reservation is required.",
+            "curiosities": "World Tourism Day is celebrated annually on September 27.",
+            "frequentlyAskedQuestion": {
+              "question": "How will I receive confirmation of my reservation?",
+              "answer": "You will receive a confirmation email shortly."
+            },
+            "remarks": "Make sure to check your inbox."
+          },
+          "hasAdditionalType": "Tourist event",
+          "hasAgenda": {
+            "position": 1,
+            "subEvent": {
+              "availableLanguage": "en",
+              "eventSchedule": {
+                "byDay": "27",
+                "byMonth": "9",
+                "byMonthDay": 27,
+                "byMonthWeek": 1,
+                "duration": "1 day",
+                "hasDescription": {
+                  "keyword": "Routes",
+                  "longDescription": "Guided routes through the city to celebrate World Tourism Day.",
+                  "shortDescription": "Tourist routes."
+                }
+              },
+              "eventType": "Cultural",
+              "hasAdditionalInformation": {
+                "accessTip": "Check the confirmation email for more details.",
+                "conditions": "Prior reservation is required.",
+                "curiosities": "World Tourism Day is celebrated annually on September 27.",
+                "frequentlyAskedQuestion": {
+                  "question": "How will I receive confirmation of my reservation?",
+                  "answer": "You will receive a confirmation email shortly."
+                },
+                "remarks": "Make sure to check your inbox."
+              },
+              "hasDescription": {
+                "keyword": "Routes",
+                "longDescription": "Guided routes through the city to celebrate World Tourism Day.",
+                "shortDescription": "Tourist routes."
+              },
+              "hasLocation": {
+                "autonomousCommunity": "Andalusia",
+                "country": "Spain",
+                "county": "Sevilla",
+                "locality": "Sevilla",
+                "postalCode": "41001",
+                "province": "Sevilla",
+                "streetAddress": "Historic Center"
+              },
+              "hasPriceSpecification": {
+                "currency": "EUR",
+                "eligibleQuantity": "1",
+                "isAccessibleForFree": true,
+                "priceSchedule": {
+                  "byDay": "27",
+                  "byMonth": "9",
+                  "byMonthDay": 27,
+                  "byMonthWeek": 1,
+                  "duration": "1 day",
+                  "hasDescription": {
+                    "keyword": "Free entry",
+                    "longDescription": "Entry to the routes is free.",
+                    "shortDescription": "Free entry."
+                  }
+                },
+                "targetAudience": "Tourists",
+                "taxesAndFessIncluded": true
+              },
+              "maximumAttendeeCapacity": 100,
+              "name": "Routes World Tourism Day",
+              "offersAdditionalEventService": "Tourist guides available",
+              "outdoorEvent": true,
+              "refPointOfInterest": {
+                "hasAdditionalInformation": {
+                  "accessTip": "Check the confirmation email for more details.",
+                  "conditions": "Prior reservation is required.",
+                  "curiosities": "World Tourism Day is celebrated annually on September 27.",
+                  "frequentlyAskedQuestion": {
+                    "question": "How will I receive confirmation of my reservation?",
+                    "answer": "You will receive a confirmation email shortly."
+                  },
+                  "remarks": "Make sure to check your inbox."
+                },
+                "hasLocation": {
+                  "autonomousCommunity": "Andalusia",
+                  "country": "Spain",
+                  "county": "Sevilla",
+                  "locality": "Sevilla",
+                  "postalCode": "41001",
+                  "province": "Sevilla",
+                  "streetAddress": "Historic Center"
+                },
+                "hasOpeningHours": {
+                  "closesAt": "23:59",
+                  "dayOfTheWeek": "Monday",
+                  "hasDescription": {
+                    "keyword": "Schedule",
+                    "longDescription": "The routes will take place all day.",
+                    "shortDescription": "Route schedule."
+                  },
+                  "opensAt": "00:00"
+                },
+                "keyword": "World Tourism Day",
+                "longDescription": "Celebration of World Tourism Day with various activities and routes in the city.",
+                "shortDescription": "Routes and activities to celebrate World Tourism Day."
+              },
+              "touristType": "Cultural"
+            }
+          },
+          "hasDescription": {
+            "keyword": "World Tourism Day",
+            "longDescription": "Celebration of World Tourism Day with various activities and routes in the city.",
+            "shortDescription": "Routes and activities to celebrate World Tourism Day."
+          },
+          "hasLocation": {
+            "autonomousCommunity": "Andalusia",
+            "country": "Spain",
+            "county": "Sevilla",
+            "locality": "Sevilla",
+            "postalCode": "41001",
+            "province": "Sevilla",
+            "streetAddress": "Historic Center"
+          },
+          "hasPriceSpecification": {
+            "currency": "EUR",
+            "eligibleQuantity": "1",
+            "isAccessibleForFree": true,
+            "priceSchedule": {
+              "byDay": "27",
+              "byMonth": "9",
+              "byMonthDay": 27,
+              "byMonthWeek": 1,
+              "duration": "1 day",
+              "hasDescription": {
+                "keyword": "Free entry",
+                "longDescription": "Entry to the routes is free.",
+                "shortDescription": "Free entry."
+              }
+            },
+            "targetAudience": "Tourists",
+            "taxesAndFessIncluded": true
+          },
+          "maximumAttendeeCapacity": 100,
+          "name": "Routes World Tourism Day",
+          "offersAdditionalEventService": "Tourist guides available",
+          "outdoorEvent": true,
+          "refPointOfInterest": {
+            "hasAdditionalInformation": {
+              "accessTip": "Check the confirmation email for more details.",
+              "conditions": "Prior reservation is required.",
+              "curiosities": "World Tourism Day is celebrated annually on September 27.",
+              "frequentlyAskedQuestion": {
+                "question": "How will I receive confirmation of my reservation?",
+                "answer": "You will receive a confirmation email shortly."
+              },
+              "remarks": "Make sure to check your inbox."
+            },
+            "hasLocation": {
+              "autonomousCommunity": "Andalusia",
+              "country": "Spain",
+              "county": "Sevilla",
+              "locality": "Sevilla",
+              "postalCode": "41001",
+              "province": "Sevilla",
+              "streetAddress": "Historic Center"
+            },
+            "hasOpeningHours": {
+              "closesAt": "23:59",
+              "dayOfTheWeek": "Monday",
+              "hasDescription": {
+                "keyword": "Schedule",
+                "longDescription": "The routes will take place all day.",
+                "shortDescription": "Route schedule."
+              },
+              "opensAt": "00:00"
+            },
+            "keyword": "World Tourism Day",
+            "longDescription": "Celebration of World Tourism Day with various activities and routes in the city.",
+            "shortDescription": "Routes and activities to celebrate World Tourism Day."
+          },
+          "touristType": "Cultural",
+          "travelUnit": "Group"
+        }
+      },
+      "classes": [
+        {
+          "score": 0.9,
+          "classname": "Event"
+        }
+      ],
+      "original_content": "Rutas Día Mundial del Turismo\n=============================\n\nHemos recibido tu reserva. Recibirás un correo de confirmación en breve.\n------------------------------------------------------------------------\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: EventRefInput!) {\n          x: createEvent(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "Sevilla",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "Routes World Tourism Day",
+              "lang": "es"
+            }
+          ],
+          "hasDescription": [
+            {
+              "object": {
+                "keyword": [
+                  "World Tourism Day"
+                ],
+                "shortDescription": [
+                  {
+                    "value": "Routes and activities to celebrate World Tourism Day.",
+                    "lang": "es"
+                  }
+                ],
+                "longDescription": [
+                  {
+                    "value": "Celebration of World Tourism Day with various activities and routes in the city.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "hasLocation": [
+            {
+              "object": {
+                "province": "Sevilla",
+                "streetAddress": "Historic Center",
+                "postalCode": "41001",
+                "locality": "Sevilla",
+                "country": "Spain",
+                "autonomousCommunity": "Andalusia",
+                "municipality": "Sevilla"
+              }
+            }
+          ],
+          "hasAdditionalInformation": {
+            "object": {
+              "accessTip": "Check the confirmation email for more details.",
+              "conditions": "Prior reservation is required.",
+              "curiosities": "World Tourism Day is celebrated annually on September 27.",
+              "frequentlyAskedQuestion": {
+                "object": {
+                  "question": "How will I receive confirmation of my reservation?",
+                  "answer": "You will receive a confirmation email shortly."
+                }
+              },
+              "remarks": "Make sure to check your inbox."
+            }
+          },
+          "hasPriceSpecification": {
+            "object": {
+              "currency": "EUR",
+              "eligibleQuantity": "1",
+              "isAccessibleForFree": true,
+              "priceSchedule": {
+                "object": {
+                  "byDay": "27",
+                  "byMonth": "9",
+                  "byMonthDay": 27,
+                  "byMonthWeek": 1,
+                  "duration": "1 day",
+                  "hasDescription": [
+                    {
+                      "object": {
+                        "keyword": [
+                          "Free entry"
+                        ],
+                        "shortDescription": [
+                          {
+                            "value": "Free entry.",
+                            "lang": "es"
+                          }
+                        ],
+                        "longDescription": [
+                          {
+                            "value": "Entry to the routes is free.",
+                            "lang": "es"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              "targetAudience": "Tourists",
+              "taxesAndFessIncluded": true
+            }
+          },
+          "hasAcknowledgement": [
+            {
+              "object": {
+                "name": [
+                  {
+                    "value": "Reservation confirmed",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "availableLanguage": [
+            {
+              "uri": "http://vocab.segittur.es/language/en"
+            }
+          ],
+          "hasAdditionalType": "Tourist event",
+          "hasAgenda": [
+            {
+              "object": {
+                "position": 1,
+                "subEvent": {
+                  "object": {
+                    "availableLanguage": {
+                      "uri": "http://vocab.segittur.es/language/en"
+                    },
+                    "eventSchedule": {
+                      "object": {
+                        "byDay": "27",
+                        "byMonth": "9",
+                        "byMonthDay": 27,
+                        "byMonthWeek": 1,
+                        "duration": "1 day",
+                        "hasDescription": [
+                          {
+                            "object": {
+                              "keyword": [
+                                "Routes"
+                              ],
+                              "shortDescription": [
+                                {
+                                  "value": "Tourist routes.",
+                                  "lang": "es"
+                                }
+                              ],
+                              "longDescription": [
+                                {
+                                  "value": "Guided routes through the city to celebrate World Tourism Day.",
+                                  "lang": "es"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "eventType": "Cultural",
+                    "hasAdditionalInformation": {
+                      "object": {
+                        "accessTip": "Check the confirmation email for more details.",
+                        "conditions": "Prior reservation is required.",
+                        "curiosities": "World Tourism Day is celebrated annually on September 27.",
+                        "frequentlyAskedQuestion": {
+                          "object": {
+                            "question": "How will I receive confirmation of my reservation?",
+                            "answer": "You will receive a confirmation email shortly."
+                          }
+                        },
+                        "remarks": "Make sure to check your inbox."
+                      }
+                    },
+                    "hasDescription": [
+                      {
+                        "object": {
+                          "keyword": [
+                            "Routes"
+                          ],
+                          "shortDescription": [
+                            {
+                              "value": "Tourist routes.",
+                              "lang": "es"
+                            }
+                          ],
+                          "longDescription": [
+                            {
+                              "value": "Guided routes through the city to celebrate World Tourism Day.",
+                              "lang": "es"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "hasLocation": [
+                      {
+                        "object": {
+                          "province": "Sevilla",
+                          "streetAddress": "Historic Center",
+                          "postalCode": "41001",
+                          "locality": "Sevilla",
+                          "country": "Spain",
+                          "autonomousCommunity": "Andalusia",
+                          "municipality": "Sevilla"
+                        }
+                      }
+                    ],
+                    "hasPriceSpecification": {
+                      "object": {
+                        "currency": "EUR",
+                        "eligibleQuantity": "1",
+                        "isAccessibleForFree": true,
+                        "priceSchedule": {
+                          "object": {
+                            "byDay": "27",
+                            "byMonth": "9",
+                            "byMonthDay": 27,
+                            "byMonthWeek": 1,
+                            "duration": "1 day",
+                            "hasDescription": [
+                              {
+                                "object": {
+                                  "keyword": [
+                                    "Free entry"
+                                  ],
+                                  "shortDescription": [
+                                    {
+                                      "value": "Free entry.",
+                                      "lang": "es"
+                                    }
+                                  ],
+                                  "longDescription": [
+                                    {
+                                      "value": "Entry to the routes is free.",
+                                      "lang": "es"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "targetAudience": "Tourists",
+                        "taxesAndFessIncluded": true
+                      }
+                    },
+                    "maximumAttendeeCapacity": 100,
+                    "name": "Routes World Tourism Day",
+                    "offersAdditionalEventService": "Tourist guides available",
+                    "outdoorEvent": true,
+                    "refPointOfInterest": {
+                      "object": {
+                        "keyword": [
+                          "World Tourism Day"
+                        ],
+                        "shortDescription": [
+                          {
+                            "value": "Routes and activities to celebrate World Tourism Day.",
+                            "lang": "es"
+                          }
+                        ],
+                        "longDescription": [
+                          {
+                            "value": "Celebration of World Tourism Day with various activities and routes in the city.",
+                            "lang": "es"
+                          }
+                        ]
+                      }
+                    },
+                    "touristType": "Cultural"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

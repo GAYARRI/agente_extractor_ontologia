@@ -1,0 +1,352 @@
+{
+  "url": "https://visitasevilla.es/evento/concierto-de-la-oliva-de-salteras-en-el-salvador",
+  "tracking_id": "7bf774ba-5e64-4d14-afe5-fe1cab8852a2",
+  "firecrawl": {
+    "job_id": "b8172f99-fb92-47e7-9c24-d9b06a9f8701",
+    "page_id": 4481,
+    "url": "https://visitasevilla.es/evento/concierto-de-la-oliva-de-salteras-en-el-salvador",
+    "markdown": "![](https://visitasevilla.es/wp-content/uploads/2022/11/404-nueva.jpg)\n\nParece que estás perdido...\n===========================\n\nPero no te preocupes, en Sevilla siempre encontrarás lo que buscas\n\n[Volver al inicio](https://visitasevilla.es/)\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\n[](https://wa.me/667669186)\n\n           \n\nCerrar los ajustes de cookies RGPD\n\n![Visita Sevilla](https://visitasevilla.es/wp-content/themes/visita-sevilla/assets/images/svg/logo.svg)\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+    "metadata": {
+      "ogLocale": "es_ES",
+      "ogTitle": "Página no encontrada - Visita Sevilla",
+      "ogSiteName": "Visita Sevilla",
+      "title": "Página no encontrada - Visita Sevilla",
+      "language": "es-ES",
+      "og:locale": "es_ES",
+      "og:title": "Página no encontrada - Visita Sevilla",
+      "viewport": "width=device-width, initial-scale=1",
+      "og:site_name": "Visita Sevilla",
+      "generator": [
+        "WordPress 6.9.4",
+        "Elementor 3.35.7; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-auto"
+      ],
+      "robots": "noindex, follow",
+      "msapplication-TileImage": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-270x270.png",
+      "favicon": "https://visitasevilla.es/wp-content/uploads/2024/06/cropped-TDS-Logotipo-web-512x512_Visita-Sevilla-32x32.png",
+      "scrapeId": "019d01ca-e136-7089-8f15-8ace2c21f2da",
+      "sourceURL": "https://visitasevilla.es/evento/concierto-de-la-oliva-de-salteras-en-el-salvador",
+      "url": "https://visitasevilla.es/evento/concierto-de-la-oliva-de-salteras-en-el-salvador",
+      "statusCode": 404,
+      "error": "Not Found",
+      "contentType": "text/html; charset=UTF-8",
+      "proxyUsed": "basic",
+      "creditsUsed": 1
+    },
+    "status_code": 404,
+    "timestamp": "2026-03-18T16:43:33.675650"
+  },
+  "mtd": {
+    "category": "unknown",
+    "entity_id": null,
+    "score": 0.0,
+    "ontology_data": {
+      "properties": {
+        "Event": {
+          "availableLanguage": "en",
+          "eventSchedule": {
+            "byDay": "Monday to Sunday",
+            "byMonth": "March",
+            "byMonthDay": 18,
+            "byMonthWeek": 3,
+            "duration": "1 day",
+            "hasDescription": {
+              "keyword": "newsletter",
+              "longDescription": "Sign up for the newsletter to receive updates and personalized marketing.",
+              "shortDescription": "Subscribe to our mailing list."
+            },
+            "repeatCount": 1
+          },
+          "eventType": "Newsletter Subscription",
+          "hasAcknowledgement": "Thank you for subscribing.",
+          "hasAdditionalInformation": {
+            "accessTip": "Check your email for more information.",
+            "conditions": "I accept the sending of commercial communications.",
+            "curiosities": "The information will be used for personalized marketing.",
+            "frequentlyAskedQuestion": {
+              "answer": "You can unsubscribe at any time.",
+              "question": "Can I cancel my subscription?"
+            },
+            "remarks": "Your privacy is important to us."
+          },
+          "hasAdditionalType": "Marketing",
+          "hasAgenda": {
+            "position": 1,
+            "subEvent": {
+              "availableLanguage": "en",
+              "eventSchedule": {
+                "byDay": "Monday to Sunday",
+                "byMonth": "March",
+                "byMonthDay": 18,
+                "byMonthWeek": 3,
+                "duration": "1 day",
+                "hasDescription": {
+                  "keyword": "newsletter",
+                  "longDescription": "Sign up for the newsletter to receive updates and personalized marketing.",
+                  "shortDescription": "Subscribe to our mailing list."
+                },
+                "repeatCount": 1
+              },
+              "eventType": "Newsletter Subscription",
+              "hasAdditionalInformation": {
+                "accessTip": "Check your email for more information.",
+                "conditions": "I accept the sending of commercial communications.",
+                "curiosities": "The information will be used for personalized marketing.",
+                "frequentlyAskedQuestion": {
+                  "answer": "You can unsubscribe at any time.",
+                  "question": "Can I cancel my subscription?"
+                },
+                "remarks": "Your privacy is important to us."
+              },
+              "hasAdditionalType": "Marketing"
+            }
+          },
+          "hasContactPoint": {
+            "url": "https://visitasevilla.es/politica-de-privacidad/"
+          },
+          "hasDescription": {
+            "keyword": "newsletter",
+            "longDescription": "Sign up for the newsletter to receive updates and personalized marketing.",
+            "shortDescription": "Subscribe to our mailing list."
+          },
+          "hasLocation": {
+            "autonomousCommunity": "Andalusia",
+            "country": "Spain",
+            "county": "Sevilla",
+            "locality": "Sevilla",
+            "postalCode": "41001",
+            "province": "Sevilla",
+            "streetAddress": "Calle de la Feria, 3"
+          },
+          "hasPriceSpecification": {
+            "currency": "EUR",
+            "eligibleQuantity": "1",
+            "isAccessibleForFree": true,
+            "priceSchedule": {
+              "byDay": "Monday to Sunday",
+              "byMonth": "March",
+              "byMonthDay": 18,
+              "byMonthWeek": 3,
+              "duration": "1 day",
+              "hasDescription": {
+                "keyword": "newsletter",
+                "longDescription": "Sign up for the newsletter to receive updates and personalized marketing.",
+                "shortDescription": "Subscribe to our mailing list."
+              },
+              "repeatCount": 1
+            },
+            "targetAudience": "General",
+            "taxesAndFessIncluded": true
+          },
+          "maximumAttendeeCapacity": 1000,
+          "name": "Seville Newsletter Subscription",
+          "offersAdditionalEventService": "Updates and promotions",
+          "relatedTo": "Marketing",
+          "touristType": "Tourist"
+        }
+      },
+      "classes": [
+        {
+          "score": 0.5,
+          "classname": "Event"
+        }
+      ],
+      "original_content": "Parece que estás perdido...\n===========================\n\nPero no te preocupes, en Sevilla siempre encontrarás lo que buscas\n\nLo que necesitas saber está en tu correo\n\nApúntate a  \nla newsletter\n--------------------------\n\nNombre            \n\nEmail            \n\n**Permisos de marketing**\n\nLa información que proporcione en este formulario sólo se utilizará para ofrecerle actualizaciones y marketing personalizado. Su privacidad es importante para nosotros. Díganos cómo desea que nos mantengamos en contacto con usted:\n\nComunicaciones comerciales\n\nAcepto el envío de comunicaciones comerciales.\n\nAl hacer clic a continuación para enviar este formulario, reconoce que la información que proporcione se procesará de acuerdo con nuestra Política de privacidad.\n\nHe leído y acepto los [términos legales](https://visitasevilla.es/politica-de-privacidad/)\n\nQuiero estar al día\n\nLoading...\n\n¡Gracias!  \nTe has suscrito satisfactoriamente a nuestra lista.\n\nCerrar los ajustes de cookies RGPD\n\n*   Resumen de privacidad\n*   Cookies estrictamente necesarias\n*   Cookies de terceros\n\nResumen de privacidad\n\nEsta web utiliza cookies para que podamos ofrecerte la mejor experiencia de usuario posible. La información de las cookies se almacena en tu navegador y realiza funciones tales como reconocerte cuando vuelves a nuestra web o ayudar a nuestro equipo a comprender qué secciones de la web encuentras más interesantes y útiles.\n\nCookies estrictamente necesarias\n\nLas cookies estrictamente necesarias tiene que activarse siempre para que podamos guardar tus preferencias de ajustes de cookies.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nCookies de terceros\n\nEsta web utiliza Google Analytics para recopilar información anónima tal como el número de visitantes del sitio, o las páginas más populares.\n\nDejar esta cookie activa nos permite mejorar nuestra web.\n\nActivar o desactivar las cookies  Activado Desactivado\n\nActivar todo Guardar cambios",
+      "uri": "",
+      "name": "",
+      "pk": ""
+    }
+  },
+  "graphql": {
+    "pk": "",
+    "query": "mutation Create($dti: String!, $input: EventRefInput!) {\n          x: createEvent(dti: $dti, input: $input) {\n            uri\n          }\n        }",
+    "variables": {
+      "dti": "Sevilla",
+      "input": {
+        "object": {
+          "name": [
+            {
+              "value": "Seville Newsletter Subscription",
+              "lang": "es"
+            }
+          ],
+          "hasDescription": [
+            {
+              "object": {
+                "keyword": [
+                  "newsletter"
+                ],
+                "shortDescription": [
+                  {
+                    "value": "Subscribe to our mailing list.",
+                    "lang": "es"
+                  }
+                ],
+                "longDescription": [
+                  {
+                    "value": "Sign up for the newsletter to receive updates and personalized marketing.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "hasLocation": [
+            {
+              "object": {
+                "province": "Sevilla",
+                "streetAddress": "Calle de la Feria, 3",
+                "postalCode": "41001",
+                "locality": "Sevilla",
+                "country": "Spain",
+                "autonomousCommunity": "Andalusia",
+                "municipality": "Sevilla"
+              }
+            }
+          ],
+          "hasAdditionalInformation": {
+            "object": {
+              "accessTip": "Check your email for more information.",
+              "conditions": "I accept the sending of commercial communications.",
+              "curiosities": "The information will be used for personalized marketing.",
+              "frequentlyAskedQuestion": {
+                "object": {
+                  "answer": "You can unsubscribe at any time.",
+                  "question": "Can I cancel my subscription?"
+                }
+              },
+              "remarks": "Your privacy is important to us."
+            }
+          },
+          "hasContactPoint": [
+            {
+              "object": {
+                "url": "https://visitasevilla.es/politica-de-privacidad/",
+                "email": null,
+                "telephone": []
+              }
+            }
+          ],
+          "hasPriceSpecification": {
+            "object": {
+              "currency": "EUR",
+              "eligibleQuantity": "1",
+              "isAccessibleForFree": true,
+              "priceSchedule": {
+                "object": {
+                  "byDay": "Monday to Sunday",
+                  "byMonth": "March",
+                  "byMonthDay": 18,
+                  "byMonthWeek": 3,
+                  "duration": "1 day",
+                  "hasDescription": [
+                    {
+                      "object": {
+                        "keyword": [
+                          "newsletter"
+                        ],
+                        "shortDescription": [
+                          {
+                            "value": "Subscribe to our mailing list.",
+                            "lang": "es"
+                          }
+                        ],
+                        "longDescription": [
+                          {
+                            "value": "Sign up for the newsletter to receive updates and personalized marketing.",
+                            "lang": "es"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "repeatCount": 1
+                }
+              },
+              "targetAudience": "General",
+              "taxesAndFessIncluded": true
+            }
+          },
+          "hasAcknowledgement": [
+            {
+              "object": {
+                "name": [
+                  {
+                    "value": "Thank you for subscribing.",
+                    "lang": "es"
+                  }
+                ]
+              }
+            }
+          ],
+          "availableLanguage": [
+            {
+              "uri": "http://vocab.segittur.es/language/en"
+            }
+          ],
+          "hasAdditionalType": "Marketing",
+          "hasAgenda": [
+            {
+              "object": {
+                "position": 1,
+                "subEvent": {
+                  "object": {
+                    "availableLanguage": {
+                      "uri": "http://vocab.segittur.es/language/en"
+                    },
+                    "eventSchedule": {
+                      "object": {
+                        "byDay": "Monday to Sunday",
+                        "byMonth": "March",
+                        "byMonthDay": 18,
+                        "byMonthWeek": 3,
+                        "duration": "1 day",
+                        "hasDescription": [
+                          {
+                            "object": {
+                              "keyword": [
+                                "newsletter"
+                              ],
+                              "shortDescription": [
+                                {
+                                  "value": "Subscribe to our mailing list.",
+                                  "lang": "es"
+                                }
+                              ],
+                              "longDescription": [
+                                {
+                                  "value": "Sign up for the newsletter to receive updates and personalized marketing.",
+                                  "lang": "es"
+                                }
+                              ]
+                            }
+                          }
+                        ],
+                        "repeatCount": 1
+                      }
+                    },
+                    "eventType": "Newsletter Subscription",
+                    "hasAdditionalInformation": {
+                      "object": {
+                        "accessTip": "Check your email for more information.",
+                        "conditions": "I accept the sending of commercial communications.",
+                        "curiosities": "The information will be used for personalized marketing.",
+                        "frequentlyAskedQuestion": {
+                          "object": {
+                            "answer": "You can unsubscribe at any time.",
+                            "question": "Can I cancel my subscription?"
+                          }
+                        },
+                        "remarks": "Your privacy is important to us."
+                      }
+                    },
+                    "hasAdditionalType": "Marketing"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
