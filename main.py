@@ -13,6 +13,7 @@ from src.entity_description_consolidator import EntityDescriptionConsolidator
 from src.export.json_exporter import JSONExporter
 from src.visualization.tourism_graph_visualizer import TourismGraphVisualizer
 from src.visualization.tourism_map_visualizer import TourismMapVisualizer
+from src.kg_postprocessor import KGPostProcessor
 
 
 def main():
@@ -55,6 +56,10 @@ def main():
     # ---------------------------
     consolidator = EntityDescriptionConsolidator()
     global_entities = consolidator.consolidate(all_results)
+    
+    postprocessor = KGPostProcessor()
+    global_entities = postprocessor.process(global_entities)
+
     print("\n=== TRAS EntityDescriptionConsolidator ===")
     if global_entities:
         print(global_entities[0])

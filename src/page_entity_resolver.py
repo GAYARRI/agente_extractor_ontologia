@@ -137,6 +137,7 @@ class PageEntityResolver:
             "consejos, rutas y curiosidades gastronómicas",
             "mainimage",
             "image",
+            "candidateimage",
         }
         if nl in bad_exact:
             return True
@@ -260,7 +261,7 @@ class PageEntityResolver:
     def clean_placeholder_properties(self, entity: dict) -> dict:
         props = entity.get("properties", {}) or {}
 
-        for key in ["image", "mainImage"]:
+        for key in ["image", "mainImage", "candidateImage"]:
             value = props.get(key)
             if isinstance(value, str) and value.strip().lower() == key.lower():
                 props.pop(key, None)
@@ -325,7 +326,6 @@ class PageEntityResolver:
 
             scored.sort(key=lambda x: x[1], reverse=True)
 
-            # si todas puntúan igual de mal, no tocamos
             if len(set(score for _, score in scored)) == 1 and scored[0][1] == 0:
                 continue
 
@@ -343,65 +343,62 @@ class PageEntityResolver:
 
         return entities
 
-    def remove_repeated_global_images(self, entities: list, threshold: int = 2) -> list:
+    def _extract_all_image_candidates(self, e: dict):
+        props = e.get("properties", {}) or {}
+        imgs = []
 
+        for key in ["image", "mainImage", "additionalImages"]:
+            val = e.get(key)
+            if val:
+                if isinstance(val, list):
+                    imgs.extend(val)
+                else:
+                    imgs.append(val)
+
+            valp = props.get(key)
+            if valp:
+                if isinstance(valp, list):
+                    imgs.extend(valp)
+                else:
+                    imgs.append(valp)
+
+        flat = []
+        for img in imgs:
+            if not img:
+                continue
+            s = str(img).strip()
+
+            if s.startswith("[") and s.endswith("]"):
+                inner = s[1:-1].strip()
+                parts = [p.strip(" '\"") for p in inner.split(",") if p.strip(" '\"")]
+                flat.extend(parts)
+            elif "|" in s:
+                flat.extend([x.strip() for x in s.split("|") if x.strip()])
+            else:
+                flat.append(s)
+
+        return self._dedupe_preserve_order(flat)
+
+    def remove_repeated_global_images(self, entities: list, threshold: int = 2) -> list:
         counter = {}
 
-        def get_all_images(e):
-            props = e.get("properties", {}) or {}
-            imgs = []
-
-            for key in ["image", "mainImage", "additionalImages"]:
-                val = e.get(key)
-                if val:
-                    if isinstance(val, list):
-                        imgs.extend(val)
-                    else:
-                        imgs.append(val)
-
-                valp = props.get(key)
-                if valp:
-                    if isinstance(valp, list):
-                        imgs.extend(valp)
-                    else:
-                        imgs.append(valp)
-
-            flat = []
-            for img in imgs:
-                if not img:
-                    continue
-                s = str(img).strip()
-
-                if s.startswith("[") and s.endswith("]"):
-                    inner = s[1:-1].strip()
-                    parts = [p.strip(" '\"") for p in inner.split(",") if p.strip(" '\"")]
-                    flat.extend(parts)
-                elif "|" in s:
-                    flat.extend([x.strip() for x in s.split("|") if x.strip()])
-                else:
-                    flat.append(s)
-
-            return flat
-
-        # contar
         for e in entities:
-            for img in get_all_images(e):
+            for img in self._extract_all_image_candidates(e):
                 counter[img] = counter.get(img, 0) + 1
 
-        # eliminar las repetidas/globales
         for e in entities:
             props = e.get("properties", {}) or {}
 
             filtered = []
-            for img in get_all_images(e):
+            for img in self._extract_all_image_candidates(e):
                 low = img.lower()
                 if counter.get(img, 0) >= threshold:
                     continue
-                if any(b in low for b in ["separador", "separator", "logo", "banner", "icon"]):
+                if any(b in low for b in ["separador", "separator", "logo", "banner", "icon", "header", "footer"]):
                     continue
                 filtered.append(img)
 
-            filtered = list(dict.fromkeys(filtered))
+            filtered = self._dedupe_preserve_order(filtered)
 
             if filtered:
                 e["image"] = filtered[0]
@@ -421,7 +418,47 @@ class PageEntityResolver:
 
             e["properties"] = props
 
-        return entities        
+        return entities
+
+    def promote_unique_candidate_images(self, entities: list) -> list:
+        candidate_counts = {}
+
+        for e in entities:
+            props = e.get("properties", {}) or {}
+            cand = (props.get("candidateImage") or "").strip()
+
+            if not cand:
+                continue
+
+            candidate_counts[cand] = candidate_counts.get(cand, 0) + 1
+
+        for e in entities:
+            props = e.get("properties", {}) or {}
+            cand = (props.get("candidateImage") or "").strip()
+
+            if not cand:
+                continue
+
+            if (e.get("image") or "").strip() or (e.get("mainImage") or "").strip():
+                continue
+
+            low = cand.lower()
+
+            if any(bad in low for bad in [
+                "logo", "icon", "banner", "separator", "separador",
+                "header", "footer", "placeholder", "avatar", "share", "social"
+            ]):
+                continue
+
+            if candidate_counts.get(cand, 0) == 1:
+                e["image"] = cand
+                e["mainImage"] = cand
+                props["image"] = cand
+                props["mainImage"] = cand
+
+            e["properties"] = props
+
+        return entities
 
     # =========================================================
     # Filtro editorial / duplicados parciales
@@ -649,8 +686,8 @@ class PageEntityResolver:
 
         resolved = self.dedupe_images_across_entities(resolved)
         resolved = self.remove_repeated_global_images(resolved, threshold=2)
+        resolved = self.promote_unique_candidate_images(resolved)
         resolved = [e for e in resolved if not self.is_editorial_entity(e)]
         resolved = self.remove_substring_entities(resolved)
 
         return resolved
-

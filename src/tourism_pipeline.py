@@ -24,6 +24,8 @@ from src.entities.entity_graph_builder import EntityGraphBuilder
 from src.tourism_property_extractor import TourismPropertyExtractor
 from src.page_entity_resolver import PageEntityResolver
 from src.dom_image_resolver import DOMImageResolver
+from src.block_quality_scorer import BlockQualityScorer
+from src.entity_evidence_builder import EntityEvidenceBuilder
 
 import re
 import hashlib
@@ -83,6 +85,9 @@ class TourismPipeline:
         self.tourism_property_extractor = TourismPropertyExtractor()
         self.page_entity_resolver = PageEntityResolver()
         self.dom_image_resolver = DOMImageResolver()
+        self.block_quality_scorer = BlockQualityScorer()
+        self.entity_evidence_builder = EntityEvidenceBuilder()
+
 
         self.edge_stopwords = {
             "de", "del", "la", "las", "el", "los", "y", "e", "en", "por",
@@ -258,9 +263,32 @@ class TourismPipeline:
         else:
             props.pop("wikidataImage", None)
 
+
+        candidate = props.get("candidateImage")
+
+        if candidate:
+            candidate = self._normalize_image_url(candidate)
+            if not candidate or self._is_wikimedia_url(candidate):
+                props.pop("candidateImage", None)
+            else:
+                props["candidateImage"] = candidate
+        else:
+            props.pop("candidateImage", None)
+
+        candidate = props.get("candidateImage")
+        if candidate:
+            candidate = self._normalize_image_url(candidate)
+            if not candidate or self._is_wikimedia_url(candidate):
+                props.pop("candidateImage", None)
+            else:
+                props["candidateImage"] = candidate
+        else:
+            props.pop("candidateImage", None) 
+
         return props
 
-    def _resolve_dom_image(self, html, entity, url=""):
+    def _resolve_dom_image(self, html, entity, url="", block_text=""):
+
         """
         Devuelve (image_url, score)
         """
@@ -270,6 +298,7 @@ class TourismPipeline:
                     html=html,
                     entity_name=entity,
                     base_url=url,
+                    block_text=block_text,
                     min_score=0,
                 )
         except Exception:
@@ -281,6 +310,7 @@ class TourismPipeline:
                     html=html,
                     entity_name=entity,
                     base_url=url,
+                    block_text=block_text,
                     min_score=0,
                 )
                 return img, 3 if img else 0
@@ -293,10 +323,10 @@ class TourismPipeline:
                 return img, 3 if img else 0
         except Exception:
             pass
-
-        return "", 0    
         
+        return "", 0         
 
+    
     # ==================================================
     # NUEVOS HELPERS OUTPUT
     # ==================================================
@@ -713,7 +743,7 @@ class TourismPipeline:
 
     def _merge_properties(self, *prop_dicts):
         merged = {}
-        local_image_keys = {"image", "mainImage", "additionalImages"}
+        local_image_keys = {"image", "mainImage", "additionalImages", "candidateImage"}
         local_images = []
         wikidata_image = None
 
@@ -879,6 +909,12 @@ class TourismPipeline:
                     entities.append(primary)
 
             try:
+                # 🔎 Evaluar calidad del bloque
+                block_quality = self.block_quality_scorer.evaluate(text, html=html)
+
+                if block_quality["decision"] == "discard" and not self.has_entity_signal(text):
+                    continue
+                
                 ner_entities = self.entity_extractor.extract(text) or []
                 entities.extend(ner_entities)
             except Exception:
@@ -975,17 +1011,29 @@ class TourismPipeline:
                             entity=entity,
                             text=text,
                             html=html,
+                            url=url,
                         ) or {}
                     except Exception:
                         image_props = {}
 
-                    dom_image, dom_score = self._resolve_dom_image(html, entity, url=url)
-                    
+                    dom_image, dom_score = self._resolve_dom_image(
+                        html,
+                        entity,
+                        url=url,
+                        block_text=text
+                    )
+
+                    # 1) prioridad total a la imagen local por DOM
                     if dom_image and dom_score >= 3:
                         image_props["image"] = dom_image
                         image_props["mainImage"] = dom_image
+
+                    # 2) si no hay buena DOM, guardar candidata media
                     elif dom_image and dom_score == 2:
                         image_props["candidateImage"] = dom_image
+
+                            
+                        
 
                     props = self._merge_properties(
                         self.property_enricher.enrich(entity, "Place", text),
@@ -995,20 +1043,34 @@ class TourismPipeline:
 
                     desc = page_props.get("description", "")
 
-                    classified_entities.append(
-                        self._build_output_entity(
-                            entity=entity,
-                            label="Place",
-                            score=0.5,
-                            props=props,
-                            short_description=desc[:180] if desc else "",
-                            long_description=desc,
-                            wikidata_id=None,
-                            html=html,
-                            text=text,
-                            url=url,
-                        )
-                    )
+                    built_entity = self._build_output_entity(
+                    entity=entity,
+                    label="Place",
+                    score=0.5,
+                    props=props,
+                    short_description=desc[:180] if desc else "",
+                    long_description=desc,
+                    wikidata_id=None,
+                    text=text,
+                    url=url,
+                )
+
+                evidence = self.entity_evidence_builder.evaluate(
+                    built_entity,
+                    block_score=block_quality["score"]
+                )
+
+                built_entity["evidenceScore"] = evidence["evidenceScore"]
+                built_entity["evidenceFlags"] = evidence["evidenceFlags"]
+                built_entity["evidenceDecision"] = evidence["evidenceDecision"]
+
+                if evidence["evidenceDecision"] != "discard":
+                    if evidence["evidenceDecision"] == "review":
+                        built_entity["needsReview"] = True
+                    classified_entities.append(built_entity)                     
+
+
+
                     print("\n=== TRAS _build_output_entity ===")
                     if classified_entities:
                         print(classified_entities[0])
@@ -1030,23 +1092,33 @@ class TourismPipeline:
                         entity=entity,
                     ) or {}
 
+                
                     try:
                         image_props = self.image_enricher.enrich(
                             entity=entity,
                             text=text,
                             html=html,
+                            url=url,
                         ) or {}
                     except Exception:
                         image_props = {}
 
-                    dom_image, dom_score = self._resolve_dom_image(html, entity, url=url)
-                    
+                    dom_image, dom_score = self._resolve_dom_image(
+                        html,
+                        entity,
+                        url=url,
+                        block_text=text
+                    )
+
+                    # 1) prioridad total a la imagen local por DOM
                     if dom_image and dom_score >= 3:
                         image_props["image"] = dom_image
                         image_props["mainImage"] = dom_image
+
+                    # 2) si no hay buena DOM, guardar candidata media
                     elif dom_image and dom_score == 2:
                         image_props["candidateImage"] = dom_image
-                    
+ 
 
                     wikidata_props = {}
                     wikidata_id = None
@@ -1073,20 +1145,33 @@ class TourismPipeline:
                     short_description = e.get("short_description", "") or page_props.get("description", "")[:180]
                     long_description = e.get("long_description", "") or page_props.get("description", "")
 
-                    classified_entities.append(
-                        self._build_output_entity(
-                            entity=entity,
-                            label=label,
-                            score=score,
-                            props=props,
-                            short_description=short_description,
-                            long_description=long_description,
-                            wikidata_id=wikidata_id,
-                            html=html,
-                            text=text,
-                            url=url,
-                        )
-                    )
+                    built_entity = self._build_output_entity(
+                    entity=entity,
+                    label=label,
+                    score=score,
+                    props=props,
+                    short_description=short_description,
+                    long_description=long_description,
+                    wikidata_id=wikidata_id,
+                    text=text,
+                    url=url,
+                )
+
+                evidence = self.entity_evidence_builder.evaluate(
+                    built_entity,
+                    block_score=block_quality["score"]
+                )
+
+                built_entity["evidenceScore"] = evidence["evidenceScore"]
+                built_entity["evidenceFlags"] = evidence["evidenceFlags"]
+                built_entity["evidenceDecision"] = evidence["evidenceDecision"]
+
+                if evidence["evidenceDecision"] != "discard":
+                    if evidence["evidenceDecision"] == "review":
+                        built_entity["needsReview"] = True
+                    classified_entities.append(built_entity)
+
+
                     print("\n=== TRAS _build_output_entity ===")
                     if classified_entities:
                         print(classified_entities[0])

@@ -1,264 +1,225 @@
-import os
 import re
-from urllib.parse import urlparse, urlunparse, unquote
+from urllib.parse import urljoin
 
 
 class ImageEnricher:
     def __init__(self):
         pass
 
-    # ==================================================
-    # HELPERS
-    # ==================================================
+    # =========================================================
+    # Helpers
+    # =========================================================
 
-    def _normalize_text(self, text):
-        return " ".join((text or "").strip().lower().split())
+    def _normalize(self, text: str) -> str:
+        return re.sub(r"\s+", " ", (text or "").strip().lower())
 
-    def _entity_tokens(self, text):
-        text = self._normalize_text(text)
-        text = re.sub(r"[^a-z0-9áéíóúñü\s\-_/]", " ", text)
-        return {t for t in text.replace("-", " ").replace("/", " ").split() if len(t) >= 3}
+    def _tokens(self, text: str):
+        text = self._normalize(text)
+        return [t for t in re.split(r"[\s\-_/,.;:()]+", text) if len(t) > 3]
 
-    def _normalize_image_url(self, url):
-        if not url:
-            return None
-
-        url = str(url).strip()
-        if not url:
-            return None
-
-        parsed = urlparse(url)
-
-        if parsed.scheme not in ("http", "https"):
-            return None
-
-        clean = urlunparse((
-            parsed.scheme.lower(),
-            parsed.netloc.lower(),
-            parsed.path,
-            "",
-            "",
-            ""
-        ))
-
-        return unquote(clean)
-
-    def _image_signature(self, url):
-        if not url:
-            return None
-
-        norm = self._normalize_image_url(url)
-        if not norm:
-            return None
-
-        path = unquote(urlparse(norm).path).lower()
-        filename = os.path.basename(path)
-
-        if not filename:
-            return path
-
-        thumb_prefixes = [
-            "120px-", "150px-", "180px-", "200px-", "220px-", "250px-",
-            "300px-", "320px-", "400px-", "500px-", "640px-", "800px-",
-            "1024px-"
-        ]
-
-        for prefix in thumb_prefixes:
-            if filename.startswith(prefix):
-                filename = filename[len(prefix):]
-                break
-
-        return filename
-
-    def _is_wikimedia_url(self, url):
+    def _is_probably_image_url(self, url: str) -> bool:
         if not url:
             return False
-
-        low = url.lower()
-        return any(host in low for host in [
-            "wikimedia.org",
-            "wikipedia.org",
-            "wikidata.org",
-            "commons.wikimedia.org",
-        ])
-
-    def _is_probably_image_url(self, url):
-        if not url:
-            return False
-
-        low = url.lower()
-
-        if any(ext in low for ext in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg"]):
-            return True
-
-        return False
+        u = url.lower()
+        return any(ext in u for ext in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"])
 
     def _is_probably_logo(self, url: str) -> bool:
         if not url:
             return True
 
         u = url.lower()
-
         bad_patterns = [
             "logo", "icon", "sprite", "banner", "placeholder",
-            "default", "avatar", "marca", "brand", "header",
-            "footer", "og-image", "share", "social"
+            "default", "avatar", "header", "footer",
+            "og-image", "share", "social",
+            "separador", "separator"
         ]
+        return any(p in u for p in bad_patterns)
 
-        return any(p in u for p in bad_patterns)    
-        
+    def _extract_img_tags(self, html: str):
+        if not html:
+            return []
 
-    def _dedupe_images(self, urls):
-        result = []
-        seen = set()
+        pattern = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
+        return pattern.findall(html)
 
-        for url in urls:
-            norm = self._normalize_image_url(url)
-            sig = self._image_signature(norm)
+    def _extract_attr(self, tag: str, attr: str) -> str:
+        if not tag:
+            return ""
 
-            if not norm or not sig:
-                continue
+        patterns = [
+            rf'{attr}\s*=\s*"([^"]+)"',
+            rf"{attr}\s*=\s*'([^']+)'",
+        ]
+        for p in patterns:
+            m = re.search(p, tag, re.IGNORECASE)
+            if m:
+                return m.group(1).strip()
 
-            if sig in seen:
-                continue
+        return ""
 
-            seen.add(sig)
-            result.append(norm)
+    def _get_img_src(self, tag: str, base_url: str = "") -> str:
+        src = (
+            self._extract_attr(tag, "src")
+            or self._extract_attr(tag, "data-src")
+            or self._extract_attr(tag, "data-lazy-src")
+        )
 
-        return result
+        if not src:
+            srcset = self._extract_attr(tag, "srcset")
+            if srcset:
+                src = srcset.split(",")[0].split(" ")[0].strip()
 
-    def _image_relevance_score(self, entity, image_url, text=""):
-        """
-        Intenta evitar imágenes ajenas a la instancia.
-        No es perfecto, pero ayuda a filtrar URLs demasiado genéricas.
-        """
-        if not image_url:
-            return -10
+        if src and base_url:
+            src = urljoin(base_url, src)
 
-        if self._is_probably_logo(image_url):
-            return -10
+        return src
 
-        entity_tokens = self._entity_tokens(entity)
-        if not entity_tokens:
-            return 0
-
-        bag = set()
-        bag.update(self._entity_tokens(image_url))
-        bag.update(self._entity_tokens(text))
-
-        overlap = len(entity_tokens & bag)
-
+    def _image_relevance_score(self, entity: str, src: str, alt: str = "", title: str = "", text: str = "") -> int:
         score = 0
-        score += overlap * 3
 
-        # pequeña penalización si parece muy genérica
-        generic_tokens = {"image", "images", "photo", "photos", "gallery", "media", "upload"}
-        if bag & generic_tokens:
-            score -= 1
+        entity_tokens = self._tokens(entity)
+        src_l = self._normalize(src)
+        alt_l = self._normalize(alt)
+        title_l = self._normalize(title)
+        text_l = self._normalize(text)
+
+        if self._is_probably_logo(src):
+            score -= 10
+
+        if any(t in alt_l for t in entity_tokens):
+            score += 5
+
+        if any(t in title_l for t in entity_tokens):
+            score += 4
+
+        if any(t in src_l for t in entity_tokens):
+            score += 3
+
+        if entity_tokens and any(t in text_l for t in entity_tokens):
+            score += 1
+
+        if src_l.endswith(".jpg") or src_l.endswith(".jpeg") or src_l.endswith(".webp"):
+            score += 1
+
+        # penalizar imágenes muy globales
+        generic_hits = [
+            "visitasevilla",
+            "home",
+            "portada",
+            "hero",
+            "cabecera",
+            "header",
+            "cover",
+            "pumarejo",
+        ]
+        if any(g in src_l for g in generic_hits):
+            score -= 3
 
         return score
 
-    # ==================================================
-    # EXTRACT
-    # ==================================================
+    def _dedupe_images(self, images):
+        out = []
+        seen = set()
+
+        for img in images:
+            if not img:
+                continue
+            key = img.strip()
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            out.append(key)
+
+        return out
+
+    def _extract_text_image_urls(self, text: str):
+        if not text:
+            return []
+
+        urls = re.findall(r'https?://[^\s<>"\']+', text)
+        return [u for u in urls if self._is_probably_image_url(u)]
+
+    def _extract_candidates_from_html(self, html: str, entity: str, base_url: str = "", text: str = ""):
+        candidates = []
+        img_tags = self._extract_img_tags(html)
+
+        for tag in img_tags:
+            src = self._get_img_src(tag, base_url=base_url)
+            if not src:
+                continue
+            if not self._is_probably_image_url(src):
+                continue
+
+            alt = self._extract_attr(tag, "alt")
+            title = self._extract_attr(tag, "title")
+            score = self._image_relevance_score(entity, src, alt=alt, title=title, text=text)
+            candidates.append((src, score))
+
+        return candidates
+
+    def _best_candidate(self, candidates):
+        if not candidates:
+            return "", 0
+
+        best_by_src = {}
+        for src, score in candidates:
+            if src not in best_by_src or score > best_by_src[src]:
+                best_by_src[src] = score
+
+        ordered = sorted(best_by_src.items(), key=lambda x: x[1], reverse=True)
+        return ordered[0]
+
+    # =========================================================
+    # API pública
+    # =========================================================
 
     def enrich(self, entity, text="", html="", url=""):
         """
-        Devuelve una imagen razonable para la entidad.
-        Prioridad:
-        1) imágenes explícitas en el texto
-        2) JSON-LD / schema.org
-        3) og:image SOLO como fallback débil
+        Muy conservador:
+        - usa imágenes explícitas en el texto si existen
+        - usa imágenes del HTML solo si tienen evidencia razonable
+        - NO usa og:image como fallback global
         """
 
         candidates = []
 
-        if text:
-            urls = re.findall(r'https?://[^\s<>"\']+', text)
-            text_images = [u for u in urls if self._is_probably_image_url(u)]
-            candidates.extend(text_images)
+        # 1) URLs de imagen explícitas en el texto
+        text_images = self._extract_text_image_urls(text)
+        for img in text_images:
+            score = self._image_relevance_score(entity, img, text=text) + 2
+            candidates.append((img, score))
 
-        jsonld_images = []
-        og_image = ""
+        # 2) Imágenes del HTML con scoring semántico
+        html_candidates = self._extract_candidates_from_html(html, entity, base_url=url, text=text)
+        candidates.extend(html_candidates)
 
-        if html:
-            jsonld_images = self._extract_jsonld_images(html)
-            og_image = self._extract_og_image(html)
+        # limpiar
+        cleaned = []
+        for src, score in candidates:
+            if not src:
+                continue
+            if self._is_probably_logo(src):
+                continue
+            cleaned.append((src, score))
 
-        # Primero intentamos con imágenes más específicas
-        candidates.extend(jsonld_images)
-        candidates = self._dedupe_images(candidates)
+        if not cleaned:
+            return {}
 
-        best = self._choose_best_image(entity, candidates, text=text)
-        if best:
-            return {"image": best}
+        src, score = self._best_candidate(cleaned)
 
-        # og:image solo como fallback
-        if og_image and not self._is_probably_logo(og_image):
-            return {"image": og_image}
+        # umbral conservador:
+        # solo devolvemos si hay evidencia media-alta
+        if score >= 4:
+            return {
+                "image": src,
+                "mainImage": src,
+            }
+
+        # confianza media: no la promovemos a imagen final
+        if score == 3:
+            return {
+                "candidateImage": src,
+            }
 
         return {}
-    
-        
-    
-
-    def _extract_og_image(self, html: str) -> str:
-        if not html:
-            return ""
-        m = re.search(
-            r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
-            html,
-            re.IGNORECASE
-        )
-        return m.group(1).strip() if m else ""
-
-    def _extract_jsonld_images(self, html: str) -> list:
-        if not html:
-            return []
-        matches = re.findall(r'"image"\s*:\s*"([^"]+)"', html, re.IGNORECASE)
-        return [m.strip() for m in matches if m.strip()]
-
-    def _choose_best_image(self, entity: str, candidates: list, text: str = "") -> str:
-        valid = []
-
-        entity_norm = (entity or "").strip().lower()
-
-        for img in candidates:
-            if not img:
-                continue
-            if self._is_probably_logo(img):
-                continue
-
-            score = self._image_relevance_score(entity, img, text=text)
-
-            u = img.lower()
-
-            if self._is_wikimedia_url(img):
-                score += 1
-
-            # penalizaciones por imagen demasiado genérica
-            generic_hits = [
-                "visitasevilla",
-                "cabecera",
-                "header",
-                "home",
-                "portada",
-                "generic",
-                "default",
-                "banner"
-            ]
-            if any(g in u for g in generic_hits):
-                score -= 3
-
-            # premio si el nombre de la entidad aparece en la URL
-            tokens = [t for t in re.split(r"[\s\-_]+", entity_norm) if len(t) > 3]
-            if tokens and any(t in u for t in tokens):
-                score += 3
-
-            valid.append((img, score))
-
-        if not valid:
-            return ""
-
-        valid.sort(key=lambda x: x[1], reverse=True)
-        return valid[0][0]
