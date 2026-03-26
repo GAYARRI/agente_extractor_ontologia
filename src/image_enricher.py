@@ -210,14 +210,14 @@ class ImageEnricher:
 
         # umbral conservador:
         # solo devolvemos si hay evidencia media-alta
-        if score >= 4:
+        if score >= 3:
             return {
                 "image": src,
                 "mainImage": src,
             }
 
         # confianza media: no la promovemos a imagen final
-        if score == 3:
+        if score == 2:
             return {
                 "candidateImage": src,
             }

@@ -1,22 +1,22 @@
 # src/report/markdown_report.py
 
 import re
-from typing import Any, List
 
 
 class EntitiesReporter:
     def __init__(self, ontology_index=None):
         self.ontology_index = ontology_index
 
-    # =========================
+    # =========================================================
     # Helpers
-    # =========================
+    # =========================================================
 
-    def _normalize_space(self, text: str) -> str:
-        text = text or ""
-        return re.sub(r"\s+", " ", str(text)).strip()
+    def _clean_text(self, text):
+        text = (text or "").strip()
+        text = re.sub(r"\s+", " ", text)
+        return text
 
-    def _as_list(self, value: Any) -> List[Any]:
+    def _as_list(self, value):
         if value is None:
             return []
         if isinstance(value, list):
@@ -25,7 +25,7 @@ class EntitiesReporter:
             return list(value)
         return [value]
 
-    def _dedupe_preserve_order(self, values: List[Any]) -> List[Any]:
+    def _dedupe_preserve_order(self, values):
         seen = set()
         out = []
         for v in values:
@@ -36,219 +36,271 @@ class EntitiesReporter:
             out.append(v)
         return out
 
-    def _clean_text(self, value: str) -> str:
-        v = self._normalize_space(value)
-        if not v:
-            return ""
-
-        noisy_markers = [
-            " Leer más",
-            " leer más",
-            " Mostrar más",
-            " mostrar más",
-        ]
-
-        for marker in noisy_markers:
-            idx = v.find(marker)
-            if idx > 0:
-                v = v[:idx].strip(" -|,.;:")
-
-        return v.strip()
-
-    def _clean_multiline_text(self, value: str) -> str:
-        if not value:
-            return ""
-        parts = [self._clean_text(p) for p in str(value).splitlines()]
-        parts = [p for p in parts if p]
-        parts = self._dedupe_preserve_order(parts)
-        return "\n".join(parts)
-
-    def _is_bad_name(self, value: str) -> bool:
-        v = self._clean_text(value)
-        vl = v.lower()
-
-        if not v:
-            return True
-
-        bad_exact = {
-            "comer y salir en sevilla - visita sevilla",
-            "saborea sevilla barrio a barrio",
-            "visita sevilla",
-            "mainimage",
-            "image",
-            "consejos, rutas y curiosidades gastronómicas",
-        }
-        if vl in bad_exact:
-            return True
-
-        if re.fullmatch(r"\d+[_-]?", v):
-            return True
-        if re.fullmatch(r"[A-Za-z]?\d+[_-]?[A-Za-z]?", v):
-            return True
-
-        bad_fragments = [
-            "leer más",
-            "mostrar más",
-            "ruta gastro",
-            "descubre sevilla",
-            "bajo el cielo de sevilla",
-            "comer y salir en sevilla",
-            "saborea sevilla",
-            "visita sevilla",
-            "consejos, rutas",
-        ]
-        return any(b in vl for b in bad_fragments)
-
-    def _choose_display_name(self, entity: dict) -> str:
-        label = self._clean_text(entity.get("label", ""))
-        entity_name = self._clean_text(entity.get("entity_name", ""))
-        entity_base = self._clean_text(entity.get("entity", ""))
-
-        raw_name = entity.get("name", "")
-        name_candidates = self._as_list(raw_name)
-        name_candidates = [self._clean_text(n) for n in name_candidates if self._clean_text(n)]
-
-        preferred = [label, entity_name, entity_base] + name_candidates
-
-        for candidate in preferred:
-            if candidate and not self._is_bad_name(candidate):
-                return candidate
-
-        for candidate in preferred:
-            if candidate:
-                return candidate
-
-        return "Entidad"
-
-    def _extract_types(self, entity: dict) -> List[str]:
-        values = []
-        values.extend(self._as_list(entity.get("type")))
-        values.extend(self._as_list(entity.get("class")))
-
-        cleaned = []
-        for v in values:
-            txt = self._normalize_space(str(v))
-            if txt:
-                cleaned.append(txt)
-
-        return self._dedupe_preserve_order(cleaned)
-
-    def _extract_related_urls(self, entity: dict) -> List[str]:
-        raw = entity.get("relatedUrls", "")
+    def _normalize_related_urls(self, value):
         items = []
 
-        if isinstance(raw, list):
-            items.extend(raw)
-        elif isinstance(raw, str):
-            if "|" in raw:
-                items.extend([x.strip() for x in raw.split("|")])
-            elif "\n" in raw:
-                items.extend([x.strip() for x in raw.splitlines()])
-            elif raw.strip():
-                items.append(raw.strip())
+        if isinstance(value, list):
+            items.extend(value)
+        elif isinstance(value, str):
+            if "|" in value:
+                items.extend([x.strip() for x in value.split("|") if x.strip()])
+            elif "\n" in value:
+                items.extend([x.strip() for x in value.splitlines() if x.strip()])
+            elif value.strip():
+                items.append(value.strip())
 
+        items = [
+            x for x in items
+            if str(x).startswith("http://") or str(x).startswith("https://")
+        ]
         return self._dedupe_preserve_order(items)
 
-    def _extract_images(self, entity: dict) -> List[str]:
-        props = entity.get("properties", {}) or {}
+    def _pick_name(self, entity):
+        return (
+            entity.get("name")
+            or entity.get("entity_name")
+            or entity.get("entity")
+            or entity.get("label")
+            or "Entidad sin nombre"
+        )
 
-        candidates = [
-            entity.get("image", ""),
-            entity.get("mainImage", ""),
-            props.get("image", ""),
-            props.get("mainImage", ""),
-        ]
+    def _pick_types(self, entity):
+        types = []
+
+        if entity.get("types"):
+            types.extend(self._as_list(entity.get("types")))
+
+        if entity.get("type"):
+            types.extend(self._as_list(entity.get("type")))
+
+        if entity.get("class"):
+            types.extend(self._as_list(entity.get("class")))
+
+        if not types:
+            return ["Place"]
 
         cleaned = []
-        for c in candidates:
-            c = self._clean_text(c)
-            if not c:
-                continue
-            if c.lower() in {"image", "mainimage"}:
-                continue
-            cleaned.append(c)
+        for t in types:
+            t = self._clean_text(str(t))
+            if t:
+                cleaned.append(t)
 
         return self._dedupe_preserve_order(cleaned)
 
-    def _entity_to_markdown(self, entity: dict) -> str:
-        name = self._choose_display_name(entity)
-        types_ = self._extract_types(entity)
+    def _pick_images(self, entity):
+        images = []
 
-        score = entity.get("score", "")
-        source_url = self._clean_text(entity.get("sourceUrl", ""))
-        url = self._clean_text(entity.get("url", ""))
-        related_urls = self._extract_related_urls(entity)
+        # nivel superior
+        for key in ["image", "mainImage"]:
+            val = entity.get(key)
+            if val and isinstance(val, str):
+                images.append(val)
 
-        short_description = self._clean_text(entity.get("short_description", ""))
-        long_description = self._clean_text(entity.get("long_description", ""))
-        description = self._clean_multiline_text(entity.get("description", ""))
-        address = self._clean_text(entity.get("address", ""))
-        phone = self._clean_text(entity.get("phone", ""))
-        email = self._clean_text(entity.get("email", ""))
-        wikidata_id = self._clean_text(entity.get("wikidata_id", ""))
+        top_images = entity.get("images")
+        if isinstance(top_images, list):
+            images.extend([img for img in top_images if img])
 
-        images = self._extract_images(entity)
+        # properties
+        props = entity.get("properties", {}) or {}
 
-        coords = entity.get("coordinates") or {}
-        lat = coords.get("lat")
-        lng = coords.get("lng")
+        for key in ["image", "mainImage", "candidateImage"]:
+            val = props.get(key)
+            if val and isinstance(val, str):
+                images.append(val)
 
-        lines = []
-        lines.append(f"## {name}")
-        lines.append("")
+        additional = props.get("additionalImages")
+        if isinstance(additional, list):
+            images.extend([img for img in additional if img])
 
-        if types_:
-            lines.append(f"**type:** {', '.join(types_)}")
-        if score not in ("", None):
-            lines.append(f"**score:** {score}")
-        if source_url:
-            lines.append(f"**sourceUrl:** {source_url}")
-        if url:
-            lines.append(f"**url:** {url}")
-        if related_urls:
-            lines.append("**relatedUrls:**")
-            for rel in related_urls:
-                lines.append(f"- {rel}")
-        if address:
-            lines.append(f"**address:** {address}")
-        if phone:
-            lines.append(f"**phone:** {phone}")
-        if email:
-            lines.append(f"**email:** {email}")
-        if lat not in (None, "") or lng not in (None, ""):
-            lines.append(f"**coordinates:** lat={lat}, lng={lng}")
-        if wikidata_id:
-            lines.append(f"**wikidataId:** {wikidata_id}")
-        if images:
-            lines.append("**images:**")
-            for img in images:
-                lines.append(f"- {img}")
-        if short_description:
-            lines.append(f"**shortDescription:** {short_description}")
-        if long_description:
-            lines.append(f"**longDescription:** {long_description}")
-        if description:
-            lines.append(f"**description:** {description}")
+        # normalizar listas serializadas raras
+        flat = []
+        for img in images:
+            s = self._clean_text(str(img))
+            if not s:
+                continue
 
-        lines.append("")
-        return "\n".join(lines)
+            if s.startswith("[") and s.endswith("]"):
+                inner = s[1:-1].strip()
+                parts = [p.strip(" '\"") for p in inner.split(",") if p.strip(" '\"")]
+                flat.extend(parts)
+            elif "|" in s:
+                flat.extend([x.strip() for x in s.split("|") if x.strip()])
+            else:
+                flat.append(s)
 
-    # =========================
+        flat = [
+            x for x in flat
+            if x.startswith("http://") or x.startswith("https://")
+        ]
+
+        return self._dedupe_preserve_order(flat)
+
+    def _flatten_results(self, results):
+        entities = []
+
+        for item in results or []:
+            if not item:
+                continue
+
+            if isinstance(item, dict) and "entities" in item:
+                ents = item.get("entities") or []
+                for e in ents:
+                    if isinstance(e, dict):
+                        entities.append(e)
+            elif isinstance(item, dict):
+                entities.append(item)
+
+        return entities
+
+    def _dedupe_entities(self, entities):
+        grouped = {}
+
+        for e in entities:
+            name = self._clean_text(self._pick_name(e)).lower()
+            if not name:
+                continue
+
+            if name not in grouped:
+                grouped[name] = dict(e)
+                continue
+
+            current = grouped[name]
+
+            # conservar score mayor
+            if (e.get("score") or 0) > (current.get("score") or 0):
+                current["score"] = e.get("score")
+
+            # conservar texto más largo si falta o mejora
+            for field in ["short_description", "long_description", "description", "address", "phone", "email", "sourceUrl", "url"]:
+                old = self._clean_text(current.get(field, ""))
+                new = self._clean_text(e.get(field, ""))
+                if not old and new:
+                    current[field] = new
+                elif new and len(new) > len(old):
+                    current[field] = new
+
+            # merge properties
+            old_props = current.get("properties", {}) or {}
+            new_props = e.get("properties", {}) or {}
+            for k, v in new_props.items():
+                if k not in old_props or old_props[k] in (None, "", [], {}):
+                    old_props[k] = v
+            current["properties"] = old_props
+
+            # merge related urls top-level
+            old_related = self._normalize_related_urls(current.get("relatedUrls", []))
+            new_related = self._normalize_related_urls(e.get("relatedUrls", []))
+            current["relatedUrls"] = self._dedupe_preserve_order(old_related + new_related)
+
+            # merge images top-level
+            old_images = self._pick_images(current)
+            new_images = self._pick_images(e)
+            merged_images = self._dedupe_preserve_order(old_images + new_images)
+
+            if merged_images:
+                current["images"] = merged_images
+                if not current.get("image"):
+                    current["image"] = merged_images[0]
+                if not current.get("mainImage"):
+                    current["mainImage"] = merged_images[0]
+
+            grouped[name] = current
+
+        return list(grouped.values())
+
+    # =========================================================
     # API pública
-    # =========================
+    # =========================================================
 
-    def generate_markdown_report(self, entities: list, output_path: str = "entities_report.md"):
+    def generate_markdown_report(self, results, output_file):
+        entities = self._flatten_results(results)
+        entities = self._dedupe_entities(entities)
+
+        # ordenar por score desc y nombre
+        entities = sorted(
+            entities,
+            key=lambda e: (
+                -(e.get("score") or 0),
+                self._pick_name(e).lower()
+            )
+        )
+
         lines = []
         lines.append("# Knowledge Graph")
         lines.append(f"Total de entidades: {len(entities)}")
         lines.append("")
 
         for entity in entities:
-            if not isinstance(entity, dict):
-                continue
-            lines.append(self._entity_to_markdown(entity))
+            name = self._pick_name(entity)
+            types = self._pick_types(entity)
+            score = entity.get("score", "")
+            source_url = self._clean_text(entity.get("sourceUrl", ""))
+            url = self._clean_text(entity.get("url", ""))
+            address = self._clean_text(entity.get("address", ""))
+            phone = self._clean_text(entity.get("phone", ""))
+            email = self._clean_text(entity.get("email", ""))
+            short_desc = self._clean_text(entity.get("short_description", ""))
+            long_desc = self._clean_text(entity.get("long_description", ""))
+            description = self._clean_text(entity.get("description", ""))
+            related_urls = self._normalize_related_urls(entity.get("relatedUrls", []))
+            images = self._pick_images(entity)
 
-        content = "\n".join(lines).strip() + "\n"
+            lines.append(f"## {name}")
+            lines.append("")
 
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(content)
+            if types:
+                lines.append(f"**type:** {', '.join(types)}")
+
+            if score != "":
+                lines.append(f"**score:** {score}")
+
+            if source_url:
+                lines.append(f"**sourceUrl:** {source_url}")
+
+            if url:
+                lines.append(f"**url:** {url}")
+
+            if related_urls:
+                lines.append("**relatedUrls:**")
+                for rel in related_urls:
+                    lines.append(f"- {rel}")
+
+            if address:
+                lines.append(f"**address:** {address}")
+
+            if phone:
+                lines.append(f"**phone:** {phone}")
+
+            if email:
+                lines.append(f"**email:** {email}")
+
+            if short_desc:
+                lines.append(f"**shortDescription:** {short_desc}")
+
+            if long_desc:
+                lines.append(f"**longDescription:** {long_desc}")
+
+            if description and description != long_desc:
+                lines.append(f"**description:** {description}")
+
+            if images:
+                lines.append("**images:**")
+                lines.append("")
+                for img in images[:3]:
+                    lines.append(f"![{name}]({img})")
+                    lines.append("")
+
+            # campos de calidad si existen
+            if entity.get("qualityScore") is not None:
+                lines.append(f"**qualityScore:** {entity.get('qualityScore')}")
+
+            if entity.get("qualityDecision"):
+                lines.append(f"**qualityDecision:** {entity.get('qualityDecision')}")
+
+            if entity.get("needsReview"):
+                lines.append("**needsReview:** True")
+
+            lines.append("")
+
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write("\n".join(lines))

@@ -48,7 +48,6 @@ class WikidataLinker:
 
         return None
 
-    # 🔥 NUEVO: obtener propiedades reales
     def get_entity_data(self, wikidata_id):
 
         url = f"https://www.wikidata.org/wiki/Special:EntityData/{wikidata_id}.json"
@@ -68,19 +67,35 @@ class WikidataLinker:
 
             # P31 → instance of
             if "P31" in claims:
-                props["instance_of"] = claims["P31"][0]["mainsnak"]["datavalue"]["value"]["id"]
+                try:
+                    props["instance_of"] = claims["P31"][0]["mainsnak"]["datavalue"]["value"]["id"]
+                except Exception:
+                    pass
 
             # P17 → country
             if "P17" in claims:
-                props["country"] = claims["P17"][0]["mainsnak"]["datavalue"]["value"]["id"]
+                try:
+                    props["country"] = claims["P17"][0]["mainsnak"]["datavalue"]["value"]["id"]
+                except Exception:
+                    pass
 
             # P625 → coordinates
             if "P625" in claims:
-                coord = claims["P625"][0]["mainsnak"]["datavalue"]["value"]
-                props["coordinates"] = {
-                    "lat": coord["latitude"],
-                    "lon": coord["longitude"]
-                }
+                try:
+                    coord = claims["P625"][0]["mainsnak"]["datavalue"]["value"]
+
+                    lat = coord.get("latitude")
+                    lon = coord.get("longitude")
+
+                    if lat is not None and lon is not None:
+                        props["latitude"] = lat
+                        props["longitude"] = lon
+                        props["coordinates"] = {
+                            "lat": lat,
+                            "lon": lon
+                        }
+                except Exception:
+                    pass
 
             return props
 

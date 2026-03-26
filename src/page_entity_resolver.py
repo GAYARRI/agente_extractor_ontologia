@@ -379,7 +379,7 @@ class PageEntityResolver:
 
         return self._dedupe_preserve_order(flat)
 
-    def remove_repeated_global_images(self, entities: list, threshold: int = 2) -> list:
+    def remove_repeated_global_images(self, entities: list, threshold: int = 5) -> list:
         counter = {}
 
         for e in entities:
@@ -685,7 +685,7 @@ class PageEntityResolver:
             resolved.append(g)
 
         resolved = self.dedupe_images_across_entities(resolved)
-        resolved = self.remove_repeated_global_images(resolved, threshold=2)
+        resolved = self.remove_repeated_global_images(resolved, threshold=5)
         resolved = self.promote_unique_candidate_images(resolved)
         resolved = [e for e in resolved if not self.is_editorial_entity(e)]
         resolved = self.remove_substring_entities(resolved)

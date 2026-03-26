@@ -28,7 +28,7 @@ def main():
 
     print(f"\n🌐 Iniciando crawling del sitio: {start_url}\n")
 
-    crawler = SiteCrawler(start_url, max_pages=5)
+    crawler = SiteCrawler(start_url, max_pages=3)
     pages = crawler.crawl()
 
     print(f"\n📄 Páginas encontradas: {len(pages)}")
@@ -59,6 +59,16 @@ def main():
     
     postprocessor = KGPostProcessor()
     global_entities = postprocessor.process(global_entities)
+
+    print("\n=== DEBUG IMAGES ===")
+    for e in global_entities[:10]:
+        print(
+            e.get("name") or e.get("entity_name") or e.get("entity"),
+            "image=", e.get("image", ""),
+            "mainImage=", e.get("mainImage", ""),
+            "props.image=", (e.get("properties", {}) or {}).get("image", ""),
+            "props.candidateImage=", (e.get("properties", {}) or {}).get("candidateImage", "")
+        )
 
     print("\n=== TRAS EntityDescriptionConsolidator ===")
     if global_entities:

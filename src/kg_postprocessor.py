@@ -39,6 +39,10 @@ class KGPostProcessor:
             "955 471 232",
         }
 
+        self.global_email_values = {
+            "visitasevilla@sevillacityoffice.es",
+        }
+
     # =========================================================
     # Helpers
     # =========================================================
@@ -55,12 +59,14 @@ class KGPostProcessor:
         text = (text or "").strip()
         text = re.sub(r"\s+", " ", text)
 
-        markers = [" Leer más", " leer más", " Leer mas", " leer mas",
-                   " Mostrar más", " mostrar más", " Mostrar mas", " mostrar mas"]
+        markers = [
+            " Leer más", " leer más", " Leer mas", " leer mas",
+            " Mostrar más", " mostrar más", " Mostrar mas", " mostrar mas"
+        ]
         for marker in markers:
             idx = text.find(marker)
             if idx > 0:
-                text = text[:idx].strip(" -|,.;:")
+                text = text[:idx].strip(" -|,.;:>")
         return text.strip()
 
     def _as_list(self, value):
@@ -96,7 +102,10 @@ class KGPostProcessor:
             elif value.strip():
                 items.append(value.strip())
 
-        items = [x for x in items if str(x).startswith("http://") or str(x).startswith("https://")]
+        items = [
+            x for x in items
+            if str(x).startswith("http://") or str(x).startswith("https://")
+        ]
         return self._dedupe(items)
 
     def _entity_name(self, entity: dict) -> str:
@@ -129,7 +138,6 @@ class KGPostProcessor:
         if any(label.endswith(sfx) for sfx in self.hard_bad_suffixes):
             return True
 
-        # nombres excesivamente raros/truncados
         if re.fullmatch(r"[\W_0-9]+", label):
             return True
 
@@ -164,6 +172,23 @@ class KGPostProcessor:
         entity["email"] = self._clean_text(entity.get("email", ""))
         return entity
 
+    def _drop_global_email_for_non_org(self, entity: dict):
+        email = self._clean_text(entity.get("email", "")).lower()
+        if not email:
+            return entity
+
+        if email not in self.global_email_values:
+            return entity
+
+        entity_class = str(entity.get("class", "")).strip()
+        entity_types = {str(t).strip() for t in self._as_list(entity.get("type")) if str(t).strip()}
+
+        allowed_classes = {"Organization", "LocalBusiness"}
+        if entity_class not in allowed_classes and not (entity_types & allowed_classes):
+            entity["email"] = ""
+
+        return entity
+
     def _clean_related_urls(self, entity: dict):
         urls = self._normalize_related_urls(entity.get("relatedUrls", ""))
         label = self._entity_key(entity)
@@ -173,8 +198,13 @@ class KGPostProcessor:
             entity["relatedUrls"] = []
             return entity
 
-        # si la entidad es muy general pero válida, no recortar demasiado
-        broad_entities = {"sevilla", "semana santa", "cuaresma", "real alcazar", "real alcázar"}
+        broad_entities = {
+            "sevilla",
+            "semana santa",
+            "cuaresma",
+            "real alcazar",
+            "real alcázar",
+        }
 
         if label in broad_entities:
             entity["relatedUrls"] = urls[:10]
@@ -186,7 +216,6 @@ class KGPostProcessor:
             if tokens and any(tok in ul for tok in tokens):
                 filtered.append(u)
 
-        # si el filtrado deja vacío, conserva una URL como mínimo
         if not filtered and urls:
             filtered = urls[:1]
 
@@ -199,7 +228,6 @@ class KGPostProcessor:
         return entity
 
     def _clean_images(self, entity: dict):
-        # mantiene la política conservadora actual
         image = self._clean_text(entity.get("image", ""))
         main_image = self._clean_text(entity.get("mainImage", ""))
 
@@ -208,7 +236,6 @@ class KGPostProcessor:
         entity["image"] = image if image.startswith(("http://", "https://")) else ""
         entity["mainImage"] = main_image if main_image.startswith(("http://", "https://")) else ""
 
-        # no exportamos candidateImage a nivel superior, pero la dejamos en properties si existe
         candidate = props.get("candidateImage")
         if candidate:
             candidate = self._clean_text(candidate)
@@ -235,11 +262,21 @@ class KGPostProcessor:
 
         label = self._entity_key(entity)
 
-        # heurísticas suaves y generales
-        if label in {"semana santa", "feria de sevilla", "vela de triana", "vela de triana",
-                     "temporada taurina", "pregon", "pregón", "madruga", "madrugá",
-                     "miercoles de ceniza", "miércoles de ceniza", "viernes santo",
-                     "domingo de ramos", "cuaresma"}:
+        if label in {
+            "semana santa",
+            "feria de sevilla",
+            "vela de triana",
+            "temporada taurina",
+            "pregon",
+            "pregón",
+            "madruga",
+            "madrugá",
+            "miercoles de ceniza",
+            "miércoles de ceniza",
+            "viernes santo",
+            "domingo de ramos",
+            "cuaresma",
+        }:
             return ["Event"]
 
         if label in {"ruta de los azulejos", "ruta de la opera", "ruta de la ópera"}:
@@ -260,7 +297,6 @@ class KGPostProcessor:
         if any(word in label for word in ["castillo", "capilla", "hospital", "catedral", "alcazar", "alcázar"]):
             return ["TouristAttraction"]
 
-        # quitar "Location" si hay algo mejor
         preferred = [t for t in cleaned if t != "Location"]
 
         if not preferred:
@@ -296,9 +332,6 @@ class KGPostProcessor:
     # =========================================================
 
     def _is_more_specific(self, a: dict, b: dict) -> bool:
-        """
-        True si a parece mejor entidad que b.
-        """
         name_a = self._entity_name(a)
         name_b = self._entity_name(b)
 
@@ -335,7 +368,6 @@ class KGPostProcessor:
                     continue
 
                 if n_i in n_j and l_j > l_i:
-                    # solo eliminamos si la más larga parece mejor
                     if self._is_more_specific(e_j, e_i):
                         drop = True
                         break
@@ -371,6 +403,8 @@ class KGPostProcessor:
             entity = self._clean_images(entity)
 
             entity["type"] = self._normalize_types(entity)
+
+            entity = self._drop_global_email_for_non_org(entity)
 
             quality = self.quality_scorer.evaluate(entity)
             entity["qualityScore"] = quality["score"]

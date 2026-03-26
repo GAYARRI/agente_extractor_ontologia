@@ -56,16 +56,16 @@ class DOMImageResolver:
         src_l = self._normalize(src)
 
         if self._is_bad_image(src):
-            score -= 10
+            score -= 6
 
         if any(t in alt for t in entity_tokens):
-            score += 5
-
-        if any(t in title for t in entity_tokens):
             score += 4
 
-        if any(t in src_l for t in entity_tokens):
+        if any(t in title for t in entity_tokens):
             score += 3
+
+        if any(t in src_l for t in entity_tokens):
+            score += 2
 
         if "wp-image" in cls:
             score += 1

@@ -148,6 +148,29 @@ class TourismPipeline:
     # IMAGE HELPERS
     # ==================================================
 
+    def is_operational_info_block(self, text):
+        t = (text or "").lower()
+
+        signals = [
+            "de lunes a domingo",
+            "de lunes a viernes",
+            "sábados, domingos y festivos",
+            "sabados, domingos y festivos",
+            "horario",
+            "horario especial",
+            "oficina permanecerá cerrada",
+            "la oficina permanecerá cerrada",
+            "localización:",
+            "localizacion:",
+            "09:30",
+            "14:30",
+            "15:30",
+            "18:30",
+        ]
+
+        hits = sum(1 for s in signals if s in t)
+        return hits >= 3
+
     def _normalize_image_url(self, url):
         if not url:
             return None
@@ -386,8 +409,20 @@ class TourismPipeline:
         return self._extract_email_from_text(visible_text)
 
     def _build_coordinates(self, props):
+        
         lat = self._safe_float(props.get("latitude"))
         lng = self._safe_float(props.get("longitude"))
+
+        if lng is None:
+            lng = self._safe_float(props.get("lon"))
+
+        if lat is None and isinstance(props.get("coordinates"), dict):
+            lat = self._safe_float(props["coordinates"].get("lat"))
+
+        if lng is None and isinstance(props.get("coordinates"), dict):
+            lng = self._safe_float(
+                props["coordinates"].get("lng") or props["coordinates"].get("lon")
+            )
 
         if lat is not None and not (-90 <= lat <= 90):
             lat = None
@@ -398,9 +433,10 @@ class TourismPipeline:
         return {
             "lat": lat,
             "lng": lng
-        }
+        }    
+       
 
-    def _build_output_entity(
+    def _build_output_entity(       
         self,
         entity,
         label,
@@ -416,6 +452,9 @@ class TourismPipeline:
         short_description = self._safe_string(short_description)
         long_description = self._safe_string(long_description)
 
+        props = props if isinstance(props, dict) else {}
+        props = self._normalize_final_image_props(props)
+
         fallback_desc = self._safe_string(props.get("description"))
 
         if not short_description:
@@ -424,20 +463,32 @@ class TourismPipeline:
         if not long_description:
             long_description = fallback_desc
 
-    
         email = (
             self._safe_string(props.get("email"))
             or self._safe_string(props.get("correo"))
         )
 
         if not self._looks_like_email(email):
-            email = ""    
-        
-
-        if not self._looks_like_email(email):
             email = ""
 
-        props = self._normalize_final_image_props(props if isinstance(props, dict) else {})
+        related_urls = props.get("relatedUrls", [])
+        if isinstance(related_urls, str):
+            related_urls = self._safe_string(related_urls)
+        elif isinstance(related_urls, list):
+            related_urls = [self._safe_string(x) for x in related_urls if self._safe_string(x)]
+        else:
+            related_urls = []
+
+        print("\n=== BUILD OUTPUT ENTITY DEBUG ===")
+        print("ENTITY:", entity)
+        print("WIKIDATA_ID:", wikidata_id)
+        print("PROPS LATITUDE:", props.get("latitude"))
+        print("PROPS LONGITUDE:", props.get("longitude"))
+        print("PROPS COORDINATES:", props.get("coordinates"))
+        print("FINAL COORDS:", self._build_coordinates(props))
+        print("PROPS IMAGE:", props.get("image"))
+        print("PROPS MAINIMAGE:", props.get("mainImage"))
+        print("PROPS CANDIDATE:", props.get("candidateImage"))    
 
         return {
             "entity": self._safe_string(entity),
@@ -457,13 +508,13 @@ class TourismPipeline:
             "phone": self._safe_string(props.get("telephone") or props.get("phone")),
             "email": email,
             "coordinates": self._build_coordinates(props),
-            "wikidata_id": wikidata_id,
+            "wikidata_id": self._safe_string(wikidata_id),
             "image": self._safe_string(props.get("image")),
             "mainImage": self._safe_string(props.get("mainImage")),
-            "relatedUrls": self._safe_string(props.get("relatedUrls")),
+            "relatedUrls": related_urls,
             "url": self._safe_string(props.get("url")),
-        }
-
+        }        
+       
     # ==================================================
     # VALIDACIÓN GENERAL
     # ==================================================
@@ -611,80 +662,102 @@ class TourismPipeline:
 
         return False
 
-    def is_low_value_entity(self, entity, block_text=""):
-        if not entity:
-            return True
+    def is_low_value_entity(self, entity, text=""):
+        e = (entity or "").strip()
+        e_low = e.lower().strip()
 
-        e = self.clean_entity_edges(entity)
         if not e:
             return True
 
-        low = e.lower().strip()
-        tokens = [t for t in re.findall(r"\b[\wáéíóúñü]+\b", low, flags=re.IGNORECASE) if t]
-
-        if not tokens:
+        # demasiado corto
+        if len(e) <= 2:
             return True
 
-        if len(e) < 3:
+        # sufijos editoriales
+        bad_suffixes = [
+            " leer",
+            " leer más",
+            " leer mas",
+            " ver más",
+            " ver mas",
+            " mostrar más",
+            " mostrar mas",
+        ]
+        if any(e_low.endswith(s) for s in bad_suffixes):
             return True
 
-        if self.is_code_like_entity(e):
+        # prefijos o ruido editorial
+        bad_prefixes = [
+            "localización",
+            "localizacion",
+            "horario",
+            "oficina",
+        ]
+        if any(e_low.startswith(p) for p in bad_prefixes):
             return True
 
-        if any(x in low for x in ["google analytics", "gracias te", "páginas más populares", "paginas más populares"]):
+        # entidades demasiado genéricas
+        bad_exact = {
+            "leer",
+            "evento",
+            "ruta",
+            "mercado",
+            "música",
+            "otros",
+            "teatro",
+            "deportes",
+            "cultural",
+            "actividades",
+            "familia",
+            "semana santa",
+            "jueves santo",
+            "viernes santo",
+            "sábado santo",
+            "sabado santo",
+        }
+
+        # ojo: aquí puedes quitar semana santa / jueves santo si en otras urls sí te interesan
+        if e_low in bad_exact:
             return True
 
-        if low in {
-            "cultura", "ocio", "familia", "compras", "moneda", "idioma",
-            "horarios", "mapas", "guías", "guias", "autobús", "autobus",
-            "taxi", "metro", "parking", "festivales", "fiestas",
-            "museos", "monumentos", "gastronomía", "gastronomia",
-            "paradas de taxi", "líneas de autobús", "lineas de autobus",
-            "eventos deportivos", "actividades en familia", "planes culturales",
-            "medios de transporte", "puntos de información", "puntos de informacion",
-            "información turística", "informacion turistica", "visitas guiadas",
-            "servicios de emergencia", "patrimonio monumental"
+        # patrones tipo abreviaturas o trozos rotos
+        if re.fullmatch(r"[A-ZÁÉÍÓÚÑ]\s+[A-ZÁÉÍÓÚÑ](\s+[A-ZÁÉÍÓÚÑ])?", e):
+            return True
+
+        # ruido de navegación/listado
+        noisy_terms = [
+            "leer más",
+            "leer mas",
+            "mostrar más",
+            "mostrar mas",
+            "next",
+            "localización",
+            "localizacion",
+            "horario especial",
+            "de lunes a domingo",
+            "de lunes a viernes",
+            "sábados, domingos y festivos",
+            "sabados, domingos y festivos",
+        ]
+        joined = f"{e_low} {(text or '').lower()}"
+        if any(t in joined for t in noisy_terms) and len(e.split()) <= 3:
+            return True
+
+        # trozos truncados muy típicos
+        if e_low in {
+            "sevilla leer",
+            "guadalquivir leer",
+            "alamillo leer",
+            "parque de maría",
+            "localización edificio",
+            "localizacion edificio",
+            "localización edificio laredo",
+            "localizacion edificio laredo",
         }:
             return True
 
-        if len(tokens) >= 2:
-            if e == e.lower():
-                generic_heads = {
-                    "eventos", "actividades", "planes", "medios", "puntos",
-                    "servicios", "visitas", "conexiones", "horarios",
-                    "información", "informacion", "patrimonio"
-                }
-                if any(tok in generic_heads for tok in tokens):
-                    return True
-
-        if all(token in self.portal_category_terms for token in tokens):
-            return True
-
-        if len(tokens) >= 2 and sum(1 for token in tokens if token in self.portal_category_terms) >= len(tokens) - 1:
-            return True
-
-        if re.search(r"\b\d{4,5}\b", low) and len(tokens) <= 3:
-            return True
-
-        if re.search(r"\b(km|av|s/n|gmt)\b", low) and len(tokens) <= 4:
-            return True
-
-        if any(token in self.edge_stopwords for token in tokens[:1] + tokens[-1:]):
-            return True
-
-        if len(tokens) >= 3 and all(token in self.portal_category_terms or token in self.edge_stopwords for token in tokens):
-            return True
-
-        if any(
-            x in low for x in [
-                "ir a página", "ir a pagina", "ver listado",
-                "teléfonos de atención", "telefonos de atencion",
-                "puntos de información", "puntos de informacion"
-            ]
-        ):
-            return True
-
-        return False
+        return False    
+        
 
     def smart_trim(self, entity):
         entity = self.clean_entity_edges(entity)
@@ -898,6 +971,13 @@ class TourismPipeline:
             if self.is_navigation_block(text):
                 continue
 
+            if self.is_calendar_or_listing_block(text):
+                continue
+
+            if self.is_operational_info_block(text):
+                continue
+
+
             print("\n--- TEXTO BLOQUE ---")
             print(text[:120])
 
@@ -909,12 +989,13 @@ class TourismPipeline:
                     entities.append(primary)
 
             try:
-                # 🔎 Evaluar calidad del bloque
                 block_quality = self.block_quality_scorer.evaluate(text, html=html)
-
                 if block_quality["decision"] == "discard" and not self.has_entity_signal(text):
                     continue
-                
+            except Exception:
+                block_quality = {"score": 0.5, "decision": "keep"}
+
+            try:
                 ner_entities = self.entity_extractor.extract(text) or []
                 entities.extend(ner_entities)
             except Exception:
@@ -972,7 +1053,6 @@ class TourismPipeline:
             entities = [self.smart_trim(e) for e in entities]
             entities = [self.clean_entity_edges(e) for e in entities]
             entities = [e for e in entities if e]
-
             entities = [e for e in entities if not self.is_low_value_entity(e, text)]
 
             final_entities = []
@@ -993,7 +1073,7 @@ class TourismPipeline:
             classified_entities = []
 
             try:
-                llm_entities = self.llm_supervisor.analyze_entities(entities, text)
+                llm_entities = self.llm_supervisor.analyze_entities(entities, text) or []
             except Exception:
                 llm_entities = []
 
@@ -1023,57 +1103,65 @@ class TourismPipeline:
                         block_text=text
                     )
 
-                    # 1) prioridad total a la imagen local por DOM
-                    if dom_image and dom_score >= 3:
+                    if dom_image and dom_score >= 2:
                         image_props["image"] = dom_image
                         image_props["mainImage"] = dom_image
-
-                    # 2) si no hay buena DOM, guardar candidata media
-                    elif dom_image and dom_score == 2:
+                    elif dom_image and dom_score == 1:
                         image_props["candidateImage"] = dom_image
 
-                            
-                        
+                    wikidata_props = {}
+                    wikidata_id = None
+
+                    try:
+                        link = self.wikidata_linker.link(entity)
+                        if isinstance(link, dict):
+                            wikidata_id = link.get("id")
+                        elif isinstance(link, str):
+                            wikidata_id = link
+
+                        if wikidata_id:
+                            wikidata_props = self.wikidata_linker.get_entity_data(wikidata_id) or {}
+                    except Exception:
+                        wikidata_props = {}
 
                     props = self._merge_properties(
                         self.property_enricher.enrich(entity, "Place", text),
                         page_props,
                         image_props,
+                        wikidata_props,
                     )
 
                     desc = page_props.get("description", "")
 
                     built_entity = self._build_output_entity(
-                    entity=entity,
-                    label="Place",
-                    score=0.5,
-                    props=props,
-                    short_description=desc[:180] if desc else "",
-                    long_description=desc,
-                    wikidata_id=None,
-                    text=text,
-                    url=url,
-                )
+                        entity=entity,
+                        label="Place",
+                        score=0.5,
+                        props=props,
+                        short_description=desc[:180] if desc else "",
+                        long_description=desc,
+                        wikidata_id=wikidata_id,
+                        text=text,
+                        url=url,
+                    )
 
-                evidence = self.entity_evidence_builder.evaluate(
-                    built_entity,
-                    block_score=block_quality["score"]
-                )
+                    evidence = self.entity_evidence_builder.evaluate(
+                        built_entity,
+                        block_score=block_quality["score"]
+                    )
 
-                built_entity["evidenceScore"] = evidence["evidenceScore"]
-                built_entity["evidenceFlags"] = evidence["evidenceFlags"]
-                built_entity["evidenceDecision"] = evidence["evidenceDecision"]
+                    built_entity["evidenceScore"] = evidence["evidenceScore"]
+                    built_entity["evidenceFlags"] = evidence["evidenceFlags"]
+                    built_entity["evidenceDecision"] = evidence["evidenceDecision"]
 
-                if evidence["evidenceDecision"] != "discard":
-                    if evidence["evidenceDecision"] == "review":
-                        built_entity["needsReview"] = True
-                    classified_entities.append(built_entity)                     
-
-
+                    if evidence["evidenceDecision"] != "discard":
+                        if evidence["evidenceDecision"] == "review":
+                            built_entity["needsReview"] = True
+                        classified_entities.append(built_entity)
 
                     print("\n=== TRAS _build_output_entity ===")
-                    if classified_entities:
-                        print(classified_entities[0])
+                    print(built_entity)
+
             else:
                 for e in llm_entities:
                     entity = self.clean_entity_edges(e.get("entity", ""))
@@ -1092,7 +1180,6 @@ class TourismPipeline:
                         entity=entity,
                     ) or {}
 
-                
                     try:
                         image_props = self.image_enricher.enrich(
                             entity=entity,
@@ -1110,15 +1197,11 @@ class TourismPipeline:
                         block_text=text
                     )
 
-                    # 1) prioridad total a la imagen local por DOM
-                    if dom_image and dom_score >= 3:
+                    if dom_image and dom_score >= 2:
                         image_props["image"] = dom_image
                         image_props["mainImage"] = dom_image
-
-                    # 2) si no hay buena DOM, guardar candidata media
-                    elif dom_image and dom_score == 2:
+                    elif dom_image and dom_score == 1:
                         image_props["candidateImage"] = dom_image
- 
 
                     wikidata_props = {}
                     wikidata_id = None
@@ -1146,35 +1229,33 @@ class TourismPipeline:
                     long_description = e.get("long_description", "") or page_props.get("description", "")
 
                     built_entity = self._build_output_entity(
-                    entity=entity,
-                    label=label,
-                    score=score,
-                    props=props,
-                    short_description=short_description,
-                    long_description=long_description,
-                    wikidata_id=wikidata_id,
-                    text=text,
-                    url=url,
-                )
+                        entity=entity,
+                        label=label,
+                        score=score,
+                        props=props,
+                        short_description=short_description,
+                        long_description=long_description,
+                        wikidata_id=wikidata_id,
+                        text=text,
+                        url=url,
+                    )
 
-                evidence = self.entity_evidence_builder.evaluate(
-                    built_entity,
-                    block_score=block_quality["score"]
-                )
+                    evidence = self.entity_evidence_builder.evaluate(
+                        built_entity,
+                        block_score=block_quality["score"]
+                    )
 
-                built_entity["evidenceScore"] = evidence["evidenceScore"]
-                built_entity["evidenceFlags"] = evidence["evidenceFlags"]
-                built_entity["evidenceDecision"] = evidence["evidenceDecision"]
+                    built_entity["evidenceScore"] = evidence["evidenceScore"]
+                    built_entity["evidenceFlags"] = evidence["evidenceFlags"]
+                    built_entity["evidenceDecision"] = evidence["evidenceDecision"]
 
-                if evidence["evidenceDecision"] != "discard":
-                    if evidence["evidenceDecision"] == "review":
-                        built_entity["needsReview"] = True
-                    classified_entities.append(built_entity)
-
+                    if evidence["evidenceDecision"] != "discard":
+                        if evidence["evidenceDecision"] == "review":
+                            built_entity["needsReview"] = True
+                        classified_entities.append(built_entity)
 
                     print("\n=== TRAS _build_output_entity ===")
-                    if classified_entities:
-                        print(classified_entities[0])
+                    print(built_entity)
 
             cleaned_classified = []
             seen_classified = set()
@@ -1197,24 +1278,24 @@ class TourismPipeline:
                 item["name"] = item.get("name") or entity_name
                 item["properties"] = self._normalize_final_image_props(item.get("properties", {}))
 
-                if "image" not in item:
+                if "image" not in item or not item.get("image"):
                     item["image"] = self._safe_string(item["properties"].get("image"))
 
-                if "mainImage" not in item:
+                if "mainImage" not in item or not item.get("mainImage"):
                     item["mainImage"] = self._safe_string(item["properties"].get("mainImage"))
 
                 if "verisimilitude_score" not in item:
                     item["verisimilitude_score"] = item.get("score", 0.0)
 
-                if "address" not in item:
+                if "address" not in item or not item.get("address"):
                     item["address"] = self._safe_string(item["properties"].get("address"))
 
-                if "phone" not in item:
+                if "phone" not in item or not item.get("phone"):
                     item["phone"] = self._safe_string(
                         item["properties"].get("telephone") or item["properties"].get("phone")
                     )
 
-                if "email" not in item:
+                if "email" not in item or not item.get("email"):
                     extracted_email = (
                         self._safe_string(item["properties"].get("email"))
                         or self._safe_string(item["properties"].get("correo"))
@@ -1222,17 +1303,14 @@ class TourismPipeline:
                     )
                     item["email"] = extracted_email if self._looks_like_email(extracted_email) else ""
 
-                if "coordinates" not in item:
+                if "coordinates" not in item or not item.get("coordinates"):
                     item["coordinates"] = self._build_coordinates(item["properties"])
-
-                    print("\n=== TRAS _build_output_entity ===")
-                    if classified_entities:
-                        print(classified_entities[0])
 
                 cleaned_classified.append(item)
                 seen_classified.add(key)
 
             cleaned_classified = self.page_entity_resolver.resolve(cleaned_classified)
+
             print("\n=== TRAS PageEntityResolver ===")
             if cleaned_classified:
                 print(cleaned_classified[0])
@@ -1274,7 +1352,8 @@ class TourismPipeline:
 
             print("Relaciones:", relations)
 
-        return results
+        return results    
+        
 
     def _is_wikimedia_url(self, url):
         if not url:
@@ -1305,6 +1384,41 @@ class TourismPipeline:
 
         words = t.split()
         if len(words) >= 2 and any(w[:1].isupper() for w in words):
+            return True
+
+        return False
+    def is_calendar_or_listing_block(self, text: str) -> bool:
+        t = normalize_text(text)
+
+        bad_signals = [
+            "fecha inicio",
+            "fecha fin",
+            "limpiar fechas",
+            "mostrar categorías",
+            "ocultar categorías",
+            "estas viendo todos los planes",
+            "sin filtros",
+            "next evento",
+            "actividades en familia",
+            "evento en la calle",
+            "tradición religiosa",
+            "visita guiada",
+        ]
+
+        if any(x in t for x in bad_signals):
+            return True
+
+        # días/meses repetidos tipo calendario
+        if re.search(r"\b(l m x j v s d)\b", t):
+            return True
+
+        if re.search(r"\b1 2 3 4 5 6 7 8 9 10 11 12\b", t):
+            return True
+
+        # bloque muy largo con demasiadas categorías cortas
+        words = t.split()
+        short_tokens = sum(1 for w in words if len(w) <= 3)
+        if len(words) > 20 and short_tokens > len(words) * 0.45:
             return True
 
         return False
