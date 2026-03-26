@@ -26,6 +26,7 @@ from src.page_entity_resolver import PageEntityResolver
 from src.dom_image_resolver import DOMImageResolver
 from src.block_quality_scorer import BlockQualityScorer
 from src.entity_evidence_builder import EntityEvidenceBuilder
+from src.ontology_reasoner import OntologyReasoner
 
 import re
 import hashlib
@@ -87,6 +88,7 @@ class TourismPipeline:
         self.dom_image_resolver = DOMImageResolver()
         self.block_quality_scorer = BlockQualityScorer()
         self.entity_evidence_builder = EntityEvidenceBuilder()
+        self.ontology_reasoner = OntologyReasoner(self.ontology_index)
 
 
         self.edge_stopwords = {
@@ -436,7 +438,43 @@ class TourismPipeline:
         }    
        
 
-    def _build_output_entity(       
+
+    def _safe_entity_contact(self, props: dict, key: str) -> str:
+        value = (props or {}).get(key)
+        if value is None:
+            return ""
+        return str(value).strip()
+
+    def _safe_entity_image(self, props: dict) -> str:
+        generic_fragments = [
+            "el-flamenco-bloque-2.jpg",
+        ]
+        for key in ("mainImage", "image", "candidateImage"):
+            value = (props or {}).get(key)
+            if not value:
+                continue
+            value = str(value).strip()
+            if not value:
+                continue
+            if any(fragment in value for fragment in generic_fragments):
+                continue
+            return value
+        return ""
+
+    def _should_skip_partial_entity(self, current_name: str, all_entities) -> bool:
+        current_name = (current_name or "").strip().lower()
+        if not current_name:
+            return True
+
+        for other in all_entities or []:
+            other_name = self.clean_entity_edges(other.get("entity", "")).strip().lower()
+            if not other_name or other_name == current_name:
+                continue
+            if current_name in other_name and len(other_name) > len(current_name):
+                return True
+        return False
+
+    def _build_output_entity(
         self,
         entity,
         label,
@@ -479,24 +517,40 @@ class TourismPipeline:
         else:
             related_urls = []
 
+        final_image = self._safe_entity_image(props)
+        final_address = self._safe_entity_contact(props, "address")
+        final_phone = (
+            self._safe_entity_contact(props, "telephone")
+            or self._safe_entity_contact(props, "phone")
+        )
+        final_email = email
+        final_coordinates = self._build_coordinates(props)
+
+        entity_class = self._safe_string(label) or "Thing"
+        entity_types = [entity_class]
+
+        if entity_class in {"Place", "TouristAttraction", "Landmark", "Location"}:
+            if "Location" not in entity_types:
+                entity_types.append("Location")
+
         print("\n=== BUILD OUTPUT ENTITY DEBUG ===")
         print("ENTITY:", entity)
         print("WIKIDATA_ID:", wikidata_id)
         print("PROPS LATITUDE:", props.get("latitude"))
         print("PROPS LONGITUDE:", props.get("longitude"))
         print("PROPS COORDINATES:", props.get("coordinates"))
-        print("FINAL COORDS:", self._build_coordinates(props))
+        print("FINAL COORDS:", final_coordinates)
         print("PROPS IMAGE:", props.get("image"))
         print("PROPS MAINIMAGE:", props.get("mainImage"))
-        print("PROPS CANDIDATE:", props.get("candidateImage"))    
+        print("PROPS CANDIDATE:", props.get("candidateImage"))
 
         return {
             "entity": self._safe_string(entity),
             "entity_name": self._safe_string(entity),
             "label": self._safe_string(entity),
             "name": self._safe_string(entity),
-            "class": self._safe_string(label) or "Place",
-            "type": [self._safe_string(label) or "Place", "Location"],
+            "class": entity_class,
+            "type": entity_types,
             "score": float(score) if score is not None else 0.0,
             "verisimilitude_score": float(score) if score is not None else 0.0,
             "sourceUrl": self._safe_string(url),
@@ -504,17 +558,18 @@ class TourismPipeline:
             "short_description": short_description,
             "long_description": long_description,
             "description": fallback_desc,
-            "address": self._safe_string(props.get("address")),
-            "phone": self._safe_string(props.get("telephone") or props.get("phone")),
-            "email": email,
-            "coordinates": self._build_coordinates(props),
+            "address": final_address,
+            "phone": final_phone,
+            "email": final_email,
+            "coordinates": final_coordinates,
             "wikidata_id": self._safe_string(wikidata_id),
-            "image": self._safe_string(props.get("image")),
-            "mainImage": self._safe_string(props.get("mainImage")),
+            "image": final_image,
+            "mainImage": final_image,
             "relatedUrls": related_urls,
             "url": self._safe_string(props.get("url")),
         }        
-       
+        
+
     # ==================================================
     # VALIDACIÓN GENERAL
     # ==================================================
@@ -814,6 +869,7 @@ class TourismPipeline:
     # PROPIEDADES
     # ==================================================
 
+
     def _merge_properties(self, *prop_dicts):
         merged = {}
         local_image_keys = {"image", "mainImage", "additionalImages", "candidateImage"}
@@ -821,7 +877,7 @@ class TourismPipeline:
         wikidata_image = None
 
         for props in prop_dicts:
-            if not props:
+            if not isinstance(props, dict) or not props:
                 continue
 
             for key, value in props.items():
@@ -835,8 +891,8 @@ class TourismPipeline:
 
                 if key in local_image_keys:
                     if isinstance(value, list):
-                        local_images.extend(value)
-                    else:
+                        local_images.extend([v for v in value if isinstance(v, str) and v.strip()])
+                    elif isinstance(value, str) and value.strip():
                         local_images.append(value)
                     continue
 
@@ -850,7 +906,7 @@ class TourismPipeline:
                     continue
 
                 if isinstance(old_value, list):
-                    existing = old_value
+                    existing = old_value[:]
                 else:
                     existing = [old_value]
 
@@ -860,6 +916,8 @@ class TourismPipeline:
                     incoming = [value]
 
                 for item in incoming:
+                    if item is None or item == "":
+                        continue
                     if item not in existing:
                         existing.append(item)
 
@@ -873,8 +931,8 @@ class TourismPipeline:
             and "separator" not in str(img).lower()
             and "logo" not in str(img).lower()
             and "banner" not in str(img).lower()
-        ]    
-            
+        ]
+
         local_images = self._dedupe_images(local_images)
 
         if local_images:
@@ -891,10 +949,15 @@ class TourismPipeline:
 
         for key, value in list(merged.items()):
             if isinstance(value, list) and key != "additionalImages":
-                merged[key] = " | ".join(str(v) for v in value if v)
+                # Solo convertir a string si son valores simples
+                if all(isinstance(v, (str, int, float, bool)) for v in value):
+                    merged[key] = " | ".join(str(v) for v in value if v is not None and v != "")
+                else:
+                    # Si vinieran estructuras complejas, mejor conservar la lista
+                    merged[key] = value
 
-        return merged
-
+        return merged 
+    
     # ==================================================
     # RELACIONES
     # ==================================================
@@ -935,6 +998,7 @@ class TourismPipeline:
     # ==================================================
 
     def run(self, html, url=""):
+    
         blocks = self.block_extractor.extract(html)
         results = []
         seen_texts = []
@@ -976,7 +1040,6 @@ class TourismPipeline:
 
             if self.is_operational_info_block(text):
                 continue
-
 
             print("\n--- TEXTO BLOQUE ---")
             print(text[:120])
@@ -1077,6 +1140,10 @@ class TourismPipeline:
             except Exception:
                 llm_entities = []
 
+            print("\n=== DEBUG llm_entities ===")
+            for i, item in enumerate(llm_entities):
+                print(i, type(item), item)
+
             if not llm_entities:
                 for entity in entities:
                     page_props = self.tourism_property_extractor.extract(
@@ -1163,39 +1230,79 @@ class TourismPipeline:
                     print(built_entity)
 
             else:
+            
                 for e in llm_entities:
-                    entity = self.clean_entity_edges(e.get("entity", ""))
+                    if isinstance(e, dict):
+                        entity = self.clean_entity_edges(
+                            e.get("entity") or e.get("name") or e.get("label") or ""
+                        )
+                        label = e.get("class", "Place")
+                        score = e.get("score", 0.8)
+                        short_description = e.get("short_description", "")
+                        long_description = e.get("long_description", "")
+                    elif isinstance(e, str):
+                        entity = self.clean_entity_edges(e)
+                        label = "Place"
+                        score = 0.8
+                        short_description = ""
+                        long_description = ""
+                    else:
+                        continue
 
                     if not entity or self.is_low_value_entity(entity, text):
                         continue
 
-                    label = e.get("class", "Place")
-                    score = e.get("score", 0.8)
-
-                    base_props = self.property_enricher.enrich(entity, label, text)
-                    page_props = self.tourism_property_extractor.extract(
-                        html=html,
-                        text=text,
-                        url=url,
-                        entity=entity,
-                    ) or {}
+                    print("\n=== DEBUG ENTITY PIPELINE ===")
+                    print("entity:", entity, type(entity))
+                    print("label:", label, type(label))
+                    print("score:", score, type(score))
 
                     try:
+                        print("-> property_enricher.enrich")
+                        base_props = self.property_enricher.enrich(entity, label, text)
+                        print("OK property_enricher.enrich:", type(base_props), base_props)
+                    except Exception as ex:
+                        print("❌ ERROR en property_enricher.enrich:", repr(ex))
+                        raise
+
+                    try:
+                        print("-> tourism_property_extractor.extract")
+                        page_props = self.tourism_property_extractor.extract(
+                            html=html,
+                            text=text,
+                            url=url,
+                            entity=entity,
+                        ) or {}
+                        print("OK tourism_property_extractor.extract:", type(page_props), page_props)
+                    except Exception as ex:
+                        print("❌ ERROR en tourism_property_extractor.extract:", repr(ex))
+                        raise
+
+                    try:
+                        print("-> image_enricher.enrich")
                         image_props = self.image_enricher.enrich(
                             entity=entity,
                             text=text,
                             html=html,
                             url=url,
                         ) or {}
-                    except Exception:
+                        print("OK image_enricher.enrich:", type(image_props), image_props)
+                    except Exception as ex:
+                        print("❌ ERROR en image_enricher.enrich:", repr(ex))
                         image_props = {}
 
-                    dom_image, dom_score = self._resolve_dom_image(
-                        html,
-                        entity,
-                        url=url,
-                        block_text=text
-                    )
+                    try:
+                        print("-> _resolve_dom_image")
+                        dom_image, dom_score = self._resolve_dom_image(
+                            html,
+                            entity,
+                            url=url,
+                            block_text=text
+                        )
+                        print("OK _resolve_dom_image:", dom_image, dom_score)
+                    except Exception as ex:
+                        print("❌ ERROR en _resolve_dom_image:", repr(ex))
+                        dom_image, dom_score = None, 0
 
                     if dom_image and dom_score >= 2:
                         image_props["image"] = dom_image
@@ -1207,38 +1314,58 @@ class TourismPipeline:
                     wikidata_id = None
 
                     try:
+                        print("-> wikidata_linker.link")
                         link = self.wikidata_linker.link(entity)
+                        print("OK wikidata_linker.link:", type(link), link)
+
                         if isinstance(link, dict):
                             wikidata_id = link.get("id")
                         elif isinstance(link, str):
                             wikidata_id = link
 
                         if wikidata_id:
+                            print("-> wikidata_linker.get_entity_data")
                             wikidata_props = self.wikidata_linker.get_entity_data(wikidata_id) or {}
-                    except Exception:
+                            print("OK wikidata_linker.get_entity_data:", type(wikidata_props), wikidata_props)
+                    except Exception as ex:
+                        print("❌ ERROR en wikidata:", repr(ex))
                         wikidata_props = {}
 
-                    props = self._merge_properties(
-                        base_props,
-                        page_props,
-                        image_props,
-                        wikidata_props,
-                    )
+                    try:
+                        print("-> _merge_properties")
+                        props = self._merge_properties(
+                            base_props,
+                            page_props,
+                            image_props,
+                            wikidata_props,
+                        )
+                        print("OK _merge_properties:", type(props), props)
+                    except Exception as ex:
+                        print("❌ ERROR en _merge_properties:", repr(ex))
+                        raise
 
-                    short_description = e.get("short_description", "") or page_props.get("description", "")[:180]
-                    long_description = e.get("long_description", "") or page_props.get("description", "")
+                    if not short_description:
+                        short_description = page_props.get("description", "")[:180]
+                    if not long_description:
+                        long_description = page_props.get("description", "")
 
-                    built_entity = self._build_output_entity(
-                        entity=entity,
-                        label=label,
-                        score=score,
-                        props=props,
-                        short_description=short_description,
-                        long_description=long_description,
-                        wikidata_id=wikidata_id,
-                        text=text,
-                        url=url,
-                    )
+                    try:
+                        print("-> _build_output_entity")
+                        built_entity = self._build_output_entity(
+                            entity=entity,
+                            label=label,
+                            score=score,
+                            props=props,
+                            short_description=short_description,
+                            long_description=long_description,
+                            wikidata_id=wikidata_id,
+                            text=text,
+                            url=url,
+                        )
+                        print("OK _build_output_entity")
+                    except Exception as ex:
+                        print("❌ ERROR en _build_output_entity:", repr(ex))
+                        raise
 
                     evidence = self.entity_evidence_builder.evaluate(
                         built_entity,
@@ -1255,12 +1382,46 @@ class TourismPipeline:
                         classified_entities.append(built_entity)
 
                     print("\n=== TRAS _build_output_entity ===")
-                    print(built_entity)
-
+                    print(built_entity)    
+                
             cleaned_classified = []
             seen_classified = set()
 
+            print("\n=== DEBUG classified_entities BEFORE CLEAN ===")
+            for i, dbg_item in enumerate(classified_entities):
+                if isinstance(dbg_item, dict):
+                    print(i, "DICT", dbg_item.get("entity"))
+                else:
+                    print(i, type(dbg_item), dbg_item)
+
             for item in classified_entities:
+                if isinstance(item, str):
+                    item = {
+                        "entity": item,
+                        "entity_name": item,
+                        "label": item,
+                        "name": item,
+                        "class": "Thing",
+                        "type": ["Thing"],
+                        "score": 0.5,
+                        "verisimilitude_score": 0.5,
+                        "sourceUrl": url,
+                        "properties": {},
+                        "short_description": "",
+                        "long_description": "",
+                        "description": "",
+                        "address": "",
+                        "phone": "",
+                        "email": "",
+                        "coordinates": {"lat": None, "lng": None},
+                        "wikidata_id": "",
+                        "relatedUrls": [],
+                        "url": "",
+                    }
+
+                if not isinstance(item, dict):
+                    continue
+
                 entity_name = self.clean_entity_edges(item.get("entity", ""))
                 if not entity_name:
                     continue
@@ -1272,39 +1433,66 @@ class TourismPipeline:
                 if key in seen_classified:
                     continue
 
+                skip_partial = False
+                for other in classified_entities:
+                    if isinstance(other, str):
+                        other_name = self.clean_entity_edges(other)
+                    elif isinstance(other, dict):
+                        other_name = self.clean_entity_edges(other.get("entity", ""))
+                    else:
+                        continue
+
+                    if not other_name:
+                        continue
+
+                    current_name = entity_name.lower().strip()
+                    other_name_l = other_name.lower().strip()
+
+                    if current_name != other_name_l and current_name and current_name in other_name_l:
+                        if len(other_name_l) > len(current_name):
+                            skip_partial = True
+                            break
+
+                if skip_partial:
+                    continue
+
                 item["entity"] = entity_name
                 item["entity_name"] = entity_name
                 item["label"] = item.get("label") or entity_name
                 item["name"] = item.get("name") or entity_name
+
+                if not isinstance(item.get("properties"), dict):
+                    item["properties"] = {}
+
                 item["properties"] = self._normalize_final_image_props(item.get("properties", {}))
 
                 if "image" not in item or not item.get("image"):
-                    item["image"] = self._safe_string(item["properties"].get("image"))
+                    item["image"] = self._safe_entity_image(item.get("properties", {}))
 
                 if "mainImage" not in item or not item.get("mainImage"):
-                    item["mainImage"] = self._safe_string(item["properties"].get("mainImage"))
+                    item["mainImage"] = item.get("image", "")
 
                 if "verisimilitude_score" not in item:
                     item["verisimilitude_score"] = item.get("score", 0.0)
 
                 if "address" not in item or not item.get("address"):
-                    item["address"] = self._safe_string(item["properties"].get("address"))
+                    item["address"] = self._safe_entity_contact(item.get("properties", {}), "address")
 
                 if "phone" not in item or not item.get("phone"):
-                    item["phone"] = self._safe_string(
-                        item["properties"].get("telephone") or item["properties"].get("phone")
+                    item["phone"] = (
+                        self._safe_entity_contact(item.get("properties", {}), "telephone")
+                        or self._safe_entity_contact(item.get("properties", {}), "phone")
                     )
 
                 if "email" not in item or not item.get("email"):
                     extracted_email = (
                         self._safe_string(item["properties"].get("email"))
                         or self._safe_string(item["properties"].get("correo"))
-                        or self._extract_email_from_html(html)
                     )
                     item["email"] = extracted_email if self._looks_like_email(extracted_email) else ""
 
                 if "coordinates" not in item or not item.get("coordinates"):
-                    item["coordinates"] = self._build_coordinates(item["properties"])
+                    item["coordinates"] = self._build_coordinates(item.get("properties", {}))
 
                 cleaned_classified.append(item)
                 seen_classified.add(key)
@@ -1353,6 +1541,7 @@ class TourismPipeline:
             print("Relaciones:", relations)
 
         return results    
+            
         
 
     def _is_wikimedia_url(self, url):

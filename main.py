@@ -6,7 +6,7 @@ load_dotenv()
 os.environ["SSL_CERT_FILE"] = certifi.where()
 
 from src.site_crawler import SiteCrawler
-from src.tourism_pipeline import TourismPipeline
+from src.tourism_pipeline_ontology_driven import TourismPipeline
 from src.knowledge_graph_builder import KnowledgeGraphBuilder
 from src.report.markdown_report import EntitiesReporter
 from src.entity_description_consolidator import EntityDescriptionConsolidator
@@ -28,7 +28,7 @@ def main():
 
     print(f"\n🌐 Iniciando crawling del sitio: {start_url}\n")
 
-    crawler = SiteCrawler(start_url, max_pages=3)
+    crawler = SiteCrawler(start_url, max_pages=1)
     pages = crawler.crawl()
 
     print(f"\n📄 Páginas encontradas: {len(pages)}")
@@ -137,7 +137,8 @@ def main():
         print(f"⚠️ No se pudo generar tourism_map.html: {exc}")  
      
 
-
+print("ONTOLOGY PATH:", os.path.abspath("src/ontology/core.rdf"))
+print("EXISTS:", os.path.exists("src/ontology/core.rdf"))
 
 
 if __name__ == "__main__":
