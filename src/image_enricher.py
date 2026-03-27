@@ -29,12 +29,12 @@ class ImageEnricher:
 
         u = url.lower()
         bad_patterns = [
-            "logo", "icon", "sprite", "banner", "placeholder",
+            "logo", "icon", "iconos", "sprite", "banner", "placeholder",
             "default", "avatar", "header", "footer",
             "og-image", "share", "social",
-            "separador", "separator"
+            "separador", "separator","svg","feeling","negativo",
         ]
-        return any(p in u for p in bad_patterns)
+        return any(p in u for p in bad_patterns)        
 
     def _extract_img_tags(self, html: str):
         if not html:
@@ -87,37 +87,35 @@ class ImageEnricher:
         if self._is_probably_logo(src):
             score -= 10
 
+        if any(x in src_l for x in ["logo", "icon", "iconos", "sprite", "banner", "placeholder"]):
+            score -= 5
+
         if any(t in alt_l for t in entity_tokens):
-            score += 5
+            score += 6
 
         if any(t in title_l for t in entity_tokens):
-            score += 4
+            score += 5
 
         if any(t in src_l for t in entity_tokens):
             score += 3
 
         if entity_tokens and any(t in text_l for t in entity_tokens):
-            score += 1
+            score += 2
 
-        if src_l.endswith(".jpg") or src_l.endswith(".jpeg") or src_l.endswith(".webp"):
-            score += 1
+        if src_l.endswith((".jpg", ".jpeg", ".webp")):
+            score += 2
 
-        # penalizar imágenes muy globales
         generic_hits = [
-            "visitasevilla",
-            "home",
-            "portada",
-            "hero",
-            "cabecera",
-            "header",
-            "cover",
-            "pumarejo",
+            "visitasevilla", "home", "portada", "hero",
+            "cabecera", "header", "cover"
         ]
         if any(g in src_l for g in generic_hits):
-            score -= 3
+            score -= 4
 
-        return score
+        if len(src_l) < 15:
+            score -= 2
 
+        return score   
     def _dedupe_images(self, images):
         out = []
         seen = set()
@@ -194,7 +192,7 @@ class ImageEnricher:
         html_candidates = self._extract_candidates_from_html(html, entity, base_url=url, text=text)
         candidates.extend(html_candidates)
 
-        # limpiar
+        # 3) limpiar
         cleaned = []
         for src, score in candidates:
             if not src:
@@ -208,18 +206,26 @@ class ImageEnricher:
 
         src, score = self._best_candidate(cleaned)
 
-        # umbral conservador:
-        # solo devolvemos si hay evidencia media-alta
         if score >= 3:
             return {
                 "image": src,
                 "mainImage": src,
+                "debug": {
+                    "image_score": score,
+                    "image_reason": "best_candidate_from_html_or_text"
+                }
             }
 
-        # confianza media: no la promovemos a imagen final
         if score == 2:
             return {
                 "candidateImage": src,
+                "debug": {
+                    "image_score": score,
+                    "image_reason": "weak_candidate_from_html_or_text"
+                }
             }
 
-        return {}
+        return {}    
+        
+    
+    

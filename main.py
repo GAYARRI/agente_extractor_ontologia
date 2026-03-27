@@ -28,7 +28,7 @@ def main():
 
     print(f"\n🌐 Iniciando crawling del sitio: {start_url}\n")
 
-    crawler = SiteCrawler(start_url, max_pages=1)
+    crawler = SiteCrawler(start_url, max_pages=2)
     pages = crawler.crawl()
 
     print(f"\n📄 Páginas encontradas: {len(pages)}")

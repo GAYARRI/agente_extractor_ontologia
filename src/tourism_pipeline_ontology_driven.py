@@ -317,6 +317,12 @@ class TourismPipeline:
         """
         Devuelve (image_url, score)
         """
+        if self._is_bad_visual_asset(url):
+            return"",0
+        if self._is_bad_visual_asset(url):
+            return"",0
+        
+
         try:
             if hasattr(self.dom_image_resolver, "resolve_with_score"):
                 return self.dom_image_resolver.resolve_with_score(
@@ -342,6 +348,7 @@ class TourismPipeline:
         except Exception:
             pass
 
+        
         try:
             if hasattr(self.dom_image_resolver, "resolve_image_for_entity"):
                 img = self.dom_image_resolver.resolve_image_for_entity(html, entity)
@@ -350,6 +357,27 @@ class TourismPipeline:
             pass
         
         return "", 0         
+    
+    def _is_bad_visual_asset(self, url: str) -> bool:
+        if not url:
+            return True
+
+        u = url.lower()
+
+        bad_patterns = [
+            "logo", "icon", "iconos", "svg", "sprite", "banner",
+            "placeholder", "avatar", "header", "footer",
+            "feeling", "negativo", "positivo",
+            "share", "social", "separator", "separador"
+        ]
+
+        if url.lower().endswith(".svg"):
+            return"",0
+
+        return any(p in u for p in bad_patterns)
+         
+    
+
 
     
     # ==================================================
@@ -474,6 +502,20 @@ class TourismPipeline:
                 return True
         return False
 
+    def _should_have_generic_geo(self, entity: dict) -> bool:
+        entity_type = entity.get("class") or entity.get("type") or ""
+        entity_type = str(entity_type).lower()
+
+        geo_types = [
+            "place",
+            "location",
+            "tourismdestination",
+            "city",
+            "municipality",
+        ]
+
+        return any(t in entity_type for t in geo_types)    
+
     def _build_output_entity(
         self,
         entity,
@@ -487,6 +529,16 @@ class TourismPipeline:
         text="",
         url=""
     ):
+        entity_class = self._safe_string(label) or "Thing"
+
+        wikidata_id = self.wikidata_linker.link(
+            entity_name=self._safe_string(entity),
+            entity_class=entity_class,
+            short_description=self._safe_string(short_description),
+            long_description=self._safe_string(long_description),
+            source_url=self._safe_string(url),
+        )
+
         short_description = self._safe_string(short_description)
         long_description = self._safe_string(long_description)
 
@@ -511,7 +563,7 @@ class TourismPipeline:
 
         related_urls = props.get("relatedUrls", [])
         if isinstance(related_urls, str):
-            related_urls = self._safe_string(related_urls)
+            related_urls = [self._safe_string(related_urls)] if self._safe_string(related_urls) else []
         elif isinstance(related_urls, list):
             related_urls = [self._safe_string(x) for x in related_urls if self._safe_string(x)]
         else:
@@ -526,7 +578,6 @@ class TourismPipeline:
         final_email = email
         final_coordinates = self._build_coordinates(props)
 
-        entity_class = self._safe_string(label) or "Thing"
         entity_types = [entity_class]
 
         if entity_class in {"Place", "TouristAttraction", "Landmark", "Location"}:
@@ -562,12 +613,13 @@ class TourismPipeline:
             "phone": final_phone,
             "email": final_email,
             "coordinates": final_coordinates,
-            "wikidata_id": self._safe_string(wikidata_id),
+            "wikidata_id": wikidata_id or "",
             "image": final_image,
             "mainImage": final_image,
             "relatedUrls": related_urls,
             "url": self._safe_string(props.get("url")),
         }        
+            
         
 
     # ==================================================

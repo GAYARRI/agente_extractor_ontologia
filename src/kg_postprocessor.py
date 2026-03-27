@@ -55,20 +55,31 @@ class KGPostProcessor:
         text = re.sub(r"\s+", " ", text)
         return text.strip()
 
-    def _clean_text(self, text: str) -> str:
-        text = (text or "").strip()
-        text = re.sub(r"\s+", " ", text)
+    def _first_nonempty(self, value):
+        if isinstance(value, list):
+            for v in value:
+                s = str(v).strip()
+                if s:
+                    return s
+            return ""
+        if value is None:
+            return ""
+        return str(value).strip()
 
-        markers = [
-            " Leer más", " leer más", " Leer mas", " leer mas",
-            " Mostrar más", " mostrar más", " Mostrar mas", " mostrar mas"
-        ]
-        for marker in markers:
-            idx = text.find(marker)
-            if idx > 0:
-                text = text[:idx].strip(" -|,.;:>")
-        return text.strip()
 
+    def _clean_text(self, text):
+        if text is None:
+            return ""
+
+        if isinstance(text, list):
+            text = " | ".join(str(x).strip() for x in text if x is not None and str(x).strip())
+        elif isinstance(text, tuple):
+            text = " | ".join(str(x).strip() for x in text if x is not None and str(x).strip())
+        else:
+            text = str(text).strip()
+
+        return text    
+        
     def _as_list(self, value):
         if value is None:
             return []
@@ -232,6 +243,9 @@ class KGPostProcessor:
         main_image = self._clean_text(entity.get("mainImage", ""))
 
         props = entity.get("properties", {}) or {}
+        props_main_image = self._first_nonempty(props.get("mainImage", ""))
+        props_image = self._first_nonempty(props.get("image", ""))
+
 
         entity["image"] = image if image.startswith(("http://", "https://")) else ""
         entity["mainImage"] = main_image if main_image.startswith(("http://", "https://")) else ""

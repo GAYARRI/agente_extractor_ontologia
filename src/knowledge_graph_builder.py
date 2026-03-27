@@ -6,12 +6,14 @@ from typing import Any, Iterable, List
 
 from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS, XSD
+from src.linking.wikidata_linker import WikidataLinker
 
 
 class KnowledgeGraphBuilder:
     def __init__(self):
         self.EX = Namespace("http://example.org/resource/")
         self.TOUR = Namespace("http://example.org/tourism/")
+        self.wikidata_linker = WikidataLinker()
 
     # =========================
     # Helpers de normalización
@@ -312,26 +314,47 @@ class KnowledgeGraphBuilder:
                     g.add((subject, self.TOUR.longitude, Literal(float(lng), datatype=XSD.float)))
             except Exception:
                 pass
+ 
+            entity_name = self._clean_text(
+            entity.get("entity_name")
+            or entity.get("name")
+            or entity.get("label")
+            or display_name
+        )
 
-            # wikidata
-            wikidata_id = self._clean_text(entity.get("wikidata_id", ""))
-            self._add_literal_if_value(g, subject, self.TOUR.wikidataId, wikidata_id)
+        entity_class = self._clean_text(entity.get("class")) or "Thing"
 
-            # imágenes: solo si son claramente buenas
-            properties = entity.get("properties", {}) or {}
-            candidate_images = [
-                entity.get("image", ""),
-                entity.get("mainImage", ""),
-                properties.get("image", ""),
-                properties.get("mainImage", ""),
-            ]
-            candidate_images = [self._clean_text(x) for x in candidate_images if self._clean_text(x)]
-            candidate_images = self._dedupe_preserve_order(candidate_images)
-            candidate_images = [img for img in candidate_images if self._is_probably_good_image(img)]
+        wikidata_source_url = self._clean_text(
+            entity.get("url")
+            or entity.get("sourceUrl")
+        )
 
-            if candidate_images:
-                g.add((subject, self.TOUR.image, Literal(candidate_images[0])))
-                g.add((subject, self.TOUR.mainImage, Literal(candidate_images[0])))
+        wikidata_id = self.wikidata_linker.link(
+            entity_name=entity_name,
+            entity_class=entity_class,
+            short_description=short_description,
+            long_description=long_description,
+            source_url=wikidata_source_url,
+        )
+
+        self._add_literal_if_value(g, subject, self.TOUR.wikidataId, wikidata_id)
+                
+                
+        # imágenes: solo si son claramente buenas
+        properties = entity.get("properties", {}) or {}
+        candidate_images = [
+            entity.get("image", ""),
+            entity.get("mainImage", ""),
+            properties.get("image", ""),
+            properties.get("mainImage", ""),
+        ]
+        candidate_images = [self._clean_text(x) for x in candidate_images if self._clean_text(x)]
+        candidate_images = self._dedupe_preserve_order(candidate_images)
+        candidate_images = [img for img in candidate_images if self._is_probably_good_image(img)]
+
+        if candidate_images:
+            g.add((subject, self.TOUR.image, Literal(candidate_images[0])))
+            g.add((subject, self.TOUR.mainImage, Literal(candidate_images[0])))
 
         return g
 

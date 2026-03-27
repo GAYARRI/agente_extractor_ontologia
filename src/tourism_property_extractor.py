@@ -2,7 +2,8 @@ import re
 from typing import Dict, Any, List
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-
+import json
+from urllib.parse import unquote, urlparse, parse_qs
 
 class TourismPropertyExtractor:
     """
@@ -240,82 +241,374 @@ class TourismPropertyExtractor:
                 out.append(u)
         return out
 
-    def extract(self, html, text, url, entity):
-        properties = {}
+    def extract(self, entity, text="", html="", url=""):
+        props = {}
 
-        # Acepta entity como dict o como string
-        if isinstance(entity, dict):
-            entity_name = (
-                entity.get("entity_name")
-                or entity.get("entity")
-                or entity.get("name")
-                or entity.get("label")
-                or ""
-            )
-            entity_class = entity.get("class", "")
-        elif isinstance(entity, str):
-            entity_name = entity.strip()
-            entity_class = ""
-        else:
-            entity_name = ""
-            entity_class = ""
+        clean_text = (text or "").strip()
+        if clean_text:
+            props["description"] = clean_text[:300].strip()
 
-        if not entity_name:
-            return properties
-
-        soup = BeautifulSoup(html or "", "html.parser")
-        full_text = text or ""
-
-        # descripción local
-        if full_text:
-            properties["description"] = full_text[:500]
-
-        # url fuente
         if url:
-            properties["url"] = url
-
-        # imagen local si la encuentras
-        try:
-            image = self._extract_entity_image(soup, entity_name)
-            if image:
-                properties["image"] = image
-                properties["mainImage"] = image
-        except Exception:
-            pass
-
-        # email/teléfono/dirección solo si aparecen en contexto local
-        try:
-            local_text = self._find_local_window(full_text, entity_name)
-        except Exception:
-            local_text = full_text
+            props["url"] = url
 
         try:
-            email = self._extract_first_email(local_text)
-            if email:
-                properties["email"] = email
-        except Exception:
-            pass
+            # 1️⃣ intentar extraer de HTML / JS
+            coords, geo_debug = self.extract_best_coordinates(html=html, text=text)
 
-        try:
-            phone = self._extract_first_phone(local_text)
-            if phone:
-                properties["telephone"] = phone
-        except Exception:
-            pass
+            # 2️⃣ fallback por gazetteer (AQUÍ VA TU BLOQUE)
+            if not coords and self._is_geographic_entity(entity, None):
+                geo_hit = self._geo_from_gazetteer(entity)
+                if geo_hit:
+                    coords = {"lat": geo_hit["lat"], "lng": geo_hit["lng"]}
+                    geo_debug = {"geo_source": geo_hit["source"]}
 
-        try:
-            address = self._extract_first_address(local_text)
-            if address:
-                properties["address"] = address
-        except Exception:
-            pass
-
-        # coordenadas si existen en HTML
-        try:
-            coords = self._extract_coords(html or "")
+            # 3️⃣ guardar resultado
             if coords:
-                properties.update(coords)
-        except Exception:
-            pass
+                coords = self._normalize_coords(coords.get("lat"), coords.get("lng"))
+                props["coordinates"] = coords
+                props["latitude"] = coords.get("lat")
+                props["longitude"] = coords.get("lng")
 
-        return properties    
+            if geo_debug:
+                props.setdefault("debug", {})
+                props["debug"].update(geo_debug)
+
+        except Exception as e:
+            print(f"⚠️ GIS extraction error: {e}")
+
+        props.setdefault("debug", {})
+        props["debug"].update({
+            "geo_available": bool(props.get("coordinates")),
+            "has_description": bool(props.get("description")),
+        })
+
+        return props    
+            
+          
+    
+    def extract_from_jsonld(soup):
+        scripts = soup.find_all("script", type="application/ld+json")
+        coords = []
+
+        for s in scripts:
+            try:
+                data = json.loads(s.string)
+                if isinstance(data, dict):
+                    geo = data.get("geo")
+                    if geo:
+                        lat = geo.get("latitude")
+                        lon = geo.get("longitude")
+                        if lat and lon:
+                            coords.append((float(lat), float(lon)))
+            except:
+                continue
+
+        return coords
+    
+    def extract_from_iframes(soup):
+        coords = []
+        for iframe in soup.find_all("iframe"):
+            src = iframe.get("src", "")
+            match = re.search(r"@(-?\d+\.\d+),(-?\d+\.\d+)", src)
+            if match:
+                coords.append((float(match.group(1)), float(match.group(2))))
+        return coords
+    
+
+    def normalize_coords(lat, lon):
+        lat = float(lat)
+        lon = float(lon)
+
+        # Detectar swap típico
+        if abs(lat) > 90 and abs(lon) <= 90:
+            lat, lon = lon, lat
+
+        if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+            return None
+
+        return lat, lon
+    
+
+    def _to_float(self, value):
+        try:
+            if value is None or value == "":
+                return None
+            if isinstance(value, str):
+                value = value.strip().replace(",", ".")
+            return float(value)
+        except Exception:
+            return None
+
+
+    def _normalize_coords(self, lat, lng):
+        try:
+            # soportar strings tipo "37,38"
+            if isinstance(lat, str):
+                lat = lat.replace(",", ".")
+            if isinstance(lng, str):
+                lng = lng.replace(",", ".")
+
+            lat = float(lat)
+            lng = float(lng)
+
+        except (TypeError, ValueError):
+            print(f"⚠️ Invalid coords format: lat={lat}, lng={lng}")
+            return None
+
+        # validación geográfica
+        if not (-90 <= lat <= 90 and -180 <= lng <= 180):
+            print(f"⚠️ Out-of-range coords: lat={lat}, lng={lng}")
+            return None
+
+        return {"lat": lat, "lng": lng}    
+        
+
+    def _extract_geo_from_jsonld(self, html: str):
+        out = []
+        if not html:
+            return out
+
+        pattern = re.compile(
+            r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+            re.IGNORECASE | re.DOTALL
+        )
+
+        for block in pattern.findall(html):
+            block = block.strip()
+            if not block:
+                continue
+
+            try:
+                data = json.loads(block)
+            except Exception:
+                continue
+
+            stack = [data]
+            while stack:
+                item = stack.pop()
+
+                if isinstance(item, list):
+                    stack.extend(item)
+                    continue
+
+                if not isinstance(item, dict):
+                    continue
+
+                geo = item.get("geo")
+                if isinstance(geo, dict):
+                    coords = self._normalize_coords(
+                        geo.get("latitude"),
+                        geo.get("longitude")
+                    )
+                    if coords:
+                        out.append({
+                            "lat": coords["lat"],
+                            "lng": coords["lng"],
+                            "source": "jsonld"
+                        })
+
+                for v in item.values():
+                    if isinstance(v, (dict, list)):
+                        stack.append(v)
+
+        return out
+
+
+    def _extract_geo_from_data_attrs(self, html: str):
+        out = []
+        if not html:
+            return out
+
+        patterns = [
+            re.compile(
+                r'data-lat=["\']([^"\']+)["\'][^>]*data-lng=["\']([^"\']+)["\']',
+                re.IGNORECASE
+            ),
+            re.compile(
+                r'data-lng=["\']([^"\']+)["\'][^>]*data-lat=["\']([^"\']+)["\']',
+                re.IGNORECASE
+            ),
+        ]
+
+        for idx, pattern in enumerate(patterns):
+            for m in pattern.findall(html):
+                if idx == 0:
+                    lat, lng = m
+                else:
+                    lng, lat = m
+
+                coords = self._normalize_coords(lat, lng)
+                if coords:
+                    out.append({
+                        "lat": coords["lat"],
+                        "lng": coords["lng"],
+                        "source": "data-attrs"
+                    })
+
+        return out
+
+
+    def _extract_geo_from_iframes(self, html: str):
+        out = []
+        if not html:
+            return out
+
+        iframe_srcs = re.findall(
+            r'<iframe[^>]+src=["\']([^"\']+)["\']',
+            html,
+            re.IGNORECASE
+        )
+
+        for src in iframe_srcs:
+            src_decoded = unquote(src)
+
+            # patrón @lat,lng
+            m = re.search(r'@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)', src_decoded)
+            if m:
+                lat, lng = m.groups()
+                coords = self._normalize_coords(lat,lng)
+                if coords:
+                    out.append({
+                        "lat": coords["lat"],
+                        "lng": coords["lng"],
+                        "source": "iframe"
+                    })
+                    continue
+
+            # q=lat,lng
+            m = re.search(r'[?&]q=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)', src_decoded)
+            if m:
+                lat, lng = m.groups()
+                coords = self._normalize_coords(lat, lng)
+                if coords:
+                    out.append({
+                        "lat": coords["lat"],
+                        "lng": coords["lng"],
+                        "source": "iframe"
+                    })
+
+        return out
+
+
+    def _extract_geo_from_text_regex(self, text: str):
+        out = []
+        if not text:
+            return out
+
+        patterns = [
+            re.compile(r'@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)'),
+            re.compile(r'[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)'),
+            re.compile(r'lat(?:itude)?["\':=\s]+(-?\d+(?:\.\d+)?)', re.IGNORECASE),
+            re.compile(r'lng|lon|longitude["\':=\s]+(-?\d+(?:\.\d+)?)', re.IGNORECASE),
+        ]
+
+        # pares directos
+        for pattern in patterns[:2]:
+            for m in pattern.findall(text):
+                lat, lng = m
+                coords = self._normalize_coords(lat, lng)
+                if coords:
+                    out.append({
+                        "lat": coords["lat"],
+                        "lng": coords["lng"],
+                        "source": "regex"
+                    })
+
+        # lat suelta + lon suelta
+        lat_matches = patterns[2].findall(text)
+        lon_matches = patterns[3].findall(text)
+
+        if lat_matches and lon_matches:
+            coords = self._normalize_coords(lat_matches[0], lon_matches[0])
+            if coords:
+                out.append({
+                    "lat": coords["lat"],
+                    "lng": coords["lng"],
+                    "source": "regex"
+                })
+
+        return out
+
+
+    def _choose_best_geo_candidate(self, candidates):
+        if not candidates:
+            return None
+
+        priority = {
+            "jsonld": 4,
+            "data-attrs": 3,
+            "iframe": 2,
+            "regex": 1,
+        }
+
+        cleaned = []
+        seen = set()
+
+        for c in candidates:
+            if not c:
+                continue
+
+            lat = c.get("lat")
+            lng = c.get("lng")
+            src = c.get("source", "unknown")
+            key = (round(lat, 6), round(lng, 6), src)
+
+            if key in seen:
+                continue
+            seen.add(key)
+
+            cleaned.append(c)
+
+        cleaned.sort(key=lambda x: priority.get(x.get("source", ""), 0), reverse=True)
+        return cleaned[0] if cleaned else None
+
+
+    def extract_best_coordinates(self, html: str = "", text: str = ""):
+        candidates = []
+        candidates.extend(self._extract_geo_from_jsonld(html))
+        candidates.extend(self._extract_geo_from_data_attrs(html))
+        candidates.extend(self._extract_geo_from_iframes(html))
+        candidates.extend(self._extract_geo_from_text_regex(html or text))
+
+        best = self._choose_best_geo_candidate(candidates)
+        if not best:
+            return {}, {}
+
+        coords = {
+            "lat": best["lat"],
+            "lng": best["lng"]
+        }
+        debug = {
+            "geo_source": best.get("source", "unknown")
+        }
+        return coords, debug
+    
+    def _extract_geo_from_map_js(self, html: str):
+        out = []
+        if not html:
+            return out
+
+        patterns = [
+            re.compile(r'L\.marker\(\s*\[\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\]\s*\)'),
+            re.compile(r'LatLng\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)'),
+            re.compile(r'["\']lat["\']\s*:\s*(-?\d+(?:\.\d+)?)\s*,\s*["\'](?:lng|lon|longitude)["\']\s*:\s*(-?\d+(?:\.\d+)?)', re.IGNORECASE),
+            re.compile(r'["\']latitude["\']\s*:\s*(-?\d+(?:\.\d+)?)\s*,\s*["\']longitude["\']\s*:\s*(-?\d+(?:\.\d+)?)', re.IGNORECASE),
+        ]
+
+        for pattern in patterns:
+            for m in pattern.findall(html):
+                lat, lng = m
+                coords = self._normalize_coords(lat, lng)
+                if coords:
+                    out.append({
+                        "lat": coords["lat"],
+                        "lng": coords["lng"],
+                        "source": "map-js"
+                    })
+
+        return out
+    
+    def _is_geographic_entity(self, entity_name: str, entity_class=None) -> bool:
+        cls = str(entity_class or "").lower()
+        geo_markers = ["place", "location", "tourismdestination", "city", "municipality", "neighborhood", "district"]
+        return any(x in cls for x in geo_markers)

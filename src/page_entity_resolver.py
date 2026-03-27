@@ -2,7 +2,9 @@
 
 import re
 import unicodedata
+import math
 from difflib import SequenceMatcher
+from urllib.parse import urlparse
 
 
 class PageEntityResolver:
@@ -14,14 +16,21 @@ class PageEntityResolver:
     # =========================================================
 
     def normalize_key(self, text: str) -> str:
-        text = text or ""
-        text = text.strip().lower()
+        if text is None:
+            return ""
+
+        if isinstance(text, list):
+            text = " ".join(str(x) for x in text if x is not None)
+        elif isinstance(text, tuple):
+            text = " ".join(str(x) for x in text if x is not None)
+
+        text = str(text).strip().lower()
         text = unicodedata.normalize("NFKD", text)
         text = "".join(c for c in text if not unicodedata.combining(c))
         text = re.sub(r"[^\w\s]", " ", text)
         text = re.sub(r"\s+", " ", text).strip()
-        return text
-
+        return text    
+        
     def similar(self, a: str, b: str, threshold: float = 0.92) -> bool:
         a_n = self.normalize_key(a)
         b_n = self.normalize_key(b)
@@ -79,7 +88,12 @@ class PageEntityResolver:
         items = []
 
         if isinstance(value, list):
-            items.extend(value)
+            for v in value:
+                if isinstance(v, list):
+                    items.extend(v)
+                elif v:
+                    items.append(v)
+
         elif isinstance(value, str):
             if "|" in value:
                 items.extend([x.strip() for x in value.split("|") if x.strip()])
@@ -88,36 +102,185 @@ class PageEntityResolver:
             elif value.strip():
                 items.append(value.strip())
 
-        items = [x for x in items if self._looks_like_url(str(x).strip())]
-        return self._dedupe_preserve_order(items)
+        items = [str(x).strip() for x in items if x]
+        items = [x for x in items if self._looks_like_url(x)]
+        return self._dedupe_preserve_order(items)    
+        
+    def _string_similarity(self, a: str, b: str) -> float:
+        a_n = self.normalize_key(a)
+        b_n = self.normalize_key(b)
+
+        if not a_n or not b_n:
+            return 0.0
+
+        if a_n == b_n:
+            return 1.0
+
+        return SequenceMatcher(None, a_n, b_n).ratio()
+
+    def _extract_type(self, entity: dict) -> str:
+        raw = (
+            entity.get("type")
+            or entity.get("class")
+            or entity.get("properties", {}).get("@type")
+            or ""
+        )
+
+        if isinstance(raw, list):
+            raw = raw[0] if raw else ""
+
+        return self.normalize_key(raw)    
+
+    def _same_domain(self, url1: str, url2: str) -> bool:
+        u1 = (url1 or "").strip()
+        u2 = (url2 or "").strip()
+
+        if not u1 or not u2:
+            return False
+
+        try:
+            d1 = urlparse(u1).netloc.lower().replace("www.", "")
+            d2 = urlparse(u2).netloc.lower().replace("www.", "")
+            return bool(d1 and d2 and d1 == d2)
+        except Exception:
+            return False
+
+    def _to_float(self, value):
+        try:
+            if value is None or value == "":
+                return None
+            return float(value)
+        except Exception:
+            return None
+
+    def _coord_distance_km(self, c1: dict, c2: dict) -> float:
+        lat1 = self._to_float((c1 or {}).get("lat"))
+        lng1 = self._to_float((c1 or {}).get("lng"))
+        lat2 = self._to_float((c2 or {}).get("lat"))
+        lng2 = self._to_float((c2 or {}).get("lng"))
+
+        if None in (lat1, lng1, lat2, lng2):
+            return float("inf")
+
+        r = 6371.0
+
+        phi1 = math.radians(lat1)
+        phi2 = math.radians(lat2)
+        dphi = math.radians(lat2 - lat1)
+        dlambda = math.radians(lng2 - lng1)
+
+        a = (
+            math.sin(dphi / 2) ** 2
+            + math.cos(phi1) * math.cos(phi2) * math.sin(dlambda / 2) ** 2
+        )
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+        return r * c
+
+    def _entity_match_score(self, cand: dict, group: dict) -> float:
+        score = 0.0
+
+        name = cand.get("entity_name") or cand.get("entity") or cand.get("label") or ""
+        gname = group.get("entity_name") or group.get("entity") or group.get("label") or ""
+
+        props = cand.get("properties", {}) or {}
+        gprops = group.get("properties", {}) or {}
+
+        # 1. nombre
+        name_sim = self._string_similarity(name, gname)
+        score += name_sim * 0.45
+
+        # 2. tipo / clase
+        t1 = self._extract_type(cand)
+        t2 = self._extract_type(group)
+        if t1 and t2:
+            if t1 == t2:
+                score += 0.20
+            else:
+                score -= 0.20
+
+        # 3. señales duras de contacto
+        for key, weight in (("phone", 0.30), ("email", 0.30), ("address", 0.22)):
+            v1 = self.normalize_key(str(props.get(key) or cand.get(key) or ""))
+            v2 = self.normalize_key(str(gprops.get(key) or group.get(key) or ""))
+            if v1 and v2 and v1 == v2:
+                score += weight
+
+        # 4. urls
+        cand_urls = []
+        group_urls = []
+
+        cand_source = cand.get("sourceUrl") or cand.get("url") or ""
+        group_source = group.get("sourceUrl") or group.get("url") or ""
+
+        if cand_source:
+            cand_urls.append(cand_source)
+        if group_source:
+            group_urls.append(group_source)
+
+        cand_urls.extend(self._normalize_related_urls(cand.get("relatedUrls", "")))
+        group_urls.extend(self._normalize_related_urls(group.get("relatedUrls", "")))
+
+        cand_urls = self._dedupe_preserve_order(cand_urls)
+        group_urls = self._dedupe_preserve_order(group_urls)
+
+        if cand_urls and group_urls:
+            if any(u1 == u2 for u1 in cand_urls for u2 in group_urls):
+                score += 0.30
+            elif any(self._same_domain(u1, u2) for u1 in cand_urls for u2 in group_urls):
+                score += 0.10
+
+        # 5. coordenadas
+        c1 = cand.get("coordinates") or {}
+        c2 = group.get("coordinates") or {}
+        dist = self._coord_distance_km(c1, c2)
+
+        if dist != float("inf"):
+            if dist < 0.15:
+                score += 0.30
+            elif dist < 1.0:
+                score += 0.20
+            elif dist < 5.0:
+                score += 0.08
+            elif dist > 20.0:
+                score -= 0.25
+
+        return score
+
+    def _should_block_merge(self, cand: dict, group: dict) -> bool:
+        t1 = self._extract_type(cand)
+        t2 = self._extract_type(group)
+        if t1 and t2 and t1 != t2:
+            return True
+
+        dist = self._coord_distance_km(
+            cand.get("coordinates") or {},
+            group.get("coordinates") or {}
+        )
+        if dist != float("inf") and dist > 20.0:
+            return True
+
+        return False
 
     # =========================================================
     # Matching / agrupación
     # =========================================================
 
     def same_entity(self, cand: dict, group: dict) -> bool:
-        name = cand.get("entity_name") or cand.get("entity") or cand.get("label") or ""
-        gname = group.get("entity_name") or group.get("entity") or group.get("label") or ""
+        if self._should_block_merge(cand, group):
+            return False
 
-        if self.similar(name, gname):
-            return True
+        score = self._entity_match_score(cand, group)
 
         props = cand.get("properties", {}) or {}
         gprops = group.get("properties", {}) or {}
 
-        for key in ("phone", "email", "address"):
-            v1 = str(props.get(key) or cand.get(key) or "").strip().lower()
-            v2 = str(gprops.get(key) or group.get(key) or "").strip().lower()
+        for key in ("phone", "email"):
+            v1 = self.normalize_key(str(props.get(key) or cand.get(key) or ""))
+            v2 = self.normalize_key(str(gprops.get(key) or group.get(key) or ""))
             if v1 and v2 and v1 == v2:
                 return True
 
-        c1 = cand.get("coordinates") or {}
-        c2 = group.get("coordinates") or {}
-        if c1.get("lat") and c2.get("lat") and c1.get("lng") and c2.get("lng"):
-            if str(c1["lat"]) == str(c2["lat"]) and str(c1["lng"]) == str(c2["lng"]):
-                return True
-
-        return False
+        return score >= 0.72
 
     # =========================================================
     # Nombres
@@ -167,7 +330,14 @@ class PageEntityResolver:
         return False
 
     def choose_best_name(self, names):
-        names = [self._clean_text(str(n)) for n in names if self._clean_text(str(n))]
+        flat_names = []
+        for n in names:
+            if isinstance(n, list):
+                flat_names.extend(n)
+            else:
+                flat_names.append(n)
+
+        names = [self._clean_text(str(n)) for n in flat_names if self._clean_text(str(n))]
         if not names:
             return ""
 
@@ -199,7 +369,8 @@ class PageEntityResolver:
             return score
 
         names = sorted(names, key=score_name, reverse=True)
-        return names[0]
+        return names[0]    
+       
 
     def repair_name_fields(self, entity: dict) -> dict:
         label = (entity.get("label") or "").strip()
@@ -242,20 +413,34 @@ class PageEntityResolver:
         for k, v in (extra or {}).items():
             if v in (None, "", [], {}):
                 continue
-
-            if k not in out or out[k] in (None, "", [], {}):
-                out[k] = v
-            elif isinstance(out[k], list) and isinstance(v, list):
-                out[k] = self._dedupe_preserve_order(out[k] + v)
-            elif out[k] != v:
-                if isinstance(out[k], list):
-                    current = out[k]
+            if k in ("image", "mainImage", "candidateImage"):
+                if k not in out or out[k] in (None, "", [], {}):
+                    out[k] = v
                 else:
-                    current = [out[k]]
+                    # conservar el primero no vacío; no convertir a lista
+                    if isinstance(out[k], list):
+                        existing = next((str(x).strip() for x in out[k] if str(x).strip()), "")
+                    else:
+                        existing = str(out[k]).strip()
 
-                incoming = v if isinstance(v, list) else [v]
-                out[k] = self._dedupe_preserve_order(current + incoming)
+                    incoming = ""
+                    if isinstance(v, list):
+                        incoming = next((str(x).strip() for x in v if str(x).strip()), "")
+                    else:
+                        incoming = str(v).strip()
 
+                    out[k] = existing or incoming
+                continue
+            if k == "debug":
+                base_debug = out.get("debug", {})
+                if not isinstance(base_debug, dict):
+                    base_debug = {}
+
+                incoming_debug = v if isinstance(v, dict) else {}
+                merged_debug = dict(base_debug)
+                merged_debug.update(incoming_debug)
+                out["debug"] = merged_debug
+                continue
         return out
 
     def clean_placeholder_properties(self, entity: dict) -> dict:
@@ -328,8 +513,6 @@ class PageEntityResolver:
 
             if len(set(score for _, score in scored)) == 1 and scored[0][1] == 0:
                 continue
-
-            winner_idx = scored[0][0]
 
             for idx, _score in scored[1:]:
                 props = entities[idx].get("properties", {}) or {}
@@ -542,10 +725,14 @@ class PageEntityResolver:
 
         for e in entities:
             matched = None
+            matched_score = float("-inf")
+
             for g in groups:
                 if self.same_entity(e, g):
-                    matched = g
-                    break
+                    score = self._entity_match_score(e, g)
+                    if score > matched_score:
+                        matched = g
+                        matched_score = score
 
             current_name = (
                 e.get("entity_name")
@@ -590,8 +777,19 @@ class PageEntityResolver:
                     "mainImage": e.get("mainImage", ""),
                     "_names": [current_name, e.get("name", ""), e.get("label", "")],
                     "_images": [current_image],
+                    "_debug_matches": [],
                 })
             else:
+                matched["_debug_matches"].append({
+                    "candidate_name": current_name,
+                    "group_name": matched.get("entity_name", ""),
+                    "score": round(matched_score, 4),
+                    "candidate_type": self._extract_type(e),
+                    "group_type": self._extract_type(matched),
+                    "candidate_source": e.get("sourceUrl") or e.get("url") or "",
+                    "group_source": matched.get("sourceUrl") or matched.get("url") or "",
+                })
+
                 matched["_names"].extend([
                     current_name,
                     e.get("name", ""),
@@ -685,7 +883,7 @@ class PageEntityResolver:
             resolved.append(g)
 
         resolved = self.dedupe_images_across_entities(resolved)
-        resolved = self.remove_repeated_global_images(resolved, threshold=5)
+        #resolved = self.remove_repeated_global_images(resolved, threshold=50)
         resolved = self.promote_unique_candidate_images(resolved)
         resolved = [e for e in resolved if not self.is_editorial_entity(e)]
         resolved = self.remove_substring_entities(resolved)

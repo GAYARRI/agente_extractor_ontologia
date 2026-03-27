@@ -1,2 +1,77 @@
 # Knowledge Graph
-Total de entidades: 0
+Total de entidades: 5
+
+## Comer Descubre
+
+**type:** Restaurant
+**score:** 1
+**url:** https://visitasevilla.es/sharm-sevilla
+**shortDescription:** Restaurantes exquisitos en Sevilla.
+**longDescription:** Comer Descubre se refiere a la experiencia de disfrutar de los mejores restaurantes en Sevilla, donde la gastronomía local se presenta como un hechizo de sabores, ofreciendo a los visitantes una experiencia culinaria única y memorable.
+**description:** Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex
+**images:**
+
+![Comer Descubre](https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg)
+
+**qualityScore:** 6
+**qualityDecision:** keep
+
+## Comprar Sumérgete
+
+**type:** Thing
+**score:** 1
+**url:** https://visitasevilla.es/sharm-sevilla
+**shortDescription:** Moda y creatividad en Sevilla.
+**longDescription:** Sumérgete en el vibrante mundo de la moda en Sevilla, donde la tradición y la historia se fusionan en creaciones que reflejan la idiosincrasia sevillana.
+**description:** Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex
+**images:**
+
+![Comprar Sumérgete](https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg)
+
+**qualityScore:** 6
+**qualityDecision:** keep
+
+## Dormir Descubre
+
+**type:** Accommodation
+**score:** 1
+**url:** https://visitasevilla.es/sharm-sevilla
+**shortDescription:** Alojamientos únicos en Sevilla.
+**longDescription:** Dormir Descubre ofrece una variedad de alojamientos en Sevilla, donde cada estancia está diseñada para brindar comodidad y elegancia, permitiendo a los visitantes sumergirse en la esencia mágica de la ciudad.
+**description:** Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex
+**images:**
+
+![Dormir Descubre](https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg)
+
+**qualityScore:** 6
+**qualityDecision:** keep
+
+## Sevilla Experimentar
+
+**type:** Event
+**score:** 1
+**url:** https://visitasevilla.es/sharm-sevilla
+**shortDescription:** Experiencias fascinantes en Sevilla.
+**longDescription:** Explora las experiencias más fascinantes de Sevilla, donde cada instante se convierte en un momento inolvidable, desde la artesanía hasta la sofisticación.
+**description:** Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex
+**images:**
+
+![Sevilla Experimentar](https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg)
+
+**qualityScore:** 9
+**qualityDecision:** keep
+
+## Sevilla Sevicios
+
+**type:** Service
+**score:** 1
+**url:** https://visitasevilla.es/sharm-sevilla
+**shortDescription:** Servicios profesionales destacados en Sevilla.
+**longDescription:** Para preparar tu viaje, puedes acudir a los servicios profesionales más destacados de Sevilla, que ofrecen soluciones personalizadas con excelencia y dedicación.
+**description:** Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex
+**images:**
+
+![Sevilla Sevicios](https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg)
+
+**qualityScore:** 7
+**qualityDecision:** keep

@@ -1,1 +1,57 @@
+@prefix ex: <http://example.org/resource/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tour: <http://example.org/tourism/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:comer_descubre a tour:Entity ;
+    rdfs:label "Comer Descubre" ;
+    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
+    tour:label "Comer Descubre" ;
+    tour:longDescription "Comer Descubre se refiere a la experiencia de disfrutar de los mejores restaurantes en Sevilla, donde la gastronomía local se presenta como un hechizo de sabores, ofreciendo a los visitantes una experiencia culinaria única y memorable." ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Restaurantes exquisitos en Sevilla." ;
+    tour:type "Restaurant" ;
+    tour:url "https://visitasevilla.es/sharm-sevilla" .
+
+ex:comprar_sumergete a tour:Entity ;
+    rdfs:label "Comprar Sumérgete" ;
+    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
+    tour:label "Comprar Sumérgete" ;
+    tour:longDescription "Sumérgete en el vibrante mundo de la moda en Sevilla, donde la tradición y la historia se fusionan en creaciones que reflejan la idiosincrasia sevillana." ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Moda y creatividad en Sevilla." ;
+    tour:type "Thing" ;
+    tour:url "https://visitasevilla.es/sharm-sevilla" .
+
+ex:dormir_descubre a tour:Entity ;
+    rdfs:label "Dormir Descubre" ;
+    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
+    tour:label "Dormir Descubre" ;
+    tour:longDescription "Dormir Descubre ofrece una variedad de alojamientos en Sevilla, donde cada estancia está diseñada para brindar comodidad y elegancia, permitiendo a los visitantes sumergirse en la esencia mágica de la ciudad." ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Alojamientos únicos en Sevilla." ;
+    tour:type "Accommodation" ;
+    tour:url "https://visitasevilla.es/sharm-sevilla" .
+
+ex:sevilla_experimentar a tour:Entity ;
+    rdfs:label "Sevilla Experimentar" ;
+    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
+    tour:label "Sevilla Experimentar" ;
+    tour:longDescription "Explora las experiencias más fascinantes de Sevilla, donde cada instante se convierte en un momento inolvidable, desde la artesanía hasta la sofisticación." ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Experiencias fascinantes en Sevilla." ;
+    tour:type "Event" ;
+    tour:url "https://visitasevilla.es/sharm-sevilla" .
+
+ex:sevilla_sevicios a tour:Entity ;
+    rdfs:label "Sevilla Sevicios" ;
+    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
+    tour:image "https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg" ;
+    tour:label "Sevilla Sevicios" ;
+    tour:longDescription "Para preparar tu viaje, puedes acudir a los servicios profesionales más destacados de Sevilla, que ofrecen soluciones personalizadas con excelencia y dedicación." ;
+    tour:mainImage "https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Servicios profesionales destacados en Sevilla." ;
+    tour:type "Service" ;
+    tour:url "https://visitasevilla.es/sharm-sevilla" .
 
