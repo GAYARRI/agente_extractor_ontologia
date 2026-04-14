@@ -165,6 +165,16 @@ class KnowledgeGraphBuilder:
         values.extend(self._as_list(entity.get("type")))
         values.extend(self._as_list(entity.get("class")))
 
+        semantic_type = self._clean_text(entity.get("semantic_type", ""))
+        if semantic_type:
+            values.append(semantic_type.split("#")[-1].split("/")[-1])
+
+        properties = entity.get("properties", {}) or {}
+        if isinstance(properties, dict):
+            prop_type = self._clean_text(properties.get("type", ""))
+            if prop_type:
+                values.append(prop_type)
+
         cleaned = []
         for v in values:
             txt = self._normalize_space(str(v))
@@ -172,6 +182,36 @@ class KnowledgeGraphBuilder:
                 cleaned.append(txt)
 
         return self._dedupe_preserve_order(cleaned)
+
+    def _extract_best_entity_type(self, entity: dict) -> str:
+        candidates = []
+
+        for key in ("class", "type", "semantic_type"):
+            value = entity.get(key)
+            if isinstance(value, (list, tuple)):
+                candidates.extend([self._clean_text(v) for v in value if self._clean_text(v)])
+            else:
+                txt = self._clean_text(value)
+                if txt:
+                    candidates.append(txt)
+
+        properties = entity.get("properties", {}) or {}
+        if isinstance(properties, dict):
+            prop_type = self._clean_text(properties.get("type", ""))
+            if prop_type:
+                candidates.append(prop_type)
+
+        for candidate in candidates:
+            short = candidate.split("#")[-1].split("/")[-1].strip()
+            if short and short.lower() not in {"thing", "entity", "unknown"}:
+                return short
+
+        for candidate in candidates:
+            short = candidate.split("#")[-1].split("/")[-1].strip()
+            if short:
+                return short
+
+        return ""
 
     def _extract_related_urls(self, entity: dict) -> List[str]:
         raw = entity.get("relatedUrls", "")
@@ -314,47 +354,48 @@ class KnowledgeGraphBuilder:
                     g.add((subject, self.TOUR.longitude, Literal(float(lng), datatype=XSD.float)))
             except Exception:
                 pass
- 
+
+            # wikidata: dentro del loop y sin fallback duro a Thing
             entity_name = self._clean_text(
-            entity.get("entity_name")
-            or entity.get("name")
-            or entity.get("label")
-            or display_name
-        )
+                entity.get("entity_name")
+                or entity.get("name")
+                or entity.get("label")
+                or display_name
+            )
 
-        entity_class = self._clean_text(entity.get("class")) or "Thing"
+            entity_class = self._extract_best_entity_type(entity)
 
-        wikidata_source_url = self._clean_text(
-            entity.get("url")
-            or entity.get("sourceUrl")
-        )
+            wikidata_source_url = self._clean_text(
+                entity.get("url")
+                or entity.get("sourceUrl")
+            )
 
-        wikidata_id = self.wikidata_linker.link(
-            entity_name=entity_name,
-            entity_class=entity_class,
-            short_description=short_description,
-            long_description=long_description,
-            source_url=wikidata_source_url,
-        )
+            wikidata_id = self.wikidata_linker.link(
+                entity_name=entity_name,
+                entity_class=entity_class,
+                short_description=short_description,
+                long_description=long_description,
+                source_url=wikidata_source_url,
+                aliases=[display_name, entity_name],
+            )
 
-        self._add_literal_if_value(g, subject, self.TOUR.wikidataId, wikidata_id)
-                
-                
-        # imágenes: solo si son claramente buenas
-        properties = entity.get("properties", {}) or {}
-        candidate_images = [
-            entity.get("image", ""),
-            entity.get("mainImage", ""),
-            properties.get("image", ""),
-            properties.get("mainImage", ""),
-        ]
-        candidate_images = [self._clean_text(x) for x in candidate_images if self._clean_text(x)]
-        candidate_images = self._dedupe_preserve_order(candidate_images)
-        candidate_images = [img for img in candidate_images if self._is_probably_good_image(img)]
+            self._add_literal_if_value(g, subject, self.TOUR.wikidataId, wikidata_id)
 
-        if candidate_images:
-            g.add((subject, self.TOUR.image, Literal(candidate_images[0])))
-            g.add((subject, self.TOUR.mainImage, Literal(candidate_images[0])))
+            # imágenes: solo si son claramente buenas
+            properties = entity.get("properties", {}) or {}
+            candidate_images = [
+                entity.get("image", ""),
+                entity.get("mainImage", ""),
+                properties.get("image", "") if isinstance(properties, dict) else "",
+                properties.get("mainImage", "") if isinstance(properties, dict) else "",
+            ]
+            candidate_images = [self._clean_text(x) for x in candidate_images if self._clean_text(x)]
+            candidate_images = self._dedupe_preserve_order(candidate_images)
+            candidate_images = [img for img in candidate_images if self._is_probably_good_image(img)]
+
+            if candidate_images:
+                g.add((subject, self.TOUR.image, Literal(candidate_images[0])))
+                g.add((subject, self.TOUR.mainImage, Literal(candidate_images[0])))
 
         return g
 

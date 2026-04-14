@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+from os import name
 import re
 import sys
 from difflib import SequenceMatcher
@@ -294,6 +295,7 @@ class TourismPipeline:
                 "description",
                 "short_description",
                 "long_description",
+                "semantic_type",
             ):
                 if field in item:
                     item[field] = self._scalar_text(item.get(field))
@@ -334,6 +336,141 @@ class TourismPipeline:
 
         return promoted
 
+    def _normalized_for_match(self, text):
+        t = self._scalar_text(text).lower().strip()
+        t = re.sub(r"[^\wáéíóúñü\s]", " ", t, flags=re.IGNORECASE)
+        t = re.sub(r"\s+", " ", t).strip()
+        return t
+
+    def _guess_type_from_name_and_context(self, entity_name: str, page_text: str = "", current_type: str = "") -> str:
+        name = self._normalized_for_match(entity_name)
+        context = self._normalized_for_match(page_text)
+
+        monument_context_terms = [
+            "estatua", "escultura", "monumento", "busto",
+            "glorieta", "conjunto escultorico", "conjunto escultórico",
+            "homenaje a", "dedicado a", "obra de", "escultor",
+            "figura de bronce", "escultorico", "escultórico"
+        ]
+
+        event_terms = [
+            "bienal", "festival", "feria", "semana santa",
+            "procesion", "procesión", "congreso", "ciclo"
+        ]
+
+        place_prefixes = [
+            "plaza ", "calle ", "avenida ", "parque ", "jardin ", "jardín ",
+            "mercado ", "paseo ", "barrio ", "puerta ", "glorieta "
+        ]
+
+        monument_prefixes = [
+            "basilica ", "basílica ", "catedral ", "iglesia ", "capilla ",
+            "palacio ", "alcazar ", "alcázar ", "torre ", "puente ",
+            "monasterio ", "convento "
+        ]
+
+        if any(term in name for term in event_terms):
+            return "Event"
+
+        if any(name.startswith(prefix) for prefix in place_prefixes):
+            return "Place"
+
+        if any(name.startswith(prefix) for prefix in monument_prefixes):
+            return "Monument"
+
+        if any(term in context for term in monument_context_terms):
+            return "Monument"
+
+        if any(k in name for k in ["flamenco", "arte", "folklore", "folclore", "tradicion", "tradición", "cultura"]):
+            return "Concept"
+
+        return current_type or ""
+        
+    wikidata_hint="" 
+    
+    def _ensure_entity_type(self, entities: List[Dict[str, Any]], page_text: str = "") -> List[Dict[str, Any]]:
+        fixed = []
+
+        weak_types = {"", "thing", "unknown", "entity", "item"}
+
+        for entity in entities or []:
+            if not isinstance(entity, dict):
+                continue
+
+            item = dict(entity)
+
+            current_class = str(item.get("class") or "").strip()
+            current_type = str(item.get("type") or "").strip()
+            semantic_type = str(item.get("semantic_type") or "").strip()
+
+            props = item.get("properties")
+            prop_type = ""
+            if isinstance(props, dict):
+                prop_type = str(props.get("type") or "").strip()
+
+            def normalize_candidate_type(value: str) -> str:
+                value = str(value or "").strip()
+                if not value:
+                    return ""
+                short = value.split("#")[-1].split("/")[-1].strip()
+                if short.lower() in weak_types:
+                    return ""
+                return short
+
+            normalized_class = normalize_candidate_type(current_class)
+            normalized_type = normalize_candidate_type(current_type)
+            normalized_semantic = normalize_candidate_type(semantic_type)
+            normalized_prop_type = normalize_candidate_type(prop_type)
+
+            canonical_type = (
+                normalized_class
+                or normalized_type
+                or normalized_semantic
+                or normalized_prop_type
+            )
+
+            name = (
+                item.get("name")
+                or item.get("entity_name")
+                or item.get("entity")
+                or item.get("label")
+                or ""
+            )
+
+            # SIEMPRE inicializada
+            wikidata_hint = self._guess_wikidata_class_hint(
+                entity_name=name,
+                page_text=page_text,
+            )
+
+            if canonical_type:
+                item["class"] = canonical_type
+                item["type"] = canonical_type
+                if wikidata_hint:
+                    item["wikidata_class_hint"] = wikidata_hint
+                fixed.append(item)
+                continue
+
+            guessed = self._guess_type_from_name_and_context(
+                entity_name=name,
+                page_text=page_text,
+                current_type="",
+            )
+
+            if guessed:
+                item["class"] = guessed
+                item["type"] = guessed
+            else:
+                item["class"] = "Unknown"
+                item["type"] = "Unknown"
+
+            if wikidata_hint:
+                item["wikidata_class_hint"] = wikidata_hint
+
+            fixed.append(item)
+
+        return fixed   
+     
     def _apply_llm_supervisor(self, ranked_entities, page_text: str, url: str):
         supervisor = self.llm_supervisor
 
@@ -403,12 +540,6 @@ class TourismPipeline:
             return slug
         except Exception:
             return ""
-
-    def _normalized_for_match(self, text):
-        t = self._scalar_text(text).lower().strip()
-        t = re.sub(r"[^\wáéíóúñü\s]", " ", t, flags=re.IGNORECASE)
-        t = re.sub(r"\s+", " ", t).strip()
-        return t
 
     def refine_specific_type(self, entity_name, current_label, text="", url="", html=""):
         name = self._normalized_for_match(entity_name)
@@ -558,6 +689,7 @@ class TourismPipeline:
             candidates = self.semantic_matcher.match(entities)
 
         candidates = self._promote_semantic_type(candidates)
+        candidates = self._ensure_entity_type(candidates, page_text=page_text)
         self._debug_stage("semantic_match", candidates)
 
         ranked_entities = self.ranker.rank(
@@ -567,6 +699,7 @@ class TourismPipeline:
         )
 
         ranked_entities = self._promote_semantic_type(ranked_entities)
+        ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)
         self._debug_stage("rank", ranked_entities)
 
         ranked_entities = self._sanitize_entities_for_downstream(ranked_entities)
@@ -580,6 +713,7 @@ class TourismPipeline:
         self._debug_stage("llm_supervisor", final_entities)
 
         final_entities = self._sanitize_entities_for_downstream(final_entities)
+        final_entities = self._ensure_entity_type(final_entities, page_text=page_text)
         self._debug_stage("sanitize_final", final_entities)
 
         pre_cluster_entities = list(final_entities)
@@ -598,6 +732,7 @@ class TourismPipeline:
             clustered = pre_cluster_entities
 
         clustered = self._sanitize_entities_for_downstream(clustered)
+        clustered = self._ensure_entity_type(clustered, page_text=page_text)
         self._debug_stage("sanitize_flattened", clustered)
 
         clustered = self._enrich_final_entities(
@@ -692,7 +827,7 @@ class TourismPipeline:
         if isinstance(result, dict):
             merged.update({k: v for k, v in result.items() if v not in (None, "", [], {})})
 
-        entity_class = str(entity.get("class") or entity.get("type") or "Thing").strip() or "Thing"
+        entity_class = str(entity.get("class") or entity.get("type") or "").strip() or "Unknown"
         result = self._safe_call_component(
             self.property_enricher,
             ["enrich"],
@@ -805,7 +940,19 @@ class TourismPipeline:
             or ""
         ).strip()
 
-        entity_type = str(item.get("class") or item.get("type") or "Thing").strip() or "Thing"
+        entity_type = str(item.get("class") or item.get("type") or "").strip()
+    
+    
+
+        if entity_type.lower() in {"", "thing", "unknown", "entity", "item"}:
+            guessed = self._guess_type_from_name_and_context(
+                entity_name=name,
+                page_text=page_text,
+                current_type="",
+            )
+            entity_type = guessed or "Unknown"
+            item["class"] = entity_type
+            item["type"] = entity_type
 
         description_data = self._extract_first_description(
             entity=item,
@@ -825,9 +972,11 @@ class TourismPipeline:
             url=url,
         )
 
+        wikidata_entity_type = str(item.get("wikidata_class_hint") or entity_type).strip()
+
         wikidata_id = self._extract_wikidata_id(
             entity_name=name,
-            entity_type=entity_type,
+            entity_type=wikidata_entity_type,
             description=description_text,
             url=url,
         )
@@ -843,6 +992,7 @@ class TourismPipeline:
 
         if self.debug:
             print(f"[ENRICH] entity={name!r}")
+            print(f"[ENRICH] entity_type={entity_type!r}")
             print(f"[ENRICH] description_data={description_data!r}")
             print(f"[ENRICH] props={props!r}")
             print(f"[ENRICH] wikidata_id={wikidata_id!r}")
@@ -870,6 +1020,12 @@ class TourismPipeline:
                 existing_props = {}
             existing_props.update(props)
             item["properties"] = existing_props
+
+            prop_type = str(existing_props.get("type") or "").strip()
+            if prop_type and not str(item.get("class") or "").strip():
+                item["class"] = prop_type
+            if prop_type and not str(item.get("type") or "").strip():
+                item["type"] = prop_type
 
         item["coordinates"] = coordinates
 
@@ -902,3 +1058,32 @@ class TourismPipeline:
             enriched.append(enriched_entity)
 
         return enriched
+    def _guess_wikidata_class_hint(self, entity_name: str, page_text: str = "") -> str:
+        name = self._normalized_for_match(entity_name)
+        context = self._normalized_for_match(page_text)
+
+        monument_context_terms = [
+            "estatua", "escultura", "monumento", "busto",
+            "conjunto escultorico", "conjunto escultórico",
+            "homenaje a", "dedicado a", "obra de", "escultor"
+        ]
+
+        if any(term in context for term in monument_context_terms):
+            return "monument"
+
+        person_terms = [
+            "nacio", "nació", "murio", "murió", "poeta", "pintor",
+            "escultor", "torero", "cantante", "cantaor",
+            "bailaor", "escritor", "compositor", "artista"
+        ]
+
+        if any(term in context for term in person_terms):
+            return "person"
+
+        if any(k in name for k in ["bienal", "festival", "feria", "semana santa"]):
+            return "event"
+
+        if any(name.startswith(prefix) for prefix in ["plaza ", "calle ", "avenida ", "parque ", "mercado ", "barrio "]):
+            return "place"
+
+        return ""    

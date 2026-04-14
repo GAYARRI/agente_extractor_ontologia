@@ -5,7 +5,6 @@ from __future__ import annotations
 import re
 import unicodedata
 from typing import Any, Dict, List, Optional
-import requests
 
 import requests
 
@@ -60,7 +59,7 @@ class WikidataLinker:
         short_description = self._safe_string(short_description)
         long_description = self._safe_string(long_description)
         source_url = self._safe_string(source_url)
-        aliases = aliases or [entity_name]
+        aliases = aliases or ([entity_name] if entity_name else [])
 
         print("\n=== DEBUG WIKIDATA INPUT ===")
         print(f"NAME: {entity_name}")
@@ -71,7 +70,13 @@ class WikidataLinker:
             print("⚠️ Wikidata linker: entity_name vacío")
             return None
 
-        mapped_class = self._map_class(entity_class, short_description, long_description)
+        mapped_class = self._map_class(
+            entity_name=entity_name,
+            entity_class=entity_class,
+            short_description=short_description,
+            long_description=long_description,
+            aliases=aliases,
+        )
         print(f"MAPPED CLASS: {mapped_class}")
 
         candidates = self._search_wikidata(entity_name)
@@ -118,7 +123,6 @@ class WikidataLinker:
 
         return None
 
-
     def get_entity_data(self, qid: str) -> dict:
         if not qid:
             return {}
@@ -151,19 +155,16 @@ class WikidataLinker:
         descriptions = entity.get("descriptions", {})
         claims = entity.get("claims", {})
 
-        # label
         if "es" in labels:
             result["label"] = labels["es"].get("value", "")
         elif "en" in labels:
             result["label"] = labels["en"].get("value", "")
 
-        # description
         if "es" in descriptions:
             result["description"] = descriptions["es"].get("value", "")
         elif "en" in descriptions:
             result["description"] = descriptions["en"].get("value", "")
 
-        # coordenadas (P625)
         try:
             coord_claims = claims.get("P625", [])
             if coord_claims:
@@ -173,7 +174,6 @@ class WikidataLinker:
         except Exception:
             pass
 
-        # imagen (P18)
         try:
             image_claims = claims.get("P18", [])
             if image_claims:
@@ -182,7 +182,6 @@ class WikidataLinker:
             pass
 
         return result
-
 
     # -------------------------------------------------------------------------
     # Búsqueda y fetch
@@ -257,13 +256,11 @@ class WikidataLinker:
         norm_entity = self._normalize_text(entity_name)
         norm_label = self._normalize_text(candidate_label)
 
-        # Coincidencia exacta con label
         if norm_entity and norm_label == norm_entity:
             score += 0.45
         elif norm_entity and norm_entity in norm_label:
             score += 0.30
 
-        # Coincidencia con aliases
         norm_aliases = {self._normalize_text(a) for a in aliases if self._safe_string(a)}
         norm_candidate_aliases = {
             self._normalize_text(a) for a in candidate_aliases if self._safe_string(a)
@@ -275,7 +272,6 @@ class WikidataLinker:
         if norm_aliases.intersection(norm_candidate_aliases):
             score += 0.10
 
-        # Similaridad textual simple con descripciones
         local_desc = self._normalize_text(f"{short_description} {long_description}")
         remote_desc = self._normalize_text(candidate_desc)
 
@@ -283,15 +279,15 @@ class WikidataLinker:
             overlap = self._token_overlap(local_desc, remote_desc)
             score += min(overlap * 0.25, 0.15)
 
-        # Penalizar desambiguaciones
-        if "desambigu" in remote_desc:
+        if "desambigu" in remote_desc or "wikimedia disambiguation page" in remote_desc:
             score -= 0.40
 
-        # Bonus por tipo compatible
         if self._is_type_compatible(mapped_class, candidate_instance_of, candidate_desc):
             score += 0.20
+        else:
+            if mapped_class not in {"unknown", "thing", ""}:
+                score -= 0.08
 
-        # Bonus geográfico si la URL o el contexto sugiere Sevilla
         if "sevilla" in self._normalize_text(source_url):
             sevilla_hit = (
                 "sevilla" in remote_desc
@@ -301,7 +297,9 @@ class WikidataLinker:
             if sevilla_hit:
                 score += 0.10
 
-        # Acotar
+        if mapped_class == "place" and self._looks_like_place_name(entity_name):
+            score += 0.03
+
         score = max(0.0, min(1.0, score))
         return score
 
@@ -311,52 +309,169 @@ class WikidataLinker:
 
     def _map_class(
         self,
+        entity_name: str,
         entity_class: Optional[str],
         short_description: str = "",
         long_description: str = "",
+        aliases: Optional[List[str]] = None,
     ) -> str:
         """
         Reduce clases del pipeline a categorías útiles para Wikidata.
+        Evita usar 'place' como fallback por defecto.
         """
+        aliases = aliases or []
+
         text = " ".join(
             [
+                self._safe_string(entity_name),
                 self._safe_string(entity_class),
                 self._safe_string(short_description),
                 self._safe_string(long_description),
+                " ".join(self._safe_string(a) for a in aliases),
             ]
         )
         norm = self._normalize_text(text)
+        class_norm = self._normalize_text(entity_class)
 
-        if any(k in norm for k in ["monument", "monumento", "iglesia", "catedral", "capilla"]):
-            return "monument"
-
-        if any(k in norm for k in ["museum", "museo", "touristattraction", "touristattraction"]):
-            return "tourist_attraction"
-
-        if any(k in norm for k in ["event", "evento", "festival", "feria", "semana santa"]):
+        # Reglas fuertes por nombre
+        if self._looks_like_event_name(entity_name, short_description, long_description):
             return "event"
 
-        if any(k in norm for k in ["company", "empresa", "organization", "organizacion"]):
+        if self._looks_like_monument_name(entity_name):
+            return "monument"
+
+        if self._looks_like_place_name(entity_name):
+            return "place"
+
+        if self._looks_like_person_name(entity_name, short_description, long_description):
+            return "person"
+
+        # Reglas por tipo/contexto
+        if any(
+            k in norm
+            for k in [
+                "person", "persona", "human", "artista", "cantor", "cantaor",
+                "bailaor", "bailaora", "poeta", "pintor", "escultor",
+                "torero", "escritor", "novelista", "compositor", "cantante",
+            ]
+        ):
+            return "person"
+
+        if any(
+            k in norm
+            for k in [
+                "event", "evento", "festival", "bienal", "feria",
+                "semana santa", "congreso", "exposicion", "procesion",
+                "temporada", "ciclo",
+            ]
+        ):
+            return "event"
+
+        if any(
+            k in norm
+            for k in [
+                "monument", "monumento", "iglesia", "catedral", "capilla",
+                "basilica", "palacio", "torre", "puente", "archivo",
+                "alcazar", "muralla",
+            ]
+        ):
+            return "monument"
+
+        if any(
+            k in norm
+            for k in [
+                "museum", "museo", "touristattraction", "atraccion",
+                "visitor attraction",
+            ]
+        ):
+            return "tourist_attraction"
+
+        if any(
+            k in norm
+            for k in [
+                "company", "empresa", "organization", "organizacion",
+                "institution", "institucion", "fundacion", "asociacion",
+            ]
+        ):
             return "organization"
 
         if any(
             k in norm
             for k in [
-                "place",
-                "location",
-                "destination",
-                "tourismdestination",
-                "barrio",
-                "ciudad",
-                "zona",
-                "district",
-                "neighbourhood",
-                "neighborhood",
+                "place", "location", "destination", "tourismdestination",
+                "barrio", "ciudad", "zona", "district", "neighbourhood",
+                "neighborhood", "plaza", "calle", "avenida", "parque",
+                "jardin", "mercado", "paseo", "puerta", "glorieta",
             ]
         ):
             return "place"
 
-        return "place"
+        if any(
+            k in norm
+            for k in [
+                "arte", "art", "tradicion", "tradition", "estilo", "style",
+                "cultura", "culture", "folklore", "folclore", "genero",
+                "genre", "patrimonio inmaterial",
+            ]
+        ):
+            return "concept"
+
+        if class_norm in {"", "thing", "entity", "item", "unknown"}:
+            if any(
+                k in norm
+                for k in [
+                    "nacio", "murio", "poeta", "pintor", "escultor", "torero",
+                    "artista", "cantante", "cantaor", "bailaor",
+                    "escritor", "compositor",
+                ]
+            ):
+                return "person"
+
+            if any(
+                k in norm
+                for k in [
+                    "festival", "bienal", "feria", "semana santa",
+                    "evento", "celebracion",
+                ]
+            ):
+                return "event"
+
+            if any(
+                k in norm
+                for k in [
+                    "plaza", "calle", "parque", "mercado",
+                    "barrio", "avenida", "paseo",
+                ]
+            ):
+                return "place"
+
+            if any(
+                k in norm
+                for k in [
+                    "basilica", "catedral", "iglesia", "capilla",
+                    "palacio", "alcazar", "torre", "monumento",
+                ]
+            ):
+                return "monument"
+
+            if any(
+                k in norm
+                for k in [
+                    "museo", "museum",
+                ]
+            ):
+                return "tourist_attraction"
+
+            if any(
+                k in norm
+                for k in [
+                    "arte", "folclore", "folklore", "tradicion",
+                    "estilo", "cultura",
+                ]
+            ):
+                return "concept"
+
+        return "unknown"
 
     def _is_type_compatible(
         self,
@@ -368,64 +483,57 @@ class WikidataLinker:
 
         if mapped_class == "place":
             keys = [
-                "city",
-                "municipality",
-                "human settlement",
-                "neighbourhood",
-                "neighborhood",
-                "district",
-                "barrio",
-                "localidad",
-                "ciudad",
-                "quarter",
-                "plaza",
-                "island",
+                "city", "municipality", "human settlement", "neighbourhood",
+                "neighborhood", "district", "barrio", "localidad", "ciudad",
+                "quarter", "plaza", "square", "park", "parque", "market",
+                "mercado", "street", "avenue", "island",
             ]
             return any(self._normalize_text(k) in haystack for k in keys)
 
         if mapped_class == "monument":
             keys = [
-                "monument",
-                "church",
-                "cathedral",
-                "chapel",
-                "building",
-                "heritage",
-                "tourist attraction",
-                "arquitect",
-                "monumento",
+                "monument", "church", "cathedral", "chapel", "building",
+                "heritage", "tourist attraction", "arquitect", "monumento",
+                "basilica", "palace", "castle", "bridge", "tower",
             ]
             return any(self._normalize_text(k) in haystack for k in keys)
 
         if mapped_class == "tourist_attraction":
             keys = [
-                "tourist attraction",
-                "museum",
-                "site",
-                "visitor attraction",
-                "museo",
-                "atraccion",
+                "tourist attraction", "museum", "site", "visitor attraction",
+                "museo", "atraccion",
             ]
             return any(self._normalize_text(k) in haystack for k in keys)
 
         if mapped_class == "event":
             keys = [
-                "event",
-                "festival",
-                "celebration",
-                "holiday",
-                "festividad",
+                "event", "festival", "celebration", "holiday",
+                "festividad", "biennial", "fair", "feria",
             ]
             return any(self._normalize_text(k) in haystack for k in keys)
 
         if mapped_class == "organization":
             keys = [
-                "company",
-                "organization",
-                "business",
-                "corporation",
-                "empresa",
-                "organizacion",
+                "company", "organization", "business", "corporation",
+                "empresa", "organizacion", "institution", "foundation",
+                "association",
+            ]
+            return any(self._normalize_text(k) in haystack for k in keys)
+
+        if mapped_class == "person":
+            keys = [
+                "human", "person", "artist", "singer", "dancer", "writer",
+                "poet", "composer", "sculptor", "painter", "bullfighter",
+                "cantaor", "bailaor", "cantante", "escritor", "poeta",
+                "escultor", "pintor", "torero",
+            ]
+            return any(self._normalize_text(k) in haystack for k in keys)
+
+        if mapped_class == "concept":
+            keys = [
+                "art", "style", "tradition", "cultural concept",
+                "cultural movement", "music genre", "dance", "folklore",
+                "intangible cultural heritage",
             ]
             return any(self._normalize_text(k) in haystack for k in keys)
 
@@ -478,7 +586,6 @@ class WikidataLinker:
                 if val:
                     aliases.append(val)
 
-        # deduplicado preservando orden
         seen = set()
         clean_aliases = []
         for a in aliases:
@@ -491,7 +598,7 @@ class WikidataLinker:
 
     def _extract_instance_of(self, entity_data: Dict[str, Any]) -> List[str]:
         """
-        Extrae etiquetas si están disponibles; si no, devuelve IDs de claims P31.
+        Extrae IDs de claims P31.
         """
         results: List[str] = []
         claims = entity_data.get("claims", {}) or {}
@@ -509,6 +616,89 @@ class WikidataLinker:
                 continue
 
         return results
+
+    # -------------------------------------------------------------------------
+    # Heurísticas ligeras
+    # -------------------------------------------------------------------------
+
+    def _looks_like_person_name(
+        self,
+        entity_name: str,
+        short_description: str = "",
+        long_description: str = "",
+    ) -> bool:
+        name = self._normalize_text(entity_name)
+        context = self._normalize_text(f"{short_description} {long_description}")
+
+        if not name:
+            return False
+
+        if self._looks_like_place_name(entity_name) or self._looks_like_monument_name(entity_name):
+            return False
+
+        if self._looks_like_event_name(entity_name, short_description, long_description):
+            return False
+
+        person_context_hits = any(
+            k in context
+            for k in [
+                "nacio", "murio", "poeta", "pintor", "escultor", "torero",
+                "cantante", "cantaor", "bailaor", "artista", "escritor",
+                "compositor", "dramaturgo",
+            ]
+        )
+        if person_context_hits:
+            return True
+
+        tokens = [t for t in name.split() if t]
+        stop_tokens = {
+            "de", "del", "la", "las", "los", "el", "san", "santa",
+            "plaza", "parque", "mercado", "palacio", "basilica",
+            "iglesia", "calle", "avenida", "paseo", "torre",
+        }
+        non_stop = [t for t in tokens if t not in stop_tokens]
+
+        if 2 <= len(non_stop) <= 4:
+            if len(non_stop) >= 2 and all(len(t) > 2 for t in non_stop[:2]):
+                return True
+
+        return False
+
+    def _looks_like_event_name(
+        self,
+        entity_name: str,
+        short_description: str = "",
+        long_description: str = "",
+    ) -> bool:
+        text = self._normalize_text(f"{entity_name} {short_description} {long_description}")
+        return any(
+            k in text
+            for k in [
+                "bienal", "festival", "feria", "semana santa", "congreso",
+                "evento", "celebracion", "procesion", "muestra", "ciclo",
+            ]
+        )
+
+    def _looks_like_place_name(self, entity_name: str) -> bool:
+        name = self._normalize_text(entity_name)
+        return any(
+            name.startswith(prefix)
+            for prefix in [
+                "plaza ", "calle ", "avenida ", "parque ", "jardin ",
+                "mercado ", "paseo ", "barrio ", "puerta ", "glorieta ", "rio ",
+            ]
+        )
+
+    def _looks_like_monument_name(self, entity_name: str) -> bool:
+        name = self._normalize_text(entity_name)
+        return any(
+            name.startswith(prefix)
+            for prefix in [
+                "basilica ", "catedral ", "iglesia ", "capilla ",
+                "palacio ", "alcazar ", "torre ", "puente ",
+                "archivo ", "monasterio ", "convento ",
+            ]
+        )
 
     # -------------------------------------------------------------------------
     # Helpers de texto
@@ -551,7 +741,3 @@ class WikidataLinker:
             return 0.0
 
         return len(inter) / len(union)
-    
-    
-
-

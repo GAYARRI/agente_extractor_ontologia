@@ -1,1 +1,1109 @@
-[]
+[
+  {
+    "url": "https://visitasevilla.es/el-flamenco",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 4.13,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/el-flamenco",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/el-flamenco",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/conjuntos-escultoricos-emblematicos-sevilla",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 5.077,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/conjuntos-escultoricos-emblematicos-sevilla",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/conjuntos-escultoricos-emblematicos-sevilla",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/celebra-el-dia-mundial-del-flamenco-en-sevilla",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 4.098,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/celebra-el-dia-mundial-del-flamenco-en-sevilla",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/celebra-el-dia-mundial-del-flamenco-en-sevilla",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/que-hacer-en-sevilla/curiosidades",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.371,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/que-hacer-en-sevilla/curiosidades",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/que-hacer-en-sevilla/curiosidades",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/sabias-que-existia-una-segunda-plaza-de-toros-en-sevilla/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 4.374,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/sabias-que-existia-una-segunda-plaza-de-toros-en-sevilla/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/sabias-que-existia-una-segunda-plaza-de-toros-en-sevilla",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/real-alcazar-de-sevilla/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.887,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/real-alcazar-de-sevilla/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/real-alcazar-de-sevilla",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/sevilla-fashion-outlet/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.322,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/sevilla-fashion-outlet/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/sevilla-fashion-outlet",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/sharm-servicios-profesionales/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.669,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/sharm-servicios-profesionales/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/sharm-servicios-profesionales",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/sharm-alojamientos/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 5.141,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/sharm-alojamientos/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/sharm-alojamientos",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/comer-salir-sevilla/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 5.058,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/comer-salir-sevilla/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/comer-salir-sevilla",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/fibes-palacio-de-exposiciones-y-congresos-de-sevilla/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.812,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/fibes-palacio-de-exposiciones-y-congresos-de-sevilla/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/fibes-palacio-de-exposiciones-y-congresos-de-sevilla",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://www.radiotaxidesevilla.es/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.147,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "http://www.radiotaxidesevilla.es/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "http://www.radiotaxidesevilla.es",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/durante-tu-estancia",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.727,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/durante-tu-estancia",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/durante-tu-estancia",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/sabias-que-el-ayuntamiento-de-sevilla-esta-considerado-la-primera-obra-plateresca-de-espana",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.492,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/sabias-que-el-ayuntamiento-de-sevilla-esta-considerado-la-primera-obra-plateresca-de-espana",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/sabias-que-el-ayuntamiento-de-sevilla-esta-considerado-la-primera-obra-plateresca-de-espana",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/basilica-del-gran-poder",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 4.546,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/basilica-del-gran-poder",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/basilica-del-gran-poder",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/capilla-de-los-marineros/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.566,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/capilla-de-los-marineros/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/capilla-de-los-marineros",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/sabias-que-bajo-el-real-alcazar-late-el-antiguo-puerto-romano-de-hispalis/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.438,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/sabias-que-bajo-el-real-alcazar-late-el-antiguo-puerto-romano-de-hispalis/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/sabias-que-bajo-el-real-alcazar-late-el-antiguo-puerto-romano-de-hispalis",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/sabias-que-la-capilla-del-carmen-se-diseno-como-faro-ceramico-para-los-barcos-nocturnos/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.244,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/sabias-que-la-capilla-del-carmen-se-diseno-como-faro-ceramico-para-los-barcos-nocturnos/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/sabias-que-la-capilla-del-carmen-se-diseno-como-faro-ceramico-para-los-barcos-nocturnos",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/visitas-nocturnas-en-la-catedral-e-iglesia-de-el-salvador/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 4.776,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/visitas-nocturnas-en-la-catedral-e-iglesia-de-el-salvador/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/visitas-nocturnas-en-la-catedral-e-iglesia-de-el-salvador",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/sabias-que-esta-estatua-del-parque-de-maria-luisa-representa-el-amor-en-tres-fases/",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 4.276,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/sabias-que-esta-estatua-del-parque-de-maria-luisa-representa-el-amor-en-tres-fases/",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/sabias-que-esta-estatua-del-parque-de-maria-luisa-representa-el-amor-en-tres-fases",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://visitasevilla.es/empresas-sicted",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 8.538,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://visitasevilla.es/empresas-sicted",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://visitasevilla.es/empresas-sicted",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/disfruta/patrimonio/zonas-verdes/plazas/plaza-de-san-pablo",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.383,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/disfruta/patrimonio/zonas-verdes/plazas/plaza-de-san-pablo",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/disfruta/patrimonio/zonas-verdes/plazas/plaza-de-san-pablo",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/iglesia-de-la-antigua",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.427,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/iglesia-de-la-antigua",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/iglesia-de-la-antigua",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/evento/concierto-de-musica-renacentista-siglo-xvi-cargo-del-maestro-antonio-baciero-musica-para-una",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.771,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/evento/concierto-de-musica-renacentista-siglo-xvi-cargo-del-maestro-antonio-baciero-musica-para-una",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/evento/concierto-de-musica-renacentista-siglo-xvi-cargo-del-maestro-antonio-baciero-musica-para-una",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 3.034,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/noticias/el-festival-la-fila-de-cortometrajes-celebra-tres-decadas-en-valladolid",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 1.863,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/noticias/el-festival-la-fila-de-cortometrajes-celebra-tres-decadas-en-valladolid",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/noticias/el-festival-la-fila-de-cortometrajes-celebra-tres-decadas-en-valladolid",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/que-ver/visitas-guiadas/bus",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 2.111,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/que-ver/visitas-guiadas/bus",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/que-ver/visitas-guiadas/bus",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/academia-de-caballeria",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.412,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/academia-de-caballeria",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/academia-de-caballeria",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/museo-patio-herreriano",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 1.557,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/museo-patio-herreriano",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/museo-patio-herreriano",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/plaza-del-viejo-coso",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.417,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/plaza-del-viejo-coso",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/plaza-del-viejo-coso",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/noticias/las-imagenes-de-la-semana-santa-de-valladolid-su-provincia-conviven-en-la-exposicion-tres",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 2.433,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/noticias/las-imagenes-de-la-semana-santa-de-valladolid-su-provincia-conviven-en-la-exposicion-tres",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/noticias/las-imagenes-de-la-semana-santa-de-valladolid-su-provincia-conviven-en-la-exposicion-tres",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/ven/saborea-valladolid",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 1.081,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/ven/saborea-valladolid",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/ven/saborea-valladolid",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/evento/encuentro-internacional-los-derechos-humanos-en-espana-e-hispanoamerica-475-anos-despues-la",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.85,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/evento/encuentro-internacional-los-derechos-humanos-en-espana-e-hispanoamerica-475-anos-despues-la",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/evento/encuentro-internacional-los-derechos-humanos-en-espana-e-hispanoamerica-475-anos-despues-la",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/evento/concierto-celtas-cortos",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 2.223,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/evento/concierto-celtas-cortos",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/evento/concierto-celtas-cortos",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/evento/harley-davidson-and-custom-xx-reunion-ciudad-de-valladolid",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+    "elapsed_seconds": 6.248,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: UnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/evento/harley-davidson-and-custom-xx-reunion-ciudad-de-valladolid",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/evento/harley-davidson-and-custom-xx-reunion-ciudad-de-valladolid",
+          "error_type": "UnboundLocalError",
+          "message": "cannot access local variable 'wikidata_hint' where it is not associated with a value",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 709, in run\n    ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 474, in _ensure_entity_type\n    if wikidata_hint:\n       ^^^^^^^^^^^^^\nUnboundLocalError: cannot access local variable 'wikidata_hint' where it is not associated with a value\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/profesionales/mice/congresos-eventos/salas-de-reuniones/centro-cultural-miguel-delibes",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.527,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/profesionales/mice/congresos-eventos/salas-de-reuniones/centro-cultural-miguel-delibes",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/profesionales/mice/congresos-eventos/salas-de-reuniones/centro-cultural-miguel-delibes",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/noticias/la-semana-santa-de-valladolid-se-presenta-en-madrid-como-un-evento-unico-que-une-tradicion",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.413,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/noticias/la-semana-santa-de-valladolid-se-presenta-en-madrid-como-un-evento-unico-que-une-tradicion",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/noticias/la-semana-santa-de-valladolid-se-presenta-en-madrid-como-un-evento-unico-que-une-tradicion",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/disfruta/patrimonio/museos-salas-exposiciones/sala-de-exposiciones-del-palacio-de-pimentel",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.316,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/disfruta/patrimonio/museos-salas-exposiciones/sala-de-exposiciones-del-palacio-de-pimentel",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/disfruta/patrimonio/museos-salas-exposiciones/sala-de-exposiciones-del-palacio-de-pimentel",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/disfruta/patrimonio/patrimonio-religioso/monasterios-conventos/convento-de-santa-teresa",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.372,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/disfruta/patrimonio/patrimonio-religioso/monasterios-conventos/convento-de-santa-teresa",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/disfruta/patrimonio/patrimonio-religioso/monasterios-conventos/convento-de-santa-teresa",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/profesionales/mice/congresos-eventos/sedes-singulares/castillo-de-fuensaldana",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.553,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/profesionales/mice/congresos-eventos/sedes-singulares/castillo-de-fuensaldana",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/profesionales/mice/congresos-eventos/sedes-singulares/castillo-de-fuensaldana",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://info.valladolid.es/disfruta/patrimonio/zonas-verdes/parques-jardines/canal-de-castilla",
+    "error": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+    "elapsed_seconds": 1.361,
+    "raw_result": {
+      "status": "error",
+      "error_type": "page_processing_error",
+      "message": "No se obtuvo ninguna entidad válida de las páginas procesadas. Primer error: NameError: name 'non_stop' is not defined",
+      "mode": "single_url",
+      "start_url": "https://visitasevilla.es/",
+      "url": "https://info.valladolid.es/disfruta/patrimonio/zonas-verdes/parques-jardines/canal-de-castilla",
+      "max_pages": 1,
+      "expected_type": null,
+      "entity_count": 0,
+      "prediction": null,
+      "stats": {},
+      "entities": [],
+      "page_errors": [
+        {
+          "url": "https://info.valladolid.es/disfruta/patrimonio/zonas-verdes/parques-jardines/canal-de-castilla",
+          "error_type": "NameError",
+          "message": "name 'non_stop' is not defined",
+          "traceback": "Traceback (most recent call last):\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\main.py\", line 378, in process_pages\n    result = pipeline.run(\n        html,\n        url=url,\n        expected_type=getattr(args, \"expected_type\", None),\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 699, in run\n    candidates = self._ensure_entity_type(candidates, page_text=page_text)\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 457, in _ensure_entity_type\n    guessed = self._guess_type_from_name_and_context(\n        entity_name=name,\n        page_text=page_text,\n        current_type=\"\",\n    )\n  File \"C:\\Viual_Studio_V\\Tourism_Ontology_Agent\\src\\tourism_pipeline_ontology_driven.py\", line 395, in _guess_type_from_name_and_context\n    if 2 <= len(non_stop) <= 4:\n                ^^^^^^^^\nNameError: name 'non_stop' is not defined\n"
+        }
+      ]
+    }
+  }
+]
