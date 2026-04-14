@@ -3,55 +3,73 @@
 @prefix tour: <http://example.org/tourism/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:comer_descubre a tour:Entity ;
-    rdfs:label "Comer Descubre" ;
-    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
-    tour:label "Comer Descubre" ;
-    tour:longDescription "Comer Descubre se refiere a la experiencia de disfrutar de los mejores restaurantes en Sevilla, donde la gastronomía local se presenta como un hechizo de sabores, ofreciendo a los visitantes una experiencia culinaria única y memorable." ;
+ex:altozano_de_triana a tour:Entity ;
+    rdfs:label "Altozano de Triana" ;
+    tour:description "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam" ;
+    tour:label "Altozano de Triana" ;
+    tour:longDescription "El Altozano de Triana es un punto de referencia en el barrio de Triana, Sevilla, conocido por su conexión con la cultura flamenca y su ambiente vibrante. Este lugar es un homenaje a las tres vertientes del flamenco, lo que lo convierte en un sitio de interés tanto para locales como para turistas que buscan sumergirse en la rica tradición cultural de la región." ;
     tour:score "1.0"^^xsd:float ;
-    tour:shortDescription "Restaurantes exquisitos en Sevilla." ;
-    tour:type "Restaurant" ;
-    tour:url "https://visitasevilla.es/sharm-sevilla" .
+    tour:shortDescription "Lugar en Sevilla con una estatua homenaje al flamenco." ;
+    tour:type "Place" ;
+    tour:url "https://visitasevilla.es/el-flamenco" .
 
-ex:comprar_sumergete a tour:Entity ;
-    rdfs:label "Comprar Sumérgete" ;
-    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
-    tour:label "Comprar Sumérgete" ;
-    tour:longDescription "Sumérgete en el vibrante mundo de la moda en Sevilla, donde la tradición y la historia se fusionan en creaciones que reflejan la idiosincrasia sevillana." ;
+ex:bienal_flamenco a tour:Entity ;
+    rdfs:label "Bienal Flamenco" ;
+    tour:description "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam" ;
+    tour:label "Bienal Flamenco" ;
+    tour:longDescription "La Bienal Flamenco es un festival que se celebra en Sevilla cada dos años, donde se reúnen las máximas figuras del flamenco. Este evento es fundamental para la promoción y difusión del flamenco, declarado Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO." ;
     tour:score "1.0"^^xsd:float ;
-    tour:shortDescription "Moda y creatividad en Sevilla." ;
-    tour:type "Thing" ;
-    tour:url "https://visitasevilla.es/sharm-sevilla" .
-
-ex:dormir_descubre a tour:Entity ;
-    rdfs:label "Dormir Descubre" ;
-    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
-    tour:label "Dormir Descubre" ;
-    tour:longDescription "Dormir Descubre ofrece una variedad de alojamientos en Sevilla, donde cada estancia está diseñada para brindar comodidad y elegancia, permitiendo a los visitantes sumergirse en la esencia mágica de la ciudad." ;
-    tour:score "1.0"^^xsd:float ;
-    tour:shortDescription "Alojamientos únicos en Sevilla." ;
-    tour:type "Accommodation" ;
-    tour:url "https://visitasevilla.es/sharm-sevilla" .
-
-ex:sevilla_experimentar a tour:Entity ;
-    rdfs:label "Sevilla Experimentar" ;
-    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
-    tour:label "Sevilla Experimentar" ;
-    tour:longDescription "Explora las experiencias más fascinantes de Sevilla, donde cada instante se convierte en un momento inolvidable, desde la artesanía hasta la sofisticación." ;
-    tour:score "1.0"^^xsd:float ;
-    tour:shortDescription "Experiencias fascinantes en Sevilla." ;
+    tour:shortDescription "Festival bienal que celebra el flamenco en Sevilla." ;
     tour:type "Event" ;
-    tour:url "https://visitasevilla.es/sharm-sevilla" .
+    tour:url "https://visitasevilla.es/el-flamenco" .
 
-ex:sevilla_sevicios a tour:Entity ;
-    rdfs:label "Sevilla Sevicios" ;
-    tour:description "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex" ;
-    tour:image "https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg" ;
-    tour:label "Sevilla Sevicios" ;
-    tour:longDescription "Para preparar tu viaje, puedes acudir a los servicios profesionales más destacados de Sevilla, que ofrecen soluciones personalizadas con excelencia y dedicación." ;
-    tour:mainImage "https://visitasevilla.es/wp-content/uploads/2024/08/prueba-portada-landing-v1.jpg" ;
+ex:flamenco_en_sevilla a tour:Entity ;
+    rdfs:label "Flamenco en Sevilla" ;
+    tour:description "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam" ;
+    tour:label "Flamenco en Sevilla" ;
+    tour:longDescription "Flamenco en Sevilla es una experiencia cultural única que permite a los visitantes sumergirse en la música, el baile y la poesía de este arte popular. Sevilla, como cuna del flamenco, ofrece espectáculos, clases y eventos que reflejan la riqueza y profundidad de esta tradición, convirtiéndola en una atracción imprescindible para los turistas." ;
     tour:score "1.0"^^xsd:float ;
-    tour:shortDescription "Servicios profesionales destacados en Sevilla." ;
-    tour:type "Service" ;
-    tour:url "https://visitasevilla.es/sharm-sevilla" .
+    tour:shortDescription "Experiencia cultural del flamenco en Sevilla." ;
+    tour:type "https://ontologia.segittur.es/turismo/def/core#SingularExperience" ;
+    tour:url "https://visitasevilla.es/el-flamenco" .
+
+ex:manolo_caracol a tour:Entity ;
+    rdfs:label "Manolo Caracol" ;
+    tour:description "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam | cantante español" ;
+    tour:label "Manolo Caracol" ;
+    tour:longDescription "Manolo Caracol fue un destacado cantaor de flamenco, conocido por su profunda voz y su influencia en el desarrollo del cante jondo. Su legado perdura en la cultura flamenca y es recordado como una de las grandes figuras del arte flamenco." ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Reconocido cantaor y figura del flamenco." ;
+    tour:type "Person" ;
+    tour:url "https://visitasevilla.es/el-flamenco" .
+
+ex:nina_de_los_peines a tour:Entity ;
+    rdfs:label "Niña de los Peines" ;
+    tour:description "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam | cantante española" ;
+    tour:label "Niña de los Peines" ;
+    tour:longDescription "La Niña de los Peines, cuyo nombre real es Pastora Pavón, es considerada una de las más grandes cantaoras de flamenco de todos los tiempos. Su técnica y emotividad han dejado una huella imborrable en la música española, siendo un referente para futuras generaciones de artistas." ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Famosa figura del flamenco español." ;
+    tour:type "Person" ;
+    tour:url "https://visitasevilla.es/el-flamenco" .
+
+ex:sevilla_academias a tour:Entity ;
+    rdfs:label "Sevilla Academias" ;
+    tour:description "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam" ;
+    tour:label "Sevilla Academias" ;
+    tour:longDescription "Sevilla Academias se refiere a instituciones educativas que ofrecen formación en flamenco, un arte que combina música, baile y poesía, representando una parte esencial de la cultura andaluza. Estas academias son un punto de interés para turistas que desean aprender sobre esta tradición y experimentar la esencia del flamenco en su lugar de origen." ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Academias dedicadas a la enseñanza del flamenco en Sevilla." ;
+    tour:type "Concept" ;
+    tour:url "https://visitasevilla.es/el-flamenco" .
+
+ex:tablaos_flamencos a tour:Entity ;
+    rdfs:label "tablaos flamencos" ;
+    tour:description "En Sevilla puedes disfrutar diariamente de la representación de este arte en todo su esplendor en los conocidos tablaos flamencos -herederos directos de los antiguos cafés cantantes-, en las peñas de los barrios, en espacios temáticos, en determinados bares y, por supuesto, en festivales como la Bie" ;
+    tour:label "tablaos flamencos" ;
+    tour:longDescription "Los tablaos flamencos son locales donde se realizan espectáculos de flamenco, ofreciendo a los visitantes una experiencia auténtica de esta forma de arte. Estos lugares son herederos de los antiguos cafés cantantes y son populares entre los turistas que desean disfrutar de la música y danza flamenca en un ambiente tradicional." ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Establecimientos donde se presenta el arte del flamenco." ;
+    tour:type "Concept" ;
+    tour:url "https://visitasevilla.es/el-flamenco" .
 

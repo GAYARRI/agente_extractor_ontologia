@@ -125,7 +125,9 @@ def is_person_like_entity(text: str) -> bool:
 
 
 def is_valid_entity(entity: str, context: str = "") -> bool:
+    
     entity = normalize_entity_text(entity)
+    name = e["entity"].lower()
     if not entity:
         return False
 

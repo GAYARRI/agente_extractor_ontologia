@@ -1,146 +1,207 @@
-from urllib.parse import urljoin, urlparse, urldefrag
-import requests
-from requests.exceptions import SSLError
-from bs4 import BeautifulSoup
-import urllib3
+from __future__ import annotations
 
+import time
+from collections import deque
+from typing import List, Set, Tuple
+from urllib.parse import urljoin, urlparse
+
+import requests
+import urllib3
+from bs4 import BeautifulSoup
+from requests.exceptions import RequestException, SSLError, Timeout
+
+# Suprime warnings cuando verify=False
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 
 class SiteCrawler:
-    BLOCKED_LANGUAGES = {"en", "fr", "it", "de"}
-
-    def __init__(self, start_url, max_pages=50):
+    def __init__(self, start_url: str, max_pages: int = 10, timeout: int = 30):
         self.start_url = start_url
         self.max_pages = max_pages
-        self.visited = set()
-        self.allowed_domain = urlparse(start_url).hostname
-        self.verify_ssl = True
+        self.timeout = timeout
+
+        self.visited: Set[str] = set()
+        self.to_visit = deque([start_url])
+
+        parsed = urlparse(start_url)
+        self.allowed_domain = parsed.netloc.lower()
+
         self.session = requests.Session()
-
-    def clean_url(self, url):
-        url, _ = urldefrag(url)
-        return url.rstrip("/")
-
-    def is_same_domain(self, url):
-        host = urlparse(url).hostname
-        return host == self.allowed_domain
-
-    def is_blocked_language_url(self, url):
-        path = urlparse(url).path.lower().strip("/")
-        if not path:
-            return False
-
-        first_segment = path.split("/")[0]
-
-        return (
-            first_segment in self.BLOCKED_LANGUAGES
-            or any(first_segment.startswith(f"{lang}-") for lang in self.BLOCKED_LANGUAGES)
+        self.session.headers.update(
+            {
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/124.0 Safari/537.36"
+                )
+            }
         )
 
-    def is_valid_url(self, url):
-        if not url:
-            return False
+        # Dominios con SSL roto para los que ya decidimos usar verify=False
+        self.insecure_domains: Set[str] = set()
 
-        if self.is_blocked_language_url(url):
-            return False
+    # =========================================================
+    # API pública
+    # =========================================================
 
-        if not self.is_same_domain(url):
-            return False
+    def crawl(self) -> List[Tuple[str, str]]:
+        pages: List[Tuple[str, str]] = []
 
-        if any(url.lower().endswith(ext) for ext in [
-            ".jpg", ".jpeg", ".png", ".gif", ".svg", ".pdf",
-            ".zip", ".rar", ".doc", ".docx", ".xls", ".xlsx"
-        ]):
-            return False
+        while self.to_visit and len(pages) < self.max_pages:
+            url = self.to_visit.popleft()
 
-        return True
-
-    def extract_links(self, html, base_url):
-        soup = BeautifulSoup(html, "html.parser")
-        links = set()
-
-        for a in soup.find_all("a", href=True):
-            href = a["href"]
-            full_url = urljoin(base_url, href)
-            full_url = self.clean_url(full_url)
-
-            if self.is_valid_url(full_url) and full_url not in self.visited:
-                links.add(full_url)
-
-        return links
-
-    def fetch_url(self, url, headers):
-        try:
-            return self.session.get(
-                url,
-                timeout=10,
-                headers=headers,
-                allow_redirects=True,
-                verify=self.verify_ssl
-            )
-        except SSLError:
-            if self.verify_ssl:
-                print(f"⚠️ SSL inválido en {url}, desactivando verificación para este dominio...")
-                self.verify_ssl = False
-                return self.session.get(
-                    url,
-                    timeout=10,
-                    headers=headers,
-                    allow_redirects=True,
-                    verify=False
-                )
-            raise
-
-    def crawl(self):
-        to_visit = [self.clean_url(self.start_url)]
-        pages = []
-
-        headers = {
-            "User-Agent": (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/120.0.0.0 Safari/537.36"
-            )
-        }
-
-        while to_visit and len(self.visited) < self.max_pages:
-            current = to_visit.pop(0)
-            clean = self.clean_url(current)
-
-            if clean in self.visited:
+            normalized_url = self._normalize_url(url)
+            if not normalized_url or normalized_url in self.visited:
                 continue
 
-            if not self.is_valid_url(clean):
+            self.visited.add(normalized_url)
+
+            print(f"🌐 Visitando: {normalized_url}")
+
+            html = self._fetch(normalized_url)
+            if not html:
                 continue
 
-            self.visited.add(clean)
+            pages.append((normalized_url, html))
 
-            try:
-                print(f"🌐 Visitando: {clean}")
-                response = self.fetch_url(clean, headers)
+            for link in self._extract_links(normalized_url, html):
+                if link not in self.visited:
+                    self.to_visit.append(link)
 
-                if response.status_code >= 400:
-                    print(f"⚠️ Estado no válido para {clean}: {response.status_code}")
-                    continue
-
-                final_url = self.clean_url(response.url)
-
-                if not self.is_same_domain(final_url):
-                    print(f"⚠️ Redirección fuera del dominio ignorada: {final_url}")
-                    continue
-
-                if self.is_blocked_language_url(final_url):
-                    print(f"⚠️ Redirección a idioma bloqueado ignorada: {final_url}")
-                    continue
-
-                html = response.content.decode("utf-8", errors="ignore")
-                pages.append((final_url, html))
-
-                new_links = self.extract_links(html, final_url)
-                to_visit.extend(link for link in new_links if link not in self.visited)
-
-            except Exception as e:
-                print(f"❌ Error descargando {clean}: {e}")
+            time.sleep(0.2)
 
         return pages
+
+    # =========================================================
+    # Fetch robusto con fallback SSL
+    # =========================================================
+
+    def _fetch(self, url: str) -> str | None:
+        domain = urlparse(url).netloc.lower()
+
+        # Si ya sabemos que este dominio tiene SSL roto, ir directo con verify=False
+        if domain in self.insecure_domains:
+            return self._request(url, verify=False)
+
+        # Primer intento normal
+        try:
+            return self._request(url, verify=True)
+
+        except SSLError:
+            print(f"⚠️ SSL inválido en {url}, desactivando verificación para este dominio...")
+            self.insecure_domains.add(domain)
+
+            try:
+                return self._request(url, verify=False)
+            except Exception as e:
+                print(f"⚠️ Error procesando {url}: {e}")
+                return None
+
+        except Exception as e:
+            print(f"⚠️ Error procesando {url}: {e}")
+            return None
+
+    def _request(self, url: str, verify: bool) -> str:
+        response = self.session.get(
+            url,
+            timeout=self.timeout,
+            verify=verify,
+            allow_redirects=True,
+        )
+        response.raise_for_status()
+        response.encoding = response.apparent_encoding or response.encoding
+        return response.text
+
+    # =========================================================
+    # Links
+    # =========================================================
+
+    def _extract_links(self, base_url: str, html: str) -> List[str]:
+        links: List[str] = []
+
+        try:
+            soup = BeautifulSoup(html, "html.parser")
+        except Exception:
+            return links
+
+        for a in soup.find_all("a", href=True):
+            href = (a.get("href") or "").strip()
+            if not href:
+                continue
+
+            absolute = urljoin(base_url, href)
+            absolute = self._normalize_url(absolute)
+
+            if not absolute:
+                continue
+
+            if not self._is_same_domain(absolute):
+                continue
+
+            if self._should_skip_url(absolute):
+                continue
+
+            links.append(absolute)
+
+        return self._dedupe(links)
+
+    # =========================================================
+    # URL helpers
+    # =========================================================
+
+    def _normalize_url(self, url: str) -> str:
+        if not url:
+            return ""
+
+        try:
+            parsed = urlparse(url)
+        except Exception:
+            return ""
+
+        if parsed.scheme not in {"http", "https"}:
+            return ""
+
+        clean = parsed._replace(fragment="", params="", query="")
+        normalized = clean.geturl().rstrip("/")
+
+        return normalized
+
+    def _is_same_domain(self, url: str) -> bool:
+        domain = urlparse(url).netloc.lower()
+        return domain == self.allowed_domain
+
+    def _should_skip_url(self, url: str) -> bool:
+        low = url.lower()
+
+        bad_extensions = (
+            ".jpg", ".jpeg", ".png", ".gif", ".svg", ".webp",
+            ".pdf", ".zip", ".rar", ".7z", ".mp4", ".mp3",
+            ".avi", ".mov", ".wmv", ".doc", ".docx", ".xls", ".xlsx",
+        )
+
+        if low.endswith(bad_extensions):
+            return True
+
+        bad_fragments = [
+            "/tag/",
+            "/author/",
+            "/feed",
+            "mailto:",
+            "tel:",
+            "javascript:",
+            "#",
+        ]
+
+        return any(fragment in low for fragment in bad_fragments)
+
+    def _dedupe(self, urls: List[str]) -> List[str]:
+        seen = set()
+        out = []
+
+        for url in urls:
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            out.append(url)
+
+        return out

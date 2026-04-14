@@ -13,6 +13,56 @@ class EntityDescriptionConsolidator:
         "el flamenco - visita sevilla",
     }
 
+    GENERIC_CLASSES = {
+        "",
+        "Thing",
+        "Place",
+        "Location",
+        "TourismDestination",
+        "TouristAttraction",
+        "TouristAttractionSite",
+        "Organization",
+        "LocalBusiness",
+        "Concept",
+    }
+
+    SPECIFIC_CLASS_PRIORITY = {
+        "Alcazar": 100,
+        "Cathedral": 98,
+        "Basilica": 96,
+        "Chapel": 95,
+        "Church": 94,
+        "Castle": 93,
+        "ArcheologicalSite": 92,
+        "Bullring": 91,
+        "TownHall": 90,
+        "Stadium": 89,
+        "Square": 88,
+        "Museum": 87,
+        "ExhibitionHall": 86,
+        "CultureCenter": 85,
+        "EducationalCenter": 84,
+        "SportsCenter": 83,
+        "SportFacility": 82,
+        "TransportInfrastructure": 81,
+        "FoodEstablishment": 80,
+        "AccommodationEstablishment": 79,
+        "Accommodation": 78,
+        "TourismService": 77,
+        "PublicService": 76,
+        "EventOrganisationCompany": 75,
+        "Event": 70,
+        "Person": 65,
+        "TouristAttraction": 30,
+        "TouristAttractionSite": 29,
+        "TourismDestination": 20,
+        "Place": 15,
+        "Organization": 10,
+        "LocalBusiness": 9,
+        "Thing": 1,
+        "Concept": 0,
+    }
+
     def _safe_text(self, value):
         if value is None:
             return ""
@@ -37,6 +87,9 @@ class EntityDescriptionConsolidator:
         text = self._normalize_name(text).lower()
         text = self._strip_accents(text)
         return text
+
+    def _token_count(self, text):
+        return len(self._canonical_key(text).split())
 
     def _is_portal_text(self, value):
         value_n = self._canonical_key(value)
@@ -77,7 +130,11 @@ class EntityDescriptionConsolidator:
 
         if not current and candidate:
             return candidate
-        if candidate and len(candidate) > len(current):
+        if not candidate:
+            return current
+
+        # preferimos el texto más largo y más informativo
+        if len(candidate) > len(current):
             return candidate
         return current
 
@@ -116,7 +173,7 @@ class EntityDescriptionConsolidator:
             if not value:
                 return None
 
-            if key in {"name", "title"} and self._is_portal_text(value):
+            if key in {"name", "title", "label"} and self._is_portal_text(value):
                 return None
 
             if key in {"telephone", "phone"}:
@@ -126,7 +183,6 @@ class EntityDescriptionConsolidator:
                 return self._clean_email(value) or None
 
             if key in {"image", "mainImage"}:
-                # evita conservar imágenes genéricas si luego no tienes match mejor
                 if "el-flamenco-bloque-2.jpg" in value:
                     return None
 
@@ -172,7 +228,6 @@ class EntityDescriptionConsolidator:
                 merged[key] = merged_list
                 continue
 
-            # para strings no sobreescribimos con datos peores
             if isinstance(merged[key], str) and isinstance(value, str):
                 if len(value) > len(merged[key]):
                     merged[key] = value
@@ -184,7 +239,6 @@ class EntityDescriptionConsolidator:
         if not descriptions:
             return ""
 
-        # penaliza descripciones demasiado genéricas
         bad_fragments = [
             "te queda mucho por descubrir",
             "visita sevilla",
@@ -209,7 +263,7 @@ class EntityDescriptionConsolidator:
         if name in {"manolo caracol", "nina de los peines", "la nina de los peines", "pastora pavon"}:
             return "Person"
 
-        if name in {"tablaos flamencos", "academias de flamenco", "cante jondo", "sevilla academias"}:
+        if name in {"tablaos flamencos", "academias de flamenco", "cante jondo"}:
             return "Concept"
 
         if name in {"altozano de triana", "sevilla", "triana"}:
@@ -219,6 +273,76 @@ class EntityDescriptionConsolidator:
             return "Thing"
 
         return entity_class or "Thing"
+
+    def _class_priority(self, cls):
+        cls = self._safe_text(cls)
+        return self.SPECIFIC_CLASS_PRIORITY.get(cls, 0)
+
+    def _choose_best_class(self, current_class, candidate_class, entity_name=""):
+        current_class = self._normalize_class(entity_name, current_class)
+        candidate_class = self._normalize_class(entity_name, candidate_class)
+
+        if not current_class:
+            return candidate_class or "Thing"
+        if not candidate_class:
+            return current_class
+
+        if self._class_priority(candidate_class) > self._class_priority(current_class):
+            return candidate_class
+
+        return current_class
+
+    def _choose_best_name(self, current_name, candidate_name):
+        current_name = self._normalize_name(current_name)
+        candidate_name = self._normalize_name(candidate_name)
+
+        if not current_name and candidate_name:
+            return candidate_name
+        if not candidate_name:
+            return current_name
+
+        current_key = self._canonical_key(current_name)
+        candidate_key = self._canonical_key(candidate_name)
+
+        if current_key == candidate_key:
+            # si son equivalentes, preferimos la variante más larga
+            if len(candidate_name) > len(current_name):
+                return candidate_name
+            return current_name
+
+        # si uno contiene al otro, preferimos el más específico/largo
+        if current_key and candidate_key:
+            if current_key in candidate_key and len(candidate_name) > len(current_name):
+                return candidate_name
+            if candidate_key in current_key and len(current_name) >= len(candidate_name):
+                return current_name
+
+        # por defecto, preferimos el más largo
+        if len(candidate_name) > len(current_name):
+            return candidate_name
+        return current_name
+
+    def _choose_best_entity_field(self, current_value, candidate_value, best_name):
+        current_value = self._normalize_name(current_value)
+        candidate_value = self._normalize_name(candidate_value)
+
+        if not current_value:
+            return candidate_value or best_name
+        if not candidate_value:
+            return current_value or best_name
+
+        current_key = self._canonical_key(current_value)
+        candidate_key = self._canonical_key(candidate_value)
+        best_key = self._canonical_key(best_name)
+
+        if candidate_key == best_key and current_key != best_key:
+            return candidate_value
+        if current_key == best_key:
+            return current_value
+
+        if len(candidate_value) > len(current_value):
+            return candidate_value
+        return current_value
 
     def consolidate(self, results):
         entity_map = {}
@@ -237,7 +361,10 @@ class EntityDescriptionConsolidator:
                     entity_map[key] = {
                         "entity": e.get("entity", entity_name),
                         "entity_name": entity_name,
+                        "name": e.get("name", entity_name),
+                        "label": e.get("label", entity_name),
                         "class": self._normalize_class(entity_name, e.get("class", "")),
+                        "type": e.get("type"),
                         "score": e.get("score", 0.0),
                         "verisimilitude_score": e.get("verisimilitude_score", e.get("score", 0.0)),
                         "properties": self._merge_properties({}, e.get("properties", {})),
@@ -250,6 +377,30 @@ class EntityDescriptionConsolidator:
                         "wikidata_id": e.get("wikidata_id", ""),
                     }
 
+                # preferimos el mejor nombre observado
+                entity_map[key]["entity_name"] = self._choose_best_name(
+                    entity_map[key].get("entity_name", ""),
+                    entity_name,
+                )
+
+                best_name = entity_map[key]["entity_name"]
+
+                entity_map[key]["entity"] = self._choose_best_entity_field(
+                    entity_map[key].get("entity", ""),
+                    e.get("entity", entity_name),
+                    best_name,
+                )
+                entity_map[key]["name"] = self._choose_best_entity_field(
+                    entity_map[key].get("name", ""),
+                    e.get("name", entity_name),
+                    best_name,
+                )
+                entity_map[key]["label"] = self._choose_best_entity_field(
+                    entity_map[key].get("label", ""),
+                    e.get("label", entity_name),
+                    best_name,
+                )
+
                 entity_map[key]["score"] = max(
                     entity_map[key]["score"],
                     e.get("score", 0.0),
@@ -260,11 +411,17 @@ class EntityDescriptionConsolidator:
                     e.get("verisimilitude_score", e.get("score", 0.0)),
                 )
 
-                # normaliza clase si llega algo más específico
                 current_class = entity_map[key]["class"]
-                new_class = self._normalize_class(entity_name, e.get("class", ""))
-                if current_class in {"Thing", ""} and new_class not in {"Thing", ""}:
-                    entity_map[key]["class"] = new_class
+                new_class = self._normalize_class(best_name, e.get("class", ""))
+
+                entity_map[key]["class"] = self._choose_best_class(
+                    current_class,
+                    new_class,
+                    entity_name=best_name,
+                )
+
+                if e.get("type") and not entity_map[key].get("type"):
+                    entity_map[key]["type"] = e.get("type")
 
                 entity_map[key]["properties"] = self._merge_properties(
                     entity_map[key].get("properties", {}),
@@ -305,10 +462,15 @@ class EntityDescriptionConsolidator:
             best_short = self._select_best_description(e["short_descriptions"])
             best_long = self._select_best_description(e["long_descriptions"])
 
+            best_name = self._normalize_name(e["entity_name"])
+
             item = {
-                "entity": e["entity"],
-                "entity_name": e["entity_name"],
+                "entity": self._choose_best_entity_field(e.get("entity", ""), best_name, best_name),
+                "entity_name": best_name,
+                "name": self._choose_best_entity_field(e.get("name", ""), best_name, best_name),
+                "label": self._choose_best_entity_field(e.get("label", ""), best_name, best_name),
                 "class": e["class"],
+                "type": e.get("type"),
                 "score": e["score"],
                 "verisimilitude_score": e["verisimilitude_score"],
                 "properties": e["properties"],

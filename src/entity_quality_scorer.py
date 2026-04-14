@@ -1,5 +1,3 @@
-# src/entity_quality_scorer.py
-
 import re
 from urllib.parse import urlparse
 
@@ -8,6 +6,49 @@ class EntityQualityScorer:
     def __init__(self):
         self.stop_tokens = {
             "de", "la", "el", "los", "las", "en", "y", "a", "del"
+        }
+
+        self.strong_types = {
+            "Event",
+            "TouristAttraction",
+            "Museum",
+            "Monument",
+            "Castle",
+            "Alcazar",
+            "Church",
+            "Cathedral",
+            "Basilica",
+            "Chapel",
+            "Monastery",
+            "Abbey",
+            "Convent",
+            "Square",
+            "Route",
+            "AccommodationEstablishment",
+            "FoodEstablishment",
+            "TransportInfrastructure",
+            "CultureCenter",
+            "ExhibitionHall",
+            "TownHall",
+            "BullRing",
+            "SportsCenter",
+            "Stadium",
+        }
+
+        self.mid_types = {
+            "Place",
+            "Organization",
+            "LocalBusiness",
+            "Service",
+            "TourismService",
+            "PublicService",
+            "PublicSpace",
+            "ReligiousSite",
+            "NaturalResource",
+            "TourismDestination",
+            "Accommodation",
+            "RetailAndFashion",
+            "SportFacility",
         }
 
     # =========================================================
@@ -35,6 +76,25 @@ class EntityQualityScorer:
         text = (text or "").strip()
         text = re.sub(r"\s+", " ", text)
         return text
+
+    def _as_list(self, value):
+        if value is None:
+            return []
+        if isinstance(value, list):
+            return [str(v).strip() for v in value if str(v).strip()]
+        if isinstance(value, tuple):
+            return [str(v).strip() for v in value if str(v).strip()]
+        value = str(value).strip()
+        return [value] if value else []
+
+    def _primary_label(self, entity: dict) -> str:
+        return (
+            entity.get("label")
+            or entity.get("entity_name")
+            or entity.get("entity")
+            or entity.get("name")
+            or ""
+        )
 
     # =========================================================
     # SCORING COMPONENTS
@@ -68,6 +128,17 @@ class EntityQualityScorer:
 
         return score, flags
 
+    def _score_name_specificity(self, label: str):
+        tokens = self._tokenize(label)
+
+        if len(tokens) == 1:
+            return -2, ["too_generic"]
+
+        if len(tokens) == 2:
+            return 0, []
+
+        return 1, []
+
     def _score_description(self, short_desc, long_desc):
         score = 0
         flags = []
@@ -88,7 +159,6 @@ class EntityQualityScorer:
             score -= 2
             flags.append("no_description")
 
-        # detectar texto editorial genérico
         low = long_desc.lower()
         if any(x in low for x in [
             "descubre", "sumérgete", "vive", "experiencia única",
@@ -115,7 +185,6 @@ class EntityQualityScorer:
 
         for u in urls:
             slug_tokens = self._slug_tokens(u)
-
             if any(t in slug_tokens for t in tokens):
                 match_count += 1
 
@@ -125,7 +194,6 @@ class EntityQualityScorer:
             score -= 1
             flags.append("low_url_affinity")
 
-        # muchas URLs pero poco match → sospechoso
         if len(urls) > 5 and match_count <= 1:
             score -= 1
             flags.append("noisy_urls")
@@ -140,7 +208,7 @@ class EntityQualityScorer:
             score += 1
 
         coords = entity.get("coordinates") or {}
-        if coords.get("lat") and coords.get("lng"):
+        if coords.get("lat") is not None and coords.get("lng") is not None:
             score += 1
 
         if entity.get("address"):
@@ -152,51 +220,60 @@ class EntityQualityScorer:
         if entity.get("email"):
             score += 0.5
 
+        if entity.get("image") or entity.get("mainImage"):
+            score += 0.5
+
         return score, flags
 
     def _score_type(self, types):
         score = 0
+        flags = []
 
-        types = types or []
+        types = self._as_list(types)
 
-        strong_types = {
-            "Event",
-            "TouristAttraction",
-            "Organization",
-            "LocalBusiness",
-            "Route"
-        }
+        if not types:
+            return -1, ["no_type"]
 
-        if any(t in strong_types for t in types):
+        strong_hits = [t for t in types if t in self.strong_types]
+        mid_hits = [t for t in types if t in self.mid_types]
+
+        if strong_hits:
             score += 2
-        elif "Place" in types:
+        elif mid_hits:
             score += 1
+        else:
+            flags.append("weak_type")
 
-        return score, []
+        # bonus ligero si hay jerarquía híbrida rica
+        if len(types) >= 2:
+            score += 0.5
 
-    def _score_name_specificity(self, label):
-        tokens = self._tokenize(label)
+        return score, flags
 
-        if len(tokens) == 1:
-            return -2, ["too_generic"]
+    def _score_type_consistency(self, entity):
+        score = 0
+        flags = []
 
-        if len(tokens) == 2:
-            return 0, []
+        types = self._as_list(entity.get("type"))
+        entity_class = str(entity.get("class", "")).strip()
 
-        return 1, []
+        if not types and not entity_class:
+            return -1, ["missing_class_and_type"]
+
+        if entity_class and types:
+            if entity_class in types:
+                score += 1
+            else:
+                flags.append("class_not_in_types")
+
+        return score, flags
 
     # =========================================================
     # MAIN API
     # =========================================================
 
     def evaluate(self, entity: dict):
-        label = (
-            entity.get("label")
-            or entity.get("entity_name")
-            or entity.get("entity")
-            or entity.get("name")
-            or ""
-        )
+        label = self._primary_label(entity)
 
         short_desc = entity.get("short_description", "")
         long_desc = entity.get("long_description", "")
@@ -206,22 +283,23 @@ class EntityQualityScorer:
         total_score = 0
         flags = []
 
-        for fn in [
+        scorers = [
             lambda: self._score_name(label),
             lambda: self._score_name_specificity(label),
             lambda: self._score_description(short_desc, long_desc),
             lambda: self._score_urls(label, related_urls),
             lambda: self._score_properties(entity),
             lambda: self._score_type(types),
-        ]:
+            lambda: self._score_type_consistency(entity),
+        ]
+
+        for fn in scorers:
             s, f = fn()
             total_score += s
             flags.extend(f)
 
-        # normalizar score
         total_score = max(0, min(10, round(total_score, 2)))
 
-        # decisión
         if total_score >= 6:
             decision = "keep"
         elif total_score >= 3:

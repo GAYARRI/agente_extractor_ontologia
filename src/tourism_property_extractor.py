@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import json
 from urllib.parse import unquote, urlparse, parse_qs
+from src.utils.json_utils import safe_load_json
+
 
 class TourismPropertyExtractor:
     """
@@ -292,7 +294,7 @@ class TourismPropertyExtractor:
 
         for s in scripts:
             try:
-                data = json.loads(s.string)
+                data = safe_load_json(s.string)
                 if isinstance(data, dict):
                     geo = data.get("geo")
                     if geo:
@@ -379,7 +381,7 @@ class TourismPropertyExtractor:
                 continue
 
             try:
-                data = json.loads(block)
+                data = safe_load_json(block)
             except Exception:
                 continue
 

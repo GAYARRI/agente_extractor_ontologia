@@ -61,7 +61,8 @@ class OntologyIndex:
         if not self.classes:
             print("⚠ No se encontraron clases ontológicas")
         else:
-            print(f"✅ Clases ontológicas indexadas: {len(self.classes)}")
+            import sys
+            print(f"✅ Clases ontológicas indexadas: {len(self.classes)}",file=sys.stderr)
 
     # ---------------------------------
     # indexar propiedades ontológicas

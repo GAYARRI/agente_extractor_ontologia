@@ -1,0 +1,328 @@
+[
+  {
+    "name": "Concierto Celtas Cortos",
+    "types": [
+      "Event"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://info.valladolid.es/evento/concierto-celtas-cortos",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Concierto de la banda Celtas Cortos en su gira 2026.",
+    "longDescription": "El Concierto de Celtas Cortos es parte de su gira '40 años contando cuentos', donde la banda de folk pop celebra su trayectoria musical. Este evento promete ser un espectáculo lleno de nostalgia y buena música, atrayendo a fans de todas las edades.",
+    "description": "Semana Santa MAR 27 ABR 5 Semana Santa 2026 Un año más, Valladolid vive unos de los días más especiales del año con la celebración de su Semana Santa. Reconocida como Bien de Interés Turístico Internacional y Bien de Interés Cultural. Desde el Viernes de Dolores hasta el Domingo de Resurrección, las",
+    "images": [
+      "https://admin.info.valladolid.es/sites/default/files/styles/scale_webp_384x241/public/2026-02/logo_Celtas_Cortos-1.jpg.webp?itok=3d7EhXyf"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "name": "Archivo General de Castilla y León",
+    "types": [
+      "HistoricalOrCulturalResource"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://info.valladolid.es/disfruta/patrimonio/patrimonio-religioso/monasterios-conventos/convento-de-santa-teresa",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 41.6538948,
+      "lng": -4.7229693
+    },
+    "shortDescription": "Archivo histórico que conserva documentos de Castilla y León.",
+    "longDescription": "El Archivo General de Castilla y León es una institución que conserva y organiza documentos históricos relevantes para la historia de la región. Su colección incluye archivos diocesanos y catedralicios, lo que lo convierte en un recurso cultural importante para investigadores y turistas interesados en la historia local.",
+    "description": "Volver al inicio Francisco Javier Martín Abril Compartir Dirección Calle López Gómez, 1 Copiar dirección Abrir en Google Maps Dirección Calle López Gómez, 1 Copiar dirección Abrir en Google Maps Teléfono 983211231 Teléfono 983211231 Toma su nombre del escritor y articulista vallisoletano Francisco J | archivo documental español",
+    "images": [
+      "https://admin.info.valladolid.es/sites/default/files/styles/scale_webp_640x360/public/migration/tourist-point/images/archivo_jcyl_0.jpg.webp?itok=xYsacvXv"
+    ],
+    "wikidataId": "Q5702916"
+  },
+  {
+    "name": "Academia de Caballería",
+    "types": [
+      "TouristAttraction"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://info.valladolid.es/agenda/los-10-imprescindibles/academia-de-caballeria",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 41.647841,
+      "lng": -4.7305967
+    },
+    "shortDescription": "Edificio monumental en Valladolid dedicado a la formación militar.",
+    "longDescription": "La Academia de Caballería de Valladolid es un edificio monumental inaugurado en 1922, diseñado por el arquitecto Adolfo Pierrad. Este centro ha formado a generaciones de oficiales y alberga un museo que repasa la historia de la caballería española. Su imponente presencia y su función histórica la convierten en un símbolo de la tradición castrense en España.",
+    "description": "Cada día, una aventura Descubre nuestros itinerarios para explorar la ciudad Valladolid en un día Valladolid en dos días Valladolid en tres días Los 10 imprescindibles Los sitios icónicos que no puedes dejar de visitar Academia de Caballería Museo Patio Herreriano Plaza Mayor Catedral Museo Nacional",
+    "images": [
+      "https://admin.info.valladolid.es/sites/default/files/styles/scale_webp_384x241/public/2024-09/Academia%20de%20Caballeria.jpg.webp?itok=htErJSo7"
+    ],
+    "wikidataId": "Q113481415"
+  },
+  {
+    "name": "Real Alcázar",
+    "types": [
+      "Alcazar"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/real-alcazar-de-sevilla/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 37.38490983537507,
+      "lng": -5.990678837025141
+    },
+    "shortDescription": "Palacio histórico en Sevilla, famoso por su arquitectura y jardines.",
+    "longDescription": "El Real Alcázar de Sevilla es el palacio real en uso más antiguo de Europa, inscrito como Patrimonio de la Humanidad por la Unesco en 1987. Este complejo arquitectónico combina estilos islámicos, renacentistas y barrocos, reflejando la rica diversidad cultural de Sevilla. Sus jardines, patios y habitaciones decoradas lo convierten en una obra maestra, además de ser un escenario de eventos históric",
+    "description": "Santa Cruz, un barrio para perderse Calles estrechas, casas blancas y plazas con naranjos crean un entorno único y con mucho encanto. Recorre rincones como el Callejón del Agua, descubre patios llenos de flores, fuentes y antiguos retablos, y siente la historia en cada paso. Aquí aún se conservan re | plaza de Sevilla",
+    "images": [
+      "https://visitasevilla.es/wp-content/uploads/2024/05/alcazar-2.jpg"
+    ],
+    "wikidataId": "Q119349066"
+  },
+  {
+    "name": "Comprar Sumérgete",
+    "types": [
+      "RetailandFashion"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/sevilla-fashion-outlet/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Moda y creatividad en Sevilla.",
+    "longDescription": "Sumérgete en el vibrante mundo de la moda en Sevilla, donde la tradición y la historia se fusionan en creaciones que reflejan la idiosincrasia sevillana.",
+    "description": "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex",
+    "images": [
+      "https://visitasevilla.es/wp-content/uploads/2025/06/DSC03534-300x169.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "name": "Dormir Descubre",
+    "types": [
+      "AccomodationEstablishment"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/sharm-alojamientos/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Alojamientos únicos en Sevilla.",
+    "longDescription": "Dormir Descubre ofrece una variedad de alojamientos en Sevilla, donde cada estancia está diseñada para brindar comodidad y elegancia, permitiendo a los visitantes sumergirse en la esencia mágica de la ciudad.",
+    "description": "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex",
+    "images": [
+      "https://visitasevilla.es/wp-content/uploads/2024/08/Eurostars-Torre-Sevilla-1.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "name": "Basílica del Gran Poder",
+    "types": [
+      "Basilica"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/basilica-del-gran-poder",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 37.3972134,
+      "lng": -5.9983535
+    },
+    "shortDescription": "Iglesia emblemática de Sevilla, conocida por su impresionante imagen del Gran Poder.",
+    "longDescription": "La Basílica del Gran Poder es un importante lugar de culto en Sevilla, España, conocida por albergar la imagen del Cristo del Gran Poder, esculpida por Juan de Mesa en 1620. Este Nazareno es una figura central en la Semana Santa sevillana, atrayendo a numerosos devotos y turistas que desean admirar su belleza y participar en las tradiciones religiosas que lo rodean.",
+    "description": "Monumentos Un destino en el que los edificios más emblemáticos conviven con la belleza de cada rincón. La Sevilla más monumental nunca había estado tan cerca. Iglesias, jardines y colecciones de arte únicas. ¿Quieres saber todo lo que te espera? Monumentos Sevilla desconocida 7 planes para disfrutar",
+    "images": "https://visitasevilla.es/wp-content/uploads/2022/11/granpoder.jpg",
+    "wikidataId": ""
+  },
+  {
+    "name": "Capilla de los Marineros",
+    "types": [
+      "Chapel"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/capilla-de-los-marineros/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 37.384,
+      "lng": -6.00102
+    },
+    "shortDescription": "Capilla histórica en Sevilla, conocida por su conexión con la comunidad marinera.",
+    "longDescription": "La Capilla de los Marineros es un monumento significativo en Sevilla, dedicado a la Virgen de la Esperanza de Triana, patrona de los marineros. Su arquitectura y su historia la hacen un lugar de interés para los visitantes que desean conocer más sobre la cultura y tradiciones de la ciudad, especialmente en relación con la vida marítima y la Semana Santa.",
+    "description": "Monumentos Un destino en el que los edificios más emblemáticos conviven con la belleza de cada rincón. La Sevilla más monumental nunca había estado tan cerca. Iglesias, jardines y colecciones de arte únicas. ¿Quieres saber todo lo que te espera? Monumentos Sevilla desconocida 7 planes para disfrutar",
+    "images": "https://visitasevilla.es/wp-content/uploads/2022/11/capilla_marineros_exterior.jpg",
+    "wikidataId": "Q2957394"
+  },
+  {
+    "name": "Capilla del Carmen de Triana",
+    "types": [
+      "Chapel"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/sabias-que-la-capilla-del-carmen-se-diseno-como-faro-ceramico-para-los-barcos-nocturnos/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Iglesia emblemática en el barrio de Triana, Sevilla.",
+    "longDescription": "La Capilla del Carmen de Triana es un importante lugar de culto y un atractivo turístico en Sevilla, conocido por su arquitectura y su relevancia cultural. Situada en el famoso barrio de Triana, es un punto de interés para visitantes que buscan conocer la historia y tradiciones de la ciudad.",
+    "description": "La Capilla del Carmen de Triana, el faro cerámico del Guadalquivir",
+    "images": [
+      "https://visitasevilla.es/wp-content/uploads/2025/07/capilla-del-carmen-1.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "name": "altozano de triana",
+    "types": [
+      "Place"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/conjuntos-escultoricos-emblematicos-sevilla",
+    "relatedUrls": "https://visitasevilla.es/sabias-que-la-plaza-del-altozano-alberga-el-azulejo-exterior-mas-grande-de-sevilla/",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 37.385680555556,
+      "lng": -6.0034416666667
+    },
+    "shortDescription": "Lugar emblemático en Sevilla relacionado con el flamenco.",
+    "longDescription": "El Altozano de Triana es un lugar emblemático en Sevilla, donde se erige una estatua que rinde homenaje a las tres vertientes del mundo flamenco, destacando la importancia cultural y artística de este género musical en la región. Es un punto de interés para turistas que desean conocer más sobre la tradición flamenca.",
+    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam",
+    "images": "https://visitasevilla.es/wp-content/uploads/2025/07/azulejo-altozano.jpg",
+    "wikidataId": "Q5637661"
+  },
+  {
+    "name": "manolo caracol",
+    "types": [
+      "Monument"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/conjuntos-escultoricos-emblematicos-sevilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Representante del arte flamenco con escultura en la Alameda de Hércules.",
+    "longDescription": "Manolo Caracol fue un destacado artista del flamenco, y su legado es conmemorado con una escultura en la Alameda de Hércules. Este lugar es conocido por su vibrante cultura flamenca y atrae a turistas que buscan experimentar la esencia del arte y la música de Sevilla.",
+    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam | cantante español",
+    "images": "",
+    "wikidataId": "Q1623744"
+  },
+  {
+    "name": "niña de los peines",
+    "types": [
+      "Monument"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/conjuntos-escultoricos-emblematicos-sevilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Famosa artista flamenca con escultura en la Alameda de Hércules.",
+    "longDescription": "La Niña de los Peines, cuyo nombre real es Pastora Pavón, es considerada una de las más grandes cantaoras de flamenco. Su voz y su interpretación han dejado una huella imborrable en la historia de la música española, convirtiéndola en un referente para los amantes del flamenco y la cultura andaluza.",
+    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam | cantante española",
+    "images": "",
+    "wikidataId": "Q447571"
+  },
+  {
+    "name": "Sevilla Sevicios",
+    "types": [
+      "TourismService"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://visitasevilla.es/sharm-servicios-profesionales/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Servicios profesionales destacados en Sevilla.",
+    "longDescription": "Para preparar el viaje, puedes acudir a los servicios profesionales más destacados de Sevilla, que ofrecen soluciones personalizadas con excelencia y dedicación.",
+    "description": "Dormir Descubre alojamientos únicos en Sevilla, espacios en los que cada estancia es un hechizo de comodidad y elegancia. Sumérgete en la esencia de una ciudad llena de encanto y deja que cada rincón te sorprenda con su magia inigualable. Elige dónde hospedarte Comer Descubre los restaurantes más ex",
+    "images": [
+      "https://visitasevilla.es/wp-content/uploads/2024/08/rio-sevilla.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "name": "Canal de Castilla",
+    "types": [
+      "TouristAttraction"
+    ],
+    "score": 1,
+    "sourceUrl": "",
+    "url": "https://info.valladolid.es/disfruta/patrimonio/zonas-verdes/parques-jardines/canal-de-castilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 41.8008499,
+      "lng": -4.54574
+    },
+    "shortDescription": "Canal histórico en Castilla y León, ideal para paseos y actividades recreativas.",
+    "longDescription": "El Canal de Castilla es una vía navegable histórica que se extiende por la provincia de Valladolid y otras áreas de Castilla y León. Este canal es conocido por su belleza escénica y su importancia histórica en el transporte de mercancías. Hoy en día, es un lugar popular para paseos en bicicleta, senderismo y actividades recreativas en un entorno natural.",
+    "description": "Una DO con diez siglos de historia La fama del vino rosado de Cigales es más que merecida: este 2022 se ha convertido en la denominación más premiada en el Selection Rosé del Concurso Mundial de Bruselas. Pese a la juventud de la denominación de origen (1991), se conoce la existencia de bodegas y vi | iglesia, patrimonio histórico de Andalucía de importancia arquitectónica en Málaga, España",
+    "images": [
+      "https://admin.info.valladolid.es/sites/default/files/styles/scale_webp_640x360/public/migration/tourist-point/images/miniatura%20canal%20de%20castilla_0.jpg.webp?itok=2NxNgSku"
+    ],
+    "wikidataId": "Q97633205"
+  }
+]

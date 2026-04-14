@@ -2,6 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from openai import OpenAI
+from src.utils.json_utils import safe_load_json
 
 load_dotenv()
 
@@ -51,7 +52,6 @@ Return JSON only in this format:
         result = response.output[0].content[0].text
 
         try:
-            return json.loads(result)
-
+            return safe_load_json(result)
         except:
             return {"entities": []}

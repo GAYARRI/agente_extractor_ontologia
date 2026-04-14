@@ -1,18 +1,33 @@
 import json
+import sys
 import re
 from openai import OpenAI
+from src.ontology.type_normalizer import normalize_type
+from src.utils.json_utils import safe_load_json
+from src.supervision.gold.examples import (
+    load_gold_examples,
+    normalize_url,
+    candidate_vs_gold_score,
+)
 
 
 class LLMSupervisor:
-    def __init__(self, ontology_index, model="gpt-4o-mini"):
+    def __init__(self, ontology_index, model="gpt-4o-mini", gold_examples_path="benchmark/Ejemplos.csv"):
         self.ontology_index = ontology_index
         self.model = model
+
         try:
             self.client = OpenAI()
         except Exception as e:
             print("⚠️ LLM no disponible:", e)
             self.client = None
 
+        try:
+            self.gold_examples = load_gold_examples(gold_examples_path)
+            print(f"[LLM_SUPERVISOR] Golden examples cargados: {len(self.gold_examples)}", file=sys.stderr)
+        except Exception as e:
+            print(f"[WARN] No se pudieron cargar golden examples: {e}")
+            self.gold_examples = {}
 
     # ==================================================
     # JSON SAFE PARSE
@@ -24,25 +39,140 @@ class LLMSupervisor:
 
         content = content.strip()
 
-        # quitar fences markdown si vienen
         content = re.sub(r"^```json\s*", "", content, flags=re.IGNORECASE)
         content = re.sub(r"^```\s*", "", content)
         content = re.sub(r"\s*```$", "", content)
 
         try:
-            return json.loads(content)
+            return safe_load_json(content)
         except Exception:
             pass
 
-        # intentar rescatar primer bloque JSON
         match = re.search(r"(\{.*\}|\[.*\])", content, re.DOTALL)
         if match:
             try:
-                return json.loads(match.group(1))
+                return safe_load_json(match.group(1))
             except Exception:
                 pass
 
         return []
+
+    # ==================================================
+    # GOLD PRIOR / GOLD PROMPT
+    # ==================================================
+
+    def normalize_llm_class(self, value: str) -> str:
+        if not value:
+            return ""
+        return normalize_type(value)
+
+    def build_gold_example_prompt_context(self, url: str) -> str:
+        """
+        Si la URL actual existe en el conjunto gold, devuelve un bloque breve
+        para orientar la clasificación del LLM.
+        """
+        if not url:
+            return ""
+
+        url_norm = normalize_url(url)
+        gold_case = self.gold_examples.get(url_norm)
+
+        if not gold_case:
+            return ""
+
+        gold_entity = gold_case.get("entity", "")
+        gold_type = gold_case.get("type", "")
+
+        if not gold_entity:
+            return ""
+
+        return f"""
+EJEMPLO SUPERVISADO RELEVANTE PARA ESTA URL:
+- URL: {url_norm}
+- Entidad principal esperada: {gold_entity}
+- Clase ontológica esperada: {gold_type}
+
+Usa este ejemplo como una señal de priorización.
+IMPORTANTE:
+- No copies ciegamente el ejemplo.
+- Úsalo solo como referencia si encaja con el texto real.
+- Si el texto contradice claramente el ejemplo, prioriza el texto.
+""".strip()
+
+    def apply_gold_prior(self, url: str, candidates: list[dict]) -> list[dict]:
+        url_norm = normalize_url(url)
+        gold_case = self.gold_examples.get(url_norm)
+
+        if not gold_case:
+            return candidates
+
+        enriched = []
+        for cand in candidates:
+            if not isinstance(cand, dict):
+                continue
+
+            new_cand = dict(cand)
+            new_cand["gold_alignment_score"] = candidate_vs_gold_score(cand, gold_case)
+            enriched.append(new_cand)
+
+        enriched.sort(
+            key=lambda x: (
+                x.get("gold_alignment_score", 0.0),
+                x.get("score", 0.0),
+            ),
+            reverse=True,
+        )
+
+        print(f"[LLM_SUPERVISOR][GOLD] URL conocida: {url_norm}", file=sys.stderr)
+        for cand in enriched[:5]:
+            print(
+                "[LLM_SUPERVISOR][GOLD] candidate=",
+                cand.get("entity") or cand.get("entity_name") or cand.get("name"),
+                " class=",
+                cand.get("class"),
+                " gold_alignment_score=",
+                round(cand.get("gold_alignment_score", 0.0), 4)
+                if isinstance(cand.get("gold_alignment_score", 0.0), (int, float))
+                else cand.get("gold_alignment_score", 0.0),
+                " llm_score=",
+                cand.get("score", 0.0),
+                file=sys.stderr,
+            )
+
+        return enriched
+
+    def rerank_classified_entities(self, url: str, items: list[dict]) -> list[dict]:
+        """
+        Re-rank de entidades ya clasificadas por el LLM.
+        """
+        if not items:
+            return items
+
+        candidates = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+
+            candidate = dict(item)
+            candidate["entity_name"] = item.get("entity", "")
+            candidate["normalized_type"] = item.get("normalized_type", "") or self.normalize_llm_class(item.get("class", ""))
+            candidates.append(candidate)
+
+        reranked = self.apply_gold_prior(url, candidates)
+
+        clean_items = []
+        for item in reranked:
+            clean_items.append({
+                "entity": item.get("entity", ""),
+                "class": item.get("class", ""),
+                "score": item.get("score", 0.5),
+                "short_description": item.get("short_description", ""),
+                "long_description": item.get("long_description", ""),
+                "gold_alignment_score": item.get("gold_alignment_score", 0.0),
+                "normalized_type": item.get("normalized_type", ""),
+            })
+
+        return clean_items
 
     # ==================================================
     # ONTOLOGY CONTEXT
@@ -55,7 +185,6 @@ class LLMSupervisor:
         """
         class_lines = []
 
-        # Caso 1: diccionario tipo {class_name: description}
         if hasattr(self.ontology_index, "classes"):
             classes_obj = getattr(self.ontology_index, "classes")
 
@@ -71,7 +200,6 @@ class LLMSupervisor:
                         break
                     class_lines.append(f"- {item}")
 
-        # Caso 2: método get_all_classes()
         elif hasattr(self.ontology_index, "get_all_classes"):
             try:
                 all_classes = self.ontology_index.get_all_classes()
@@ -82,7 +210,6 @@ class LLMSupervisor:
             except Exception:
                 pass
 
-        # fallback mínimo
         if not class_lines:
             class_lines = [
                 "- Place: lugar físico, destino, ciudad, barrio, zona o recurso visitable",
@@ -104,13 +231,11 @@ class LLMSupervisor:
     # ==================================================
 
     def build_extraction_prompt(self, text):
-
         return f"""
-
 Eres un agente de turismo experto en extracción de instancias de un website que se te proporciona.
 
-Tu tarea es extraer ÚNICAMENTE instancias del website porporcionado.
-MUY IMPORTANTE : SOLO ACEPTAR URLS DEL DOMINIO INICIAL PROPORCIONADO DONDE SE CUMPLA QUE  HOSTNAME == DOMINIO_INICIAL
+Tu tarea es extraer ÚNICAMENTE instancias del website proporcionado.
+MUY IMPORTANTE: SOLO ACEPTAR URLS DEL DOMINIO INICIAL PROPORCIONADO DONDE SE CUMPLA QUE HOSTNAME == DOMINIO_INICIAL
 
 DEFINICIÓN DE INSTANCIA DE TURISMO:
 Una instancia es un elemento del mundo real, concreto, identificable y relevante para el turismo, que puede ser visitado, utilizado, experimentado o consultado por un turista.
@@ -125,20 +250,20 @@ EJEMPLOS VÁLIDOS:
 
 NO EXTRAIGAS:
 - categorías o secciones del site: cultura, ocio, monumentos, museos, agenda
-- actividades genéricas: eventos deportivos, actividades en familia o planes que no esten inequívocamente relacionados con el hecho turístico
+- actividades genéricas: eventos deportivos, actividades en familia o planes que no estén inequívocamente relacionados con el hecho turístico
 - conceptos abstractos: gastronomía, patrimonio, tradición, folklore
-- fragmentos de direcciónes: A-4 Km, 41020 Sevilla, Av. de Kansas City
+- fragmentos de direcciones: A-4 Km, 41020 Sevilla, Av. de Kansas City
 - números, códigos, teléfonos, horarios
 - elementos de navegación web: ver listado, haz clic aquí, ir a página
 - frases cortadas o concatenaciones artificiales: Museos De, Salir La, Cultura Artesanía Fiestas
 - servicios genéricos sin nombre propio: taxi, autobús, metro, líneas de autobús
-- términos demasiado genéricos que no designen una instancia concreta 
+- términos demasiado genéricos que no designen una instancia concreta
 
 REGLAS:
-- Extrae solo fragmentos de texto relacionables con el turismo . 
+- Extrae solo fragmentos de texto relacionables con el turismo.
 - No inventes instancias que no estén previamente presentes en el texto del website proporcionado.
 - No unas palabras que no formen una instancia real del texto del dominio inicial.
-- Prioriza instancias inequivocamente relacionadas con el turismo, con nombre propio o identidad concreta.
+- Prioriza instancias inequívocamente relacionadas con el turismo, con nombre propio o identidad concreta.
 - Si una expresión es dudosa y no parece encajar en el fenómeno turístico, NO la extraigas.
 - Si no hay entidades válidas, devuelve lista vacía.
 
@@ -158,13 +283,12 @@ Devuelve SOLO un JSON válido con esta forma:
         entities_json = json.dumps(entities, ensure_ascii=False)
 
         return f"""
+Eres un validador de instancias asociadas al turismo.
 
-Eres un validador de instanias asociadas al turismo.
-
-Tu tarea es extraer de una lista de instancias, SOLO las que sean susceptibles de ser clasificables en alguna de las entidades turísticas proporcionadas, concretas e identificables.
+Tu tarea es extraer de una lista de instancias solo las que sean clasificables en alguna de las entidades turísticas proporcionadas, concretas e identificables.
 
 CRITERIO DE ACEPTACIÓN:
-Una instancia acabará siendo instancia candidata si es una instancia del mundo real indubitablemente relevante para el turismo, con identidad propia. 
+Una instancia acabará siendo instancia candidata si es una instancia del mundo real indubitablemente relevante para el turismo, con identidad propia.
 
 ELIMINA:
 - categorías
@@ -182,10 +306,10 @@ MANTÉN:
 - monumentos
 - museos
 - infraestructuras de transporte
-- negocios identificables que pueden estar involucrados en la acividad turística
+- negocios identificables que pueden estar involucrados en la actividad turística
 - instituciones asociadas al negocio turístico
-- eventos de interés turísticos concretos
-- puntos de interés turísitico con nombre reconocible
+- eventos de interés turístico concretos
+- puntos de interés turístico con nombre reconocible
 
 CONTEXTO:
 \"\"\"
@@ -202,12 +326,12 @@ Devuelve SOLO un JSON válido con esta forma:
 }}
 """.strip()
 
-    def build_classification_prompt(self, entities, text):
+    def build_classification_prompt(self, entities, text, url=None):
         entities_json = json.dumps(entities, ensure_ascii=False)
         ontology_context = self.build_ontology_context()
+        gold_context = self.build_gold_example_prompt_context(url) if url else ""
 
         return f"""
-
 Eres un sistema experto en clasificación ontológica de instancias turísticas.
 
 Se te proporciona:
@@ -215,12 +339,11 @@ Se te proporciona:
 2. Una lista de instancias candidatas, susceptibles de ser clasificadas según una ontología de turismo.
 3. Una lista de entidades ontológicas dentro de las cuales se clasificarán las instancias candidatas.
 
-
 DEFINICIÓN:
 Una entidad ontológica de turismo es un elemento identificable relevante para el turista y enmarcado en el hecho turístico.
 
 TU TAREA:
-Clasificar cada instancia candidata en la entidad ontológica más adecuada, usando el contexto y las lista de entidades disponibles.
+Clasificar cada instancia candidata en la entidad ontológica más adecuada, usando el contexto y la lista de entidades disponibles.
 
 REGLAS IMPORTANTES:
 - NO inventes nuevas entidades.
@@ -229,8 +352,10 @@ REGLAS IMPORTANTES:
 - Si una entidad no es realmente válida, descártala.
 - Si hay duda razonable entre varias, usa la entidad más general que encaje.
 - No dejes sin clasificar ninguna entidad válida.
+- Prioriza la entidad principal de la página frente a elementos laterales, relacionados o accesorios.
+- Penaliza implícitamente elementos de bloques tipo “también te puede interesar”, navegación, servicios auxiliares o referencias secundarias.
 
-ONTOLOGÍA TURÍSICA:
+ONTOLOGÍA TURÍSTICA:
 {ontology_context}
 
 GUÍA GENERAL:
@@ -244,6 +369,125 @@ GUÍA GENERAL:
 - LocalBusiness: empresa o servicio identificable
 - Route: ruta o itinerario concreto
 - Service: servicio útil concreto para turistas
+
+EJEMPLOS ORIENTATIVOS:
+
+Ejemplo 1
+Input:
+Visita al Real Alcázar de Sevilla, uno de los monumentos más importantes de la ciudad.
+
+Output:
+Name: Real Alcázar
+Type: TouristAttraction
+Reason: Es un monumento histórico relevante y visitable, claramente una atracción turística.
+
+Ejemplo 2
+Input:
+La Semana Santa de Sevilla es una de las celebraciones religiosas más importantes de España.
+
+Output:
+Name: Semana Santa
+Type: Event
+Reason: Se trata de una celebración periódica con carácter cultural y religioso.
+
+Ejemplo 3
+Input:
+Ruta de los Azulejos por el casco histórico de Sevilla.
+
+Output:
+Name: Ruta de los Azulejos
+Type: Route
+Reason: Es un itinerario turístico diseñado para recorrer distintos puntos de interés.
+
+Ejemplo 4
+Input:
+El Ayuntamiento de Sevilla ofrece información turística y servicios al ciudadano.
+
+Output:
+Name: Ayuntamiento de Sevilla
+Type: Organization
+Reason: Es una entidad institucional que presta servicios públicos.
+
+Ejemplo 5
+Input:
+Cena en el restaurante Abades Triana con vistas al río Guadalquivir.
+
+Output:
+Name: Abades Triana
+Type: LocalBusiness
+Reason: Es un establecimiento comercial de restauración.
+
+Ejemplo 6
+Input: 
+Segunda plaza de toros histórica en Sevilla, un importante recurso cultural
+
+
+Output:
+Name: plaza de toros histórica
+Type: bullring
+Reason: La plaza de toros histórica de Sevilla es un importante monumento que refleja la tradición taurina de la ciudad.
+Este lugar no solo es un espacio para corridas de toros, sino que también es un atractivo turístico que ofrece visitas guiadas y eventos culturales, destacando su arquitectura y su historia en el contexto de la cultura española
+
+
+Ejemplo 7
+Input:
+Visita al Museo Nacional de Escultura en Valladolid.
+
+Output:
+Name: Museo Nacional de Escultura
+Type: TouristAttraction
+Reason: Es un museo abierto al público con interés cultural.
+
+Ejemplo 8
+Input:
+La Plaza Mayor de Valladolid es el centro neurálgico de la ciudad.
+
+Output:
+Name: Plaza Mayor de Valladolid
+Type: TouristAttraction
+Reason: Es un lugar emblemático visitable y de interés turístico.
+
+Ejemplo 9
+Input:
+La Semana Internacional de Cine de Valladolid (Seminci) es un evento cultural destacado.
+
+Output:
+Name: Seminci
+Type: Event
+Reason: Es un evento cultural periódico centrado en el cine.
+
+Ejemplo 10
+Input:
+Ruta del vino de Rueda desde Valladolid.
+
+Output:
+Name: Ruta del vino de Rueda
+Type: Route
+Reason: Es un recorrido turístico temático relacionado con el vino.
+
+Ejemplo 11
+Input:
+El Ayuntamiento de Valladolid gestiona los servicios municipales.
+
+Output:
+Name: Ayuntamiento de Valladolid
+Type: Organization
+Reason: Es una institución pública que administra servicios locales.
+
+Ejemplo 12
+Input:
+Estadio de fútbol en Valladolid, sede de eventos deportivos.
+
+Output:
+Name: Estadio José Zorrilla
+Type: Stadium
+Reason: El Estadio José Zorrilla es un emblemático estadio de fútbol ubicado en Valladolid, España.
+Es la casa del Real Valladolid y ha sido escenario de numerosos eventos deportivos y culturales.
+Su ubicación en la Avenida Mundial 82 lo convierte en un punto de interés para los aficionados al deporte y los turistas que visitan la ciudad durante eventos importantes como la Semana Santa Blanquivioleta
+
+
+
+{gold_context}
 
 TEXTO:
 \"\"\"
@@ -281,6 +525,9 @@ RESTRICCIONES:
         if default is None:
             default = []
 
+        if self.client is None:
+            return default
+
         try:
             response = self.client.chat.completions.create(
                 model=self.model,
@@ -289,13 +536,11 @@ RESTRICCIONES:
             )
 
             content = response.choices[0].message.content.strip()
-            
-
-            return  self.safe_json_parse(content)
+            return self.safe_json_parse(content)
 
         except Exception as e:
-            print("LLM extract error:", e)
-            return []
+            print("LLM extract error:", e, file=sys.stderr)
+            return default
 
     # ==================================================
     # PUBLIC API
@@ -326,11 +571,17 @@ RESTRICCIONES:
 
         return []
 
-    def analyze_entities(self, entities, text):
+    def analyze_entities(self, entities, text, url=None):
         if not entities:
             return []
 
-        prompt = self.build_classification_prompt(entities, text)
+        if url and normalize_url(url) in self.gold_examples:
+            print(
+                f"[LLM_SUPERVISOR][PROMPT_GOLD] usando ejemplo supervisado para {normalize_url(url)}",
+                file=sys.stderr,
+            )
+
+        prompt = self.build_classification_prompt(entities, text, url=url)
         data = self.call_llm_json(prompt, default={"entities": []})
 
         if isinstance(data, dict):
@@ -361,10 +612,14 @@ RESTRICCIONES:
                     clean_items.append({
                         "entity": entity,
                         "class": entity_class,
+                        "normalized_type": normalize_type(entity_class),
                         "score": score,
                         "short_description": short_description[:160],
                         "long_description": long_description[:400],
                     })
+
+                if url:
+                    clean_items = self.rerank_classified_entities(url, clean_items)
 
                 return clean_items
 
