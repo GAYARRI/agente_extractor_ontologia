@@ -1,25 +1,11 @@
 from __future__ import annotations
-
 import re
 import unicodedata
 from typing import Dict, Optional
 
 
 class TypeNormalizer:
-    """
-    Normalización conservadora de tipos.
-
-    Principios:
-    - preservar clases específicas
-    - resolver aliases y variantes
-    - evitar colapsos agresivos a clases padre
-    - usar fallback jerárquico solo cuando sea imprescindible
-    """
-
     def __init__(self):
-        # --------------------------------------------------------------
-        # Canonical exact classes
-        # --------------------------------------------------------------
         self.valid_types = {
             "Thing",
             "Place",
@@ -58,9 +44,6 @@ class TypeNormalizer:
             "Stadium",
         }
 
-        # --------------------------------------------------------------
-        # Aliases léxicos controlados
-        # --------------------------------------------------------------
         self.alias_map: Dict[str, str] = {
             "hotel": "AccommodationEstablishment",
             "hostel": "AccommodationEstablishment",
@@ -125,10 +108,6 @@ class TypeNormalizer:
             "organizador de eventos": "EventOrganisationCompany",
         }
 
-        # --------------------------------------------------------------
-        # Fallback jerárquico moderado
-        # SOLO si el tipo no es reconocido o necesitas agrupar.
-        # --------------------------------------------------------------
         self.parent_fallback: Dict[str, str] = {
             "Museum": "TouristAttraction",
             "Monument": "TouristAttraction",
@@ -156,10 +135,6 @@ class TypeNormalizer:
             "Stadium": "Place",
         }
 
-    # ------------------------------------------------------------------
-    # API principal
-    # ------------------------------------------------------------------
-
     def normalize(
         self,
         raw_type: Optional[str],
@@ -176,16 +151,13 @@ class TypeNormalizer:
 
         key = self._normalize_text(raw_type)
 
-        # alias directo
         if key in self.alias_map:
             return self.alias_map[key]
 
-        # matching flexible
         inferred = self._infer_from_text(key)
         if inferred:
             return inferred
 
-        # tentativa por forma CamelCase / snake_case / kebab-case
         candidate = self._canonicalize_token(raw_type)
         if candidate in self.valid_types:
             return candidate
@@ -201,10 +173,6 @@ class TypeNormalizer:
     def is_specific(self, cls: str) -> bool:
         return cls not in {"Thing", "Place", "Organization", "Service", "Concept", "Accommodation"}
 
-    # ------------------------------------------------------------------
-    # API contextual opcional
-    # ------------------------------------------------------------------
-
     def normalize_with_context(
         self,
         raw_type: Optional[str],
@@ -212,15 +180,6 @@ class TypeNormalizer:
         page_text: Optional[str] = None,
         default: str = "Thing",
     ) -> str:
-        """
-        Mejora el tipo usando nombre y contexto de página.
-        Muy útil para:
-        - taxi
-        - festival
-        - academia
-        - hotel
-        - parking
-        """
         t = self.normalize(raw_type, allow_parent_fallback=False, default=default)
         if t != "Thing":
             return t
@@ -268,10 +227,6 @@ class TypeNormalizer:
 
         return default
 
-    # ------------------------------------------------------------------
-    # Internos
-    # ------------------------------------------------------------------
-
     def _infer_from_text(self, key: str) -> Optional[str]:
         ordered_keywords = [
             ("plaza de toros", "BullRing"),
@@ -312,7 +267,7 @@ class TypeNormalizer:
         text = text.lower().strip()
         text = unicodedata.normalize("NFD", text)
         text = "".join(ch for ch in text if unicodedata.category(ch) != "Mn")
-        text = re.sub(r"[_\-\/]+", " ", text)
+        text = re.sub(r"[_\-/]+", " ", text)
         text = re.sub(r"\s+", " ", text)
         return text.strip()
 
@@ -320,3 +275,18 @@ class TypeNormalizer:
         chunks = re.split(r"[_\-\s]+", text.strip())
         chunks = [c for c in chunks if c]
         return "".join(c[:1].upper() + c[1:] for c in chunks)
+
+
+_DEFAULT_NORMALIZER = TypeNormalizer()
+
+def normalize_type_name(
+    raw_type: str | None,
+    *,
+    allow_parent_fallback: bool = False,
+    default: str = "Thing",
+) -> str:
+    return _DEFAULT_NORMALIZER.normalize(
+        raw_type,
+        allow_parent_fallback=allow_parent_fallback,
+        default=default,
+    )

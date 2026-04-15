@@ -42,3 +42,5 @@ PARENT_MAP = {
 
     "DestinationExperience": "Concept",
 }
+
+ONTOLOGY_PARENT_MAP = PARENT_MAP

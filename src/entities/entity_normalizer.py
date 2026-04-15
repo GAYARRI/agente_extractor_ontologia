@@ -1,4 +1,5 @@
 from __future__ import annotations
+import os
 
 from sentence_transformers import SentenceTransformer
 import numpy as np
@@ -7,14 +8,23 @@ import numpy as np
 class EntityNormalizer:
 
     def __init__(self):
-        self.model = SentenceTransformer(
-            "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
-        )
+        LOCAL_MODEL = r"C:\hf_models\paraphrase-multilingual-MiniLM-L12-v2"
+        REMOTE_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+
+        if os.path.exists(LOCAL_MODEL):
+            print("[DEBUG] Cargando modelo local")
+            self.model = SentenceTransformer(LOCAL_MODEL)
+        else:
+            print("[DEBUG] Cargando modelo desde HuggingFace")
+            self.model = SentenceTransformer(REMOTE_MODEL)
+
         self.threshold = 0.86
 
+    
     def cosine(self, a, b):
         return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
-
+    
+    
     def _entity_name(self, entity):
         if isinstance(entity, dict):
             return (

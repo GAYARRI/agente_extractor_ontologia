@@ -1,5 +1,3 @@
-# src/linking/wikidata_linker.py
-
 from __future__ import annotations
 
 import re
@@ -12,9 +10,7 @@ import requests
 class WikidataLinker:
     """
     Vincula entidades textuales con ítems de Wikidata.
-
     Devuelve preferentemente el QID (por ejemplo, 'Q8717').
-    También puede devolver metadatos internos en candidatos intermedios.
     """
 
     WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
@@ -25,16 +21,17 @@ class WikidataLinker:
         language: str = "es",
         limit: int = 5,
         timeout: int = 15,
-        min_score: float = 0.55,
+        min_score: float = 0.60,
     ) -> None:
         self.language = language
         self.limit = limit
         self.timeout = timeout
         self.min_score = min_score
+
         self.session = requests.Session()
         self.session.headers.update(
             {
-                "User-Agent": "TourismOntologyAgent/1.0 (contact: dev@example.com)"
+                "User-Agent": "TourismOntologyAgent/1.0"
             }
         )
 
@@ -81,7 +78,6 @@ class WikidataLinker:
 
         candidates = self._search_wikidata(entity_name)
 
-        # Intento adicional sin acentos si no hay nada
         if not candidates:
             normalized_query = self._strip_accents(entity_name)
             if normalized_query != entity_name:
@@ -124,13 +120,23 @@ class WikidataLinker:
         return None
 
     def get_entity_data(self, qid: str) -> dict:
+        """
+        Devuelve metadatos enriquecidos del ítem de Wikidata:
+        - wikidata_id
+        - label
+        - description
+        - latitude
+        - longitude
+        - image (URL HTTP si existe P18)
+        """
+        qid = self._safe_string(qid)
         if not qid:
             return {}
 
-        url = f"https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
+        url = self.WIKIDATA_ENTITY_URL.format(qid=qid)
 
         try:
-            response = self.session.get(url, timeout=20)
+            response = self.session.get(url, timeout=max(self.timeout, 20))
             response.raise_for_status()
             data = response.json()
         except Exception as e:
@@ -151,22 +157,22 @@ class WikidataLinker:
             "image": "",
         }
 
-        labels = entity.get("labels", {})
-        descriptions = entity.get("descriptions", {})
-        claims = entity.get("claims", {})
+        labels = entity.get("labels", {}) or {}
+        descriptions = entity.get("descriptions", {}) or {}
+        claims = entity.get("claims", {}) or {}
 
-        if "es" in labels:
-            result["label"] = labels["es"].get("value", "")
+        if self.language in labels:
+            result["label"] = self._safe_string(labels[self.language].get("value"))
         elif "en" in labels:
-            result["label"] = labels["en"].get("value", "")
+            result["label"] = self._safe_string(labels["en"].get("value"))
 
-        if "es" in descriptions:
-            result["description"] = descriptions["es"].get("value", "")
+        if self.language in descriptions:
+            result["description"] = self._safe_string(descriptions[self.language].get("value"))
         elif "en" in descriptions:
-            result["description"] = descriptions["en"].get("value", "")
+            result["description"] = self._safe_string(descriptions["en"].get("value"))
 
         try:
-            coord_claims = claims.get("P625", [])
+            coord_claims = claims.get("P625", []) or []
             if coord_claims:
                 coord = coord_claims[0]["mainsnak"]["datavalue"]["value"]
                 result["latitude"] = coord.get("latitude")
@@ -175,9 +181,10 @@ class WikidataLinker:
             pass
 
         try:
-            image_claims = claims.get("P18", [])
+            image_claims = claims.get("P18", []) or []
             if image_claims:
-                result["image"] = image_claims[0]["mainsnak"]["datavalue"]["value"]
+                raw_image = image_claims[0]["mainsnak"]["datavalue"]["value"]
+                result["image"] = self._commons_filename_to_url(raw_image)
         except Exception:
             pass
 
@@ -188,6 +195,7 @@ class WikidataLinker:
     # -------------------------------------------------------------------------
 
     def _search_wikidata(self, query: str) -> List[Dict[str, Any]]:
+    
         query = self._safe_string(query)
         if not query:
             return []
@@ -202,19 +210,39 @@ class WikidataLinker:
             "search": query,
         }
 
-        try:
-            response = self.session.get(
-                self.WIKIDATA_API_URL,
-                params=params,
-                timeout=self.timeout,
-            )
-            response.raise_for_status()
-            payload = response.json()
-            return payload.get("search", []) or []
-        except Exception as e:
-            print(f"⚠️ _search_wikidata request error: {e}")
-            return []
+        max_retries = 4
+        base_sleep = 1.5
 
+        for attempt in range(max_retries):
+            try:
+                response = self.session.get(
+                    self.WIKIDATA_API_URL,
+                    params=params,
+                    timeout=self.timeout,
+                )
+                response.raise_for_status()
+                payload = response.json()
+                return payload.get("search", []) or []
+
+            except requests.HTTPError as e:
+                status = getattr(e.response, "status_code", None)
+
+                if status == 429 and attempt < max_retries - 1:
+                    sleep_s = base_sleep * (2 ** attempt)
+                    print(f"⚠️ Wikidata 429 para '{query}'. Reintentando en {sleep_s:.1f}s...")
+                    time.sleep(sleep_s)
+                    continue
+
+                print(f"⚠️ _search_wikidata request error: {e}")
+                return []
+
+            except Exception as e:
+                print(f"⚠️ _search_wikidata request error: {e}")
+                return []
+
+        return []
+
+        
     def _get_entity_data(self, qid: str) -> Dict[str, Any]:
         qid = self._safe_string(qid)
         if not qid:
@@ -255,11 +283,16 @@ class WikidataLinker:
 
         norm_entity = self._normalize_text(entity_name)
         norm_label = self._normalize_text(candidate_label)
+        remote_desc = self._normalize_text(candidate_desc)
+        local_desc = self._normalize_text(f"{short_description} {long_description}")
+        source_norm = self._normalize_text(source_url)
 
         if norm_entity and norm_label == norm_entity:
             score += 0.45
         elif norm_entity and norm_entity in norm_label:
             score += 0.30
+        elif norm_label and norm_label in norm_entity:
+            score += 0.20
 
         norm_aliases = {self._normalize_text(a) for a in aliases if self._safe_string(a)}
         norm_candidate_aliases = {
@@ -272,30 +305,46 @@ class WikidataLinker:
         if norm_aliases.intersection(norm_candidate_aliases):
             score += 0.10
 
-        local_desc = self._normalize_text(f"{short_description} {long_description}")
-        remote_desc = self._normalize_text(candidate_desc)
-
         if local_desc and remote_desc:
             overlap = self._token_overlap(local_desc, remote_desc)
             score += min(overlap * 0.25, 0.15)
 
+        strong_bad_signals = [
+            "king",
+            "queen",
+            "dynasty",
+            "mythology",
+            "mythological",
+            "ruler",
+            "emperor",
+            "monarch",
+            "son of",
+            "ancient chinese",
+        ]
+
+        if mapped_class in {"place", "monument", "tourist_attraction", "organization"}:
+            if any(sig in remote_desc for sig in strong_bad_signals):
+                score -= 0.45
+
         if "desambigu" in remote_desc or "wikimedia disambiguation page" in remote_desc:
             score -= 0.40
 
+        if "wikimedia" in remote_desc:
+            score -= 0.10
+
         if self._is_type_compatible(mapped_class, candidate_instance_of, candidate_desc):
-            score += 0.20
+            score += 0.22
         else:
             if mapped_class not in {"unknown", "thing", ""}:
-                score -= 0.08
+                score -= 0.22
 
-        if "sevilla" in self._normalize_text(source_url):
-            sevilla_hit = (
-                "sevilla" in remote_desc
-                or "sevilla" in norm_label
-                or any("sevilla" in self._normalize_text(a) for a in candidate_aliases)
-            )
-            if sevilla_hit:
-                score += 0.10
+        if "sevilla" in source_norm or "seville" in source_norm:
+            if not any(k in remote_desc or k in norm_label for k in ["sevilla", "seville"]):
+                score -= 0.10
+
+        if "valladolid" in source_norm:
+            if "valladolid" not in remote_desc and "valladolid" not in norm_label:
+                score -= 0.10
 
         if mapped_class == "place" and self._looks_like_place_name(entity_name):
             score += 0.03
@@ -315,10 +364,6 @@ class WikidataLinker:
         long_description: str = "",
         aliases: Optional[List[str]] = None,
     ) -> str:
-        """
-        Reduce clases del pipeline a categorías útiles para Wikidata.
-        Evita usar 'place' como fallback por defecto.
-        """
         aliases = aliases or []
 
         text = " ".join(
@@ -332,10 +377,28 @@ class WikidataLinker:
         )
         norm = self._normalize_text(text)
         class_norm = self._normalize_text(entity_class)
+        name_norm = self._normalize_text(entity_name)
 
-        # Reglas fuertes por nombre
-        if self._looks_like_event_name(entity_name, short_description, long_description):
+        if class_norm in {"castle", "castillo", "alcazar", "palace", "palacio"}:
+            return "monument"
+
+        if class_norm in {"cathedral", "catedral", "church", "iglesia", "chapel", "capilla", "basilica"}:
+            return "monument"
+
+        if class_norm in {"square", "plaza", "place", "location"}:
+            return "place"
+
+        if class_norm in {"museum", "museo", "touristattraction", "tourist_attraction"}:
+            return "tourist_attraction"
+
+        if class_norm in {"event", "evento", "festival", "fair"}:
             return "event"
+
+        if class_norm in {"organization", "company", "empresa", "institution"}:
+            return "organization"
+
+        if class_norm in {"concept", "art", "style", "tradition"}:
+            return "concept"
 
         if self._looks_like_monument_name(entity_name):
             return "monument"
@@ -343,18 +406,10 @@ class WikidataLinker:
         if self._looks_like_place_name(entity_name):
             return "place"
 
-        if self._looks_like_person_name(entity_name, short_description, long_description):
-            return "person"
+        if self._looks_like_event_name(entity_name, short_description, long_description):
+            return "event"
 
-        # Reglas por tipo/contexto
-        if any(
-            k in norm
-            for k in [
-                "person", "persona", "human", "artista", "cantor", "cantaor",
-                "bailaor", "bailaora", "poeta", "pintor", "escultor",
-                "torero", "escritor", "novelista", "compositor", "cantante",
-            ]
-        ):
+        if self._looks_like_person_name(entity_name, short_description, long_description):
             return "person"
 
         if any(
@@ -372,7 +427,7 @@ class WikidataLinker:
             for k in [
                 "monument", "monumento", "iglesia", "catedral", "capilla",
                 "basilica", "palacio", "torre", "puente", "archivo",
-                "alcazar", "muralla",
+                "alcazar", "muralla", "castillo", "castle",
             ]
         ):
             return "monument"
@@ -380,8 +435,8 @@ class WikidataLinker:
         if any(
             k in norm
             for k in [
-                "museum", "museo", "touristattraction", "atraccion",
-                "visitor attraction",
+                "museum", "museo", "tourist attraction", "visitor attraction",
+                "atraccion",
             ]
         ):
             return "tourist_attraction"
@@ -416,60 +471,25 @@ class WikidataLinker:
         ):
             return "concept"
 
+        if any(
+            k in norm
+            for k in [
+                "person", "persona", "human", "artista", "cantor", "cantaor",
+                "bailaor", "bailaora", "poeta", "pintor", "escultor",
+                "torero", "escritor", "novelista", "compositor", "cantante",
+            ]
+        ):
+            return "person"
+
         if class_norm in {"", "thing", "entity", "item", "unknown"}:
-            if any(
-                k in norm
-                for k in [
-                    "nacio", "murio", "poeta", "pintor", "escultor", "torero",
-                    "artista", "cantante", "cantaor", "bailaor",
-                    "escritor", "compositor",
-                ]
-            ):
-                return "person"
-
-            if any(
-                k in norm
-                for k in [
-                    "festival", "bienal", "feria", "semana santa",
-                    "evento", "celebracion",
-                ]
-            ):
-                return "event"
-
-            if any(
-                k in norm
-                for k in [
-                    "plaza", "calle", "parque", "mercado",
-                    "barrio", "avenida", "paseo",
-                ]
-            ):
-                return "place"
-
-            if any(
-                k in norm
-                for k in [
-                    "basilica", "catedral", "iglesia", "capilla",
-                    "palacio", "alcazar", "torre", "monumento",
-                ]
-            ):
+            if any(k in name_norm for k in ["castillo", "castle", "alcazar", "palacio", "basilica", "catedral", "iglesia"]):
                 return "monument"
 
-            if any(
-                k in norm
-                for k in [
-                    "museo", "museum",
-                ]
-            ):
-                return "tourist_attraction"
+            if any(k in name_norm for k in ["plaza", "calle", "parque", "mercado", "barrio", "avenida", "paseo"]):
+                return "place"
 
-            if any(
-                k in norm
-                for k in [
-                    "arte", "folclore", "folklore", "tradicion",
-                    "estilo", "cultura",
-                ]
-            ):
-                return "concept"
+            if any(k in name_norm for k in ["festival", "bienal", "feria", "semana santa", "evento"]):
+                return "event"
 
         return "unknown"
 
@@ -597,9 +617,6 @@ class WikidataLinker:
         return clean_aliases
 
     def _extract_instance_of(self, entity_data: Dict[str, Any]) -> List[str]:
-        """
-        Extrae IDs de claims P31.
-        """
         results: List[str] = []
         claims = entity_data.get("claims", {}) or {}
         p31 = claims.get("P31", []) or []
@@ -655,6 +672,7 @@ class WikidataLinker:
             "de", "del", "la", "las", "los", "el", "san", "santa",
             "plaza", "parque", "mercado", "palacio", "basilica",
             "iglesia", "calle", "avenida", "paseo", "torre",
+            "castillo", "alcazar", "catedral", "capilla",
         }
         non_stop = [t for t in tokens if t not in stop_tokens]
 
@@ -696,7 +714,7 @@ class WikidataLinker:
             for prefix in [
                 "basilica ", "catedral ", "iglesia ", "capilla ",
                 "palacio ", "alcazar ", "torre ", "puente ",
-                "archivo ", "monasterio ", "convento ",
+                "archivo ", "monasterio ", "convento ", "castillo ",
             ]
         )
 
@@ -741,3 +759,20 @@ class WikidataLinker:
             return 0.0
 
         return len(inter) / len(union)
+
+    def _commons_filename_to_url(self, filename: str) -> str:
+        filename = self._safe_string(filename)
+        if not filename:
+            return ""
+
+        if filename.startswith("http://") or filename.startswith("https://"):
+            return filename
+
+        low = filename.lower()
+        if low.startswith("file:"):
+            filename = filename[5:].strip()
+        elif low.startswith("archivo:"):
+            filename = filename[8:].strip()
+
+        safe_name = filename.replace(" ", "_")
+        return f"https://commons.wikimedia.org/wiki/Special:FilePath/{safe_name}"

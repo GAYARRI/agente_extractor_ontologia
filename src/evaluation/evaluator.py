@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from dataclasses import dataclass
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -14,6 +15,38 @@ from src.evaluation.type_normalizer import normalize_type_name
 
 SOFT_THRESHOLD = 0.75
 
+NOISE_PATTERNS = [
+    r"\bcompartir\b",
+    r"\babrir\b",
+    r"\bdireccion\b",
+    r"\bdirección\b",
+    r"\bcomprar\b",
+    r"\bdonde\b",
+    r"\bdónde\b",
+    r"\bgoogle maps\b",
+    r"\bademas\b",
+    r"\bademás\b",
+    r"\bcalle\b",
+]
+
+
+def canonicalize_entity_name(text: str) -> str:
+    if not text:
+        return ""
+
+    text = text.strip()
+    text = unicodedata.normalize("NFD", text)
+    text = "".join(ch for ch in text if unicodedata.category(ch) != "Mn")
+    text = text.lower()
+
+    for pattern in NOISE_PATTERNS:
+        text = re.sub(pattern, " ", text)
+
+    text = re.sub(r"[|·•,;:()]+", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+
+    return text
+
 
 @dataclass
 class EvalPair:
@@ -22,6 +55,8 @@ class EvalPair:
     gt_type: str
     pred_name: str
     pred_type: str
+    gt_name_canonical: str
+    pred_name_canonical: str
     exact_name_match: bool
     exact_type_match: bool
     exact_match: bool
@@ -272,11 +307,14 @@ class Evaluator:
         pred_name = pred_item.get("name", "")
         pred_type = normalize_type_name(pred_item.get("type", ""))
 
-        exact_name_match = self.normalize_text(gt_name) == self.normalize_text(pred_name)
+        gt_name_canonical = canonicalize_entity_name(gt_name)
+        pred_name_canonical = canonicalize_entity_name(pred_name)
+
+        exact_name_match = gt_name_canonical == pred_name_canonical
         exact_type_match = gt_type == pred_type
         exact_match = exact_name_match and exact_type_match
 
-        name_similarity = self.compute_name_similarity(gt_name, pred_name)
+        name_similarity = self.compute_name_similarity(gt_name_canonical, pred_name_canonical)
         class_distance = self.dist_engine.shortest_taxonomic_distance(gt_type, pred_type)
         class_similarity = round(self.dist_engine.similarity(gt_type, pred_type), 6)
 
@@ -291,6 +329,8 @@ class Evaluator:
             gt_type=gt_type,
             pred_name=pred_name,
             pred_type=pred_type,
+            gt_name_canonical=gt_name_canonical,
+            pred_name_canonical=pred_name_canonical,
             exact_name_match=exact_name_match,
             exact_type_match=exact_type_match,
             exact_match=exact_match,
@@ -439,6 +479,8 @@ class Evaluator:
                 "gt_type": p.gt_type,
                 "pred_name": p.pred_name,
                 "pred_type": p.pred_type,
+                "gt_name_canonical": p.gt_name_canonical,
+                "pred_name_canonical": p.pred_name_canonical,
                 "exact_name_match": p.exact_name_match,
                 "exact_type_match": p.exact_type_match,
                 "exact_match": p.exact_match,

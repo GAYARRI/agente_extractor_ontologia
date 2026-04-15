@@ -1,4 +1,5 @@
 from __future__ import annotations
+from pathlib import Path
 
 import os
 import sys
@@ -6,12 +7,20 @@ import json
 import argparse
 import certifi
 import traceback
+import re
+import unicodedata
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from collections import Counter
 from contextlib import redirect_stdout
 from io import StringIO
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
+
+# Asegura que la raíz del proyecto esté en sys.path
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
+
 
 from src.site_crawler import SiteCrawler
 from src.tourism_pipeline_ontology_driven import TourismPipeline
@@ -381,7 +390,6 @@ def process_pages(pages, pipeline, args, diagnostic=False):
                 expected_type=getattr(args, "expected_type", None),
             )
 
-
             print("  -> ENTITIES_JSON:")
             for i, e in enumerate((result or [])[:3], start=1):
                 print(f"     [{i}]")
@@ -395,49 +403,6 @@ def process_pages(pages, pipeline, args, diagnostic=False):
                     f"semantic_type={e.get('semantic_type')!r} | "
                     f"score={e.get('score')!r}"
                 )
-
-
-            for i, e in enumerate((result or [])[:3], start=1):
-                print(f"     [{i}]")
-                print(json.dumps(e, indent=2, ensure_ascii=False))
-
-            print("  -> ENTITIES_JSON:")
-
-            if not result:
-                print("     []")
-            else:
-                for i, e in enumerate(result[:5], start=1):
-                    print(f"     [{i}]")
-                    print(json.dumps(e, indent=2, ensure_ascii=False))
-
-            # ===============================
-            # PRINT ENTIDADES (TOP 5)
-            # ===============================
-            print("  -> ENTITIES:")
-
-            if not result:
-                print("     (no entities)")
-            else:
-                for i, e in enumerate(result[:5], start=1):
-                    if not isinstance(e, dict):
-                        print(f"     {i}. {e}")
-                        continue
-
-                    name = (
-                        e.get("name")
-                        or e.get("entity_name")
-                        or e.get("entity")
-                        or e.get("label")
-                        or ""
-                    )
-
-                    print(
-                        f"     {i}. name={name!r} | "
-                        f"type={e.get('type')!r} | "
-                        f"semantic_type={e.get('semantic_type')!r} | "
-                        f"score={e.get('score')!r}"
-                    )  
-
 
             diag(diagnostic, f"Tipo de result={type(result).__name__}")
 
@@ -454,7 +419,6 @@ def process_pages(pages, pipeline, args, diagnostic=False):
                 })
 
             elif isinstance(result, dict):
-                # si ya viene en formato bloque
                 if "entities" in result and isinstance(result.get("entities"), list):
                     if not result["entities"]:
                         raise ValueError("pipeline.run devolvió dict con entities vacío")
@@ -462,7 +426,6 @@ def process_pages(pages, pipeline, args, diagnostic=False):
                     block.setdefault("url", url)
                     results_ok.append(block)
                 else:
-                    # dict-entity suelta -> envolver
                     results_ok.append({
                         "url": url,
                         "entities": [result],
@@ -492,6 +455,232 @@ def process_pages(pages, pipeline, args, diagnostic=False):
     return results_ok, page_errors
 
 
+def _normalize_name_for_merge(value: Any) -> str:
+    text = "" if value is None else str(value)
+    text = text.strip().lower()
+    text = unicodedata.normalize("NFD", text)
+    text = "".join(ch for ch in text if unicodedata.category(ch) != "Mn")
+
+    noise_patterns = [
+        r"\bcompartir\b",
+        r"\babrir\b",
+        r"\bgoogle maps\b",
+        r"\bdireccion\b",
+        r"\bdirección\b",
+        r"\bcopiar direccion\b",
+        r"\bcopiar dirección\b",
+    ]
+    for pattern in noise_patterns:
+        text = re.sub(pattern, " ", text)
+
+    text = re.sub(r"[^\w\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def _best_name(entity: Dict[str, Any]) -> str:
+    return (
+        entity.get("name")
+        or entity.get("entity_name")
+        or entity.get("entity")
+        or entity.get("label")
+        or ""
+    )
+
+
+def _extract_images_from_entity(entity: Dict[str, Any]) -> List[str]:
+    props = entity.get("properties") or {}
+    if not isinstance(props, dict):
+        props = {}
+
+    candidates = [
+        entity.get("image", ""),
+        entity.get("mainImage", ""),
+        entity.get("images", []),
+        entity.get("additionalImages", []),
+        props.get("image", ""),
+        props.get("mainImage", ""),
+        props.get("images", []),
+        props.get("additionalImages", []),
+        props.get("candidateImage", ""),
+    ]
+
+    out: List[str] = []
+    seen = set()
+
+    def _flatten(v):
+        if v is None:
+            return []
+        if isinstance(v, list):
+            acc = []
+            for item in v:
+                acc.extend(_flatten(item))
+            return acc
+        return [v]
+
+    for raw in candidates:
+        for item in _flatten(raw):
+            s = str(item or "").strip()
+            if not s:
+                continue
+            key = s.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(s)
+
+    return out
+
+
+def _is_valid_image_url(url: str) -> bool:
+    low = str(url or "").strip().lower()
+    if not low:
+        return False
+    if not (low.startswith("http://") or low.startswith("https://")):
+        return False
+    if ".svg" in low:
+        return False
+    bad_patterns = [
+        "_next/static/",
+        "_next/image?",
+        "/static/media/",
+        "logo",
+        "icon",
+        "sprite",
+        "banner",
+        "placeholder",
+        "favicon",
+        "avatar",
+        "share",
+        "social",
+        "financion",
+    ]
+    if any(p in low for p in bad_patterns):
+        return False
+    valid_exts = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]
+    return any(ext in low for ext in valid_exts)
+
+
+def _build_raw_entity_index(all_results: List[Dict[str, Any]]) -> Dict[Tuple[str, str], Dict[str, Any]]:
+    index: Dict[Tuple[str, str], Dict[str, Any]] = {}
+
+    for block in all_results:
+        url = str(block.get("url") or "").strip()
+        for entity in block.get("entities", []) or []:
+            if not isinstance(entity, dict):
+                continue
+
+            name = _normalize_name_for_merge(_best_name(entity))
+            if not url or not name:
+                continue
+
+            key = (url, name)
+            existing = index.get(key)
+
+            score = float(entity.get("score") or 0)
+            if existing is None or score > float(existing.get("score") or 0):
+                index[key] = entity
+
+    return index
+
+
+def _merge_back_enrichment(global_entities: List[Dict[str, Any]], all_results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    raw_index = _build_raw_entity_index(all_results)
+    merged: List[Dict[str, Any]] = []
+
+    for entity in global_entities:
+        if not isinstance(entity, dict):
+            merged.append(entity)
+            continue
+
+        url = str(entity.get("sourceUrl") or entity.get("url") or "").strip()
+        name = _normalize_name_for_merge(_best_name(entity))
+        raw = raw_index.get((url, name))
+
+        if not raw:
+            merged.append(entity)
+            continue
+
+        out = dict(entity)
+        props = out.get("properties") or {}
+        if not isinstance(props, dict):
+            props = {}
+
+        raw_props = raw.get("properties") or {}
+        if not isinstance(raw_props, dict):
+            raw_props = {}
+
+        # Wikidata
+        if not out.get("wikidata_id") and raw.get("wikidata_id"):
+            out["wikidata_id"] = raw.get("wikidata_id")
+        if not out.get("wikidataId") and raw.get("wikidataId"):
+            out["wikidataId"] = raw.get("wikidataId")
+
+        # Coordenadas
+        out_coords = out.get("coordinates") or {}
+        raw_coords = raw.get("coordinates") or {}
+        if not isinstance(out_coords, dict):
+            out_coords = {}
+        if not isinstance(raw_coords, dict):
+            raw_coords = {}
+
+        if out_coords.get("lat") in (None, "") and raw_coords.get("lat") not in (None, ""):
+            out_coords["lat"] = raw_coords.get("lat")
+        if out_coords.get("lng") in (None, "") and raw_coords.get("lng") not in (None, ""):
+            out_coords["lng"] = raw_coords.get("lng")
+        if out_coords:
+            out["coordinates"] = out_coords
+
+        if out.get("latitude") in (None, "") and raw.get("latitude") not in (None, ""):
+            out["latitude"] = raw.get("latitude")
+        if out.get("longitude") in (None, "") and raw.get("longitude") not in (None, ""):
+            out["longitude"] = raw.get("longitude")
+
+        # Imágenes: conservar solo si son válidas
+        candidate_images = _extract_images_from_entity(raw)
+        valid_images = [img for img in candidate_images if _is_valid_image_url(img)]
+        if valid_images:
+            if not out.get("image"):
+                out["image"] = valid_images[0]
+            if not out.get("mainImage"):
+                out["mainImage"] = valid_images[0]
+
+            existing_images = out.get("images")
+            if not isinstance(existing_images, list):
+                existing_images = []
+
+            for img in valid_images:
+                if img not in existing_images:
+                    existing_images.append(img)
+
+            out["images"] = existing_images
+            if len(existing_images) > 1:
+                out["additionalImages"] = existing_images[1:]
+
+            if not props.get("image"):
+                props["image"] = valid_images[0]
+            if not props.get("mainImage"):
+                props["mainImage"] = valid_images[0]
+            if len(existing_images) > 1 and not props.get("additionalImages"):
+                props["additionalImages"] = existing_images[1:]
+
+        # Descripciones largas si se perdieron
+        for field in ["description", "short_description", "long_description", "address", "phone", "email"]:
+            if not out.get(field) and raw.get(field):
+                out[field] = raw.get(field)
+
+        if raw_props:
+            merged_props = dict(raw_props)
+            merged_props.update(props)
+            out["properties"] = merged_props
+        else:
+            out["properties"] = props
+
+        merged.append(out)
+
+    return merged
+
+
 def consolidate_entities(all_results, diagnostic=False):
     diag(diagnostic, f"Entrando en consolidate_entities con {len(all_results)} bloques")
 
@@ -508,7 +697,10 @@ def consolidate_entities(all_results, diagnostic=False):
     postprocessor = KGPostProcessor()
     global_entities = postprocessor.process(global_entities)
 
-    diag(diagnostic, f"Tras postprocess(): {len(global_entities)} entidades")
+    # Reinyectar enriquecimiento perdido desde resultados crudos
+    global_entities = _merge_back_enrichment(global_entities, all_results)
+
+    diag(diagnostic, f"Tras postprocess()+merge_back: {len(global_entities)} entidades")
     return global_entities
 
 

@@ -28,13 +28,41 @@ class ImageEnricher:
             return True
 
         u = url.lower()
+
         bad_patterns = [
-            "logo", "icon", "iconos", "sprite", "banner", "placeholder",
-            "default", "avatar", "header", "footer",
-            "og-image", "share", "social",
-            "separador", "separator","svg","feeling","negativo",
+            "logo",
+            "icon",
+            "iconos",
+            "sprite",
+            "banner",
+            "placeholder",
+            "default",
+            "avatar",
+            "header",
+            "footer",
+            "og-image",
+            "share",
+            "social",
+            "separador",
+            "separator",
+            "feeling",
+            "negativo",
+            "_next/static/",
+            "_next/image?",
+            "/static/media/",
+            "financion",
+            "fav",
+            "favicon",
         ]
-        return any(p in u for p in bad_patterns)        
+
+        if any(p in u for p in bad_patterns):
+            return True
+
+        # En tu caso, la mayoría de SVGs están siendo recursos decorativos/UI
+        if ".svg" in u:
+            return True
+
+        return False
 
     def _extract_img_tags(self, html: str):
         if not html:
@@ -75,7 +103,14 @@ class ImageEnricher:
 
         return src
 
-    def _image_relevance_score(self, entity: str, src: str, alt: str = "", title: str = "", text: str = "") -> int:
+    def _image_relevance_score(
+        self,
+        entity: str,
+        src: str,
+        alt: str = "",
+        title: str = "",
+        text: str = "",
+    ) -> int:
         score = 0
 
         entity_tokens = self._tokens(entity)
@@ -90,6 +125,9 @@ class ImageEnricher:
         if any(x in src_l for x in ["logo", "icon", "iconos", "sprite", "banner", "placeholder"]):
             score -= 5
 
+        if any(x in src_l for x in ["_next/static/", "_next/image?", "/static/media/", "financion"]):
+            score -= 6
+
         if any(t in alt_l for t in entity_tokens):
             score += 6
 
@@ -102,20 +140,35 @@ class ImageEnricher:
         if entity_tokens and any(t in text_l for t in entity_tokens):
             score += 2
 
-        if src_l.endswith((".jpg", ".jpeg", ".webp")):
+        if alt_l:
+            score += 1
+
+        if title_l:
+            score += 1
+
+        if src_l.endswith((".jpg", ".jpeg", ".webp", ".png", ".avif")):
+            score += 2
+
+        # Bonus para rutas con pinta de repositorio real de imágenes
+        if any(x in src_l for x in ["/sites/default/files/", "/migration/", "/images/"]):
             score += 2
 
         generic_hits = [
-            "visitasevilla", "home", "portada", "hero",
-            "cabecera", "header", "cover"
+            "home",
+            "portada",
+            "hero",
+            "cabecera",
+            "header",
+            "cover",
         ]
         if any(g in src_l for g in generic_hits):
-            score -= 4
+            score -= 3
 
         if len(src_l) < 15:
             score -= 2
 
-        return score   
+        return score
+
     def _dedupe_images(self, images):
         out = []
         seen = set()
@@ -174,9 +227,9 @@ class ImageEnricher:
 
     def enrich(self, entity, text="", html="", url=""):
         """
-        Muy conservador:
+        Conservador, pero menos restrictivo:
         - usa imágenes explícitas en el texto si existen
-        - usa imágenes del HTML solo si tienen evidencia razonable
+        - usa imágenes del HTML si tienen evidencia razonable
         - NO usa og:image como fallback global
         """
 
@@ -206,26 +259,24 @@ class ImageEnricher:
 
         src, score = self._best_candidate(cleaned)
 
-        if score >= 3:
+        if score >= 2:
             return {
                 "image": src,
                 "mainImage": src,
+                "images": [src],
                 "debug": {
                     "image_score": score,
-                    "image_reason": "best_candidate_from_html_or_text"
-                }
+                    "image_reason": "best_candidate_from_html_or_text",
+                },
             }
 
-        if score == 2:
+        if score == 1:
             return {
                 "candidateImage": src,
                 "debug": {
                     "image_score": score,
-                    "image_reason": "weak_candidate_from_html_or_text"
-                }
+                    "image_reason": "weak_candidate_from_html_or_text",
+                },
             }
 
-        return {}    
-        
-    
-    
+        return {}

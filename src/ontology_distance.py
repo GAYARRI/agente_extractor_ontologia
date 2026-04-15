@@ -34,6 +34,12 @@ class OntologyDistance:
             "EventAttendanceFacility",
         }
 
+    def shortest_taxonomic_distance(self, source: Optional[str], target: Optional[str]) -> int:
+        """
+        Alias de compatibilidad con versiones antiguas del evaluador.
+        """
+        return self.distance(source, target)
+
     def distance(self, source: Optional[str], target: Optional[str]) -> int:
         if not source or not target:
             return 999
