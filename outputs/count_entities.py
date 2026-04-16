@@ -1,20 +1,29 @@
 #!/usr/bin/env python3
 import json
 import argparse
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 import re
 
 
+FORBIDDEN_TYPES = {
+    "Thing",
+    "Entity",
+    "Item",
+    "Location",
+}
+
+GENERIC_TYPES = {
+    "Unknown",
+    "Place",
+    "Organization",
+    "Service",
+    "Concept",
+    "Accommodation",
+}
+
+
 def has_image(entity: dict) -> bool:
-    """
-    Considera que una entidad tiene imagen si al menos uno de estos campos
-    contiene valor:
-      - image
-      - mainImage
-      - images (lista no vacía)
-      - additionalImages (lista no vacía)
-    """
     return any([
         bool(entity.get("image")),
         bool(entity.get("mainImage")),
@@ -24,25 +33,95 @@ def has_image(entity: dict) -> bool:
 
 
 def has_coordinates(entity: dict) -> bool:
-    """
-    Considera que una entidad tiene coordenadas si coordinates.lat y
-    coordinates.lng existen y no son None.
-    """
     coords = entity.get("coordinates") or {}
     lat = coords.get("lat")
     lng = coords.get("lng")
     return lat is not None and lng is not None
 
 
-def entity_classes(entity: dict) -> list[str]:
+def _as_list(value):
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return value
+    if isinstance(value, tuple):
+        return list(value)
+    return [value]
+
+
+def _clean_type(t: str) -> str:
+    return str(t).strip()
+
+
+def _is_valid_type(t: str) -> bool:
+    t = _clean_type(t)
+    return bool(t) and t not in FORBIDDEN_TYPES
+
+
+def _sanitize_types(types) -> list[str]:
+    out = []
+    seen = set()
+    for t in _as_list(types):
+        t = _clean_type(t)
+        if not _is_valid_type(t):
+            continue
+        if t in seen:
+            continue
+        seen.add(t)
+        out.append(t)
+    return out
+
+
+def entity_primary_class(entity: dict) -> str:
     """
-    Devuelve las clases de la entidad. Se excluye 'Location' del desglose
-    principal porque suele actuar como etiqueta genérica.
-    Si una entidad solo tiene 'Location', se mantiene.
+    Devuelve una sola clase principal por entidad, con esta prioridad:
+      1. class
+      2. primer type válido en types
+      3. SIN_TIPO
     """
-    types = entity.get("types") or []
-    filtered = [t for t in types if t != "Location"]
-    return filtered if filtered else (types or ["SIN_TIPO"])
+    entity_class = _clean_type(entity.get("class", ""))
+    if _is_valid_type(entity_class):
+        return entity_class
+
+    types = _sanitize_types(entity.get("types"))
+    if types:
+        # Priorizar tipos específicos frente a genéricos
+        specific = [t for t in types if t not in GENERIC_TYPES]
+        if specific:
+            return specific[0]
+        return types[0]
+
+    # Compatibilidad por si alguna salida usa "type"
+    fallback_type = _sanitize_types(entity.get("type"))
+    if fallback_type:
+        specific = [t for t in fallback_type if t not in GENERIC_TYPES]
+        if specific:
+            return specific[0]
+        return fallback_type[0]
+
+    return "SIN_TIPO"
+
+
+def entity_all_classes(entity: dict) -> list[str]:
+    """
+    Devuelve todas las clases válidas de la entidad para auditoría secundaria,
+    excluyendo tipos prohibidos.
+    """
+    classes = []
+
+    entity_class = _clean_type(entity.get("class", ""))
+    if _is_valid_type(entity_class):
+        classes.append(entity_class)
+
+    for t in _sanitize_types(entity.get("types")):
+        if t not in classes:
+            classes.append(t)
+
+    for t in _sanitize_types(entity.get("type")):
+        if t not in classes:
+            classes.append(t)
+
+    return classes or ["SIN_TIPO"]
 
 
 def slugify(value: str) -> str:
@@ -64,6 +143,11 @@ def main() -> None:
     parser.add_argument(
         "--export-dir",
         help="Directorio opcional para exportar un JSON por clase de entidad",
+    )
+    parser.add_argument(
+        "--multi-class",
+        action="store_true",
+        help="Cuenta todas las clases válidas de cada entidad en vez de solo la clase principal",
     )
     args = parser.parse_args()
 
@@ -87,7 +171,7 @@ def main() -> None:
     entities_by_class = defaultdict(list)
 
     for entity in data:
-        classes = entity_classes(entity)
+        classes = entity_all_classes(entity) if args.multi_class else [entity_primary_class(entity)]
 
         for cls in classes:
             stats_by_class[cls]["total"] += 1

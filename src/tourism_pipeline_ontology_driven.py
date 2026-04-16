@@ -14,6 +14,10 @@ from bs4 import BeautifulSoup
 from src.html_block_extractor import HTMLBlockExtractor
 from src.tourism_entity_extractor import TourismEntityExtractor
 from src.entity_cleaner import EntityCleaner
+from src.entity_filter import EntityFilter
+from src.entity_quality_scorer import EntityQualityScorer
+from src.entity_type_resolver import EntityTypeResolver
+from src.ontology_matcher import OntologyMatcher
 from src.entities.entity_deduplicator import EntityDeduplicator
 from src.entities.entity_normalizer import EntityNormalizer
 from src.entity_expander import EntityExpander
@@ -85,11 +89,15 @@ class TourismPipeline:
         self.block_extractor = HTMLBlockExtractor()
         self.entity_extractor = TourismEntityExtractor()
         self.cleaner = EntityCleaner()
+        self.entity_filter = EntityFilter()
+        self.quality_scorer = EntityQualityScorer()
+        self.type_resolver = EntityTypeResolver()
         self.deduplicator = EntityDeduplicator()
         self.normalizer = EntityNormalizer()
         self.expander = EntityExpander()
         self.splitter = EntitySplitter()
         self.ontology_index = OntologyIndex(ontology_path)
+        self.ontology_matcher = OntologyMatcher(self.ontology_index)
         self.poi_discovery = POIDiscovery()
         self.event_detector = EventDetector()
         self.type_guesser = SemanticTypeGuesser()
@@ -315,6 +323,10 @@ class TourismPipeline:
 
         return sanitized
 
+    def _is_forbidden_type(self, value: str) -> bool:
+        short = str(value or "").split("#")[-1].split("/")[-1].strip()
+        return short.lower() in {"", "thing", "unknown", "entity", "item"}
+
     def _promote_semantic_type(self, entities: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         promoted = []
 
@@ -328,9 +340,12 @@ class TourismPipeline:
             if semantic_type:
                 short_type = semantic_type.split("#")[-1].split("/")[-1].strip()
 
-                if short_type:
+                if short_type and not self._is_forbidden_type(short_type):
                     item["class"] = short_type
                     item["type"] = short_type
+                elif short_type:
+                    item["semantic_type"] = ""
+                    item["semantic_type_rejected"] = short_type
 
             promoted.append(item)
 
@@ -388,25 +403,21 @@ class TourismPipeline:
         
     wikidata_hint="" 
     
-    def _ensure_entity_type(self, entities: List[Dict[str, Any]], page_text: str = "") -> List[Dict[str, Any]]:
+    def _ensure_entity_type(self, entities: List[Dict[str, Any]], page_text: str = "", page_signals: Optional[Dict[str, Any]] = None, expected_type: Optional[str] = None) -> List[Dict[str, Any]]:
         fixed = []
-
         weak_types = {"", "thing", "unknown", "entity", "item"}
+        forbidden_final_types = {"thing"}
 
         for entity in entities or []:
             if not isinstance(entity, dict):
                 continue
 
             item = dict(entity)
-
             current_class = str(item.get("class") or "").strip()
             current_type = str(item.get("type") or "").strip()
             semantic_type = str(item.get("semantic_type") or "").strip()
-
-            props = item.get("properties")
-            prop_type = ""
-            if isinstance(props, dict):
-                prop_type = str(props.get("type") or "").strip()
+            props = item.get("properties") if isinstance(item.get("properties"), dict) else {}
+            prop_type = str(props.get("type") or "").strip()
 
             def normalize_candidate_type(value: str) -> str:
                 value = str(value or "").strip()
@@ -421,29 +432,12 @@ class TourismPipeline:
             normalized_type = normalize_candidate_type(current_type)
             normalized_semantic = normalize_candidate_type(semantic_type)
             normalized_prop_type = normalize_candidate_type(prop_type)
+            canonical_type = normalized_class or normalized_type or normalized_semantic or normalized_prop_type
 
-            canonical_type = (
-                normalized_class
-                or normalized_type
-                or normalized_semantic
-                or normalized_prop_type
-            )
+            name = item.get("name") or item.get("entity_name") or item.get("entity") or item.get("label") or ""
+            wikidata_hint = self._guess_wikidata_class_hint(entity_name=name, page_text=page_text)
 
-            name = (
-                item.get("name")
-                or item.get("entity_name")
-                or item.get("entity")
-                or item.get("label")
-                or ""
-            )
-
-            # SIEMPRE inicializada
-            wikidata_hint = self._guess_wikidata_class_hint(
-                entity_name=name,
-                page_text=page_text,
-            )
-
-            if canonical_type:
+            if canonical_type and canonical_type.lower() not in weak_types and canonical_type.lower() not in forbidden_final_types:
                 item["class"] = canonical_type
                 item["type"] = canonical_type
                 if wikidata_hint:
@@ -451,26 +445,38 @@ class TourismPipeline:
                 fixed.append(item)
                 continue
 
-            guessed = self._guess_type_from_name_and_context(
-                entity_name=name,
-                page_text=page_text,
-                current_type="",
+            if canonical_type and canonical_type.lower() in forbidden_final_types:
+                item["rejected_type"] = canonical_type
+
+            ontology_candidates = item.get("ontology_candidates") or []
+            resolved = self.type_resolver.resolve(
+                mention=name,
+                context=item.get("context") or page_text,
+                block_text=item.get("source_text") or "",
+                page_signals=page_signals or {},
+                properties=item,
+                expected_type=expected_type,
+                ontology_candidates=ontology_candidates,
             )
 
-            if guessed:
-                item["class"] = guessed
-                item["type"] = guessed
-            else:
+            resolved_class = str(resolved.get("class") or "Unknown").strip()
+            item["type_resolution"] = resolved
+            if resolved_class.lower() in weak_types or resolved_class.lower() in forbidden_final_types:
+                if resolved_class.lower() in forbidden_final_types:
+                    item["rejected_type"] = resolved_class
                 item["class"] = "Unknown"
                 item["type"] = "Unknown"
+            else:
+                item["class"] = resolved_class
+                item["type"] = resolved_class
 
             if wikidata_hint:
                 item["wikidata_class_hint"] = wikidata_hint
 
             fixed.append(item)
 
-        return fixed   
-     
+        return fixed
+
     def _apply_llm_supervisor(self, ranked_entities, page_text: str, url: str):
         supervisor = self.llm_supervisor
 
@@ -651,6 +657,79 @@ class TourismPipeline:
 
         return scored[:top_k]
 
+    def _build_page_signals(self, html: str = "", url: str = "") -> Dict[str, Any]:
+        slug = self._extract_url_slug(url)
+        return {
+            "title": self._extract_page_title(html),
+            "h1": self._extract_h1(html),
+            "breadcrumb": self._extract_breadcrumb_text(html),
+            "slug": slug,
+            "slug_tokens": [t for t in re.split(r"[^\wáéíóúñü]+", (slug or "").lower()) if t],
+            "url": url or "",
+        }
+
+    def _get_entity_context(self, entity: Dict[str, Any], page_text: str = "") -> str:
+        parts = [
+            entity.get("context") or "",
+            entity.get("source_text") or "",
+            entity.get("short_description") or "",
+            entity.get("long_description") or "",
+        ]
+        context = " ".join(str(x).strip() for x in parts if str(x).strip())
+        return context or page_text
+
+    def _apply_conservative_filter(self, entities, page_text: str = "", page_signals: Optional[Dict[str, Any]] = None, expected_type: Optional[str] = None):
+        def context_getter(item):
+            return self._get_entity_context(item, page_text=page_text)
+
+        kept, rejected = self.entity_filter.filter(
+            entities=entities,
+            context_getter=context_getter,
+            page_signals=page_signals or {},
+            expected_type=expected_type,
+        )
+
+        for item in rejected:
+            item["discarded_by_filter"] = True
+
+        return kept
+
+    def _attach_ontology_candidates(self, entities, page_text: str = "", expected_type: Optional[str] = None):
+        enriched = []
+        for entity in entities or []:
+            if not isinstance(entity, dict):
+                continue
+            item = dict(entity)
+            name = item.get("name") or item.get("entity_name") or item.get("entity") or item.get("label") or ""
+            context = self._get_entity_context(item, page_text=page_text)
+            evidence_score = float((item.get("filter_audit") or {}).get("score") or 0.0)
+            matches = self.ontology_matcher.match(
+                name,
+                context=context,
+                expected_type=expected_type,
+                evidence_score=evidence_score,
+            )
+            item["ontology_candidates"] = matches
+            if matches:
+                item["ontology_match"] = matches[0]
+                item["ontology_score"] = matches[0].get("score")
+            enriched.append(item)
+        return enriched
+
+    def _apply_quality_gate(self, entities, page_signals: Optional[Dict[str, Any]] = None, url: str = ""):
+        gated = []
+        for entity in entities or []:
+            if not isinstance(entity, dict):
+                continue
+            item = dict(entity)
+            quality = self.quality_scorer.evaluate(item, page_url=url, page_signals=page_signals or {})
+            item["quality_audit"] = quality
+            if quality.get("decision") == "discard":
+                continue
+            item["evidence_score"] = quality.get("score", 0.0)
+            gated.append(item)
+        return gated
+
     def run(self, html: str, url: str = "", expected_type: Optional[str] = None):
         html = self._scalar_text(html)
         if not html and url:
@@ -658,6 +737,7 @@ class TourismPipeline:
 
         blocks = self.block_extractor.extract(html)
         page_text = self._extract_text(blocks)
+        page_signals = self._build_page_signals(html=html, url=url)
 
         entities = self.entity_extractor.extract(blocks)
         self._debug_stage("extract", entities)
@@ -683,13 +763,26 @@ class TourismPipeline:
         entities = self.splitter.split(entities)
         self._debug_stage("split", entities)
 
+        entities = self._apply_conservative_filter(
+            entities,
+            page_text=page_text,
+            page_signals=page_signals,
+            expected_type=expected_type,
+        )
+        self._debug_stage("conservative_filter", entities)
+
+        entities = self._attach_ontology_candidates(entities, page_text=page_text, expected_type=expected_type)
+        entities = self._ensure_entity_type(entities, page_text=page_text, page_signals=page_signals, expected_type=expected_type)
+        self._debug_stage("typed_candidates", entities)
+
         try:
             candidates = self.semantic_matcher.match(entities, page_text=page_text)
         except TypeError:
             candidates = self.semantic_matcher.match(entities)
 
         candidates = self._promote_semantic_type(candidates)
-        candidates = self._ensure_entity_type(candidates, page_text=page_text)
+        candidates = self._ensure_entity_type(candidates, page_text=page_text, page_signals=page_signals, expected_type=expected_type)
+        candidates = self._apply_quality_gate(candidates, page_signals=page_signals, url=url)
         self._debug_stage("semantic_match", candidates)
 
         ranked_entities = self.ranker.rank(
@@ -699,9 +792,11 @@ class TourismPipeline:
         )
 
         ranked_entities = self._promote_semantic_type(ranked_entities)
-        ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text)
+        ranked_entities = self._ensure_entity_type(ranked_entities, page_text=page_text, page_signals=page_signals, expected_type=expected_type)
+        ranked_entities = self._apply_quality_gate(ranked_entities, page_signals=page_signals, url=url)
         self._debug_stage("rank", ranked_entities)
 
+        ranked_entities = self.select_primary_entities(ranked_entities, html=html, url=url, top_k=max(3, min(8, len(ranked_entities) or 3)))
         ranked_entities = self._sanitize_entities_for_downstream(ranked_entities)
         self._debug_stage("sanitize_ranked", ranked_entities)
 
@@ -713,7 +808,8 @@ class TourismPipeline:
         self._debug_stage("llm_supervisor", final_entities)
 
         final_entities = self._sanitize_entities_for_downstream(final_entities)
-        final_entities = self._ensure_entity_type(final_entities, page_text=page_text)
+        final_entities = self._ensure_entity_type(final_entities, page_text=page_text, page_signals=page_signals, expected_type=expected_type)
+        final_entities = self._apply_quality_gate(final_entities, page_signals=page_signals, url=url)
         self._debug_stage("sanitize_final", final_entities)
 
         pre_cluster_entities = list(final_entities)
@@ -732,7 +828,8 @@ class TourismPipeline:
             clustered = pre_cluster_entities
 
         clustered = self._sanitize_entities_for_downstream(clustered)
-        clustered = self._ensure_entity_type(clustered, page_text=page_text)
+        clustered = self._ensure_entity_type(clustered, page_text=page_text, page_signals=page_signals, expected_type=expected_type)
+        clustered = self._apply_quality_gate(clustered, page_signals=page_signals, url=url)
         self._debug_stage("sanitize_flattened", clustered)
 
         clustered = self._enrich_final_entities(

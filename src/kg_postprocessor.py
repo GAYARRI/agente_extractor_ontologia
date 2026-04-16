@@ -42,9 +42,9 @@ class KGPostProcessor:
             "visitasevilla@sevillacityoffice.es",
         }
 
-        # Clases alineadas con tu pipeline/ranker/taxonomía actual
+        # Tipos permitidos como salida operativa
         self.allowed_types = {
-            "Thing",
+            "Unknown",
             "Place",
             "Organization",
             "Service",
@@ -81,13 +81,58 @@ class KGPostProcessor:
             "Stadium",
         }
 
-        self.generic_types = {
+        # Tipos explícitamente prohibidos en salida
+        self.forbidden_types = {
             "Thing",
+            "Entity",
+            "Item",
+            "Location",
+        }
+
+        # Tipos demasiado genéricos: si hay uno más específico, se eliminan
+        self.generic_types = {
             "Place",
             "Organization",
             "Service",
             "Concept",
             "Accommodation",
+            "Unknown",
+        }
+
+        # Tokens / patrones de ruido editorial o topic-like
+        self.topic_noise_exact = {
+            "historia verde",
+            "pamplona entre",
+            "agenda urbana pamplona",
+            "biosphere pamplona",
+            "descubre pamplona",
+            "pamplona sostenible",
+            "pamplona verde",
+            "historia de la ciudad",
+            "verde y sostenible",
+        }
+
+        self.topic_noise_tokens = {
+            "historia",
+            "verde",
+            "sostenible",
+            "agenda",
+            "entre",
+            "descubre",
+            "emociones",
+            "experiencias",
+            "naturaleza",
+            "cultura",
+            "vive",
+        }
+
+        self.institutional_label_fragments = {
+            "biosphere",
+            "agenda urbana",
+            "plan",
+            "estrategia",
+            "programa",
+            "sostenible",
         }
 
     # =========================================================
@@ -187,7 +232,8 @@ class KGPostProcessor:
             return default
 
     def _is_allowed_type(self, t: str) -> bool:
-        return bool(t) and str(t).strip() in self.allowed_types
+        t = str(t).strip()
+        return bool(t) and t in self.allowed_types and t not in self.forbidden_types
 
     def _clean_type_list(self, types_list):
         cleaned = []
@@ -196,6 +242,21 @@ class KGPostProcessor:
             if t and self._is_allowed_type(t):
                 cleaned.append(t)
         return self._dedupe(cleaned)
+
+    def _sanitize_output_types(self, values):
+        cleaned = []
+        for t in self._as_list(values):
+            t = str(t).strip()
+            if not t:
+                continue
+            if not self._is_allowed_type(t):
+                continue
+            cleaned.append(t)
+
+        cleaned = self._dedupe(cleaned)
+        if not cleaned:
+            return ["Unknown"]
+        return cleaned[:5]
 
     # =========================================================
     # Reglas estructurales
@@ -214,6 +275,54 @@ class KGPostProcessor:
 
         if re.fullmatch(r"[\W_0-9]+", label):
             return True
+
+        if len(label) < 3:
+            return True
+
+        return False
+
+    def _looks_like_editorial_topic(self, entity: dict) -> bool:
+        label = self._entity_key(entity)
+        if not label:
+            return True
+
+        if label in self.topic_noise_exact:
+            return True
+
+        tokens = label.split()
+
+        # Fragmentos institucionales o de certificación
+        if any(fragment in label for fragment in self.institutional_label_fragments):
+            # Sólo dejar pasar si además tiene pinta fuerte de entidad física o visitable
+            if not any(
+                kw in label for kw in [
+                    "museo", "iglesia", "catedral", "castillo", "alcazar",
+                    "alcázar", "plaza", "ayuntamiento", "hotel", "restaurante",
+                    "teatro", "estadio", "oficina de turismo"
+                ]
+            ):
+                return True
+
+        # Bigramas/trigramas demasiado vagos
+        if len(tokens) <= 3:
+            overlap = sum(1 for t in tokens if t in self.topic_noise_tokens)
+            if overlap >= 1:
+                if not any(
+                    kw in label for kw in [
+                        "museo", "iglesia", "catedral", "castillo", "alcazar",
+                        "alcázar", "plaza", "ayuntamiento", "hotel", "restaurante",
+                        "teatro", "estadio", "san fermin", "san fermín"
+                    ]
+                ):
+                    return True
+
+        # Cortes raros / fragmentos truncados
+        if label.endswith(" entre"):
+            return True
+
+        if label.startswith("pamplona ") and len(tokens) == 2:
+            if tokens[1] in self.topic_noise_tokens:
+                return True
 
         return False
 
@@ -297,8 +406,23 @@ class KGPostProcessor:
         return entity
 
     def _clean_descriptions(self, entity: dict):
-        for field in ["short_description", "long_description", "description"]:
-            entity[field] = self._clean_text(entity.get(field, ""))
+        # Unificar variantes de nombre de campo
+        short_desc = self._clean_text(
+            entity.get("short_description", "") or entity.get("shortDescription", "")
+        )
+        long_desc = self._clean_text(
+            entity.get("long_description", "") or entity.get("longDescription", "")
+        )
+        desc = self._clean_text(entity.get("description", ""))
+
+        entity["short_description"] = short_desc
+        entity["long_description"] = long_desc
+        entity["description"] = desc
+
+        # Mantener también camelCase si tu exportador los usa
+        entity["shortDescription"] = short_desc
+        entity["longDescription"] = long_desc
+
         return entity
 
     def _clean_images(self, entity: dict):
@@ -353,6 +477,10 @@ class KGPostProcessor:
             "domingo de ramos",
             "cuaresma",
             "seminci",
+            "san fermin",
+            "san fermín",
+            "san fermin pamplona",
+            "san fermín pamplona",
         }:
             return "Event"
 
@@ -397,8 +525,14 @@ class KGPostProcessor:
             return "EducationalCenter"
 
         # Negocio / servicios
-        if "hotel" in label or "hostal" in label or "apartamento turistico" in label or "apartamento turístico" in label:
+        if (
+            "hotel" in label
+            or "hostal" in label
+            or "apartamento turistico" in label
+            or "apartamento turístico" in label
+        ):
             return "AccommodationEstablishment"
+
         if (
             "restaurante" in label
             or "cafeteria" in label
@@ -406,14 +540,17 @@ class KGPostProcessor:
             or re.search(r"\bbar\b", label)
         ):
             return "FoodEstablishment"
+
         if "outlet" in label or "fashion" in label or "shopping" in label:
             return "RetailAndFashion"
+
         if (
             "oficina de turismo" in label
             or "punto de informacion turistica" in label
             or "punto de información turística" in label
         ):
             return "TourismService"
+
         if (
             "taxi" in label
             or "aeropuerto" in label
@@ -423,6 +560,7 @@ class KGPostProcessor:
             or "autobus turistico" in label
         ):
             return "TransportInfrastructure"
+
         if "parking" in label or "aparcamiento" in label:
             return "PublicService"
 
@@ -435,7 +573,7 @@ class KGPostProcessor:
         2. class existente si es válida
         3. primer type válido
         4. inferencia por label
-        5. Thing
+        5. Unknown
         """
         label = self._entity_key(entity)
 
@@ -443,9 +581,14 @@ class KGPostProcessor:
         current_class = str(entity.get("class", "")).strip()
         current_types = self._clean_type_list(entity.get("type"))
 
+        # A veces entra por "types" en vez de "type"
+        current_types_from_types = self._clean_type_list(entity.get("types"))
+        for t in current_types_from_types:
+            if t not in current_types:
+                current_types.append(t)
+
         inferred_type = self._infer_type_from_label(label)
 
-        # Candidato principal
         if self._is_allowed_type(normalized_type):
             final_class = normalized_type
         elif self._is_allowed_type(current_class):
@@ -455,37 +598,40 @@ class KGPostProcessor:
         elif inferred_type and self._is_allowed_type(inferred_type):
             final_class = inferred_type
         else:
-            final_class = "Thing"
+            final_class = "Unknown"
 
-        final_types = []
+        final_types = [final_class]
 
-        # Mantener el principal delante
-        final_types.append(final_class)
-
-        # Conservar normalized_type si aporta algo
         if self._is_allowed_type(normalized_type) and normalized_type not in final_types:
             final_types.append(normalized_type)
 
-        # Conservar class actual si es válida y distinta
         if self._is_allowed_type(current_class) and current_class not in final_types:
             final_types.append(current_class)
 
-        # Conservar types previos válidos
         for t in current_types:
-            if t not in final_types:
+            if self._is_allowed_type(t) and t not in final_types:
                 final_types.append(t)
 
-        # Añadir inferido si ayuda
         if inferred_type and self._is_allowed_type(inferred_type) and inferred_type not in final_types:
             final_types.append(inferred_type)
 
-        # Limpiar redundancias demasiado genéricas si ya hay algo específico
         has_specific = any(t not in self.generic_types for t in final_types)
         if has_specific:
             final_types = [t for t in final_types if t not in self.generic_types or t == final_class]
 
+        final_types = self._sanitize_output_types(final_types)
+
+        if final_class in self.forbidden_types or not self._is_allowed_type(final_class):
+            final_class = final_types[0] if final_types else "Unknown"
+
+        if final_class not in final_types and self._is_allowed_type(final_class):
+            final_types.insert(0, final_class)
+
+        final_types = self._sanitize_output_types(final_types)
+
         entity["class"] = final_class
-        entity["type"] = self._dedupe(final_types[:5])
+        entity["type"] = final_types
+        entity["types"] = final_types
 
         return entity
 
@@ -616,6 +762,9 @@ class KGPostProcessor:
             if self._is_hard_bad_entity(entity):
                 continue
 
+            if self._looks_like_editorial_topic(entity):
+                continue
+
             entity = self._clean_address(entity)
             entity = self._clean_phone(entity)
             entity = self._clean_email(entity)
@@ -623,10 +772,10 @@ class KGPostProcessor:
             entity = self._clean_descriptions(entity)
             entity = self._clean_images(entity)
 
-            # 🔥 Preservar señales del ranker antes de tocar tipos
+            # Preservar señales del ranker antes de tocar tipos
             entity = self._preserve_ranking_features(entity)
 
-            # 🔥 Resolver class/type final sin destruir normalized_type
+            # Resolver class/type final sin destruir normalized_type
             entity = self._resolve_final_class_and_types(entity)
 
             entity = self._drop_global_email_for_non_org(entity)
@@ -645,6 +794,12 @@ class KGPostProcessor:
             visible_name = self._entity_name(entity)
             if not visible_name:
                 continue
+
+            # Sanitización final de seguridad
+            entity["type"] = self._sanitize_output_types(entity.get("type"))
+            entity["types"] = self._sanitize_output_types(entity.get("types"))
+            if not self._is_allowed_type(entity.get("class")):
+                entity["class"] = entity["type"][0] if entity["type"] else "Unknown"
 
             out.append(entity)
 
