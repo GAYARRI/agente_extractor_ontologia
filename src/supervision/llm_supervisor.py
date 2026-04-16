@@ -12,6 +12,59 @@ from src.supervision.gold.examples import (
 
 
 class LLMSupervisor:
+    GENERIC_REJECT_CLASSES = {
+        "thing",
+        "location",
+        "place",
+        "person",
+        "entity",
+        "resource",
+    }
+
+    BAD_ENTITY_PATTERNS = [
+        r"\bfacebook\b",
+        r"\binstagram\b",
+        r"\bsuscr[ií]bete\b",
+        r"\bmapas\b",
+        r"\bconsignas\b",
+        r"\bplanes\b",
+        r"\bqu[eé]\b",
+        r"\bver\b",
+        r"\bultimas?\b",
+        r"\bagenda\b",
+        r"\bmultitud\b",
+        r"\bfamilia\b",
+        r"\bgastronom[ií]a\b",
+        r"\bcultura\b",
+        r"\btradiciones\b",
+        r"\bturismo responsable\b",
+        r"\bdestino tur[ií]stico sostenible\b",
+        r"\binter[eé]s tur[ií]stico internacional\b",
+        r"\bdesarrollo sostenible\b",
+        r"\bnaciones unidas\b",
+    ]
+
+    BAD_EXACT_ENTITIES = {
+        "gora san fermín",
+        "facebook instagram",
+        "monumentos mercados últimas",
+        "suscríbete nuestros",
+        "pamplona viajar",
+        "pamplona ver",
+        "planes excursiones",
+        "planes cultura",
+        "planes qué",
+        "agenda multitud",
+        "historia verde",
+        "historia en",
+        "destino turístico sostenible",
+        "interés turístico internacional",
+        "turismo responsable",
+        "desarrollo sostenible",
+        "certificación biosphere",
+        "biosphere pamplona",
+    }
+
     def __init__(self, ontology_index, model="gpt-4o-mini", gold_examples_path="benchmark/Ejemplos.csv"):
         self.ontology_index = ontology_index
         self.model = model
@@ -29,6 +82,8 @@ class LLMSupervisor:
             print(f"[WARN] No se pudieron cargar golden examples: {e}")
             self.gold_examples = {}
 
+        self.allowed_classes = self._load_allowed_classes()
+
     # ==================================================
     # JSON SAFE PARSE
     # ==================================================
@@ -38,7 +93,6 @@ class LLMSupervisor:
             return []
 
         content = content.strip()
-
         content = re.sub(r"^```json\s*", "", content, flags=re.IGNORECASE)
         content = re.sub(r"^```\s*", "", content)
         content = re.sub(r"\s*```$", "", content)
@@ -58,6 +112,80 @@ class LLMSupervisor:
         return []
 
     # ==================================================
+    # ONTOLOGY HELPERS
+    # ==================================================
+
+    def _load_allowed_classes(self):
+        allowed = set()
+
+        if hasattr(self.ontology_index, "classes"):
+            classes_obj = getattr(self.ontology_index, "classes")
+            if isinstance(classes_obj, dict):
+                allowed.update(str(k).strip() for k in classes_obj.keys() if str(k).strip())
+            elif isinstance(classes_obj, list):
+                for item in classes_obj:
+                    if isinstance(item, str):
+                        allowed.add(item.strip())
+                    elif isinstance(item, dict) and item.get("name"):
+                        allowed.add(str(item["name"]).strip())
+
+        elif hasattr(self.ontology_index, "get_all_classes"):
+            try:
+                for item in self.ontology_index.get_all_classes():
+                    if isinstance(item, str):
+                        allowed.add(item.strip())
+                    elif isinstance(item, dict) and item.get("name"):
+                        allowed.add(str(item["name"]).strip())
+            except Exception:
+                pass
+
+        return {c for c in allowed if c}
+
+    def build_ontology_context(self, max_classes=80):
+        class_lines = []
+
+        if hasattr(self.ontology_index, "classes"):
+            classes_obj = getattr(self.ontology_index, "classes")
+
+            if isinstance(classes_obj, dict):
+                for i, (cls, desc) in enumerate(classes_obj.items()):
+                    if i >= max_classes:
+                        break
+                    class_lines.append(f"- {cls}: {desc}")
+
+            elif isinstance(classes_obj, list):
+                for i, item in enumerate(classes_obj):
+                    if i >= max_classes:
+                        break
+                    class_lines.append(f"- {item}")
+
+        elif hasattr(self.ontology_index, "get_all_classes"):
+            try:
+                all_classes = self.ontology_index.get_all_classes()
+                for i, item in enumerate(all_classes):
+                    if i >= max_classes:
+                        break
+                    class_lines.append(f"- {item}")
+            except Exception:
+                pass
+
+        if not class_lines:
+            class_lines = [
+                "- Place: lugar físico, destino, ciudad, barrio, zona o recurso visitable",
+                "- TouristAttraction: atracción turística, monumento, museo, punto de interés",
+                "- Accommodation: hotel, hostal, apartamento turístico, camping",
+                "- Restaurant: restaurante, bar, cafetería, local gastronómico",
+                "- Event: evento concreto, festival, feria, concierto, exposición",
+                "- TransportInfrastructure: aeropuerto, estación, terminal, muelle",
+                "- Organization: institución, organismo, oficina de turismo, ayuntamiento",
+                "- LocalBusiness: empresa o servicio turístico identificable",
+                "- Route: ruta, itinerario o recorrido turístico concreto",
+                "- Service: servicio concreto útil para el turista",
+            ]
+
+        return "\n".join(class_lines)
+
+    # ==================================================
     # GOLD PRIOR / GOLD PROMPT
     # ==================================================
 
@@ -67,10 +195,6 @@ class LLMSupervisor:
         return normalize_type(value)
 
     def build_gold_example_prompt_context(self, url: str) -> str:
-        """
-        Si la URL actual existe en el conjunto gold, devuelve un bloque breve
-        para orientar la clasificación del LLM.
-        """
         if not url:
             return ""
 
@@ -142,9 +266,6 @@ IMPORTANTE:
         return enriched
 
     def rerank_classified_entities(self, url: str, items: list[dict]) -> list[dict]:
-        """
-        Re-rank de entidades ya clasificadas por el LLM.
-        """
         if not items:
             return items
 
@@ -175,56 +296,134 @@ IMPORTANTE:
         return clean_items
 
     # ==================================================
-    # ONTOLOGY CONTEXT
+    # ENTITY QUALITY FILTERS
     # ==================================================
 
-    def build_ontology_context(self, max_classes=80):
-        """
-        Intenta construir un contexto textual de clases ontológicas
-        a partir de ontology_index sin asumir demasiado de su implementación.
-        """
-        class_lines = []
+    def normalize_entity_text(self, value: str) -> str:
+        value = str(value or "").strip()
+        value = re.sub(r"\s+", " ", value)
+        return value
 
-        if hasattr(self.ontology_index, "classes"):
-            classes_obj = getattr(self.ontology_index, "classes")
+    def is_bad_entity_name(self, entity: str) -> bool:
+        entity = self.normalize_entity_text(entity)
+        if not entity:
+            return True
 
-            if isinstance(classes_obj, dict):
-                for i, (cls, desc) in enumerate(classes_obj.items()):
-                    if i >= max_classes:
-                        break
-                    class_lines.append(f"- {cls}: {desc}")
+        entity_l = entity.lower()
 
-            elif isinstance(classes_obj, list):
-                for i, item in enumerate(classes_obj):
-                    if i >= max_classes:
-                        break
-                    class_lines.append(f"- {item}")
+        if entity_l in self.BAD_EXACT_ENTITIES:
+            return True
 
-        elif hasattr(self.ontology_index, "get_all_classes"):
-            try:
-                all_classes = self.ontology_index.get_all_classes()
-                for i, item in enumerate(all_classes):
-                    if i >= max_classes:
-                        break
-                    class_lines.append(f"- {item}")
-            except Exception:
-                pass
+        if len(entity) < 3:
+            return True
 
-        if not class_lines:
-            class_lines = [
-                "- Place: lugar físico, destino, ciudad, barrio, zona o recurso visitable",
-                "- TouristAttraction: atracción turística, monumento, museo, punto de interés",
-                "- Accommodation: hotel, hostal, apartamento turístico, camping",
-                "- Restaurant: restaurante, bar, cafetería, local gastronómico",
-                "- Event: evento concreto, festival, feria, concierto, exposición",
-                "- TransportInfrastructure: aeropuerto, estación, terminal, muelle",
-                "- Organization: institución, organismo, oficina de turismo, ayuntamiento",
-                "- LocalBusiness: empresa o servicio turístico identificable",
-                "- Route: ruta, itinerario o recorrido turístico concreto",
-                "- Service: servicio concreto útil para el turista",
-            ]
+        if len(entity.split()) > 7:
+            return True
 
-        return "\n".join(class_lines)
+        if re.fullmatch(r"[\W\d_]+", entity):
+            return True
+
+        if re.search(r"\b(siglos?|origen|historia|descubre|pamplona bizi-bizirik)\b", entity_l):
+            return True
+
+        if re.search(r"\b(aquí|allí|muy viva|últimas|ver listado|haz clic)\b", entity_l):
+            return True
+
+        for pat in self.BAD_ENTITY_PATTERNS:
+            if re.search(pat, entity_l, flags=re.IGNORECASE):
+                return True
+
+        tokens = entity_l.split()
+        if len(tokens) >= 2 and len(set(tokens)) == 1:
+            return True
+
+        return False
+
+    def dedupe_entities(self, entities: list[str]) -> list[str]:
+        seen = set()
+        clean = []
+
+        for e in entities:
+            e = self.normalize_entity_text(e)
+            key = e.lower()
+            if not e or key in seen:
+                continue
+            seen.add(key)
+            clean.append(e)
+
+        return clean
+
+    def is_valid_class(self, class_name: str) -> bool:
+        if not class_name:
+            return False
+
+        raw = str(class_name).strip()
+        normalized = self.normalize_llm_class(raw).strip().lower()
+
+        if not normalized:
+            return False
+
+        if normalized in self.GENERIC_REJECT_CLASSES:
+            return False
+
+        if self.allowed_classes:
+            raw_ok = raw in self.allowed_classes
+            norm_ok = any(self.normalize_llm_class(c).lower() == normalized for c in self.allowed_classes)
+            if not raw_ok and not norm_ok:
+                return False
+
+        return True
+
+    def calibrate_score(self, entity: str, class_name: str, llm_score: float) -> float:
+        score = max(0.0, min(1.0, float(llm_score)))
+
+        if self.is_bad_entity_name(entity):
+            score *= 0.15
+
+        if not self.is_valid_class(class_name):
+            score *= 0.10
+
+        if len(entity.split()) == 1:
+            score *= 0.80
+
+        entity_l = entity.lower()
+        if re.search(r"\b(san|santa|santo)\b", entity_l) and len(entity.split()) == 2:
+            score *= 0.75
+
+        if score > 0.95:
+            score = 0.92
+
+        return round(score, 4)
+
+    def filter_classified_items(self, items: list[dict]) -> list[dict]:
+        filtered = []
+        seen = set()
+
+        for item in items:
+            entity = self.normalize_entity_text(item.get("entity", ""))
+            entity_class = str(item.get("class", "")).strip()
+            score = float(item.get("score", 0.0))
+
+            if not entity or not entity_class:
+                continue
+
+            if self.is_bad_entity_name(entity):
+                continue
+
+            if not self.is_valid_class(entity_class):
+                continue
+
+            if score < 0.45:
+                continue
+
+            key = (entity.lower(), self.normalize_llm_class(entity_class).lower())
+            if key in seen:
+                continue
+            seen.add(key)
+
+            filtered.append(item)
+
+        return filtered
 
     # ==================================================
     # PROMPTS
@@ -232,13 +431,20 @@ IMPORTANTE:
 
     def build_extraction_prompt(self, text):
         return f"""
-Eres un agente de turismo experto en extracción de instancias de un website que se te proporciona.
+Eres un agente de turismo experto en extracción de instancias turisticas de un website que se te proporciona
 
-Tu tarea es extraer ÚNICAMENTE instancias del website proporcionado.
-MUY IMPORTANTE: SOLO ACEPTAR URLS DEL DOMINIO INICIAL PROPORCIONADO DONDE SE CUMPLA QUE HOSTNAME == DOMINIO_INICIAL
+Tu tarea es UNICAMENTE EXTRAER instancias turísticas del website proporcionado.
 
 DEFINICIÓN DE INSTANCIA DE TURISMO:
-Una instancia es un elemento del mundo real, concreto, identificable y relevante para el turismo, que puede ser visitado, utilizado, experimentado o consultado por un turista.
+Una instancia es un OBJETO MATERIAL, CONCRETO, NOMBRADO y RELEVANTE TURISTICAMENTE.
+
+MUY IMPORTANTE:
+- Solo extrae entidades con nombre identificable.
+- No extraigas fragmentos cortados.
+- No extraigas concatenaciones artificiales.
+- No extraigas lemas, slogans, menús, botones, breadcrumbs, secciones, hashtags o texto de navegación.
+- No extraigas personas salvo que aparezcan como recurso turístico explícito y visitable.
+- No extraigas certificaciones, declaraciones, premios, etiquetas, campañas o conceptos abstractos.
 
 EJEMPLOS VÁLIDOS:
 - ciudades, barrios, lugares y destinos
@@ -248,24 +454,17 @@ EJEMPLOS VÁLIDOS:
 - eventos concretos con identidad propia
 - instituciones u organizaciones estrechamente relacionadas con el turismo
 
-NO EXTRAIGAS:
-- categorías o secciones del site: cultura, ocio, monumentos, museos, agenda
-- actividades genéricas: eventos deportivos, actividades en familia o planes que no estén inequívocamente relacionados con el hecho turístico
-- conceptos abstractos: gastronomía, patrimonio, tradición, folklore
-- fragmentos de direcciones: A-4 Km, 41020 Sevilla, Av. de Kansas City
+NO EXTRAIGAS COMO ENTIDADES:
+- categorías o secciones del site
+- actividades genéricas
+- conceptos abstractos
+- fragmentos de dirección
 - números, códigos, teléfonos, horarios
-- elementos de navegación web: ver listado, haz clic aquí, ir a página
-- frases cortadas o concatenaciones artificiales: Museos De, Salir La, Cultura Artesanía Fiestas
-- servicios genéricos sin nombre propio: taxi, autobús, metro, líneas de autobús
-- términos demasiado genéricos que no designen una instancia concreta
-
-REGLAS:
-- Extrae solo fragmentos de texto relacionables con el turismo.
-- No inventes instancias que no estén previamente presentes en el texto del website proporcionado.
-- No unas palabras que no formen una instancia real del texto del dominio inicial.
-- Prioriza instancias inequívocamente relacionadas con el turismo, con nombre propio o identidad concreta.
-- Si una expresión es dudosa y no parece encajar en el fenómeno turístico, NO la extraigas.
-- Si no hay entidades válidas, devuelve lista vacía.
+- elementos de navegación web
+- frases cortadas o concatenaciones artificiales
+- servicios genéricos sin nombre propio
+- términos demasiado genéricos
+- personas históricas, medios, instituciones globales o marcas si no son el recurso turístico principal del texto
 
 TEXTO:
 \"\"\"
@@ -283,14 +482,11 @@ Devuelve SOLO un JSON válido con esta forma:
         entities_json = json.dumps(entities, ensure_ascii=False)
 
         return f"""
-Eres un validador de instancias asociadas al turismo.
+Eres un VALIDADOR de instancias asociadas al turismo.
 
-Tu tarea es extraer de una lista de instancias solo las que sean clasificables en alguna de las entidades turísticas proporcionadas, concretas e identificables.
+Tu tarea es conservar SOLO entidades turísticas concretas, visitables, identificables o claramente relevantes como recurso turístico.
 
-CRITERIO DE ACEPTACIÓN:
-Una instancia acabará siendo instancia candidata si es una instancia del mundo real indubitablemente relevante para el turismo, con identidad propia.
-
-ELIMINA:
+ELIMINA SIEMPRE:
 - categorías
 - conceptos abstractos
 - actividades genéricas
@@ -300,16 +496,20 @@ ELIMINA:
 - concatenaciones artificiales
 - duplicados
 - expresiones demasiado genéricas sin identidad propia
+- slogans, claims, menús, navegación, footer, redes sociales
+- certificaciones, reconocimientos, agendas, etiquetas promocionales
+- personas, periódicos, instituciones globales o nombres históricos si no son el recurso turístico principal
 
 MANTÉN:
-- topónimos
+- topónimos concretos
 - monumentos
 - museos
+- plazas, parques y barrios con nombre propio
 - infraestructuras de transporte
-- negocios identificables que pueden estar involucrados en la actividad turística
-- instituciones asociadas al negocio turístico
-- eventos de interés turístico concretos
-- puntos de interés turístico con nombre reconocible
+- negocios identificables
+- instituciones turísticas locales
+- eventos concretos
+- puntos de interés con nombre reconocible
 
 CONTEXTO:
 \"\"\"
@@ -331,161 +531,33 @@ Devuelve SOLO un JSON válido con esta forma:
         ontology_context = self.build_ontology_context()
         gold_context = self.build_gold_example_prompt_context(url) if url else ""
 
+        allowed_classes_line = ", ".join(sorted(self.allowed_classes)) if self.allowed_classes else "Usa solo clases de la ontología dada"
+
         return f"""
-Eres un sistema experto en clasificación ontológica de instancias turísticas.
+Eres un sistema experto en CLASIFICACION ONTOLOGICA de instancias turísticas.
 
 Se te proporciona:
 1. Un texto de contexto.
-2. Una lista de instancias candidatas, susceptibles de ser clasificadas según una ontología de turismo.
-3. Una lista de entidades ontológicas dentro de las cuales se clasificarán las instancias candidatas.
-
-DEFINICIÓN:
-Una entidad ontológica de turismo es un elemento identificable relevante para el turista y enmarcado en el hecho turístico.
+2. Instancias candidatas.
+3. Una lista de clases ontológicas permitidas.
 
 TU TAREA:
-Clasificar cada instancia candidata en la entidad ontológica más adecuada, usando el contexto y la lista de entidades disponibles.
+Clasificar SOLO las instancias verdaderamente válidas y devolver SOLO aquellas cuya clase sea específica y pertenezca a la ontología.
 
-REGLAS IMPORTANTES:
-- NO inventes nuevas entidades.
-- NO cambies el nombre de las entidades.
-- NO clasifiques categorías, conceptos o fragmentos.
-- Si una entidad no es realmente válida, descártala.
-- Si hay duda razonable entre varias, usa la entidad más general que encaje.
-- No dejes sin clasificar ninguna entidad válida.
-- Prioriza la entidad principal de la página frente a elementos laterales, relacionados o accesorios.
-- Penaliza implícitamente elementos de bloques tipo “también te puede interesar”, navegación, servicios auxiliares o referencias secundarias.
+REGLAS CRÍTICAS:
+- ELIGE EXCLUSIVAMENTE UNA CLASE REAL DE LA ONTOLOGÍA
+- SI LA ÚNICA CLASE POSIBLE ES Thing, Place, Location, Person u otra genérica: DESCARTA LA ENTIDAD
+- SI LA ENTIDAD ES ABSTRACTA, PROMOCIONAL, CORTADA O DE NAVEGACIÓN: DESCÁRTALA
+- NO CAMBIES EL NOMBRE DE LA ENTIDAD
+- NO INVENTES CLASES NUEVAS
+- NO FUERCES CLASIFICACIONES
+- NO DEVUELVAS ENTIDADES DUDOSAS
+
+CLASES PERMITIDAS:
+{allowed_classes_line}
 
 ONTOLOGÍA TURÍSTICA:
 {ontology_context}
-
-GUÍA GENERAL:
-- Place: lugar físico, ciudad, barrio, zona, enclave
-- TouristAttraction: monumento, museo, atracción, recurso visitable
-- Accommodation: hotel, hostal, apartamento turístico, camping
-- Restaurant: restaurante, bar, cafetería, local gastronómico
-- Event: evento concreto, feria, festival, concierto, exposición
-- TransportInfrastructure: aeropuerto, estación, terminal, muelle
-- Organization: institución, organismo, ayuntamiento, oficina de turismo
-- LocalBusiness: empresa o servicio identificable
-- Route: ruta o itinerario concreto
-- Service: servicio útil concreto para turistas
-
-EJEMPLOS ORIENTATIVOS:
-
-Ejemplo 1
-Input:
-Visita al Real Alcázar de Sevilla, uno de los monumentos más importantes de la ciudad.
-
-Output:
-Name: Real Alcázar
-Type: TouristAttraction
-Reason: Es un monumento histórico relevante y visitable, claramente una atracción turística.
-
-Ejemplo 2
-Input:
-La Semana Santa de Sevilla es una de las celebraciones religiosas más importantes de España.
-
-Output:
-Name: Semana Santa
-Type: Event
-Reason: Se trata de una celebración periódica con carácter cultural y religioso.
-
-Ejemplo 3
-Input:
-Ruta de los Azulejos por el casco histórico de Sevilla.
-
-Output:
-Name: Ruta de los Azulejos
-Type: Route
-Reason: Es un itinerario turístico diseñado para recorrer distintos puntos de interés.
-
-Ejemplo 4
-Input:
-El Ayuntamiento de Sevilla ofrece información turística y servicios al ciudadano.
-
-Output:
-Name: Ayuntamiento de Sevilla
-Type: Organization
-Reason: Es una entidad institucional que presta servicios públicos.
-
-Ejemplo 5
-Input:
-Cena en el restaurante Abades Triana con vistas al río Guadalquivir.
-
-Output:
-Name: Abades Triana
-Type: LocalBusiness
-Reason: Es un establecimiento comercial de restauración.
-
-Ejemplo 6
-Input: 
-Segunda plaza de toros histórica en Sevilla, un importante recurso cultural
-
-
-Output:
-Name: plaza de toros histórica
-Type: bullring
-Reason: La plaza de toros histórica de Sevilla es un importante monumento que refleja la tradición taurina de la ciudad.
-Este lugar no solo es un espacio para corridas de toros, sino que también es un atractivo turístico que ofrece visitas guiadas y eventos culturales, destacando su arquitectura y su historia en el contexto de la cultura española
-
-
-Ejemplo 7
-Input:
-Visita al Museo Nacional de Escultura en Valladolid.
-
-Output:
-Name: Museo Nacional de Escultura
-Type: TouristAttraction
-Reason: Es un museo abierto al público con interés cultural.
-
-Ejemplo 8
-Input:
-La Plaza Mayor de Valladolid es el centro neurálgico de la ciudad.
-
-Output:
-Name: Plaza Mayor de Valladolid
-Type: TouristAttraction
-Reason: Es un lugar emblemático visitable y de interés turístico.
-
-Ejemplo 9
-Input:
-La Semana Internacional de Cine de Valladolid (Seminci) es un evento cultural destacado.
-
-Output:
-Name: Seminci
-Type: Event
-Reason: Es un evento cultural periódico centrado en el cine.
-
-Ejemplo 10
-Input:
-Ruta del vino de Rueda desde Valladolid.
-
-Output:
-Name: Ruta del vino de Rueda
-Type: Route
-Reason: Es un recorrido turístico temático relacionado con el vino.
-
-Ejemplo 11
-Input:
-El Ayuntamiento de Valladolid gestiona los servicios municipales.
-
-Output:
-Name: Ayuntamiento de Valladolid
-Type: Organization
-Reason: Es una institución pública que administra servicios locales.
-
-Ejemplo 12
-Input:
-Estadio de fútbol en Valladolid, sede de eventos deportivos.
-
-Output:
-Name: Estadio José Zorrilla
-Type: Stadium
-Reason: El Estadio José Zorrilla es un emblemático estadio de fútbol ubicado en Valladolid, España.
-Es la casa del Real Valladolid y ha sido escenario de numerosos eventos deportivos y culturales.
-Su ubicación en la Avenida Mundial 82 lo convierte en un punto de interés para los aficionados al deporte y los turistas que visitan la ciudad durante eventos importantes como la Semana Santa Blanquivioleta
-
-
 
 {gold_context}
 
@@ -513,6 +585,7 @@ Devuelve SOLO un JSON válido con esta forma:
 
 RESTRICCIONES:
 - score debe estar entre 0 y 1
+- NO uses 1.0 salvo evidencia extremadamente clara
 - short_description máximo 160 caracteres
 - long_description máximo 400 caracteres
 """.strip()
@@ -553,7 +626,10 @@ RESTRICCIONES:
         if isinstance(data, dict):
             entities = data.get("entities", [])
             if isinstance(entities, list):
-                return [str(e).strip() for e in entities if str(e).strip()]
+                entities = [str(e).strip() for e in entities if str(e).strip()]
+                entities = self.dedupe_entities(entities)
+                entities = [e for e in entities if not self.is_bad_entity_name(e)]
+                return entities
 
         return []
 
@@ -567,11 +643,19 @@ RESTRICCIONES:
         if isinstance(data, dict):
             clean_entities = data.get("entities", [])
             if isinstance(clean_entities, list):
-                return [str(e).strip() for e in clean_entities if str(e).strip()]
+                clean_entities = [str(e).strip() for e in clean_entities if str(e).strip()]
+                clean_entities = self.dedupe_entities(clean_entities)
+                clean_entities = [e for e in clean_entities if not self.is_bad_entity_name(e)]
+                return clean_entities
 
         return []
 
     def analyze_entities(self, entities, text, url=None):
+        if not entities:
+            return []
+
+        entities = self.dedupe_entities(entities)
+        entities = [e for e in entities if not self.is_bad_entity_name(e)]
         if not entities:
             return []
 
@@ -593,21 +677,22 @@ RESTRICCIONES:
                     if not isinstance(item, dict):
                         continue
 
-                    entity = str(item.get("entity", "")).strip()
-                    entity_class = str(item.get("class", "Place")).strip() or "Place"
+                    entity = self.normalize_entity_text(item.get("entity", ""))
+                    entity_class = str(item.get("class", "")).strip()
+
+                    if not entity or not entity_class:
+                        continue
 
                     try:
-                        score = float(item.get("score", 0.5))
+                        raw_score = float(item.get("score", 0.5))
                     except Exception:
-                        score = 0.5
+                        raw_score = 0.5
 
-                    score = max(0.0, min(1.0, score))
+                    raw_score = max(0.0, min(1.0, raw_score))
+                    score = self.calibrate_score(entity, entity_class, raw_score)
 
                     short_description = str(item.get("short_description", "")).strip()
                     long_description = str(item.get("long_description", "")).strip()
-
-                    if not entity:
-                        continue
 
                     clean_items.append({
                         "entity": entity,
@@ -617,6 +702,8 @@ RESTRICCIONES:
                         "short_description": short_description[:160],
                         "long_description": long_description[:400],
                     })
+
+                clean_items = self.filter_classified_items(clean_items)
 
                 if url:
                     clean_items = self.rerank_classified_entities(url, clean_items)
@@ -633,3 +720,121 @@ RESTRICCIONES:
         extracted = self.extract_entities(text)
         validated = self.validate_entities(extracted, text)
         return validated
+
+    # ==================================================
+    # FINAL HARD FILTER FOR POST-PROCESSING / ENRICHMENT
+    # ==================================================
+
+    def final_entity_guard(self, entities: list[dict]) -> list[dict]:
+        CLEAN_TYPES = {
+            "TownHall", "Square", "Park", "Museum",
+            "Restaurant", "Event", "TouristAttraction",
+            "Accommodation", "Monument", "Route",
+            "BullRing", "Basilica", "Cathedral",
+            "Castle", "ArcheologicalSite",
+            "HistoricalOrCulturalResource",
+            "EventOrganisationCompany",
+            "LocalBusiness", "Organization",
+            "TransportInfrastructure",
+        }
+
+        GENERIC_TYPES = {
+            "thing", "location", "place", "entity"
+        }
+
+        BAD_NAME_PATTERNS = [
+            r"\bplanes\b",
+            r"\bagenda\b",
+            r"\bmapas\b",
+            r"\bsuscr",
+            r"\bfacebook\b",
+            r"\binstagram\b",
+            r"\bqué\b",
+            r"\bver\b",
+            r"\búltimas\b",
+            r"\bgastronom[ií]a\b",
+            r"\bcultura\b",
+            r"\bfamilia\b",
+            r"\btradiciones\b",
+        ]
+
+        def is_bad_name(name: str) -> bool:
+            name_l = str(name or "").lower().strip()
+            if not name_l:
+                return True
+
+            if len(name_l.split()) > 6:
+                return True
+
+            for p in BAD_NAME_PATTERNS:
+                if re.search(p, name_l):
+                    return True
+
+            tokens = name_l.split()
+            if len(tokens) >= 2 and len(set(tokens)) == 1:
+                return True
+
+            return False
+
+        def get_clean_types(types: list[str]) -> list[str]:
+            if not types:
+                return []
+
+            clean = []
+            seen = set()
+
+            for t in types:
+                if not t:
+                    continue
+
+                t = str(t).strip()
+                t_l = t.lower()
+
+                if t_l in GENERIC_TYPES:
+                    continue
+
+                if t in CLEAN_TYPES and t not in seen:
+                    seen.add(t)
+                    clean.append(t)
+
+            return clean
+
+        filtered = []
+
+        for e in entities:
+            if not isinstance(e, dict):
+                continue
+
+            name = self.normalize_entity_text(e.get("name", ""))
+            types = e.get("types", [])
+
+            if not name:
+                continue
+
+            if is_bad_name(name):
+                continue
+
+            clean_types = get_clean_types(types)
+            if not clean_types:
+                continue
+
+            e["name"] = name
+            e["types"] = clean_types
+
+            try:
+                e["score"] = min(float(e.get("score", 0.5)), 0.9)
+            except Exception:
+                e["score"] = 0.5
+
+            filtered.append(e)
+
+        return filtered
+
+    def is_geo_valid(self, entity: str, lat, lng) -> bool:
+        if lat is None or lng is None:
+            return True
+
+        return (
+            41.5 <= lat <= 43.5 and
+            -3.5 <= lng <= -0.5
+        )

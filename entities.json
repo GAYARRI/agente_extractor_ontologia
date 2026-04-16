@@ -1,12 +1,14 @@
 [
   {
-    "name": "Bienal Flamenco",
+    "name": "Ayuntamiento de Pamplona Plaza Consistorial",
     "types": [
-      "Event"
+      "TownHall",
+      "Square",
+      "Location"
     ],
-    "score": 1,
+    "score": 1.0,
     "sourceUrl": "",
-    "url": "https://visitasevilla.es/el-flamenco",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
     "relatedUrls": [],
     "address": "",
     "phone": "",
@@ -15,20 +17,111 @@
       "lat": null,
       "lng": null
     },
-    "shortDescription": "Festival bienal que celebra el flamenco en Sevilla.",
-    "longDescription": "La Bienal Flamenco es un festival que se celebra en Sevilla cada dos años, donde se reúnen las máximas figuras del flamenco. Este evento es fundamental para la promoción y difusión del flamenco, declarado Patrimonio Cultural Inmaterial de la Humanidad por la UNESCO.",
-    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam",
-    "images": [],
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
     "wikidataId": ""
   },
   {
-    "name": "Altozano de Triana",
+    "name": "Plaza de los Fueros",
     "types": [
-      "Place"
+      "Square",
+      "Location"
     ],
-    "score": 1,
+    "score": 1.0,
     "sourceUrl": "",
-    "url": "https://visitasevilla.es/el-flamenco",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.84557778,
+      "lng": -2.66996389
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/hEMINGWAY-plaza-toros-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/hEMINGWAY-plaza-toros-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/01/hEMINGWAY-plaza-toros-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q12257920"
+  },
+  {
+    "name": "Parque de la Media Luna",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.81482,
+      "lng": -1.6336
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q3776693"
+  },
+  {
+    "name": "Plaza de Toros",
+    "types": [
+      "Square",
+      "BullRing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 36.59691936,
+      "lng": -6.232869231
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/hEMINGWAY-plaza-toros-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/hEMINGWAY-plaza-toros-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/01/hEMINGWAY-plaza-toros-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q5688840"
+  },
+  {
+    "name": "Navarra Barrio",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona",
     "relatedUrls": [],
     "address": "",
     "phone": "",
@@ -37,20 +130,26 @@
       "lat": null,
       "lng": null
     },
-    "shortDescription": "Lugar en Sevilla con una estatua homenaje al flamenco.",
-    "longDescription": "El Altozano de Triana es un punto de referencia en el barrio de Triana, Sevilla, conocido por su conexión con la cultura flamenca y su ambiente vibrante. Este lugar es un homenaje a las tres vertientes del flamenco, lo que lo convierte en un sitio de interés tanto para locales como para turistas que buscan sumergirse en la rica tradición cultural de la región.",
-    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam",
-    "images": [],
+    "shortDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea",
+    "longDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "description": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png"
+    ],
+    "additionalImages": [],
     "wikidataId": ""
   },
   {
-    "name": "Niña de los Peines",
+    "name": "Parque Fluvial",
     "types": [
-      "Person"
+      "Basilica",
+      "Location"
     ],
-    "score": 1,
+    "score": 1.0,
     "sourceUrl": "",
-    "url": "https://visitasevilla.es/el-flamenco",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
     "relatedUrls": [],
     "address": "",
     "phone": "",
@@ -59,64 +158,26 @@
       "lat": null,
       "lng": null
     },
-    "shortDescription": "Famosa figura del flamenco español.",
-    "longDescription": "La Niña de los Peines, cuyo nombre real es Pastora Pavón, es considerada una de las más grandes cantaoras de flamenco de todos los tiempos. Su técnica y emotividad han dejado una huella imborrable en la música española, siendo un referente para futuras generaciones de artistas.",
-    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam | cantante española",
-    "images": [],
-    "wikidataId": "Q447571"
-  },
-  {
-    "name": "Manolo Caracol",
-    "types": [
-      "Person"
+    "shortDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Parque-Fluvial-del-Arg.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Parque-Fluvial-del-Arg.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Parque-Fluvial-del-Arg.png"
     ],
-    "score": 1,
-    "sourceUrl": "",
-    "url": "https://visitasevilla.es/el-flamenco",
-    "relatedUrls": [],
-    "address": "",
-    "phone": "",
-    "email": "",
-    "coordinates": {
-      "lat": null,
-      "lng": null
-    },
-    "shortDescription": "Reconocido cantaor y figura del flamenco.",
-    "longDescription": "Manolo Caracol fue un destacado cantaor de flamenco, conocido por su profunda voz y su influencia en el desarrollo del cante jondo. Su legado perdura en la cultura flamenca y es recordado como una de las grandes figuras del arte flamenco.",
-    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam | cantante español",
-    "images": [],
-    "wikidataId": "Q1623744"
-  },
-  {
-    "name": "Sevilla Academias",
-    "types": [
-      "Concept"
-    ],
-    "score": 1,
-    "sourceUrl": "",
-    "url": "https://visitasevilla.es/el-flamenco",
-    "relatedUrls": [],
-    "address": "",
-    "phone": "",
-    "email": "",
-    "coordinates": {
-      "lat": null,
-      "lng": null
-    },
-    "shortDescription": "Academias dedicadas a la enseñanza del flamenco en Sevilla.",
-    "longDescription": "Sevilla Academias se refiere a instituciones educativas que ofrecen formación en flamenco, un arte que combina música, baile y poesía, representando una parte esencial de la cultura andaluza. Estas academias son un punto de interés para turistas que desean aprender sobre esta tradición y experimentar la esencia del flamenco en su lugar de origen.",
-    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam",
-    "images": [],
+    "additionalImages": [],
     "wikidataId": ""
   },
   {
-    "name": "Flamenco en Sevilla",
+    "name": "Parque Yamaguchi y el Planetario de Pamplona",
     "types": [
-      "https://ontologia.segittur.es/turismo/def/core#SingularExperience"
+      "Thing",
+      "Location"
     ],
-    "score": 1,
+    "score": 1.0,
     "sourceUrl": "",
-    "url": "https://visitasevilla.es/el-flamenco",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
     "relatedUrls": [],
     "address": "",
     "phone": "",
@@ -125,20 +186,54 @@
       "lat": null,
       "lng": null
     },
-    "shortDescription": "Experiencia cultural del flamenco en Sevilla.",
-    "longDescription": "Flamenco en Sevilla es una experiencia cultural única que permite a los visitantes sumergirse en la música, el baile y la poesía de este arte popular. Sevilla, como cuna del flamenco, ofrece espectáculos, clases y eventos que reflejan la riqueza y profundidad de esta tradición, convirtiéndola en una atracción imprescindible para los turistas.",
-    "description": "FLAMENCO, ARTE, IMPRESCINDIBLES Conociendo el alma de un pueblo El flamenco es música, cante, baile, poesía, sentimiento… y toda una filosofía vital. Descubre los auténticos significados que esta incomparable demostración de arte popular puede llegar a alcanzar. Flamenco en Sevilla Academias de Flam",
-    "images": [],
+    "shortDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg"
+    ],
+    "additionalImages": [],
     "wikidataId": ""
   },
   {
-    "name": "tablaos flamencos",
+    "name": "Parque Yamaguchi",
     "types": [
-      "Concept"
+      "Place",
+      "Location"
     ],
-    "score": 1,
+    "score": 1.0,
     "sourceUrl": "",
-    "url": "https://visitasevilla.es/el-flamenco",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.80863889,
+      "lng": -1.66322222
+    },
+    "shortDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Parque-Fluvial-del-Arg.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Parque-Fluvial-del-Arg.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Parque-Fluvial-del-Arg.png"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q23652112"
+  },
+  {
+    "name": "Interés Turístico Internacional",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
     "relatedUrls": [],
     "address": "",
     "phone": "",
@@ -147,10 +242,1947 @@
       "lat": null,
       "lng": null
     },
-    "shortDescription": "Establecimientos donde se presenta el arte del flamenco.",
-    "longDescription": "Los tablaos flamencos son locales donde se realizan espectáculos de flamenco, ofreciendo a los visitantes una experiencia auténtica de esta forma de arte. Estos lugares son herederos de los antiguos cafés cantantes y son populares entre los turistas que desean disfrutar de la música y danza flamenca en un ambiente tradicional.",
-    "description": "En Sevilla puedes disfrutar diariamente de la representación de este arte en todo su esplendor en los conocidos tablaos flamencos -herederos directos de los antiguos cafés cantantes-, en las peñas de los barrios, en espacios temáticos, en determinados bares y, por supuesto, en festivales como la Bie",
-    "images": [],
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Destino Turístico Sostenible",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos",
+    "longDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "description": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Gora San Fermín",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Monumentos Mercados Últimas",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Frecuentaba Casa Marceliano",
+    "types": [
+      "Castle",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Café Iruña",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "San Cristóbal",
+    "types": [
+      "Cathedral",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pamplona Viajar",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Festival Ecozine",
+    "types": [
+      "EventOrganisationCompany",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Universidad Pública",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Origen Siglos",
+    "types": [
+      "ArcheologicalSite",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Navarra Arena",
+    "types": [
+      "Castle",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Facebook Instagram",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Vinofest Navarra",
+    "types": [
+      "Castle",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "San Fermín San Fermín",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Convention Bureau Área",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "San Fermín Pamplona",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea",
+    "longDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "description": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Santa Maria La Real",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Cneo Pompeyo Magno",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "San Francisco Javier",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Hey Kid",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Iruña Rock",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Suscríbete Nuestros",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pamplona Parques",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pamplona Ver",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Consignas Mapas",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Reyes Magos",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea",
+    "longDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "description": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "San Saturnino",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.244094,
+      "lng": -0.082238
+    },
+    "shortDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea",
+    "longDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "description": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q1442511"
+  },
+  {
+    "name": "San Juan",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 14.604,
+      "lng": 121.03
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "description": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q44241"
+  },
+  {
+    "name": "San Jorge",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q1449543"
+  },
+  {
+    "name": "Conservatorio Superior",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad",
+    "longDescription": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "description": "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pamplona Entre",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Sancho Garcés",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "San Cernin",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "San Nicolás",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Ventura Rodríguez",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Luis Paret",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Fuentes-de-Luis-Paret.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Fuentes-de-Luis-Paret.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Fuentes-de-Luis-Paret.png"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q283412"
+  },
+  {
+    "name": "Guerras Carlistas",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Ley Paccionada",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Segundo Ensanche",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pablo Sarasate",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/estatua_fueros_paseo_sarasate_1-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/estatua_fueros_paseo_sarasate_1-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/estatua_fueros_paseo_sarasate_1-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q95786833"
+  },
+  {
+    "name": "Julián Gayarre",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Orfeón Pamplonés",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Media Luna",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Tercer Ensanche",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Certificación Biosphere",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos",
+    "longDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "description": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Biosphere Pamplona",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos",
+    "longDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "description": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Desarrollo Sostenible",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos",
+    "longDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "description": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Naciones Unidas",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos",
+    "longDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "description": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Ernest Hemingway",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Hemingway.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Hemingway.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Hemingway.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q23434"
+  },
+  {
+    "name": "Toronto Star",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Presbítero Honesto",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Comunidad Foral",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Santo Domingo",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Zona Joven",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Sound Fermín",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona",
+    "longDescription": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "description": "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pilar Ci",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Santiago Gastronomía Turismo",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Agenda Urbana Pamplona",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos",
+    "longDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "description": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Planes Excursiones",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Planes Cultura",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2026/02/Pamplona-senior_-como-disfrutar-la-ciudad-a-un-ritmo-tranquilo-y-lleno-de-cultura.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2026/02/Pamplona-senior_-como-disfrutar-la-ciudad-a-un-ritmo-tranquilo-y-lleno-de-cultura.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2026/02/Pamplona-senior_-como-disfrutar-la-ciudad-a-un-ritmo-tranquilo-y-lleno-de-cultura.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Agenda Multitud",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos",
+    "longDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "description": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pamplona Planes Gastronomía Familia Invierno",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Historia En",
+    "types": [
+      "HistoricalOrCulturalResource",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea",
+    "longDescription": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "description": "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Cultura Familia Tradiciones",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/12/Tradiciones-vivas-de-Pamplona-que-te-haran-viajar-en-el-tiempo.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/12/Tradiciones-vivas-de-Pamplona-que-te-haran-viajar-en-el-tiempo.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/12/Tradiciones-vivas-de-Pamplona-que-te-haran-viajar-en-el-tiempo.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Planes Pamplona",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Planes Qué",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Historia Verde",
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "description": "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Naturaleza_puente_verde_pamplona-scaled-e1749471472937.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Naturaleza_puente_verde_pamplona-scaled-e1749471472937.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Naturaleza_puente_verde_pamplona-scaled-e1749471472937.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Turismo Responsable",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos",
+    "longDescription": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "description": "Verde y sostenible Pamplona/Iruña huele a hierba mojada y aire de los Pirineos. A la gran cantidad de zonas verdes que se extienden por toda la ciudad, se suma el parque fluvial donde se refugia una gran biodiversidad. L a evolución histórica y urbanística de Pamplona ha favorecido una ciudad camina",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Los Jardines",
+    "types": [
+      "Thing",
+      "Location"
+    ],
+    "score": 0.3111,
+    "sourceUrl": "",
+    "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual",
+    "longDescription": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "description": "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul",
+    "image": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "mainImage": "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg",
+    "images": [
+      "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg"
+    ],
+    "additionalImages": [],
     "wikidataId": ""
   }
 ]

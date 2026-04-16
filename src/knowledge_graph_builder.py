@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 import re
 import unicodedata
 from typing import Any, Iterable, List
 
 from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS, XSD
+
 from src.linking.wikidata_linker import WikidataLinker
 
 
@@ -28,8 +31,7 @@ class KnowledgeGraphBuilder:
 
     def _normalize_space(self, text: str) -> str:
         text = text or ""
-        text = re.sub(r"\s+", " ", str(text)).strip()
-        return text
+        return re.sub(r"\s+", " ", str(text)).strip()
 
     def _as_list(self, value: Any) -> List[Any]:
         if value is None:
@@ -56,9 +58,6 @@ class KnowledgeGraphBuilder:
     # =========================
 
     def _commons_filename_to_url(self, filename: str) -> str:
-        """
-        Convierte un nombre de archivo de Commons (P18) a URL usable.
-        """
         filename = self._normalize_space(filename)
         if not filename:
             return ""
@@ -66,93 +65,16 @@ class KnowledgeGraphBuilder:
         if filename.startswith("http://") or filename.startswith("https://"):
             return filename
 
+        low = filename.lower()
+        if low.startswith("file:"):
+            filename = filename[5:].strip()
+        elif low.startswith("archivo:"):
+            filename = filename[8:].strip()
+
         safe_name = filename.replace(" ", "_")
         return f"https://commons.wikimedia.org/wiki/Special:FilePath/{safe_name}"
 
-    def _normalize_coordinates(self, entity: dict) -> dict:
-        coords = entity.get("coordinates")
-        if not isinstance(coords, dict):
-            coords = {}
-
-        lat = coords.get("lat")
-        lng = coords.get("lng")
-
-        if lat in (None, ""):
-            lat = entity.get("latitude")
-        if lng in (None, ""):
-            lng = entity.get("longitude")
-
-        entity["coordinates"] = {
-            "lat": lat,
-            "lng": lng,
-        }
-        return entity
-
-    def _collect_entity_images(self, entity: dict) -> List[str]:
-        props = entity.get("properties", {}) or {}
-        if not isinstance(props, dict):
-            props = {}
-
-        candidates = [
-            entity.get("image", ""),
-            entity.get("mainImage", ""),
-            entity.get("images", []),
-            entity.get("additionalImages", []),
-            props.get("image", ""),
-            props.get("mainImage", ""),
-            props.get("additionalImages", []),
-        ]
-
-        flat = []
-        for item in candidates:
-            if isinstance(item, list):
-                flat.extend(item)
-            elif isinstance(item, tuple):
-                flat.extend(list(item))
-            elif item:
-                flat.append(item)
-
-        cleaned = []
-        for img in flat:
-            img = self._clean_text(str(img))
-            if img:
-                cleaned.append(img)
-
-        cleaned = self._dedupe_preserve_order(cleaned)
-        cleaned = [img for img in cleaned if self._is_probably_good_image(img)]
-        return cleaned
-
-    def _set_entity_images(self, entity: dict, images: List[str]) -> dict:
-        images = [self._clean_text(x) for x in images if self._clean_text(x)]
-        images = self._dedupe_preserve_order(images)
-        images = [img for img in images if self._is_probably_good_image(img)]
-
-        if not images:
-            return entity
-
-        entity["images"] = images
-        if not entity.get("image"):
-            entity["image"] = images[0]
-        if not entity.get("mainImage"):
-            entity["mainImage"] = images[0]
-
-        props = entity.get("properties", {}) or {}
-        if not isinstance(props, dict):
-            props = {}
-
-        if not props.get("image"):
-            props["image"] = images[0]
-        if not props.get("mainImage"):
-            props["mainImage"] = images[0]
-        props["additionalImages"] = images[:4]
-
-        entity["properties"] = props
-        return entity
-
     def _enrich_entity_with_wikidata(self, entity: dict, wikidata_payload: dict) -> dict:
-        """
-        Inyecta wikidata_id, coords e imagen si faltan en la entidad local.
-        """
         if not isinstance(entity, dict):
             return entity
 
@@ -163,9 +85,10 @@ class KnowledgeGraphBuilder:
         if qid and not entity.get("wikidata_id"):
             entity["wikidata_id"] = qid
 
-        entity = self._normalize_coordinates(entity)
+        coords = entity.get("coordinates")
+        if not isinstance(coords, dict):
+            coords = {}
 
-        coords = entity.get("coordinates", {})
         lat = coords.get("lat")
         lng = coords.get("lng")
 
@@ -175,9 +98,15 @@ class KnowledgeGraphBuilder:
         if lng in (None, "") and wikidata_payload.get("longitude") is not None:
             coords["lng"] = wikidata_payload.get("longitude")
 
-        entity["coordinates"] = coords
+        if coords:
+            entity["coordinates"] = coords
 
-        existing_images = self._collect_entity_images(entity)
+        if entity.get("latitude") in (None, "") and wikidata_payload.get("latitude") is not None:
+            entity["latitude"] = wikidata_payload.get("latitude")
+
+        if entity.get("longitude") in (None, "") and wikidata_payload.get("longitude") is not None:
+            entity["longitude"] = wikidata_payload.get("longitude")
+
         wikidata_image = self._commons_filename_to_url(wikidata_payload.get("image", ""))
 
         if wikidata_image:
@@ -195,22 +124,9 @@ class KnowledgeGraphBuilder:
             if not props.get("mainImage"):
                 props["mainImage"] = wikidata_image
 
-            additional = props.get("additionalImages")
-            if not isinstance(additional, list):
-                additional = []
-
-            if wikidata_image not in additional:
-                additional = [wikidata_image] + additional
-
-            props["additionalImages"] = additional[:4]
             entity["properties"] = props
 
-            merged_images = list(existing_images)
-            if wikidata_image:
-                merged_images = self._dedupe_preserve_order([wikidata_image] + merged_images)
-
-            entity = self._set_entity_images(entity, merged_images)
-            return entity
+        return entity
 
     # =========================
     # Filtros de calidad
@@ -262,11 +178,30 @@ class KnowledgeGraphBuilder:
             return False
 
         vl = v.lower()
+
         bad = [
-            "logo", "icon", "sprite", "banner", "placeholder",
-            "header", "footer", "og-image", "share", "social"
+            "logo",
+            "icon",
+            "sprite",
+            "banner",
+            "placeholder",
+            "header",
+            "footer",
+            "og-image",
+            "share",
+            "social",
+            "favicon",
+            "_next/static/",
+            "_next/image?",
+            "/static/media/",
+            "financion",
+            ".svg",
         ]
         if any(b in vl for b in bad):
+            return False
+
+        valid_exts = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]
+        if not any(ext in vl for ext in valid_exts):
             return False
 
         return True
@@ -389,6 +324,31 @@ class KnowledgeGraphBuilder:
         items = [x for x in items if self._looks_like_url(x)]
         return self._dedupe_preserve_order(items)
 
+    def _extract_candidate_images(self, entity: dict) -> List[str]:
+        properties = entity.get("properties", {}) or {}
+        if not isinstance(properties, dict):
+            properties = {}
+
+        values = []
+        values.extend(self._as_list(entity.get("image")))
+        values.extend(self._as_list(entity.get("mainImage")))
+        values.extend(self._as_list(entity.get("images")))
+        values.extend(self._as_list(entity.get("additionalImages")))
+
+        values.extend(self._as_list(properties.get("image")))
+        values.extend(self._as_list(properties.get("mainImage")))
+        values.extend(self._as_list(properties.get("images")))
+        values.extend(self._as_list(properties.get("additionalImages")))
+        values.extend(self._as_list(properties.get("candidateImage")))
+
+        cleaned = []
+        for value in values:
+            txt = self._clean_text(str(value))
+            if txt and self._is_probably_good_image(txt):
+                cleaned.append(txt)
+
+        return self._dedupe_preserve_order(cleaned)
+
     def _should_skip_entity(self, entity: dict) -> bool:
         label = self._clean_text(entity.get("label", ""))
         name = self._choose_display_name(entity)
@@ -414,11 +374,19 @@ class KnowledgeGraphBuilder:
         if value is None:
             return
 
+        if isinstance(value, (list, tuple)):
+            for item in value:
+                self._add_literal_if_value(g, subject, predicate, item, datatype=datatype)
+            return
+
+        if isinstance(value, dict):
+            return
+
         text = str(value).strip()
         if not text:
             return
 
-        lit = Literal(value, datatype=datatype) if datatype else Literal(value)
+        lit = Literal(text, datatype=datatype) if datatype else Literal(text)
         g.add((subject, predicate, lit))
 
     def _add_unique_string_list(self, g: Graph, subject: URIRef, predicate: URIRef, values: List[str]):
@@ -496,11 +464,15 @@ class KnowledgeGraphBuilder:
             self._add_literal_if_value(g, subject, self.TOUR.phone, phone)
             self._add_literal_if_value(g, subject, self.TOUR.email, email)
 
-            entity = self._normalize_coordinates(entity)
-
             coords = entity.get("coordinates") or {}
-            lat = coords.get("lat")
-            lng = coords.get("lng")
+            lat = coords.get("lat") if isinstance(coords, dict) else None
+            lng = coords.get("lng") if isinstance(coords, dict) else None
+
+            if lat in (None, ""):
+                lat = entity.get("latitude")
+            if lng in (None, ""):
+                lng = entity.get("longitude")
+
             try:
                 if lat not in (None, ""):
                     g.add((subject, self.TOUR.latitude, Literal(float(lat), datatype=XSD.float)))
@@ -536,11 +508,27 @@ class KnowledgeGraphBuilder:
                 wikidata_payload = self.wikidata_linker.get_entity_data(wikidata_id)
                 entity = self._enrich_entity_with_wikidata(entity, wikidata_payload)
 
-            self._add_literal_if_value(g, subject, self.TOUR.wikidataId, entity.get("wikidata_id"))
+            wikidata_value = (
+                entity.get("wikidata_id")
+                or entity.get("wikidataId")
+                or (entity.get("properties", {}) or {}).get("wikidata_id")
+                or (entity.get("properties", {}) or {}).get("wikidataId")
+            )
+
+            try:
+                self._add_literal_if_value(g, subject, self.TOUR.wikidataId, wikidata_value)
+            except Exception as e:
+                print(f"⚠️ Error añadiendo wikidataId para {display_name}: {e}")
 
             coords = entity.get("coordinates") or {}
-            lat = coords.get("lat")
-            lng = coords.get("lng")
+            lat = coords.get("lat") if isinstance(coords, dict) else None
+            lng = coords.get("lng") if isinstance(coords, dict) else None
+
+            if lat in (None, ""):
+                lat = entity.get("latitude")
+            if lng in (None, ""):
+                lng = entity.get("longitude")
+
             try:
                 if lat not in (None, ""):
                     g.add((subject, self.TOUR.latitude, Literal(float(lat), datatype=XSD.float)))
@@ -549,10 +537,18 @@ class KnowledgeGraphBuilder:
             except Exception:
                 pass
 
-            candidate_images = self._collect_entity_images(entity)
+            candidate_images = self._extract_candidate_images(entity)
             if candidate_images:
-                g.add((subject, self.TOUR.image, Literal(candidate_images[0])))
-                g.add((subject, self.TOUR.mainImage, Literal(candidate_images[0])))
+                self._add_literal_if_value(g, subject, self.TOUR.image, candidate_images[0])
+                self._add_literal_if_value(g, subject, self.TOUR.mainImage, candidate_images[0])
+
+                if len(candidate_images) > 1:
+                    self._add_unique_string_list(
+                        g,
+                        subject,
+                        self.TOUR.additionalImages,
+                        candidate_images[1:4],
+                    )
 
         return g
 
