@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from entity_processing.page_classifier import classify_page
 import re
 import unicodedata
 from typing import Any, Dict, List, Optional, Tuple
@@ -238,7 +238,35 @@ class EntityFilter:
                 item.get("name") or item.get("entity_name") or item.get("entity") or item.get("label") or ""
             )
             context = context_getter(item) if callable(context_getter) else (item.get("context") or "")
-            audit = self.evaluate(name, context=context, page_signals=page_signals, expected_type=expected_type)
+            
+
+        page_type = classify_page(
+            url=item.get("url") or item.get("sourceUrl") or "",
+            entity=item
+        )
+
+        audit = self.evaluate(
+            name,
+            context=context,
+            page_signals=page_signals,
+            expected_type=expected_type
+        )
+
+        # 🔥 NEW: stricter filtering for bad page types
+        if page_type in {"listing_page", "category_page", "blog_page"}:
+            if audit["decision"] != "keep":
+                audit["decision"] = "reject"
+                audit["reasons"].append(f"rejected_by_page_type:{page_type}")
+
+            if len(name.split()) > 7:
+                audit["decision"] = "reject"
+                audit["reasons"].append("too_long_for_listing")
+
+            if any(tok in name.lower() for tok in ["lugares", "categorías", "planes", "que ver", "qué ver"]):
+                audit["decision"] = "reject"
+                audit["reasons"].append("category_noise")
+
+
             enriched = dict(item)
             enriched["filter_audit"] = audit
             if audit["decision"] == "reject":

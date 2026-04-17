@@ -4,6 +4,13 @@ import os
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
+# 🔥 SAFE IMPORT (won’t break if module not present yet)
+try:
+    from entity_processing.name_cleaner import clean_entity_name
+except Exception:
+    def clean_entity_name(x):
+        return x
+
 
 class EntityNormalizer:
 
@@ -20,21 +27,32 @@ class EntityNormalizer:
 
         self.threshold = 0.86
 
-    
     def cosine(self, a, b):
         return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
-    
-    
+
     def _entity_name(self, entity):
+        """
+        Extract and CLEAN entity name.
+        This is the key improvement.
+        """
         if isinstance(entity, dict):
-            return (
+            name = (
                 entity.get("name")
                 or entity.get("entity_name")
                 or entity.get("entity")
                 or entity.get("label")
                 or ""
             ).strip()
-        return str(entity).strip()
+        else:
+            name = str(entity).strip()
+
+        # 🔥 NEW: clean noisy names
+        try:
+            name = clean_entity_name(name)
+        except Exception:
+            pass
+
+        return name
 
     def _entity_score(self, entity):
         if not isinstance(entity, dict):
@@ -52,7 +70,7 @@ class EntityNormalizer:
 
     def _entity_weight(self, entity):
         """
-        Preferir la entidad más informativa como representante del cluster.
+        Prefer the most informative entity in a cluster.
         """
         if not isinstance(entity, dict):
             return len(str(entity).strip())
@@ -62,14 +80,23 @@ class EntityNormalizer:
         name = self._entity_name(entity)
         weight += len(name)
 
-        for field in ("description", "short_description", "long_description", "address", "phone", "email"):
+        for field in (
+            "description",
+            "short_description",
+            "long_description",
+            "address",
+            "phone",
+            "email",
+        ):
             value = entity.get(field)
             if isinstance(value, str) and value.strip():
                 weight += 10
 
         props = entity.get("properties")
         if isinstance(props, dict):
-            weight += len([k for k, v in props.items() if v not in (None, "", [], {})])
+            weight += len(
+                [k for k, v in props.items() if v not in (None, "", [], {})]
+            )
 
         return weight
 
@@ -95,6 +122,9 @@ class EntityNormalizer:
         return best_idx
 
     def normalize(self, entities):
+        """
+        Cluster similar entities using embeddings and keep best representative.
+        """
         if not entities:
             return entities
 
@@ -137,8 +167,13 @@ class EntityNormalizer:
         normalized = []
 
         for cluster in clusters:
-            global_cluster_indices = [valid_indices[local_idx] for local_idx in cluster]
-            best_global_idx = self._choose_best_representative(global_cluster_indices, entities)
+            global_cluster_indices = [
+                valid_indices[local_idx] for local_idx in cluster
+            ]
+            best_global_idx = self._choose_best_representative(
+                global_cluster_indices,
+                entities
+            )
             normalized.append(entities[best_global_idx])
 
         return normalized

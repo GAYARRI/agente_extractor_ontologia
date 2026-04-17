@@ -273,7 +273,7 @@ def build_parser():
 
     parser.add_argument("--start_url", type=str, default="https://visitasevilla.es/")
     parser.add_argument("--url", type=str, default=None)
-    parser.add_argument("--max_pages", type=int, default=2)
+    parser.add_argument("--max_pages", type=int, default=None)
     parser.add_argument("--ontology_path", type=str, default="src/ontology/core.rdf")
     parser.add_argument("--kg_output", type=str, default="knowledge_graph.ttl")
     parser.add_argument("--kg_html_output", type=str, default="knowledge_graph.html")
@@ -411,7 +411,9 @@ def process_pages(pages, pipeline, args, diagnostic=False):
 
             if isinstance(result, list):
                 if not result:
-                    raise ValueError("pipeline.run devolvió lista vacía")
+                    log(f"ℹ️ Sin entidades finales para {url} (resultado válido tras filtrado)")
+                    diag(diagnostic, f"pipeline.run devolvió lista vacía para {url}; se omite sin error")
+                    continue
 
                 results_ok.append({
                     "url": url,
@@ -421,10 +423,13 @@ def process_pages(pages, pipeline, args, diagnostic=False):
             elif isinstance(result, dict):
                 if "entities" in result and isinstance(result.get("entities"), list):
                     if not result["entities"]:
-                        raise ValueError("pipeline.run devolvió dict con entities vacío")
+                        log(f"ℹ️ Sin entidades finales para {url} (dict con entities vacío, resultado válido tras filtrado)")
+                        diag(diagnostic, f"pipeline.run devolvió dict con entities vacío para {url}; se omite sin error")
+                        continue
                     block = dict(result)
                     block.setdefault("url", url)
                     results_ok.append(block)
+            
                 else:
                     results_ok.append({
                         "url": url,
@@ -713,17 +718,31 @@ def predict_from_pages(pages, pipeline, args, diagnostic=False):
     )
 
     if not all_results:
-        message = "No se obtuvo ninguna entidad válida de las páginas procesadas."
-        if page_errors:
-            first = page_errors[0]
-            message = f"{message} Primer error: {first['error_type']}: {first['message']}"
-
-        payload = build_error_payload(
-            args,
-            message=message,
-            error_type="page_processing_error",
-            extra={"page_errors": page_errors},
-        )
+        payload = {
+            "status": "ok",
+            "mode": "single_url" if args.url else "crawl",
+            "start_url": args.start_url,
+            "url": args.url,
+            "max_pages": args.max_pages,
+            "expected_type": getattr(args, "expected_type", None),
+            "entity_count": 0,
+            "prediction": None,
+            "stats": {
+                "total_entities": 0,
+                "by_type": {},
+                "by_type_percent": {},
+                "entities_by_type": {},
+                "with_wikidata": 0,
+                "without_wikidata": 0,
+                "with_coordinates": 0,
+                "without_coordinates": 0,
+                "with_image": 0,
+                "without_image": 0,
+            },
+            "entities": [],
+            "message": "No se obtuvieron entidades finales válidas; resultado permitido tras filtrado.",
+            "page_errors": page_errors,
+        }
         return payload, all_results, []
 
     global_entities = consolidate_entities(all_results, diagnostic=diagnostic)
@@ -847,10 +866,14 @@ def main():
                 args=args,
                 diagnostic=diagnostic,
             )
-
+            
             if payload.get("status") == "error":
                 raise RuntimeError(payload.get("message", "Error desconocido en predict_from_pages"))
 
+            if payload.get("entity_count", 0) == 0:
+                log("\nℹ️ No se obtuvieron entidades finales válidas en este lote (resultado permitido tras filtrado).")
+                return
+            
             log(f"\n✅ Total bloques intermedios: {len(all_results)}")
             debug_entities(global_entities)
             generate_outputs(global_entities, pipeline, args)

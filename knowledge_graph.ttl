@@ -5,17 +5,481 @@
 
 ex:ayuntamiento_de_pamplona_plaza_consistorial a tour:Entity ;
     rdfs:label "Ayuntamiento de Pamplona Plaza Consistorial" ;
-    tour:description "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo" ;
-    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg" ;
+    tour:description "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/03/001PAMPLONA_PELOTAZALE_dburguiDBIZ3794-scaled.jpg" ;
     tour:label "Ayuntamiento de Pamplona Plaza Consistorial" ;
-    tour:longDescription "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo" ;
-    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Huerta_pamplons_sostenible-1-scaled-e1749468727273.jpg" ;
+    tour:latitude "42.8061705"^^xsd:float ;
+    tour:longDescription "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni" ;
+    tour:longitude "-1.5903973"^^xsd:float ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/03/001PAMPLONA_PELOTAZALE_dburguiDBIZ3794-scaled.jpg" ;
     tour:score "1.0"^^xsd:float ;
-    tour:shortDescription "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual" ;
+    tour:shortDescription "Cultura muy viva Un paseo por sus calles te permitirá respirar la cultura y esencia de la ciudad: rincones que te transportan a un pasacalles de San Fermín ; conchas que anuncian que, tras el paso de los Pirineos, entras a la primera del Camino de Santiago ; patrimonio histórico artístico con más de 5 kilómetros de murallas renacentistas excepcionales; frontones secretos donde descubrir la pelota vasca o barras de bar que atesoran una gastronomía sublime basada en el producto local" ;
     tour:type "Location",
         "Square",
         "TownHall" ;
-    tour:url "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible" .
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/pelota-vasca-en-pamplona" .
+
+ex:cafe_iruna a tour:Entity ;
+    rdfs:label "Café Iruña" ;
+    tour:description "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg" ;
+    tour:label "Café Iruña" ;
+    tour:longDescription "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "San Fermín San Fermín es la fiesta más emblemática de Pamplona" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/san-fermin" .
+
+ex:castillo_lugares a tour:Entity ;
+    rdfs:label "Castillo Lugares" ;
+    tour:description "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea. Si quieres saber" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Plaza_castillo-portada-1.jpg" ;
+    tour:label "Castillo Lugares" ;
+    tour:longDescription "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea. Si quieres saber" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Plaza_castillo-portada-1.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea" ;
+    tour:type "Castle",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/que-ver" .
+
+ex:centro_de_acogida a tour:Entity ;
+    rdfs:label "Centro de Acogida" ;
+    tour:description "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino. Situada en pleno camino a Compostela, Pamplona es la primera ciudad en el peregrinaje desde Roncesvalles. El Camin" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/ultria.jpg" ;
+    tour:label "Centro de Acogida" ;
+    tour:longDescription "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino. Situada en pleno camino a Compostela, Pamplona es la primera ciudad en el peregrinaje desde Roncesvalles. El Camin" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/ultria.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/camino-de-santiago" .
+
+ex:cicloturismo_parque_fluvial a tour:Entity ;
+    rdfs:label "Cicloturismo Parque Fluvial" ;
+    tour:description "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nues" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:label "Cicloturismo Parque Fluvial" ;
+    tour:longDescription "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nues" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nuestra agenda de eventos y actividades" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/que-hacer" .
+
+ex:clinica_universitaria a tour:Entity ;
+    rdfs:label "Clínica Universitaria" ;
+    tour:description """Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes. Navarra Health Tourism
+Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienest""" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/09/turismo_salud2-1.jpg" ;
+    tour:label "Clínica Universitaria" ;
+    tour:longDescription "Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes. Navarra Health Tourism Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienest" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/09/turismo_salud2-1.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/turismo-de-salud" .
+
+ex:cneo_pompeyo_magno a tour:Entity ;
+    rdfs:label "Cneo Pompeyo Magno" ;
+    tour:description "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg" ;
+    tour:label "Cneo Pompeyo Magno" ;
+    tour:longDescription "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual" ;
+    tour:type "Location",
+        "Monument" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/historia" .
+
+ex:comunidad_foral a tour:Entity ;
+    rdfs:label "Comunidad Foral" ;
+    tour:description """Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes. Navarra Health Tourism
+Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienest""" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/09/turismo_salud2-1.jpg" ;
+    tour:label "Comunidad Foral" ;
+    tour:longDescription "Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes. Navarra Health Tourism Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienest" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/09/turismo_salud2-1.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/turismo-de-salud" .
+
+ex:consignas_mapas a tour:Entity ;
+    rdfs:label "Consignas Mapas" ;
+    tour:description "Dónde comer La gastronomía es uno de los grandes atractivos de esta región. Quienes visiten Pamplona podrán encontrar una gran variedad de opciones deliciosas para todos los gustos y preferencias, desde alta cocina hasta restaurantes tradicionales ¡y no nos olvidemos de los bares de pintxos! ¿Tienes" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/09/gastronomia-1-scaled.jpg" ;
+    tour:label "Consignas Mapas" ;
+    tour:longDescription "Dónde comer La gastronomía es uno de los grandes atractivos de esta región. Quienes visiten Pamplona podrán encontrar una gran variedad de opciones deliciosas para todos los gustos y preferencias, desde alta cocina hasta restaurantes tradicionales ¡y no nos olvidemos de los bares de pintxos! ¿Tienes" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/09/gastronomia-1-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Dónde comer La gastronomía es uno de los grandes atractivos de esta región" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer" .
+
+ex:convention_bureau_area a tour:Entity ;
+    rdfs:label "Convention Bureau Área" ;
+    tour:description "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/03/001PAMPLONA_PELOTAZALE_dburguiDBIZ3794-scaled.jpg" ;
+    tour:label "Convention Bureau Área" ;
+    tour:longDescription "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/03/001PAMPLONA_PELOTAZALE_dburguiDBIZ3794-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla" ;
+    tour:type "Location",
+        "Monument" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/pelota-vasca-en-pamplona" .
+
+ex:familias_si a tour:Entity ;
+    rdfs:label "Familias Si" ;
+    tour:description "Dónde comer La gastronomía es uno de los grandes atractivos de esta región. Quienes visiten Pamplona podrán encontrar una gran variedad de opciones deliciosas para todos los gustos y preferencias, desde alta cocina hasta restaurantes tradicionales ¡y no nos olvidemos de los bares de pintxos! ¿Tienes" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/09/gastronomia-1-scaled.jpg" ;
+    tour:label "Familias Si" ;
+    tour:longDescription "Dónde comer La gastronomía es uno de los grandes atractivos de esta región. Quienes visiten Pamplona podrán encontrar una gran variedad de opciones deliciosas para todos los gustos y preferencias, desde alta cocina hasta restaurantes tradicionales ¡y no nos olvidemos de los bares de pintxos! ¿Tienes" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/09/gastronomia-1-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Dónde comer La gastronomía es uno de los grandes atractivos de esta región" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer" .
+
+ex:festival_ecozine a tour:Entity ;
+    rdfs:label "Festival Ecozine" ;
+    tour:description "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg" ;
+    tour:label "Festival Ecozine" ;
+    tour:longDescription "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla" ;
+    tour:type "EventOrganisationCompany",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/" .
+
+ex:festival_santas_pascuas a tour:Entity ;
+    rdfs:label "Festival Santas Pascuas" ;
+    tour:description "Cultura muy viva Un paseo por sus calles te permitirá respirar la cultura y esencia de la ciudad: rincones que te transportan a un pasacalles de San Fermín ; conchas que anuncian que, tras el paso de los Pirineos, entras a la primera del Camino de Santiago ; patrimonio histórico artístico con más de" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/festival-murallas.jpg" ;
+    tour:label "Festival Santas Pascuas" ;
+    tour:longDescription "Cultura muy viva Un paseo por sus calles te permitirá respirar la cultura y esencia de la ciudad: rincones que te transportan a un pasacalles de San Fermín ; conchas que anuncian que, tras el paso de los Pirineos, entras a la primera del Camino de Santiago ; patrimonio histórico artístico con más de" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/festival-murallas.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Cultura muy viva Un paseo por sus calles te permitirá respirar la cultura y esencia de la ciudad: rincones que te transportan a un pasacalles de San Fermín ; conchas que anuncian que, tras el paso de los Pirineos, entras a la primera del Camino de Santiago ; patrimonio histórico artístico con más de 5 kilómetros de murallas renacentistas excepcionales; frontones secretos donde descubrir la pelota vasca o barras de bar que atesoran una gastronomía sublime basada en el producto local" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/cultura" .
+
+ex:fronton_jito_alai a tour:Entity ;
+    rdfs:label "Frontón Jito Alai" ;
+    tour:description "Pelota Vasca en Pamplona, una historia compartida Pamplona esconde un tesoro deportivo que cautiva a locales y visitantes por igual: la pelota vasca. Deporte de reyes, curas y, sobre todo, del pueblo. En el caso de Pamplona hay noticias de su práctica desde la época medieval. La práctica de la pelot" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/03/001PAMPLONA_PELOTAZALE_dburguiDBIZ3794-scaled.jpg" ;
+    tour:label "Frontón Jito Alai" ;
+    tour:longDescription "Pelota Vasca en Pamplona, una historia compartida Pamplona esconde un tesoro deportivo que cautiva a locales y visitantes por igual: la pelota vasca. Deporte de reyes, curas y, sobre todo, del pueblo. En el caso de Pamplona hay noticias de su práctica desde la época medieval. La práctica de la pelot" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/03/001PAMPLONA_PELOTAZALE_dburguiDBIZ3794-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Pelota Vasca en Pamplona, una historia compartida Pamplona esconde un tesoro deportivo que cautiva a locales y visitantes por igual: la pelota vasca" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/pelota-vasca-en-pamplona" .
+
+ex:fundacion_miguel_servet a tour:Entity ;
+    rdfs:label "Fundación Miguel Servet" ;
+    tour:description """Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes. Navarra Health Tourism
+Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienest""" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/09/turismo_salud2-1.jpg" ;
+    tour:label "Fundación Miguel Servet" ;
+    tour:longDescription "Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes. Navarra Health Tourism Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienest" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/09/turismo_salud2-1.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/turismo-de-salud" .
+
+ex:gora_san_fermin a tour:Entity ;
+    rdfs:label "Gora San Fermín" ;
+    tour:description "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg" ;
+    tour:label "Gora San Fermín" ;
+    tour:longDescription "San Fermín San Fermín es la fiesta más emblemática de Pamplona. Celebrada del 6 al 14 de julio, esta festividad declarada de Interés Turístico Internacional, atrae cada año a miles de visitantes de todo el mundo. Aunque es mundialmente conocida por sus encierros, San Fermín es mucho más: alegría, am" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "San Fermín San Fermín es la fiesta más emblemática de Pamplona" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/san-fermin" .
+
+ex:hostel_albergues_albergue_plaza_catedral_albergues a tour:Entity ;
+    rdfs:label "Hostel Albergues Albergue Plaza Catedral Albergues" ;
+    tour:description "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/pamplona-catedral-hotel.jpg" ;
+    tour:label "Hostel Albergues Albergue Plaza Catedral Albergues" ;
+    tour:latitude "42.8061705"^^xsd:float ;
+    tour:longDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:longitude "-1.5903973"^^xsd:float ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/pamplona-catedral-hotel.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas" ;
+    tour:type "Cathedral",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/donde-alojarse" .
+
+ex:hotel_leyre_ver a tour:Entity ;
+    rdfs:label "Hotel Leyre Ver" ;
+    tour:description "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/pamplona-catedral-hotel.jpg" ;
+    tour:label "Hotel Leyre Ver" ;
+    tour:latitude "42.8061705"^^xsd:float ;
+    tour:longDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:longitude "-1.5903973"^^xsd:float ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/pamplona-catedral-hotel.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas" ;
+    tour:type "AccommodationEstablishment",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/donde-alojarse" .
+
+ex:hoteles_hotel_blanca a tour:Entity ;
+    rdfs:label "Hoteles Hotel Blanca" ;
+    tour:description "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2026/02/HABITACION-BLANCA-DE-NAVARRA.jpg" ;
+    tour:label "Hoteles Hotel Blanca" ;
+    tour:latitude "42.8061705"^^xsd:float ;
+    tour:longDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:longitude "-1.5903973"^^xsd:float ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2026/02/HABITACION-BLANCA-DE-NAVARRA.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas" ;
+    tour:type "AccommodationEstablishment",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/donde-alojarse" .
+
+ex:hoteles_pamplona_catedral_hotel_hoteles_hotel a tour:Entity ;
+    rdfs:label "Hoteles Pamplona Catedral Hotel Hoteles Hotel" ;
+    tour:description "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:label "Hoteles Pamplona Catedral Hotel Hoteles Hotel" ;
+    tour:latitude "42.8061705"^^xsd:float ;
+    tour:longDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:longitude "-1.5903973"^^xsd:float ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas" ;
+    tour:type "Cathedral",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/donde-alojarse" .
+
+ex:iglesia_san_saturnino a tour:Entity ;
+    rdfs:label "Iglesia San Saturnino" ;
+    tour:description "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea. Si quieres saber" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/T00663-San-saturnino-scaled.jpg" ;
+    tour:label "Iglesia San Saturnino" ;
+    tour:longDescription "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea. Si quieres saber" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/T00663-San-saturnino-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea" ;
+    tour:type "Cathedral",
+        "Church",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/que-ver" .
+
+ex:libreria_diocesana a tour:Entity ;
+    rdfs:label "Librería Diocesana" ;
+    tour:description "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino. Situada en pleno camino a Compostela, Pamplona es la primera ciudad en el peregrinaje desde Roncesvalles. El Camin" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/ultria.jpg" ;
+    tour:label "Librería Diocesana" ;
+    tour:longDescription "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino. Situada en pleno camino a Compostela, Pamplona es la primera ciudad en el peregrinaje desde Roncesvalles. El Camin" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/ultria.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino" ;
+    tour:type "Cathedral",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/camino-de-santiago" .
+
+ex:maisonnave_hoteles_hotel_eurostars_pamplona_hoteles a tour:Entity ;
+    rdfs:label "Maisonnave Hoteles Hotel Eurostars Pamplona Hoteles" ;
+    tour:description "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:label "Maisonnave Hoteles Hotel Eurostars Pamplona Hoteles" ;
+    tour:latitude "42.8061705"^^xsd:float ;
+    tour:longDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:longitude "-1.5903973"^^xsd:float ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas" ;
+    tour:type "AccommodationEstablishment",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/donde-alojarse" .
+
+ex:mercado_de_ermitagana_ver a tour:Entity ;
+    rdfs:label "Mercado de Ermitagaña Ver" ;
+    tour:description "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea. Si quieres saber" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Mercado-de-Santo-Domingo-scaled.jpg" ;
+    tour:label "Mercado de Ermitagaña Ver" ;
+    tour:longDescription "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea. Si quieres saber" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Mercado-de-Santo-Domingo-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/que-ver" .
+
+ex:monasterio_de_leyre_excursiones a tour:Entity ;
+    rdfs:label "Monasterio de Leyre Excursiones" ;
+    tour:description "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nues" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:label "Monasterio de Leyre Excursiones" ;
+    tour:longDescription "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nues" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nuestra agenda de eventos y actividades" ;
+    tour:type "HistoricalOrCulturalResource",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/que-hacer" .
+
+ex:museo_pablo_sarasate_museos a tour:Entity ;
+    rdfs:label "Museo Pablo Sarasate Museos" ;
+    tour:description "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea. Si quieres saber" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/estatua_fueros_paseo_sarasate_1-scaled.jpg" ;
+    tour:label "Museo Pablo Sarasate Museos" ;
+    tour:longDescription "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea. Si quieres saber" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/estatua_fueros_paseo_sarasate_1-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Lugares de interés Iglesias y catedral Monumentos Museos y centros de interpretación Mercados Qué ver Un paseo por Pamplona-Iruña es un auténtico viaje en el tiempo, desde la esencia del poblado vascón hasta los más actuales ejemplos de arquitectura contemporánea" ;
+    tour:type "Location",
+        "Museum" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/que-ver" .
+
+ex:navarra_arena a tour:Entity ;
+    rdfs:label "Navarra Arena" ;
+    tour:description "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png" ;
+    tour:label "Navarra Arena" ;
+    tour:longDescription "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad" ;
+    tour:type "Castle",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio" .
+
+ex:navarra_health_tourism a tour:Entity ;
+    rdfs:label "Navarra Health Tourism" ;
+    tour:description """Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes. Navarra Health Tourism
+Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienest""" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/09/turismo_salud2-1.jpg" ;
+    tour:label "Navarra Health Tourism" ;
+    tour:longDescription "Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes. Navarra Health Tourism Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienest" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/09/turismo_salud2-1.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Turismo de salud Pamplona es reconocida por su extensa oferta de servicios médicos de gran calidad, además del alto bienestar que ofrece a sus pacientes" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/turismo-de-salud" .
+
+ex:palacio_de_congresos_baluarte_ver a tour:Entity ;
+    rdfs:label "Palacio de Congresos Baluarte Ver" ;
+    tour:description "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nues" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Baluarte.jpg" ;
+    tour:label "Palacio de Congresos Baluarte Ver" ;
+    tour:longDescription "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nues" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Baluarte.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Visitas guiadas Enogastronomía Espacios culturales Juegos de escape Visitas en familia Actividades deportivas Cicloturismo Senderismo Paseos y rutas Excursiones desde Pamplona Qué hacer Si estás programando tu visita a Pamplona y no sabes qué hacer, te invitamos a que conozcas nuestra agenda de eventos y actividades" ;
+    tour:type "Location",
+        "TownHall" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/que-hacer" .
+
+ex:parque_de_la_media_luna a tour:Entity ;
+    rdfs:label "Parque de la Media Luna" ;
+    tour:description "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg" ;
+    tour:label "Parque de la Media Luna" ;
+    tour:latitude "42.81482"^^xsd:float ;
+    tour:longDescription "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual. Cada espacio y cada rincón conservan y atesoran su huella histórica. Con el impul" ;
+    tour:longitude "-1.6336"^^xsd:float ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Cultura_3U4A0135_H_ALTA-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/historia" ;
+    tour:wikidataId "Q3776693" .
+
+ex:parque_fluvial a tour:Entity ;
+    rdfs:label "Parque Fluvial" ;
+    tour:description "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Parque-Fluvial-del-Arg.png" ;
+    tour:label "Parque Fluvial" ;
+    tour:longDescription "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Parque-Fluvial-del-Arg.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad" ;
+    tour:type "Basilica",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio" .
+
+ex:plaza_catedral_albergues_albergue_de_pamplona a tour:Entity ;
+    rdfs:label "Plaza Catedral Albergues Albergue de Pamplona" ;
+    tour:description "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:label "Plaza Catedral Albergues Albergue de Pamplona" ;
+    tour:latitude "42.8061705"^^xsd:float ;
+    tour:longDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas. La ciudad dispone de una gran va" ;
+    tour:longitude "-1.5903973"^^xsd:float ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Todos los lugares Hoteles Pensiones y hostales Albergues Campings Agroturismos / Casa rurales Áreas de autocaravanas Dónde alojarse Pamplona ofrece un ambiente urbano, belleza natural y gran variedad de experiencias culturales, atrayendo cada año a miles de personas" ;
+    tour:type "Cathedral",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/tipo-lugar/donde-alojarse" .
+
+ex:puente_la_reina a tour:Entity ;
+    rdfs:label "Puente la Reina" ;
+    tour:description "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino. Situada en pleno camino a Compostela, Pamplona es la primera ciudad en el peregrinaje desde Roncesvalles. El Camin" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Naturaleza_puente_verde_pamplona-scaled-e1749471472937.jpg" ;
+    tour:label "Puente la Reina" ;
+    tour:longDescription "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino. Situada en pleno camino a Compostela, Pamplona es la primera ciudad en el peregrinaje desde Roncesvalles. El Camin" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/06/Naturaleza_puente_verde_pamplona-scaled-e1749471472937.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Camino de Santiago El Camino de Santiago es una de las rutas de peregrinación más importantes a nivel mundial, y Pamplona/Iruña es parada ineludible de esta gran experiencia, el Camino" ;
+    tour:type "Location",
+        "Monument" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/camino-de-santiago" .
+
+ex:reyes_magos a tour:Entity ;
+    rdfs:label "Reyes Magos" ;
+    tour:description "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:label "Reyes Magos" ;
+    tour:longDescription "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona" .
+
+ex:san_cristobal a tour:Entity ;
+    rdfs:label "San Cristóbal" ;
+    tour:description "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg" ;
+    tour:label "San Cristóbal" ;
+    tour:longDescription "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/10/ciudadela_vuelta_castillo_iturrama-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad" ;
+    tour:type "Cathedral",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio" .
 
 ex:san_fermin_pamplona a tour:Entity ;
     rdfs:label "San Fermín Pamplona" ;
@@ -30,4 +494,43 @@ ex:san_fermin_pamplona a tour:Entity ;
         "Location",
         "Unknown" ;
     tour:url "https://visitpamplonairuna.com/descubre-pamplona" .
+
+ex:santiago_gastronomia_turismo a tour:Entity ;
+    rdfs:label "Santiago Gastronomía Turismo" ;
+    tour:description "Dónde comer La gastronomía es uno de los grandes atractivos de esta región. Quienes visiten Pamplona podrán encontrar una gran variedad de opciones deliciosas para todos los gustos y preferencias, desde alta cocina hasta restaurantes tradicionales ¡y no nos olvidemos de los bares de pintxos! ¿Tienes" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/09/gastronomia-1-scaled.jpg" ;
+    tour:label "Santiago Gastronomía Turismo" ;
+    tour:longDescription "Dónde comer La gastronomía es uno de los grandes atractivos de esta región. Quienes visiten Pamplona podrán encontrar una gran variedad de opciones deliciosas para todos los gustos y preferencias, desde alta cocina hasta restaurantes tradicionales ¡y no nos olvidemos de los bares de pintxos! ¿Tienes" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/09/gastronomia-1-scaled.jpg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Dónde comer La gastronomía es uno de los grandes atractivos de esta región" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer" .
+
+ex:universidad_publica a tour:Entity ;
+    rdfs:label "Universidad Pública" ;
+    tour:description "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png" ;
+    tour:label "Universidad Pública" ;
+    tour:longDescription "Barrio a barrio El Casco Antiguo de Pamplona y sus ensanches son el epicentro de la ciudad. Allí se encuentran los tres burgos que la conformaron y su planta medieval, así como sus mercados, plazuelas y todos los edificios históricos que recuerdan que fue capital de un gran reino. Al norte Al sur Al" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/01/Universidad-Publica-de-Navarra.png" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual" ;
+    tour:type "Location",
+        "Unknown" ;
+    tour:url "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio" .
+
+ex:vinofest_navarra a tour:Entity ;
+    rdfs:label "Vinofest Navarra" ;
+    tour:description "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni" ;
+    tour:image "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg" ;
+    tour:label "Vinofest Navarra" ;
+    tour:longDescription "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parques, las murallas y sus animadas calles; o se degusta un pintxo con el soni" ;
+    tour:mainImage "https://visitpamplonairuna.com/wp-content/uploads/2025/07/Plaza-del-Castillo-1-scaled.jpeg" ;
+    tour:score "1.0"^^xsd:float ;
+    tour:shortDescription "Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla" ;
+    tour:type "Castle",
+        "Location" ;
+    tour:url "https://visitpamplonairuna.com/" .
 
