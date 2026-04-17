@@ -89,6 +89,16 @@ class KGPostProcessor:
             "Location",
         }
 
+        self.type_aliases = {
+            "organisation": "Organization",
+            "organization": "Organization",
+            "eventorganisationcompany": "EventOrganisationCompany",
+            "medicalclinic": "PublicService",
+            "clinic": "PublicService",
+            "healthcareorganization": "PublicService",
+            "healthcarefacility": "PublicService",
+        }
+
         # Tipos demasiado genéricos: si hay uno más específico, se eliminan
         self.generic_types = {
             "Place",
@@ -230,10 +240,11 @@ class KGPostProcessor:
             return max(0.0, min(1.0, float(value)))
         except Exception:
             return default
-
+        
     def _is_allowed_type(self, t: str) -> bool:
-        t = str(t).strip()
-        return bool(t) and t in self.allowed_types and t not in self.forbidden_types
+        t = self._canonicalize_type_alias(t)
+        return bool(t) and t in self.allowed_types and t not in self.forbidden_types    
+       
 
     def _clean_type_list(self, types_list):
         cleaned = []
@@ -245,18 +256,27 @@ class KGPostProcessor:
 
     def _sanitize_output_types(self, values):
         cleaned = []
-        for t in self._as_list(values):
-            t = str(t).strip()
-            if not t:
-                continue
-            if not self._is_allowed_type(t):
-                continue
-            cleaned.append(t)
+        for t in self._canonicalize_type_values(values):
+            if t and self._is_allowed_type(t):
+                cleaned.append(t)
+        return self._dedupe(cleaned)    
+        
+    
+    def _canonicalize_type_alias(self, value: str) -> str:
+        t = str(value or "").strip()
+        if not t:
+            return ""
+        return self.type_aliases.get(t.lower(), t)
 
-        cleaned = self._dedupe(cleaned)
-        if not cleaned:
-            return ["Unknown"]
-        return cleaned[:5]
+    def _canonicalize_type_values(self, values):
+        out = []
+        for v in self._as_list(values):
+            t = self._canonicalize_type_alias(v)
+            if t:
+                out.append(t)
+        return self._dedupe(out)
+
+
 
     # =========================================================
     # Reglas estructurales
@@ -458,25 +478,13 @@ class KGPostProcessor:
     # =========================================================
 
     def _infer_type_from_label(self, label: str):
+    
         if not label:
             return None
 
-        # Eventos
+        label = str(label).strip().lower()
+
         if label in {
-            "semana santa",
-            "feria de sevilla",
-            "vela de triana",
-            "temporada taurina",
-            "pregon",
-            "pregón",
-            "madruga",
-            "madrugá",
-            "miercoles de ceniza",
-            "miércoles de ceniza",
-            "viernes santo",
-            "domingo de ramos",
-            "cuaresma",
-            "seminci",
             "san fermin",
             "san fermín",
             "san fermin pamplona",
@@ -484,156 +492,107 @@ class KGPostProcessor:
         }:
             return "Event"
 
-        # Patrimonio / cultura
-        if "museo" in label:
-            return "Museum"
-        if "castillo" in label:
-            return "Castle"
-        if "alcazar" in label or "alcázar" in label:
-            return "Alcazar"
+        if (
+            "camino " in label
+            or label.startswith("camino ")
+            or "ruta" in label
+            or "itinerario" in label
+            or "visita guiada" in label
+            or "excursion" in label
+            or "excursión" in label
+            or "senderismo" in label
+            or "cicloturismo" in label
+        ):
+            # aquí se genera candidato; el cierre ontológico decidirá si Route/Ruta/DE existe
+            return "Route"
+
         if "catedral" in label:
             return "Cathedral"
-        if "basilica" in label or "basílica" in label:
-            return "Basilica"
-        if "capilla" in label:
-            return "Chapel"
-        if "iglesia" in label:
-            return "Church"
-        if "abadia" in label or "abadía" in label:
-            return "HistoricalOrCulturalResource"
-        if "monasterio" in label:
-            return "HistoricalOrCulturalResource"
-        if "convento" in label:
-            return "HistoricalOrCulturalResource"
-        if "plaza de toros" in label:
-            return "BullRing"
-        if "plaza" in label:
-            return "Square"
         if "ayuntamiento" in label:
             return "TownHall"
-        if "estadio" in label:
-            return "Stadium"
-        if "estatua" in label or "escultura" in label:
-            return "Monument"
-        if "yacimiento" in label or "arqueologic" in label or "arqueológic" in label:
-            return "ArcheologicalSite"
-        if "centro cultural" in label:
-            return "CultureCenter"
-        if "sala de exposiciones" in label:
-            return "ExhibitionHall"
-        if "academia" in label:
-            return "EducationalCenter"
+        if "plaza" in label:
+            return "Square"
 
-        # Negocio / servicios
-        if (
-            "hotel" in label
-            or "hostal" in label
-            or "apartamento turistico" in label
-            or "apartamento turístico" in label
-        ):
-            return "AccommodationEstablishment"
-
-        if (
-            "restaurante" in label
-            or "cafeteria" in label
-            or "cafetería" in label
-            or re.search(r"\bbar\b", label)
-        ):
-            return "FoodEstablishment"
-
-        if "outlet" in label or "fashion" in label or "shopping" in label:
-            return "RetailAndFashion"
-
-        if (
-            "oficina de turismo" in label
-            or "punto de informacion turistica" in label
-            or "punto de información turística" in label
-        ):
-            return "TourismService"
-
-        if (
-            "taxi" in label
-            or "aeropuerto" in label
-            or "estacion" in label
-            or "estación" in label
-            or "bus turistico" in label
-            or "autobus turistico" in label
-        ):
-            return "TransportInfrastructure"
-
-        if "parking" in label or "aparcamiento" in label:
-            return "PublicService"
-
-        return None
+        return None 
 
     def _resolve_final_class_and_types(self, entity: dict):
-        """
-        Prioridad:
-        1. normalized_type del ranker
-        2. class existente si es válida
-        3. primer type válido
-        4. inferencia por label
-        5. Unknown
-        """
-        label = self._entity_key(entity)
+    
+        normalized_type = self._canonicalize_type_alias(
+            str(entity.get("normalized_type", "")).strip()
+        )
 
-        normalized_type = str(entity.get("normalized_type", "")).strip()
-        current_class = str(entity.get("class", "")).strip()
+        raw_label = self._entity_key(entity)
+        normalized_label = str(entity.get("normalized_text", "")).strip()
+        label_for_inference = normalized_label or raw_label
+
+        current_class = self._canonicalize_type_alias(
+            str(entity.get("class", "")).strip()
+        )
+
         current_types = self._clean_type_list(entity.get("type"))
 
-        # A veces entra por "types" en vez de "type"
         current_types_from_types = self._clean_type_list(entity.get("types"))
         for t in current_types_from_types:
             if t not in current_types:
                 current_types.append(t)
 
-        inferred_type = self._infer_type_from_label(label)
+        inferred_type = self._infer_type_from_label(label_for_inference)
+        if inferred_type:
+            inferred_type = self._canonicalize_type_alias(inferred_type)
+
+        candidate_order = []
 
         if self._is_allowed_type(normalized_type):
-            final_class = normalized_type
-        elif self._is_allowed_type(current_class):
-            final_class = current_class
-        elif current_types:
-            final_class = current_types[0]
-        elif inferred_type and self._is_allowed_type(inferred_type):
-            final_class = inferred_type
+            candidate_order.append(normalized_type)
+
+        if self._is_allowed_type(current_class):
+            candidate_order.append(current_class)
+
+        for t in current_types:
+            t = self._canonicalize_type_alias(t)
+            if self._is_allowed_type(t):
+                candidate_order.append(t)
+
+        if inferred_type and self._is_allowed_type(inferred_type):
+            candidate_order.append(inferred_type)
+
+        candidate_order = self._dedupe(candidate_order)
+
+        specific_candidates = [
+            t for t in candidate_order
+            if t not in self.generic_types and t != "Unknown"
+        ]
+        generic_candidates = [
+            t for t in candidate_order
+            if t in self.generic_types and t != "Unknown"
+        ]
+
+        if specific_candidates:
+            final_class = specific_candidates[0]
+        elif generic_candidates:
+            final_class = generic_candidates[0]
         else:
             final_class = "Unknown"
 
-        final_types = [final_class]
+        final_types = []
+        if final_class != "Unknown":
+            final_types.append(final_class)
 
-        if self._is_allowed_type(normalized_type) and normalized_type not in final_types:
-            final_types.append(normalized_type)
-
-        if self._is_allowed_type(current_class) and current_class not in final_types:
-            final_types.append(current_class)
-
-        for t in current_types:
-            if self._is_allowed_type(t) and t not in final_types:
+        for t in candidate_order:
+            if t != "Unknown" and t not in final_types:
                 final_types.append(t)
 
-        if inferred_type and self._is_allowed_type(inferred_type) and inferred_type not in final_types:
-            final_types.append(inferred_type)
-
-        has_specific = any(t not in self.generic_types for t in final_types)
-        if has_specific:
-            final_types = [t for t in final_types if t not in self.generic_types or t == final_class]
-
-        final_types = self._sanitize_output_types(final_types)
-
-        if final_class in self.forbidden_types or not self._is_allowed_type(final_class):
-            final_class = final_types[0] if final_types else "Unknown"
-
-        if final_class not in final_types and self._is_allowed_type(final_class):
-            final_types.insert(0, final_class)
-
-        final_types = self._sanitize_output_types(final_types)
+        if not final_types:
+            final_types = ["Unknown"]
 
         entity["class"] = final_class
         entity["type"] = final_types
         entity["types"] = final_types
 
-        return entity
+        return entity    
+        
+        
+        
 
     def _preserve_ranking_features(self, entity: dict):
         entity["score"] = self._clip_score(entity.get("score"), default=0.0)

@@ -1,21 +1,52 @@
 import re
-import spacy
+from typing import List, Set
 
-from src.entity_filter import (
-    is_valid_entity,
-    normalize_entity_text,
-)
+try:
+    from src.entity_filter import is_valid_entity, normalize_entity_text
+except Exception:
+    def normalize_entity_text(text: str) -> str:
+        text = str(text or "").strip()
+        text = re.sub(r"\s+", " ", text)
+        return text
+
+    def is_valid_entity(entity: str, context: str = "") -> bool:
+        entity = str(entity or "").strip()
+        if not entity or len(entity) < 3:
+            return False
+        return True
+
+try:
+    import spacy  # type: ignore
+    SPACY_AVAILABLE = True
+except Exception:
+    spacy = None
+    SPACY_AVAILABLE = False
 
 
 class TourismEntityExtractor:
-    def __init__(self):
-        self.nlp = spacy.load("es_core_news_md")
+    def __init__(self, model_name: str = "es_core_news_md", use_spacy: bool = True):
+        self.model_name = model_name
+        self.use_spacy = bool(use_spacy and SPACY_AVAILABLE)
+        self.nlp = None
+
+        if self.use_spacy:
+            try:
+                self.nlp = spacy.load(self.model_name)
+            except Exception:
+                self.use_spacy = False
+                self.nlp = None
 
         self.bad_words = {
-            "aquí", "ideal", "perfecta", "perfectas", "desde", "practica",
-            "navega", "zarpa", "utilizamos", "disfruta", "más", "todo",
-            "nuestro", "nuestra", "este", "esta", "estos", "estas",
-            "familia", "leer", "descubre", "sevillanos", "visitantes",
+            "pamplona",
+            "iruña",
+            "navarra",
+            "turismo",
+            "gastronomía",
+            "gastronomia",
+            "historia",
+            "viaje",
+            "descubre",
+            "visitantes",
         }
 
         self.bad_patterns = [
@@ -25,84 +56,160 @@ class TourismEntityExtractor:
             r"leer más",
             r"leer mas",
             r"todo lo que necesitas",
-            r"te queda mucho por descubrir:?",
             r"^\d+_",
         ]
 
-    def clean_text(self, text: str) -> str:
-        text = text or ""
+        self.category_heading_patterns = [
+            r"^sidrer[ií]as en ",
+            r"^restaurantes en ",
+            r"^bares en ",
+            r"^hoteles en ",
+            r"^museos en ",
+            r"^cafeter[ií]as en ",
+            r"^alojamientos en ",
+        ]
+
+    def clean_text(self, text) -> str:
+        if isinstance(text, list):
+            parts = []
+            for item in text:
+                if isinstance(item, dict):
+                    value = item.get("text") or item.get("content") or item.get("html") or ""
+                    if value:
+                        parts.append(str(value))
+                elif item is not None:
+                    parts.append(str(item))
+            text = " ".join(parts)
+        elif text is None:
+            text = ""
+        else:
+            text = str(text)
+
         text = re.sub(r"\s+", " ", text)
 
-        for p in self.bad_patterns:
-            text = re.sub(p, "", text, flags=re.IGNORECASE)
+        for pattern in self.bad_patterns:
+            text = re.sub(pattern, "", text, flags=re.IGNORECASE)
 
-        # limpia numeraciones tipo 01_ / 02_
         text = re.sub(r"\b\d+_\s*", "", text)
         text = re.sub(r"\s+", " ", text)
         return text.strip()
 
-    def _rule_based_candidates(self, text: str):
-        candidates = set()
+    def _looks_like_category_heading(self, entity: str) -> bool:
+        norm = normalize_entity_text(entity).lower()
+        return any(re.match(pattern, norm) for pattern in self.category_heading_patterns)
 
-        person_patterns = [
-            r"\bManolo Caracol\b",
-            r"\bLa Niña de los Peines\b",
-            r"\bNiña de los Peines\b",
-            r"\bPastora Pav[oó]n\b",
+    def _looks_like_bad_compound(self, entity: str) -> bool:
+        norm = normalize_entity_text(entity)
+        if not norm:
+            return True
+
+        lower = norm.lower()
+
+        if self._looks_like_category_heading(norm):
+            return True
+
+        suspicious_fragments = [
+            "gastronomía turismo",
+            "gastronomia turismo",
+            "turismo salud",
+            "salud turismo",
+            "santiago gastronomía turismo",
+            "santiago gastronomia turismo",
+        ]
+        if any(fragment in lower for fragment in suspicious_fragments):
+            return True
+
+        words = norm.split()
+        if len(words) >= 5 and all(w[:1].isupper() for w in words if w):
+            return True
+
+        return False
+
+    def _rule_based_candidates(self, text: str) -> Set[str]:
+        candidates: Set[str] = set()
+
+        patterns = [
+            r"\bSan\s+Ferm[ií]n(?:\s+Pamplona)?\b",
+            r"\bCatedral\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑáéíóúñ\-]+\b",
+            r"\bAyuntamiento\s+de\s+[A-ZÁÉÍÓÚÑ][\wÁÉÍÓÚÑáéíóúñ\-]+\b",
+            r"\bPlaza\s+Consistorial\b",
+            r"\bCamino\s+Franc[eé]s\b",
+            r"\bCamino\s+Primitivo\b",
+            r"\bCamino\s+Baztan[eé]s\b",
+            r"\bCamino\s+de\s+Santiago\b",
+            r"\bSidrer[ií]as\s+En\s+Pamplona\b",
         ]
 
-        place_patterns = [
-            r"\bAltozano de Triana\b",
-            r"\bReal Alc[aá]zar\b",
-            r"\bIsla M[aá]gica\b",
-            r"\bSevilla\b",
-            r"\bTriana\b",
-        ]
-
-        concept_patterns = [
-            r"\bcante jondo\b",
-        ]
-
-        for pattern in person_patterns + place_patterns + concept_patterns:
-            for m in re.finditer(pattern, text, flags=re.IGNORECASE):
-                candidates.add(normalize_entity_text(m.group(0)))
+        for pattern in patterns:
+            for match in re.finditer(pattern, text, flags=re.IGNORECASE):
+                entity = normalize_entity_text(match.group(0))
+                if entity:
+                    candidates.add(entity)
 
         return candidates
 
-    def extract(self, text: str):
-        text = self.clean_text(text)
-        if not text:
-            return []
+    def _spacy_candidates(self, text: str) -> Set[str]:
+        if not self.use_spacy or self.nlp is None:
+            return set()
 
-        doc = self.nlp(text)
-        entities = set()
+        entities: Set[str] = set()
 
-        # spaCy NER
+        try:
+            doc = self.nlp(text)
+        except Exception:
+            return set()
+
         for ent in doc.ents:
             entity = normalize_entity_text(ent.text)
             if not entity:
                 continue
             if entity.lower() in self.bad_words:
                 continue
-            if is_valid_entity(entity, context=text):
-                entities.add(entity)
+            entities.add(entity)
 
-        # reglas adicionales para nombres históricos y lugares concretos
-        for entity in self._rule_based_candidates(text):
-            if is_valid_entity(entity, context=text):
-                entities.add(entity)
+        return entities
 
-        # evita subtrozos si existe una mención más completa
-        final_entities = []
+    def _postfilter_entities(self, entities: Set[str], context: str) -> List[str]:
+        final_entities: List[str] = []
+
         sorted_entities = sorted(entities, key=lambda x: (-len(x), x.lower()))
 
         for entity in sorted_entities:
             entity_l = entity.lower()
+
+            if not entity.strip():
+                continue
+
+            if entity_l in self.bad_words:
+                continue
+
+            if self._looks_like_category_heading(entity):
+                continue
+
+            if self._looks_like_bad_compound(entity):
+                continue
+
+            if not is_valid_entity(entity, context=context):
+                continue
+
             if any(
                 entity_l != other.lower() and entity_l in other.lower()
                 for other in final_entities
             ):
                 continue
+
             final_entities.append(entity)
 
         return final_entities
+
+    def extract(self, text) -> List[str]:
+        text = self.clean_text(text)
+        if not text or not isinstance(text, str):
+            return []
+
+        entities: Set[str] = set()
+
+        entities.update(self._spacy_candidates(text))
+        entities.update(self._rule_based_candidates(text))
+
+        return self._postfilter_entities(entities, context=text)

@@ -13,10 +13,43 @@ class EntityTypeResolver:
     - uses lexical hints before ontology drift
     """
 
+    
     def __init__(self):
-        self.weak_types = {"", "thing", "unknown", "entity", "item"}
+        self.weak_types = {"", "thing", "unknown", "entity", "item", "location"}
         self.forbidden_final_types = {"Thing", "Entity", "Item", "Location"}
 
+        # Canonical aliases so upstream variants do not leak downstream.
+        
+
+        self.type_aliases = {
+            "organisation": "Organization",
+            "organization": "Organization",
+            "eventorganisationcompany": "EventOrganisationCompany",
+            "medicalclinic": "PublicService",
+            "clinic": "PublicService",
+            "healthcareorganization": "PublicService",
+            "healthcarefacility": "PublicService",
+            "route": "Route",
+            "ruta": "Ruta",
+            "guidedtour": "DestinationExperience",
+            "excursion": "DestinationExperience",
+            "activity": "DestinationExperience",
+            "arena": "EventAttendanceFacility",
+            "theatre": "EventAttendanceFacility",
+            "sportsvenue": "SportsCenter",
+        }
+
+        self.lexical_rules = [
+            (r"\bayuntamiento\b|\btown hall\b", "TownHall"),
+            (r"\bplaza\b|\bsquare\b", "Square"),
+            (r"\bcatedral\b|\bcathedral\b", "Cathedral"),
+            (r"\bevento\b|\bevent\b|\bfestival\b|\bsan ferm[ií]n\b", "Event"),
+            (r"\bcamino\b", "Route"),
+            (r"\bruta\b|\broute\b", "Route"),
+            (r"\bvisita guiada\b|\bguided tour\b", "DestinationExperience"),
+            (r"\bexcursi[oó]n\b|\bexcursion\b", "DestinationExperience"),
+        ]
+        
         self.min_semantic_confidence = 0.70
         self.strong_semantic_confidence = 0.80
 
@@ -27,59 +60,73 @@ class EntityTypeResolver:
             (r"\bbasilica\b|\bbasílica\b", "Basilica"),
             (r"\biglesia\b|\bchurch\b", "Church"),
             (r"\bcapilla\b|\bchapel\b", "Chapel"),
-            (r"\bmonasterio\b|\bmonastery\b", "Monastery"),
+            (r"\bmonasterio\b|\bmonastery\b", "HistoricalOrCulturalResource"),
             (r"\bmuseo\b|\bmuseum\b", "Museum"),
             (r"\bcastillo\b|\bcastle\b", "Castle"),
             (r"\balc[aá]zar\b", "Alcazar"),
             (r"\bmonumento\b|\bmonument\b|\bestatua\b|\bescultura\b", "Monument"),
-            (r"\bparque\b|\bpark\b", "Park"),
-            (r"\bjardines\b|\bgarden\b", "Garden"),
-            (r"\bpuente\b|\bbridge\b", "Bridge"),
-            (r"\bmercado\b|\bmarket\b", "Market"),
-            (r"\bteatro\b|\btheatre\b|\btheater\b", "Theatre"),
-            (r"\barena\b", "Arena"),
-            (r"\bfront[oó]n\b", "SportsVenue"),
-            (r"\bportal\b", "Gate"),
-            (r"\bmuralla\b|\bmurallas\b|\bfortification\b", "Fortification"),
+            (r"\bparque\b|\bpark\b", "Place"),
+            (r"\bjardines\b|\bgarden\b", "Place"),
+            (r"\bpuente\b|\bbridge\b", "HistoricalOrCulturalResource"),
+            (r"\bmercado\b|\bmarket\b", "Place"),
+            (r"\bteatro\b|\btheatre\b|\btheater\b", "EventAttendanceFacility"),
+            (r"\barena\b", "EventAttendanceFacility"),
+            (r"\bfront[oó]n\b", "SportsCenter"),
+            (r"\bportal\b", "HistoricalOrCulturalResource"),
+            (r"\bmuralla\b|\bmurallas\b|\bfortification\b", "HistoricalOrCulturalResource"),
             (r"\bevento\b|\bevent\b|\bfestival\b|\bconcierto\b", "Event"),
-            (r"\bexcursi[oó]n\b|\bexcursion\b", "Excursion"),
-            (r"\bruta\b|\broute\b", "Route"),
-            (r"\bvisita guiada\b|\bguided tour\b", "GuidedTour"),
-            (r"\bactividad\b|\bactivity\b|\bcicloturismo\b|\bsenderismo\b", "Activity"),
+            (r"\bexcursi[oó]n\b|\bexcursion\b", "DestinationExperience"),
+            (r"\bruta\b|\broute\b", "DestinationExperience"),
+            (r"\bvisita guiada\b|\bguided tour\b", "DestinationExperience"),
+            (r"\bactividad\b|\bactivity\b|\bcicloturismo\b|\bsenderismo\b", "DestinationExperience"),
             (r"\brestaurante\b|\brestaurant\b|\bbar\b|\bcaf[eé]\b|\bcafeter[ií]a\b", "FoodEstablishment"),
-            (r"\bpostre\b", "Dessert"),
-            (r"\blicor\b|\bsidra\b|\bdrink\b", "Drink"),
-            (r"\bqueso\b|\bfood product\b", "FoodProduct"),
-            (r"\bgoxua\b|\bcuajada\b|\bpantxineta\b|\bajoarriero\b|\bfritos\b|\bpochas\b|\bmenestra\b", "Dish"),
+            (r"\bpostre\b", "FoodEstablishment"),
+            (r"\blicor\b|\bsidra\b|\bdrink\b", "FoodEstablishment"),
+            (r"\bqueso\b|\bfood product\b", "FoodEstablishment"),
+            (r"\bgoxua\b|\bcuajada\b|\bpantxineta\b|\bajoarriero\b|\bfritos\b|\bpochas\b|\bmenestra\b", "FoodEstablishment"),
         ]
 
         self.family_compatibility = {
             "place": {
-                "TownHall", "Square", "Cathedral", "Basilica", "Church", "Chapel",
-                "Monastery", "Museum", "Castle", "Alcazar", "Monument", "Park",
-                "Garden", "Bridge", "Market", "Theatre", "Arena", "SportsVenue",
-                "Gate", "Fortification",
+                "Place",
+                "TownHall",
+                "Square",
+                "Cathedral",
+                "Basilica",
+                "Church",
+                "Chapel",
+                "Museum",
+                "Castle",
+                "Alcazar",
+                "Monument",
+                "HistoricalOrCulturalResource",
+                "EventAttendanceFacility",
+                "SportsCenter",
             },
-            "event": {"Event", "GuidedTour", "Excursion", "Activity"},
-            "food": {"FoodEstablishment", "Dish", "Dessert", "Drink", "FoodProduct"},
-            "route": {"Route", "GuidedTour", "Excursion", "Activity"},
-            "service": {"TourismService", "Organization"},
+            "event": {"Event", "DestinationExperience"},
+            "food": {"FoodEstablishment"},
+            "route": {"DestinationExperience"},
+            "service": {"TourismService", "Organization", "PublicService"},
             "concept": {"Unknown"},
             "unknown": set(),
-        }
+        }    
 
     def _normalize_text(self, value: Any) -> str:
         text = str(value or "").strip().lower()
         text = re.sub(r"\s+", " ", text)
         return text
 
-    def _normalize_type(self, value: Any) -> str:
+    def _normalize_type(self, value):
         raw = str(value or "").strip()
         if not raw:
             return ""
-        short = raw.split("#")[-1].split("/")[-1].strip()
-        return short
 
+        short = raw.split("#")[-1].split("/")[-1].strip()
+        if not short:
+            return ""
+
+        return self.type_aliases.get(short.lower(), short) 
+        
     def _is_weak_type(self, value: Any) -> bool:
         t = self._normalize_type(value).lower()
         return t in self.weak_types

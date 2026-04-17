@@ -47,9 +47,22 @@ from src.entity_evidence_builder import EntityEvidenceBuilder
 from src.ontology_reasoner import OntologyReasoner
 from src.entities.entity_final_filter import EntityFinalFilter
 
+from src.tourism_entity_detector import TourismEntityExtractor
+from src.entity_type_resolver import EntityTypeResolver
+from src.kg_postprocessor import KGPostProcessor
+from src.html_block_extractor import HTMLBlockExtractor
+
+
 from src.entities.type_normalizer import TypeNormalizer
 from src.ontology_distance import OntologyDistance
 from src.ontology_taxonomy import PARENT_MAP
+
+from src.ontology_utils import (
+    load_valid_classes_from_ontology,
+    enforce_closed_world_batch,
+    choose_route_like_class,
+    choose_event_class,
+)
 
 
 def normalize_text(text: str) -> str:
@@ -81,136 +94,96 @@ def fix_encoding(text: str) -> str:
 
 
 class TourismPipeline:
-    def __init__(self, ontology_path, use_fewshots=False, fewshots=None, benchmark_mode=False):
+    def __init__(
+        self,
+        ontology_path: str,
+        llm=None,
+        entity_extractor=None,
+        block_extractor=None,
+        type_resolver=None,
+        kg_postprocessor=None,
+        use_fewshots: bool = False,
+        benchmark_mode: bool = False,
+        **kwargs,  # prevents future crashes from extra args
+    ):
+        """
+        Main tourism pipeline constructor.
+
+        Args:
+            ontology_path: Path to ontology file
+            llm: optional LLM (if used)
+            entity_extractor: optional custom extractor
+            block_extractor: optional custom block extractor
+            type_resolver: optional resolver
+            kg_postprocessor: optional postprocessor
+            use_fewshots: enable few-shot mode
+            benchmark_mode: enable benchmark mode
+        """
+
+        # --------------------------------------------------
+        # Core config
+        # --------------------------------------------------
+        self.ontology_path = ontology_path
+        self.llm = llm
         self.use_fewshots = use_fewshots
-        self.fewshots = fewshots or []
         self.benchmark_mode = benchmark_mode
 
-        self.enable_entity_postprocess = False
-        self.enable_entity_dedupe = True
-        self.debug = True
+        # --------------------------------------------------
+        # Lazy imports (avoid circular deps)
+        # --------------------------------------------------
+        from src.tourism_entity_detector import TourismEntityExtractor
+        from src.entity_type_resolver import EntityTypeResolver
+        from src.kg_postprocessor import KGPostProcessor
 
-        self.block_extractor = HTMLBlockExtractor()
-        self.entity_extractor = TourismEntityExtractor()
-        self.cleaner = EntityCleaner()
-        self.entity_filter = EntityFilter()
-        self.quality_scorer = EntityQualityScorer()
-        self.type_resolver = EntityTypeResolver()
-        self.deduplicator = EntityDeduplicator()
-        self.normalizer = EntityNormalizer()
-        self.expander = EntityExpander()
-        self.splitter = EntitySplitter()
-        self.ontology_index = OntologyIndex(ontology_path)
-        self.ontology_matcher = OntologyMatcher(self.ontology_index)
-        self.poi_discovery = POIDiscovery()
-        self.event_detector = EventDetector()
-        self.type_guesser = SemanticTypeGuesser()
-        self.semantic_matcher = SemanticSimilarityMatcher(self.ontology_index)
-        self.relation_extractor = RelationExtractor()
-        self.property_enricher = PropertyEnricher(self.ontology_index)
-        self.wikidata_linker = WikidataLinker()
-        self.description_extractor = DescriptionExtractor()
-        self.image_enricher = ImageEnricher()
-        self.llm_supervisor = LLMSupervisor(self.ontology_index)
+        # ⚠️ IMPORTANT: adjust this import if your class name 
+        # --------------------------------------------------
+        # Components initialization
+        # --------------------------------------------------
 
-        self.type_normalizer = TypeNormalizer()
-        self.ontology_distance = OntologyDistance(PARENT_MAP)
+        from src.html_block_extractor import HTMLBlockExtractor
 
-        self.ranker = EntityRanker(
-            type_normalizer=self.type_normalizer,
-            ontology_distance=self.ontology_distance,
-        )
+        # Block extractor (FIXES YOUR CURRENT ERROR)
+        self.block_extractor = block_extractor or HTMLBlockExtractor()
 
-        self.clusterer = EntityClusterer()
-        self.global_memory = GlobalEntityMemory()
-        self.entity_scorer = EntityScorer()
-        self.graph_builder = EntityGraphBuilder()
-        self.final_filter = EntityFinalFilter()
-        self.tourism_property_extractor = TourismPropertyExtractor()
-        self.page_entity_resolver = PageEntityResolver()
-        self.dom_image_resolver = DOMImageResolver()
-        self.block_quality_scorer = BlockQualityScorer()
-        self.entity_evidence_builder = EntityEvidenceBuilder()
-        self.ontology_reasoner = OntologyReasoner(self.ontology_index)
+        # Entity extractor
+        self.entity_extractor = entity_extractor or TourismEntityExtractor()
 
-        self.edge_stopwords = {
-            "de", "del", "la", "las", "el", "los", "y", "e", "en", "por",
-            "para", "con", "sin", "a", "al", "un", "una", "uno", "unas",
-            "unos", "si", "te", "tu", "sus", "su", "lo", "que", "como",
-            "ver", "más", "mas"
-        }
+        # Type resolver
+        self.type_resolver = type_resolver or EntityTypeResolver()
 
-        self.portal_category_terms = {
-            "monumentos", "museos", "agenda", "cultura", "artesanía",
-            "artesania", "fiestas", "deporte", "ocio", "familia", "parques",
-            "barrios", "compras", "gastronomía", "gastronomia", "conciertos",
-            "exposiciones", "actividades", "rutas", "mapas", "horarios",
-            "alojamientos", "visitas", "planes", "contactos", "información",
-            "informacion", "guías", "guias", "idioma", "moneda", "comer",
-            "salir", "lugares", "eventos", "hoteles", "albergues", "pensiones",
-            "mercados", "excursiones", "senderismo", "cicloturismo"
-        }
+        # Postprocessor
+        self.kg_postprocessor = kg_postprocessor or KGPostProcessor()
 
-        self.ui_noise_patterns = [
-            "google analytics",
-            "esta web utiliza",
-            "te has suscrito",
-            "watch later",
-            "copy link",
-            "share",
-            "suscrito satisfactoriamente",
-            "cookies",
-            "privacidad",
-            "aviso legal",
-            "política de cookies",
-            "politica de cookies",
-            "páginas más populares",
-            "paginas más populares",
-            "número de visitantes",
-            "numero de visitantes",
-            "ir a página",
-            "ir a pagina",
-            "ver listado",
-            "haz clic aquí",
-            "haz clic aqui",
-            "facebook instagram",
-            "consignas mapas"
-        ]
+        self.block_extractor = block_extractor or HTMLBlockExtractor()
 
-        self.navigation_patterns = [
-            "qué hacer",
-            "que hacer",
-            "prepara tu viaje",
-            "durante tu estancia",
-            "cómo moverte",
-            "como moverte",
-            "ideas y planes",
-            "monumentos y museos",
-            "comer y salir",
-            "ocio y familia",
-            "de compras",
-            "puntos de información turística",
-            "puntos de informacion turistica",
-            "todos los lugares",
-            "lugares de interés",
-            "lugares de interes",
-            "museos y centros de interpretación",
-            "museos y centros de interpretacion",
-            "visitas guiadas",
-            "dónde alojarse",
-            "donde alojarse",
-            "dónde comer",
-            "donde comer",
-        ]
+        # --------------------------------------------------
+        # Optional / future components
+        # --------------------------------------------------
+        self.ontology = None  # if you load ontology later
+        self.debug = kwargs.get("debug", False)
 
-        self.generic_prefix_terms = {
-            "hotel", "hoteles", "hostel", "hostales", "albergue", "albergues",
-            "museo", "museos", "mercado", "mercados", "festival", "festivales",
-            "monasterio", "monasterios", "palacio", "palacios", "parque",
-            "parques", "plaza", "plazas", "iglesia", "iglesias", "catedral",
-            "catedrales", "centro", "centros", "excursiones", "visitas",
-            "lugares", "monumentos"
-        }
+        # --------------------------------------------------
+        # Debug log (optional but useful)
+        # --------------------------------------------------
+        if self.debug:
+            print("[INIT] TourismPipeline initialized")
+            print(f"  - ontology_path: {ontology_path}")
+            print(f"  - use_fewshots: {use_fewshots}")
+            print(f"  - benchmark_mode: {benchmark_mode}")
+
+        try:
+            from src.block_extractor import BlockExtractor
+        except ImportError:
+            from src.html_block_extractor import HTMLBlockExtractor as BlockExtractor
+
+        self.block_extractor = block_extractor or BlockExtractor()
+        self.entity_extractor = entity_extractor or TourismEntityExtractor(use_spacy=False)
+        self.type_resolver = type_resolver or EntityTypeResolver()
+        self.kg_postprocessor = kg_postprocessor or KGPostProcessor()
+
+        self.valid_classes = load_valid_classes_from_ontology(ontology_path)
+        print(f"[ONTOLOGY] Clases válidas cargadas: {len(self.valid_classes)}")    
+        
 
     def _debug_stage(self, stage: str, entities):
         if not self.debug:
@@ -578,133 +551,160 @@ class TourismPipeline:
 
     wikidata_hint = ""
 
+
     def _ensure_entity_type(
         self,
-        entities: List[Dict[str, Any]],
+        entities,
         page_text: str = "",
-        page_signals: Optional[Dict[str, Any]] = None,
-        expected_type: Optional[str] = None,
-    ) -> List[Dict[str, Any]]:
+        page_signals=None,
+        expected_type: str = None,
+    ):
         fixed = []
-        weak_types = {"", "thing", "unknown", "entity", "item"}
-        forbidden_final_types = {"thing"}
+
+        weak_types = {"", "thing", "unknown", "entity", "item", "location", "place"}
+        forbidden_final_types = {"thing", "location"}
+
+        route_like_class = choose_route_like_class(self.valid_classes)
+        event_like_class = choose_event_class(self.valid_classes)
+
+        def normalize_candidate_type(value: str) -> str:
+            value = str(value or "").strip()
+            if not value:
+                return ""
+
+            short = value.split("#")[-1].split("/")[-1].strip()
+            if not short:
+                return ""
+
+            aliases = {
+                "organisation": "Organization",
+                "organization": "Organization",
+                "medicalclinic": "PublicService",
+                "clinic": "PublicService",
+                "healthcareorganization": "PublicService",
+                "healthcarefacility": "PublicService",
+                "eventorganisationcompany": "EventOrganisationCompany",
+                "route": route_like_class if route_like_class != "Unknown" else "Route",
+                "ruta": route_like_class if route_like_class != "Unknown" else "Ruta",
+                "guidedtour": "DestinationExperience",
+                "excursion": "DestinationExperience",
+                "activity": "DestinationExperience",
+            }
+
+            normalized = aliases.get(short.lower(), short)
+            if normalized.lower() in weak_types:
+                return ""
+            return normalized
+
+        def build_context(item: dict) -> str:
+            return " ".join([
+                str(item.get("shortDescription") or ""),
+                str(item.get("longDescription") or ""),
+                str(item.get("description") or ""),
+                str(page_text or ""),
+            ])
 
         for entity in entities or []:
             if not isinstance(entity, dict):
                 continue
 
             item = dict(entity)
+
             current_class = str(item.get("class") or "").strip()
             current_type = str(item.get("type") or "").strip()
             semantic_type = str(item.get("semantic_type") or "").strip()
+
             props = item.get("properties") if isinstance(item.get("properties"), dict) else {}
             prop_type = str(props.get("type") or "").strip()
-
-            def normalize_candidate_type(value: str) -> str:
-                value = str(value or "").strip()
-                if not value:
-                    return ""
-                short = value.split("#")[-1].split("/")[-1].strip()
-                if short.lower() in weak_types:
-                    return ""
-                return short
 
             normalized_class = normalize_candidate_type(current_class)
             normalized_type = normalize_candidate_type(current_type)
             normalized_semantic = normalize_candidate_type(semantic_type)
             normalized_prop_type = normalize_candidate_type(prop_type)
-            canonical_type = normalized_class or normalized_type or normalized_semantic or normalized_prop_type
 
-            name = item.get("name") or item.get("entity_name") or item.get("entity") or item.get("label") or ""
-            wikidata_hint = self._guess_wikidata_class_hint(entity_name=name, page_text=page_text)
+            canonical_type = (
+                normalized_class
+                or normalized_type
+                or normalized_semantic
+                or normalized_prop_type
+            )
 
-            if canonical_type and canonical_type.lower() not in weak_types and canonical_type.lower() not in forbidden_final_types:
-                item["class"] = canonical_type
-                item["type"] = canonical_type
-                if wikidata_hint:
-                    item["wikidata_class_hint"] = wikidata_hint
-                fixed.append(item)
-                continue
-
-            if canonical_type and canonical_type.lower() in forbidden_final_types:
-                item["rejected_type"] = canonical_type
-
+            name = (
+                item.get("name")
+                or item.get("entity_name")
+                or item.get("entity")
+                or item.get("label")
+                or ""
+            )
 
             name_norm = self._normalized_for_match(name)
+            context_norm = self._normalized_for_match(build_context(item))
 
-            direct_name_overrides = {
-                "parque fluvial": "Place",
-                "navarra arena": "Place",
-                "café iruña": "FoodEstablishment",
-                "cafe iruña": "FoodEstablishment",
-                "cafe iruna": "FoodEstablishment",
-                "fundación miguel servet": "Organisation",
-                "fundacion miguel servet": "Organisation",
-                "clínica universitaria": "MedicalClinic",
-                "clinica universitaria": "MedicalClinic",
-            }
+            # 1) Reglas contextuales de alta precisión
+            if "san fermin" in name_norm or "san fermín" in name_norm:
+                if event_like_class != "Unknown":
+                    item["class"] = event_like_class
+                    item["type"] = event_like_class
+                    fixed.append(item)
+                    continue
 
-            forced_applied = False
-
-        for k, forced_type in direct_name_overrides.items():
-            if k in name_norm:
-                item["class"] = forced_type
-                item["type"] = forced_type
-                if wikidata_hint:
-                    item["wikidata_class_hint"] = wikidata_hint
-                fixed.append(item)
-                forced_applied = True
-                break
-
-            if forced_applied:
-                continue
-
-            if name_norm.startswith("iglesia "):
-                item["class"] = "Church"
-                item["type"] = "Church"
-                if wikidata_hint:
-                    item["wikidata_class_hint"] = wikidata_hint
-                fixed.append(item)
-                continue
+            if name_norm.startswith("camino "):
+                if (
+                    "camino de santiago" in context_norm
+                    or "ruta de peregrinacion" in context_norm
+                    or "ruta de peregrinación" in context_norm
+                    or "peregrinaje" in context_norm
+                ):
+                    if route_like_class != "Unknown":
+                        item["class"] = route_like_class
+                        item["type"] = route_like_class
+                        fixed.append(item)
+                        continue
 
             if name_norm.startswith("catedral "):
                 item["class"] = "Cathedral"
                 item["type"] = "Cathedral"
-                if wikidata_hint:
-                    item["wikidata_class_hint"] = wikidata_hint
                 fixed.append(item)
                 continue
 
-            ontology_candidates = item.get("ontology_candidates") or []
+            if "ayuntamiento" in name_norm and "plaza consistorial" in name_norm:
+                item["class"] = "TownHall"
+                item["type"] = ["TownHall", "Square"]
+                fixed.append(item)
+                continue
+
+            # 2) Preservar tipo fuerte ya existente
+            if canonical_type and canonical_type.lower() not in weak_types and canonical_type.lower() not in forbidden_final_types:
+                item["class"] = canonical_type
+                item["type"] = canonical_type
+                fixed.append(item)
+                continue
+
+            # 3) Resolver con contexto enriquecido
             resolved = self.type_resolver.resolve(
                 mention=name,
-                context=item.get("context") or page_text,
+                context=build_context(item),
                 block_text=item.get("source_text") or "",
                 page_signals=page_signals or {},
                 properties=item,
                 expected_type=expected_type,
-                ontology_candidates=ontology_candidates,
+                ontology_candidates=item.get("ontology_candidates") or [],
             )
 
-            resolved_class = str(resolved.get("class") or "Unknown").strip()
+            resolved_class = normalize_candidate_type(str(resolved.get("class") or "Unknown").strip())
             item["type_resolution"] = resolved
 
-            if resolved_class.lower() in weak_types or resolved_class.lower() in forbidden_final_types:
-                if resolved_class.lower() in forbidden_final_types:
-                    item["rejected_type"] = resolved_class
+            if not resolved_class or resolved_class.lower() in weak_types or resolved_class.lower() in forbidden_final_types:
                 item["class"] = "Unknown"
                 item["type"] = "Unknown"
             else:
                 item["class"] = resolved_class
                 item["type"] = resolved_class
 
-            if wikidata_hint:
-                item["wikidata_class_hint"] = wikidata_hint
-
             fixed.append(item)
 
-            return fixed
-
+        return fixed        
+        
     def _apply_llm_supervisor(self, ranked_entities, page_text: str, url: str):
         supervisor = self.llm_supervisor
 
