@@ -32,6 +32,11 @@ from src.visualization.tourism_graph_visualizer import TourismGraphVisualizer
 from src.visualization.tourism_map_visualizer import TourismMapVisualizer
 from src.kg_postprocessor import KGPostProcessor
 from src.entity_resolver import EntityResolver
+from src.ontology_utils import (
+    OFFICIAL_SEGITTUR_CORE_NT,
+    ONTOLOGY_ALIASES,
+    enforce_closed_world_batch,
+)
 
 
 os.environ["PYTHONIOENCODING"] = "utf-8"
@@ -274,7 +279,7 @@ def build_parser():
     parser.add_argument("--start_url", type=str, default="https://visitasevilla.es/")
     parser.add_argument("--url", type=str, default=None)
     parser.add_argument("--max_pages", type=int, default=None)
-    parser.add_argument("--ontology_path", type=str, default="src/ontology/core.rdf")
+    parser.add_argument("--ontology_path", type=str, default="src/ontology/core.rdf", help="Ruta local, URL RDF/OWL o alias segittur/segittur_core")
     parser.add_argument("--kg_output", type=str, default="knowledge_graph.ttl")
     parser.add_argument("--kg_html_output", type=str, default="knowledge_graph.html")
     parser.add_argument("--report_output", type=str, default="entities_report.md")
@@ -318,17 +323,24 @@ def build_pipeline(args):
 
 
 def validate_inputs(args, diagnostic=False):
-    if not os.path.exists(args.ontology_path):
+    ontology_value = str(args.ontology_path or "").strip()
+
+    is_alias = ontology_value in ONTOLOGY_ALIASES
+    is_url = ontology_value.startswith("http://") or ontology_value.startswith("https://")
+    is_local_file = os.path.exists(ontology_value)
+
+    if not (is_alias or is_url or is_local_file):
         error = {
             "status": "error",
             "error_type": "ontology_not_found",
-            "message": f"No existe el archivo de ontología: {os.path.abspath(args.ontology_path)}",
+            "message": f"No existe ni es accesible la ontología indicada: {ontology_value}",
             "url": args.url,
             "start_url": args.start_url,
         }
         diag(diagnostic, f"ERROR ontology_not_found: {error}")
         return error
-    return None
+
+    return None    
 
 
 def get_pages_for_url(url, max_pages=1, diagnostic=False):
@@ -746,12 +758,20 @@ def predict_from_pages(pages, pipeline, args, diagnostic=False):
         return payload, all_results, []
 
     global_entities = consolidate_entities(all_results, diagnostic=diagnostic)
+
+    # 🔒 REAPLICAR CERRADO ONTOLÓGICO DESPUÉS DE CONSOLIDAR
+    global_entities = enforce_closed_world_batch(
+        global_entities,
+        pipeline.valid_classes,
+        ontology_catalog=pipeline.ontology_catalog,
+    )
+
     payload = build_stdout_payload(global_entities, args)
 
     if page_errors:
         payload["page_errors"] = page_errors
 
-    return payload, all_results, global_entities
+    return payload, all_results, global_entities    
 
 
 def predict_single_url(url, pipeline, args, diagnostic=False):
@@ -780,7 +800,9 @@ def generate_outputs(global_entities, pipeline, args):
         except Exception as exc:
             log(f"⚠️ No se pudo generar HTML del KG: {exc}")
 
-    reporter = EntitiesReporter(pipeline.ontology_index)
+    reporter = EntitiesReporter(
+    getattr(pipeline, "ontology_index", None) or getattr(pipeline, "ontology_catalog", {})
+)
     reporter.generate_markdown_report(global_entities, args.report_output)
     log(f"📝 Reporte Markdown generado en {args.report_output}")
 
@@ -854,7 +876,26 @@ def main():
             if captured.strip():
                 print(captured, file=sys.stderr, end="")
 
+            # Serializar entidades con el mismo esquema del exportador final
+            json_exporter = JSONExporter()
+            payload["entities"] = [
+                json_exporter.entity_to_dict(e)
+                for e in global_entities
+                if isinstance(e, dict)
+            ]
+            payload["entity_count"] = len(payload["entities"])
+
+            # Recalcular stats/prediction ya con entidades cerradas y serializadas
+            try:
+                payload["stats"] = compute_entity_stats(payload["entities"])
+            except Exception as e:
+                payload["stats"] = {"error": str(e)}
+
+            payload["prediction"] = infer_main_prediction(payload["entities"])
+
             safe_json_output(payload)
+
+
 
         else:
             pages = get_pages(args, diagnostic=diagnostic)

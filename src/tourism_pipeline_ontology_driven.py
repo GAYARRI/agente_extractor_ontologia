@@ -58,6 +58,7 @@ from src.ontology_distance import OntologyDistance
 from src.ontology_taxonomy import PARENT_MAP
 
 from src.ontology_utils import (
+    extract_ontology_catalog,
     load_valid_classes_from_ontology,
     enforce_closed_world_batch,
     choose_route_like_class,
@@ -104,20 +105,10 @@ class TourismPipeline:
         kg_postprocessor=None,
         use_fewshots: bool = False,
         benchmark_mode: bool = False,
-        **kwargs,  # prevents future crashes from extra args
+        **kwargs,
     ):
         """
         Main tourism pipeline constructor.
-
-        Args:
-            ontology_path: Path to ontology file
-            llm: optional LLM (if used)
-            entity_extractor: optional custom extractor
-            block_extractor: optional custom block extractor
-            type_resolver: optional resolver
-            kg_postprocessor: optional postprocessor
-            use_fewshots: enable few-shot mode
-            benchmark_mode: enable benchmark mode
         """
 
         # --------------------------------------------------
@@ -127,63 +118,158 @@ class TourismPipeline:
         self.llm = llm
         self.use_fewshots = use_fewshots
         self.benchmark_mode = benchmark_mode
-
-        # --------------------------------------------------
-        # Lazy imports (avoid circular deps)
-        # --------------------------------------------------
-        from src.tourism_entity_detector import TourismEntityExtractor
-        from src.entity_type_resolver import EntityTypeResolver
-        from src.kg_postprocessor import KGPostProcessor
-
-        # ⚠️ IMPORTANT: adjust this import if your class name 
-        # --------------------------------------------------
-        # Components initialization
-        # --------------------------------------------------
-
-        from src.html_block_extractor import HTMLBlockExtractor
-
-        # Block extractor (FIXES YOUR CURRENT ERROR)
-        self.block_extractor = block_extractor or HTMLBlockExtractor()
-
-        # Entity extractor
-        self.entity_extractor = entity_extractor or TourismEntityExtractor()
-
-        # Type resolver
-        self.type_resolver = type_resolver or EntityTypeResolver()
-
-        # Postprocessor
-        self.kg_postprocessor = kg_postprocessor or KGPostProcessor()
-
-        self.block_extractor = block_extractor or HTMLBlockExtractor()
-
-        # --------------------------------------------------
-        # Optional / future components
-        # --------------------------------------------------
-        self.ontology = None  # if you load ontology later
         self.debug = kwargs.get("debug", False)
 
         # --------------------------------------------------
-        # Debug log (optional but useful)
+        # Local helpers
+        # --------------------------------------------------
+        def _safe_build(factory, *args, default=None, **kws):
+            try:
+                return factory(*args, **kws)
+            except TypeError:
+                try:
+                    return factory()
+                except Exception:
+                    return default
+            except Exception:
+                return default
+
+        # --------------------------------------------------
+        # Core components
+        # --------------------------------------------------
+        try:
+            from src.block_extractor import BlockExtractor
+            self.block_extractor = block_extractor or BlockExtractor()
+        except Exception:
+            self.block_extractor = block_extractor or HTMLBlockExtractor()
+
+        self.entity_extractor = entity_extractor or _safe_build(
+            TourismEntityExtractor,
+            use_spacy=False,
+            default=TourismEntityExtractor(),
+        )
+
+        self.type_resolver = type_resolver or _safe_build(
+            EntityTypeResolver,
+            default=None,
+        )
+
+        self.kg_postprocessor = kg_postprocessor or _safe_build(
+            KGPostProcessor,
+            default=None,
+        )
+
+        # --------------------------------------------------
+        # Ontology / closed-world config
+        # --------------------------------------------------
+        self.ontology = None
+        self.ontology_catalog = extract_ontology_catalog(ontology_path)
+        self.ontology_index = self.ontology_catalog   # 👈 AÑADE ESTA LÍNEA
+        self.valid_classes = set(self.ontology_catalog.keys())
+        print(f"[ONTOLOGY] Clases válidas cargadas: {len(self.valid_classes)}")
+
+        # --------------------------------------------------
+        # Processing pipeline components
+        # --------------------------------------------------
+        self.cleaner = _safe_build(EntityCleaner, default=None)
+        self.deduplicator = _safe_build(EntityDeduplicator, default=None)
+        self.normalizer = _safe_build(EntityNormalizer, default=None)
+        self.expander = _safe_build(EntityExpander, default=None)
+        self.splitter = _safe_build(EntitySplitter, default=None)
+
+        self.entity_filter = _safe_build(EntityFilter, default=None)
+        self.quality_scorer = _safe_build(EntityQualityScorer, default=None)
+
+        # Ontology matcher: opcional, no debe romper el pipeline
+        self.ontology_matcher = _safe_build(
+            OntologyMatcher,
+            self.ontology_catalog,
+            default=None,
+        )
+        if self.ontology_matcher is None:
+            self.ontology_matcher = _safe_build(OntologyMatcher, default=None)
+
+        self.semantic_matcher = _safe_build(SemanticSimilarityMatcher, default=None)
+        self.ranker = _safe_build(EntityRanker, default=None)
+        self.clusterer = _safe_build(EntityClusterer, default=None)
+        self.final_filter = _safe_build(EntityFinalFilter, default=None)
+
+        # --------------------------------------------------
+        # Enrichment / linking components
+        # --------------------------------------------------
+        self.description_extractor = _safe_build(DescriptionExtractor, default=None)
+        self.property_enricher = _safe_build(PropertyEnricher, default=None)
+        self.wikidata_linker = _safe_build(WikidataLinker, default=None)
+        self.tourism_property_extractor = _safe_build(TourismPropertyExtractor, default=None)
+        self.dom_image_resolver = _safe_build(DOMImageResolver, default=None)
+
+        # --------------------------------------------------
+        # Optional supervisor / other helpers
+        # --------------------------------------------------
+        self.llm_supervisor = _safe_build(LLMSupervisor, default=None)
+        self.poi_discovery = _safe_build(POIDiscovery, default=None)
+        self.event_detector = _safe_build(EventDetector, default=None)
+        self.semantic_type_guesser = _safe_build(SemanticTypeGuesser, default=None)
+        self.relation_extractor = _safe_build(RelationExtractor, default=None)
+        self.entity_scorer = _safe_build(EntityScorer, default=None)
+        self.entity_graph_builder = _safe_build(EntityGraphBuilder, default=None)
+        self.page_entity_resolver = _safe_build(PageEntityResolver, default=None)
+        self.block_quality_scorer = _safe_build(BlockQualityScorer, default=None)
+        self.entity_evidence_builder = _safe_build(EntityEvidenceBuilder, default=None)
+        self.ontology_reasoner = _safe_build(OntologyReasoner, default=None)
+
+        # --------------------------------------------------
+        # Runtime state
+        # --------------------------------------------------
+        self.global_memory = _safe_build(GlobalEntityMemory, default=None)
+        self.graph_builder = _safe_build(EntityGraphBuilder, default=None)
+
+        # --------------------------------------------------
+        # Flags used later in run()
+        # --------------------------------------------------
+        self.enable_entity_postprocess = True
+        self.enable_entity_dedupe = True
+
+        # --------------------------------------------------
+        # Lexical sets used by filters
+        # --------------------------------------------------
+        self.portal_category_terms = {
+            "turismo", "gastronomia", "gastronomía", "cultura", "historia",
+            "eventos", "lugares", "museos", "hoteles", "restaurantes",
+            "alojarse", "comer", "que ver", "qué ver", "que hacer", "qué hacer",
+            "viaje", "planifica", "salud", "familias", "mapas",
+            "excursiones", "visitas", "monumentos", "rutas",
+        }
+
+        self.ui_noise_patterns = {
+            "ver más", "ver mas", "leer más", "leer mas", "mostrar más", "mostrar mas",
+            "abrir", "google maps", "copiar dirección", "copiar direccion",
+            "compartir", "contacto", "sitio web", "llamar", "cómo llegar",
+        }
+
+        self.navigation_patterns = {
+            "inicio", "home", "siguiente", "anterior", "breadcrumb",
+            "menu", "menú", "volver", "subir", "más info", "mas info",
+        }
+
+        # --------------------------------------------------
+        # Optional debug
         # --------------------------------------------------
         if self.debug:
             print("[INIT] TourismPipeline initialized")
             print(f"  - ontology_path: {ontology_path}")
             print(f"  - use_fewshots: {use_fewshots}")
             print(f"  - benchmark_mode: {benchmark_mode}")
+            print(f"  - valid_classes: {len(self.valid_classes)}")
+            print(f"  - ontology_matcher: {type(self.ontology_matcher).__name__ if self.ontology_matcher else None}")
+            print(f"  - semantic_matcher: {type(self.semantic_matcher).__name__ if self.semantic_matcher else None}")
+            print(f"  - ranker: {type(self.ranker).__name__ if self.ranker else None}")
+            print(f"  - final_filter: {type(self.final_filter).__name__ if self.final_filter else None}")
 
-        try:
-            from src.block_extractor import BlockExtractor
-        except ImportError:
-            from src.html_block_extractor import HTMLBlockExtractor as BlockExtractor
-
-        self.block_extractor = block_extractor or BlockExtractor()
-        self.entity_extractor = entity_extractor or TourismEntityExtractor(use_spacy=False)
-        self.type_resolver = type_resolver or EntityTypeResolver()
-        self.kg_postprocessor = kg_postprocessor or KGPostProcessor()
-
-        self.valid_classes = load_valid_classes_from_ontology(ontology_path)
-        print(f"[ONTOLOGY] Clases válidas cargadas: {len(self.valid_classes)}")    
-        
+        # --------------------------------------------------
+        # Reset runtime state
+        # --------------------------------------------------
+        self.reset_runtime_state()
 
     def _debug_stage(self, stage: str, entities):
         if not self.debug:
@@ -324,6 +410,66 @@ class TourismPipeline:
             sanitized.append(item)
 
         return sanitized
+    
+
+
+    def _coerce_entities_to_dicts(self, entities: List[Any], url: str = "") -> List[Dict[str, Any]]:
+        """
+        Convierte entradas heterogéneas (dict / str / otros) a una lista homogénea de dicts.
+        """
+        out: List[Dict[str, Any]] = []
+
+        for item in entities or []:
+            if item is None:
+                continue
+
+            if isinstance(item, dict):
+                name = (
+                    item.get("name")
+                    or item.get("entity_name")
+                    or item.get("entity")
+                    or item.get("label")
+                    or ""
+                )
+                if str(name).strip():
+                    out.append(item)
+                continue
+
+            if isinstance(item, str):
+                name = item.strip()
+                if not name:
+                    continue
+                out.append({
+                    "name": name,
+                    "entity_name": name,
+                    "label": name,
+                    "type": "Unknown",
+                    "class": "Unknown",
+                    "sourceUrl": url or "",
+                    "url": url or "",
+                    "score": 0.5,
+                })
+                continue
+
+            # Fallback defensivo
+            try:
+                name = str(item).strip()
+            except Exception:
+                name = ""
+
+            if name:
+                out.append({
+                    "name": name,
+                    "entity_name": name,
+                    "label": name,
+                    "type": "Unknown",
+                    "class": "Unknown",
+                    "sourceUrl": url or "",
+                    "url": url or "",
+                    "score": 0.5,
+                })
+
+        return out
 
     def _is_forbidden_type(self, value: str) -> bool:
         short = str(value or "").split("#")[-1].split("/")[-1].strip()
@@ -661,15 +807,19 @@ class TourismPipeline:
                         fixed.append(item)
                         continue
 
-            if name_norm.startswith("catedral "):
+            if name_norm.startswith("catedral ") and "Cathedral" in self.valid_classes:
                 item["class"] = "Cathedral"
                 item["type"] = "Cathedral"
                 fixed.append(item)
                 continue
 
             if "ayuntamiento" in name_norm and "plaza consistorial" in name_norm:
-                item["class"] = "TownHall"
-                item["type"] = ["TownHall", "Square"]
+                if "TownHall" in self.valid_classes:
+                    item["class"] = "TownHall"
+                    item["type"] = "TownHall"
+                elif "Square" in self.valid_classes:
+                    item["class"] = "Square"
+                    item["type"] = "Square"
                 fixed.append(item)
                 continue
 
@@ -928,13 +1078,18 @@ class TourismPipeline:
         context = " ".join(str(x).strip() for x in parts if str(x).strip())
         return context or page_text
 
+    
+
     def _apply_conservative_filter(
         self,
         entities,
         page_text: str = "",
         page_signals: Optional[Dict[str, Any]] = None,
         expected_type: Optional[str] = None,
+        url: str = "",
     ):
+        entities = self._coerce_entities_to_dicts(entities, url=url)
+
         def context_getter(item):
             return self._get_entity_context(item, page_text=page_text)
 
@@ -946,31 +1101,76 @@ class TourismPipeline:
         )
 
         for item in rejected:
-            item["discarded_by_filter"] = True
+            if isinstance(item, dict):
+                item["discarded_by_filter"] = True
 
         return kept
 
-    def _attach_ontology_candidates(self, entities, page_text: str = "", expected_type: Optional[str] = None):
+    def _attach_ontology_candidates(self, entities, page_text: str = "", expected_type=None):
         enriched = []
+
+        # 🔒 Si no hay matcher → no romper pipeline
+        if self.ontology_matcher is None or not hasattr(self.ontology_matcher, "match"):
+            for entity in entities or []:
+                if not isinstance(entity, dict):
+                    continue
+                item = dict(entity)
+                item["ontology_candidates"] = []
+                item["ontology_match"] = None
+                item["ontology_score"] = None
+                enriched.append(item)
+            return enriched
+
         for entity in entities or []:
             if not isinstance(entity, dict):
                 continue
+
             item = dict(entity)
-            name = item.get("name") or item.get("entity_name") or item.get("entity") or item.get("label") or ""
-            context = self._get_entity_context(item, page_text=page_text)
-            evidence_score = float((item.get("filter_audit") or {}).get("score") or 0.0)
-            matches = self.ontology_matcher.match(
-                name,
-                context=context,
-                expected_type=expected_type,
-                evidence_score=evidence_score,
+
+            name = (
+                item.get("name")
+                or item.get("entity_name")
+                or item.get("entity")
+                or item.get("label")
+                or ""
             )
+
+            context = self._get_entity_context(item, page_text=page_text)
+
+            evidence_score = float(
+                (item.get("filter_audit") or {}).get("score") or 0.0
+            )
+
+            try:
+                matches = self.ontology_matcher.match(
+                    name,
+                    context=context,
+                    expected_type=expected_type,
+                    evidence_score=evidence_score,
+                )
+            except TypeError:
+                try:
+                    matches = self.ontology_matcher.match(name, context=context)
+                except Exception:
+                    matches = []
+            except Exception:
+                matches = []
+
+            if matches is None:
+                matches = []
+
             item["ontology_candidates"] = matches
-            if matches:
+
+            if matches and isinstance(matches, list) and isinstance(matches[0], dict):
                 item["ontology_match"] = matches[0]
                 item["ontology_score"] = matches[0].get("score")
+            else:
+                item["ontology_match"] = None
+                item["ontology_score"] = None
+
             enriched.append(item)
-        return enriched
+
+        return enriched     
 
     def _apply_quality_gate(self, entities, page_signals: Optional[Dict[str, Any]] = None, url: str = ""):
         gated = []
@@ -991,9 +1191,20 @@ class TourismPipeline:
         if not html and url:
             html = self._fetch_html(url)
 
-        blocks = self.block_extractor.extract(html)
+        # --------------------------------------------------
+        # Page extraction
+        # --------------------------------------------------
+        if self.block_extractor is None:
+            return []
+
+        try:
+            blocks = self.block_extractor.extract(html)
+        except Exception:
+            return []
+
         page_text = self._extract_text(blocks)
         page_signals = self._build_page_signals(html=html, url=url)
+
         strict_listing_page = self._is_strict_listing_page(
             page_signals=page_signals,
             page_text=page_text,
@@ -1003,181 +1214,456 @@ class TourismPipeline:
         if strict_listing_page:
             if self.debug:
                 print(f"[PIPELINE] strict_listing_page -> skipping entity extraction for {url}", file=sys.stderr)
-            return [] 
+            return []
 
-        listing_like_page = self._is_listing_like_page(page_signals=page_signals, page_text=page_text, url=url)
+        listing_like_page = self._is_listing_like_page(
+            page_signals=page_signals,
+            page_text=page_text,
+            url=url,
+        )
 
-        entities = self.entity_extractor.extract(blocks)
-        self._debug_stage("extract", entities)
-
-        entities = self.cleaner.clean(entities)
-        self._debug_stage("clean", entities)
-
-        entities = self.deduplicator.deduplicate(entities)
-        self._debug_stage("deduplicate", entities)
-
-        entities = self.normalizer.normalize(entities)
-        self._debug_stage("normalize", entities)
+        # --------------------------------------------------
+        # Extraction
+        # --------------------------------------------------
+        if self.entity_extractor is None:
+            return []
 
         try:
-            entities = self.expander.expand(entities, page_text)
-        except TypeError:
+            entities = self.entity_extractor.extract(blocks)
+        except Exception:
+            return []
+
+        self._debug_stage("extract", entities)
+
+        entities = self._coerce_entities_to_dicts(entities, url=url)
+        self._debug_stage("extract_coerced", entities)
+
+        # --------------------------------------------------
+        # Cleaning
+        # --------------------------------------------------
+        if self.cleaner is not None and hasattr(self.cleaner, "clean"):
             try:
-                entities = self.expander.expand(entities, text=page_text)
+                entities = self.cleaner.clean(entities)
+            except Exception:
+                pass
+        self._debug_stage("clean", entities)
+
+        entities = self._coerce_entities_to_dicts(entities, url=url)
+
+        # --------------------------------------------------
+        # Deduplicate
+        # --------------------------------------------------
+        if self.deduplicator is not None and hasattr(self.deduplicator, "deduplicate"):
+            try:
+                entities = self.deduplicator.deduplicate(entities)
+            except Exception:
+                pass
+        self._debug_stage("deduplicate", entities)
+
+        entities = self._coerce_entities_to_dicts(entities, url=url)
+
+        # --------------------------------------------------
+        # Normalize
+        # --------------------------------------------------
+        if self.normalizer is not None and hasattr(self.normalizer, "normalize"):
+            try:
+                entities = self.normalizer.normalize(entities)
+            except Exception:
+                pass
+        self._debug_stage("normalize", entities)
+
+        entities = self._coerce_entities_to_dicts(entities, url=url)
+
+        # --------------------------------------------------
+        # Expand
+        # --------------------------------------------------
+        if self.expander is not None and hasattr(self.expander, "expand"):
+            try:
+                entities = self.expander.expand(entities, page_text)
             except TypeError:
+                try:
+                    entities = self.expander.expand(entities, text=page_text)
+                except Exception:
+                    pass
+            except Exception:
                 pass
         self._debug_stage("expand", entities)
 
-        entities = self.splitter.split(entities)
+        entities = self._coerce_entities_to_dicts(entities, url=url)
+
+        # --------------------------------------------------
+        # Split
+        # --------------------------------------------------
+        if self.splitter is not None and hasattr(self.splitter, "split"):
+            try:
+                entities = self.splitter.split(entities)
+            except Exception:
+                pass
         self._debug_stage("split", entities)
 
-        split_entities = list(entities or [])
+        split_entities = self._coerce_entities_to_dicts(list(entities or []), url=url)
+        self._debug_stage("split_coerced", split_entities)
 
-        entities = self._apply_conservative_filter(
-            split_entities,
-            page_text=page_text,
-            page_signals=page_signals,
-            expected_type=expected_type,
-        )
+        # --------------------------------------------------
+        # Conservative filter
+        # --------------------------------------------------
+        entities = split_entities
+        if self.entity_filter is not None and hasattr(self.entity_filter, "filter"):
+            try:
+                entities = self._apply_conservative_filter(
+                    split_entities,
+                    page_text=page_text,
+                    page_signals=page_signals,
+                    expected_type=expected_type,
+                    url=url,
+                )
+            except TypeError:
+                try:
+                    entities = self._apply_conservative_filter(
+                        split_entities,
+                        page_text=page_text,
+                        page_signals=page_signals,
+                        expected_type=expected_type,
+                    )
+                except Exception:
+                    entities = split_entities
+            except Exception:
+                entities = split_entities
 
         if not entities and split_entities and not strict_listing_page:
             if self.debug:
                 print(
-                    f"[PIPELINE] conservative_filter_bypassed_on_empty for {url}: "
-                    f"split={len(split_entities)}",
+                    f"[PIPELINE] conservative_filter_bypassed_on_empty for {url}: split={len(split_entities)}",
                     file=sys.stderr,
                 )
             entities = split_entities
 
+        entities = self._coerce_entities_to_dicts(entities, url=url)
         self._debug_stage("conservative_filter", entities)
 
-        entities = self._attach_ontology_candidates(entities, page_text=page_text, expected_type=expected_type)
-        entities = self._ensure_entity_type(
-            entities,
-            page_text=page_text,
-            page_signals=page_signals,
-            expected_type=expected_type,
-        )
+        # --------------------------------------------------
+        # Ontology candidates (optional helper)
+        # --------------------------------------------------
+        try:
+            entities = self._attach_ontology_candidates(
+                entities,
+                page_text=page_text,
+                expected_type=expected_type,
+            )
+        except Exception:
+            pass
+
+        entities = self._coerce_entities_to_dicts(entities, url=url)
+
+        # --------------------------------------------------
+        # Ensure type
+        # --------------------------------------------------
+        try:
+            entities = self._ensure_entity_type(
+                entities,
+                page_text=page_text,
+                page_signals=page_signals,
+                expected_type=expected_type,
+            )
+        except Exception:
+            pass
+
+        entities = self._coerce_entities_to_dicts(entities, url=url)
         self._debug_stage("typed_candidates", entities)
 
-        try:
-            candidates = self.semantic_matcher.match(entities, page_text=page_text)
-        except TypeError:
-            candidates = self.semantic_matcher.match(entities)
+        # --------------------------------------------------
+        # Semantic matcher
+        # --------------------------------------------------
+        candidates = entities
+        if self.semantic_matcher is not None and hasattr(self.semantic_matcher, "match"):
+            try:
+                candidates = self.semantic_matcher.match(entities, page_text=page_text)
+            except TypeError:
+                try:
+                    candidates = self.semantic_matcher.match(entities)
+                except Exception:
+                    candidates = entities
+            except Exception:
+                candidates = entities
 
-        candidates = self._promote_semantic_type(candidates)
-        candidates = self._ensure_entity_type(
-            candidates,
-            page_text=page_text,
-            page_signals=page_signals,
-            expected_type=expected_type,
-        )
-        candidates = self._apply_quality_gate(candidates, page_signals=page_signals, url=url)
+        candidates = self._coerce_entities_to_dicts(candidates, url=url)
+
+        try:
+            candidates = self._promote_semantic_type(candidates)
+        except Exception:
+            pass
+
+        try:
+            candidates = self._ensure_entity_type(
+                candidates,
+                page_text=page_text,
+                page_signals=page_signals,
+                expected_type=expected_type,
+            )
+        except Exception:
+            pass
+
+        if self.quality_scorer is not None and hasattr(self.quality_scorer, "evaluate"):
+            try:
+                candidates = self._apply_quality_gate(
+                    candidates,
+                    page_signals=page_signals,
+                    url=url,
+                )
+            except Exception:
+                pass
+
+        candidates = self._coerce_entities_to_dicts(candidates, url=url)
         self._debug_stage("semantic_match", candidates)
 
-        ranked_entities = self.ranker.rank(
-            candidates=candidates,
-            target_type=expected_type,
-            page_text=page_text,
-        )
+        # --------------------------------------------------
+        # Rank
+        # --------------------------------------------------
+        ranked_entities = candidates
+        if self.ranker is not None and hasattr(self.ranker, "rank"):
+            try:
+                ranked_entities = self.ranker.rank(
+                    candidates=candidates,
+                    target_type=expected_type,
+                    page_text=page_text,
+                )
+            except TypeError:
+                try:
+                    ranked_entities = self.ranker.rank(candidates)
+                except Exception:
+                    ranked_entities = candidates
+            except Exception:
+                ranked_entities = candidates
 
-        ranked_entities = self._promote_semantic_type(ranked_entities)
-        ranked_entities = self._ensure_entity_type(
-            ranked_entities,
-            page_text=page_text,
-            page_signals=page_signals,
-            expected_type=expected_type,
-        )
-        ranked_entities = self._apply_quality_gate(ranked_entities, page_signals=page_signals, url=url)
+        ranked_entities = self._coerce_entities_to_dicts(ranked_entities, url=url)
+
+        try:
+            ranked_entities = self._promote_semantic_type(ranked_entities)
+        except Exception:
+            pass
+
+        try:
+            ranked_entities = self._ensure_entity_type(
+                ranked_entities,
+                page_text=page_text,
+                page_signals=page_signals,
+                expected_type=expected_type,
+            )
+        except Exception:
+            pass
+
+        if self.quality_scorer is not None and hasattr(self.quality_scorer, "evaluate"):
+            try:
+                ranked_entities = self._apply_quality_gate(
+                    ranked_entities,
+                    page_signals=page_signals,
+                    url=url,
+                )
+            except Exception:
+                pass
+
+        ranked_entities = self._coerce_entities_to_dicts(ranked_entities, url=url)
         self._debug_stage("rank", ranked_entities)
 
+        # --------------------------------------------------
+        # Primary selection
+        # --------------------------------------------------
         if listing_like_page:
             top_k = 3
         else:
             top_k = max(3, min(8, len(ranked_entities) or 3))
 
-        ranked_entities = self.select_primary_entities(
-            ranked_entities,
-            html=html,
-            url=url,
-            top_k=top_k,
-        )
-        ranked_entities = self._sanitize_entities_for_downstream(ranked_entities)
+        try:
+            ranked_entities = self.select_primary_entities(
+                ranked_entities,
+                html=html,
+                url=url,
+                top_k=top_k,
+            )
+        except Exception:
+            ranked_entities = ranked_entities[:top_k]
+
+        ranked_entities = self._coerce_entities_to_dicts(ranked_entities, url=url)
+
+        try:
+            ranked_entities = self._sanitize_entities_for_downstream(ranked_entities)
+        except Exception:
+            pass
+
+        ranked_entities = self._coerce_entities_to_dicts(ranked_entities, url=url)
         self._debug_stage("sanitize_ranked", ranked_entities)
 
-        final_entities = self._apply_llm_supervisor(
-            ranked_entities=ranked_entities,
-            page_text=page_text,
-            url=url,
-        )
+        # --------------------------------------------------
+        # LLM supervisor
+        # --------------------------------------------------
+        final_entities = ranked_entities
+        if self.llm_supervisor is not None:
+            try:
+                final_entities = self._apply_llm_supervisor(
+                    ranked_entities=ranked_entities,
+                    page_text=page_text,
+                    url=url,
+                )
+            except Exception:
+                final_entities = ranked_entities
+
+        final_entities = self._coerce_entities_to_dicts(final_entities, url=url)
         self._debug_stage("llm_supervisor", final_entities)
 
-        final_entities = self._sanitize_entities_for_downstream(final_entities)
-        final_entities = self._ensure_entity_type(
-            final_entities,
-            page_text=page_text,
-            page_signals=page_signals,
-            expected_type=expected_type,
-        )
-        final_entities = self._apply_quality_gate(final_entities, page_signals=page_signals, url=url)
+        # --------------------------------------------------
+        # Final sanitize + type + quality
+        # --------------------------------------------------
+        try:
+            final_entities = self._sanitize_entities_for_downstream(final_entities)
+        except Exception:
+            pass
+
+        final_entities = self._coerce_entities_to_dicts(final_entities, url=url)
+
+        try:
+            final_entities = self._ensure_entity_type(
+                final_entities,
+                page_text=page_text,
+                page_signals=page_signals,
+                expected_type=expected_type,
+            )
+        except Exception:
+            pass
+
+        if self.quality_scorer is not None and hasattr(self.quality_scorer, "evaluate"):
+            try:
+                final_entities = self._apply_quality_gate(
+                    final_entities,
+                    page_signals=page_signals,
+                    url=url,
+                )
+            except Exception:
+                pass
+
+        final_entities = self._coerce_entities_to_dicts(final_entities, url=url)
         self._debug_stage("sanitize_final", final_entities)
 
+        # --------------------------------------------------
+        # Cluster
+        # --------------------------------------------------
         pre_cluster_entities = list(final_entities)
-
         clustered = pre_cluster_entities
-        try:
-            maybe_clustered = self.clusterer.cluster(final_entities)
-            if isinstance(maybe_clustered, list) and maybe_clustered:
-                if isinstance(maybe_clustered[0], list):
-                    clustered = pre_cluster_entities
-                else:
-                    clustered = maybe_clustered
-            elif isinstance(maybe_clustered, list):
-                clustered = []
-        except Exception:
-            clustered = pre_cluster_entities
 
+        if self.clusterer is not None and hasattr(self.clusterer, "cluster"):
+            try:
+                maybe_clustered = self.clusterer.cluster(final_entities)
+                if isinstance(maybe_clustered, list) and maybe_clustered:
+                    if isinstance(maybe_clustered[0], list):
+                        clustered = pre_cluster_entities
+                    else:
+                        clustered = maybe_clustered
+                elif isinstance(maybe_clustered, list):
+                    clustered = []
+            except Exception:
+                clustered = pre_cluster_entities
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
         self._debug_stage("cluster", clustered)
 
-        clustered = self._sanitize_entities_for_downstream(clustered)
-        clustered = self._ensure_entity_type(
-            clustered,
-            page_text=page_text,
-            page_signals=page_signals,
-            expected_type=expected_type,
-        )
-        clustered = self._apply_quality_gate(clustered, page_signals=page_signals, url=url)
+        # --------------------------------------------------
+        # Flatten / type / quality
+        # --------------------------------------------------
+        try:
+            clustered = self._sanitize_entities_for_downstream(clustered)
+        except Exception:
+            pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
+
+        try:
+            clustered = self._ensure_entity_type(
+                clustered,
+                page_text=page_text,
+                page_signals=page_signals,
+                expected_type=expected_type,
+            )
+        except Exception:
+            pass
+
+        if self.quality_scorer is not None and hasattr(self.quality_scorer, "evaluate"):
+            try:
+                clustered = self._apply_quality_gate(
+                    clustered,
+                    page_signals=page_signals,
+                    url=url,
+                )
+            except Exception:
+                pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
         self._debug_stage("sanitize_flattened", clustered)
 
-        clustered = self._enrich_final_entities(
-            entities=clustered,
-            html=html,
-            page_text=page_text,
-            url=url,
-        )
+        # --------------------------------------------------
+        # Enrichment
+        # --------------------------------------------------
+        try:
+            clustered = self._enrich_final_entities(
+                entities=clustered,
+                html=html,
+                page_text=page_text,
+                url=url,
+            )
+        except Exception:
+            pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
         self._debug_stage("enriched_final", clustered)
 
-        clustered = self._apply_final_filter(
-            clustered,
-            page_signals=page_signals,
-            page_text=page_text,
-            url=url,
-            listing_like_page=listing_like_page,
-        )
+        # --------------------------------------------------
+        # Final filter
+        # --------------------------------------------------
+        if self.final_filter is not None and hasattr(self.final_filter, "filter"):
+            try:
+                clustered = self._apply_final_filter(
+                    clustered,
+                    page_signals=page_signals,
+                    page_text=page_text,
+                    url=url,
+                    listing_like_page=listing_like_page,
+                )
+            except Exception:
+                pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
         self._debug_stage("final_filter", clustered)
 
-        if self.enable_entity_postprocess:
+        # --------------------------------------------------
+        # Optional postprocess
+        # --------------------------------------------------
+        if getattr(self, "enable_entity_postprocess", False):
             try:
                 clustered = postprocess_entities(
                     clustered,
-                    enable_dedupe=self.enable_entity_dedupe,
+                    enable_dedupe=getattr(self, "enable_entity_dedupe", True),
                 )
-                self._debug_stage("postprocessed_final", clustered)
             except Exception as e:
                 if self.debug:
                     print(f"[POSTPROCESS] failed: {e}", file=sys.stderr)
 
-        return clustered
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
+        self._debug_stage("postprocessed_final", clustered)
+
+        # --------------------------------------------------
+        # Closed-world enforcement
+        # --------------------------------------------------
+        try:
+            clustered = enforce_closed_world_batch(
+                clustered,
+                self.valid_classes,
+                ontology_catalog=self.ontology_catalog,
+            )
+        except Exception:
+            pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
+        self._debug_stage("closed_world", clustered)
+
+        return clustered    
 
     def _is_wikimedia_url(self, url):
         if not url:
