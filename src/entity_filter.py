@@ -1,276 +1,555 @@
 from __future__ import annotations
-from entity_processing.page_classifier import classify_page
+
 import re
 import unicodedata
-from typing import Any, Dict, List, Optional, Tuple
-from urllib.parse import urlparse
-
-
-def _strip_accents(text: str) -> str:
-    return "".join(
-        ch for ch in unicodedata.normalize("NFKD", text or "")
-        if not unicodedata.combining(ch)
-    )
-
-
-def normalize_entity_text(text: str) -> str:
-    text = text or ""
-    text = text.strip()
-    text = re.sub(r"^\d+[\)_\-.]*\s*", "", text)
-    text = re.sub(r"\s+", " ", text)
-    return text.strip(" \t\r\n,.;:|/-–—•·")
-
-
-def canonical_entity_key(text: str) -> str:
-    text = normalize_entity_text(text).lower()
-    return _strip_accents(text)
+from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
 
 class EntityFilter:
     """
-    Filtro conservador para cortar candidatos débiles antes del matching semántico.
+    Filtro conservador previo al ranking.
 
-    Filosofía:
-    - si parece navegación/editorial/contacto => reject
-    - si el nombre es demasiado genérico => reject
-    - si no tiene evidencia positiva suficiente => reject
-    - si hay duda real => review, pero no keep directo
+    Debe:
+    - eliminar ruido evidente de UI, navegación y fragmentos narrativos
+    - dejar pasar entidades turísticas plausibles aunque aún estén incompletas
+    - no asumir categorías no turísticas como Person
     """
 
-    def __init__(self) -> None:
-        self.ui_exact = {
-            "leer más", "leer mas", "más info", "mas info", "ver más", "ver mas",
-            "inicio", "home", "descubre", "historia", "detalles", "detalle",
-            "actividad", "actividades", "servicios", "información", "informacion",
-            "contacto", "mapa", "mapas", "cómo llegar", "como llegar",
-        }
-        self.generic_single_token_blocklist = {
-            "bienal", "academias", "tablaos", "flamenco", "visitantes",
-            "agenda", "planes", "museos", "monumentos", "ocio", "familia",
-            "cultura", "rutas", "barrios", "compras", "gastronomia", "gastronomía",
-        }
-        self.generic_multiword_blocklist = {
-            "tablaos flamencos", "academias de flamenco", "que hacer",
-            "qué hacer", "ideas y planes", "durante tu estancia", "de compras",
-            "comer y salir", "monumentos y museos", "puntos de informacion turistica",
-            "puntos de información turística",
-        }
-        self.person_like_titles = {
-            "la niña de los peines", "niña de los peines", "manolo caracol",
-        }
-        self.noise_contains = {
-            "google analytics", "cookies", "política de cookies", "politica de cookies",
-            "privacidad", "aviso legal", "copy link", "watch later", "share",
-            "suscrito", "te has suscrito", "ir a página", "ir a pagina",
-            "abrir en google maps", "sitio web ver", "maps abrir",
-        }
-        self.contact_tokens = {
-            "teléfono", "telefono", "dirección", "direccion", "email", "correo",
-            "whatsapp", "horario", "horarios", "reservas",
-        }
-        self.place_allowlist = {"sevilla", "triana"}
-        self.instance_indicators = {
-            "museo", "iglesia", "capilla", "basilica", "basílica", "catedral",
-            "palacio", "alcazar", "alcázar", "teatro", "tablao", "parque",
-            "jardín", "jardin", "plaza", "puente", "barrio", "hotel", "hostal",
-            "restaurante", "bar", "mercado", "ayuntamiento", "estadio", "festival",
-            "bienal", "centro", "fundación", "fundacion", "asociación", "asociacion",
+    def __init__(self, debug: bool = False):
+        self.debug = debug
+
+        self.ui_terms = {
+            "ir al contenido",
+            "reserva tu actividad",
+            "todos los derechos reservados",
+            "accesibilidad",
+            "guías convention bureau",
+            "guias convention bureau",
+            "área profesional",
+            "area profesional",
+            "ver más",
+            "ver mas",
+            "leer más",
+            "leer mas",
+            "mostrar más",
+            "mostrar mas",
+            "google maps",
+            "copiar dirección",
+            "copiar direccion",
+            "contacto",
+            "newsletter",
+            "suscríbete",
+            "suscribete",
+            "apúntate",
+            "apuntate",
+            "mapas",
         }
 
-    def _slug_tokens(self, url: str) -> List[str]:
-        try:
-            path = urlparse(url or "").path.lower()
-        except Exception:
-            return []
-        return [t for t in re.split(r"[^\wáéíóúñü]+", path) if t]
+        self.navigation_terms = {
+            "inicio",
+            "home",
+            "siguiente",
+            "anterior",
+            "breadcrumb",
+            "menú",
+            "menu",
+            "volver",
+            "subir",
+            "todos los lugares",
+            "qué ver",
+            "que ver",
+            "qué hacer",
+            "que hacer",
+            "dónde alojarse",
+            "donde alojarse",
+            "dónde comer",
+            "donde comer",
+            "descubre pamplona",
+            "planifica tu viaje",
+            "moverse por pamplona",
+        }
 
-    def _normalize_context(self, context: str) -> str:
-        return canonical_entity_key(context)
+        self.generic_terms = {
+            "agenda",
+            "programa",
+            "experiencias",
+            "familias",
+            "viajar",
+            "vista",
+            "aquí",
+            "aqui",
+            "además",
+            "ademas",
+            "locales",
+            "lugares",
+            "actividad",
+            "actividades",
+            "preguntas frecuentes",
+            "noticias",
+        }
 
-    def looks_like_ui_fragment(self, text: str) -> bool:
-        t = canonical_entity_key(text)
-        if not t:
-            return True
-        if t in self.ui_exact:
-            return True
-        if t in self.generic_multiword_blocklist:
-            return True
-        if re.fullmatch(r"\d+_?", t):
-            return True
-        if t.startswith(("01 ", "02 ", "03 ")):
-            return True
-        if any(x in t for x in self.noise_contains):
-            return True
-        return False
+        self.instance_terms = {
+            "ayuntamiento",
+            "catedral",
+            "iglesia",
+            "basílica",
+            "basilica",
+            "capilla",
+            "monasterio",
+            "convento",
+            "castillo",
+            "alcázar",
+            "alcazar",
+            "palacio",
+            "museo",
+            "mercado",
+            "plaza",
+            "parque",
+            "jardín",
+            "jardin",
+            "teatro",
+            "puente",
+            "festival",
+            "feria",
+            "congreso",
+            "camino",
+            "ruta",
+            "sendero",
+            "frontón",
+            "fronton",
+            "baluarte",
+            "hotel",
+            "hostal",
+            "albergue",
+            "camping",
+            "balneario",
+            "centro de interpretación",
+            "centro de interpretacion",
+            "centro de acogida",
+            "ciudadela",
+            "archivo real",
+            "caballo blanco",
+            "plaza del castillo",
+        }
 
-    def is_generic_entity(self, text: str) -> bool:
-        t = canonical_entity_key(text)
-        if not t:
-            return True
-        if t in self.generic_single_token_blocklist or t in self.generic_multiword_blocklist:
-            return True
-        words = t.split()
-        if len(words) == 1 and t not in self.place_allowlist and t not in self.person_like_titles:
-            return True
-        if len(words) >= 2 and all(w.isalpha() for w in words):
-            if words[-1].endswith("s") and t == t.lower() and t not in self.person_like_titles:
+        self.soft_person_particles = {
+            "de", "del", "la", "las", "los", "y",
+            "san", "santa", "santo"
+        }
+
+        self.verb_markers = {
+            "es", "son", "fue", "fueron", "ser", "hay",
+            "combina", "combinan", "ofrece", "ofrecen",
+            "permite", "permiten", "comenzaremos", "comenzará", "comenzara",
+            "visitaremos", "llegaremos", "disfruta", "disfrutar",
+            "tiene", "tienen", "puede", "pueden", "ocurre", "ocurren",
+            "data", "incluye", "incluyen", "vivir",
+            "piensa", "piensan", "transforma", "transforman",
+        }
+
+        self.phrase_openers = {
+            "a quien", "aquí", "aqui", "si quieres", "si estás", "si estas",
+            "cuando", "cuándo", "como", "cómo", "por supuesto",
+            "también", "tambien", "además", "ademas",
+            "no hay", "no te", "te invitamos",
+        }
+
+        self.trailing_noise_tokens = {
+            "también", "tambien", "comenzaremos", "comenzará", "comenzara",
+            "ver", "más", "mas", "monumento", "monumentos",
+            "espacios", "museo", "museos", "lugar", "lugares",
+            "pago", "recomendado",
+        }
+
+        self.leading_noise_tokens = {
+            "actividad", "agenda", "programa", "experiencias",
+            "por", "por supuesto", "también", "tambien",
+        }
+
+        self.false_positive_patterns = [
+            r"\bmultitud de actividades\b",
+            r"\bgran variedad de\b",
+            r"\bmejor manera de\b",
+            r"\bcalidad de vida\b",
+            r"\bservicio integral de\b",
+            r"\btratamientos de\b",
+            r"\bgastronom[ií]a de alta calidad\b",
+            r"\bcentros de investigaci[oó]n\b",
+            r"\benvolturas de fango\b",
+            r"\bpamplona agenda\b",
+            r"\bagenda multitud\b",
+            r"\bactividad san ferm[ií]n\b",
+            r"\bpor supuesto san ferm[ií]n\b",
+            r"\bqu[ií]en fue san ferm[ií]n\b",
+            r"\bsan ferm[ií]n es mucho m[aá]s\b",
+            r"\bcatedral hotel\b",
+        ]
+
+    # ---------------------------------------------------------
+    # utils
+    # ---------------------------------------------------------
+
+    def _norm(self, value: Any) -> str:
+        value = "" if value is None else str(value)
+        value = value.strip()
+        value = re.sub(r"\s+", " ", value)
+        return value
+
+    def _low(self, value: Any) -> str:
+        return self._norm(value).lower()
+
+    def _strip_accents(self, text: str) -> str:
+        return "".join(
+            c for c in unicodedata.normalize("NFD", text)
+            if unicodedata.category(c) != "Mn"
+        )
+
+    def _low_ascii(self, value: Any) -> str:
+        return self._strip_accents(self._low(value))
+
+    def _tokenize(self, text: str) -> List[str]:
+        return [t for t in re.split(r"[^\wáéíóúñü]+", self._low(text)) if t]
+
+    def _short_type(self, value: Any) -> str:
+        raw = self._norm(value)
+        if not raw:
+            return ""
+        return raw.split("#")[-1].split("/")[-1].strip()
+
+    def _entity_name(self, entity: Dict[str, Any]) -> str:
+        return self._norm(
+            entity.get("name")
+            or entity.get("entity_name")
+            or entity.get("entity")
+            or entity.get("label")
+            or ""
+        )
+
+    def _entity_class(self, entity: Dict[str, Any]) -> str:
+        return self._short_type(entity.get("class") or entity.get("type") or "")
+
+    def _clean_name_edges(self, text: str) -> str:
+        value = self._norm(text)
+
+        changed = True
+        while changed and value:
+            changed = False
+            low = self._low(value)
+
+            for prefix in sorted(self.leading_noise_tokens, key=len, reverse=True):
+                if low.startswith(prefix + " "):
+                    value = self._norm(value[len(prefix):])
+                    changed = True
+                    break
+
+            if changed:
+                continue
+
+            low = self._low(value)
+            tokens = value.split()
+            if tokens:
+                last = self._low(tokens[-1])
+                if last in self.trailing_noise_tokens:
+                    value = self._norm(" ".join(tokens[:-1]))
+                    changed = True
+
+        return value.strip(" -|,;:")
+
+    # ---------------------------------------------------------
+    # weak signals
+    # ---------------------------------------------------------
+
+    def _looks_like_person_name(self, text: str) -> bool:
+        """
+        Señal débil.
+        No implica rechazo automático porque muchos nombres de persona
+        terminan siendo esculturas, retratos, monumentos, calles, etc.
+        """
+        name = self._norm(text)
+        parts = [p for p in re.split(r"\s+", name) if p]
+        if len(parts) < 2 or len(parts) > 4:
+            return False
+
+        properish = 0
+        for p in parts:
+            p_clean = p.strip(".,;:¡!¿?()[]{}\"'")
+            if not p_clean:
+                continue
+            if self._low(p_clean) in self.soft_person_particles:
+                continue
+            if re.match(r"^[A-ZÁÉÍÓÚÑÜ][a-záéíóúñü\-]+$", p_clean):
+                properish += 1
+
+        return properish >= 2
+
+    def _has_instance_signal(self, text: str) -> bool:
+        low = self._low(text)
+        return any(term in low for term in self.instance_terms)
+
+    def _has_supportive_context(self, text: str, context: str) -> bool:
+        merged = f"{self._low(text)} || {self._low(context)}"
+        return any(term in merged for term in self.instance_terms)
+
+    def _looks_like_event_signal(self, text: str, context: str = "") -> bool:
+        merged = f"{self._low(text)} || {self._low(context)}"
+        event_terms = {
+            "festival", "feria", "congreso", "evento",
+            "san fermín", "san fermin", "punto de vista",
+            "ecozine", "jotas", "flamenco on fire",
+        }
+        return any(term in merged for term in event_terms)
+
+    def _looks_like_route_signal(self, text: str, context: str = "") -> bool:
+        merged = f"{self._low(text)} || {self._low(context)}"
+        route_terms = {
+            "camino de santiago", "ruta", "sendero",
+            "itinerario", "recorrido", "peregrinación", "peregrinacion",
+        }
+        return any(term in merged for term in route_terms)
+
+    # ---------------------------------------------------------
+    # hard rejections
+    # ---------------------------------------------------------
+
+    def _is_ui_fragment(self, name: str) -> bool:
+        low = self._low_ascii(name)
+        for term in self.ui_terms:
+            if self._strip_accents(term) in low:
                 return True
         return False
 
-    def _positive_signals(self, entity: str, context: str, page_signals: Optional[Dict[str, Any]] = None) -> Tuple[int, List[str]]:
-        score = 0
-        reasons: List[str] = []
-        name = normalize_entity_text(entity)
-        key = canonical_entity_key(name)
-        context_k = self._normalize_context(context)
-        page_signals = page_signals or {}
+    def _is_navigation_fragment(self, name: str) -> bool:
+        low = self._low_ascii(name)
+        for term in self.navigation_terms:
+            if self._strip_accents(term) in low:
+                return True
+        return False
 
-        words = name.split()
-        meaningful = [w for w in words if len(w) > 2]
-        if len(meaningful) >= 2:
-            score += 2
+    def _is_false_positive_pattern(self, name: str) -> bool:
+        low = self._low(name)
+        return any(re.search(p, low, flags=re.IGNORECASE) for p in self.false_positive_patterns)
+
+    def _is_phrase_fragment(self, name: str) -> bool:
+        low = self._low(name)
+        tokens = self._tokenize(name)
+
+        if not tokens:
+            return True
+
+        if len(tokens) >= 6:
+            return True
+
+        if any(low.startswith(opener) for opener in self.phrase_openers):
+            return True
+
+        if len(tokens) >= 4 and any(t in self.verb_markers for t in tokens):
+            return True
+
+        if re.search(r"\b(qu[ií]en|c[oó]mo|cu[aá]ndo)\b", low):
+            return True
+
+        return False
+
+    def _is_overgeneric(self, name: str) -> bool:
+        low = self._low(name)
+        if low in self.generic_terms:
+            return True
+        if low in self.navigation_terms:
+            return True
+        if low in self.ui_terms:
+            return True
+        return False
+
+    def _is_bad_compound(self, name: str) -> bool:
+        low = self._low(name)
+        tokens = self._tokenize(name)
+
+        generic_hits = 0
+        for token in tokens:
+            if token in {
+                "agenda", "actividad", "actividades", "experiencias",
+                "lugares", "lugar", "monumento", "monumentos", "museo",
+                "museos", "espacios", "ver", "más", "mas", "programa"
+            }:
+                generic_hits += 1
+
+        if len(tokens) >= 5 and generic_hits >= 2:
+            return True
+
+        if len(tokens) >= 7:
+            return True
+
+        if re.search(r"\b(ver|más|mas|comenzaremos|también|tambien)\b", low):
+            return True
+
+        return False
+
+    # ---------------------------------------------------------
+    # scoring
+    # ---------------------------------------------------------
+
+    def _score_entity_name(
+        self,
+        name: str,
+        context: str = "",
+        entity_class: str = "",
+        expected_type: Optional[str] = None,
+    ) -> Tuple[int, List[str]]:
+        reasons: List[str] = []
+        score = 0
+
+        clean_name = self._clean_name_edges(name)
+        low = self._low(clean_name)
+        tokens = self._tokenize(clean_name)
+        entity_class_low = self._low(entity_class)
+
+        if not clean_name:
+            return -10, ["empty_name"]
+
+        if self._is_ui_fragment(clean_name):
+            return -8, ["ui_fragment"]
+
+        if self._is_navigation_fragment(clean_name):
+            return -8, ["foreign_noise"]
+
+        if self._is_false_positive_pattern(clean_name):
+            return -8, ["phrase_fragment"]
+
+        if self._is_phrase_fragment(clean_name):
+            return -8, ["phrase_fragment"]
+
+        if self._is_overgeneric(clean_name):
+            score -= 4
+            reasons.append("generic_name")
+
+        if len(tokens) == 1:
+            score -= 2
+            reasons.append("single_token")
+
+        if len(tokens) >= 2:
+            score += 1
             reasons.append("multiword_name")
 
-        if any(ind in key for ind in self.instance_indicators):
-            score += 2
+        if self._has_instance_signal(clean_name):
+            score += 3
             reasons.append("instance_indicator")
 
-        if any(tok in context_k for tok in [
-            "visitar", "visita", "monumento", "museo", "iglesia", "festival",
-            "patrimonio", "barrio", "plaza", "palacio", "alojamiento", "restaurante",
-            "ubicado", "situado", "se encuentra", "dirección", "direccion",
-        ]):
-            score += 1
+        if self._has_supportive_context(clean_name, context):
+            score += 2
             reasons.append("supportive_context")
 
-        slug_tokens = set(page_signals.get("slug_tokens") or [])
-        name_tokens = {canonical_entity_key(x) for x in words if len(x) > 3}
-        if slug_tokens and name_tokens.intersection(slug_tokens):
+        if self._looks_like_event_signal(clean_name, context):
             score += 2
-            reasons.append("url_affinity")
+            reasons.append("event_lexical_hint")
 
-        h1 = canonical_entity_key(page_signals.get("h1") or "")
-        title = canonical_entity_key(page_signals.get("title") or "")
-        if key and h1 and (key in h1 or h1 in key):
+        if self._looks_like_route_signal(clean_name, context):
             score += 2
-            reasons.append("h1_match")
-        if key and title and (key in title or title in key):
+            reasons.append("route_lexical_hint")
+
+        if self._looks_like_person_name(clean_name):
             score += 1
-            reasons.append("title_match")
+            reasons.append("person_name_weak_signal")
+
+        if entity_class_low in {
+            "cathedral", "church", "chapel", "basilica", "castle",
+            "alcazar", "palace", "museum", "townhall", "square",
+            "park", "garden", "route", "event", "market", "stadium",
+            "monument"
+        }:
+            score += 2
+            reasons.append("strong_type")
+
+        if expected_type:
+            if self._low(expected_type) == entity_class_low and entity_class_low:
+                score += 1
+                reasons.append("expected_type_match")
+
+        if self._is_bad_compound(clean_name):
+            score -= 5
+            reasons.append("bad_compound_name")
+
+        # Un nombre de persona sin soporte contextual/instancia no debe subir mucho
+        if self._looks_like_person_name(clean_name) and not self._has_instance_signal(clean_name):
+            if not self._has_supportive_context(clean_name, context):
+                score -= 1
 
         return score, reasons
 
-    def evaluate(
-        self,
-        entity: str,
-        context: str = "",
-        page_signals: Optional[Dict[str, Any]] = None,
-        expected_type: Optional[str] = None,
-    ) -> Dict[str, Any]:
-        entity = normalize_entity_text(entity)
-        context_k = self._normalize_context(context)
-        reasons: List[str] = []
-
-        if not entity:
-            return {"decision": "reject", "score": -10, "reasons": ["empty"]}
-
-        if len(entity) < 3 or len(entity.split()) > 8:
-            return {"decision": "reject", "score": -6, "reasons": ["bad_length"]}
-
-        if self.looks_like_ui_fragment(entity):
-            return {"decision": "reject", "score": -8, "reasons": ["ui_fragment"]}
-
-        key = canonical_entity_key(entity)
-        if any(x in key for x in ["wenn", "sie", "und", "les", "des", "comment", "arriver"]):
-            return {"decision": "reject", "score": -8, "reasons": ["foreign_noise"]}
-
-        if any(tok in context_k for tok in ["breadcrumb", "menu", "navegación", "navegacion"]):
-            return {"decision": "reject", "score": -6, "reasons": ["navigation_context"]}
-
-        if self.is_generic_entity(entity):
-            reasons.append("generic_name")
-
-        if len(entity.split()) == 1 and key not in self.place_allowlist:
-            reasons.append("single_token")
-
-        if any(tok in key for tok in self.contact_tokens):
-            return {"decision": "reject", "score": -6, "reasons": ["contact_fragment"]}
-
-        pos_score, pos_reasons = self._positive_signals(entity, context, page_signals)
-        reasons.extend(pos_reasons)
-
-        score = pos_score
-        if "generic_name" in reasons:
-            score -= 3
-        if "single_token" in reasons:
-            score -= 2
-
-        if expected_type and canonical_entity_key(expected_type) in key:
-            score += 1
-            reasons.append("expected_type_lexical_hint")
-
-        if score >= 3 and "generic_name" not in reasons:
-            decision = "keep"
-        elif score >= 2:
-            decision = "review"
-        else:
-            decision = "reject"
-
-        return {
-            "decision": decision,
-            "score": score,
-            "reasons": sorted(set(reasons)),
-        }
+    # ---------------------------------------------------------
+    # public api
+    # ---------------------------------------------------------
 
     def filter(
         self,
-        entities: List[Dict[str, Any]],
-        context_getter=None,
+        entities: Iterable[Dict[str, Any]],
+        context_getter: Optional[Callable[[Dict[str, Any]], str]] = None,
         page_signals: Optional[Dict[str, Any]] = None,
         expected_type: Optional[str] = None,
     ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         kept: List[Dict[str, Any]] = []
         rejected: List[Dict[str, Any]] = []
-        for item in entities or []:
-            if not isinstance(item, dict):
+
+        for entity in entities or []:
+            if not isinstance(entity, dict):
                 continue
-            name = (
-                item.get("name") or item.get("entity_name") or item.get("entity") or item.get("label") or ""
+
+            item = dict(entity)
+            raw_name = self._entity_name(item)
+            clean_name = self._clean_name_edges(raw_name)
+
+            item["name"] = clean_name or raw_name
+            item["entity_name"] = clean_name or raw_name
+            item["label"] = clean_name or raw_name
+            item["entity"] = clean_name or raw_name
+
+            context = ""
+            if callable(context_getter):
+                try:
+                    context = context_getter(item) or ""
+                except Exception:
+                    context = ""
+
+            entity_class = self._entity_class(item)
+
+            score, reasons = self._score_entity_name(
+                clean_name or raw_name,
+                context=context,
+                entity_class=entity_class,
+                expected_type=expected_type,
             )
-            context = context_getter(item) if callable(context_getter) else (item.get("context") or "")
-            
 
-        page_type = classify_page(
-            url=item.get("url") or item.get("sourceUrl") or "",
-            entity=item
-        )
+            decision = "keep"
+            reject_reasons: List[str] = []
 
-        audit = self.evaluate(
-            name,
-            context=context,
-            page_signals=page_signals,
-            expected_type=expected_type
-        )
+            if score <= -3:
+                decision = "reject"
+                reject_reasons = [r for r in reasons if r in {
+                    "ui_fragment", "foreign_noise", "phrase_fragment",
+                    "generic_name", "single_token", "bad_compound_name"
+                }]
+                if not reject_reasons:
+                    reject_reasons = ["low_score"]
 
-        # 🔥 NEW: stricter filtering for bad page types
-        if page_type in {"listing_page", "category_page", "blog_page"}:
-            if audit["decision"] != "keep":
-                audit["decision"] = "reject"
-                audit["reasons"].append(f"rejected_by_page_type:{page_type}")
+            audit = {
+                "decision": decision,
+                "score": score,
+                "reasons": reject_reasons if decision == "reject" else reasons,
+            }
+            item["filter_audit"] = audit
 
-            if len(name.split()) > 7:
-                audit["decision"] = "reject"
-                audit["reasons"].append("too_long_for_listing")
-
-            if any(tok in name.lower() for tok in ["lugares", "categorías", "planes", "que ver", "qué ver"]):
-                audit["decision"] = "reject"
-                audit["reasons"].append("category_noise")
-
-
-            enriched = dict(item)
-            enriched["filter_audit"] = audit
-            if audit["decision"] == "reject":
-                rejected.append(enriched)
+            if decision == "keep":
+                kept.append(item)
             else:
-                kept.append(enriched)
+                rejected.append(item)
+
+        if self.debug:
+            print(f"[DEBUG FILTER] kept={len(kept)} rejected={len(rejected)}")
+            for sample in rejected[:10]:
+                try:
+                    print(
+                        f"[DEBUG REJECT SAMPLE] {sample.get('name')} {sample.get('filter_audit')}"
+                    )
+                except Exception:
+                    pass
+
         return kept, rejected

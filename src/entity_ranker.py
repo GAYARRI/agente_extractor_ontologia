@@ -17,107 +17,41 @@ class EntityRanker:
     def __init__(self, type_normalizer=None, ontology_distance=None):
         self.type_normalizer = type_normalizer
         self.ontology_distance = ontology_distance
-
-        # Debug desactivado por defecto
         self.debug = False
 
         self.anchor_words = {
-            "museo",
-            "iglesia",
-            "capilla",
-            "catedral",
-            "basílica",
-            "basilica",
-            "castillo",
-            "alcázar",
-            "alcazar",
-            "plaza",
-            "ayuntamiento",
-            "estadio",
-            "hotel",
-            "restaurante",
-            "monasterio",
-            "convento",
-            "palacio",
-            "torre",
-            "puente",
-            "parque",
-            "jardín",
-            "jardin",
-            "barrio",
-            "mercado",
-            "centro",
-            "flamenco",
-            "bienal",
+            "museo", "iglesia", "capilla", "catedral", "basílica", "basilica",
+            "castillo", "alcázar", "alcazar", "plaza", "ayuntamiento", "estadio",
+            "hotel", "restaurante", "monasterio", "convento", "palacio", "torre",
+            "puente", "parque", "jardín", "jardin", "barrio", "mercado", "centro",
+            "festival", "concierto", "taller", "ruta", "feria", "exposición",
+            "exposicion", "navidad", "pelota", "camino",
         }
 
         self.bad_words = {
-            "cada",
-            "día",
-            "dia",
-            "semana",
-            "historia",
-            "información",
-            "informacion",
-            "curiosidades",
-            "evento",
-            "celebra",
-            "descubre",
-            "conoce",
-            "planes",
-            "agenda",
-            "turismo",
-            "cultura",
-            "analytics",
-            "google",
-            "patrimonio",
-            "cultural",
-            "inmaterial",
+            "cada", "día", "dia", "semana", "historia", "información", "informacion",
+            "curiosidades", "celebra", "descubre", "conoce", "analytics", "google",
         }
 
         self.bad_verbs = {
-            "es",
-            "son",
-            "fue",
-            "eran",
-            "donde",
-            "cuando",
-            "como",
-            "aunque",
-            "existe",
-            "existía",
-            "existia",
-            "celebra",
+            "es", "son", "fue", "eran", "donde", "cuando", "como", "aunque",
+            "existe", "existía", "existia", "celebra",
         }
 
         self.invalid_trailing_words = {
-            "de",
-            "del",
-            "la",
-            "las",
-            "el",
-            "los",
-            "e",
-            "y",
-            "a",
-            "al",
+            "de", "del", "la", "las", "el", "los", "e", "y", "a", "al",
         }
 
         self.generic_entities = {
-            "sevilla",
-            "flamenco",
-            "cultura",
-            "turismo",
-            "curiosidades",
-            "el flamenco",
-            "la sevilla",
-            "patrimonio cultural inmaterial",
-            "google analytics",
+            "cultura", "turismo", "google analytics", "qué ver", "que ver",
+            "qué hacer", "que hacer", "mapas",
         }
 
-    # =========================================================
-    # Helpers
-    # =========================================================
+        self.ui_noise_markers = {
+            "todos los derechos reservados", "ir al contenido", "reserva tu",
+            "convention bureau", "área profesional", "area profesional",
+            "ver todas las noticias", "newsletter", "suscríbete", "apúntate",
+        }
 
     def _entity_name(self, entity: Dict[str, Any]) -> str:
         return (
@@ -147,13 +81,10 @@ class EntityRanker:
         tokens = self._tokenize(text)
         if not tokens:
             return True
-
         if tokens[-1] in self.invalid_trailing_words:
             return True
-
         if len(tokens) >= 2 and tokens[-1] in self.bad_verbs:
             return True
-
         return False
 
     def _name_quality_score(self, name: str) -> float:
@@ -165,16 +96,15 @@ class EntityRanker:
         token_count = len(tokens)
         low = name.lower().strip()
 
-        # positivos
         if self._has_anchor_word(name):
             score += 2.5
 
-        if 2 <= token_count <= 5:
+        if 2 <= token_count <= 6:
             score += 1.5
         elif token_count == 1:
+            score -= 0.5
+        elif token_count > 10:
             score -= 1.0
-        elif token_count > 7:
-            score -= 2.0
 
         if " de " in low or " del " in low:
             score += 0.8
@@ -182,36 +112,25 @@ class EntityRanker:
         if all(word[:1].isupper() for word in name.split() if word[:1].isalpha()):
             score += 0.5
 
-        # negativos generales
+        if any(marker in low for marker in self.ui_noise_markers):
+            score -= 5.0
+
         if any(t in self.bad_words for t in tokens):
-            score -= 2.0
+            score -= 1.5
 
         if any(t in self.bad_verbs for t in tokens):
-            score -= 2.5
+            score -= 2.0
 
         if low in self.generic_entities:
             score -= 2.0
 
         if self._looks_truncated(name):
-            score -= 2.5
-
-        # penalizaciones específicas
-        if low in {"google analytics", "la sevilla", "el flamenco", "patrimonio cultural inmaterial"}:
-            score -= 4.0
+            score -= 2.0
 
         if "google" in tokens or "analytics" in tokens:
             score -= 4.0
 
-        if "patrimonio" in tokens and "cultural" in tokens:
-            score -= 3.0
-
         if tokens and tokens[0] in {"el", "la", "los", "las"} and not self._has_anchor_word(name):
-            score -= 2.5
-
-        if token_count == 2 and tokens[0] == "sevilla" and tokens[1] not in self.anchor_words:
-            score -= 3.0
-
-        if token_count == 2 and tokens[0] in {"el", "la", "los", "las"} and not self._has_anchor_word(name):
             score -= 1.5
 
         return score
@@ -222,7 +141,6 @@ class EntityRanker:
 
         name_low = name.lower()
         page_low = page_text.lower()
-
         score = 0.0
 
         if name_low in page_low:
@@ -283,10 +201,6 @@ class EntityRanker:
 
         return score
 
-    # =========================================================
-    # API
-    # =========================================================
-
     def rank(
         self,
         candidates: List[Dict[str, Any]],
@@ -317,35 +231,22 @@ class EntityRanker:
             page_relevance = self._page_relevance_score(name, page_text)
             type_score = self._type_score(item, target_type)
 
-            final_score = (
-                semantic * 1.2
-                + name_quality
-                + page_relevance
-                + type_score
-            )
+            final_score = semantic * 1.2 + name_quality + page_relevance + type_score
 
             item["name_quality_score"] = round(name_quality, 4)
             item["page_relevance_score"] = round(page_relevance, 4)
             item["semantic_similarity"] = round(semantic, 4)
             item["final_score"] = round(final_score, 4)
-
-            # compatibilidad con el resto del pipeline
             item["score"] = item["final_score"]
 
             if self.debug:
                 print(
-                    "[RANKER] entity=",
-                    name,
-                    "| semantic=",
-                    semantic,
-                    "| name_quality=",
-                    name_quality,
-                    "| page_relevance=",
-                    page_relevance,
-                    "| type_score=",
-                    type_score,
-                    "| final_score=",
-                    final_score,
+                    "[RANKER] entity=", name,
+                    "| semantic=", semantic,
+                    "| name_quality=", name_quality,
+                    "| page_relevance=", page_relevance,
+                    "| type_score=", type_score,
+                    "| final_score=", final_score,
                 )
 
             ranked.append(item)

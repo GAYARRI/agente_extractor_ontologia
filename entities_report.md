@@ -1,30 +1,226 @@
 # Knowledge Graph
-Total de entidades: 2
+Total de entidades: 16
 
 ## Ayuntamiento de Pamplona
 
-**type:** Monument
+**type:** TownHall
 **score:** 1.0
-**url:** https://visitpamplonairuna.com/descubre-pamplona/pelota-vasca-en-pamplona
-**shortDescription:** Historia de la ciudad Origen Siglos IV-X Siglos IX-XII Siglo XVI Siglos XVIII Siglos XIX Con raíces en el pueblo vascón de Iruña, Pamplona ha evolucionado a lo largo de los siglos hasta convertirse en la ciudad actual
-**longDescription:** Descubre Pamplona Abierta, diversa y con profundas raíces, combina la herencia de siglos con una mirada contemporánea. Aquí, cada calle, plaza o edificio cuenta una historia; cada fiesta, una emoción compartida. Descubre Pamplona desde una mirada tranquila, caminando, de forma pausada, porque Pamplo
+**url:** https://visitpamplonairuna.com/de-la-fiesta-a-la-calma-vive-sanfermines-y-descubre-el-descanso-en-los-alrededores-de-pamplona
+**shortDescription:** Ir al contenido Reserva tu actividad Noticias PSTD SF365 Noticias publicadas sobre PSTD Pamplona SF365 25/06/2024 El congreso UrbanFest 365 abordará esta semana en Pamplona la gestión de macroeventos urbanos desde perspectivas como la sostenibilidad, la seguridad y la proyección exterior 18/06/2024 Pamplona alberga cada semana del año un evento deportivo subvencionado o patrocinado por el Ayuntamiento 13/06/2024 San Fermín suma una nueva experiencia de las fiestas en el ‘Espacio SanFermIN! Espazioa’ de la cuesta de Santo Domingo 07/06/2024 El análisis de macrodatos permitirá tomar decisiones en tiempo real, optimizar recursos y realizar acciones correctoras en actividades clave de los Sanfermines 05/06/2024 El Ayuntamiento organizará y clasificará más de 108
+**longDescription:** Ir al contenido Reserva tu actividad Pamplona bizi-bizirik Iruña muy viva Pamplona bizi-bizirik Iruña muy viva Con un profundo legado histórico y mirada contemporánea, Pamplona no se explica con una lista de monumentos, hay que vivirla. Aquí, lo mejor ocurre mientras se pasea sin prisa por los parqu
 **images:**
 
-![Ayuntamiento de Pamplona](https://visitpamplonairuna.com/wp-content/uploads/2025/03/001PAMPLONA_PELOTAZALE_dburguiDBIZ3794-scaled.jpg)
+![Ayuntamiento de Pamplona](https://visitpamplonairuna.com/wp-content/uploads/2025/08/de-la-fiesta-a-la-calma-vive-sanfermines-y-descubre-el-descanso-en-los-alrededores-de-pamplona-1.jpg)
 
-**qualityScore:** 9.5
+**qualityScore:** 10.0
 **qualityDecision:** promote
 
-## Camino de Santiago
+## Camino de Santiago Comenzaremos
 
 **type:** Place
 **score:** 1.0
-**url:** https://visitpamplonairuna.com/descubre-pamplona/cultura
-**shortDescription:** Cultura muy viva Un paseo por sus calles te permitirá respirar la cultura y esencia de la ciudad: rincones que te transportan a un pasacalles de San Fermín ; conchas que anuncian que, tras el paso de los Pirineos, entras a la primera del Camino de Santiago ; patrimonio histórico artístico con más de 5 kilómetros de murallas renacentistas excepcionales; frontones secretos donde descubrir la pelota vasca o barras de bar que atesoran una gastronomía sublime basada en el producto local
-**longDescription:** Cultura muy viva Un paseo por sus calles te permitirá respirar la cultura y esencia de la ciudad: rincones que te transportan a un pasacalles de San Fermín ; conchas que anuncian que, tras el paso de los Pirineos, entras a la primera del Camino de Santiago ; patrimonio histórico artístico con más de
+**url:** https://visitpamplonairuna.com/evento/excursion-a-roncesvalles-camino-de-santiago
+**shortDescription:** Ir al contenido Reserva tu actividad Excursión a Roncesvalles-Camino de Santiago Comenzaremos nuestra excursión con la visita al Mirador del Alto de Ibañeta
+**longDescription:** Ir al contenido Reserva tu actividad Excursión a Roncesvalles-Camino de Santiago Comenzaremos nuestra excursión con la visita al Mirador del Alto de Ibañeta. Desde este alto se puede ver por donde viene el Camino de Santiago a Navarra, para llegar a Roncesvalles desde St Jean Pied de Port. A continu
 **images:**
 
-![Camino de Santiago](https://visitpamplonairuna.com/wp-content/uploads/2025/10/Flamenco-on-Fire-scaled.jpg)
+![Camino de Santiago Comenzaremos](https://visitas.pamplona.es/wp-content/plugins/visitas/img/servicios/Excursion_a_Roncesvalles-Camino_de_Santiago-exursion-roncesvalles.jpg)
 
-**qualityScore:** 8.0
+**qualityScore:** 7.0
+**qualityDecision:** promote
+
+## Catedral de Pamplona PAGO RECOMENDADO
+
+**type:** Cathedral
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/evento/visita-guiada-a-pamplona-tu-pones-el-precio
+**shortDescription:** Ir al contenido Reserva tu actividad Visita guiada a Pamplona «Tú pones el precio» Comenzaremos la Visita Guiada a Pamplona en la céntrica Plaza del Castillo, corazón de la ciudad
+**longDescription:** Ir al contenido Reserva tu actividad Visita guiada a Pamplona «Tú pones el precio» Comenzaremos la Visita Guiada a Pamplona en la céntrica Plaza del Castillo, corazón de la ciudad. Nos juntaremos en una de las esquinas, junto a un conocido bar de la ciudad (Bar Txoko).Tras una introducción histórica
+**images:**
+
+![Catedral de Pamplona PAGO RECOMENDADO](https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Catedral de Pamplona También
+
+**type:** Cathedral
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/evento/visita-guiada-pamplona-al-completo
+**shortDescription:** Ir al contenido Reserva tu actividad Visita guiada Pamplona al completo Si quieres conocer bien Pamplona, no te puedes perder esta visita guiada
+**longDescription:** Ir al contenido Reserva tu actividad Visita guiada Pamplona al completo Si quieres conocer bien Pamplona, no te puedes perder esta visita guiada. Un recorrido de unas 2-2.30 horas de duración para que conozcas todo lo importante de Pamplona.Nuestra Historia local… y regional, ya que no podemos olvid
+**images:**
+
+![Catedral de Pamplona También](https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Catedral Pamplona Comenzaremos
+
+**type:** Cathedral
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/evento/visita-guiada-catedral-pamplona
+**shortDescription:** Ir al contenido Reserva tu actividad Visita guiada Catedral Pamplona Comenzaremos frente a la fachada neoclásica de la Catedral de Pamplona, una fachada que nos sorprende por no ser algo que esperamos en una ciudad con tanta historia y en medio del camino de Santiago
+**longDescription:** Ir al contenido Reserva tu actividad Visita guiada Catedral Pamplona Comenzaremos frente a la fachada neoclásica de la Catedral de Pamplona, una fachada que nos sorprende por no ser algo que esperamos en una ciudad con tanta historia y en medio del camino de Santiago.Subiremos a la torre a ver las v
+**images:**
+
+![Catedral Pamplona Comenzaremos](https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Centro de Interpretación
+
+**type:** Monument
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/pamplona-primera-del-camino-santiago
+**shortDescription:** Ir al contenido Reserva tu actividad Pamplona, el primer paso hacia el Camino de Santiago Pamplona es el punto de partida ideal para quienes desean embarcarse en la maravillosa experiencia del Camino de Santiago, gracias a su privilegiada ubicación
+**longDescription:** Ir al contenido Reserva tu actividad Pamplona, el primer paso hacia el Camino de Santiago Pamplona es el punto de partida ideal para quienes desean embarcarse en la maravillosa experiencia del Camino de Santiago, gracias a su privilegiada ubicación. Además, su relevancia como inicio del recorrido ha
+**images:**
+
+![Centro de Interpretación](https://visitpamplonairuna.com/wp-content/uploads/2025/08/pamplona-primera-del-camino-1.jpg)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Espacio Sanfermin Espazioa
+
+**type:** Monument
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/pamplona-la-gran-sorpresa-del-norte-de-espana-razones-por-las-que-no-querras-irte
+**shortDescription:** Ir al contenido Reserva tu actividad Pamplona, la gran sorpresa del norte de España: razones por las que no querrás irte Pamplona es de esas ciudades que, aunque creas conocer, terminan sorprendiéndote a cada paso
+**longDescription:** Ir al contenido Reserva tu actividad Pamplona, la gran sorpresa del norte de España: razones por las que no querrás irte Pamplona es de esas ciudades que, aunque creas conocer, terminan sorprendiéndote a cada paso. Quien llega con expectativas modestas, se encuentra con una ciudad vibrante, amable,
+**images:**
+
+![Espacio Sanfermin Espazioa](https://visitpamplonairuna.com/wp-content/uploads/2025/08/parque-fluvial-del-Arga.jpg)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Festival de Jotas de Navarra
+
+**type:** Event
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/tradiciones-san-fermin-cultura-costumbres
+**shortDescription:** Ir al contenido Reserva tu actividad Tradiciones de San Fermín: cultura y costumbres San Fermín es una de las festividades navarras más icónicas y reconocidas a nivel internacional
+**longDescription:** Ir al contenido Reserva tu actividad Tradiciones de San Fermín: cultura y costumbres San Fermín es una de las festividades navarras más icónicas y reconocidas a nivel internacional. Esta celebración que mezcla tradición y cultura , atrae a miles de visitantes cada año, quienes se sumergen en una exp
+**images:**
+
+![Festival de Jotas de Navarra](https://visitpamplonairuna.com/wp-content/uploads/2025/01/san-fermin-fiesta-historia.jpg)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Festival Punto de Vista 2026
+
+**type:** Event
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/evento/festival-ecozine-all-birds-sing-beatifully
+**shortDescription:** Ir al contenido Reserva tu actividad Festival Punto de Vista 2026 El público podrá disfrutar durante una semana de un espacio estimulante y activo donde conocer las últimas tendencias del cine de no-ficción junto a programas que revisitan la obra de cineastas imprescindibles
+**longDescription:** Ir al contenido Reserva tu actividad Festival Punto de Vista 2026 El público podrá disfrutar durante una semana de un espacio estimulante y activo donde conocer las últimas tendencias del cine de no-ficción junto a programas que revisitan la obra de cineastas imprescindibles. 20/04/2026 - 20/04/2026
+**images:**
+
+![Festival Punto de Vista 2026](https://visitpamplonairuna.com/wp-content/uploads/2026/04/1.jpg)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Mercado de Santo Domingo
+
+**type:** Place
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/mercados-imprescindibles-pamplona
+**shortDescription:** Ir al contenido Reserva tu actividad La Ruta de Hemingway en Pamplona Ernest Hemingway, uno de los autores más influyentes del siglo XX, tuvo un vínculo especial con Pamplona, la ciudad que lo inspiró a escribir Fiesta (The Sun Also Rises)
+**longDescription:** Ir al contenido Reserva tu actividad Mercados imprescindibles en Pamplona para vivir como una persona local Visitar Pamplona es una invitación a saborear la ciudad más allá de sus monumentos y fiestas. Es sentir su pulso en los pequeños gestos cotidianos, en la manera en que se saludan quienes se cr
+**images:**
+
+![Mercado de Santo Domingo](https://visitpamplonairuna.com/wp-content/uploads/2025/10/Mercados-imprescindibles-en-Pamplona-para-vivir-como-una-persona-local.jpg)
+
+**qualityScore:** 7.0
+**qualityDecision:** promote
+
+## Museo Universidad de Navarra
+
+**type:** Monument
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/pamplona-senior-como-disfrutar-de-la-ciudad-a-un-ritmo-tranquilo-y-lleno-de-cultura
+**shortDescription:** Ir al contenido Reserva tu actividad Pamplona senior: Cómo disfrutar de la ciudad a un ritmo tranquilo y lleno de cultura Pamplona no es solo una ciudad para las grandes fiestas, los corredores de encierros o el bullicio estival
+**longDescription:** Ir al contenido Reserva tu actividad Guía definitiva para visitar Pamplona por primera vez Pamplona es una ciudad que se gana el cariño desde el primer paseo. Aquí todo parece estar en equilibrio: lo antiguo y lo nuevo, los parques amplios y las calles estrechas, la vida tranquila y el ambiente cult
+**images:**
+
+![Museo Universidad de Navarra](https://visitpamplonairuna.com/wp-content/uploads/2026/02/Pamplona-senior_-como-disfrutar-la-ciudad-a-un-ritmo-tranquilo-y-lleno-de-cultura.jpg)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Palacio Real de Pamplona
+
+**type:** Monument
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/que-ver-en-pamplona-lugares-imprescindibles
+**shortDescription:** Ir al contenido Reserva tu actividad 10 lugares imprescindibles que ver en Pamplona Pamplona es una ciudad que sorprende y enamora
+**longDescription:** Ir al contenido Reserva tu actividad 10 lugares imprescindibles que ver en Pamplona Pamplona es una ciudad que sorprende y enamora. Quienes llegan con la imagen de los Sanfermines descubren enseguida que aquí hay mucho más que fiesta: hay historia, cultura, arte, naturaleza… y sobre todo, una forma
+**images:**
+
+![Palacio Real de Pamplona](https://visitpamplonairuna.com/wp-content/uploads/2025/08/Camino-de-Santiago-por-Pamplona.jpg)
+
+**qualityScore:** 8.5
+**qualityDecision:** promote
+
+## Parque Natural de Urbasa
+
+**type:** Place
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/evento/excursion-al-nacedero-del-urederra
+**shortDescription:** Ir al contenido Reserva tu actividad Excursión al Nacedero del Urederra La salida es a las 8am desde la Oficina de Turismo (Calle San Satunino, nº 2)
+**longDescription:** Ir al contenido Reserva tu actividad Excursión al Nacedero del Urederra La salida es a las 8am desde la Oficina de Turismo (Calle San Satunino, nº 2). Tras un viaje de una hora de duración, llegaremos a un parking en donde comenzaremos nuestro paseo para disfrutar del entorno del Nacedero del Ureder
+**images:**
+
+![Parque Natural de Urbasa](https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png)
+
+**qualityScore:** 7.0
+**qualityDecision:** promote
+
+## Producción Agraria Ecológica
+
+**type:** Place
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/evento/mercado-de-producto-local-y-artesano-basotxoa
+**shortDescription:** Ir al contenido Reserva tu actividad Mercado de producto local y artesano Basotxoa El segundo sábado de cada mes de n horario de 10 a 14 horas
+**longDescription:** Ir al contenido Reserva tu actividad Mercado de producto local y artesano Basotxoa El segundo sábado de cada mes de n horario de 10 a 14 horas. Consulta fechas. 14/02/2026 - 14/11/2026 Este mercado al aire libre se celebra los segundos sábados de mes , en febrero , marzo , abril , mayo , junio , ago
+**images:**
+
+![Producción Agraria Ecológica](https://visitpamplonairuna.com/wp-content/uploads/2024/11/GobiernoES_Ministerio.png)
+
+**qualityScore:** 7.0
+**qualityDecision:** promote
+
+## San Fermín entre tambores
+
+**type:** Event
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/sanfermines-para-todos
+**shortDescription:** Ir al contenido Reserva tu actividad Sanfermines para todos: tradición, cultura y emoción compartida A quien diga que San Fermín es solo encierro y fiesta habría que invitarle a pasear —sin prisa y con ojos nuevos— por Pamplona en julio
+**longDescription:** Ir al contenido Reserva tu actividad Sanfermines para todos: tradición, cultura y emoción compartida A quien diga que San Fermín es solo encierro y fiesta habría que invitarle a pasear —sin prisa y con ojos nuevos— por Pamplona en julio. Porque estas fiestas esconden algo más profundo: una celebraci
+**images:**
+
+![San Fermín entre tambores](https://visitpamplonairuna.com/wp-content/uploads/2025/07/sanfermines-para-todos-los-publicos-tradicoon-cultura-y-experiencias-imprescindibles.jpg)
+
+**qualityScore:** 9.0
+**qualityDecision:** promote
+
+## Transporte Urbano Comarcal
+
+**type:** Monument
+**score:** 1.0
+**url:** https://visitpamplonairuna.com/planifica-tu-viaje/moverse-por-pamplona
+**shortDescription:** Ir al contenido Reserva tu actividad Moverse por Pamplona A pie En bici En villavesa En taxi En coche Moverse por Pamplona es fácil
+**longDescription:** Ir al contenido Reserva tu actividad Moverse por Pamplona A pie En bici En villavesa En taxi En coche Moverse por Pamplona es fácil. Es una ciudad ideal para recorrer a pie, por su tamaño y porque está diseñada para facilitar el desplazamiento peatonal y la inclusión de personas con movilidad reduci
+**images:**
+
+![Transporte Urbano Comarcal](https://visitpamplonairuna.com/wp-content/uploads/2026/04/T06497-1024x682.jpg)
+
+**qualityScore:** 9.0
 **qualityDecision:** promote

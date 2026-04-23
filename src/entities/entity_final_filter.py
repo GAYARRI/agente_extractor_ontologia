@@ -2,423 +2,426 @@ from __future__ import annotations
 
 import re
 import unicodedata
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 
 class EntityFinalFilter:
     """
-    Final conservative filter for already-ranked entities.
+    Filtro final conservador para entidades turísticas.
 
-    Goal:
-    - remove obvious garbage mentions
-    - remove UI/menu/category fragments
-    - remove malformed phrase chunks
-    - apply lightweight page-topic compatibility checks
+    Objetivo:
+    - dejar pasar entidades turísticas plausibles y limpias
+    - bloquear fragmentos narrativos, ruido UI y nombres contaminados
+    - no matar entidades válidas por exceso de agresividad
     """
 
-    def __init__(self) -> None:
-        self.stop_phrases = {
-            "facebook",
-            "instagram",
-            "youtube",
-            "twitter",
-            "x",
-            "linkedin",
-            "tiktok",
-            "ver mas",
-            "ver más",
-            "leer mas",
-            "leer más",
-            "mas informacion",
-            "más información",
-            "ultima",
-            "última",
-            "ultimas",
-            "últimas",
-            "buscar",
-            "busca",
-            "newsletter",
-            "cookies",
-            "politica",
-            "política",
-            "privacidad",
-            "aviso legal",
-            "contacto",
-            "menu",
-            "menú",
-        }
+    def __init__(self, debug: bool = False):
+        self.debug = debug
 
-        self.bad_exact_names = {
-            "facebook instagram",
-            "monumentos mercados ultimas",
-            "monumentos mercados últimas",
-            "pamplona viajar",
-            "navarra barrio",
-            "desde puente",
-            "origen siglos",
-            "club dejate",
-            "club déjate",
-            "reyno gourmet busca",
-            "postres queso roncal",
-            "interes turistico internacional",
-            "interés turístico internacional",
-            "indicaciones geograficas protegidas",
-            "indicaciones geográficas protegidas",
-            "navarra la ruta",
-            "verano cultural",
-        }
-
-        self.bad_contains = {
-            "facebook",
-            "instagram",
-            "ultima",
-            "última",
-            "ultimas",
-            "últimas",
-            "busca",
-            "haz clic",
-            "suscrib",
-            "newsletter",
-            "privacidad",
-            "cookies",
-        }
-
-        self.leading_bad_words = {
-            "desde",
-            "con",
-            "para",
-            "durante",
-            "entre",
-            "sobre",
-            "hacia",
-            "segun",
-            "según",
-            "frecuentaba",
-            "indicaciones",
-            "origen",
-        }
-
-        self.generic_category_words = {
-            "monumentos",
-            "mercados",
-            "ultimas",
-            "últimas",
-            "categoria",
-            "categorías",
-            "categorias",
-            "planes",
-            "blog",
+        self.generic_names = {
+            "mapas",
+            "vista",
+            "aquí",
+            "aqui",
+            "suscríbete",
+            "suscribete",
+            "apúntate",
+            "apuntate",
+            "preguntas frecuentes",
+            "qué ver",
+            "que ver",
+            "qué hacer",
+            "que hacer",
+            "paseos",
+            "experiencias",
             "agenda",
-            "noticias",
-            "profesional",
+            "programa",
             "viajar",
-            "ruta",
-            "rutas",
-            "historia",
-            "cultura",
-            "gastronomia",
-            "gastronomía",
-            "postres",
-            "queso",
+            "locales",
             "mercado",
-            "mercados",
-            "barrios",
-            "barrio",
-            "ultimas",
-            "últimas",
+            "plaza",
+            "parque",
+            "castillo",
+            "además",
+            "ademas",
         }
 
-        self.allowed_unknown_names = {
-            "cafe iruna",
-            "café iruña",
-            "caf\u00e9 iru\u00f1a",
-            "navarra arena",
-            "fronton jito alai",
-            "frontón jito alai",
-            "festival santas pascuas",
-            "flamenco on fire",
-            "parque de la media luna",
-            "catedral de pamplona",
-            "ayuntamiento de pamplona plaza consistorial",
+        self.ui_patterns = [
+            r"\bir al contenido\b",
+            r"\breserva tu actividad\b",
+            r"\btodos los derechos reservados\b",
+            r"\baccesibilidad\b",
+            r"\bgu[ií]as convention bureau\b",
+            r"\b[aá]rea profesional\b",
+            r"\bver m[aá]s\b",
+            r"\bleer m[aá]s\b",
+            r"\bmostrar m[aá]s\b",
+            r"\bgoogle maps\b",
+            r"\bcopiar direcci[oó]n\b",
+            r"\bcontacto\b",
+            r"\bmapas\b",
+        ]
+
+        self.phrase_markers = {
+            "es",
+            "son",
+            "fue",
+            "fueron",
+            "ser",
+            "comenzaremos",
+            "comenzará",
+            "comenzara",
+            "visitaremos",
+            "llegaremos",
+            "permite",
+            "permiten",
+            "ofrece",
+            "ofrecen",
+            "combina",
+            "combinan",
+            "disfruta",
+            "disfrutar",
+            "vivir",
+            "tiene",
+            "tienen",
+            "ocurre",
+            "ocurren",
+            "puede",
+            "pueden",
+            "hay",
+            "incluye",
+            "incluyen",
+            "data",
         }
 
-        self.class_aliases = {
-            "townhall": "TownHall",
-            "square": "Square",
-            "cathedral": "Cathedral",
-            "basilica": "Basilica",
-            "church": "Church",
-            "chapel": "Chapel",
-            "monastery": "Monastery",
-            "museum": "Museum",
-            "castle": "Castle",
-            "alcazar": "Alcazar",
-            "monument": "Monument",
-            "event": "Event",
-            "foodestablishment": "FoodEstablishment",
-            "unknown": "Unknown",
-            "sportsvenue": "SportsVenue",
-            "arena": "Arena",
-            "theatre": "Theatre",
-            "park": "Park",
-            "garden": "Garden",
-            "bridge": "Bridge",
-            "market": "Market",
-            "guidedtour": "GuidedTour",
-            "excursion": "Excursion",
-            "activity": "Activity",
+        self.trailing_noise = {
+            "también",
+            "tambien",
+            "comenzaremos",
+            "comenzará",
+            "comenzara",
+            "pago recomendado",
+            "ver",
+            "más",
+            "mas",
+            "monumento",
+            "monumentos",
+            "espacios",
+            "museo",
+            "museos",
+            "lugares",
+            "lugar",
         }
 
-    # -------------------------------------------------------------------------
-    # Text helpers
-    # -------------------------------------------------------------------------
+        self.leading_noise = {
+            "actividad",
+            "agenda",
+            "programa",
+            "experiencias",
+            "visita guiada",
+            "ir al contenido",
+            "reserva tu actividad",
+            "por supuesto",
+            "también",
+            "tambien",
+            "además",
+            "ademas",
+        }
+
+        self.instance_terms = {
+            "ayuntamiento",
+            "catedral",
+            "iglesia",
+            "basílica",
+            "basilica",
+            "capilla",
+            "monasterio",
+            "convento",
+            "castillo",
+            "alcázar",
+            "alcazar",
+            "palacio",
+            "museo",
+            "mercado",
+            "plaza",
+            "parque",
+            "teatro",
+            "puente",
+            "festival",
+            "feria",
+            "congreso",
+            "camino",
+            "ruta",
+            "sendero",
+            "hotel",
+            "hostal",
+            "albergue",
+            "camping",
+            "centro de interpretación",
+            "centro de interpretacion",
+            "centro de acogida",
+            "jardines",
+            "ciudadela",
+            "frontón",
+            "fronton",
+            "baluarte",
+        }
+
+        self.strong_valid_types = {
+            "townhall",
+            "cathedral",
+            "church",
+            "chapel",
+            "basilica",
+            "castle",
+            "alcazar",
+            "palace",
+            "museum",
+            "square",
+            "park",
+            "garden",
+            "route",
+            "stadium",
+            "event",
+            "monument",
+            "market",
+            "touristattraction",
+        }
+
+    # ------------------------------------------------------------------
+    # Utils
+    # ------------------------------------------------------------------
+
+    def _norm(self, value: Any) -> str:
+        value = "" if value is None else str(value)
+        value = value.strip()
+        value = re.sub(r"\s+", " ", value)
+        return value
+
+    def _norm_low(self, value: Any) -> str:
+        return self._norm(value).lower()
 
     def _strip_accents(self, text: str) -> str:
         return "".join(
-            ch for ch in unicodedata.normalize("NFD", text)
-            if unicodedata.category(ch) != "Mn"
+            c for c in unicodedata.normalize("NFD", text)
+            if unicodedata.category(c) != "Mn"
         )
 
-    def _norm(self, value: Any) -> str:
-        text = str(value or "").strip().lower()
-        text = self._strip_accents(text)
-        text = re.sub(r"\s+", " ", text)
-        return text
+    def _tokenize(self, text: str) -> List[str]:
+        return [t for t in re.split(r"[^\wáéíóúñü]+", self._norm_low(text)) if t]
 
-    def _norm_type(self, value: Any) -> str:
-        text = str(value or "").strip()
-        if not text:
+    def _short_type(self, value: Any) -> str:
+        raw = self._norm(value)
+        if not raw:
             return ""
-        short = text.split("#")[-1].split("/")[-1].strip()
-        return short
+        return raw.split("#")[-1].split("/")[-1].strip()
 
-    def _get_name(self, entity: Dict[str, Any]) -> str:
-        return str(
+    def _entity_name(self, entity: Dict[str, Any]) -> str:
+        return self._norm(
             entity.get("name")
             or entity.get("entity_name")
             or entity.get("entity")
             or entity.get("label")
             or ""
-        ).strip()
-
-    def _get_primary_class(self, entity: Dict[str, Any]) -> str:
-        types = entity.get("types")
-        if isinstance(types, list) and types:
-            for t in types:
-                norm_t = self._norm_type(t)
-                if norm_t and norm_t.lower() not in {"location", "thing", "entity", "item"}:
-                    return norm_t
-
-        entity_class = self._norm_type(entity.get("class"))
-        if entity_class:
-            return entity_class
-
-        entity_type = self._norm_type(entity.get("type"))
-        if entity_type:
-            return entity_type
-
-        return "Unknown"
-
-    def _page_topic(self, url: str, entity: Dict[str, Any]) -> str:
-        u = self._norm(url)
-        text = self._norm(
-            " ".join([
-                str(entity.get("shortDescription") or ""),
-                str(entity.get("longDescription") or ""),
-                str(entity.get("description") or ""),
-            ])
         )
 
-        source = f"{u} {text}"
+    def _entity_class(self, entity: Dict[str, Any]) -> str:
+        return self._short_type(entity.get("class") or entity.get("type") or "")
 
-        if any(k in source for k in [
-            "gastronomia", "gastronomia", "gastronomy", "pintxo", "comer", "food"
-        ]):
-            return "gastronomy"
+    # ------------------------------------------------------------------
+    # Limpieza de nombres
+    # ------------------------------------------------------------------
 
-        if any(k in source for k in [
-            "camino-de-santiago", "camino de santiago", "pilgrim", "peregrin"
-        ]):
-            return "camino"
+    def _clean_name_edges(self, text: str) -> str:
+        value = self._norm(text)
 
-        if any(k in source for k in [
-            "pelota-vasca", "pelota vasca", "fronton", "frontón", "arena"
-        ]):
-            return "sports"
+        changed = True
+        while changed and value:
+            changed = False
+            low = self._norm_low(value)
 
-        if any(k in source for k in [
-            "san-fermin", "san fermin", "festival", "fiesta", "evento"
-        ]):
-            return "event"
+            for prefix in sorted(self.leading_noise, key=len, reverse=True):
+                if low.startswith(prefix + " "):
+                    value = self._norm(value[len(prefix):])
+                    changed = True
+                    break
 
-        if any(k in source for k in [
-            "historia", "history", "patrimonio", "murallas", "catedral"
-        ]):
-            return "history"
+            if changed:
+                continue
 
-        if any(k in source for k in [
-            "cultura", "culture", "museo", "museum", "teatro"
-        ]):
-            return "culture"
+            low = self._norm_low(value)
+            for suffix in sorted(self.trailing_noise, key=len, reverse=True):
+                if low.endswith(" " + suffix):
+                    value = self._norm(value[: -len(suffix)])
+                    changed = True
+                    break
+                if low == suffix:
+                    value = ""
+                    changed = True
+                    break
 
-        return "generic"
+        value = re.sub(r"\s+", " ", value).strip(" -|,;:")
+        return value
 
-    # -------------------------------------------------------------------------
-    # Quality checks
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    # Señales
+    # ------------------------------------------------------------------
 
-    def _looks_like_ui_noise(self, name: str) -> bool:
-        n = self._norm(name)
-
-        if not n:
+    def _looks_like_ui_fragment(self, text: str) -> bool:
+        low = self._norm_low(text)
+        if not low:
             return True
+        return any(re.search(p, low, flags=re.IGNORECASE) for p in self.ui_patterns)
 
-        if n in self.bad_exact_names:
-            return True
-
-        if n in self.stop_phrases:
-            return True
-
-        if any(bad in n for bad in self.bad_contains):
-            return True
-
-        return False
-
-    def _looks_like_bad_phrase_fragment(self, name: str) -> bool:
-        n = self._norm(name)
-        tokens = n.split()
+    def _looks_like_phrase_fragment(self, text: str) -> bool:
+        low = self._norm_low(text)
+        tokens = self._tokenize(low)
 
         if not tokens:
             return True
 
-        if tokens[0] in self.leading_bad_words:
+        if re.search(r"\b(quién|quien|cuándo|cuando|cómo|como)\b", low):
             return True
 
-        if len(tokens) >= 3:
-            generic_hits = sum(1 for t in tokens if t in self.generic_category_words)
-            if generic_hits >= 2:
-                return True
-
-        # Very weak chunks like "origen siglos", "desde puente"
-        if len(tokens) == 2 and tokens[0] in self.leading_bad_words:
+        if len(tokens) >= 6:
             return True
 
-        # obvious menu/list chunks
-        if len(tokens) >= 3 and all(t in self.generic_category_words for t in tokens[:3]):
+        if len(tokens) >= 4 and any(t in self.phrase_markers for t in tokens):
             return True
 
         return False
 
-    def _looks_too_generic_for_final(self, name: str, primary_class: str) -> bool:
-        n = self._norm(name)
+    def _looks_like_foreign_noise(self, text: str) -> bool:
+        low = self._norm_low(text)
+        patterns = [
+            r"\bmultitud de actividades\b",
+            r"\bplanifica tu viaje\b",
+            r"\bdescubre pamplona\b",
+            r"\bmoverse por pamplona\b",
+            r"\btodos los lugares\b",
+            r"\bd[oó]nde alojarse\b",
+            r"\bd[oó]nde comer\b",
+            r"\bqu[eé] ver\b",
+            r"\bqu[eé] hacer\b",
+        ]
+        return any(re.search(p, low, flags=re.IGNORECASE) for p in patterns)
 
-        if n in self.allowed_unknown_names:
+    def _looks_like_generic_name(self, text: str) -> bool:
+        low = self._norm_low(text)
+        return low in self.generic_names
+
+    def _looks_like_person_name(self, text: str) -> bool:
+        """
+        Señal débil. No implica rechazo.
+        Solo sirve para no premiar demasiado ciertos nombres.
+        """
+        name = self._norm(text)
+        parts = [p for p in re.split(r"\s+", name) if p]
+        if len(parts) < 2 or len(parts) > 4:
             return False
 
-        tokens = n.split()
+        uppercase_like = 0
+        for p in parts:
+            if re.match(r"^[A-ZÁÉÍÓÚÑÜ][a-záéíóúñü\-]+$", p):
+                uppercase_like += 1
 
-        # one-word generic names
-        if len(tokens) == 1 and primary_class == "Unknown":
-            return True
+        return uppercase_like >= 2
 
-        # very generic two-word unknowns
-        if len(tokens) == 2 and primary_class == "Unknown":
-            if tokens[0] in {"navarra", "pamplona", "origen", "desde", "club", "verano"}:
-                return True
+    def _has_instance_signal(self, text: str) -> bool:
+        low = self._norm_low(text)
+        return any(term in low for term in self.instance_terms)
 
-        return False
+    def _name_quality_score(self, name: str, entity_class: str = "") -> float:
+        clean = self._clean_name_edges(name)
+        low = self._norm_low(clean)
+        tokens = self._tokenize(clean)
+        score = 0.0
 
-    def _class_page_mismatch(self, primary_class: str, name: str, url: str, entity: Dict[str, Any]) -> bool:
-        topic = self._page_topic(url, entity)
-        n = self._norm(name)
-        c = self.class_aliases.get(primary_class.lower(), primary_class)
+        if clean:
+            score += 1.0
 
-        # lexical rescue
-        if "arena" in n and c in {"Arena", "SportsVenue"}:
-            return False
-        if "fronton" in n or "frontón" in name.lower():
-            if c in {"SportsVenue", "Arena", "Unknown"}:
-                return False
-        if "festival" in n and c == "Event":
-            return False
-        if "catedral" in n and c == "Cathedral":
-            return False
-        if "parque" in n and c in {"Park", "Garden", "Unknown"}:
-            return False
-        if "cafe" in n or "café" in name.lower():
-            if c in {"FoodEstablishment", "Unknown"}:
-                return False
+        if len(tokens) >= 2:
+            score += 1.0
 
-        if topic == "sports":
-            if c in {"Basilica", "Cathedral", "Chapel", "Monastery", "Castle"} and "castillo" not in n:
-                return True
+        if len(tokens) >= 2 and len(tokens) <= 5:
+            score += 1.0
 
-        if topic == "gastronomy":
-            if c in {"Castle", "Basilica", "Cathedral", "Monument"}:
-                return True
+        if self._has_instance_signal(clean):
+            score += 2.0
 
-        if topic == "camino":
-            if c in {"Basilica", "Castle"} and "castillo" not in n and "basilica" not in n and "basílica" not in n:
-                return True
+        if entity_class and entity_class.lower() in self.strong_valid_types:
+            score += 1.0
 
-        if topic == "event":
-            if c in {"Castle", "Basilica", "Cathedral", "Monument"} and "festival" in n:
-                return True
+        if self._looks_like_person_name(clean):
+            score += 0.25  # señal débil, no fuerte
 
-        return False
+        if self._looks_like_ui_fragment(clean):
+            score -= 4.0
 
-    def _entity_has_minimum_signal(self, entity: Dict[str, Any]) -> bool:
-        name = self._get_name(entity)
-        if not name.strip():
-            return False
+        if self._looks_like_foreign_noise(clean):
+            score -= 4.0
 
-        # image alone is not enough
-        text_len = max(
-            len(str(entity.get("shortDescription") or "")),
-            len(str(entity.get("description") or "")),
-            len(str(entity.get("longDescription") or "")),
-        )
+        if self._looks_like_phrase_fragment(clean):
+            score -= 4.0
 
-        if text_len < 20 and not entity.get("wikidataId"):
-            return False
+        if self._looks_like_generic_name(clean):
+            score -= 3.0
 
-        return True
+        return score
 
-    # -------------------------------------------------------------------------
-    # Public API
-    # -------------------------------------------------------------------------
+    # ------------------------------------------------------------------
+    # Reglas finales
+    # ------------------------------------------------------------------
 
-    def evaluate(self, entity: Dict[str, Any]) -> Dict[str, Any]:
-        name = self._get_name(entity)
-        url = str(entity.get("url") or entity.get("sourceUrl") or "").strip()
-        primary_class = self._get_primary_class(entity)
-
+    def _should_keep(self, entity: Dict[str, Any]) -> Tuple[bool, List[str], Dict[str, Any]]:
+        raw_name = self._entity_name(entity)
+        cleaned_name = self._clean_name_edges(raw_name)
+        entity_class = self._entity_class(entity)
         reasons: List[str] = []
 
-        if not self._entity_has_minimum_signal(entity):
-            reasons.append("minimum_signal")
+        if not cleaned_name:
+            reasons.append("empty_name_after_cleaning")
+            return False, reasons, {"cleaned_name": cleaned_name}
 
-        if self._looks_like_ui_noise(name):
-            reasons.append("ui_noise")
+        if self._looks_like_ui_fragment(cleaned_name):
+            reasons.append("ui_fragment")
+            return False, reasons, {"cleaned_name": cleaned_name}
 
-        if self._looks_like_bad_phrase_fragment(name):
+        if self._looks_like_foreign_noise(cleaned_name):
+            reasons.append("foreign_noise")
+            return False, reasons, {"cleaned_name": cleaned_name}
+
+        if self._looks_like_phrase_fragment(cleaned_name):
             reasons.append("phrase_fragment")
+            return False, reasons, {"cleaned_name": cleaned_name}
 
-        if self._looks_too_generic_for_final(name, primary_class):
-            reasons.append("too_generic")
+        if self._looks_like_generic_name(cleaned_name):
+            reasons.append("generic_name")
+            return False, reasons, {"cleaned_name": cleaned_name}
 
-        if self._class_page_mismatch(primary_class, name, url, entity):
-            reasons.append("class_page_mismatch")
+        tokens = self._tokenize(cleaned_name)
+        if len(tokens) == 1 and not self._has_instance_signal(cleaned_name):
+            reasons.append("single_token_without_instance_signal")
+            return False, reasons, {"cleaned_name": cleaned_name}
 
-        decision = "reject" if reasons else "keep"
+        score = self._name_quality_score(cleaned_name, entity_class=entity_class)
 
-        return {
-            "decision": decision,
-            "reasons": reasons,
-            "name": name,
-            "primary_class": primary_class,
-            "url": url,
-        }
+        strong_type = entity_class.lower() in self.strong_valid_types if entity_class else False
+        strong_instance = self._has_instance_signal(cleaned_name)
+
+        if score < 0:
+            reasons.append("low_name_quality")
+            return False, reasons, {"cleaned_name": cleaned_name, "quality_score": score}
+
+        if not strong_type and not strong_instance and len(tokens) >= 4:
+            reasons.append("long_name_without_strong_support")
+            return False, reasons, {"cleaned_name": cleaned_name, "quality_score": score}
+
+        return True, reasons, {"cleaned_name": cleaned_name, "quality_score": score}
+
+    # ------------------------------------------------------------------
+    # API pública
+    # ------------------------------------------------------------------
 
     def filter(self, entities: List[Dict[str, Any]]) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         kept: List[Dict[str, Any]] = []
@@ -428,13 +431,44 @@ class EntityFinalFilter:
             if not isinstance(entity, dict):
                 continue
 
-            audit = self.evaluate(entity)
             item = dict(entity)
+            keep, reasons, meta = self._should_keep(item)
+
+            cleaned_name = meta.get("cleaned_name") or self._entity_name(item)
+            if cleaned_name:
+                item["name"] = cleaned_name
+                item["entity_name"] = cleaned_name
+                item["label"] = cleaned_name
+                item["entity"] = cleaned_name
+
+            audit = item.get("final_filter_audit") or {}
+            if not isinstance(audit, dict):
+                audit = {}
+
+            audit["decision"] = "keep" if keep else "reject"
+            audit["reasons"] = reasons
+            audit["name"] = cleaned_name
+            audit["primary_class"] = self._entity_class(item) or ""
+            audit["quality_score"] = meta.get("quality_score")
+            audit["url"] = item.get("sourceUrl") or item.get("url") or ""
             item["final_filter_audit"] = audit
 
-            if audit["decision"] == "keep":
+            if keep:
                 kept.append(item)
             else:
+                item["discarded_by_final_filter"] = True
                 rejected.append(item)
+
+        if self.debug:
+            print(f"[FINAL FILTER] kept={len(kept)} rejected={len(rejected)}")
+            for sample in rejected[:10]:
+                try:
+                    print(
+                        "[FINAL FILTER][REJECT]",
+                        f"name={sample.get('name')!r}",
+                        f"reasons={sample.get('final_filter_audit', {}).get('reasons', [])}",
+                    )
+                except Exception:
+                    pass
 
         return kept, rejected

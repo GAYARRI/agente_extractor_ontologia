@@ -1,201 +1,391 @@
 from __future__ import annotations
 
 import re
+import unicodedata
 from collections import defaultdict
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
 class EntityTypeResolver:
     """
-    Conservative resolver:
-    - prefers precision over recall
-    - rejects weak semantic matches
-    - uses lexical hints before ontology drift
+    Conservative tourism type resolver.
+
+    The resolver gives priority to the entity mention, then uses local
+    properties, ontology candidates and context only as supporting signals.
+    It avoids returning generic final classes such as Place or Entity.
     """
 
-    
     def __init__(self):
-        self.weak_types = {"", "thing", "unknown", "entity", "item", "location"}
+        self.weak_types = {
+            "",
+            "thing",
+            "unknown",
+            "entity",
+            "item",
+            "location",
+            "person",
+        }
+        self.generic_final_types = {
+            "Thing",
+            "Entity",
+            "Item",
+            "Location",
+            "Place",
+            "TourismEntity",
+            "TourismResource",
+            "TourismService",
+            "TourismOrRelatedFacility",
+            "TourismOrganisation",
+            "Organization",
+            "Service",
+            "Concept",
+            "ConceptScheme",
+            "Accommodation",
+        }
         self.forbidden_final_types = {"Thing", "Entity", "Item", "Location"}
 
-        # Canonical aliases so upstream variants do not leak downstream.
-        
-
         self.type_aliases = {
-            "organisation": "Organization",
-            "organization": "Organization",
-            "eventorganisationcompany": "EventOrganisationCompany",
-            "medicalclinic": "PublicService",
-            "clinic": "PublicService",
-            "healthcareorganization": "PublicService",
-            "healthcarefacility": "PublicService",
-            "route": "Route",
-            "ruta": "Ruta",
-            "guidedtour": "DestinationExperience",
-            "excursion": "DestinationExperience",
             "activity": "DestinationExperience",
-            "arena": "EventAttendanceFacility",
-            "theatre": "EventAttendanceFacility",
-            "sportsvenue": "SportsCenter",
+            "airport": "Airport",
+            "bar": "Bar",
+            "basilica": "Basilica",
+            "bus station": "BusStation",
+            "busstation": "BusStation",
+            "cafe": "FoodEstablishment",
+            "cathedral": "Cathedral",
+            "chapel": "Chapel",
+            "church": "Church",
+            "concept": "ConceptScheme",
+            "event": "Event",
+            "excursion": "DestinationExperience",
+            "festival": "Event",
+            "guided tour": "Tour",
+            "guidedtour": "Tour",
+            "healthcarefacility": "PublicService",
+            "healthcareorganization": "PublicService",
+            "hotel": "Hotel",
+            "museum": "Museum",
+            "organisation": "TourismOrganisation",
+            "organization": "TourismOrganisation",
+            "park": "NaturalPark",
+            "restaurant": "Restaurant",
+            "route": "Route",
+            "ruta": "Route",
+            "stadium": "Stadium",
+            "theatre": "Theater",
+            "tourist attraction": "TouristAttractionSite",
+            "touristattraction": "TouristAttractionSite",
+            "touristattractionsite": "TouristAttractionSite",
+            "train station": "TrainStation",
+            "trainstation": "TrainStation",
         }
 
-        self.lexical_rules = [
-            (r"\bayuntamiento\b|\btown hall\b", "TownHall"),
-            (r"\bplaza\b|\bsquare\b", "Square"),
-            (r"\bcatedral\b|\bcathedral\b", "Cathedral"),
-            (r"\bevento\b|\bevent\b|\bfestival\b|\bsan ferm[ií]n\b", "Event"),
-            (r"\bcamino\b", "Route"),
-            (r"\bruta\b|\broute\b", "Route"),
-            (r"\bvisita guiada\b|\bguided tour\b", "DestinationExperience"),
-            (r"\bexcursi[oó]n\b|\bexcursion\b", "DestinationExperience"),
-        ]
-        
-        self.min_semantic_confidence = 0.70
-        self.strong_semantic_confidence = 0.80
+        self.min_semantic_confidence = 0.74
+        self.strong_semantic_confidence = 0.86
+        self.context_vote_threshold = 2.0
 
+        # Ordered by specificity. Patterns run over normalized, accent-free text.
+        raw_lexical_rules: List[Tuple[str, str, float]] = [
+            (r"\b(oficina de turismo|punto de informacion turistica)\b", "TouristInformationOffice", 6.0),
+            (r"\b(estacion de tren|estacion ferroviaria|apeadero)\b", "TrainStation", 6.0),
+            (r"\b(estacion de autobuses|terminal de autobuses)\b", "BusStation", 6.0),
+            (r"\b(aeropuerto)\b", "Airport", 6.0),
+            (r"\b(ayuntamiento|casa consistorial)\b", "TownHall", 6.0),
+            (r"\b(catedral)\b", "Cathedral", 6.0),
+            (r"\b(basilica)\b", "Basilica", 6.0),
+            (r"\b(iglesia|parroquia)\b", "Church", 5.8),
+            (r"\b(capilla|ermita)\b", "Chapel", 5.8),
+            (r"\b(monasterio)\b", "Monastery", 5.8),
+            (r"\b(convento)\b", "Convent", 5.8),
+            (r"\b(museo|pinacoteca)\b", "Museum", 5.8),
+            (r"\b(alcazar)\b", "Alcazar", 5.8),
+            (r"\b(castillo|fortaleza)\b", "Castle", 5.8),
+            (r"\b(palacio)\b", "Palace", 5.7),
+            (r"\b(torre|campanario|mirador torre)\b", "Tower", 5.4),
+            (r"\b(muralla|murallas)\b", "Wall", 5.4),
+            (r"\b(puente)\b", "Bridge", 5.4),
+            (r"\b(plaza)\b", "Square", 5.2),
+            (r"\b(jardin|jardines)\b", "Garden", 5.0),
+            (r"\b(parque natural)\b", "NaturalPark", 5.4),
+            (r"\b(parque de atracciones|parque tematico|isla magica)\b", "AmusementPark", 5.4),
+            (r"\b(parque)\b", "Garden", 4.2),
+            (r"\b(monumento|estatua|escultura|busto|conjunto escultorico)\b", "Monument", 5.1),
+            (r"\b(yacimiento|sitio arqueologico|restos arqueologicos|antiquarium)\b", "ArcheologicalSite", 5.2),
+            (r"\b(archivo de indias|archivo historico)\b", "HistoricalOrCulturalResource", 5.0),
+            (r"\b(teatro)\b", "Theater", 5.1),
+            (r"\b(auditorio|auditorium)\b", "Auditorium", 5.1),
+            (r"\b(plaza de toros|real maestranza)\b", "BullRing", 5.2),
+            (r"\b(estadio|campo de futbol)\b", "Stadium", 5.2),
+            (r"\b(acuario)\b", "Aquarium", 5.2),
+            (r"\b(biblioteca)\b", "Library", 5.0),
+            (r"\b(mercado de abastos|mercado tradicional)\b", "TraditionalMarket", 5.2),
+            (r"\b(mercado|mercadillo|zoco)\b", "TraditionalMarket", 4.6),
+            (r"\b(hotel|hostal|parador|albergue)\b", "Hotel", 5.0),
+            (r"\b(restaurante)\b", "Restaurant", 5.0),
+            (r"\b(bar|taberna|cerveceria|bodega)\b", "Bar", 4.8),
+            (r"\b(cafeteria|cafe)\b", "FoodEstablishment", 4.8),
+            (r"\b(festival|bienal|concierto|exposicion|evento|feria|semana santa|procesion|via crucis|ciclo)\b", "Event", 5.2),
+            (r"\b(ruta|camino|sendero|itinerario|recorrido|via verde)\b", "Route", 5.0),
+            (r"\b(visita guiada|tour guiado|excursion)\b", "Tour", 4.8),
+        ]
         self.lexical_rules = [
-            (r"\bayuntamiento\b|\btown hall\b", "TownHall"),
-            (r"\bplaza\b|\bsquare\b", "Square"),
-            (r"\bcatedral\b|\bcathedral\b", "Cathedral"),
-            (r"\bbasilica\b|\bbasílica\b", "Basilica"),
-            (r"\biglesia\b|\bchurch\b", "Church"),
-            (r"\bcapilla\b|\bchapel\b", "Chapel"),
-            (r"\bmonasterio\b|\bmonastery\b", "HistoricalOrCulturalResource"),
-            (r"\bmuseo\b|\bmuseum\b", "Museum"),
-            (r"\bcastillo\b|\bcastle\b", "Castle"),
-            (r"\balc[aá]zar\b", "Alcazar"),
-            (r"\bmonumento\b|\bmonument\b|\bestatua\b|\bescultura\b", "Monument"),
-            (r"\bparque\b|\bpark\b", "Place"),
-            (r"\bjardines\b|\bgarden\b", "Place"),
-            (r"\bpuente\b|\bbridge\b", "HistoricalOrCulturalResource"),
-            (r"\bmercado\b|\bmarket\b", "Place"),
-            (r"\bteatro\b|\btheatre\b|\btheater\b", "EventAttendanceFacility"),
-            (r"\barena\b", "EventAttendanceFacility"),
-            (r"\bfront[oó]n\b", "SportsCenter"),
-            (r"\bportal\b", "HistoricalOrCulturalResource"),
-            (r"\bmuralla\b|\bmurallas\b|\bfortification\b", "HistoricalOrCulturalResource"),
-            (r"\bevento\b|\bevent\b|\bfestival\b|\bconcierto\b", "Event"),
-            (r"\bexcursi[oó]n\b|\bexcursion\b", "DestinationExperience"),
-            (r"\bruta\b|\broute\b", "DestinationExperience"),
-            (r"\bvisita guiada\b|\bguided tour\b", "DestinationExperience"),
-            (r"\bactividad\b|\bactivity\b|\bcicloturismo\b|\bsenderismo\b", "DestinationExperience"),
-            (r"\brestaurante\b|\brestaurant\b|\bbar\b|\bcaf[eé]\b|\bcafeter[ií]a\b", "FoodEstablishment"),
-            (r"\bpostre\b", "FoodEstablishment"),
-            (r"\blicor\b|\bsidra\b|\bdrink\b", "FoodEstablishment"),
-            (r"\bqueso\b|\bfood product\b", "FoodEstablishment"),
-            (r"\bgoxua\b|\bcuajada\b|\bpantxineta\b|\bajoarriero\b|\bfritos\b|\bpochas\b|\bmenestra\b", "FoodEstablishment"),
+            (re.compile(pattern), label, weight)
+            for pattern, label, weight in raw_lexical_rules
         ]
 
         self.family_compatibility = {
+            "accommodation": {"Hotel", "AccommodationEstablishment"},
+            "event": {"Event"},
+            "experience": {"DestinationExperience", "Tour"},
+            "food": {"Bar", "FoodEstablishment", "Restaurant", "TraditionalMarket", "WineBar"},
             "place": {
-                "Place",
-                "TownHall",
-                "Square",
-                "Cathedral",
-                "Basilica",
-                "Church",
-                "Chapel",
-                "Museum",
-                "Castle",
+                "Airport",
                 "Alcazar",
-                "Monument",
-                "HistoricalOrCulturalResource",
+                "AmusementPark",
+                "Aquarium",
+                "ArcheologicalSite",
+                "Auditorium",
+                "Basilica",
+                "Bridge",
+                "BullRing",
+                "BusStation",
+                "Castle",
+                "Cathedral",
+                "Chapel",
+                "Church",
+                "Convent",
                 "EventAttendanceFacility",
-                "SportsCenter",
+                "Garden",
+                "HistoricalOrCulturalResource",
+                "Library",
+                "Monastery",
+                "Monument",
+                "Museum",
+                "NaturalPark",
+                "Palace",
+                "Square",
+                "Stadium",
+                "Theater",
+                "TouristAttractionSite",
+                "TouristInformationOffice",
+                "Tower",
+                "TownHall",
+                "TraditionalMarket",
+                "TrainStation",
+                "Wall",
             },
-            "event": {"Event", "DestinationExperience"},
-            "food": {"FoodEstablishment"},
-            "route": {"DestinationExperience"},
-            "service": {"TourismService", "Organization", "PublicService"},
-            "concept": {"Unknown"},
+            "route": {"Itinerary", "Route", "Trail", "Tour"},
+            "service": {"PublicService", "TourGuide", "TourismIntermediary"},
             "unknown": set(),
-        }    
+        }
+
+    # ---------------------------------------------------------
+    # Normalization helpers
+    # ---------------------------------------------------------
 
     def _normalize_text(self, value: Any) -> str:
         text = str(value or "").strip().lower()
-        text = re.sub(r"\s+", " ", text)
-        return text
+        text = unicodedata.normalize("NFKD", text)
+        text = "".join(c for c in text if not unicodedata.combining(c))
+        text = re.sub(r"[^a-z0-9]+", " ", text)
+        return re.sub(r"\s+", " ", text).strip()
 
-    def _normalize_type(self, value):
+    def _local_name(self, value: Any) -> str:
         raw = str(value or "").strip()
         if not raw:
             return ""
+        return raw.rstrip("/").split("#")[-1].split("/")[-1].strip()
 
-        short = raw.split("#")[-1].split("/")[-1].strip()
-        if not short:
+    def _normalize_type(self, value: Any) -> str:
+        raw = self._local_name(value)
+        if not raw:
             return ""
 
-        return self.type_aliases.get(short.lower(), short) 
-        
+        key = self._normalize_text(raw)
+        compact = key.replace(" ", "")
+        return self.type_aliases.get(key) or self.type_aliases.get(compact) or raw
+
+    def _as_list(self, value: Any) -> List[Any]:
+        if value is None:
+            return []
+        if isinstance(value, list):
+            return value
+        if isinstance(value, tuple):
+            return list(value)
+        return [value]
+
     def _is_weak_type(self, value: Any) -> bool:
-        t = self._normalize_type(value).lower()
-        return t in self.weak_types
+        return self._normalize_type(value).lower() in self.weak_types
+
+    def _is_generic_final_type(self, value: Any) -> bool:
+        return self._normalize_type(value) in self.generic_final_types
 
     def _is_forbidden_type(self, value: Any) -> bool:
-        t = self._normalize_type(value)
-        return t in self.forbidden_final_types
+        normalized = self._normalize_type(value)
+        return normalized in self.forbidden_final_types or normalized.lower() in self.weak_types
 
-    def _vote(self, votes: Dict[str, float], label: str, weight: float) -> None:
-        if not label:
+    def _vote(
+        self,
+        votes: Dict[str, float],
+        evidence: List[str],
+        label: str,
+        weight: float,
+        source: str,
+        family: str = "unknown",
+    ) -> None:
+        label = self._normalize_type(label)
+        if not label or self._is_forbidden_type(label):
             return
-        if self._is_forbidden_type(label):
+
+        if self._is_generic_final_type(label):
+            weight *= 0.35
+
+        compatible = self.family_compatibility.get(family) or set()
+        if compatible and label not in compatible:
+            weight *= 0.45
+
+        if weight <= 0:
             return
-        if self._is_weak_type(label):
-            return
+
         votes[label] += weight
+        evidence.append(f"{source}:{label}:{round(weight, 2)}")
 
-    def _detect_family(self, mention: str, context: str) -> str:
-        text = self._normalize_text(f"{mention} {context}")
+    # ---------------------------------------------------------
+    # Signal extraction
+    # ---------------------------------------------------------
 
-        if re.search(r"\brestaurante\b|\brestaurant\b|\bpostre\b|\blicor\b|\bsidra\b|\bqueso\b|\bgoxua\b|\bcuajada\b|\bpantxineta\b|\bajoarriero\b|\bfritos\b|\bpochas\b|\bmenestra\b", text):
-            return "food"
+    def _detect_family(self, mention: str, context: str = "") -> str:
+        text = self._normalize_text(f"{mention} {context[:500]}")
+        mention_text = self._normalize_text(mention)
 
-        if re.search(r"\bevento\b|\bevent\b|\bfestival\b|\bconcierto\b|\bvisita guiada\b|\bguided tour\b|\bexcursi[oó]n\b|\bexcursion\b", text):
+        if re.search(r"\b(festival|evento|concierto|bienal|feria|semana santa|procesion|via crucis|exposicion)\b", mention_text):
             return "event"
 
-        if re.search(r"\bruta\b|\broute\b|\bcicloturismo\b|\bsenderismo\b|\bcamino\b", text):
+        if re.search(r"\b(camino|ruta|sendero|itinerario|recorrido|via verde)\b", mention_text):
             return "route"
 
-        if re.search(r"\bbureau\b|\bincoming\b|\bgu[ií]a\b|\bservice\b|\bservicio\b|\bprofesional\b", text):
-            return "service"
+        if re.search(r"\b(visita guiada|tour guiado|excursion)\b", mention_text):
+            return "experience"
 
-        if re.search(r"\bayuntamiento\b|\bplaza\b|\bcatedral\b|\biglesia\b|\bcapilla\b|\bmuseo\b|\bcastillo\b|\bparque\b|\bjardines\b|\bpuente\b|\bteatro\b|\barena\b|\bfront[oó]n\b|\bportal\b|\bmurallas?\b|\bmercado\b", text):
+        if re.search(r"\b(restaurante|bar|cafeteria|cafe|taberna|bodega|cerveceria)\b", mention_text):
+            return "food"
+
+        if re.search(r"\b(hotel|hostal|parador|albergue)\b", mention_text):
+            return "accommodation"
+
+        if re.search(
+            r"\b(ayuntamiento|catedral|museo|castillo|plaza|parque|jardin|iglesia|capilla|"
+            r"basilica|palacio|alcazar|torre|puente|monasterio|convento|mercado|estadio|teatro)\b",
+            mention_text,
+        ):
             return "place"
 
-        if re.search(r"\bpelota vasca\b|\bedad media\b|\bgastronom[ií]a\b|\bcultura\b", text):
-            return "concept"
+        if re.search(r"\b(fecha|horario|entradas|programacion|concierto|festival)\b", text):
+            return "event"
 
         return "unknown"
 
-    def _lexical_candidates(self, mention: str, context: str) -> List[str]:
-        text = self._normalize_text(f"{mention} {context}")
-        out: List[str] = []
-        for pattern, label in self.lexical_rules:
-            if re.search(pattern, text, flags=re.IGNORECASE) and label not in out:
-                out.append(label)
+    def _lexical_candidates(self, text: str) -> List[Tuple[str, float]]:
+        normalized = self._normalize_text(text)
+        out: List[Tuple[str, float]] = []
+
+        for pattern, label, weight in self.lexical_rules:
+            if pattern.search(normalized):
+                out.append((label, weight))
+
         return out
 
-    def _compatible_with_family(self, label: str, family: str) -> bool:
-        if family == "unknown":
-            return True
-        allowed = self.family_compatibility.get(family, set())
-        if not allowed:
-            return True
-        return label in allowed
+    def _iter_property_type_candidates(self, properties: Dict[str, Any]) -> Iterable[Tuple[str, str]]:
+        fields = (
+            "class",
+            "type",
+            "primaryClass",
+            "semantic_type",
+            "classUri",
+            "types",
+            "typesRaw",
+            "types_raw",
+        )
+
+        for key in fields:
+            for value in self._as_list(properties.get(key)):
+                label = self._normalize_type(value)
+                if label:
+                    yield key, label
+
+        nested = properties.get("properties")
+        if isinstance(nested, dict):
+            for key in ("class", "type", "semantic_type"):
+                label = self._normalize_type(nested.get(key))
+                if label:
+                    yield f"properties.{key}", label
+
+    def _candidate_label(self, cand: Dict[str, Any]) -> str:
+        for key in ("class", "type", "label", "name", "id", "uri"):
+            label = self._normalize_type(cand.get(key))
+            if label:
+                return label
+        return ""
+
+    def _candidate_score(self, cand: Dict[str, Any]) -> float:
+        for key in ("score", "confidence", "similarity"):
+            try:
+                if cand.get(key) is not None:
+                    return float(cand.get(key) or 0)
+            except (TypeError, ValueError):
+                continue
+        return 0.0
+
+    # ---------------------------------------------------------
+    # Final decision
+    # ---------------------------------------------------------
 
     def _best(self, votes: Dict[str, float]) -> Dict[str, Any]:
         if not votes:
             return {"class": "Unknown", "score": 0.0, "margin": 0.0}
 
-        ordered = sorted(votes.items(), key=lambda x: (-x[1], x[0].lower()))
+        ordered = sorted(votes.items(), key=lambda x: (-x[1], self._is_generic_final_type(x[0]), x[0]))
         best_label, best_score = ordered[0]
         second_score = ordered[1][1] if len(ordered) > 1 else 0.0
         margin = best_score - second_score
 
-        if best_score < 3.0 or margin < 0.7:
+        min_score = 3.2 if not self._is_generic_final_type(best_label) else 7.0
+        min_margin = 0.65 if best_score >= 5.0 else 1.0
+
+        if best_score < min_score or margin < min_margin:
+            return {"class": "Unknown", "score": best_score, "margin": margin}
+
+        if self._is_generic_final_type(best_label):
             return {"class": "Unknown", "score": best_score, "margin": margin}
 
         return {"class": best_label, "score": best_score, "margin": margin}
+
+    def _result(
+        self,
+        final_class: str,
+        family: str,
+        score: float,
+        margin: float,
+        evidence: List[str],
+        semantic_type: str = "",
+        semantic_score: float = 0.0,
+        ontology_candidates_seen: int = 0,
+    ) -> Dict[str, Any]:
+        final_class = self._normalize_type(final_class) or "Unknown"
+        if self._is_generic_final_type(final_class) or self._is_forbidden_type(final_class):
+            final_class = "Unknown"
+
+        return {
+            "class": final_class,
+            "type": final_class,
+            "family": family,
+            "score": round(float(score or 0.0), 4),
+            "margin": round(float(margin or 0.0), 4),
+            "evidence": evidence,
+            "semantic_type": semantic_type,
+            "semantic_score": round(float(semantic_score or 0.0), 4),
+            "ontology_candidates_seen": ontology_candidates_seen,
+        }
 
     def resolve(
         self,
@@ -207,92 +397,104 @@ class EntityTypeResolver:
         expected_type: Optional[str] = None,
         ontology_candidates: Optional[List[Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
-        page_signals = page_signals or {}
         properties = properties or {}
+        page_signals = page_signals or {}
         ontology_candidates = ontology_candidates or []
 
         mention = str(mention or "").strip()
-        context = str(context or "").strip()
-        block_text = str(block_text or "").strip()
+        context = str(context or "")
+        block_text = str(block_text or "")
 
-        evidence: List[str] = []
+        family = self._detect_family(mention, context or block_text)
+        mention_norm = self._normalize_text(mention)
+
+        # High-precision overrides for common tourism cases.
+        hard_rules = [
+            (r"\bplaza de toros\b", "BullRing", "place"),
+            (r"\b(estacion de autobuses|estacion de bus|terminal de autobuses)\b", "BusStation", "place"),
+            (r"\b(plaza de armas|prado de san sebastian)\b", "BusStation", "place"),
+            (r"\b(estacion de santa justa|estacion de tren|estacion ferroviaria)\b", "TrainStation", "place"),
+            (r"\bayuntamiento\b", "TownHall", "place"),
+            (r"\bcamino de santiago\b", "Route", "route"),
+            (r"\bsan fermin(es)?\b", "Event", "event"),
+            (r"\bsemana santa\b", "Event", "event"),
+            (r"^plaza\b", "Square", "place"),
+            (r"^museo\b", "Museum", "place"),
+            (r"^castillo\b", "Castle", "place"),
+            (r"^palacio\b", "Palace", "place"),
+            (r"^parque\b", "Garden", "place"),
+        ]
+        for pattern, label, hard_family in hard_rules:
+            if re.search(pattern, mention_norm):
+                return self._result(
+                    final_class=label,
+                    family=hard_family,
+                    score=10.0,
+                    margin=10.0,
+                    evidence=[f"hard_rule:{label}"],
+                    ontology_candidates_seen=len(ontology_candidates),
+                )
+
         votes: Dict[str, float] = defaultdict(float)
+        evidence: List[str] = []
 
-        family = self._detect_family(mention, f"{context} {block_text}")
+        # Mention evidence is strongest because context often describes tours
+        # around an entity rather than the entity itself.
+        for label, weight in self._lexical_candidates(mention):
+            self._vote(votes, evidence, label, weight, "mention", family)
 
-        # 1) strong lexical evidence first
-        lexical = self._lexical_candidates(mention, f"{context} {block_text}")
-        for label in lexical:
-            self._vote(votes, label, 3.5)
-            evidence.append(f"lexical:{label}")
-
-        # 2) expected_type can bias lightly
         normalized_expected = self._normalize_type(expected_type)
-        if normalized_expected and not self._is_forbidden_type(normalized_expected) and not self._is_weak_type(normalized_expected):
-            if self._compatible_with_family(normalized_expected, family):
-                self._vote(votes, normalized_expected, 1.2)
-                evidence.append(f"expected:{normalized_expected}")
+        if normalized_expected:
+            self._vote(votes, evidence, normalized_expected, 1.1, "expected_type", family)
 
-        # 3) explicit types already present in properties
-        for key in ("class", "type", "normalized_type"):
-            candidate = self._normalize_type(properties.get(key))
-            if candidate and not self._is_forbidden_type(candidate) and not self._is_weak_type(candidate):
-                if self._compatible_with_family(candidate, family):
-                    self._vote(votes, candidate, 1.5)
-                    evidence.append(f"property:{candidate}")
+        for source, label in self._iter_property_type_candidates(properties):
+            weight = 2.0 if source in {"class", "type", "primaryClass"} else 1.2
+            self._vote(votes, evidence, label, weight, source, family)
 
-        # 4) ontology / semantic candidates
-        best_semantic_uri = ""
-        best_semantic_score = 0.0
-        best_semantic_label = ""
-
+        semantic_type = ""
+        semantic_score = 0.0
         for cand in ontology_candidates[:5]:
-            label = self._normalize_type(cand.get("label") or cand.get("class") or cand.get("type"))
-            uri = str(cand.get("uri") or cand.get("id") or "").strip()
-            score = float(cand.get("score") or 0.0)
-
-            if not label or self._is_forbidden_type(label) or self._is_weak_type(label):
+            label = self._candidate_label(cand)
+            score = self._candidate_score(cand)
+            if not label:
                 continue
-
-            if not self._compatible_with_family(label, family):
-                continue
-
+            if score > semantic_score:
+                semantic_type = label
+                semantic_score = score
             if score >= self.strong_semantic_confidence:
-                self._vote(votes, label, 2.5 + (score - self.strong_semantic_confidence) * 4)
-                evidence.append(f"semantic_strong:{label}:{score:.4f}")
+                self._vote(votes, evidence, label, 2.4, "ontology_strong", family)
             elif score >= self.min_semantic_confidence:
-                if label in lexical:
-                    self._vote(votes, label, 1.8 + (score - self.min_semantic_confidence) * 3)
-                    evidence.append(f"semantic_supported:{label}:{score:.4f}")
-            else:
-                continue
+                self._vote(votes, evidence, label, 1.1, "ontology_weak", family)
 
-            if score > best_semantic_score:
-                best_semantic_score = score
-                best_semantic_label = label
-                best_semantic_uri = uri
+        # Context has lower weight and only participates when the mention did
+        # not already provide a decisive specific type.
+        mention_vote = max(votes.values(), default=0.0)
+        if mention_vote < 5.0:
+            context_text = " ".join([block_text[:1200], context[:1800]])
+            context_hits = self._lexical_candidates(context_text)
+            for label, weight in context_hits[:4]:
+                self._vote(
+                    votes,
+                    evidence,
+                    label,
+                    min(self.context_vote_threshold, weight * 0.35),
+                    "context",
+                    family,
+                )
 
-        # 5) final decision
+        page_expected = self._normalize_type(page_signals.get("expected_type") or page_signals.get("type"))
+        if page_expected:
+            self._vote(votes, evidence, page_expected, 0.7, "page_signal", family)
+
         best = self._best(votes)
-        final_class = best["class"]
 
-        if final_class == "Unknown":
-            best_semantic_label = ""
-            best_semantic_uri = ""
-            best_semantic_score = 0.0
-        elif final_class != best_semantic_label:
-            # if lexical won over semantic, keep class but clear semantic URI unless it matches
-            best_semantic_uri = best_semantic_uri if final_class == best_semantic_label else ""
-            best_semantic_score = best_semantic_score if final_class == best_semantic_label else 0.0
-
-        return {
-            "class": final_class,
-            "type": final_class,
-            "semantic_type": best_semantic_uri,
-            "semantic_score": round(best_semantic_score, 4),
-            "family": family,
-            "score": round(best.get("score", 0.0), 4),
-            "margin": round(best.get("margin", 0.0), 4),
-            "evidence": evidence,
-            "ontology_candidates_seen": len(ontology_candidates),
-        }
+        return self._result(
+            final_class=best["class"],
+            family=family,
+            score=best["score"],
+            margin=best["margin"],
+            evidence=evidence,
+            semantic_type=semantic_type,
+            semantic_score=semantic_score,
+            ontology_candidates_seen=len(ontology_candidates),
+        )

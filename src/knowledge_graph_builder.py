@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
-from typing import Any, Iterable, List
+from typing import Any, Iterable, List, Optional
 
 from rdflib import Graph, Literal, Namespace, URIRef
 from rdflib.namespace import RDF, RDFS, XSD
@@ -15,6 +15,44 @@ class KnowledgeGraphBuilder:
         self.EX = Namespace("http://example.org/resource/")
         self.TOUR = Namespace("http://example.org/tourism/")
         self.wikidata_linker = WikidataLinker()
+
+        self.generic_types = {
+            "",
+            "Thing",
+            "Entity",
+            "Unknown",
+            "Location",
+            "TourismEntity",
+            "TourismResource",
+        }
+
+        self.name_noise_suffixes = [
+            " pago recomendado",
+            " también",
+            " comenzaremos",
+            " ver",
+            " más",
+            " tambien",
+        ]
+
+        self.bad_image_fragments = [
+            "logo",
+            "icon",
+            "sprite",
+            "banner",
+            "placeholder",
+            "header",
+            "footer",
+            "og-image",
+            "share",
+            "social",
+            "favicon",
+            "_next/static/",
+            "_next/image?",
+            "/static/media/",
+            ".svg",
+            "gobiernoes_ministerio",
+        ]
 
     # =========================
     # Helpers de normalización
@@ -53,8 +91,14 @@ class KnowledgeGraphBuilder:
             out.append(v)
         return out
 
+    def _local_name(self, value: Any) -> str:
+        txt = self._normalize_space(str(value or ""))
+        if not txt:
+            return ""
+        return txt.split("#")[-1].split("/")[-1].strip()
+
     # =========================
-    # Helpers nuevos
+    # Helpers Wikidata
     # =========================
 
     def _commons_filename_to_url(self, filename: str) -> str:
@@ -74,6 +118,64 @@ class KnowledgeGraphBuilder:
         safe_name = filename.replace(" ", "_")
         return f"https://commons.wikimedia.org/wiki/Special:FilePath/{safe_name}"
 
+    def _safe_get_wikidata_payload(self, wikidata_id: str) -> dict:
+        if not wikidata_id or not self.wikidata_linker:
+            return {}
+
+        # compatibilidad con varias implementaciones
+        for method_name in ("get_entity_data", "fetch_entity_data", "_get_entity_data"):
+            if hasattr(self.wikidata_linker, method_name):
+                method = getattr(self.wikidata_linker, method_name)
+                try:
+                    payload = method(wikidata_id)
+                    return payload or {}
+                except Exception:
+                    return {}
+        return {}
+
+    def _safe_link_wikidata(
+        self,
+        entity_name: str,
+        entity_class: str,
+        short_description: str,
+        long_description: str,
+        source_url: str,
+        aliases: Optional[List[str]] = None,
+    ) -> str:
+        if not self.wikidata_linker:
+            return ""
+
+        aliases = aliases or []
+
+        try:
+            return (
+                self.wikidata_linker.link(
+                    entity_name=entity_name,
+                    entity_class=entity_class,
+                    short_description=short_description,
+                    long_description=long_description,
+                    source_url=source_url,
+                    aliases=aliases,
+                )
+                or ""
+            )
+        except TypeError:
+            try:
+                return (
+                    self.wikidata_linker.link(
+                        entity_name,
+                        entity_class,
+                        short_description,
+                        long_description,
+                        source_url,
+                    )
+                    or ""
+                )
+            except Exception:
+                return ""
+        except Exception:
+            return ""
+
     def _enrich_entity_with_wikidata(self, entity: dict, wikidata_payload: dict) -> dict:
         if not isinstance(entity, dict):
             return entity
@@ -81,8 +183,8 @@ class KnowledgeGraphBuilder:
         if not isinstance(wikidata_payload, dict):
             return entity
 
-        qid = wikidata_payload.get("wikidata_id")
-        if qid and not entity.get("wikidata_id"):
+        qid = wikidata_payload.get("wikidata_id") or wikidata_payload.get("id")
+        if qid and not entity.get("wikidata_id") and not entity.get("wikidataId"):
             entity["wikidata_id"] = qid
 
         coords = entity.get("coordinates")
@@ -109,7 +211,7 @@ class KnowledgeGraphBuilder:
 
         wikidata_image = self._commons_filename_to_url(wikidata_payload.get("image", ""))
 
-        if wikidata_image:
+        if wikidata_image and self._is_probably_good_image(wikidata_image):
             if not entity.get("image"):
                 entity["image"] = wikidata_image
             if not entity.get("mainImage"):
@@ -140,12 +242,14 @@ class KnowledgeGraphBuilder:
             return True
 
         bad_exact = {
-            "comer y salir en sevilla - visita sevilla",
-            "saborea sevilla barrio a barrio",
-            "visita sevilla",
             "mainimage",
             "image",
-            "consejos, rutas y curiosidades gastronómicas",
+            "mapas",
+            "vista",
+            "aquí",
+            "aqui",
+            "qué ver",
+            "que ver",
         }
         if vl in bad_exact:
             return True
@@ -157,14 +261,17 @@ class KnowledgeGraphBuilder:
 
         bad_fragments = [
             "leer más",
+            "leer mas",
             "mostrar más",
-            "ruta gastro",
-            "descubre sevilla",
-            "bajo el cielo de sevilla",
-            "comer y salir en sevilla",
-            "saborea sevilla",
-            "visita sevilla",
-            "consejos, rutas",
+            "mostrar mas",
+            "reserva tu actividad",
+            "ir al contenido",
+            "todos los derechos reservados",
+            "accesibilidad",
+            "guías convention bureau",
+            "guias convention bureau",
+            "área profesional",
+            "area profesional",
         ]
         return any(b in vl for b in bad_fragments)
 
@@ -179,25 +286,7 @@ class KnowledgeGraphBuilder:
 
         vl = v.lower()
 
-        bad = [
-            "logo",
-            "icon",
-            "sprite",
-            "banner",
-            "placeholder",
-            "header",
-            "footer",
-            "og-image",
-            "share",
-            "social",
-            "favicon",
-            "_next/static/",
-            "_next/image?",
-            "/static/media/",
-            "financion",
-            ".svg",
-        ]
-        if any(b in vl for b in bad):
+        if any(b in vl for b in self.bad_image_fragments):
             return False
 
         valid_exts = [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]
@@ -214,8 +303,12 @@ class KnowledgeGraphBuilder:
         noisy_markers = [
             " Leer más",
             " leer más",
+            " Leer mas",
+            " leer mas",
             " Mostrar más",
             " mostrar más",
+            " Mostrar mas",
+            " mostrar mas",
         ]
 
         for marker in noisy_markers:
@@ -233,14 +326,30 @@ class KnowledgeGraphBuilder:
         parts = self._dedupe_preserve_order(parts)
         return "\n".join(parts)
 
+    def _strip_name_suffix_noise(self, value: str) -> str:
+        txt = self._clean_text(value)
+        low = txt.lower()
+
+        for suffix in self.name_noise_suffixes:
+            if low.endswith(suffix):
+                txt = txt[: -len(suffix)].strip(" -|,.;:")
+                low = txt.lower()
+
+        txt = re.sub(r"\b(PAGO RECOMENDADO|También|Tambien|Comenzaremos|Ver)\b$", "", txt, flags=re.IGNORECASE).strip(" -|,.;:")
+        return txt
+
     def _choose_display_name(self, entity: dict) -> str:
-        label = self._clean_text(entity.get("label", ""))
-        entity_name = self._clean_text(entity.get("entity_name", ""))
-        entity_base = self._clean_text(entity.get("entity", ""))
+        label = self._strip_name_suffix_noise(entity.get("label", ""))
+        entity_name = self._strip_name_suffix_noise(entity.get("entity_name", ""))
+        entity_base = self._strip_name_suffix_noise(entity.get("entity", ""))
 
         raw_name = entity.get("name", "")
         name_candidates = self._as_list(raw_name)
-        name_candidates = [self._clean_text(n) for n in name_candidates if self._clean_text(n)]
+        name_candidates = [
+            self._strip_name_suffix_noise(n)
+            for n in name_candidates
+            if self._strip_name_suffix_noise(n)
+        ]
 
         preferred = [label, entity_name, entity_base] + name_candidates
 
@@ -261,18 +370,23 @@ class KnowledgeGraphBuilder:
 
         semantic_type = self._clean_text(entity.get("semantic_type", ""))
         if semantic_type:
-            values.append(semantic_type.split("#")[-1].split("/")[-1])
+            values.append(self._local_name(semantic_type))
 
         properties = entity.get("properties", {}) or {}
         if isinstance(properties, dict):
             prop_type = self._clean_text(properties.get("type", ""))
             if prop_type:
-                values.append(prop_type)
+                values.append(self._local_name(prop_type))
+
+        # closed-world enriched fields
+        values.extend(self._as_list(entity.get("types")))
+        values.extend(self._as_list(entity.get("typesRaw")))
+        values.extend(self._as_list(entity.get("types_raw")))
 
         cleaned = []
         for v in values:
-            txt = self._normalize_space(str(v))
-            if txt:
+            txt = self._local_name(v)
+            if txt and txt not in self.generic_types:
                 cleaned.append(txt)
 
         return self._dedupe_preserve_order(cleaned)
@@ -280,30 +394,24 @@ class KnowledgeGraphBuilder:
     def _extract_best_entity_type(self, entity: dict) -> str:
         candidates = []
 
-        for key in ("class", "type", "semantic_type"):
+        for key in ("class", "type", "semantic_type", "primaryClass"):
             value = entity.get(key)
             if isinstance(value, (list, tuple)):
-                candidates.extend([self._clean_text(v) for v in value if self._clean_text(v)])
+                candidates.extend([self._local_name(v) for v in value if self._local_name(v)])
             else:
-                txt = self._clean_text(value)
+                txt = self._local_name(value)
                 if txt:
                     candidates.append(txt)
 
         properties = entity.get("properties", {}) or {}
         if isinstance(properties, dict):
-            prop_type = self._clean_text(properties.get("type", ""))
+            prop_type = self._local_name(properties.get("type", ""))
             if prop_type:
                 candidates.append(prop_type)
 
         for candidate in candidates:
-            short = candidate.split("#")[-1].split("/")[-1].strip()
-            if short and short.lower() not in {"thing", "entity", "unknown"}:
-                return short
-
-        for candidate in candidates:
-            short = candidate.split("#")[-1].split("/")[-1].strip()
-            if short:
-                return short
+            if candidate and candidate not in self.generic_types:
+                return candidate
 
         return ""
 
@@ -357,11 +465,7 @@ class KnowledgeGraphBuilder:
         if not combined.strip():
             return True
 
-        bad_entities = {
-            "sevilla leer",
-            "sevilla cuando",
-        }
-        if label.lower() in bad_entities or name.lower() in bad_entities:
+        if self._is_bad_name(name):
             return True
 
         return False
@@ -395,6 +499,24 @@ class KnowledgeGraphBuilder:
         for v in values:
             g.add((subject, predicate, Literal(v)))
 
+    def _add_coordinates(self, g: Graph, subject: URIRef, entity: dict):
+        coords = entity.get("coordinates") or {}
+        lat = coords.get("lat") if isinstance(coords, dict) else None
+        lng = coords.get("lng") if isinstance(coords, dict) else None
+
+        if lat in (None, ""):
+            lat = entity.get("latitude")
+        if lng in (None, ""):
+            lng = entity.get("longitude")
+
+        try:
+            if lat not in (None, ""):
+                g.add((subject, self.TOUR.latitude, Literal(float(lat), datatype=XSD.float)))
+            if lng not in (None, ""):
+                g.add((subject, self.TOUR.longitude, Literal(float(lng), datatype=XSD.float)))
+        except Exception:
+            pass
+
     # =========================
     # API pública
     # =========================
@@ -422,7 +544,7 @@ class KnowledgeGraphBuilder:
             raw_name_values = self._as_list(entity.get("name"))
             clean_names = []
             for n in raw_name_values:
-                n = self._clean_text(str(n))
+                n = self._strip_name_suffix_noise(str(n))
                 if n and not self._is_bad_name(n) and n != display_name:
                     clean_names.append(n)
             clean_names = self._dedupe_preserve_order(clean_names)
@@ -449,8 +571,16 @@ class KnowledgeGraphBuilder:
             related_urls = self._extract_related_urls(entity)
             self._add_unique_string_list(g, subject, self.TOUR.relatedUrls, related_urls)
 
-            short_description = self._clean_text(entity.get("short_description", ""))
-            long_description = self._clean_text(entity.get("long_description", ""))
+            short_description = self._clean_text(
+                entity.get("short_description")
+                or entity.get("shortDescription")
+                or ""
+            )
+            long_description = self._clean_text(
+                entity.get("long_description")
+                or entity.get("longDescription")
+                or ""
+            )
             description = self._clean_multiline_text(entity.get("description", ""))
             address = self._clean_text(entity.get("address", ""))
 
@@ -464,22 +594,7 @@ class KnowledgeGraphBuilder:
             self._add_literal_if_value(g, subject, self.TOUR.phone, phone)
             self._add_literal_if_value(g, subject, self.TOUR.email, email)
 
-            coords = entity.get("coordinates") or {}
-            lat = coords.get("lat") if isinstance(coords, dict) else None
-            lng = coords.get("lng") if isinstance(coords, dict) else None
-
-            if lat in (None, ""):
-                lat = entity.get("latitude")
-            if lng in (None, ""):
-                lng = entity.get("longitude")
-
-            try:
-                if lat not in (None, ""):
-                    g.add((subject, self.TOUR.latitude, Literal(float(lat), datatype=XSD.float)))
-                if lng not in (None, ""):
-                    g.add((subject, self.TOUR.longitude, Literal(float(lng), datatype=XSD.float)))
-            except Exception:
-                pass
+            self._add_coordinates(g, subject, entity)
 
             entity_name = self._clean_text(
                 entity.get("entity_name")
@@ -495,47 +610,43 @@ class KnowledgeGraphBuilder:
                 or entity.get("sourceUrl")
             )
 
-            wikidata_id = self.wikidata_linker.link(
-                entity_name=entity_name,
-                entity_class=entity_class,
-                short_description=short_description,
-                long_description=long_description,
-                source_url=wikidata_source_url,
-                aliases=[display_name, entity_name],
+            wikidata_id = (
+                entity.get("wikidata_id")
+                or entity.get("wikidataId")
+                or (entity.get("properties", {}) or {}).get("wikidata_id")
+                or (entity.get("properties", {}) or {}).get("wikidataId")
+                or ""
             )
 
+            if not wikidata_id:
+                wikidata_id = self._safe_link_wikidata(
+                    entity_name=entity_name,
+                    entity_class=entity_class,
+                    short_description=short_description,
+                    long_description=long_description,
+                    source_url=wikidata_source_url,
+                    aliases=[display_name, entity_name],
+                )
+
             if wikidata_id:
-                wikidata_payload = self.wikidata_linker.get_entity_data(wikidata_id)
+                wikidata_payload = self._safe_get_wikidata_payload(wikidata_id)
                 entity = self._enrich_entity_with_wikidata(entity, wikidata_payload)
 
             wikidata_value = (
                 entity.get("wikidata_id")
                 or entity.get("wikidataId")
-                or (entity.get("properties", {}) or {}).get("wikidata_id")
-                or (entity.get("properties", {}) or {}).get("wikidataId")
+                or wikidata_id
+                or ""
             )
 
-            try:
-                self._add_literal_if_value(g, subject, self.TOUR.wikidataId, wikidata_value)
-            except Exception as e:
-                print(f"⚠️ Error añadiendo wikidataId para {display_name}: {e}")
+            if wikidata_value:
+                try:
+                    self._add_literal_if_value(g, subject, self.TOUR.wikidataId, wikidata_value)
+                except Exception as e:
+                    print(f"⚠️ Error añadiendo wikidataId para {display_name}: {e}")
 
-            coords = entity.get("coordinates") or {}
-            lat = coords.get("lat") if isinstance(coords, dict) else None
-            lng = coords.get("lng") if isinstance(coords, dict) else None
-
-            if lat in (None, ""):
-                lat = entity.get("latitude")
-            if lng in (None, ""):
-                lng = entity.get("longitude")
-
-            try:
-                if lat not in (None, ""):
-                    g.add((subject, self.TOUR.latitude, Literal(float(lat), datatype=XSD.float)))
-                if lng not in (None, ""):
-                    g.add((subject, self.TOUR.longitude, Literal(float(lng), datatype=XSD.float)))
-            except Exception:
-                pass
+            # Coordenadas otra vez, por si Wikidata las completó
+            self._add_coordinates(g, subject, entity)
 
             candidate_images = self._extract_candidate_images(entity)
             if candidate_images:

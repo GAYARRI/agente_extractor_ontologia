@@ -19,10 +19,16 @@ class EntityQualityScorer:
             "Place", "Organization", "LocalBusiness", "Service", "TourismService",
             "PublicService", "PublicSpace", "ReligiousSite", "NaturalResource",
             "TourismDestination", "Accommodation", "RetailAndFashion", "SportFacility",
+            "DestinationExperience",
         }
         self.editorial_markers = {
             "descubre", "sumérgete", "sumergite", "vive", "experiencia única",
             "no te pierdas", "te sorprenderá", "te sorprendera",
+        }
+        self.ui_noise_markers = {
+            "todos los derechos reservados", "ir al contenido", "reserva tu",
+            "convention bureau", "área profesional", "area profesional",
+            "ver todas las noticias", "newsletter", "suscríbete", "apúntate",
         }
 
     def _normalize(self, text: str) -> str:
@@ -61,21 +67,25 @@ class EntityQualityScorer:
         score = 0.0
         flags: List[str] = []
         if not tokens:
-            return -5.0, ["empty_name"]
-        if 2 <= len(tokens) <= 6:
+            return -3.0, ["empty_name"]
+        if 2 <= len(tokens) <= 8:
             score += 2.0
         elif len(tokens) == 1:
-            score -= 2.0
+            score -= 1.0
             flags.append("too_generic_name")
-        elif len(tokens) > 8:
-            score -= 1.5
+        elif len(tokens) > 12:
+            score -= 1.0
             flags.append("too_long_name")
         meaningful = [t for t in tokens if t not in self.stop_tokens]
         if len(meaningful) >= 2:
             score += 1.0
         else:
-            score -= 1.0
+            score -= 0.5
             flags.append("low_semantic_density")
+        low = self._normalize(label)
+        if any(m in low for m in self.ui_noise_markers):
+            score -= 3.0
+            flags.append("ui_noise")
         return score, flags
 
     def _score_description(self, short_desc: str, long_desc: str):
@@ -84,15 +94,15 @@ class EntityQualityScorer:
         short_desc = self._clean_text(short_desc)
         long_desc = self._clean_text(long_desc)
         if short_desc:
-            score += 1.0
+            score += 0.75
         if long_desc:
-            score += 2.0 if len(long_desc) > 80 else 1.0
+            score += 1.5 if len(long_desc) > 80 else 0.75
         if not short_desc and not long_desc:
-            score -= 2.0
+            score -= 1.0
             flags.append("no_description")
         low = long_desc.lower()
         if any(x in low for x in self.editorial_markers):
-            score -= 1.0
+            score -= 0.5
             flags.append("editorial_text")
         return score, flags
 
@@ -113,18 +123,18 @@ class EntityQualityScorer:
         if match_count > 0:
             score += min(2.5, 1.0 + match_count * 0.5)
         else:
-            score -= 1.0
+            score -= 0.5
             flags.append("low_url_affinity")
         if len(urls) > 5 and match_count <= 1:
-            score -= 1.0
+            score -= 0.5
             flags.append("noisy_urls")
         return score, flags
 
     def _score_properties(self, entity: Dict[str, Any]):
         score = 0.0
         flags: List[str] = []
-        if entity.get("url"):
-            score += 1.0
+        if entity.get("url") or entity.get("sourceUrl"):
+            score += 0.75
         coords = entity.get("coordinates") or {}
         if isinstance(coords, dict) and coords.get("lat") is not None and coords.get("lng") is not None:
             score += 1.0
@@ -145,7 +155,7 @@ class EntityQualityScorer:
         flags: List[str] = []
         types = self._as_list(types)
         if not types:
-            return -1.0, ["no_type"]
+            return -0.5, ["no_type"]
         strong_hits = [t for t in types if t in self.strong_types]
         mid_hits = [t for t in types if t in self.mid_types]
         if strong_hits:
@@ -164,7 +174,7 @@ class EntityQualityScorer:
         types = self._as_list(entity.get("type") or entity.get("types"))
         entity_class = str(entity.get("class", "")).strip()
         if not types and not entity_class:
-            return -1.0, ["missing_class_and_type"]
+            return -0.5, ["missing_class_and_type"]
         if entity_class and types:
             if entity_class in types:
                 score += 1.0
@@ -215,9 +225,9 @@ class EntityQualityScorer:
             total_score += s
             flags.extend(f)
         total_score = max(0.0, min(10.0, round(total_score, 2)))
-        if total_score >= 6.0:
+        if total_score >= 5.0:
             decision = "promote"
-        elif total_score >= 3.5:
+        elif total_score >= 2.0:
             decision = "review"
         else:
             decision = "discard"

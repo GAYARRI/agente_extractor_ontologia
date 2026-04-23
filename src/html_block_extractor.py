@@ -1,44 +1,179 @@
+from __future__ import annotations
+
+import re
 from bs4 import BeautifulSoup
 
 
 class HTMLBlockExtractor:
+    """
+    Extractor de bloques HTML más permisivo para páginas de turismo,
+    pero con filtros específicos para cortar bloques de cabecera,
+    contacto, menús globales y contenido site-wide.
+    """
 
-    def __init__(self):
-        pass
+    def __init__(self, min_text_length: int = 12):
+        self.min_text_length = max(1, int(min_text_length))
+
+        self.noise_keywords = [
+            "menu", "nav", "header", "footer",
+            "sidebar", "cookie", "banner",
+            "login", "form", "search",
+            "newsletter", "breadcrumbs", "breadcrumb",
+            "pagination", "pager", "filter", "filters",
+            "modal", "popup", "share", "social",
+        ]
+
+        self.ui_noise_fragments = [
+            "phone number",
+            "email",
+            "login",
+            "register",
+            "password",
+            "cookies",
+            "política de cookies",
+            "politica de cookies",
+            "aviso legal",
+            "privacy policy",
+            "política de privacidad",
+            "politica de privacidad",
+        ]
+
+        self.contact_keywords = [
+            "teléfono", "telefono", "phone", "móvil", "movil",
+            "email", "correo", "@",
+            "facebook", "instagram", "x-twitter", "twitter", "linkedin",
+            "oficinaturismo", "oficina de turismo",
+            "plaza consistorial", "consistorial",
+            "s/n", "cp ", "c.p.", "31001",
+        ]
+
+        self.portal_menu_keywords = [
+            "descubre pamplona",
+            "barrio a barrio",
+            "verde y sostenible",
+            "san fermín", "san fermin",
+            "pelota vasca",
+            "cultura muy viva",
+            "camino de santiago",
+            "gastronomía", "gastronomia",
+            "turismo de salud",
+            "qué ver", "que ver",
+            "qué hacer", "que hacer",
+            "planifica tu viaje",
+            "dónde alojarse", "donde alojarse",
+            "dónde comer", "donde comer",
+            "cómo llegar", "como llegar",
+            "moverse por pamplona",
+            "donde aparcar",
+            "consignas",
+            "mapas y guías", "mapas y guias",
+            "convention bureau",
+            "área profesional", "area profesional",
+            "facebook instagram", "instagram x-twitter",
+        ]
+
+        self.short_ui = {
+            "ver más", "ver mas", "leer más", "leer mas",
+            "más info", "mas info", "contacto", "inicio",
+            "mapa", "cómo llegar", "como llegar", "llamar",
+            "reservar", "comprar", "cerrar",
+        }
 
     # ==================================================
     # FILTRO DE TAGS BASURA
     # ==================================================
 
     def remove_noise(self, soup):
-
-        # ❌ eliminar completamente
         for tag in soup([
             "script", "style", "nav", "header", "footer",
-            "aside", "form", "noscript"
+            "aside", "form", "noscript", "svg", "iframe",
         ]):
             tag.decompose()
 
         return soup
 
     # ==================================================
-    # FILTRO DE CLASES HTML
+    # HELPERS
+    # ==================================================
+
+    def _normalize_text(self, text: str) -> str:
+        text = str(text or "")
+        text = re.sub(r"\s+", " ", text)
+        return text.strip()
+
+    def _count_matches(self, low: str, patterns) -> int:
+        return sum(1 for p in patterns if p in low)
+
+    def _has_phone(self, text: str) -> bool:
+        # patrones amplios para teléfonos europeos
+        return bool(re.search(r"(?:\+?\d[\d\s\-]{7,}\d)", text))
+
+    def _has_email(self, text: str) -> bool:
+        return "@" in text and bool(re.search(r"\b[^\s@]+@[^\s@]+\.[^\s@]+\b", text))
+
+    def _is_contact_or_office_block(self, text: str) -> bool:
+        low = text.lower()
+        keyword_hits = self._count_matches(low, self.contact_keywords)
+
+        if keyword_hits >= 2:
+            return True
+
+        if self._has_phone(text) and self._has_email(text):
+            return True
+
+        if self._has_phone(text) and keyword_hits >= 1:
+            return True
+
+        return False
+
+    def _is_sitewide_menu_block(self, text: str) -> bool:
+        low = text.lower()
+        menu_hits = self._count_matches(low, self.portal_menu_keywords)
+
+        # combinación muy típica del bloque que está contaminando
+        if menu_hits >= 4:
+            return True
+
+        # menú + contacto/redes en el mismo bloque => casi seguro cabecera/sitewide
+        if menu_hits >= 2 and self._is_contact_or_office_block(text):
+            return True
+
+        return False
+
+    def _is_mostly_ui_text(self, text: str) -> bool:
+        low = text.lower()
+
+        if any(fragment in low for fragment in self.ui_noise_fragments):
+            return True
+
+        if low in self.short_ui:
+            return True
+
+        return False
+
+    # ==================================================
+    # FILTRO DE CLASES / IDS HTML
     # ==================================================
 
     def is_noise_block(self, element):
-
         if not element:
             return True
 
         classes = " ".join(element.get("class", [])).lower()
+        el_id = str(element.get("id", "")).lower()
+        attrs = f"{classes} {el_id}".strip()
 
-        noise_keywords = [
-            "menu", "nav", "header", "footer",
-            "sidebar", "cookie", "banner",
-            "login", "form", "search"
-        ]
+        if any(k in attrs for k in self.noise_keywords):
+            return True
 
-        if any(k in classes for k in noise_keywords):
+        text = self._normalize_text(element.get_text(" ", strip=True))
+        if not text:
+            return True
+
+        if self._is_contact_or_office_block(text):
+            return True
+
+        if self._is_sitewide_menu_block(text):
             return True
 
         return False
@@ -48,43 +183,55 @@ class HTMLBlockExtractor:
     # ==================================================
 
     def extract(self, html):
-
-        soup = BeautifulSoup(html, "html.parser")
-
+        soup = BeautifulSoup(html or "", "html.parser")
         soup = self.remove_noise(soup)
 
         blocks = []
+        seen = set()
 
-        # 🔥 SOLO CONTENIDO REAL
-        candidates = soup.find_all(["section", "article", "div", "p"])
+        candidates = soup.find_all([
+            "section", "article", "div", "p",
+            "li", "a", "h1", "h2", "h3", "h4",
+            "span", "figcaption",
+        ])
 
         for el in candidates:
-
             if self.is_noise_block(el):
                 continue
 
-            text = el.get_text(" ", strip=True)
+            text = self._normalize_text(el.get_text(" ", strip=True))
 
-            # 🔥 FILTROS CLAVE
             if not text:
                 continue
 
-            if len(text) < 60:
+            if len(text) < self.min_text_length:
                 continue
 
-            # ❌ evitar navegación / UI
-            if any(x in text.lower() for x in [
-                "phone number",
-                "email",
-                "login",
-                "register",
-                "password",
-                "cookies"
-            ]):
+            if self._is_mostly_ui_text(text):
                 continue
+
+            # Evitar bloques absurdamente largos de página completa
+            if len(text) > 5000:
+                continue
+
+            # segunda pasada defensiva sobre el propio texto
+            if self._is_contact_or_office_block(text):
+                continue
+
+            if self._is_sitewide_menu_block(text):
+                continue
+
+            norm_key = text.lower()
+            if norm_key in seen:
+                continue
+            seen.add(norm_key)
 
             blocks.append({
-                "text": text
+                "text": text,
+                "tag": el.name,
+                "href": el.get("href"),
+                "class": " ".join(el.get("class", [])),
+                "id": el.get("id"),
             })
 
         return blocks

@@ -65,6 +65,302 @@ class LLMSupervisor:
         "biosphere pamplona",
     }
 
+    CLASSIFICATION_SYSTEM_PROMPT = """
+Eres un sistema experto en CLASIFICACIÓN ONTOLÓGICA de instancias turísticas.
+
+Tu tarea es:
+1. Identificar cuáles de las entidades candidatas son realmente entidades turísticas válidas.
+2. Asignar SOLO una clase ontológica específica y válida a las entidades correctas.
+3. Rechazar cualquier candidato que sea ruido, texto editorial, navegación, CTA, categoría, concepto abstracto o fragmento narrativo.
+
+REGLAS CRÍTICAS:
+- Usa el NOMBRE de la entidad como señal principal.
+- Usa el CONTEXTO textual para confirmar, desambiguar o rechazar.
+- Si el nombre parece una frase narrativa, texto cortado, claim, CTA, categoría, sección del site o encabezado editorial: REJECT.
+- Si no existe evidencia suficiente para una clase ontológica concreta: REJECT.
+- No inventes entidades.
+- No inventes clases.
+- No cambies el nombre de la entidad.
+- No aceptes clases genéricas como Thing, Place, Location, Person, Entity o Resource como resultado final.
+- Si varias clases parecen posibles, elige la más específica respaldada por el texto.
+- Si el contenido describe un tema general y no un POI concreto, REJECT.
+- El contexto ayuda a clasificar mejor, pero NUNCA debe rescatar un nombre malo o narrativo.
+- Respeta exactamente los nombres de entidades que se te proporcionan.
+- Si rechazas una entidad, NO la devuelvas en la salida final.
+
+FORMATO DE RESPUESTA OBLIGATORIO:
+Devuelve SOLO un JSON válido con esta estructura exacta:
+{
+  "entities": [
+    {
+      "entity": "Nombre exacto de la entidad",
+      "class": "ClaseOntologica",
+      "score": 0.0,
+      "short_description": "Descripción breve y concreta",
+      "long_description": "Descripción algo más amplia y contextual",
+      "reason": "Motivo breve de la clasificación"
+    }
+  ]
+}
+
+REGLAS DE SALIDA:
+- score entre 0 y 1
+- NO uses 1.0 salvo evidencia extremadamente clara
+- short_description máximo 160 caracteres
+- long_description máximo 400 caracteres
+- Devuelve SOLO entidades válidas y clasificables
+- Devuelve SOLO JSON, sin explicación adicional
+""".strip()
+
+    POSITIVE_FEW_SHOTS = [
+        {
+            "input": {
+                "name": "Catedral de Santa María La Real",
+                "url": "https://visitpamplonairuna.com/tipo-lugar/iglesias-y-catedral/",
+                "page_context": "https://visitpamplonairuna.com/lugar/catedral-de-santa-maria-la-real/",
+            },
+            "output": {
+                "entity": "Catedral de Santa María La Real",
+                "class": "Cathedral",
+                "score": 0.99,
+                "short_description": "Construida entre los siglos XIV y XV sobre una antigua catedral románica",
+                "long_description": "La Catedral de Santa María la Real es un destacado ejemplo de la arquitectura gótica francesa en Navarra, considerado uno de los tres mejores conjuntos catedralicios góticos.",
+                "reason": "Nombre de POI claro y contexto coherente con una catedral.",
+                "img": "https://visitpamplonairuna.com/wp-content/uploads/elementor/thumbs/Catedral_SantaMaria-1-r0f6ruewswmbhucz3t4o82zh6r1ydhviw01z8p8dpg.png",
+            },
+        },
+        {
+            "input": {
+                "name": "San Fermín",
+                "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin/",
+                "page_context": "https://visitpamplonairuna.com/descubre-pamplona/",
+            },
+            "output": {
+                "entity": "San Fermín",
+                "class": "Evento",
+                "score": 0.98,
+                "short_description": "San Fermín es la fiesta más emblemática de Pamplona.",
+                "long_description": "En el siglo XVI parte de la población empezó a sumarse al trayecto, corriendo delante de los astados. Pese al intento de impedirlas por parte de las autoridades, las carreras continuaron hasta consolidarse como tradición.",
+                "reason": "Nombre de fiesta de interés turístico asociada principalmente a los encierros",
+                "img": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+            },
+        },
+        {
+            "input": {
+                "name": "Archivo General de Indias",
+                "url": "https://visitasevilla.es/archivo-de-indias/",
+                "page_context": "https://visitasevilla.es/",
+            },
+            "output": {
+                "entity": "Archivo General de Indias",
+                "class": "InterpretationCentre",
+                "score": 0.96,
+                "short_description": "Visita recomendable para conocer el papel de Sevilla en la historia global.",
+                "long_description": "El Archivo General de Indias fue fundado en 1785 por orden de Carlos III para centralizar la documentación sobre las colonias españolas, hasta entonces dispersa en otros archivos.",
+                "reason": "La entidad es un archivo documental y un edificio histórico.",
+                "img": "https://visitasevilla.es/wp-content/uploads/2025/06/shutterstock_2444981479-1024x683.jpg",
+            },
+        },
+        {
+            "input": {
+                "name": "Alcazaba",
+                "url": "https://www.turismobadajoz.es/alcazaba-badajoz/",
+                "page_context": "https://www.turismobadajoz.es/",
+            },
+            "output": {
+                "entity": "Alcazaba",
+                "class": "Monumento",
+                "score": 0.99,
+                "short_description": "Muralla o alcazaba vinculada a los orígenes de la ciudad.",
+                "long_description": "Construcción fortificada de origen musulmán del siglo IX que testimonia los inicios de la ciudad y su esplendor histórico.",
+                "reason": "Construcción fortificada musulmana del siglo IX.",
+                "img": "https://www.turismobadajoz.es/wp-content/uploads/2020/09/alcazaba-badajoz.jpg",
+            },
+        },
+        {
+            "input": {
+                "name": "OleoturJaén",
+                "url": "https://www.jaenparaisointerior.es/es/oleotour/inicio",
+                "page_context": "https://www.jaenparaisointerior.es/es/",
+            },
+            "output": {
+                "entity": "OleoturJaén",
+                "class": "DestinationExperience",
+                "score": 0.99,
+                "short_description": "Oferta de oleoturismo en Jaén vinculada a la cultura del olivo.",
+                "long_description": "Experiencia turística centrada en el proceso de producción del aceite y en el conocimiento de la cultura del olivo en Jaén.",
+                "reason": "Experiencia turística temática claramente identificable.",
+                "img": "",
+            },
+        },
+        {
+            "input": {
+                "name": "ANNI B SWEET",
+                "url": "https://visita.malaga.eu/es/agenda/anni-b-sweet-p109988",
+                "page_context": "https://visita.malaga.eu/es/agenda/",
+            },
+            "output": {
+                "entity": "ANNI B SWEET",
+                "class": "Event",
+                "score": 0.99,
+                "short_description": "Concierto en el Teatro Cervantes dentro del ciclo Unísonas.",
+                "long_description": "Actuación musical concreta, identificable y contextualizada como evento cultural en Málaga.",
+                "reason": "Entidad asociada a un concierto o evento cultural concreto.",
+                "img": "https://static.visita.malaga.eu/visita/subidas/imagenes/8/5/arc_41058_m.jpg",
+            },
+        },
+        {
+            "input": {
+                "name": "Descarga de guías y publicaciones",
+                "url": "https://www.costablanca.org/es/travel-planning/travel-guides",
+                "page_context": "https://www.costablanca.org/es/",
+            },
+            "output": {
+                "entity": "guias y publicaciones",
+                "class": "TourismEntity",
+                "score": 0.99,
+                "short_description": "Guías gratuitas para consultar propuestas de la Costa Blanca.",
+                "long_description": "Recurso turístico informativo de apoyo al visitante, centrado en guías y publicaciones descargables.",
+                "reason": "Recurso turístico del que puede hacer uso el turista de la Costa Blanca.",
+                "img": "https://cms.smartcostablanca.com/sites/default/files/2024-01/encabezadoguiaypubliacaciones.jpg",
+            },
+        },
+        {
+            "input": {
+                "name": "Turismo Joven",
+                "url": "https://getafe.es/muestra-turismo-joven/",
+                "page_context": "https://getafe.es/",
+            },
+            "output": {
+                "entity": "Turismo Joven",
+                "class": "Evento",
+                "score": 0.98,
+                "short_description": "Especial informativo sobre turismo dirigido a jóvenes.",
+                "long_description": "Actividad organizada por un servicio juvenil para orientar viajes de jóvenes durante las fiestas navideñas.",
+                "reason": "Recurso o evento turístico orientado a jóvenes de Getafe.",
+                "img": "https://visitpamplonairuna.com/wp-content/uploads/2025/10/Chupinazo-2.jpg",
+            },
+        },
+        {
+            "input": {
+                "name": "Residencia Cultural y Universitaria Cimadevilla",
+                "url": "https://www.gijon.es/es/directorio/residencia-cultural-y-universitaria-cimadevilla",
+                "page_context": "https://www.gijon.es/es/turismo/",
+            },
+            "output": {
+                "entity": "Residencia Cultural y Universitaria Cimadevilla",
+                "class": "Residence",
+                "score": 0.99,
+                "short_description": "Residencia situada en el casco antiguo de Gijón.",
+                "long_description": "Alojamiento identificado y localizado en una zona turística, conectado con campus, playa y puerto deportivo.",
+                "reason": "Recurso turístico de alojamiento.",
+                "img": "",
+            },
+        },
+        {
+            "input": {
+                "name": "Emérita sobrenatural",
+                "url": "https://turismoapps.dip-badajoz.es/node/18766",
+                "page_context": "https://turismoapps.dip-badajoz.es/",
+            },
+            "output": {
+                "entity": "Emérita sobrenatural",
+                "class": "LocalBusiness",
+                "score": 0.99,
+                "short_description": "Actividad temática vinculada a relatos sobrenaturales.",
+                "long_description": "Experiencia organizada en torno a casas encantadas, maldiciones y mitología del inframundo.",
+                "reason": "Actividad o negocio turístico temático identificable.",
+                "img": "",
+            },
+        },
+        {
+            "input": {
+                "name": "Cicloturismo en Madrid",
+                "url": "https://www.visitmadrid.es/hacer-madrid-planes-experiencias-imperdibles/hacer/deporte-turismo-activo/ciclamadrid",
+                "page_context": "https://www.visitmadrid.es/hacer-madrid-planes-experiencias-imperdibles/hacer/deporte-turismo-activo/",
+            },
+            "output": {
+                "entity": "Cicloturismo",
+                "class": "TourismService",
+                "score": 0.99,
+                "short_description": "Espacio para amantes de la bicicleta en la Comunidad de Madrid.",
+                "long_description": "Servicio o recurso turístico con información práctica, buscador de rutas y propuestas de movilidad activa en bici.",
+                "reason": "Servicio turístico orientado a rutas y movilidad ciclista.",
+                "img": "",
+            },
+        },
+        {
+            "input": {
+                "name": "De Pavía a Breda",
+                "url": "https://www.jerez.es/eventos",
+                "page_context": "https://www.turismojerez.com/",
+            },
+            "output": {
+                "entity": "De Pavía a Breda",
+                "class": "Event",
+                "score": 0.99,
+                "short_description": "Exposición temporal De Pavía a Breda.",
+                "long_description": "Exposición temporal claramente identificada como evento cultural.",
+                "reason": "Evento expositivo concreto.",
+                "img": "",
+            },
+        },
+    ]
+
+    NEGATIVE_FEW_SHOTS = [
+        {
+            "input": {
+                "name": "no sabes qué hacer",
+                "url": "https://ejemplo.com/que-hacer",
+                "page_context": "Rellena aquí con el bloque o texto real",
+            },
+            "output": {
+                "reject": True,
+                "reason": "Fragmento de frase narrativa, no nombre de entidad.",
+            },
+        },
+        {
+            "input": {
+                "name": "Descubre Pamplona",
+                "url": "https://ejemplo.com/descubre-pamplona",
+                "page_context": "Rellena aquí con el bloque o texto real",
+            },
+            "output": {
+                "reject": True,
+                "reason": "Heading o lema editorial del portal, no entidad concreta.",
+            },
+        },
+    ]
+
+    AMBIGUOUS_FEW_SHOTS = [
+        {
+            "input": {
+                "name": "Pelota Vasca",
+                "url": "https://ejemplo.com/pelota-vasca",
+                "page_context": "Rellena aquí con el bloque o texto real",
+            },
+            "output": {
+                "reject": True,
+                "reason": "Concepto cultural o deportivo general, no POI concreto.",
+            },
+        },
+        {
+            "input": {
+                "name": "Casco Antiguo de Pamplona",
+                "url": "https://ejemplo.com/casco-antiguo",
+                "page_context": "Rellena aquí con el bloque o texto real",
+            },
+            "output": {
+                "entity": "Casco Antiguo de Pamplona",
+                "class": "Place",
+                "score": 0.90,
+                "short_description": "Zona urbana histórica claramente identificable.",
+                "long_description": "Entidad territorial concreta respaldada por el contexto urbano e histórico.",
+                "reason": "Entidad urbana concreta y reconocible, no simple heading editorial.",
+            },
+        },
+    ]
+
     def __init__(self, ontology_index, model="gpt-4o-mini", gold_examples_path="benchmark/Ejemplos.csv"):
         self.ontology_index = ontology_index
         self.model = model
@@ -84,25 +380,21 @@ class LLMSupervisor:
 
         self.allowed_classes = self._load_allowed_classes()
 
-    # ==================================================
-    # JSON SAFE PARSE
-    # ==================================================
-
     def safe_json_parse(self, content):
         if not content:
             return []
 
         content = content.strip()
-        content = re.sub(r"^```json\s*", "", content, flags=re.IGNORECASE)
-        content = re.sub(r"^```\s*", "", content)
-        content = re.sub(r"\s*```$", "", content)
+        content = re.sub(r"^```json\\s*", "", content, flags=re.IGNORECASE)
+        content = re.sub(r"^```\\s*", "", content)
+        content = re.sub(r"\\s*```$", "", content)
 
         try:
             return safe_load_json(content)
         except Exception:
             pass
 
-        match = re.search(r"(\{.*\}|\[.*\])", content, re.DOTALL)
+        match = re.search(r"(\\{.*\\}|\\[.*\\])", content, re.DOTALL)
         if match:
             try:
                 return safe_load_json(match.group(1))
@@ -110,10 +402,6 @@ class LLMSupervisor:
                 pass
 
         return []
-
-    # ==================================================
-    # ONTOLOGY HELPERS
-    # ==================================================
 
     def _load_allowed_classes(self):
         allowed = set()
@@ -183,11 +471,7 @@ class LLMSupervisor:
                 "- Service: servicio concreto útil para el turista",
             ]
 
-        return "\n".join(class_lines)
-
-    # ==================================================
-    # GOLD PRIOR / GOLD PROMPT
-    # ==================================================
+        return "\\n".join(class_lines)
 
     def normalize_llm_class(self, value: str) -> str:
         if not value:
@@ -291,17 +575,34 @@ IMPORTANTE:
                 "long_description": item.get("long_description", ""),
                 "gold_alignment_score": item.get("gold_alignment_score", 0.0),
                 "normalized_type": item.get("normalized_type", ""),
+                "reason": item.get("reason", ""),
             })
 
         return clean_items
 
-    # ==================================================
-    # ENTITY QUALITY FILTERS
-    # ==================================================
+    def _format_few_shot_examples(self, title: str, examples: list[dict]) -> str:
+        if not examples:
+            return f"{title}:\\n- Sin ejemplos todavía."
+
+        lines = [title]
+        for i, ex in enumerate(examples, start=1):
+            lines.append(f"\\nEjemplo {i}")
+            lines.append("INPUT:")
+            lines.append(json.dumps(ex.get("input", {}), ensure_ascii=False, indent=2))
+            lines.append("OUTPUT:")
+            lines.append(json.dumps(ex.get("output", {}), ensure_ascii=False, indent=2))
+        return "\\n".join(lines)
+
+    def build_few_shot_prompt_context(self) -> str:
+        return "\\n\\n".join([
+            self._format_few_shot_examples("EJEMPLOS POSITIVOS", self.POSITIVE_FEW_SHOTS),
+            self._format_few_shot_examples("EJEMPLOS NEGATIVOS", self.NEGATIVE_FEW_SHOTS),
+            self._format_few_shot_examples("EJEMPLOS AMBIGUOS", self.AMBIGUOUS_FEW_SHOTS),
+        ])
 
     def normalize_entity_text(self, value: str) -> str:
         value = str(value or "").strip()
-        value = re.sub(r"\s+", " ", value)
+        value = re.sub(r"\\s+", " ", value)
         return value
 
     def is_bad_entity_name(self, entity: str) -> bool:
@@ -320,13 +621,13 @@ IMPORTANTE:
         if len(entity.split()) > 7:
             return True
 
-        if re.fullmatch(r"[\W\d_]+", entity):
+        if re.fullmatch(r"[\\W\\d_]+", entity):
             return True
 
-        if re.search(r"\b(siglos?|origen|historia|descubre|pamplona bizi-bizirik)\b", entity_l):
+        if re.search(r"\\b(siglos?|origen|historia|descubre|pamplona bizi-bizirik)\\b", entity_l):
             return True
 
-        if re.search(r"\b(aquí|allí|muy viva|últimas|ver listado|haz clic)\b", entity_l):
+        if re.search(r"\\b(aquí|allí|muy viva|últimas|ver listado|haz clic)\\b", entity_l):
             return True
 
         for pat in self.BAD_ENTITY_PATTERNS:
@@ -387,7 +688,7 @@ IMPORTANTE:
             score *= 0.80
 
         entity_l = entity.lower()
-        if re.search(r"\b(san|santa|santo)\b", entity_l) and len(entity.split()) == 2:
+        if re.search(r"\\b(san|santa|santo)\\b", entity_l) and len(entity.split()) == 2:
             score *= 0.75
 
         if score > 0.95:
@@ -425,13 +726,9 @@ IMPORTANTE:
 
         return filtered
 
-    # ==================================================
-    # PROMPTS
-    # ==================================================
-
     def build_extraction_prompt(self, text):
         return f"""
-Eres un agente de turismo experto en extracción de instancias turisticas de un website que se te proporciona
+Eres un agente de turismo experto en extracción de instancias turisticas de un website que se te proporciona.
 
 Tu tarea es UNICAMENTE EXTRAER instancias turísticas del website proporcionado.
 
@@ -530,29 +827,15 @@ Devuelve SOLO un JSON válido con esta forma:
         entities_json = json.dumps(entities, ensure_ascii=False)
         ontology_context = self.build_ontology_context()
         gold_context = self.build_gold_example_prompt_context(url) if url else ""
-
-        allowed_classes_line = ", ".join(sorted(self.allowed_classes)) if self.allowed_classes else "Usa solo clases de la ontología dada"
+        few_shot_context = self.build_few_shot_prompt_context()
+        allowed_classes_line = (
+            ", ".join(sorted(self.allowed_classes))
+            if self.allowed_classes
+            else "Usa solo clases de la ontología dada"
+        )
 
         return f"""
-Eres un sistema experto en CLASIFICACION ONTOLOGICA de instancias turísticas.
-
-Se te proporciona:
-1. Un texto de contexto.
-2. Instancias candidatas.
-3. Una lista de clases ontológicas permitidas.
-
-TU TAREA:
-Clasificar SOLO las instancias verdaderamente válidas y devolver SOLO aquellas cuya clase sea específica y pertenezca a la ontología.
-
-REGLAS CRÍTICAS:
-- ELIGE EXCLUSIVAMENTE UNA CLASE REAL DE LA ONTOLOGÍA
-- NO DEJES NINGUNA INSTANCIA SIN CLASIFICAR ONTOLOGICAMENTE
-- SI LA ÚNICA CLASE POSIBLE ES Thing, Place, Location, Person u otra genérica: DESCARTA LA ENTIDAD
-- SI LA ENTIDAD ES ABSTRACTA, PROMOCIONAL, CORTADA O DE NAVEGACIÓN: DESCÁRTALA
-- NO CAMBIES EL NOMBRE DE LA ENTIDAD
-- NO INVENTES CLASES NUEVAS
-- NO FUERCES CLASIFICACIONES
-- NO DEVUELVAS ENTIDADES DUDOSAS
+{self.CLASSIFICATION_SYSTEM_PROMPT}
 
 CLASES PERMITIDAS:
 {allowed_classes_line}
@@ -562,38 +845,24 @@ ONTOLOGÍA TURÍSTICA:
 
 {gold_context}
 
-TEXTO:
+{few_shot_context}
+
+CONTEXTO:
 \"\"\"
 {text}
 \"\"\"
 
-ENTIDADES:
+ENTIDADES CANDIDATAS:
 {entities_json}
 
-FORMATO DE SALIDA:
-Devuelve SOLO un JSON válido con esta forma:
-{{
-  "entities": [
-    {{
-      "entity": "Nombre exacto de la entidad",
-      "class": "ClaseOntologica",
-      "score": 0.0,
-      "short_description": "Descripción breve y concreta",
-      "long_description": "Descripción algo más amplia y contextual"
-    }}
-  ]
-}}
-
-RESTRICCIONES:
-- score debe estar entre 0 y 1
-- NO uses 1.0 salvo evidencia extremadamente clara
-- short_description máximo 160 caracteres
-- long_description máximo 400 caracteres
+INSTRUCCIONES FINALES:
+- Clasifica SOLO las instancias verdaderamente válidas.
+- Si una entidad es dudosa, genérica, narrativa o editorial, NO la devuelvas.
+- Usa los few-shots como criterio adicional.
+- Prioriza siempre la ontología y el contexto real.
+- Usa exactamente el nombre recibido en cada entidad.
+- Devuelve SOLO JSON válido.
 """.strip()
-
-    # ==================================================
-    # LOW LEVEL CALL
-    # ==================================================
 
     def call_llm_json(self, prompt, default=None):
         if default is None:
@@ -606,7 +875,7 @@ RESTRICCIONES:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
-                temperature=0
+                temperature=0,
             )
 
             content = response.choices[0].message.content.strip()
@@ -615,10 +884,6 @@ RESTRICCIONES:
         except Exception as e:
             print("LLM extract error:", e, file=sys.stderr)
             return default
-
-    # ==================================================
-    # PUBLIC API
-    # ==================================================
 
     def extract_entities(self, text):
         prompt = self.build_extraction_prompt(text)
@@ -694,6 +959,7 @@ RESTRICCIONES:
 
                     short_description = str(item.get("short_description", "")).strip()
                     long_description = str(item.get("long_description", "")).strip()
+                    reason = str(item.get("reason", "")).strip()
 
                     clean_items.append({
                         "entity": entity,
@@ -702,6 +968,7 @@ RESTRICCIONES:
                         "score": score,
                         "short_description": short_description[:160],
                         "long_description": long_description[:400],
+                        "reason": reason[:220],
                     })
 
                 clean_items = self.filter_classified_items(clean_items)
@@ -713,18 +980,10 @@ RESTRICCIONES:
 
         return []
 
-    # ==================================================
-    # FULL PIPELINE
-    # ==================================================
-
     def extract_and_validate_entities(self, text):
         extracted = self.extract_entities(text)
         validated = self.validate_entities(extracted, text)
         return validated
-
-    # ==================================================
-    # FINAL HARD FILTER FOR POST-PROCESSING / ENRICHMENT
-    # ==================================================
 
     def final_entity_guard(self, entities: list[dict]) -> list[dict]:
         CLEAN_TYPES = {
@@ -740,27 +999,28 @@ RESTRICCIONES:
         }
 
         GENERIC_TYPES = {
-            "thing", "location", "place", "entity"
+            "thing", "location", "place", "entity",
         }
 
         BAD_NAME_PATTERNS = [
-            r"\bplanes\b",
-            r"\bagenda\b",
-            r"\bmapas\b",
-            r"\bsuscr",
-            r"\bfacebook\b",
-            r"\binstagram\b",
-            r"\bqué\b",
-            r"\bver\b",
-            r"\búltimas\b",
-            r"\bgastronom[ií]a\b",
-            r"\bcultura\b",
-            r"\bfamilia\b",
-            r"\btradiciones\b",
+            r"\\bplanes\\b",
+            r"\\bagenda\\b",
+            r"\\bmapas\\b",
+            r"\\bsuscr",
+            r"\\bfacebook\\b",
+            r"\\binstagram\\b",
+            r"\\bqué\\b",
+            r"\\bver\\b",
+            r"\\búltimas\\b",
+            r"\\bgastronom[ií]a\\b",
+            r"\\bcultura\\b",
+            r"\\bfamilia\\b",
+            r"\\btradiciones\\b",
         ]
 
         def is_bad_name(name: str) -> bool:
             name_l = str(name or "").lower().strip()
+
             if not name_l:
                 return True
 
@@ -830,12 +1090,3 @@ RESTRICCIONES:
             filtered.append(e)
 
         return filtered
-
-    def is_geo_valid(self, entity: str, lat, lng) -> bool:
-        if lat is None or lng is None:
-            return True
-
-        return (
-            41.5 <= lat <= 43.5 and
-            -3.5 <= lng <= -0.5
-        )

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-import json
+from __future__ import annotations
+
 import argparse
-from collections import defaultdict, Counter
-from pathlib import Path
+import json
 import re
+from collections import Counter, defaultdict
+from pathlib import Path
 from typing import Any, Dict, Iterable, List, Tuple
 
 
@@ -20,10 +22,12 @@ GENERIC_TYPES = {
     "Organization",
     "Service",
     "Concept",
+    "ConceptScheme",
     "Accommodation",
+    "SIN_TIPO",
 }
 
-# Normalize common variants into canonical labels.
+# Normalización de variantes frecuentes
 CANONICAL_TYPE_MAP = {
     "hotel": "Hotel",
     "hotels": "Hotel",
@@ -43,13 +47,34 @@ CANONICAL_TYPE_MAP = {
     "tourist attraction": "TouristAttraction",
     "touristattraction": "TouristAttraction",
     "attraction": "TouristAttraction",
+    "townhall": "TownHall",
+    "town hall": "TownHall",
+    "cathedral": "Cathedral",
+    "church": "Church",
+    "palace": "Palace",
+    "castle": "Castle",
+    "route": "Route",
+    "event": "Event",
+    "garden": "Garden",
+    "park": "Park",
+    "monument": "Monument",
 }
 
-# Higher score = better candidate for primary class.
+# Cuanto mayor, más preferible como clase primaria
 TYPE_PRIORITY = {
+    "TownHall": 120,
+    "Cathedral": 120,
+    "Church": 115,
+    "Palace": 115,
+    "Castle": 115,
+    "Museum": 110,
+    "Route": 110,
+    "Event": 110,
+    "Park": 105,
+    "Garden": 105,
+    "Monument": 100,
     "Hotel": 100,
     "Restaurant": 100,
-    "Museum": 100,
     "Airport": 100,
     "Bar": 95,
     "Cafe": 95,
@@ -58,15 +83,27 @@ TYPE_PRIORITY = {
     "Service": 20,
     "Organization": 10,
     "Place": 5,
+    "ConceptScheme": 0,
     "Concept": 0,
     "Unknown": 0,
+    "SIN_TIPO": 0,
 }
 
-# Minimal class-specific completeness expectations.
+# Campos esperados mínimos por clase
 EXPECTED_FIELDS = {
+    "TownHall": ["name"],
+    "Cathedral": ["name"],
+    "Church": ["name"],
+    "Palace": ["name"],
+    "Castle": ["name"],
+    "Museum": ["name"],
+    "Route": ["name"],
+    "Event": ["name"],
+    "Park": ["name"],
+    "Garden": ["name"],
+    "Monument": ["name"],
     "Hotel": ["name", "coordinates"],
     "Restaurant": ["name", "coordinates"],
-    "Museum": ["name"],
     "Airport": ["name", "coordinates"],
     "Bar": ["name", "coordinates"],
     "Cafe": ["name", "coordinates"],
@@ -74,20 +111,23 @@ EXPECTED_FIELDS = {
 }
 
 
-def has_image(entity: Dict[str, Any]) -> bool:
-    return any([
-        bool(entity.get("image")),
-        bool(entity.get("mainImage")),
-        bool(entity.get("images")),
-        bool(entity.get("additionalImages")),
-    ])
+def normalize_text(value: Any) -> str:
+    return re.sub(r"\s+", " ", str(value or "").strip().lower())
 
 
-def has_coordinates(entity: Dict[str, Any]) -> bool:
-    coords = entity.get("coordinates") or {}
-    lat = coords.get("lat")
-    lng = coords.get("lng")
-    return lat is not None and lng is not None
+def _normalize_spaces(value: str) -> str:
+    return re.sub(r"\s+", " ", str(value or "").strip())
+
+
+def _local_name(value: Any) -> str:
+    text = _normalize_spaces(value)
+    if not text:
+        return ""
+    if "#" in text:
+        text = text.split("#")[-1]
+    if "/" in text:
+        text = text.rstrip("/").split("/")[-1]
+    return _normalize_spaces(text)
 
 
 def _as_list(value: Any) -> List[Any]:
@@ -100,39 +140,62 @@ def _as_list(value: Any) -> List[Any]:
     return [value]
 
 
-def _normalize_spaces(value: str) -> str:
-    return re.sub(r"\s+", " ", value).strip()
-
-
-def _clean_type(t: Any) -> str:
-    raw = _normalize_spaces(str(t))
+def _clean_type(value: Any) -> str:
+    raw = _local_name(value)
     if not raw:
         return ""
-    canonical = CANONICAL_TYPE_MAP.get(raw.lower())
-    return canonical or raw
+    return CANONICAL_TYPE_MAP.get(raw.lower(), raw)
 
 
-def _is_valid_type(t: str) -> bool:
-    t = _clean_type(t)
-    return bool(t) and t not in FORBIDDEN_TYPES
+def _is_valid_type(label: str) -> bool:
+    label = _clean_type(label)
+    return bool(label) and label not in FORBIDDEN_TYPES
 
 
 def _sanitize_types(types: Any) -> List[str]:
-    out = []
+    out: List[str] = []
     seen = set()
-    for t in _as_list(types):
-        t = _clean_type(t)
-        if not _is_valid_type(t):
+
+    for value in _as_list(types):
+        label = _clean_type(value)
+        if not _is_valid_type(label):
             continue
-        if t in seen:
+        if label in seen:
             continue
-        seen.add(t)
-        out.append(t)
+        seen.add(label)
+        out.append(label)
+
     return out
 
 
+def has_image(entity: Dict[str, Any]) -> bool:
+    images = entity.get("images")
+    additional_images = entity.get("additionalImages") or entity.get("additional_images")
+    return any(
+        [
+            bool(entity.get("image")),
+            bool(entity.get("mainImage") or entity.get("main_image")),
+            bool(images),
+            bool(additional_images),
+        ]
+    )
+
+
+def has_coordinates(entity: Dict[str, Any]) -> bool:
+    coords = entity.get("coordinates") or {}
+    lat = coords.get("lat")
+    lng = coords.get("lng")
+
+    if lat is None:
+        lat = entity.get("latitude")
+    if lng is None:
+        lng = entity.get("longitude")
+
+    return lat is not None and lng is not None
+
+
 def class_quality(label: str) -> str:
-    if label == "SIN_TIPO":
+    if not label or label == "SIN_TIPO":
         return "missing"
     if label in GENERIC_TYPES:
         return "generic"
@@ -141,38 +204,37 @@ def class_quality(label: str) -> str:
 
 def iter_class_candidates(entity: Dict[str, Any]) -> Iterable[Tuple[str, str]]:
     """
-    Yield (source, class_label) candidates from class/types/type fields.
+    Devuelve pares (origen, etiqueta_clase) a partir de class/types/type y variantes.
     """
-    for source, values in [
+    fields = [
         ("class", entity.get("class")),
         ("types", entity.get("types")),
         ("type", entity.get("type")),
-    ]:
-        for t in _sanitize_types(values):
-            yield source, t
+        ("class_raw", entity.get("class_raw")),
+        ("types_raw", entity.get("types_raw")),
+        ("typesRaw", entity.get("typesRaw")),
+    ]
+
+    for source, values in fields:
+        for label in _sanitize_types(values):
+            yield source, label
 
 
 def entity_primary_class(entity: Dict[str, Any]) -> str:
-    """
-    Pick the best primary class using:
-      - canonicalization
-      - forbidden filtering
-      - specificity scoring
-      - slight preference for 'class' source, without letting generic labels always win
-    """
-    candidates = []
+    candidates: List[Tuple[int, str]] = []
+
     for source, label in iter_class_candidates(entity):
         score = TYPE_PRIORITY.get(label, 50)
 
-        # Prefer specific over generic.
         if label not in GENERIC_TYPES:
             score += 15
 
-        # Slight source bias only.
         if source == "class":
             score += 5
         elif source == "types":
             score += 2
+        elif source == "type":
+            score += 1
 
         candidates.append((score, label))
 
@@ -184,7 +246,7 @@ def entity_primary_class(entity: Dict[str, Any]) -> str:
 
 
 def entity_all_classes(entity: Dict[str, Any]) -> List[str]:
-    classes = []
+    classes: List[str] = []
     seen = set()
 
     for _, label in iter_class_candidates(entity):
@@ -200,8 +262,8 @@ def entity_specific_classes(entity: Dict[str, Any]) -> List[str]:
 
 
 def entity_declared_class(entity: Dict[str, Any]) -> str:
-    c = _clean_type(entity.get("class", ""))
-    return c if _is_valid_type(c) else ""
+    label = _clean_type(entity.get("class"))
+    return label if _is_valid_type(label) else ""
 
 
 def has_class_conflict(entity: Dict[str, Any]) -> bool:
@@ -216,25 +278,27 @@ def has_class_conflict(entity: Dict[str, Any]) -> bool:
     return declared not in specific
 
 
-def normalize_text(s: Any) -> str:
-    return re.sub(r"\s+", " ", str(s or "").strip().lower())
-
-
 def entity_key(entity: Dict[str, Any]) -> str:
     """
-    Stable-ish dedupe key:
-      1. explicit id / externalId / url if present
-      2. name + rounded coordinates
-      3. fallback name only
+    Clave estable de deduplicación:
+      1. id/externalId/url/sourceUrl
+      2. nombre + coordenadas redondeadas
+      3. nombre
     """
-    ext_id = entity.get("id") or entity.get("externalId") or entity.get("url")
+    ext_id = (
+        entity.get("id")
+        or entity.get("externalId")
+        or entity.get("external_id")
+        or entity.get("url")
+        or entity.get("sourceUrl")
+    )
     if ext_id:
         return "id|" + normalize_text(ext_id)
 
-    name = normalize_text(entity.get("name"))
+    name = normalize_text(entity.get("name") or entity.get("entity_name") or entity.get("label"))
     coords = entity.get("coordinates") or {}
-    lat = coords.get("lat")
-    lng = coords.get("lng")
+    lat = coords.get("lat", entity.get("latitude"))
+    lng = coords.get("lng", entity.get("longitude"))
 
     if lat is not None and lng is not None:
         try:
@@ -247,19 +311,23 @@ def entity_key(entity: Dict[str, Any]) -> str:
 
 def entity_missing_expected_fields(entity: Dict[str, Any], primary_class: str) -> List[str]:
     missing = []
+
     for field in EXPECTED_FIELDS.get(primary_class, []):
         if field == "coordinates":
             if not has_coordinates(entity):
                 missing.append(field)
         else:
             value = entity.get(field)
-            if value is None or (isinstance(value, str) and not value.strip()):
+            if value is None:
                 missing.append(field)
+            elif isinstance(value, str) and not value.strip():
+                missing.append(field)
+
     return missing
 
 
 def slugify(value: str) -> str:
-    value = value.strip().replace("/", "-")
+    value = str(value or "").strip().replace("/", "-")
     value = re.sub(r"[^A-Za-z0-9._-]+", "_", value)
     return value.strip("_") or "SIN_TIPO"
 
@@ -273,7 +341,7 @@ def print_section(title: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=(
-            "Audita entidades: deduplicación, clases primarias más precisas, "
+            "Audita entidades: deduplicación, clases primarias precisas, "
             "conflictos class/types, ambigüedad y calidad por clase."
         )
     )
@@ -290,7 +358,7 @@ def main() -> None:
     parser.add_argument(
         "--multi-class",
         action="store_true",
-        help="Cuenta todas las clases válidas por entidad en vez de solo la clase principal (solo auditoría secundaria)",
+        help="Cuenta todas las clases válidas por entidad en vez de solo la primaria",
     )
     args = parser.parse_args()
 
@@ -305,13 +373,11 @@ def main() -> None:
     total_with_image = sum(1 for e in data if has_image(e))
     total_with_coordinates = sum(1 for e in data if has_coordinates(e))
 
-    # Dedupe analysis
     key_counts = Counter(entity_key(e) for e in data)
     duplicate_groups = {k: c for k, c in key_counts.items() if c > 1}
     total_unique_entities = len(key_counts)
     duplicate_entities = sum(c - 1 for c in key_counts.values() if c > 1)
 
-    # High-level quality metrics
     primary_quality_counter = Counter()
     conflict_count = 0
     ambiguous_count = 0
@@ -319,13 +385,15 @@ def main() -> None:
 
     ambiguous_pair_counter = Counter()
 
-    stats_by_class = defaultdict(lambda: {
-        "total": 0,
-        "with_image": 0,
-        "with_coordinates": 0,
-        "generic_primary": 0,
-        "missing_expected_fields": 0,
-    })
+    stats_by_class = defaultdict(
+        lambda: {
+            "total": 0,
+            "with_image": 0,
+            "with_coordinates": 0,
+            "generic_primary": 0,
+            "missing_expected_fields": 0,
+        }
+    )
 
     entities_by_class = defaultdict(list)
     audit_buckets = defaultdict(list)
@@ -363,22 +431,22 @@ def main() -> None:
                 stats_by_class[cls]["with_image"] += 1
             if has_coordinates(entity):
                 stats_by_class[cls]["with_coordinates"] += 1
-            if class_quality(primary) == "generic":
+            if primary_quality == "generic":
                 stats_by_class[cls]["generic_primary"] += 1
             if missing_expected:
                 stats_by_class[cls]["missing_expected_fields"] += 1
 
             entities_by_class[cls].append(entity)
 
-    # Duplicate candidate export bucket
     if duplicate_groups:
         seen = set()
         dup_entities = []
         for entity in data:
             k = entity_key(entity)
-            if key_counts[k] > 1 and id(entity) not in seen:
+            marker = (k, id(entity))
+            if key_counts[k] > 1 and marker not in seen:
                 dup_entities.append(entity)
-                seen.add(id(entity))
+                seen.add(marker)
         audit_buckets["duplicate_candidates"] = dup_entities
 
     print_section("RESUMEN GENERAL")
@@ -408,7 +476,7 @@ def main() -> None:
 
     for cls, stats in sorted(
         stats_by_class.items(),
-        key=lambda item: (-item[1]["total"], item[0].lower())
+        key=lambda item: (-item[1]["total"], item[0].lower()),
     ):
         print(
             f"{cls:30} "
@@ -431,7 +499,6 @@ def main() -> None:
         export_dir = Path(args.export_dir)
         export_dir.mkdir(parents=True, exist_ok=True)
 
-        # Per-class exports
         per_class_dir = export_dir / "by_class"
         per_class_dir.mkdir(parents=True, exist_ok=True)
 
@@ -440,7 +507,6 @@ def main() -> None:
             with out_file.open("w", encoding="utf-8") as f:
                 json.dump(entities, f, ensure_ascii=False, indent=2)
 
-        # Audit-focused exports
         audit_dir = export_dir / "audit"
         audit_dir.mkdir(parents=True, exist_ok=True)
 
@@ -449,7 +515,6 @@ def main() -> None:
             with out_file.open("w", encoding="utf-8") as f:
                 json.dump(entities, f, ensure_ascii=False, indent=2)
 
-        # Summary export
         summary = {
             "total_raw_entities": total,
             "total_unique_entities_estimated": total_unique_entities,
@@ -467,6 +532,7 @@ def main() -> None:
             ],
             "stats_by_class": dict(stats_by_class),
         }
+
         with (export_dir / "summary.json").open("w", encoding="utf-8") as f:
             json.dump(summary, f, ensure_ascii=False, indent=2)
 

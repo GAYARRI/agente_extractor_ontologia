@@ -1,778 +1,616 @@
 from __future__ import annotations
 
 import re
+import time
 import unicodedata
 from typing import Any, Dict, List, Optional
-import time
+
 import requests
 
 
 class WikidataLinker:
     """
-    Vincula entidades textuales con ítems de Wikidata.
-    Devuelve preferentemente el QID (por ejemplo, 'Q8717').
+    Linker conservador contra Wikidata.
+
+    Objetivos:
+    - evitar consultas basura con fragmentos narrativos
+    - soportar rate-limit (429)
+    - devolver resultados consistentes aunque falle Wikidata
+    - exponer get_entity_data() para otros componentes del pipeline
     """
 
-    WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
-    WIKIDATA_ENTITY_URL = "https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
+    WIKIDATA_SEARCH_URL = "https://www.wikidata.org/w/api.php"
+    WIKIDATA_ENTITY_DATA_URL = "https://www.wikidata.org/wiki/Special:EntityData/{qid}.json"
 
     def __init__(
         self,
-        language: str = "es",
-        limit: int = 5,
-        timeout: int = 15,
-        min_score: float = 0.60,
-    ) -> None:
-        self.language = language
-        self.limit = limit
+        lang: str = "es",
+        user_agent: str = "TourismOntologyAgent/1.0",
+        timeout: int = 20,
+        max_retries: int = 2,
+        retry_sleep: float = 1.5,
+        debug: bool = False,
+    ):
+        self.lang = lang
+        self.user_agent = user_agent
         self.timeout = timeout
-        self.min_score = min_score
+        self.max_retries = max_retries
+        self.retry_sleep = retry_sleep
+        self.debug = debug
 
         self.session = requests.Session()
         self.session.headers.update(
             {
-                "User-Agent": "TourismOntologyAgent/1.0"
+                "User-Agent": self.user_agent,
+                "Accept": "application/json",
             }
         )
 
-    # -------------------------------------------------------------------------
-    # API pública
-    # -------------------------------------------------------------------------
-
-    def link(
-        self,
-        entity_name: str,
-        entity_class: Optional[str] = None,
-        short_description: str = "",
-        long_description: str = "",
-        source_url: str = "",
-        aliases: Optional[List[str]] = None,
-    ) -> Optional[str]:
-        """
-        Devuelve el wikidata_id (Qxxx) o None si no encuentra candidato fiable.
-        """
-        entity_name = self._safe_string(entity_name)
-        entity_class = self._safe_string(entity_class)
-        short_description = self._safe_string(short_description)
-        long_description = self._safe_string(long_description)
-        source_url = self._safe_string(source_url)
-        aliases = aliases or ([entity_name] if entity_name else [])
-
-        print("\n=== DEBUG WIKIDATA INPUT ===")
-        print(f"NAME: {entity_name}")
-        print(f"CLASS: {entity_class or None}")
-        print(f"ALIASES: {aliases}")
-
-        if not entity_name:
-            print("⚠️ Wikidata linker: entity_name vacío")
-            return None
-
-        mapped_class = self._map_class(
-            entity_name=entity_name,
-            entity_class=entity_class,
-            short_description=short_description,
-            long_description=long_description,
-            aliases=aliases,
-        )
-        print(f"MAPPED CLASS: {mapped_class}")
-
-        candidates = self._search_wikidata(entity_name)
-
-        if not candidates:
-            normalized_query = self._strip_accents(entity_name)
-            if normalized_query != entity_name:
-                candidates = self._search_wikidata(normalized_query)
-
-        print(f"CANDIDATES for {entity_name}: {len(candidates)}")
-
-        best_candidate: Optional[Dict[str, Any]] = None
-        best_score = 0.0
-
-        for candidate in candidates:
-            qid = candidate.get("id", "")
-            if not qid:
-                continue
-
-            entity_data = self._get_entity_data(qid)
-            score = self._score_candidate(
-                candidate=candidate,
-                entity_data=entity_data,
-                entity_name=entity_name,
-                aliases=aliases,
-                mapped_class=mapped_class,
-                short_description=short_description,
-                long_description=long_description,
-                source_url=source_url,
-            )
-
-            candidate["_score"] = score
-
-            if score > best_score:
-                best_score = score
-                best_candidate = candidate
-
-        print(f"BEST SCORE: {best_score}")
-        print(f"BEST CANDIDATE: {best_candidate.get('id') if best_candidate else None}")
-
-        if best_candidate and best_score >= self.min_score:
-            return best_candidate.get("id")
-
-        return None
-
-    def get_entity_data(self, qid: str) -> dict:
-        """
-        Devuelve metadatos enriquecidos del ítem de Wikidata:
-        - wikidata_id
-        - label
-        - description
-        - latitude
-        - longitude
-        - image (URL HTTP si existe P18)
-        """
-        qid = self._safe_string(qid)
-        if not qid:
-            return {}
-
-        url = self.WIKIDATA_ENTITY_URL.format(qid=qid)
-
-        try:
-            response = self.session.get(url, timeout=max(self.timeout, 20))
-            response.raise_for_status()
-            data = response.json()
-        except Exception as e:
-            print(f"⚠️ get_entity_data request error: {e}")
-            return {}
-
-        try:
-            entity = data["entities"][qid]
-        except Exception:
-            return {}
-
-        result = {
-            "wikidata_id": qid,
-            "label": "",
-            "description": "",
-            "latitude": None,
-            "longitude": None,
-            "image": "",
+        self.ui_terms = {
+            "ir al contenido",
+            "reserva tu actividad",
+            "ver más",
+            "ver mas",
+            "leer más",
+            "leer mas",
+            "mostrar más",
+            "mostrar mas",
+            "todos los derechos reservados",
+            "accesibilidad",
+            "guías convention bureau",
+            "guias convention bureau",
+            "área profesional",
+            "area profesional",
+            "mapas",
+            "contacto",
+            "google maps",
+            "copiar dirección",
+            "copiar direccion",
         }
 
-        labels = entity.get("labels", {}) or {}
-        descriptions = entity.get("descriptions", {}) or {}
-        claims = entity.get("claims", {}) or {}
-
-        if self.language in labels:
-            result["label"] = self._safe_string(labels[self.language].get("value"))
-        elif "en" in labels:
-            result["label"] = self._safe_string(labels["en"].get("value"))
-
-        if self.language in descriptions:
-            result["description"] = self._safe_string(descriptions[self.language].get("value"))
-        elif "en" in descriptions:
-            result["description"] = self._safe_string(descriptions["en"].get("value"))
-
-        try:
-            coord_claims = claims.get("P625", []) or []
-            if coord_claims:
-                coord = coord_claims[0]["mainsnak"]["datavalue"]["value"]
-                result["latitude"] = coord.get("latitude")
-                result["longitude"] = coord.get("longitude")
-        except Exception:
-            pass
-
-        try:
-            image_claims = claims.get("P18", []) or []
-            if image_claims:
-                raw_image = image_claims[0]["mainsnak"]["datavalue"]["value"]
-                result["image"] = self._commons_filename_to_url(raw_image)
-        except Exception:
-            pass
-
-        return result
-
-    # -------------------------------------------------------------------------
-    # Búsqueda y fetch
-    # -------------------------------------------------------------------------
-
-    def _search_wikidata(self, query: str) -> List[Dict[str, Any]]:
-    
-        query = self._safe_string(query)
-        if not query:
-            return []
-
-        params = {
-            "action": "wbsearchentities",
-            "format": "json",
-            "language": self.language,
-            "uselang": self.language,
-            "type": "item",
-            "limit": self.limit,
-            "search": query,
-        }
-
-        max_retries = 4
-        base_sleep = 1.5
-
-        for attempt in range(max_retries):
-            try:
-                response = self.session.get(
-                    self.WIKIDATA_API_URL,
-                    params=params,
-                    timeout=self.timeout,
-                )
-                response.raise_for_status()
-                payload = response.json()
-                return payload.get("search", []) or []
-
-            except requests.HTTPError as e:
-                status = getattr(e.response, "status_code", None)
-
-                if status == 429 and attempt < max_retries - 1:
-                    sleep_s = base_sleep * (2 ** attempt)
-                    print(f"⚠️ Wikidata 429 para '{query}'. Reintentando en {sleep_s:.1f}s...")
-                    time.sleep(sleep_s)
-                    continue
-
-                print(f"⚠️ _search_wikidata request error: {e}")
-                return []
-
-            except Exception as e:
-                print(f"⚠️ _search_wikidata request error: {e}")
-                return []
-
-        return []
-
-        
-    def _get_entity_data(self, qid: str) -> Dict[str, Any]:
-        qid = self._safe_string(qid)
-        if not qid:
-            return {}
-
-        url = self.WIKIDATA_ENTITY_URL.format(qid=qid)
-
-        try:
-            response = self.session.get(url, timeout=self.timeout)
-            response.raise_for_status()
-            payload = response.json()
-            return payload.get("entities", {}).get(qid, {}) or {}
-        except Exception as e:
-            print(f"⚠️ _get_entity_data request error for {qid}: {e}")
-            return {}
-
-    # -------------------------------------------------------------------------
-    # Scoring
-    # -------------------------------------------------------------------------
-
-    def _score_candidate(
-        self,
-        candidate: Dict[str, Any],
-        entity_data: Dict[str, Any],
-        entity_name: str,
-        aliases: List[str],
-        mapped_class: str,
-        short_description: str,
-        long_description: str,
-        source_url: str,
-    ) -> float:
-        score = 0.0
-
-        candidate_label = self._extract_candidate_label(candidate, entity_data)
-        candidate_desc = self._extract_candidate_description(candidate, entity_data)
-        candidate_aliases = self._extract_candidate_aliases(candidate, entity_data)
-        candidate_instance_of = self._extract_instance_of(entity_data)
-
-        norm_entity = self._normalize_text(entity_name)
-        norm_label = self._normalize_text(candidate_label)
-        remote_desc = self._normalize_text(candidate_desc)
-        local_desc = self._normalize_text(f"{short_description} {long_description}")
-        source_norm = self._normalize_text(source_url)
-
-        if norm_entity and norm_label == norm_entity:
-            score += 0.45
-        elif norm_entity and norm_entity in norm_label:
-            score += 0.30
-        elif norm_label and norm_label in norm_entity:
-            score += 0.20
-
-        norm_aliases = {self._normalize_text(a) for a in aliases if self._safe_string(a)}
-        norm_candidate_aliases = {
-            self._normalize_text(a) for a in candidate_aliases if self._safe_string(a)
-        }
-
-        if norm_entity in norm_candidate_aliases:
-            score += 0.20
-
-        if norm_aliases.intersection(norm_candidate_aliases):
-            score += 0.10
-
-        if local_desc and remote_desc:
-            overlap = self._token_overlap(local_desc, remote_desc)
-            score += min(overlap * 0.25, 0.15)
-
-        strong_bad_signals = [
-            "king",
-            "queen",
-            "dynasty",
-            "mythology",
-            "mythological",
-            "ruler",
-            "emperor",
-            "monarch",
-            "son of",
-            "ancient chinese",
+        self.leading_noise_patterns = [
+            r"^(actividad)\b",
+            r"^(agenda)\b",
+            r"^(programa)\b",
+            r"^(experiencias)\b",
+            r"^(visita guiada)\b",
+            r"^(ir al contenido)\b",
+            r"^(reserva tu actividad)\b",
+            r"^(por supuesto)\b",
+            r"^(también|tambien|además|ademas)\b",
         ]
 
-        if mapped_class in {"place", "monument", "tourist_attraction", "organization"}:
-            if any(sig in remote_desc for sig in strong_bad_signals):
-                score -= 0.45
+        self.trailing_noise_patterns = [
+            r"\b(ver|más|mas|también|tambien|comenzaremos)$",
+            r"\b(monumento|monumentos|espacios|museo|museos|lugar|lugares)$",
+            r"\b(pago recomendado)$",
+        ]
 
-        if "desambigu" in remote_desc or "wikimedia disambiguation page" in remote_desc:
-            score -= 0.40
-
-        if "wikimedia" in remote_desc:
-            score -= 0.10
-
-        if self._is_type_compatible(mapped_class, candidate_instance_of, candidate_desc):
-            score += 0.22
-        else:
-            if mapped_class not in {"unknown", "thing", ""}:
-                score -= 0.22
-
-        if "sevilla" in source_norm or "seville" in source_norm:
-            if not any(k in remote_desc or k in norm_label for k in ["sevilla", "seville"]):
-                score -= 0.10
-
-        if "valladolid" in source_norm:
-            if "valladolid" not in remote_desc and "valladolid" not in norm_label:
-                score -= 0.10
-
-        if mapped_class == "place" and self._looks_like_place_name(entity_name):
-            score += 0.03
-
-        score = max(0.0, min(1.0, score))
-        return score
-
-    # -------------------------------------------------------------------------
-    # Mapping de clases
-    # -------------------------------------------------------------------------
-
-    def _map_class(
-        self,
-        entity_name: str,
-        entity_class: Optional[str],
-        short_description: str = "",
-        long_description: str = "",
-        aliases: Optional[List[str]] = None,
-    ) -> str:
-        aliases = aliases or []
-
-        text = " ".join(
-            [
-                self._safe_string(entity_name),
-                self._safe_string(entity_class),
-                self._safe_string(short_description),
-                self._safe_string(long_description),
-                " ".join(self._safe_string(a) for a in aliases),
-            ]
-        )
-        norm = self._normalize_text(text)
-        class_norm = self._normalize_text(entity_class)
-        name_norm = self._normalize_text(entity_name)
-
-        if class_norm in {"castle", "castillo", "alcazar", "palace", "palacio"}:
-            return "monument"
-
-        if class_norm in {"cathedral", "catedral", "church", "iglesia", "chapel", "capilla", "basilica"}:
-            return "monument"
-
-        if class_norm in {"square", "plaza", "place", "location"}:
-            return "place"
-
-        if class_norm in {"museum", "museo", "touristattraction", "tourist_attraction"}:
-            return "tourist_attraction"
-
-        if class_norm in {"event", "evento", "festival", "fair"}:
-            return "event"
-
-        if class_norm in {"organization", "company", "empresa", "institution"}:
-            return "organization"
-
-        if class_norm in {"concept", "art", "style", "tradition"}:
-            return "concept"
-
-        if self._looks_like_monument_name(entity_name):
-            return "monument"
-
-        if self._looks_like_place_name(entity_name):
-            return "place"
-
-        if self._looks_like_event_name(entity_name, short_description, long_description):
-            return "event"
-
-        if self._looks_like_person_name(entity_name, short_description, long_description):
-            return "person"
-
-        if any(
-            k in norm
-            for k in [
-                "event", "evento", "festival", "bienal", "feria",
-                "semana santa", "congreso", "exposicion", "procesion",
-                "temporada", "ciclo",
-            ]
-        ):
-            return "event"
-
-        if any(
-            k in norm
-            for k in [
-                "monument", "monumento", "iglesia", "catedral", "capilla",
-                "basilica", "palacio", "torre", "puente", "archivo",
-                "alcazar", "muralla", "castillo", "castle",
-            ]
-        ):
-            return "monument"
-
-        if any(
-            k in norm
-            for k in [
-                "museum", "museo", "tourist attraction", "visitor attraction",
-                "atraccion",
-            ]
-        ):
-            return "tourist_attraction"
-
-        if any(
-            k in norm
-            for k in [
-                "company", "empresa", "organization", "organizacion",
-                "institution", "institucion", "fundacion", "asociacion",
-            ]
-        ):
-            return "organization"
-
-        if any(
-            k in norm
-            for k in [
-                "place", "location", "destination", "tourismdestination",
-                "barrio", "ciudad", "zona", "district", "neighbourhood",
-                "neighborhood", "plaza", "calle", "avenida", "parque",
-                "jardin", "mercado", "paseo", "puerta", "glorieta",
-            ]
-        ):
-            return "place"
-
-        if any(
-            k in norm
-            for k in [
-                "arte", "art", "tradicion", "tradition", "estilo", "style",
-                "cultura", "culture", "folklore", "folclore", "genero",
-                "genre", "patrimonio inmaterial",
-            ]
-        ):
-            return "concept"
-
-        if any(
-            k in norm
-            for k in [
-                "person", "persona", "human", "artista", "cantor", "cantaor",
-                "bailaor", "bailaora", "poeta", "pintor", "escultor",
-                "torero", "escritor", "novelista", "compositor", "cantante",
-            ]
-        ):
-            return "person"
-
-        if class_norm in {"", "thing", "entity", "item", "unknown"}:
-            if any(k in name_norm for k in ["castillo", "castle", "alcazar", "palacio", "basilica", "catedral", "iglesia"]):
-                return "monument"
-
-            if any(k in name_norm for k in ["plaza", "calle", "parque", "mercado", "barrio", "avenida", "paseo"]):
-                return "place"
-
-            if any(k in name_norm for k in ["festival", "bienal", "feria", "semana santa", "evento"]):
-                return "event"
-
-        return "unknown"
-
-    def _is_type_compatible(
-        self,
-        mapped_class: str,
-        candidate_instance_of: List[str],
-        candidate_desc: str,
-    ) -> bool:
-        haystack = self._normalize_text(" ".join(candidate_instance_of) + " " + candidate_desc)
-
-        if mapped_class == "place":
-            keys = [
-                "city", "municipality", "human settlement", "neighbourhood",
-                "neighborhood", "district", "barrio", "localidad", "ciudad",
-                "quarter", "plaza", "square", "park", "parque", "market",
-                "mercado", "street", "avenue", "island",
-            ]
-            return any(self._normalize_text(k) in haystack for k in keys)
-
-        if mapped_class == "monument":
-            keys = [
-                "monument", "church", "cathedral", "chapel", "building",
-                "heritage", "tourist attraction", "arquitect", "monumento",
-                "basilica", "palace", "castle", "bridge", "tower",
-            ]
-            return any(self._normalize_text(k) in haystack for k in keys)
-
-        if mapped_class == "tourist_attraction":
-            keys = [
-                "tourist attraction", "museum", "site", "visitor attraction",
-                "museo", "atraccion",
-            ]
-            return any(self._normalize_text(k) in haystack for k in keys)
-
-        if mapped_class == "event":
-            keys = [
-                "event", "festival", "celebration", "holiday",
-                "festividad", "biennial", "fair", "feria",
-            ]
-            return any(self._normalize_text(k) in haystack for k in keys)
-
-        if mapped_class == "organization":
-            keys = [
-                "company", "organization", "business", "corporation",
-                "empresa", "organizacion", "institution", "foundation",
-                "association",
-            ]
-            return any(self._normalize_text(k) in haystack for k in keys)
-
-        if mapped_class == "person":
-            keys = [
-                "human", "person", "artist", "singer", "dancer", "writer",
-                "poet", "composer", "sculptor", "painter", "bullfighter",
-                "cantaor", "bailaor", "cantante", "escritor", "poeta",
-                "escultor", "pintor", "torero",
-            ]
-            return any(self._normalize_text(k) in haystack for k in keys)
-
-        if mapped_class == "concept":
-            keys = [
-                "art", "style", "tradition", "cultural concept",
-                "cultural movement", "music genre", "dance", "folklore",
-                "intangible cultural heritage",
-            ]
-            return any(self._normalize_text(k) in haystack for k in keys)
-
-        return False
-
-    # -------------------------------------------------------------------------
-    # Extractores de datos del candidato
-    # -------------------------------------------------------------------------
-
-    def _extract_candidate_label(self, candidate: Dict[str, Any], entity_data: Dict[str, Any]) -> str:
-        label = self._safe_string(candidate.get("label"))
-        if label:
-            return label
-
-        labels = entity_data.get("labels", {})
-        if self.language in labels:
-            return self._safe_string(labels[self.language].get("value"))
-        if "en" in labels:
-            return self._safe_string(labels["en"].get("value"))
-
-        return ""
-
-    def _extract_candidate_description(self, candidate: Dict[str, Any], entity_data: Dict[str, Any]) -> str:
-        desc = self._safe_string(candidate.get("description"))
-        if desc:
-            return desc
-
-        descriptions = entity_data.get("descriptions", {})
-        if self.language in descriptions:
-            return self._safe_string(descriptions[self.language].get("value"))
-        if "en" in descriptions:
-            return self._safe_string(descriptions["en"].get("value"))
-
-        return ""
-
-    def _extract_candidate_aliases(self, candidate: Dict[str, Any], entity_data: Dict[str, Any]) -> List[str]:
-        aliases: List[str] = []
-
-        match = candidate.get("match")
-        if isinstance(match, dict):
-            match_text = self._safe_string(match.get("text"))
-            if match_text:
-                aliases.append(match_text)
-
-        aliases_data = entity_data.get("aliases", {})
-        for lang in [self.language, "en"]:
-            lang_aliases = aliases_data.get(lang, [])
-            for item in lang_aliases:
-                val = self._safe_string(item.get("value"))
-                if val:
-                    aliases.append(val)
-
-        seen = set()
-        clean_aliases = []
-        for a in aliases:
-            key = self._normalize_text(a)
-            if key and key not in seen:
-                clean_aliases.append(a)
-                seen.add(key)
-
-        return clean_aliases
-
-    def _extract_instance_of(self, entity_data: Dict[str, Any]) -> List[str]:
-        results: List[str] = []
-        claims = entity_data.get("claims", {}) or {}
-        p31 = claims.get("P31", []) or []
-
-        for claim in p31:
-            try:
-                mainsnak = claim.get("mainsnak", {})
-                datavalue = mainsnak.get("datavalue", {})
-                value = datavalue.get("value", {})
-                qid = self._safe_string(value.get("id"))
-                if qid:
-                    results.append(qid)
-            except Exception:
-                continue
-
-        return results
-
-    # -------------------------------------------------------------------------
-    # Heurísticas ligeras
-    # -------------------------------------------------------------------------
-
-    def _looks_like_person_name(
-        self,
-        entity_name: str,
-        short_description: str = "",
-        long_description: str = "",
-    ) -> bool:
-        name = self._normalize_text(entity_name)
-        context = self._normalize_text(f"{short_description} {long_description}")
-
-        if not name:
-            return False
-
-        if self._looks_like_place_name(entity_name) or self._looks_like_monument_name(entity_name):
-            return False
-
-        if self._looks_like_event_name(entity_name, short_description, long_description):
-            return False
-
-        person_context_hits = any(
-            k in context
-            for k in [
-                "nacio", "murio", "poeta", "pintor", "escultor", "torero",
-                "cantante", "cantaor", "bailaor", "artista", "escritor",
-                "compositor", "dramaturgo",
-            ]
-        )
-        if person_context_hits:
-            return True
-
-        tokens = [t for t in name.split() if t]
-        stop_tokens = {
-            "de", "del", "la", "las", "los", "el", "san", "santa",
-            "plaza", "parque", "mercado", "palacio", "basilica",
-            "iglesia", "calle", "avenida", "paseo", "torre",
-            "castillo", "alcazar", "catedral", "capilla",
+        self.phrase_markers = {
+            "es",
+            "son",
+            "fue",
+            "fueron",
+            "ser",
+            "puede",
+            "pueden",
+            "ofrece",
+            "ofrecen",
+            "comenzaremos",
+            "comienza",
+            "combina",
+            "combinan",
+            "disfruta",
+            "disfrutar",
+            "vivir",
+            "tienen",
+            "data",
+            "ocurre",
+            "permite",
+            "permiten",
+            "llegaremos",
+            "visitaremos",
         }
-        non_stop = [t for t in tokens if t not in stop_tokens]
 
-        if 2 <= len(non_stop) <= 4:
-            if len(non_stop) >= 2 and all(len(t) > 2 for t in non_stop[:2]):
-                return True
+        self.stop_tokens = {
+            "de",
+            "del",
+            "la",
+            "las",
+            "el",
+            "los",
+            "y",
+            "en",
+            "con",
+            "por",
+            "para",
+            "un",
+            "una",
+            "unos",
+            "unas",
+            "al",
+        }
 
-        return False
+    # ------------------------------------------------------------------
+    # Normalización
+    # ------------------------------------------------------------------
 
-    def _looks_like_event_name(
-        self,
-        entity_name: str,
-        short_description: str = "",
-        long_description: str = "",
-    ) -> bool:
-        text = self._normalize_text(f"{entity_name} {short_description} {long_description}")
-        return any(
-            k in text
-            for k in [
-                "bienal", "festival", "feria", "semana santa", "congreso",
-                "evento", "celebracion", "procesion", "muestra", "ciclo",
-            ]
-        )
+    def _norm(self, text: Any) -> str:
+        text = "" if text is None else str(text)
+        text = text.strip()
+        text = re.sub(r"\s+", " ", text)
+        return text
 
-    def _looks_like_place_name(self, entity_name: str) -> bool:
-        name = self._normalize_text(entity_name)
-        return any(
-            name.startswith(prefix)
-            for prefix in [
-                "plaza ", "calle ", "avenida ", "parque ", "jardin ",
-                "mercado ", "paseo ", "barrio ", "puerta ", "glorieta ", "rio ",
-            ]
-        )
-
-    def _looks_like_monument_name(self, entity_name: str) -> bool:
-        name = self._normalize_text(entity_name)
-        return any(
-            name.startswith(prefix)
-            for prefix in [
-                "basilica ", "catedral ", "iglesia ", "capilla ",
-                "palacio ", "alcazar ", "torre ", "puente ",
-                "archivo ", "monasterio ", "convento ", "castillo ",
-            ]
-        )
-
-    # -------------------------------------------------------------------------
-    # Helpers de texto
-    # -------------------------------------------------------------------------
-
-    def _safe_string(self, value: Any) -> str:
-        if value is None:
-            return ""
-        if isinstance(value, str):
-            return value.strip()
-        return str(value).strip()
+    def _norm_low(self, text: Any) -> str:
+        text = self._norm(text).lower()
+        text = re.sub(r"[“”\"'`´]", "", text)
+        return text
 
     def _strip_accents(self, text: str) -> str:
-        text = self._safe_string(text)
-        if not text:
-            return ""
         return "".join(
             c for c in unicodedata.normalize("NFD", text)
             if unicodedata.category(c) != "Mn"
         )
 
-    def _normalize_text(self, text: Any) -> str:
-        text = self._safe_string(text).lower()
-        text = self._strip_accents(text)
-        text = re.sub(r"[^\w\s\-]", " ", text, flags=re.UNICODE)
-        text = re.sub(r"\s+", " ", text).strip()
-        return text
+    def _tokens(self, text: str) -> List[str]:
+        return [t for t in re.split(r"[^\wáéíóúñü]+", self._norm_low(text)) if t]
 
-    def _token_overlap(self, text_a: str, text_b: str) -> float:
-        a = set(self._normalize_text(text_a).split())
-        b = set(self._normalize_text(text_b).split())
+    # ------------------------------------------------------------------
+    # Ruido / calidad de consulta
+    # ------------------------------------------------------------------
 
-        if not a or not b:
+    def _clean_name(self, text: str) -> str:
+        value = self._norm(text)
+
+        for pat in self.leading_noise_patterns:
+            value = re.sub(pat, "", value, flags=re.IGNORECASE).strip()
+
+        for pat in self.trailing_noise_patterns:
+            value = re.sub(pat, "", value, flags=re.IGNORECASE).strip()
+
+        value = re.sub(r"\s+", " ", value).strip(" -|,;:")
+        return value
+
+    def _looks_like_ui_fragment(self, text: str) -> bool:
+        low = self._norm_low(text)
+        if not low:
+            return True
+        return any(term in low for term in self.ui_terms)
+
+    def _looks_like_phrase_fragment(self, text: str) -> bool:
+        low = self._norm_low(text)
+        tokens = self._tokens(low)
+
+        if not tokens:
+            return True
+
+        if re.search(r"\b(quién|quien|cuándo|cuando|cómo|como)\b", low):
+            return True
+
+        if len(tokens) >= 6:
+            return True
+
+        if any(tok in self.phrase_markers for tok in tokens) and len(tokens) >= 4:
+            return True
+
+        return False
+
+    def _looks_like_foreign_noise(self, text: str) -> bool:
+        low = self._norm_low(text)
+
+        foreign_patterns = [
+            r"\btodos los lugares\b",
+            r"\bmultitud de actividades\b",
+            r"\bplanifica tu viaje\b",
+            r"\bdescubre pamplona\b",
+            r"\bmoverse por pamplona\b",
+            r"\bqué ver\b",
+            r"\bque ver\b",
+            r"\bqué hacer\b",
+            r"\bque hacer\b",
+        ]
+        return any(re.search(pat, low, flags=re.IGNORECASE) for pat in foreign_patterns)
+
+    def _looks_like_person_name(self, text: str) -> bool:
+        """
+        Señal débil. No fuerza mapeo a person.
+        Solo describe forma del nombre.
+        """
+        name = self._norm(text)
+        if not name:
+            return False
+
+        parts = [p for p in re.split(r"\s+", name) if p]
+        if len(parts) < 2 or len(parts) > 4:
+            return False
+
+        uppercase_like = 0
+        for p in parts:
+            if re.match(r"^[A-ZÁÉÍÓÚÑÜ][a-záéíóúñü\-]+$", p):
+                uppercase_like += 1
+
+        return uppercase_like >= 2
+
+    def _has_instance_signal(self, text: str) -> bool:
+        low = self._norm_low(text)
+        signals = [
+            "ayuntamiento",
+            "catedral",
+            "iglesia",
+            "basílica",
+            "basilica",
+            "capilla",
+            "monasterio",
+            "convento",
+            "castillo",
+            "alcázar",
+            "alcazar",
+            "palacio",
+            "museo",
+            "mercado",
+            "plaza",
+            "parque",
+            "teatro",
+            "puente",
+            "festival",
+            "feria",
+            "congreso",
+            "camino",
+            "ruta",
+            "sendero",
+            "hotel",
+            "hostal",
+            "albergue",
+            "camping",
+            "centro de interpretación",
+            "centro de acogida",
+        ]
+        return any(s in low for s in signals)
+
+    def _is_queryable_name(self, text: str) -> bool:
+        cleaned = self._clean_name(text)
+        low = self._norm_low(cleaned)
+        tokens = self._tokens(cleaned)
+
+        if not cleaned:
+            return False
+        if self._looks_like_ui_fragment(cleaned):
+            return False
+        if self._looks_like_foreign_noise(cleaned):
+            return False
+        if self._looks_like_phrase_fragment(cleaned):
+            return False
+        if len(tokens) == 1 and not self._has_instance_signal(cleaned):
+            return False
+
+        return True
+
+    # ------------------------------------------------------------------
+    # Mapeo de clase -> tipo de búsqueda Wikidata
+    # ------------------------------------------------------------------
+
+    def _map_class_for_search(
+        self,
+        entity_class: Optional[str],
+        entity_name: str = "",
+        description: str = "",
+    ) -> Optional[str]:
+        """
+        Mapea clases turísticas a una familia Wikidata aproximada.
+        Muy conservador.
+        """
+        cls = self._norm_low(entity_class)
+        name = self._norm_low(entity_name)
+        desc = self._norm_low(description)
+
+        if not cls or cls in {"unknown", "thing", "entity", "item", "location"}:
+            # Solo señales MUY fuertes
+            if "camino de santiago" in name:
+                return "place"
+            if any(k in name for k in ["festival", "feria", "congreso", "san fermín", "san fermin"]):
+                return "event"
+            if any(k in name for k in ["ayuntamiento", "catedral", "iglesia", "palacio", "castillo", "museo", "plaza", "parque"]):
+                return "place"
+            return "unknown"
+
+        place_classes = {
+            "townhall",
+            "cathedral",
+            "church",
+            "chapel",
+            "basilica",
+            "castle",
+            "alcazar",
+            "palace",
+            "museum",
+            "square",
+            "park",
+            "garden",
+            "route",
+            "stadium",
+            "monument",
+        }
+
+        event_classes = {
+            "event",
+            "festivity",
+            "festival",
+            "fair",
+            "conference",
+        }
+
+        concept_classes = {
+            "conceptscheme",
+            "concept",
+        }
+
+        if cls in place_classes:
+            return "place"
+        if cls in event_classes:
+            return "event"
+        if cls in concept_classes:
+            return "concept"
+
+        # persona como categoría turística NO existe; no usar como default
+        if self._looks_like_person_name(entity_name):
+            if self._has_instance_signal(entity_name) or any(
+                k in desc for k in ["estatua", "escultura", "monumento", "retrato", "busto"]
+            ):
+                return "place"
+
+        return "unknown"
+
+    # ------------------------------------------------------------------
+    # HTTP helpers
+    # ------------------------------------------------------------------
+
+    def _request_json(self, url: str, params: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
+        retries = 0
+
+        while True:
+            try:
+                response = self.session.get(
+                    url,
+                    params=params,
+                    timeout=self.timeout,
+                )
+
+                if response.status_code == 429:
+                    if retries >= self.max_retries:
+                        if self.debug:
+                            print(f"⚠️ Wikidata 429 persistente en {url}")
+                        return None
+
+                    retries += 1
+                    if self.debug:
+                        print(f"⚠️ Wikidata 429. Reintentando en {self.retry_sleep}s...")
+                    time.sleep(self.retry_sleep)
+                    continue
+
+                response.raise_for_status()
+                return response.json()
+
+            except requests.RequestException as e:
+                if self.debug:
+                    print(f"⚠️ request error for {url}: {e}")
+                return None
+            except ValueError as e:
+                if self.debug:
+                    print(f"⚠️ json decode error for {url}: {e}")
+                return None
+
+    # ------------------------------------------------------------------
+    # Search
+    # ------------------------------------------------------------------
+
+    def _search_candidates(self, query: str, limit: int = 5) -> List[Dict[str, Any]]:
+        query = self._clean_name(query)
+        if not self._is_queryable_name(query):
+            return []
+
+        payload = {
+            "action": "wbsearchentities",
+            "format": "json",
+            "language": self.lang,
+            "uselang": self.lang,
+            "search": query,
+            "limit": limit,
+            "type": "item",
+        }
+
+        data = self._request_json(self.WIKIDATA_SEARCH_URL, params=payload)
+        if not data or "search" not in data:
+            return []
+
+        return data.get("search", []) or []
+
+    def _get_entity_data(self, qid: str) -> Optional[Dict[str, Any]]:
+        if not qid:
+            return None
+
+        url = self.WIKIDATA_ENTITY_DATA_URL.format(qid=qid)
+        return self._request_json(url)
+
+    def get_entity_data(self, qid: str) -> Optional[Dict[str, Any]]:
+        """
+        Método público requerido por knowledge_graph_builder.py
+        """
+        return self._get_entity_data(qid)
+
+    # ------------------------------------------------------------------
+    # Scoring
+    # ------------------------------------------------------------------
+
+    def _candidate_label(self, candidate: Dict[str, Any]) -> str:
+        return self._norm(candidate.get("label") or candidate.get("display", {}).get("label", {}).get("value") or "")
+
+    def _candidate_description(self, candidate: Dict[str, Any]) -> str:
+        return self._norm(candidate.get("description") or candidate.get("display", {}).get("description", {}).get("value") or "")
+
+    def _text_similarity(self, a: str, b: str) -> float:
+        a_norm = self._strip_accents(self._norm_low(a))
+        b_norm = self._strip_accents(self._norm_low(b))
+
+        if not a_norm or not b_norm:
+            return 0.0
+        if a_norm == b_norm:
+            return 1.0
+        if a_norm in b_norm or b_norm in a_norm:
+            return 0.85
+
+        a_tokens = {t for t in self._tokens(a_norm) if t not in self.stop_tokens}
+        b_tokens = {t for t in self._tokens(b_norm) if t not in self.stop_tokens}
+        if not a_tokens or not b_tokens:
             return 0.0
 
-        inter = a.intersection(b)
-        union = a.union(b)
+        inter = len(a_tokens & b_tokens)
+        union = len(a_tokens | b_tokens)
+        return inter / union if union else 0.0
 
-        if not union:
-            return 0.0
+    def _score_candidate(
+        self,
+        entity_name: str,
+        candidate: Dict[str, Any],
+        mapped_class: str,
+        description: str = "",
+    ) -> float:
+        label = self._candidate_label(candidate)
+        cand_desc = self._candidate_description(candidate)
 
-        return len(inter) / len(union)
+        score = 0.0
 
-    def _commons_filename_to_url(self, filename: str) -> str:
-        filename = self._safe_string(filename)
-        if not filename:
-            return ""
+        name_sim = self._text_similarity(entity_name, label)
+        score += name_sim * 0.7
 
-        if filename.startswith("http://") or filename.startswith("https://"):
-            return filename
+        if description and cand_desc:
+            desc_sim = self._text_similarity(description, cand_desc)
+            score += desc_sim * 0.2
 
-        low = filename.lower()
-        if low.startswith("file:"):
-            filename = filename[5:].strip()
-        elif low.startswith("archivo:"):
-            filename = filename[8:].strip()
+        # Ajustes suaves por tipo esperado
+        low_desc = self._norm_low(cand_desc)
+        if mapped_class == "event" and any(k in low_desc for k in ["festival", "holiday", "event", "fiesta"]):
+            score += 0.1
+        elif mapped_class == "place" and any(k in low_desc for k in ["municipal building", "cathedral", "church", "museum", "palace", "square", "park", "route", "town hall"]):
+            score += 0.1
+        elif mapped_class == "concept" and any(k in low_desc for k in ["concept", "tradition", "cultural practice"]):
+            score += 0.05
 
-        safe_name = filename.replace(" ", "_")
-        return f"https://commons.wikimedia.org/wiki/Special:FilePath/{safe_name}"
+        return min(score, 1.0)
+
+    # ------------------------------------------------------------------
+    # Public linking API
+    # ------------------------------------------------------------------
+
+    def resolve(
+        self,
+        entity_name: Optional[str] = None,
+        entity_class: Optional[str] = None,
+        short_description: Optional[str] = None,
+        long_description: Optional[str] = None,
+        source_url: Optional[str] = None,
+        **kwargs,
+    ) -> Dict[str, Any]:
+        name = self._clean_name(entity_name or kwargs.get("name") or "")
+        description = self._norm(long_description or short_description or kwargs.get("description") or "")
+
+        mapped_class = self._map_class_for_search(
+            entity_class=entity_class,
+            entity_name=name,
+            description=description,
+        )
+
+        if self.debug:
+            print("\n=== DEBUG WIKIDATA INPUT ===")
+            print(f"NAME: {name}")
+            print(f"CLASS: {entity_class}")
+            print(f"ALIASES: {[name] if name else []}")
+            print(f"MAPPED CLASS: {mapped_class}")
+
+        if not self._is_queryable_name(name):
+            if self.debug:
+                print(f"CANDIDATES for {name}: 0")
+                print("BEST SCORE: 0.0")
+                print("BEST CANDIDATE: None")
+            return {
+                "wikidata_id": "",
+                "qid": "",
+                "score": 0.0,
+                "candidate": None,
+                "mapped_class": mapped_class,
+                "candidates": [],
+            }
+
+        candidates = self._search_candidates(name, limit=5)
+
+        scored_candidates: List[Dict[str, Any]] = []
+        best_qid = ""
+        best_score = 0.0
+        best_candidate = None
+
+        for cand in candidates:
+            qid = cand.get("id") or ""
+            if not qid:
+                continue
+
+            score = self._score_candidate(
+                entity_name=name,
+                candidate=cand,
+                mapped_class=mapped_class,
+                description=description,
+            )
+
+            cand_copy = dict(cand)
+            cand_copy["score"] = score
+            scored_candidates.append(cand_copy)
+
+            if score > best_score:
+                best_score = score
+                best_qid = qid
+                best_candidate = cand_copy
+
+        scored_candidates.sort(key=lambda x: x.get("score", 0.0), reverse=True)
+
+        if self.debug:
+            print(f"CANDIDATES for {name}: {len(scored_candidates)}")
+            print(f"BEST SCORE: {best_score}")
+            print(f"BEST CANDIDATE: {best_qid or None}")
+
+        # Umbral conservador
+        accepted_qid = best_qid if best_score >= 0.53 else ""
+
+        return {
+            "wikidata_id": accepted_qid,
+            "qid": accepted_qid,
+            "score": best_score,
+            "candidate": best_candidate,
+            "mapped_class": mapped_class,
+            "candidates": scored_candidates,
+        }
+
+    def link(
+        self,
+        entity_name: Optional[str] = None,
+        entity_class: Optional[str] = None,
+        short_description: Optional[str] = None,
+        long_description: Optional[str] = None,
+        source_url: Optional[str] = None,
+        **kwargs,
+    ) -> str:
+        result = self.resolve(
+            entity_name=entity_name,
+            entity_class=entity_class,
+            short_description=short_description,
+            long_description=long_description,
+            source_url=source_url,
+            **kwargs,
+        )
+        return result.get("wikidata_id", "") or ""
+
+    def link_entity(self, *args, **kwargs) -> str:
+        return self.link(*args, **kwargs)
+
+    def run(self, *args, **kwargs) -> Dict[str, Any]:
+        return self.resolve(*args, **kwargs)
+
+    def process(self, *args, **kwargs) -> Dict[str, Any]:
+        return self.resolve(*args, **kwargs)

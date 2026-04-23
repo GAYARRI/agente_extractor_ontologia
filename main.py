@@ -720,7 +720,6 @@ def consolidate_entities(all_results, diagnostic=False):
     diag(diagnostic, f"Tras postprocess()+merge_back: {len(global_entities)} entidades")
     return global_entities
 
-
 def predict_from_pages(pages, pipeline, args, diagnostic=False):
     all_results, page_errors = process_pages(
         pages=pages,
@@ -759,7 +758,6 @@ def predict_from_pages(pages, pipeline, args, diagnostic=False):
 
     global_entities = consolidate_entities(all_results, diagnostic=diagnostic)
 
-    # 🔒 REAPLICAR CERRADO ONTOLÓGICO DESPUÉS DE CONSOLIDAR
     global_entities = enforce_closed_world_batch(
         global_entities,
         pipeline.valid_classes,
@@ -801,8 +799,9 @@ def generate_outputs(global_entities, pipeline, args):
             log(f"⚠️ No se pudo generar HTML del KG: {exc}")
 
     reporter = EntitiesReporter(
-    getattr(pipeline, "ontology_index", None) or getattr(pipeline, "ontology_catalog", {})
-)
+        getattr(pipeline, "ontology_index", None)
+        or getattr(pipeline, "ontology_catalog", {})
+    )
     reporter.generate_markdown_report(global_entities, args.report_output)
     log(f"📝 Reporte Markdown generado en {args.report_output}")
 
@@ -876,7 +875,6 @@ def main():
             if captured.strip():
                 print(captured, file=sys.stderr, end="")
 
-            # Serializar entidades con el mismo esquema del exportador final
             json_exporter = JSONExporter()
             payload["entities"] = [
                 json_exporter.entity_to_dict(e)
@@ -885,7 +883,6 @@ def main():
             ]
             payload["entity_count"] = len(payload["entities"])
 
-            # Recalcular stats/prediction ya con entidades cerradas y serializadas
             try:
                 payload["stats"] = compute_entity_stats(payload["entities"])
             except Exception as e:
@@ -894,8 +891,6 @@ def main():
             payload["prediction"] = infer_main_prediction(payload["entities"])
 
             safe_json_output(payload)
-
-
 
         else:
             pages = get_pages(args, diagnostic=diagnostic)
