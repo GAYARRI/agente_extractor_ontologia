@@ -124,6 +124,8 @@ class EntityTypeResolver:
             (r"\b(restaurante)\b", "Restaurant", 5.0),
             (r"\b(bar|taberna|cerveceria|bodega)\b", "Bar", 4.8),
             (r"\b(cafeteria|cafe)\b", "FoodEstablishment", 4.8),
+            (r"\b(pump track|skatepark|skate)\b", "SportsCenter", 4.8),
+            (r"\b(casco antiguo|barrio|casco historico)\b", "Neighborhood", 4.6),
             (r"\b(festival|bienal|concierto|exposicion|evento|feria|semana santa|procesion|via crucis|ciclo)\b", "Event", 5.2),
             (r"\b(ruta|camino|sendero|itinerario|recorrido|via verde)\b", "Route", 5.0),
             (r"\b(visita guiada|tour guiado|excursion)\b", "Tour", 4.8),
@@ -224,6 +226,23 @@ class EntityTypeResolver:
         normalized = self._normalize_type(value)
         return normalized in self.forbidden_final_types or normalized.lower() in self.weak_types
 
+    def _html_context_text(self, signals: Any) -> str:
+        if not isinstance(signals, dict):
+            return ""
+        parts = [
+            signals.get("tag") or "",
+            signals.get("href") or "",
+            signals.get("class") or "",
+            signals.get("id") or "",
+            signals.get("heading") or "",
+            signals.get("parent_tag") or "",
+            signals.get("parent_class") or "",
+            signals.get("parent_id") or "",
+            signals.get("link_text") or "",
+            signals.get("link_href") or "",
+        ]
+        return self._normalize_text(" ".join(str(part) for part in parts if str(part).strip()))
+
     def _vote(
         self,
         votes: Dict[str, float],
@@ -320,6 +339,201 @@ class EntityTypeResolver:
                 if label:
                     yield f"properties.{key}", label
 
+    def _iter_html_context_candidates(
+        self,
+        mention: str,
+        html_context_signals: Any,
+        page_signals: Optional[Dict[str, Any]] = None,
+    ) -> List[Tuple[str, float, str]]:
+        mention_norm = self._normalize_text(mention)
+        html_text = self._html_context_text(html_context_signals)
+        page_text = self._normalize_text(
+            " ".join([
+                str((page_signals or {}).get("title") or ""),
+                str((page_signals or {}).get("h1") or ""),
+                str((page_signals or {}).get("breadcrumb") or ""),
+                str((page_signals or {}).get("slug") or ""),
+                str((page_signals or {}).get("url") or ""),
+            ])
+        )
+        merged = f"{html_text} || {page_text}"
+        candidates: List[Tuple[str, float, str]] = []
+
+        def add(label: str, weight: float, reason: str) -> None:
+            candidates.append((label, weight, reason))
+
+        if any(term in merged for term in {"hotel", "hoteles", "hostal", "hostales", "alojamiento", "alojarse"}):
+            if mention_norm.startswith(("hotel ", "hostal ", "albergue ", "parador ")):
+                add("Hotel", 3.4, "html_accommodation_strong")
+            elif any(term in mention_norm for term in {"hotel", "hostal", "albergue", "parador"}):
+                add("Hotel", 2.4, "html_accommodation")
+
+        if any(term in merged for term in {"restaurante", "restaurantes", "gastronomia", "donde comer"}):
+            if mention_norm.startswith("restaurante "):
+                add("Restaurant", 3.1, "html_food_strong")
+            elif "restaurante" in mention_norm:
+                add("Restaurant", 2.2, "html_food")
+
+        if any(term in merged for term in {"bar", "bares", "taberna", "cafeteria", "cafeterias"}):
+            if mention_norm.startswith(("bar ", "taberna ", "cafeteria ", "cafe ")):
+                add("Bar", 3.0, "html_bar_strong")
+            elif any(term in mention_norm for term in {"bar", "taberna", "cafeteria", "cafe"}):
+                add("Bar", 2.0, "html_bar")
+
+        if any(term in merged for term in {"visitas guiadas", "tour", "tours", "guias turistico culturales"}):
+            if any(term in mention_norm for term in {"tour", "visita", "guiada"}):
+                add("Tour", 2.0, "html_tour")
+
+        if any(term in merged for term in {"museo", "museos"}):
+            if "museo" in mention_norm:
+                add("Museum", 2.0, "html_museum")
+
+        if any(term in merged for term in {"mercado", "mercados"}):
+            if "mercado" in mention_norm:
+                add("TraditionalMarket", 2.0, "html_market")
+
+        return candidates
+
+    def _clean_mention_for_resolution(
+        self,
+        mention: str,
+        context: str = "",
+        page_signals: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        mention_norm = self._normalize_text(mention)
+        context_norm = self._normalize_text(context)
+        page_norm = self._normalize_text(
+            " ".join([
+                str((page_signals or {}).get("title") or ""),
+                str((page_signals or {}).get("h1") or ""),
+                str((page_signals or {}).get("breadcrumb") or ""),
+                str((page_signals or {}).get("slug") or ""),
+                str((page_signals or {}).get("url") or ""),
+            ])
+        )
+
+        prefix = "ayuntamiento de pamplona "
+        if mention_norm.startswith(prefix):
+            strong_municipal_terms = {
+                "casa consistorial", "plaza consistorial", "tramite", "municipal", "concejal", "alcaldia", "alcalde",
+            }
+            false_footer_tails = {
+                "casco antiguo",
+                "pump track",
+                "frente ciudadela",
+                "san fermin",
+                "estrellas michelin",
+                "queso",
+                "alojamientos",
+                "verde",
+                "reserva",
+                "preguntas",
+                "mercados",
+                "agroturismos",
+                "cordero",
+                "menestra",
+                "patxaran",
+                "actas",
+                "pimientos",
+                "ajoarriero",
+                "trucha",
+                "pochas",
+                "esparragos",
+                "cuajada",
+                "chistorra",
+                "goxua",
+                "pantxineta",
+                "fritos",
+                "planes",
+                "cultura",
+                "hostelet",
+                "informacion general",
+            }
+            merged = f"{context_norm} || {page_norm}"
+            if any(term in mention_norm for term in false_footer_tails):
+                remainder = mention[len(prefix):].strip()
+                if remainder:
+                    return remainder
+            if not any(term in merged for term in strong_municipal_terms):
+                remainder = mention[len(prefix):].strip()
+                if remainder:
+                    return remainder
+
+        return mention
+
+    def _iter_description_candidates(
+        self,
+        properties: Dict[str, Any],
+        page_signals: Optional[Dict[str, Any]] = None,
+    ) -> List[Tuple[str, float, str]]:
+        text = self._normalize_text(
+            " ".join([
+                str(properties.get("short_description") or properties.get("shortDescription") or ""),
+                str(properties.get("long_description") or properties.get("longDescription") or ""),
+                str(properties.get("description") or ""),
+                str((page_signals or {}).get("title") or ""),
+                str((page_signals or {}).get("h1") or ""),
+            ])
+        )
+        candidates: List[Tuple[str, float, str]] = []
+
+        def add(label: str, weight: float, reason: str) -> None:
+            candidates.append((label, weight, reason))
+
+        if re.search(r"\b(hotel|hostal|alojamiento|habitaciones|estrellas|recepcion|recepción)\b", text):
+            add("Hotel", 2.8, "description_accommodation")
+        if re.search(r"\b(restaurante|cocina|gastronomia|gastronomica|menu degustacion|menú degustación)\b", text):
+            add("Restaurant", 2.4, "description_food")
+        if re.search(r"\b(bar|pintxos|pinchos|taberna|cerveceria|cervecería)\b", text):
+            add("Bar", 2.2, "description_bar")
+        if re.search(r"\b(museo|coleccion|colección|exposicion|exposición)\b", text):
+            add("Museum", 2.4, "description_museum")
+        if re.search(r"\b(muralla|baluarte|fortificacion|fortificación|sistema defensivo)\b", text):
+            add("Wall", 2.3, "description_wall")
+        if re.search(r"\b(festival|programacion cultural|programación cultural|conciertos|actuaciones|teatro|circo)\b", text):
+            add("Event", 2.3, "description_event")
+        if re.search(r"\b(mercado|producto local|puestos|artesano)\b", text):
+            add("TraditionalMarket", 2.1, "description_market")
+        if re.search(r"\b(queso|postre|licor|embutido|plato|gastronomico|gastronómico)\b", text):
+            add("FoodEstablishment", 1.6, "description_food_product")
+
+        if re.search(r"\b(hostal|hostelet|pamplona beds|room pamplona|apartamento|apartamentos)\b", text):
+            add("Hotel", 2.4, "description_lodging")
+
+        if re.search(r"\b(hostel|albergue|albergues|pensiones y hostales)\b", text):
+            add("Hostel", 2.7, "description_hostel")
+        if re.search(r"\b(teatro|coliseo|escenario|espectaculos)\b", text):
+            add("Theater", 2.4, "description_theater")
+        if re.search(r"\b(pump track|skate park|skatepark|skateboarding|rocodromo|rocopolis|deporte sobre ruedas)\b", text):
+            add("SportsCenter", 2.5, "description_sport")
+        if re.search(r"\b(casco antiguo|barrio historico|centro historico)\b", text):
+            add("Neighborhood", 2.4, "description_neighborhood")
+        if re.search(r"\b(ruta cicloturista|cicloturismo|senderismo|peregrinos|via verde)\b", text):
+            add("Route", 2.4, "description_route")
+
+        return candidates
+
+    def _iter_image_context_candidates(self, properties: Dict[str, Any]) -> List[Tuple[str, float, str]]:
+        image_text = self._normalize_text(
+            " ".join([
+                str(properties.get("image") or ""),
+                str(properties.get("mainImage") or ""),
+            ])
+        )
+        candidates: List[Tuple[str, float, str]] = []
+
+        def add(label: str, weight: float, reason: str) -> None:
+            candidates.append((label, weight, reason))
+
+        if any(term in image_text for term in {"hotel", "hostal", "hostelet", "alojamiento"}):
+            add("Hotel", 1.6, "image_accommodation")
+        if any(term in image_text for term in {"pump_track", "pump-track", "skate", "rocopolis"}):
+            add("SportsCenter", 1.5, "image_sport")
+        if any(term in image_text for term in {"queso", "patxaran", "piquillo", "cuajada", "goxua", "pantxineta", "chistorra", "fritos"}):
+            add("FoodEstablishment", 1.2, "image_food_product")
+
+        return candidates
+
     def _candidate_label(self, cand: Dict[str, Any]) -> str:
         for key in ("class", "type", "label", "name", "id", "uri"):
             label = self._normalize_type(cand.get(key))
@@ -404,9 +618,69 @@ class EntityTypeResolver:
         mention = str(mention or "").strip()
         context = str(context or "")
         block_text = str(block_text or "")
+        mention = self._clean_mention_for_resolution(
+            mention=mention,
+            context=" ".join([context[:1200], block_text[:600]]),
+            page_signals=page_signals,
+        )
 
         family = self._detect_family(mention, context or block_text)
         mention_norm = self._normalize_text(mention)
+        html_context_signals = properties.get("html_context_signals") if isinstance(properties, dict) else {}
+
+        hard_reject_patterns = [
+            r"^visitas guiadas$",
+            r"^actividades$",
+            r"^culturales visitas$",
+            r"^produccion agraria ecologica$",
+            r"^sostenibilidad turistica$",
+            r"^interes turistico internacional$",
+            r"^postres queso roncal$",
+            r"^actividades .* skate$",
+            r"^actividades .* pump track$",
+            r"^informacion general$",
+            r"^reserva$",
+            r"^preguntas$",
+            r"^planes$",
+            r"^cultura$",
+            r"^verde$",
+            r"^mercados$",
+            r"^actas$",
+            r"^queso roncal$",
+            r"^queso idiazabal$",
+            r"^patxaran$",
+            r"^ajoarriero$",
+            r"^trucha( a la navarra)?$",
+            r"^pochas$",
+            r"^esparragos$",
+            r"^cuajada$",
+            r"^chistorra$",
+            r"^goxua$",
+            r"^pantxineta$",
+            r"^fritos$",
+            r"^hoteles$",
+            r"^restaurantes$",
+            r"^albergues$",
+            r"^campings$",
+            r"^pensiones$",
+            r"^pensiones y hostales$",
+            r"^paseos y rutas$",
+            r"^excursiones$",
+            r"^todos los lugares$",
+            r"^todas las noticias$",
+            r"^categorias$",
+            r"^categorías$",
+        ]
+        for pattern in hard_reject_patterns:
+            if re.search(pattern, mention_norm):
+                return self._result(
+                    final_class="Unknown",
+                    family="unknown",
+                    score=0.0,
+                    margin=0.0,
+                    evidence=["hard_reject:non_entity"],
+                    ontology_candidates_seen=len(ontology_candidates),
+                )
 
         # High-precision overrides for common tourism cases.
         hard_rules = [
@@ -414,7 +688,7 @@ class EntityTypeResolver:
             (r"\b(estacion de autobuses|estacion de bus|terminal de autobuses)\b", "BusStation", "place"),
             (r"\b(plaza de armas|prado de san sebastian)\b", "BusStation", "place"),
             (r"\b(estacion de santa justa|estacion de tren|estacion ferroviaria)\b", "TrainStation", "place"),
-            (r"\bayuntamiento\b", "TownHall", "place"),
+            (r"\b(ayuntamiento|casa consistorial)\b", "TownHall", "place"),
             (r"\bcamino de santiago\b", "Route", "route"),
             (r"\bsan fermin(es)?\b", "Event", "event"),
             (r"\bsemana santa\b", "Event", "event"),
@@ -426,6 +700,8 @@ class EntityTypeResolver:
         ]
         for pattern, label, hard_family in hard_rules:
             if re.search(pattern, mention_norm):
+                if label == "TownHall" and not re.search(r"^(ayuntamiento|casa consistorial)\b", mention_norm):
+                    continue
                 return self._result(
                     final_class=label,
                     family=hard_family,
@@ -442,10 +718,30 @@ class EntityTypeResolver:
         # around an entity rather than the entity itself.
         for label, weight in self._lexical_candidates(mention):
             self._vote(votes, evidence, label, weight, "mention", family)
+        if mention_norm.startswith(("hotel ", "gran hotel ", "hostal ", "alojamientos ", "apartamentos ")):
+            self._vote(votes, evidence, "Hotel", 3.2, "mention_lodging_prefix", family)
+        if mention_norm.startswith(("restaurante ", "asador ")):
+            self._vote(votes, evidence, "Restaurant", 3.0, "mention_food_prefix", family)
 
         normalized_expected = self._normalize_type(expected_type)
         if normalized_expected:
             self._vote(votes, evidence, normalized_expected, 1.1, "expected_type", family)
+
+        for label, weight, reason in self._iter_html_context_candidates(
+            mention=mention,
+            html_context_signals=html_context_signals,
+            page_signals=page_signals,
+        ):
+            self._vote(votes, evidence, label, weight, reason, family)
+
+        for label, weight, reason in self._iter_description_candidates(
+            properties=properties,
+            page_signals=page_signals,
+        ):
+            self._vote(votes, evidence, label, weight, reason, family)
+
+        for label, weight, reason in self._iter_image_context_candidates(properties):
+            self._vote(votes, evidence, label, weight, reason, family)
 
         for source, label in self._iter_property_type_candidates(properties):
             weight = 2.0 if source in {"class", "type", "primaryClass"} else 1.2

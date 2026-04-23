@@ -59,26 +59,48 @@ class KGPostProcessor:
             "Cathedral",
             "Church",
             "Chapel",
+            "Monastery",
+            "Convent",
             "ArcheologicalSite",
             "HistoricalOrCulturalResource",
             "Square",
             "TownHall",
+            "Neighborhood",
             "BullRing",
             "SportsCenter",
+            "Theater",
+            "Auditorium",
             "CultureCenter",
             "ExhibitionHall",
             "EducationalCenter",
             "DestinationExperience",
+            "Route",
+            "Tour",
             "RetailAndFashion",
             "TourismService",
             "Accommodation",
             "AccommodationEstablishment",
+            "Hotel",
+            "Hostel",
             "FoodEstablishment",
+            "Restaurant",
+            "Bar",
+            "TraditionalMarket",
             "TransportInfrastructure",
+            "TrainStation",
+            "BusStation",
+            "Airport",
             "EventOrganisationCompany",
             "EventAttendanceFacility",
             "PublicService",
             "Stadium",
+            "Bridge",
+            "Wall",
+            "Palace",
+            "Garden",
+            "NaturalPark",
+            "Tower",
+            "Library",
         }
 
         # Tipos explícitamente prohibidos en salida
@@ -178,6 +200,28 @@ class KGPostProcessor:
             text = " | ".join(str(x).strip() for x in text if x is not None and str(x).strip())
         else:
             text = str(text).strip()
+
+        text = re.sub(r"\s+", " ", text).strip()
+        text = re.sub(r"^\s*ir al contenido\s+", "", text, flags=re.IGNORECASE).strip()
+        text = re.sub(r"^\s*reserva tu actividad\s+", "", text, flags=re.IGNORECASE).strip()
+
+        cut_markers = [
+            "Ayuntamiento de Pamplona 31001",
+            "Descubre Pamplona",
+            "Convention Bureau",
+            "Área profesional",
+            "Area profesional",
+            "Mapas y guías",
+            "Mapas y guias",
+        ]
+        low = text.lower()
+        cut_points = []
+        for marker in cut_markers:
+            idx = low.find(marker.lower())
+            if idx > 0:
+                cut_points.append(idx)
+        if cut_points:
+            text = text[: min(cut_points)].strip()
 
         return text
 

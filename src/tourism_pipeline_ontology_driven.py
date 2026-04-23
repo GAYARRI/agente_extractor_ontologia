@@ -78,6 +78,29 @@ def normalize_text(text: str) -> str:
     return text
 
 
+def strip_sitewide_footer_text(text: str) -> str:
+    value = "" if text is None else str(text)
+    value = re.sub(r"\s+", " ", value).strip()
+    value = re.sub(r"^\s*ir al contenido\s+", "", value, flags=re.IGNORECASE).strip()
+    value = re.sub(r"^\s*reserva tu actividad\s+", "", value, flags=re.IGNORECASE).strip()
+    low = value.lower()
+    cut_points = []
+
+    for marker in [
+        "ayuntamiento de pamplona 31001",
+        "descubre pamplona",
+        "© 2025 ayuntamiento de pamplona",
+    ]:
+        idx = low.find(marker)
+        if idx > 0:
+            cut_points.append(idx)
+
+    if cut_points:
+        value = value[: min(cut_points)].strip()
+
+    return value
+
+
 def text_hash(text: str) -> str:
     return hashlib.md5((text or "").encode("utf-8")).hexdigest()
 
@@ -184,7 +207,13 @@ class TourismPipeline:
         self.tourism_property_extractor = _safe_build(TourismPropertyExtractor, default=None)
         self.dom_image_resolver = _safe_build(DOMImageResolver, default=None)
 
-        self.llm_supervisor = _safe_build(LLMSupervisor, default=None)
+        self.llm_supervisor = _safe_build(
+            LLMSupervisor,
+            self.ontology_catalog,
+            use_fewshots=self.use_fewshots,
+            fewshots=kwargs.get("fewshots") or [],
+            default=None,
+        )
         self.poi_discovery = _safe_build(POIDiscovery, default=None)
         self.event_detector = _safe_build(EventDetector, default=None)
         self.semantic_type_guesser = _safe_build(SemanticTypeGuesser, default=None)
@@ -417,6 +446,36 @@ class TourismPipeline:
             text = re.sub(pat, "", text, flags=re.IGNORECASE).strip()
 
         text = re.sub(r"\b(PAGO RECOMENDADO|Ver|Más|Mas|También|Tambien|Comenzaremos)\b$", "", text, flags=re.IGNORECASE).strip()
+        text = re.sub(
+            r"^\s*Ayuntamiento\s+de\s+Pamplona\s+",
+            "",
+            text,
+            flags=re.IGNORECASE,
+        ).strip()
+
+        for prefix in (
+            "Todos los lugares ",
+            "Todas las noticias ",
+            "Categorias ",
+            "Categorías ",
+            "Que ver ",
+            "Qué ver ",
+            "Que hacer ",
+            "Qué hacer ",
+            "Donde comer ",
+            "Dónde comer ",
+            "Pensiones y hostales ",
+            "Albergues ",
+            "Campings ",
+            "Excursiones desde Pamplona ",
+            "Paseos y rutas ",
+            "Hoteles ",
+            "Restaurantes ",
+            "Mercados ",
+        ):
+            if text.lower().startswith(prefix.lower()):
+                text = text[len(prefix):].strip()
+
         text = re.sub(r"\s+", " ", text).strip(" -|,;:")
 
         return text
@@ -667,6 +726,28 @@ class TourismPipeline:
 
         return False
 
+    def _page_capture_profile(self, listing_like_page: bool = False, strict_listing_page: bool = False) -> Dict[str, Any]:
+        if strict_listing_page:
+            return {
+                "name": "strict_listing",
+                "supplement_limit": 16,
+                "evidence_rescue_score": 2.2,
+                "quality_review_ok": True,
+            }
+        if listing_like_page:
+            return {
+                "name": "listing",
+                "supplement_limit": 12,
+                "evidence_rescue_score": 2.6,
+                "quality_review_ok": True,
+            }
+        return {
+            "name": "detail",
+            "supplement_limit": 5,
+            "evidence_rescue_score": 3.4,
+            "quality_review_ok": False,
+        }
+
     def _looks_like_ui_or_category_name(self, entity_name: str) -> bool:
         key = self._canonical_key(entity_name)
         if not key:
@@ -721,6 +802,7 @@ class TourismPipeline:
     def _entity_name_penalty(self, entity_name: str, url: str = "", page_signals: Optional[Dict[str, Any]] = None) -> float:
         key = self._canonical_key(entity_name)
         penalty = 0.0
+        page_signals = page_signals or {}
 
         if not key:
             return 10.0
@@ -738,6 +820,16 @@ class TourismPipeline:
 
         if self._looks_like_person_name(entity_name):
             penalty += 1.25  # señal débil, no veto
+
+        if self._looks_like_technical_noise_entity(entity_name):
+            penalty += 6.0
+
+        primary_candidates = self._extract_primary_page_entity_candidates(
+            title=page_signals.get("title") or "",
+            h1=page_signals.get("h1") or "",
+        )
+        if self._is_subordinate_event_label(entity_name, primary_candidates=primary_candidates):
+            penalty += 5.0
 
         if re.search(r"\b(ver|más|mas|si|también|tambien|comenzaremos)\b", key):
             penalty += 5.0
@@ -769,10 +861,16 @@ class TourismPipeline:
             "procesion", "procesión", "congreso", "ciclo"
         ]
 
-        place_prefixes = [
-            "plaza ", "calle ", "avenida ", "parque ", "jardin ", "jardín ",
-            "mercado ", "paseo ", "barrio ", "puerta ", "glorieta "
-        ]
+        place_prefix_map = {
+            "plaza ": "Square",
+            "parque ": "UrbanPark",
+            "jardin ": "Garden",
+            "jardín ": "Garden",
+            "mercado ": "Market",
+            "barrio ": "Neighborhood",
+            "puerta ": "Gate",
+            "glorieta ": "Roundabout",
+        }
 
         monument_prefixes = [
             "basilica ", "basílica ", "catedral ", "iglesia ", "capilla ",
@@ -783,8 +881,9 @@ class TourismPipeline:
         if any(term in name for term in event_terms):
             return "Event"
 
-        if any(name.startswith(prefix) for prefix in place_prefixes):
-            return "Place"
+        for prefix, guessed in place_prefix_map.items():
+            if name.startswith(prefix):
+                return guessed
 
         if any(name.startswith(prefix) for prefix in monument_prefixes):
             if name.startswith("ayuntamiento "):
@@ -837,8 +936,8 @@ class TourismPipeline:
                 return ""
 
             aliases = {
-                "organisation": "Organization",
-                "organization": "Organization",
+                "organisation": "TourismOrganisation",
+                "organization": "TourismOrganisation",
                 "medicalclinic": "PublicService",
                 "clinic": "PublicService",
                 "healthcareorganization": "PublicService",
@@ -850,6 +949,14 @@ class TourismPipeline:
                 "excursion": "DestinationExperience",
                 "activity": "DestinationExperience",
                 "concept": "ConceptScheme",
+                "place": "",
+                "market": "Market",
+                "square": "Square",
+                "garden": "Garden",
+                "urbanpark": "UrbanPark",
+                "neighborhood": "Neighborhood",
+                "gate": "Gate",
+                "roundabout": "Roundabout",
                 "person": "",
             }
 
@@ -860,10 +967,10 @@ class TourismPipeline:
 
         def build_context(item: dict) -> str:
             return " ".join([
-                str(item.get("shortDescription") or item.get("short_description") or ""),
-                str(item.get("longDescription") or item.get("long_description") or ""),
-                str(item.get("description") or ""),
-                str(page_text or ""),
+                strip_sitewide_footer_text(item.get("shortDescription") or item.get("short_description") or ""),
+                strip_sitewide_footer_text(item.get("longDescription") or item.get("long_description") or ""),
+                strip_sitewide_footer_text(item.get("description") or ""),
+                strip_sitewide_footer_text(page_text or ""),
             ])
 
         for entity in entities or []:
@@ -927,7 +1034,14 @@ class TourismPipeline:
                 fixed.append(item)
                 continue
 
-            if "ayuntamiento" in name_norm and "TownHall" in self.valid_classes:
+            if (
+                re.search(r"^(ayuntamiento|casa consistorial)\b", name_norm)
+                and not re.search(
+                    r"\b(casco antiguo|festival|pump track|frente ciudadela|estrellas michelin|queso|alojamientos|verde|reserva|preguntas|mercados|agroturismos|cordero|menestra|patxaran|actas|pimientos|ajoarriero|trucha|pochas|esparragos|cuajada|chistorra|goxua|pantxineta|fritos|planes|cultura)\b",
+                    name_norm,
+                )
+                and "TownHall" in self.valid_classes
+            ):
                 item["class"] = "TownHall"
                 item["type"] = "TownHall"
                 fixed.append(item)
@@ -1050,6 +1164,85 @@ class TourismPipeline:
         except Exception:
             return ""
 
+    def _clean_heading_candidate(self, text: str) -> str:
+        value = str(text or "").strip()
+        if not value:
+            return ""
+
+        value = re.sub(r"\s+", " ", value)
+        for separator in (" | ", " - ", " – ", " — ", " » "):
+            if separator in value:
+                value = value.split(separator)[0].strip()
+
+        low = self._normalized_for_match(value)
+        for prefix in ("ir al contenido", "reserva tu actividad", "descubre pamplona", "planifica tu viaje"):
+            if low.startswith(prefix + " "):
+                value = value[len(prefix):].strip()
+                low = self._normalized_for_match(value)
+
+        return self._clean_candidate_name(value)
+
+    def _extract_primary_page_entity_candidates(self, title: str = "", h1: str = "") -> List[str]:
+        anchor_pattern = re.compile(
+            r"\b(?:Festival|Mercado|Feria|Ruta|Camino|Museo|Catedral|Iglesia|Capilla|Castillo|"
+            r"Palacio|Plaza|Ayuntamiento|Parque|Puente|Estacion|Oficina de Turismo)\b"
+            r"(?:\s+[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9'’-]+){0,16}",
+            flags=re.IGNORECASE,
+        )
+        candidates: List[str] = []
+        seen = set()
+
+        for raw in (h1, title):
+            cleaned = self._clean_heading_candidate(raw)
+            if not cleaned:
+                continue
+
+            direct = cleaned.strip(" ,.;:-|")
+            if direct and len(direct.split()) <= 18:
+                direct_key = self._canonical_key(direct)
+                if direct_key and direct_key not in seen and not self._is_contextual_noise_entity(direct):
+                    seen.add(direct_key)
+                    candidates.append(direct)
+
+            for match in anchor_pattern.findall(cleaned):
+                candidate = self._clean_candidate_name(match)
+                key = self._canonical_key(candidate)
+                if not key or key in seen:
+                    continue
+                if self._is_contextual_noise_entity(candidate):
+                    continue
+                seen.add(key)
+                candidates.append(candidate)
+
+        return candidates
+
+    def _looks_like_technical_noise_entity(self, entity_name: str) -> bool:
+        name = self._normalized_for_match(entity_name)
+        technical_terms = {
+            "tecnologia",
+            "tecnologias",
+            "agroalimentaria",
+            "agroalimentarias",
+            "infraestructura",
+            "infraestructuras",
+            "investigacion",
+            "innovacion",
+            "desarrollo",
+            "biotecnologia",
+            "laboratorio",
+        }
+        hits = sum(1 for term in technical_terms if term in name)
+        return hits >= 1 and not any(anchor in name for anchor in ("mercado", "festival", "museo", "ruta", "plaza", "ayuntamiento"))
+
+    def _is_subordinate_event_label(self, entity_name: str, primary_candidates: Optional[List[str]] = None) -> bool:
+        name = self._normalized_for_match(entity_name)
+        if not name:
+            return False
+
+        parent_has_event = any("festival" in self._normalized_for_match(candidate) for candidate in (primary_candidates or []))
+        subordinate_terms = {"espectaculos", "programacion", "ciclo", "seccion", "escena", "agenda", "actividades"}
+        return parent_has_event and any(term in name for term in subordinate_terms) and "festival" not in name
+
     def _is_contextual_noise_entity(self, entity_name):
         name = self._normalized_for_match(entity_name)
         bad_terms = [
@@ -1071,20 +1264,197 @@ class TourismPipeline:
             "ir al contenido",
             "pago recomendado",
         ]
-        return any(term in name for term in bad_terms)
+        if any(term in name for term in bad_terms):
+            return True
+        if self._looks_like_technical_noise_entity(entity_name):
+            return True
+        return False
+
+    def _has_strong_tourism_anchor(self, entity_name: str) -> bool:
+        name = self._normalized_for_match(entity_name)
+        strong_anchors = {
+            "festival", "mercado", "museo", "catedral", "iglesia", "capilla", "castillo",
+            "palacio", "plaza", "ayuntamiento", "parque", "jardin", "puente", "ruta",
+            "camino", "feria", "baluarte", "ciudadela", "estacion", "oficina de turismo",
+            "monasterio", "convento", "teatro", "auditorio",
+        }
+        return any(anchor in name for anchor in strong_anchors)
+
+    def _is_abstract_topic_entity(self, entity_name: str) -> bool:
+        name = self._normalized_for_match(entity_name)
+        abstract_terms = {
+            "sostenibilidad", "turistica", "turistico", "produccion", "agraria",
+            "ecologica", "agroalimentaria", "agroalimentarias", "plan", "estrategia",
+            "modelo", "desarrollo", "innovacion", "tecnologia", "tecnologias",
+        }
+        hits = sum(1 for term in abstract_terms if term in name)
+        return hits >= 2 and not self._has_strong_tourism_anchor(entity_name)
+
+    def _rescue_empty_page_candidates(self, entities, listing_like_page: bool = False):
+        rescued = []
+        seen = set()
+
+        for item in entities or []:
+            if not isinstance(item, dict):
+                continue
+
+            candidate = dict(item)
+            name = self._clean_candidate_name(
+                candidate.get("name")
+                or candidate.get("entity_name")
+                or candidate.get("entity")
+                or candidate.get("label")
+                or ""
+            )
+            if not name:
+                continue
+            if self._looks_like_ui_or_category_name(name):
+                continue
+            if self._is_contextual_noise_entity(name):
+                continue
+            if self._is_abstract_topic_entity(name):
+                continue
+            if self._is_phrase_fragment(name) and not self._has_strong_tourism_anchor(name):
+                continue
+            if self._looks_like_bad_compound_entity(name) and not self._has_strong_tourism_anchor(name):
+                continue
+
+            key = self._canonical_key(name)
+            if not key or key in seen:
+                continue
+
+            score = float(candidate.get("score", 0.0) or 0.0)
+            if listing_like_page:
+                if not self._has_strong_tourism_anchor(name):
+                    continue
+            elif score < 0.25 and not self._has_strong_tourism_anchor(name):
+                continue
+
+            candidate["name"] = name
+            candidate["entity_name"] = name
+            candidate["label"] = name
+            candidate["entity"] = name
+            rescued.append(candidate)
+            seen.add(key)
+
+        rescued.sort(
+            key=lambda item: (
+                1 if self._has_strong_tourism_anchor(item.get("name", "")) else 0,
+                float(item.get("score", 0.0) or 0.0),
+            ),
+            reverse=True,
+        )
+        return rescued[: (12 if listing_like_page else 5)]
+
+    def _annotate_tourism_evidence(
+        self,
+        entities,
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ):
+        annotated = []
+
+        for entity in entities or []:
+            if not isinstance(entity, dict):
+                continue
+
+            item = dict(entity)
+            audit = {"score": 0.0, "decision": "unknown", "reasons": []}
+
+            if self.tourism_evidence is not None and hasattr(self.tourism_evidence, "score_entity"):
+                try:
+                    audit = self.tourism_evidence.score_entity(
+                        item,
+                        page_url=url,
+                        page_signals=page_signals or {},
+                    ) or audit
+                except Exception:
+                    audit = audit
+
+            item["tourism_evidence_audit"] = audit
+            item["tourism_evidence_score"] = float(audit.get("score", 0.0) or 0.0)
+            annotated.append(item)
+
+        return annotated
+
+    def _supplement_listing_candidates(
+        self,
+        kept_entities,
+        source_entities,
+        listing_like_page: bool = False,
+        strict_listing_page: bool = False,
+    ):
+        profile = self._page_capture_profile(
+            listing_like_page=listing_like_page,
+            strict_listing_page=strict_listing_page,
+        )
+        rescued = self._rescue_empty_page_candidates(
+            source_entities,
+            listing_like_page=(listing_like_page or strict_listing_page),
+        )
+
+        merged = []
+        seen = set()
+        for item in list(kept_entities or []) + list(rescued or []):
+            if not isinstance(item, dict):
+                continue
+            key = self._canonical_key(
+                item.get("name")
+                or item.get("entity_name")
+                or item.get("entity")
+                or item.get("label")
+                or ""
+            )
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            merged.append(item)
+
+        return merged[: profile["supplement_limit"]]
 
     def select_primary_entities(self, entities, html="", url="", top_k=3):
         if not entities:
-            return []
+            entities = []
 
-        title = self._normalized_for_match(self._extract_page_title(html))
-        h1 = self._normalized_for_match(self._extract_h1(html))
+        raw_title = self._extract_page_title(html)
+        raw_h1 = self._extract_h1(html)
+        title = self._normalized_for_match(raw_title)
+        h1 = self._normalized_for_match(raw_h1)
         breadcrumb = self._normalized_for_match(self._extract_breadcrumb_text(html))
         slug = self._normalized_for_match(self._extract_url_slug(url))
         page_signals = self._build_page_signals(html=html, url=url)
         listing_like = self._is_listing_like_page(page_signals=page_signals, page_text=(h1 + " " + title), url=url)
+        primary_candidates = self._extract_primary_page_entity_candidates(title=raw_title, h1=raw_h1)
 
         scored = []
+        seen_names = {
+            self._canonical_key(
+                entity.get("name")
+                or entity.get("entity_name")
+                or entity.get("entity")
+                or entity.get("label")
+                or ""
+            )
+            for entity in entities
+            if isinstance(entity, dict)
+        }
+
+        for candidate in primary_candidates:
+            key = self._canonical_key(candidate)
+            if not key or key in seen_names:
+                continue
+            entities.append({
+                "name": candidate,
+                "entity_name": candidate,
+                "entity": candidate,
+                "label": candidate,
+                "type": "Unknown",
+                "class": "Unknown",
+                "score": 0.8,
+                "source_text": f"{raw_h1} {raw_title}".strip(),
+                "_synthetic_primary_candidate": True,
+            })
+            seen_names.add(key)
 
         for entity in entities:
             if not isinstance(entity, dict):
@@ -1120,8 +1490,14 @@ class TourismPipeline:
                 centrality += 2.0
             if breadcrumb and norm_name in breadcrumb:
                 centrality += 1.5
+            if any(norm_name == self._normalized_for_match(candidate) for candidate in primary_candidates):
+                centrality += 6.0
+            elif any(norm_name in self._normalized_for_match(candidate) for candidate in primary_candidates):
+                centrality += 2.5
             if self._is_contextual_noise_entity(name):
                 centrality -= 4.0
+            if self._is_subordinate_event_label(name, primary_candidates=primary_candidates):
+                centrality -= 5.0
 
             penalty = self._entity_name_penalty(name, url=url, page_signals=page_signals)
             if listing_like:
@@ -1233,6 +1609,7 @@ class TourismPipeline:
 
             context = self._get_entity_context(item, page_text=page_text)
             evidence_score = float((item.get("filter_audit") or {}).get("score") or 0.0)
+            evidence_score += max(0.0, float(item.get("tourism_evidence_score", 0.0) or 0.0) * 0.35)
 
             try:
                 matches = self.ontology_matcher.match(
@@ -1265,17 +1642,53 @@ class TourismPipeline:
 
         return enriched
 
-    def _apply_quality_gate(self, entities, page_signals: Optional[Dict[str, Any]] = None, url: str = ""):
+    def _apply_quality_gate(
+        self,
+        entities,
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+        listing_like_page: bool = False,
+        strict_listing_page: bool = False,
+    ):
         gated = []
+        profile = self._page_capture_profile(
+            listing_like_page=listing_like_page,
+            strict_listing_page=strict_listing_page,
+        )
         for entity in entities or []:
             if not isinstance(entity, dict):
                 continue
             item = dict(entity)
+            tourism_audit = item.get("tourism_evidence_audit")
+            if not isinstance(tourism_audit, dict):
+                tourism_audit = {"score": 0.0, "decision": "unknown", "reasons": []}
+
             quality = self.quality_scorer.evaluate(item, page_url=url, page_signals=page_signals or {})
             item["quality_audit"] = quality
-            if quality.get("decision") == "discard":
+
+            quality_score = float(quality.get("score", 0.0) or 0.0)
+            tourism_score = float(tourism_audit.get("score", 0.0) or 0.0)
+            combined_score = round(quality_score + max(0.0, tourism_score) * 0.6, 3)
+
+            keep = quality.get("decision") != "discard"
+            if not keep:
+                has_anchor = self._has_strong_tourism_anchor(item.get("name", ""))
+                if (
+                    tourism_score >= profile["evidence_rescue_score"]
+                    and has_anchor
+                    and not self._is_abstract_topic_entity(item.get("name", ""))
+                ):
+                    keep = True
+                    item["quality_gate_rescued"] = True
+                    item["quality_gate_rescue_reason"] = "tourism_evidence"
+            elif quality.get("decision") == "review" and profile["quality_review_ok"]:
+                item["quality_gate_rescued"] = True
+                item["quality_gate_rescue_reason"] = "review_allowed_by_page_profile"
+
+            if not keep:
                 continue
-            item["evidence_score"] = quality.get("score", 0.0)
+
+            item["evidence_score"] = combined_score
             gated.append(item)
         return gated
 
@@ -1320,10 +1733,16 @@ class TourismPipeline:
         )
 
         if isinstance(result, dict):
-            return result
+            cleaned = {}
+            for key, value in result.items():
+                if key in {"description", "short_description", "long_description"}:
+                    cleaned[key] = strip_sitewide_footer_text(value)
+                else:
+                    cleaned[key] = value
+            return cleaned
 
         if isinstance(result, str) and result.strip():
-            text = result.strip()
+            text = strip_sitewide_footer_text(result.strip())
             return {
                 "description": text,
                 "short_description": text[:220],
@@ -1612,7 +2031,11 @@ class TourismPipeline:
                 reasons.append("contextual_noise_name")
             if self._is_phrase_fragment(name):
                 reasons.append("phrase_fragment")
-            if listing_like_page and len(self._tokenize_name(name)) >= 5:
+            if (
+                listing_like_page
+                and len(self._tokenize_name(name)) >= 7
+                and not self._has_strong_tourism_anchor(name)
+            ):
                 reasons.append("listing_page_long_compound")
 
             entity_type = str(item.get("class") or item.get("type") or "").strip().lower()
@@ -1678,11 +2101,6 @@ class TourismPipeline:
             page_text=page_text,
             url=url,
         )
-
-        if strict_listing_page:
-            if self.debug:
-                print(f"[PIPELINE] strict_listing_page -> skipping entity extraction for {url}", file=sys.stderr)
-            return []
 
         listing_like_page = self._is_listing_like_page(
             page_signals=page_signals,
@@ -1780,6 +2198,30 @@ class TourismPipeline:
         self._debug_stage("conservative_filter", entities)
 
         try:
+            entities = self._annotate_tourism_evidence(
+                entities,
+                page_signals=page_signals,
+                url=url,
+            )
+        except Exception:
+            pass
+
+        if listing_like_page or strict_listing_page:
+            try:
+                entities = self._supplement_listing_candidates(
+                    entities,
+                    split_entities,
+                    listing_like_page=listing_like_page,
+                    strict_listing_page=strict_listing_page,
+                )
+            except Exception:
+                pass
+
+        entities = self._coerce_entities_to_dicts(entities, url=url)
+        entities = self._sanitize_entities_for_downstream(entities)
+        self._debug_stage("tourism_evidence", entities)
+
+        try:
             entities = self._attach_ontology_candidates(
                 entities,
                 page_text=page_text,
@@ -1838,6 +2280,8 @@ class TourismPipeline:
                     candidates,
                     page_signals=page_signals,
                     url=url,
+                    listing_like_page=listing_like_page,
+                    strict_listing_page=strict_listing_page,
                 )
             except Exception:
                 pass
@@ -1885,6 +2329,8 @@ class TourismPipeline:
                     ranked_entities,
                     page_signals=page_signals,
                     url=url,
+                    listing_like_page=listing_like_page,
+                    strict_listing_page=strict_listing_page,
                 )
             except Exception:
                 pass
@@ -1893,7 +2339,7 @@ class TourismPipeline:
         ranked_entities = self._sanitize_entities_for_downstream(ranked_entities)
         self._debug_stage("rank", ranked_entities)
 
-        top_k = 3 if listing_like_page else max(3, min(8, len(ranked_entities) or 3))
+        top_k = min(12, max(5, len(ranked_entities) or 5)) if listing_like_page else max(3, min(8, len(ranked_entities) or 3))
 
         try:
             ranked_entities = self.select_primary_entities(
@@ -1940,6 +2386,8 @@ class TourismPipeline:
                     final_entities,
                     page_signals=page_signals,
                     url=url,
+                    listing_like_page=listing_like_page,
+                    strict_listing_page=strict_listing_page,
                 )
             except Exception:
                 pass
@@ -1984,6 +2432,8 @@ class TourismPipeline:
                     clustered,
                     page_signals=page_signals,
                     url=url,
+                    listing_like_page=listing_like_page,
+                    strict_listing_page=strict_listing_page,
                 )
             except Exception:
                 pass
@@ -2017,6 +2467,16 @@ class TourismPipeline:
                 )
             except Exception:
                 pass
+
+        if not clustered and not strict_listing_page:
+            rescue_pool = final_entities or ranked_entities or candidates or entities or split_entities
+            try:
+                clustered = self._rescue_empty_page_candidates(
+                    rescue_pool,
+                    listing_like_page=listing_like_page,
+                )
+            except Exception:
+                clustered = clustered or []
 
         clustered = self._coerce_entities_to_dicts(clustered, url=url)
         clustered = self._sanitize_entities_for_downstream(clustered)

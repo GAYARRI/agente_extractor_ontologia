@@ -72,6 +72,19 @@ class HTMLBlockExtractor:
             "facebook instagram", "instagram x-twitter",
         ]
 
+        self.footer_signature_fragments = [
+            "ayuntamiento de pamplona 31001",
+            "ayuntamiento de pamplona",
+            "descubre pamplona",
+            "barrio a barrio",
+            "moverse por pamplona",
+            "mapas y guias",
+            "mapas y guÇðas",
+            "convention bureau",
+            "area profesional",
+            "Ç­rea profesional",
+        ]
+
         self.short_ui = {
             "ver más", "ver mas", "leer más", "leer mas",
             "más info", "mas info", "contacto", "inicio",
@@ -140,6 +153,30 @@ class HTMLBlockExtractor:
 
         return False
 
+    def _strip_footer_signature(self, text: str) -> str:
+        normalized = self._normalize_text(text)
+        low = normalized.lower()
+        cut_points = []
+
+        for marker in [
+            "ayuntamiento de pamplona 31001",
+            "descubre pamplona",
+            "© 2025 ayuntamiento de pamplona",
+        ]:
+            idx = low.find(marker)
+            if idx > 0:
+                cut_points.append(idx)
+
+        if cut_points:
+            normalized = normalized[: min(cut_points)].strip()
+
+        return normalized
+
+    def _has_footer_signature(self, text: str) -> bool:
+        low = self._normalize_text(text).lower()
+        hits = self._count_matches(low, self.footer_signature_fragments)
+        return hits >= 2
+
     def _is_mostly_ui_text(self, text: str) -> bool:
         low = text.lower()
 
@@ -176,6 +213,9 @@ class HTMLBlockExtractor:
         if self._is_sitewide_menu_block(text):
             return True
 
+        if self._has_footer_signature(text):
+            return True
+
         return False
 
     # ==================================================
@@ -200,6 +240,7 @@ class HTMLBlockExtractor:
                 continue
 
             text = self._normalize_text(el.get_text(" ", strip=True))
+            text = self._strip_footer_signature(text)
 
             if not text:
                 continue
@@ -226,12 +267,55 @@ class HTMLBlockExtractor:
                 continue
             seen.add(norm_key)
 
+            nearest_heading = ""
+            try:
+                prev_heading = el.find_previous(["h1", "h2", "h3", "h4"])
+                if prev_heading:
+                    nearest_heading = self._normalize_text(prev_heading.get_text(" ", strip=True))
+                    nearest_heading = self._strip_footer_signature(nearest_heading)
+            except Exception:
+                nearest_heading = ""
+
+            parent = getattr(el, "parent", None)
+            parent_tag = getattr(parent, "name", "") if parent else ""
+            parent_class = ""
+            parent_id = ""
+            if parent:
+                try:
+                    parent_class = " ".join(parent.get("class", []))
+                except Exception:
+                    parent_class = ""
+                try:
+                    parent_id = parent.get("id")
+                except Exception:
+                    parent_id = ""
+
+            anchor = el if el.name == "a" else el.find("a")
+            link_text = ""
+            link_href = ""
+            if anchor:
+                try:
+                    link_text = self._normalize_text(anchor.get_text(" ", strip=True))
+                    link_text = self._strip_footer_signature(link_text)
+                except Exception:
+                    link_text = ""
+                try:
+                    link_href = anchor.get("href")
+                except Exception:
+                    link_href = ""
+
             blocks.append({
                 "text": text,
                 "tag": el.name,
                 "href": el.get("href"),
                 "class": " ".join(el.get("class", [])),
                 "id": el.get("id"),
+                "heading": nearest_heading,
+                "parent_tag": parent_tag,
+                "parent_class": parent_class,
+                "parent_id": parent_id,
+                "link_text": link_text,
+                "link_href": link_href,
             })
 
         return blocks
