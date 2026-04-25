@@ -206,7 +206,7 @@ Return only JSON.
     def __init__(
         self,
         ontology_index=None,
-        model: str = "gpt-4o-mini",
+        model: str = "gpt-5.4-mini",
         gold_examples_path: str = "benchmark/Ejemplos.csv",
         use_fewshots: bool = False,
         fewshots: Optional[List[dict]] = None,

@@ -5,23 +5,61 @@ from .normalize import normalize_text
 
 
 GENERIC_FINAL_CLASSES = {"Unknown", "Place", "Concept", "SIN_TIPO", "ContentPage", "CategoryPage"}
+CANONICAL_CROSS_PAGE_CLASSES = {
+    "TownHall",
+    "Cathedral",
+    "Church",
+    "Chapel",
+    "Basilica",
+    "Palace",
+    "Castle",
+    "Museum",
+    "Square",
+    "Garden",
+    "Bridge",
+    "Wall",
+    "TraditionalMarket",
+}
+TOWNHALL_EQUIVALENTS = {
+    "ayuntamiento de pamplona",
+    "ayuntamiento",
+    "casa consistorial",
+    "ayuntamiento y plaza consistorial",
+    "pamplona ayuntamiento",
+}
+
+
+def canonical_entity_name(entity: Dict[str, Any]) -> str:
+    name = normalize_text(entity.get("name"))
+    primary = str(entity.get("primaryClass") or entity.get("class") or entity.get("type") or "").strip()
+
+    if primary == "TownHall":
+        if any(token in name for token in TOWNHALL_EQUIVALENTS):
+            return "ayuntamiento de pamplona"
+        if "ayuntamiento" in name or "casa consistorial" in name:
+            return "ayuntamiento de pamplona"
+
+    return name
 
 
 def entity_key(entity: Dict[str, Any]) -> str:
+    primary = str(entity.get("primaryClass") or entity.get("class") or entity.get("type") or "").strip()
+    name = canonical_entity_name(entity)
+    if primary in CANONICAL_CROSS_PAGE_CLASSES and name:
+        return f"classname|{normalize_text(primary)}|{name}"
+
     ext_id = (
         entity.get("id")
         or entity.get("externalId")
         or entity.get("url")
         or entity.get("slug")
         or entity.get("canonicalUrl")
-        or entity.get("sourceUrl")
         or entity.get("sameAs")
         or entity.get("identifier")
     )
     if ext_id:
         return "id|" + normalize_text(ext_id)
 
-    name = normalize_text(entity.get("name"))
     coords = entity.get("coordinates") or {}
     lat = coords.get("lat")
     lng = coords.get("lng")

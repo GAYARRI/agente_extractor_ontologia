@@ -265,6 +265,7 @@ class TourismPipeline:
         self.trailing_noise_patterns = [
             r"\b(ver|más|mas|también|tambien|comenzaremos|pago recomendado)$",
             r"\b(monumento|monumentos|museo|museos|iglesia|iglesias|lugares|interés|interes)$",
+            r"\b(preguntas|informacion|información|reserva|reservar|contacto|como llegar|cómo llegar|horarios|tarifas|precios)$",
         ]
 
         if self.debug:
@@ -479,6 +480,63 @@ class TourismPipeline:
         text = re.sub(r"\s+", " ", text).strip(" -|,;:")
 
         return text
+
+    def _is_narrative_side_entity(
+        self,
+        entity_name: str,
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ) -> bool:
+        name = self._normalized_for_match(entity_name)
+        if not name:
+            return False
+
+        if self._is_primary_page_candidate_name(entity_name, page_signals=page_signals, url=url):
+            return False
+
+        url_low = self._normalized_for_match(url or page_signals.get("url") or "")
+        route_like_page = any(token in url_low for token in ("ruta", "route", "hemingway", "paseos-y-rutas"))
+        detail_like_page = self._is_detail_priority_page(page_signals=page_signals, url=url)
+
+        if not (route_like_page or detail_like_page):
+            return False
+
+        narrative_markers = {
+            "narra",
+            "cerca",
+            "adentrate",
+            "adéntrate",
+            "descubre",
+            "historia",
+            "biografia",
+            "biografía",
+            "guerra",
+            "school",
+        }
+        person_like_markers = {
+            "hemingway",
+            "bacall",
+            "barnes",
+            "richardson",
+            "jake",
+            "elizabeth",
+            "clarence",
+            "mary",
+            "ventura rodriguez",
+            "ventura rodríguez",
+            "johan lome",
+        }
+
+        if any(marker in name for marker in narrative_markers):
+            return True
+
+        if route_like_page and any(marker in name for marker in person_like_markers):
+            return True
+
+        if detail_like_page and len(name.split()) >= 3 and any(marker in name for marker in person_like_markers):
+            return True
+
+        return False
 
     def _is_phrase_fragment(self, entity_name: str) -> bool:
         key = self._canonical_key(entity_name)
@@ -726,7 +784,12 @@ class TourismPipeline:
 
         return False
 
-    def _page_capture_profile(self, listing_like_page: bool = False, strict_listing_page: bool = False) -> Dict[str, Any]:
+    def _page_capture_profile(
+        self,
+        listing_like_page: bool = False,
+        strict_listing_page: bool = False,
+        detail_priority_page: bool = False,
+    ) -> Dict[str, Any]:
         if strict_listing_page:
             return {
                 "name": "strict_listing",
@@ -741,12 +804,219 @@ class TourismPipeline:
                 "evidence_rescue_score": 2.6,
                 "quality_review_ok": True,
             }
+        if detail_priority_page:
+            return {
+                "name": "detail_priority",
+                "supplement_limit": 6,
+                "evidence_rescue_score": 2.2,
+                "quality_review_ok": True,
+            }
         return {
             "name": "detail",
             "supplement_limit": 5,
             "evidence_rescue_score": 3.4,
             "quality_review_ok": False,
         }
+
+    def _classify_page_intent(
+        self,
+        page_signals: Optional[Dict[str, Any]] = None,
+        page_text: str = "",
+        url: str = "",
+    ) -> str:
+        page_signals = page_signals or {}
+        url_low = str(url or "").strip().lower()
+        title = self._canonical_key(page_signals.get("title") or "")
+        h1 = self._canonical_key(page_signals.get("h1") or "")
+        breadcrumb = self._canonical_key(page_signals.get("breadcrumb") or "")
+        slug = self._canonical_key(page_signals.get("slug") or "")
+        text = self._canonical_key(page_text[:2000])
+        combined = " | ".join(
+            x for x in [title, h1, breadcrumb, slug, text, self._canonical_key(url)] if x
+        )
+
+        legal_markers = {
+            "aviso legal",
+            "politica de privacidad",
+            "politica de cookies",
+            "declaracion de accesibilidad",
+            "declaracion accesibilidad",
+            "privacy policy",
+            "cookie policy",
+            "legal notice",
+        }
+        technical_markers = {
+            "elementor_library",
+            "wp-json",
+            "feed",
+            "preview=true",
+            "replytocom",
+        }
+        institutional_markers = {
+            "area profesional",
+            "estrategias y planes",
+            "estudios e informes",
+            "licitaciones",
+            "plan de sostenibilidad",
+            "pstd",
+            "sf365",
+        }
+        programmatic_markers = {
+            "plan",
+            "estrategia",
+            "estrategias",
+            "informe",
+            "informes",
+            "licitacion",
+            "licitaciones",
+            "sostenibilidad",
+            "promocion",
+            "promociones",
+            "marketing",
+        }
+
+        if any(marker in combined for marker in legal_markers):
+            return "legal"
+
+        if any(fragment in url_low for fragment in ("/aviso-legal", "privacidad", "cookies", "accesibilidad")):
+            return "legal"
+
+        if any(marker in combined for marker in technical_markers):
+            return "technical"
+
+        if any(fragment in url_low for fragment in ("elementor_library=", "wp-json", "/feed", "preview=true", "replytocom")):
+            return "technical"
+
+        if any(marker in combined for marker in institutional_markers):
+            if any(marker in combined for marker in programmatic_markers):
+                return "programmatic"
+            return "institutional"
+
+        if "/lugar/" in url_low or "/en/lugar/" in url_low:
+            return "detail"
+
+        if self._is_strict_listing_page(page_signals=page_signals, page_text=page_text, url=url):
+            return "listing"
+
+        if self._is_listing_like_page(page_signals=page_signals, page_text=page_text, url=url):
+            return "listing"
+
+        return "detail"
+
+    def _should_ignore_page(self, page_signals: Optional[Dict[str, Any]] = None, url: str = "") -> bool:
+        page_signals = page_signals or {}
+        intent = str(page_signals.get("pageIntent") or "").strip().lower()
+        if intent in {"legal", "technical"}:
+            return True
+
+        url_low = str(url or "").strip().lower()
+        ignored_url_fragments = (
+            "elementor_library=",
+            "/aviso-legal",
+            "privacidad",
+            "cookies",
+            "accesibilidad",
+            "/feed/",
+            "/feed",
+            "wp-json",
+        )
+        return any(fragment in url_low for fragment in ignored_url_fragments)
+
+    def _is_detail_priority_page(self, page_signals: Optional[Dict[str, Any]] = None, url: str = "") -> bool:
+        page_signals = page_signals or {}
+        url_low = str(url or page_signals.get("url") or "").strip().lower()
+        return "/lugar/" in url_low or "/en/lugar/" in url_low
+
+    def _is_primary_page_candidate_name(
+        self,
+        name: str,
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ) -> bool:
+        page_signals = page_signals or {}
+        norm_name = self._normalized_for_match(name)
+        if not norm_name:
+            return False
+
+        title = self._normalized_for_match(page_signals.get("title") or "")
+        h1 = self._normalized_for_match(page_signals.get("h1") or "")
+        slug = self._normalized_for_match(page_signals.get("slug") or self._extract_url_slug(url))
+
+        return any(
+            (
+                norm_name == candidate
+                or (candidate and norm_name in candidate)
+                or (candidate and candidate in norm_name)
+            )
+            for candidate in (title, h1, slug)
+            if candidate
+        )
+
+    def _is_detail_secondary_label(
+        self,
+        entity_name: str,
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ) -> bool:
+        if not self._is_detail_priority_page(page_signals=page_signals, url=url):
+            return False
+
+        if self._is_primary_page_candidate_name(entity_name, page_signals=page_signals, url=url):
+            return False
+
+        name = self._normalized_for_match(entity_name)
+        if not name:
+            return False
+
+        generic_labels = {
+            "visitas para grupos",
+            "visitas en familia",
+            "actividades deportivas",
+            "localizacion",
+            "ubicacion",
+            "como llegar",
+            "informacion practica",
+            "informacion adicional",
+            "horarios",
+            "precios",
+            "tarifas",
+            "reservas",
+            "reserva",
+            "contacto",
+            "group visits",
+            "family visits",
+            "sports activities",
+            "location",
+            "how to get there",
+            "opening hours",
+            "prices",
+            "rates",
+            "booking",
+            "bookings",
+            "contact",
+        }
+        if name in generic_labels:
+            return True
+
+        weak_patterns = (
+            "visitas ",
+            "visita ",
+            "grupos",
+            "familia",
+            "how to ",
+            "como ",
+            "opening ",
+            "booking",
+            "reserv",
+            "horario",
+            "precio",
+            "tarifa",
+            "contact",
+            "localizacion",
+            "ubicacion",
+            "location ",
+        )
+        return any(term in name for term in weak_patterns)
 
     def _looks_like_ui_or_category_name(self, entity_name: str) -> bool:
         key = self._canonical_key(entity_name)
@@ -830,6 +1100,10 @@ class TourismPipeline:
         )
         if self._is_subordinate_event_label(entity_name, primary_candidates=primary_candidates):
             penalty += 5.0
+        if self._is_detail_secondary_label(entity_name, page_signals=page_signals, url=url):
+            penalty += 8.0
+        if self._is_narrative_side_entity(entity_name, page_signals=page_signals, url=url):
+            penalty += 8.0
 
         if re.search(r"\b(ver|más|mas|si|también|tambien|comenzaremos)\b", key):
             penalty += 5.0
@@ -850,22 +1124,40 @@ class TourismPipeline:
 
         monument_context_terms = [
             "estatua", "escultura", "monumento", "busto",
-            "glorieta", "conjunto escultorico", "conjunto escultórico",
+            "glorieta", "conjunto escultorico",
             "homenaje a", "dedicado a", "obra de", "escultor",
-            "figura de bronce", "escultorico", "escultórico", "fachada",
+            "figura de bronce", "escultorico", "fachada",
             "claustro", "retablo", "nave central",
         ]
 
         event_terms = [
             "bienal", "festival", "feria", "semana santa",
-            "procesion", "procesión", "congreso", "ciclo"
+            "procesion", "congreso", "ciclo",
+        ]
+
+        route_terms = [
+            "ruta", "camino", "eurovelo", "cicloturismo",
+            "via verde", "sendero", "itinerario",
+        ]
+
+        sports_terms = [
+            "pump track", "skate park", "skatepark", "skate",
+            "instalacion deportiva", "deporte sobre ruedas",
+            "patin", "patinaje", "rocodromo", "rocopolis",
+            "circuito deportivo",
+        ]
+
+        heritage_terms = [
+            "archivo", "archivo real", "archivo general",
+            "edificio historico", "patrimonio historico",
+            "patrimonio cultural", "claustro", "fachada",
+            "retablo", "nave central", "capitel",
         ]
 
         place_prefix_map = {
             "plaza ": "Square",
             "parque ": "UrbanPark",
             "jardin ": "Garden",
-            "jardín ": "Garden",
             "mercado ": "Market",
             "barrio ": "Neighborhood",
             "puerta ": "Gate",
@@ -873,13 +1165,24 @@ class TourismPipeline:
         }
 
         monument_prefixes = [
-            "basilica ", "basílica ", "catedral ", "iglesia ", "capilla ",
-            "palacio ", "alcazar ", "alcázar ", "torre ", "puente ",
-            "monasterio ", "convento ", "ayuntamiento "
+            "basilica ", "catedral ", "iglesia ", "capilla ",
+            "palacio ", "alcazar ", "torre ", "puente ",
+            "monasterio ", "convento ", "ayuntamiento ",
         ]
 
         if any(term in name for term in event_terms):
             return "Event"
+
+        strong_route_name_terms = [
+            "ruta ", "camino ", "camino de ", "eurovelo", "cicloturismo",
+            "via verde", "sendero", "itinerario",
+        ]
+
+        if any(term in name for term in strong_route_name_terms):
+            return "Route"
+
+        if any(term in name for term in sports_terms) or any(term in context for term in sports_terms):
+            return "SportsCenter"
 
         for prefix, guessed in place_prefix_map.items():
             if name.startswith(prefix):
@@ -894,7 +1197,7 @@ class TourismPipeline:
                 return "Church"
             if name.startswith("capilla "):
                 return "Chapel"
-            if name.startswith("basilica ") or name.startswith("basílica "):
+            if name.startswith("basilica "):
                 return "Basilica"
             if name.startswith("palacio "):
                 return "Palace"
@@ -903,13 +1206,105 @@ class TourismPipeline:
         if "camino de santiago" in name:
             return "Route"
 
+        if "archivo" in name:
+            return "HistoricalOrCulturalResource"
+
         if any(term in context for term in monument_context_terms):
             return "Monument"
 
-        if any(k in name for k in ["tradicion", "tradición", "cultura", "patrimonio inmaterial"]):
+        if any(term in context for term in heritage_terms):
+            return "HistoricalOrCulturalResource"
+
+        if any(k in name for k in ["tradicion", "cultura", "patrimonio inmaterial"]):
             return "ConceptScheme"
 
         return current_type or ""
+
+    def _normalize_programmatic_type(
+        self,
+        name: str,
+        current_type: str,
+        page_signals: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        page_signals = page_signals or {}
+        if str(page_signals.get("pageIntent") or "").strip().lower() != "programmatic":
+            return current_type or ""
+
+        current = str(current_type or "").strip()
+        current_low = current.lower()
+        name_low = self._normalized_for_match(name)
+
+        suspicious_physical = {
+            "garden",
+            "square",
+            "cathedral",
+            "church",
+            "chapel",
+            "palace",
+            "castle",
+            "monument",
+            "bridge",
+            "wall",
+            "museum",
+        }
+
+        if any(term in name_low for term in ("congreso", "simposio", "jornadas", "convencion", "convención", "asamblea", "festival")):
+            return "Event"
+
+        if any(term in name_low for term in ("plan", "estrategia", "estudio", "informe", "analisis", "análisis", "licitacion", "licitación", "gobernanza", "marketing", "movilidad", "eficiencia", "rehabilitacion", "rehabilitación")):
+            return "TourismService" if "TourismService" in self.valid_classes else "PublicService"
+
+        if current_low in suspicious_physical:
+            return "TourismService" if "TourismService" in self.valid_classes else "PublicService"
+
+        return current
+
+    def _normalize_unknown_family_type(
+        self,
+        name: str,
+        current_type: str,
+        page_signals: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        current = str(current_type or "").strip()
+        page_signals = page_signals or {}
+        name_low = self._normalized_for_match(name)
+        url_low = self._normalized_for_match(page_signals.get("url") or "")
+
+        if current and current.lower() not in {"unknown", ""}:
+            return current
+
+        if any(term in name_low for term in ("congreso", "simposio", "jornadas", "convencion", "convención", "asamblea", "startup day")):
+            return "Event"
+
+        gastronomic_product_terms = (
+            "pimientos del piquillo",
+            "queso roncal",
+            "sidra navarra",
+            "torta de txantxigorri",
+            "chistorra",
+            "cuajada",
+            "goxua",
+            "pantxineta",
+            "patxaran",
+            "ajoarriero",
+            "fritos",
+            "pochas",
+            "espárragos",
+            "esparragos",
+        )
+        if any(term in name_low for term in gastronomic_product_terms):
+            return "FoodEstablishment" if "FoodEstablishment" in self.valid_classes else "HistoricalOrCulturalResource"
+
+        if any(term in name_low for term in ("consignas", "consigna", "locker", "lockers", "guarda equipajes")):
+            return "PublicService" if "PublicService" in self.valid_classes else current
+
+        if any(term in name_low for term in ("club de producto", "indicaciones geograficas protegidas", "indicaciones geográficas protegidas", "reyno gourmet")):
+            return "HistoricalOrCulturalResource"
+
+        if ("/eventos-del-sector" in url_low) and any(term in name_low for term in ("congreso", "simposio", "jornadas", "convencion", "convención")):
+            return "Event"
+
+        return current
 
     def _ensure_entity_type(
         self,
@@ -1010,6 +1405,11 @@ class TourismPipeline:
                 or normalized_semantic
                 or normalized_prop_type
             )
+            canonical_type = self._normalize_unknown_family_type(
+                name=name,
+                current_type=canonical_type,
+                page_signals=page_signals or {},
+            )
 
             name_norm = self._normalized_for_match(name)
             context_norm = self._normalized_for_match(build_context(item))
@@ -1048,6 +1448,11 @@ class TourismPipeline:
                 continue
 
             if canonical_type and canonical_type.lower() not in weak_types and canonical_type.lower() not in forbidden_final_types:
+                canonical_type = self._normalize_programmatic_type(
+                    name=name,
+                    current_type=canonical_type,
+                    page_signals=page_signals or {},
+                )
                 item["class"] = canonical_type
                 item["type"] = canonical_type
                 fixed.append(item)
@@ -1078,6 +1483,16 @@ class TourismPipeline:
                     page_text=build_context(item),
                     current_type="",
                 )
+                guessed = self._normalize_programmatic_type(
+                    name=name,
+                    current_type=guessed,
+                    page_signals=page_signals or {},
+                )
+                guessed = self._normalize_unknown_family_type(
+                    name=name,
+                    current_type=guessed,
+                    page_signals=page_signals or {},
+                )
                 guessed = normalize_candidate_type(guessed)
 
                 if guessed and guessed.lower() not in forbidden_final_types and guessed.lower() not in weak_types:
@@ -1089,6 +1504,18 @@ class TourismPipeline:
             else:
                 item["class"] = resolved_class
                 item["type"] = resolved_class
+
+            if str(item.get("class") or "").strip() in {"Unknown", "Place", "Location", "HistoricalOrCulturalResource"}:
+                upgraded = normalize_candidate_type(
+                    self._guess_type_from_name_and_context(
+                        entity_name=name,
+                        page_text=build_context(item),
+                        current_type=str(item.get("class") or ""),
+                    )
+                )
+                if upgraded and upgraded.lower() not in forbidden_final_types and upgraded.lower() not in weak_types:
+                    item["class"] = upgraded
+                    item["type"] = upgraded
 
             fixed.append(item)
 
@@ -1216,6 +1643,94 @@ class TourismPipeline:
 
         return candidates
 
+    def _seed_detail_primary_candidates(
+        self,
+        entities,
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ):
+        page_signals = page_signals or {}
+        title = page_signals.get("title") or ""
+        h1 = page_signals.get("h1") or ""
+        primary_candidates = self._extract_primary_page_entity_candidates(title=title, h1=h1)
+
+        seeded = list(entities or [])
+        seen = {
+            self._canonical_key(
+                item.get("name")
+                or item.get("entity_name")
+                or item.get("entity")
+                or item.get("label")
+                or ""
+            )
+            for item in seeded
+            if isinstance(item, dict)
+        }
+
+        for candidate in primary_candidates:
+            key = self._canonical_key(candidate)
+            if not key or key in seen:
+                continue
+            seeded.append(
+                {
+                    "name": candidate,
+                    "entity_name": candidate,
+                    "entity": candidate,
+                    "label": candidate,
+                    "type": "Unknown",
+                    "class": "Unknown",
+                    "score": 0.95,
+                    "source_text": f"{h1} {title}".strip(),
+                    "_synthetic_primary_candidate": True,
+                    "_detail_priority_seed": True,
+                    "sourceUrl": url,
+                }
+            )
+            seen.add(key)
+        return seeded
+
+    def _build_detail_primary_fallback(
+        self,
+        page_signals: Optional[Dict[str, Any]] = None,
+        page_text: str = "",
+        url: str = "",
+    ) -> List[Dict[str, Any]]:
+        page_signals = page_signals or {}
+        candidates = self._extract_primary_page_entity_candidates(
+            title=page_signals.get("title") or "",
+            h1=page_signals.get("h1") or "",
+        )
+        fallback = []
+        seen = set()
+        for candidate in candidates:
+            key = self._canonical_key(candidate)
+            if not key or key in seen:
+                continue
+            fallback.append(
+                {
+                    "name": candidate,
+                    "entity_name": candidate,
+                    "entity": candidate,
+                    "label": candidate,
+                    "type": "Unknown",
+                    "class": "Unknown",
+                    "score": 1.0,
+                    "source_text": " ".join(
+                        x
+                        for x in [
+                            page_signals.get("h1") or "",
+                            page_signals.get("title") or "",
+                            (page_text or "")[:500],
+                        ]
+                        if x
+                    ).strip(),
+                    "_detail_primary_fallback": True,
+                    "sourceUrl": url,
+                }
+            )
+            seen.add(key)
+        return fallback
+
     def _looks_like_technical_noise_entity(self, entity_name: str) -> bool:
         name = self._normalized_for_match(entity_name)
         technical_terms = {
@@ -1280,6 +1795,16 @@ class TourismPipeline:
         }
         return any(anchor in name for anchor in strong_anchors)
 
+    def _looks_like_route_entity_name(self, entity_name: str) -> bool:
+        name = self._normalized_for_match(entity_name)
+        if not name:
+            return False
+        strong_terms = (
+            "ruta ", "camino ", "camino de ", "eurovelo", "cicloturismo",
+            "via verde", "sendero", "itinerario",
+        )
+        return any(term in name for term in strong_terms)
+
     def _is_abstract_topic_entity(self, entity_name: str) -> bool:
         name = self._normalized_for_match(entity_name)
         abstract_terms = {
@@ -1290,7 +1815,14 @@ class TourismPipeline:
         hits = sum(1 for term in abstract_terms if term in name)
         return hits >= 2 and not self._has_strong_tourism_anchor(entity_name)
 
-    def _rescue_empty_page_candidates(self, entities, listing_like_page: bool = False):
+    def _rescue_empty_page_candidates(
+        self,
+        entities,
+        listing_like_page: bool = False,
+        detail_priority_page: bool = False,
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ):
         rescued = []
         seen = set()
 
@@ -1314,6 +1846,10 @@ class TourismPipeline:
                 continue
             if self._is_abstract_topic_entity(name):
                 continue
+            if self._is_narrative_side_entity(name, page_signals=page_signals, url=url):
+                continue
+            if detail_priority_page and self._is_detail_secondary_label(name, page_signals=page_signals, url=url):
+                continue
             if self._is_phrase_fragment(name) and not self._has_strong_tourism_anchor(name):
                 continue
             if self._looks_like_bad_compound_entity(name) and not self._has_strong_tourism_anchor(name):
@@ -1324,8 +1860,12 @@ class TourismPipeline:
                 continue
 
             score = float(candidate.get("score", 0.0) or 0.0)
+            primary_match = self._is_primary_page_candidate_name(name, page_signals=page_signals, url=url)
             if listing_like_page:
                 if not self._has_strong_tourism_anchor(name):
+                    continue
+            elif detail_priority_page:
+                if score < 0.1 and not (self._has_strong_tourism_anchor(name) or primary_match):
                     continue
             elif score < 0.25 and not self._has_strong_tourism_anchor(name):
                 continue
@@ -1339,12 +1879,14 @@ class TourismPipeline:
 
         rescued.sort(
             key=lambda item: (
+                1 if self._is_primary_page_candidate_name(item.get("name", ""), page_signals=page_signals, url=url) else 0,
                 1 if self._has_strong_tourism_anchor(item.get("name", "")) else 0,
                 float(item.get("score", 0.0) or 0.0),
             ),
             reverse=True,
         )
-        return rescued[: (12 if listing_like_page else 5)]
+        limit = 12 if listing_like_page else (6 if detail_priority_page else 5)
+        return rescued[:limit]
 
     def _annotate_tourism_evidence(
         self,
@@ -1424,6 +1966,7 @@ class TourismPipeline:
         slug = self._normalized_for_match(self._extract_url_slug(url))
         page_signals = self._build_page_signals(html=html, url=url)
         listing_like = self._is_listing_like_page(page_signals=page_signals, page_text=(h1 + " " + title), url=url)
+        detail_priority = self._is_detail_priority_page(page_signals=page_signals, url=url)
         primary_candidates = self._extract_primary_page_entity_candidates(title=raw_title, h1=raw_h1)
 
         scored = []
@@ -1498,6 +2041,14 @@ class TourismPipeline:
                 centrality -= 4.0
             if self._is_subordinate_event_label(name, primary_candidates=primary_candidates):
                 centrality -= 5.0
+            if detail_priority and self._is_detail_secondary_label(name, page_signals=page_signals, url=url):
+                centrality -= 7.0
+            if (
+                detail_priority
+                and entity.get("_synthetic_primary_candidate")
+                and self._is_primary_page_candidate_name(name, page_signals=page_signals, url=url)
+            ):
+                centrality += 4.0
 
             penalty = self._entity_name_penalty(name, url=url, page_signals=page_signals)
             if listing_like:
@@ -1534,14 +2085,27 @@ class TourismPipeline:
 
     def _build_page_signals(self, html: str = "", url: str = "") -> Dict[str, Any]:
         slug = self._extract_url_slug(url)
-        return {
+        signals = {
             "title": self._extract_page_title(html),
             "h1": self._extract_h1(html),
             "breadcrumb": self._extract_breadcrumb_text(html),
             "slug": slug,
-            "slug_tokens": [t for t in re.split(r"[^\wáéíóúñü]+", (slug or "").lower()) if t],
+            "slug_tokens": [t for t in re.split(r"[\W_]+", (slug or "").lower()) if t],
             "url": url or "",
         }
+        signals["pageIntent"] = self._classify_page_intent(
+            page_signals=signals,
+            page_text=" ".join(
+                x for x in [
+                    signals.get("title") or "",
+                    signals.get("h1") or "",
+                    signals.get("breadcrumb") or "",
+                ]
+                if x
+            ),
+            url=url,
+        )
+        return signals
 
     def _get_entity_context(self, entity: Dict[str, Any], page_text: str = "") -> str:
         parts = [
@@ -1649,11 +2213,13 @@ class TourismPipeline:
         url: str = "",
         listing_like_page: bool = False,
         strict_listing_page: bool = False,
+        detail_priority_page: bool = False,
     ):
         gated = []
         profile = self._page_capture_profile(
             listing_like_page=listing_like_page,
             strict_listing_page=strict_listing_page,
+            detail_priority_page=detail_priority_page,
         )
         for entity in entities or []:
             if not isinstance(entity, dict):
@@ -1673,9 +2239,10 @@ class TourismPipeline:
             keep = quality.get("decision") != "discard"
             if not keep:
                 has_anchor = self._has_strong_tourism_anchor(item.get("name", ""))
+                primary_match = self._is_primary_page_candidate_name(item.get("name", ""), page_signals=page_signals, url=url)
                 if (
                     tourism_score >= profile["evidence_rescue_score"]
-                    and has_anchor
+                    and (has_anchor or (detail_priority_page and primary_match))
                     and not self._is_abstract_topic_entity(item.get("name", ""))
                 ):
                     keep = True
@@ -1999,6 +2566,7 @@ class TourismPipeline:
         page_text: str = "",
         url: str = "",
         listing_like_page: bool = False,
+        detail_priority_page: bool = False,
     ):
         prekept = []
         prerejected = []
@@ -2022,6 +2590,7 @@ class TourismPipeline:
 
             reasons = []
             penalty = self._entity_name_penalty(name, url=url, page_signals=page_signals)
+            primary_match = self._is_primary_page_candidate_name(name, page_signals=page_signals, url=url)
 
             if self._looks_like_ui_or_category_name(name):
                 reasons.append("ui_or_category_name")
@@ -2029,8 +2598,12 @@ class TourismPipeline:
                 reasons.append("bad_compound_name")
             if self._is_contextual_noise_entity(name):
                 reasons.append("contextual_noise_name")
+            if self._is_narrative_side_entity(name, page_signals=page_signals, url=url):
+                reasons.append("narrative_side_entity")
             if self._is_phrase_fragment(name):
                 reasons.append("phrase_fragment")
+            if detail_priority_page and self._is_detail_secondary_label(name, page_signals=page_signals, url=url):
+                reasons.append("detail_secondary_label")
             if (
                 listing_like_page
                 and len(self._tokenize_name(name)) >= 7
@@ -2041,6 +2614,16 @@ class TourismPipeline:
             entity_type = str(item.get("class") or item.get("type") or "").strip().lower()
             if entity_type in {"unknown", ""} and penalty >= 3:
                 reasons.append("weak_type_and_bad_name")
+            if entity_type == "route" and not self._looks_like_route_entity_name(name):
+                reasons.append("weak_route_name")
+
+            if detail_priority_page and primary_match:
+                reasons = [
+                    reason
+                    for reason in reasons
+                    if reason not in {"bad_compound_name", "phrase_fragment", "weak_type_and_bad_name"}
+                ]
+                penalty = max(0.0, penalty - 3.0)
 
             if penalty >= 5 or reasons:
                 rejected = dict(item)
@@ -2085,6 +2668,15 @@ class TourismPipeline:
         if not html and url:
             html = self._fetch_html(url)
 
+        early_signals = self._build_page_signals(html=html, url=url)
+        if self._should_ignore_page(page_signals=early_signals, url=url):
+            if self.debug:
+                print(
+                    f"[PIPELINE] ignored_page intent={early_signals.get('pageIntent')} url={url}",
+                    file=sys.stderr,
+                )
+            return []
+
         if self.block_extractor is None:
             return []
 
@@ -2095,6 +2687,11 @@ class TourismPipeline:
 
         page_text = self._extract_text(blocks)
         page_signals = self._build_page_signals(html=html, url=url)
+        page_signals["pageIntent"] = self._classify_page_intent(
+            page_signals=page_signals,
+            page_text=page_text,
+            url=url,
+        )
 
         strict_listing_page = self._is_strict_listing_page(
             page_signals=page_signals,
@@ -2107,6 +2704,7 @@ class TourismPipeline:
             page_text=page_text,
             url=url,
         )
+        detail_priority_page = self._is_detail_priority_page(page_signals=page_signals, url=url)
 
         if self.entity_extractor is None:
             return []
@@ -2119,6 +2717,12 @@ class TourismPipeline:
         self._debug_stage("extract", entities)
 
         entities = self._coerce_entities_to_dicts(entities, url=url)
+        if detail_priority_page:
+            entities = self._seed_detail_primary_candidates(
+                entities,
+                page_signals=page_signals,
+                url=url,
+            )
         self._debug_stage("extract_coerced", entities)
 
         if self.cleaner is not None and hasattr(self.cleaner, "clean"):
@@ -2282,6 +2886,7 @@ class TourismPipeline:
                     url=url,
                     listing_like_page=listing_like_page,
                     strict_listing_page=strict_listing_page,
+                    detail_priority_page=detail_priority_page,
                 )
             except Exception:
                 pass
@@ -2331,6 +2936,7 @@ class TourismPipeline:
                     url=url,
                     listing_like_page=listing_like_page,
                     strict_listing_page=strict_listing_page,
+                    detail_priority_page=detail_priority_page,
                 )
             except Exception:
                 pass
@@ -2388,6 +2994,7 @@ class TourismPipeline:
                     url=url,
                     listing_like_page=listing_like_page,
                     strict_listing_page=strict_listing_page,
+                    detail_priority_page=detail_priority_page,
                 )
             except Exception:
                 pass
@@ -2434,6 +3041,7 @@ class TourismPipeline:
                     url=url,
                     listing_like_page=listing_like_page,
                     strict_listing_page=strict_listing_page,
+                    detail_priority_page=detail_priority_page,
                 )
             except Exception:
                 pass
@@ -2464,6 +3072,7 @@ class TourismPipeline:
                     page_text=page_text,
                     url=url,
                     listing_like_page=listing_like_page,
+                    detail_priority_page=detail_priority_page,
                 )
             except Exception:
                 pass
@@ -2474,6 +3083,25 @@ class TourismPipeline:
                 clustered = self._rescue_empty_page_candidates(
                     rescue_pool,
                     listing_like_page=listing_like_page,
+                    detail_priority_page=detail_priority_page,
+                    page_signals=page_signals,
+                    url=url,
+                )
+            except Exception:
+                clustered = clustered or []
+
+        if not clustered and detail_priority_page:
+            try:
+                clustered = self._build_detail_primary_fallback(
+                    page_signals=page_signals,
+                    page_text=page_text,
+                    url=url,
+                )
+                clustered = self._ensure_entity_type(
+                    clustered,
+                    page_text=page_text,
+                    page_signals=page_signals,
+                    expected_type=expected_type,
                 )
             except Exception:
                 clustered = clustered or []

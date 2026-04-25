@@ -111,6 +111,16 @@ class EntityFinalFilter:
             "museos",
             "lugares",
             "lugar",
+            "preguntas",
+            "informacion",
+            "información",
+            "reserva",
+            "reservar",
+            "contacto",
+            "horarios",
+            "tarifas",
+            "precios",
+            "si",
         }
 
         self.leading_noise = {
@@ -223,6 +233,26 @@ class EntityFinalFilter:
             or entity.get("entity")
             or entity.get("label")
             or ""
+        )
+
+    def _matches_detail_slug(self, entity: Dict[str, Any], cleaned_name: str) -> bool:
+        url = self._norm_low(entity.get("sourceUrl") or entity.get("url") or "")
+        if "/lugar/" not in url:
+            return False
+
+        slug = url.rstrip("/").split("/")[-1].replace("-", " ").replace("_", " ").strip()
+        if not slug:
+            return False
+
+        clean_slug = self._strip_accents(slug).lower()
+        clean_name = self._strip_accents(self._norm(cleaned_name)).lower()
+        if not clean_name:
+            return False
+
+        return (
+            clean_name == clean_slug
+            or clean_name in clean_slug
+            or clean_slug in clean_name
         )
 
     def _entity_class(self, entity: Dict[str, Any]) -> str:
@@ -392,8 +422,9 @@ class EntityFinalFilter:
             return False, reasons, {"cleaned_name": cleaned_name}
 
         if self._looks_like_phrase_fragment(cleaned_name):
-            reasons.append("phrase_fragment")
-            return False, reasons, {"cleaned_name": cleaned_name}
+            if not self._matches_detail_slug(entity, cleaned_name):
+                reasons.append("phrase_fragment")
+                return False, reasons, {"cleaned_name": cleaned_name}
 
         if self._looks_like_generic_name(cleaned_name):
             reasons.append("generic_name")

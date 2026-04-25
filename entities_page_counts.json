@@ -1,0 +1,2550 @@
+{
+  "totalPages": 386,
+  "totalEntities": 650,
+  "pagesWithoutEntities": 175,
+  "pagesWithEntities": 211,
+  "pagesByEntityCount": {
+    "0": 175,
+    "1": 63,
+    "2": 43,
+    "3": 34,
+    "4": 24,
+    "5": 15,
+    "6": 13,
+    "7": 10,
+    "8": 4,
+    "9": 2,
+    "10": 3
+  },
+  "pages": [
+    {
+      "url": "https://visitpamplonairuna.com/eventos-del-sector",
+      "entityCount": 10,
+      "entityTypeCounts": {
+        "Event": 7,
+        "Location": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/monumento-a-ernest-hemingway",
+      "entityCount": 10,
+      "entityTypeCounts": {
+        "Monument": 9,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/museo-jorge-oteiza",
+      "entityCount": 10,
+      "entityTypeCounts": {
+        "Monument": 8,
+        "Event": 1,
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/roncesvalles-orreaga-fabrica-de-armas-orbaizeta-eugi-zubiri",
+      "entityCount": 9,
+      "entityTypeCounts": {
+        "Monument": 5,
+        "Church": 2,
+        "Route": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ruta-hemingway",
+      "entityCount": 9,
+      "entityTypeCounts": {
+        "Hotel": 3,
+        "Monument": 2,
+        "Castle": 1,
+        "Route": 1,
+        "Square": 1,
+        "Theater": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/de-la-fiesta-a-la-calma-vive-sanfermines-y-descubre-el-descanso-en-los-alrededores-de-pamplona",
+      "entityCount": 8,
+      "entityTypeCounts": {
+        "Castle": 2,
+        "Monastery": 2,
+        "Bridge": 1,
+        "Monument": 1,
+        "Route": 1,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/a-bardenas-reales-ribera",
+      "entityCount": 8,
+      "entityTypeCounts": {
+        "Monument": 3,
+        "Bar": 1,
+        "Cathedral": 1,
+        "Convent": 1,
+        "Palace": 1,
+        "Stadium": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pamplona-foz-de-lumbier-sanguesa-zangoza-javier-y-monasterio-de-leire",
+      "entityCount": 8,
+      "entityTypeCounts": {
+        "Monument": 6,
+        "Castle": 1,
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/hoteles-3",
+      "entityCount": 8,
+      "entityTypeCounts": {
+        "Hotel": 8
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/ayuntamiento/en-familia",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "Stadium": 3,
+        "Cathedral": 2,
+        "Event": 1,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/gastronomia",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "Location": 4,
+        "HistoricalOrCulturalResource": 2,
+        "Bar": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/archivo-real-y-general-de-navarra",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "HistoricalOrCulturalResource": 6,
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/catedral-de-santa-maria-la-real",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "Monument": 5,
+        "Cathedral": 1,
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/parque-fluvial-del-arga",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "HistoricalOrCulturalResource": 4,
+        "Bridge": 1,
+        "Garden": 1,
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/grupo-motor",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "Location": 6,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/mercado-del-segundo-ensanche",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "TraditionalMarket": 5,
+        "Route": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pamplona-selva-del-irati-y-roncal",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "Monument": 6,
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ruta-por-las-murallas-de-pamplona",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Bar": 1,
+        "Bridge": 1,
+        "Castle": 1,
+        "Garden": 1,
+        "Wall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/pamplona-senior-como-disfrutar-de-la-ciudad-a-un-ritmo-tranquilo-y-lleno-de-cultura",
+      "entityCount": 7,
+      "entityTypeCounts": {
+        "Monument": 3,
+        "Garden": 2,
+        "Castle": 1,
+        "Stadium": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/arte-contemporaneo-pamplona",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Monument": 5,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/cultura",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Wall": 2,
+        "Event": 1,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ciudadela-y-vuelta-del-castillo",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Monument": 4,
+        "Castle": 1,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/jardines-de-la-taconera",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Garden": 3,
+        "Monument": 2,
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ruta-de-parques-y-jardines",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Garden": 3,
+        "Stadium": 2,
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/pamplona-iruna-capital-de-la-pelota-2",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "HistoricalOrCulturalResource": 4,
+        "Garden": 1,
+        "Theater": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/festival-murallas-privilegio-union-pamplona",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Event": 6
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pamplona-bertiz-valle-de-baztan-zugarramurdi-urdax-bidasoa",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Monument": 3,
+        "Garden": 2,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/noticias",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Location": 6
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/mapas-y-guias",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Monument": 6
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/semana-santa-en-pamplona",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Museum": 2,
+        "Route": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tradiciones-san-fermin-cultura-costumbres",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Location": 3,
+        "Event": 2,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/visitas-guiadas-pamplona-historia-leyendas",
+      "entityCount": 6,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Church": 1,
+        "FoodEstablishment": 1,
+        "Hotel": 1,
+        "Wall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/area-profesional/estudios-e-informes",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Location": 5
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/area-profesional/noticias-pstd-sf365",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Location": 3,
+        "Garden": 1,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/ciudadela-pamplona-patrimonio-cultura",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Monument": 5
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ayuntamiento",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Monument": 4,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/parque-de-la-media-luna",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Monument": 4,
+        "Bar": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/plaza-de-toros",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Monument": 3,
+        "Square": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/genealogias-femeninas-en-la-nueva-coleccion-pilar-citoler",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Monument": 4,
+        "Theater": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/hey-kid",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Location": 4,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/festival-de-las-murallas",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Monument": 4,
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/guia-de-festivales-en-pamplona",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Event": 3,
+        "Monument": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/pamplona-la-gran-sorpresa-del-norte-de-espana-razones-por-las-que-no-querras-irte",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Bridge": 1,
+        "Cathedral": 1,
+        "Monument": 1,
+        "Route": 1,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/plan-de-sostenibilidad-turistica",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "HistoricalOrCulturalResource": 3,
+        "Location": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/normativa",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Location": 5
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/cicloturismo",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Route": 2,
+        "Event": 1,
+        "Garden": 1,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/hoteles-4",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Hotel": 4,
+        "Castle": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/area-profesional",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Location": 4
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/area-profesional/estrategias-y-planes-municipales",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Location": 4
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/excursiones-desde-pamplona",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Event": 2,
+        "Monument": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/palacio-del-condestable",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Museum": 1,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ultreia-centro-de-acogida-al-peregrino-e-interpretacion-del-camino-de-santiago",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Route": 1,
+        "Stadium": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/escalerica-san-fermin",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Monument": 3,
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/excursion-a-roncesvalles-camino-de-santiago",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Chapel": 2,
+        "Monument": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/festival-ecozine-shifting-baselines",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Location": 3,
+        "Theater": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/funcion-escolar-ez-gara-azkenak-izango",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Location": 3,
+        "Bar": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/gastronomia-san-fermin",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Event": 2,
+        "Location": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/guia-museos-pamplona-que-ver-visitar",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Cathedral": 1,
+        "Garden": 1,
+        "Monument": 1,
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/guia-visitar-pamplona-primera-vez",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Museum": 2,
+        "Castle": 1,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/invierno-en-pamplona-que-hacer",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Stadium": 3,
+        "Castle": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/camino-de-santiago-sur-urederra",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Monument": 1,
+        "Museum": 1,
+        "NaturalPark": 1,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/mercado-de-santo-domingo",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "TraditionalMarket": 4
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/como-llegar",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Stadium": 4
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/donde-aparcar",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Location": 2,
+        "BusStation": 1,
+        "Garden": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/primavera-verano-festivales-mercados-eventos",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Castle": 1,
+        "Event": 1,
+        "Monument": 1,
+        "TraditionalMarket": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/que-hacer-en-pamplona-en-navidad",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Location": 2,
+        "Castle": 1,
+        "Garden": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/que-ver-en-pamplona-lugares-imprescindibles",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Bar": 1,
+        "Palace": 1,
+        "Route": 1,
+        "Wall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/ruta-hemingway-pamplona",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Restaurant": 1,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/secretos-mejor-guardados-de-pamplona",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Route": 1,
+        "Stadium": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tradiciones-vivas-de-pamplona-historia-y-cultura",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Event": 1,
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/turismo-de-salud",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Location": 4
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/contacto",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Location": 2,
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Garden": 2,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Event": 2,
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/abodi-alojamientos-hostelet",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Hotel": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/cicloturismo-eurovelo-3",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Route": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/museo-de-navarra",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Museum": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/rincon-del-caballo-blanco",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Wall": 2,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ruta-camino-de-santiago",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Route": 2,
+        "Castle": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/skate-park-antoniutti",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Stadium": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Hotel": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/12",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Hostel": 2,
+        "Bar": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/20",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 1,
+        "Restaurant": 1,
+        "TraditionalMarket": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/escapada-pamplona-puente-fin-de-semana",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Bridge": 1,
+        "Garden": 1,
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/mercado-de-producto-local-y-artesano-basotxoa",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Location": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/pamplona-iruna-capital-de-la-pelota",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/taller-de-nociones-basicas-de-jardineria-domestica",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/vinofest-navarra",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Location": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/visita-guiada-a-pamplona-tu-pones-el-precio",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Castle": 1,
+        "Palace": 1,
+        "Wall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/eventos/page/2",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Event": 2,
+        "Tour": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/guia-festivales-pamplona",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Wall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/parque-de-la-media-luna-2",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Garden": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/portal-de-francia-o-de-zumalacarregui",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/consignas",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "PublicService": 2,
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/profesional",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Location": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/que-hacer-en-pamplona-en-verano-festivales-cultura-y-naturaleza",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Route": 2,
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/que-ver-en-pamplona-en-1-2-o-3-dias",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Castle": 2,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/sanfermines-para-todos",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Event": 2,
+        "Castle": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/secretos-que-solo-los-locales-conocen",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Route": 2,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/monumentos",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/museos-y-centros-de-interpretacion",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 1,
+        "Museum": 1,
+        "Stadium": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/pensiones-y-hostales/page/2",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Hostel": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/visitas-en-familia",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Stadium": 3
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/un-dia-en-pamplona",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Castle": 1,
+        "Cathedral": 1,
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/visita-catedral-pamplona",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 2,
+        "Cathedral": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/san-fermin",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Event": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Bar": 1,
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/camino-de-santiago",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Bridge": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/pelota-vasca-en-pamplona",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Monument": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Garden": 1,
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ajoarriero",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "FoodEstablishment": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/cicloturismo-eurovelo-1",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Monument": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/cuajada",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "FoodEstablishment": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/fritos",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "FoodEstablishment": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/iglesia-san-saturnino",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Church": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/plaza-del-castillo",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Castle": 1,
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/puente-de-la-magdalena",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Bridge": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ruta-de-san-fermin",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Monument": 1,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/sidra",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1,
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/13",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Hostel": 1,
+        "Hotel": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/16",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Restaurant": 1,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/6",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Hotel": 1,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/tipo-lugar/que-visitar-desde-pamplona-iruna",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "NaturalPark": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/ciudadela-contemporanea",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Location": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/excursion-al-nacedero-del-urederra",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Location": 1,
+        "Tour": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/excursion-selva-de-irati-ochagavia-y-foces-naturales",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Location": 1,
+        "Tour": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/me-gusta-el-planeta-a",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "HistoricalOrCulturalResource": 1,
+        "Theater": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/visita-guiada-catedral-pamplona",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Monument": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/visita-guiada-ruta-por-la-historia-de-la-pelota-vasca-en-pamplona-espanol",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Event": 1,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/visita-guiada-veladas-nocturnas-a-la-catedral",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Cathedral": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/iglesia-san-lorenzo-y-capilla-de-san-fermin",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Chapel": 1,
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/mercados-imprescindibles-pamplona",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Monument": 1,
+        "TraditionalMarket": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/momenticos-san-fermin",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Event": 1,
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/consigna-municipal-del-parking-de-bicicletas-calle-mayor",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Event": 1,
+        "PublicService": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Location": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer/de-pintxos-y-cazuelicas",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Event": 1,
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer/sidrerias",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Location": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje/moverse-por-pamplona",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Hotel": 1,
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/profesional/convention-bureau",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Monument": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/san-fermin-a-traves-de-los-siglos-un-recorrido-historico",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Castle": 1,
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/sanfermines-en-familia",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Location": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/sanfermines-para-jovenes",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Route": 1,
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/club-de-producto",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Bar": 1,
+        "HistoricalOrCulturalResource": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/deporte",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Stadium": 2
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/espacios-culturales",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Location": 1,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/iglesias-y-catedral",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Cathedral": 1,
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/que-hacer",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Palace": 1,
+        "Stadium": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/restaurantes-del-reyno",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Castle": 1,
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/area-profesional/licitaciones",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/blog",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/blog/page/2",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/blog/page/4",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/camino-de-santiago",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/gastronomia",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/planes",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/planes/page/2",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/historia",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/descubre-pamplona/san-fermin/carteles-de-san-fermin",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/belena-de-portalapea",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/chistorra",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/cordero-al-chilindron",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/esparragos-blancos-de-navarra",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/goxua",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/navarra-arena",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/patxaran",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/pimientos-del-piquillo",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/pochas",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/pump-track",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Stadium": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/queso-idiazabal",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/queso-roncal",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/torta-de-txantxigorri",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/10",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/14",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/15",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Hotel": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/18",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "FoodEstablishment": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/19",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Restaurant": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/4",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Restaurant": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/9",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/espacio-sanfermin-espazioa",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/concierto-solidario-agao",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/gloria",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/privilegio-de-la-union",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/un-monstruo-viene-a-verme",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/visita-guiada-pamplona-al-completo",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/eventos/page/3",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Wall": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/guia-de-san-fermin",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "TouristInformationOffice": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/iglesia-de-san-nicolas",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/iglesia-de-san-saturnino-o-san-cernin",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pamplona-via-verde-plazaola-lekunberri-mendukilo-san-miguel-de-aralar-leitza",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/3",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/pamplona-bajo-la-lluvia",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "HistoricalOrCulturalResource": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/pamplona-en-navidad-luces-mercadillos-festivales",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/pamplona-slow-travel-la-ciudad-perfecta-para-una-escapada-sin-prisas",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Castle": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/parques-jardines-pamplona",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Garden": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/plan-perfecto-fin-de-semana-pamplona",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Castle": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/ropa-san-fermin-que-llevar",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/solicitud-de-material-turistico",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/subvenciones",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/agroturismos-casa-rurales",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/agroturismos-casa-rurales/page/2",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/areas-de-autocaravanas",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/donde-alojarse",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Cathedral": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/donde-comer",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Restaurant": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/escape-room",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Location": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/grupos",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/hoteles",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Hotel": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/hoteles-3/page/2",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Hotel": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/lugares-de-interes/page/2",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/paseos-y-rutas",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/pensiones-y-hostales",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Hostel": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/senderismo",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Garden": 1
+      }
+    },
+    {
+      "url": "https://visitpamplonairuna.com/",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/?elementor_library=privilegio-de-la-union",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/aviso-legal",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/ayuntamiento",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/blog/page/3",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/blog/page/5",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/cultura",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/cultura/page/2",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/familia",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/parques-y-jardines",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/pelota",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/category/san-fermin/page/2",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/cocina-tradicional-navarra-pamplona",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/declaracion-de-accesibilidad",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/donde-comer/sidrerias",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/donde-dormir-en-pamplona",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/bertiz-valle-de-baztan-zugarramurdi-urdax-bidasoa",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/camino-de-santiago-urederra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/capilla-de-san-fermin",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/espacio-sanfermin-espazioa",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/espacios-culturales",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/foz-lumbier-sanguesa-zangoza-javier-y-monasterio-leyre",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/fronton-labrit",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/iglesia-san-nicolas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/menestra-de-verduras",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/pantxineta",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/parque-de-yamaguchi",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/plazaola-lekunberri-mendukilo-san-miguel-aralar-leitza",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/portal-de-francia",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/refena",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/ruta-por-las-murallas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/selva-del-irati-roncal",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/teatro-gayarre",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/trucha-a-la-navarra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugar/zona-media-de-navarra-olite",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/11",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/17",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/2",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/21",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/22",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/3",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/5",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/7",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/lugares/page/8",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/en/tipo-lugar/planifica-tu-viaje",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/excursion-ruta-medieval",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/excursion-valle-de-baztan-urdax-y-zugarramurdi",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/festival-de-las-murallas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/festival-ecozine-all-birds-sing-beatifully",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/evento/visita",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/eventos",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/a-bardenas-reales-ribera",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/abodi-alojamientos-hostelet",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ajoarriero",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/archivo-real-y-general-de-navarra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ayuntamiento",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/belena-de-portalapea",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/bertiz-valle-de-baztan-zugarramurdi-urdax-bidasoa",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/camino-de-santiago-urederra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/capilla-de-san-fermin",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/catedral-de-santa-maria-la-real",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/catedral-santa-maria-la-real",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/chistorra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/cicloturismo-eurovelo-1",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/cicloturismo-eurovelo-3",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ciudadela-y-vuelta-del-castillo",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/cordero-al-chilindron",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/cuajada",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/espacio-sanfermin-espazioa",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/espacios-culturales",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/esparragos-blancos-de-navarra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/foz-lumbier-sanguesa-zangoza-javier-y-monasterio-leyre",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/fritos",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/fronton-labrit",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/goxua",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/iglesia-san-nicolas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/iglesia-san-saturnino",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/jardines-de-la-taconera",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/menestra-de-verduras",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/museo-de-navarra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/museo-pablo-sarasate",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/navarra-arena",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/palacio-del-condestable",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pamplona-bardenas-reales",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pantxineta",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/parque-de-la-media-luna",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/parque-de-yamaguchi",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/parque-fluvial-del-arga",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/patxaran",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pimientos-del-piquillo",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/plaza-de-toros",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/plaza-del-castillo",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/plazaola-lekunberri-mendukilo-san-miguel-aralar-leitza",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pochas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/portal-de-francia",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/puente-de-la-magdalena",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/pump-track",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/queso-idiazabal",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/queso-roncal",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/refena",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/rincon-del-caballo-blanco",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/roncesvalles-orreaga-fabrica-de-armas-orbaizeta-eugi-zubiri",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ruta-camino-de-santiago",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ruta-de-parques-y-jardines",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ruta-de-san-fermin",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ruta-hemingway",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ruta-por-las-murallas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/rutas-pamplona-es-verde",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/selva-del-irati-roncal",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/sidra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/skate-park-antoniutti",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/teatro-gayarre",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/torta-de-txantxigorri",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/trucha-a-la-navarra",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/ultreia-centro-de-acogida-al-peregrino-e-interpretacion-del-camino-de-santiago",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/zona-media-de-navarra-olite",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugar/zona-media-de-navarra-olite-y-alrededores",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares-con-encanto-escapadas-perfectas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/10",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/11",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/12",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/13",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/14",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/15",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/16",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/17",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/18",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/19",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/2",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/20",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/21",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/22",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/4",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/5",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/6",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/7",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/8",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/lugares/page/9",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/otono-en-pamplona",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/pamplona-primera-del-camino-santiago",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/planifica-tu-viaje",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/politica-de-cookies",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/politica-de-privacidad",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/que-hacer",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/que-hacer/en-familia",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/que-hacer/paseos-y-rutas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/ruta-vino-navarra-pamplona",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/actividades",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/albergues",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/campings",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/enogastronomia",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/estrellas-michelin",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/excursiones-desde-pamplona",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/grupos/page/2",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/hoteles-1",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/hoteles-2",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/hoteles-4/page/2",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/hoteles-5",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/individual",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/juegos",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/lugares-de-interes",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/mercados",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/museos",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/planifica-tu-viaje",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/que-ver",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/que-visitar-desde-pamplona-iruna",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/restaurantes",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/tipo-lugar/visitas-guiadas",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/viajar-a-pamplona-en-temporada-baja",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/visita-pamplona/barrio-a-barrio",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/visita-pamplona/historia",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    },
+    {
+      "url": "https://visitpamplonairuna.com/visita-pamplona/verde-y-sostenible",
+      "entityCount": 0,
+      "entityTypeCounts": {}
+    }
+  ]
+}

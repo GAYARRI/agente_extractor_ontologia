@@ -634,6 +634,28 @@ class KGPostProcessor:
         entity["types"] = final_types
 
         return entity    
+
+    def _upgrade_generic_class_from_name(self, entity: dict) -> dict:
+        name = self._normalize(self._entity_name(entity))
+        current_class = self._canonicalize_type_alias(str(entity.get("class", "")).strip())
+
+        if current_class not in {"Unknown", "Place", "Location", "HistoricalOrCulturalResource"}:
+            return entity
+
+        upgraded = ""
+
+        if re.search(r"\b(pump track|skate park|skatepark|skate|rocodromo|rocopolis)\b", name):
+            upgraded = "SportsCenter"
+        elif re.search(r"\b(archivo|archivo real|archivo general)\b", name):
+            upgraded = "HistoricalOrCulturalResource"
+
+        if not upgraded or not self._is_allowed_type(upgraded):
+            return entity
+
+        entity["class"] = upgraded
+        entity["type"] = [upgraded]
+        entity["types"] = [upgraded]
+        return entity
         
         
         
@@ -780,6 +802,7 @@ class KGPostProcessor:
 
             # Resolver class/type final sin destruir normalized_type
             entity = self._resolve_final_class_and_types(entity)
+            entity = self._upgrade_generic_class_from_name(entity)
 
             entity = self._drop_global_email_for_non_org(entity)
 

@@ -785,7 +785,7 @@ def predict_single_url(url, pipeline, args, diagnostic=False):
     return payload, pages, all_results, global_entities
 
 
-def generate_outputs(global_entities, pipeline, args):
+def generate_outputs(global_entities, pipeline, args, pages=None):
     kg_builder = KnowledgeGraphBuilder()
     graph = kg_builder.build_graph(global_entities)
     kg_builder.save_graph(graph, args.kg_output)
@@ -806,7 +806,7 @@ def generate_outputs(global_entities, pipeline, args):
     log(f"📝 Reporte Markdown generado en {args.report_output}")
 
     json_exporter = JSONExporter()
-    json_exporter.export(global_entities, args.json_output)
+    json_exporter.export(global_entities, args.json_output, pages=pages)
     log(f"📦 Export JSON generado en {args.json_output}")
 
     try:
@@ -912,7 +912,7 @@ def main():
             
             log(f"\n✅ Total bloques intermedios: {len(all_results)}")
             debug_entities(global_entities)
-            generate_outputs(global_entities, pipeline, args)
+            generate_outputs(global_entities, pipeline, args, pages=pages)
 
             log("\n✅ Proceso completado correctamente")
 

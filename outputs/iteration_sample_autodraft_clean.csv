@@ -1,0 +1,15 @@
+id,url,page_family,expected,actual,error_type,notes,proposed_classes
+1,https://visitpamplonairuna.com/,detalle,,0 entidades,falso negativo potencial,Contiene enlaces a paginas de eventos .,
+2,https://visitpamplonairuna.com/?elementor_library=privilegio-de-la-union,detalle,,0 entidades,falso negativo potencial,Este enlace debe ignorarse.,
+3,https://visitpamplonairuna.com/area-profesional/estrategias-y-planes-municipales,institucional,,0 entidades,falso negativo confirmado,"Debe producir entidades de tipo """"Recurso Turistico""""",
+4,https://visitpamplonairuna.com/area-profesional/estudios-e-informes,institucional,,0 entidades,falso negativo confirmado,"Debe producir entidades de tipo """"Recurso Turistico""""",
+5,https://visitpamplonairuna.com/area-profesional/licitaciones,institucional,,0 entidades,falso negativo confirmado,"Debe producir entidades de tipo """"Recurso Turistico""""",
+6,https://visitpamplonairuna.com/area-profesional,institucional,,1 entidades,clases: Location,mal clasificado confimado,"La pagina tiene multiples entidades turísticas, todas ellas clasificables como recursos turísticos"
+7,https://visitpamplonairuna.com/aviso-legal,detalle,,1 entidades,clases: Location,mal clasificado confirmadol,Es un disclaimer legal no clasificable
+8,https://visitpamplonairuna.com/en/lugar/archivo-real-y-general-de-navarra,detalle,,1 entidades,clases: Location,mal clasificado confirmado,Se trata de un edificio histórico; Razonar mejor a partir del contexto
+9,https://visitpamplonairuna.com/en/lugar/pump-track,detalle,,1 entidades,clases: Location,mal clasificado confimado,Es una instalación deportiva
+10,https://visitpamplonairuna.com/en/lugar/skate-park-antoniutti,detalle,,1 entidades,clases: Location,mal clasificado confirmada,Es una instalación deportiva.
+11,https://visitpamplonairuna.com/area-profesional/noticias-pstd-sf365,institucional,,1 entidades,clases: TownHall,mal clasificado confimado,"Se trata de """"información adicional""""""; TourismOrganisation; Promotion; etc."
+12,https://visitpamplonairuna.com/ayuntamiento/en-familia,institucional,,1 entidades,clases: Event,Se mencionan varios recursos para turismo en familia ( confirmada la mala clasificacion),"Se mencionan varias entidades para turismo con niños ( """"parque del tren"""" """"ssgreet escapes"""")""; TourismOrganisation; Promotion; etc."
+13,https://visitpamplonairuna.com/en/lugar/ayuntamiento,institucional,,1 entidades,clases: TownHall,VALIDADO,BIEN CLASIFICADO ( CUALQUIER MENCIKON EN OTRO SITIO AL AYUNTAMIENTO HAN DE SER DEDUPLICADA CON ESTE MISMO); TourismOrganisation; Promotion; etc.
+14,https://visitpamplonairuna.com/plan-de-sostenibilidad-turistica,institucional,,1 entidades,clases: Location,mal clasificado confirmado,"Se trata de un Recurso Turistico """" Plan de Sostenibilidad Turística""""""; TourismOrganisation; Promotion; etc."

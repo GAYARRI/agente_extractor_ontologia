@@ -1,6 +1,8 @@
 # src/export/json_exporter.py
 import json
 import re
+from collections import Counter
+from pathlib import Path
 
 
 class JSONExporter:
@@ -199,6 +201,78 @@ class JSONExporter:
             "lng": lng,
         }
 
+    def _pick_page_url(self, entity: dict) -> str:
+        return self._clean_text(entity.get("url") or entity.get("sourceUrl"))
+
+    def _pick_primary_type(self, entity: dict) -> str:
+        final_class = self._clean_text(entity.get("class"))
+        if final_class:
+            return final_class
+        types = self._extract_types(entity)
+        return types[0] if types else "Unknown"
+
+    def _normalize_pages(self, pages) -> list:
+        normalized = []
+        for item in pages or []:
+            if isinstance(item, (list, tuple)) and item:
+                page_url = self._clean_text(item[0])
+            else:
+                page_url = self._clean_text(item)
+            if page_url:
+                normalized.append(page_url)
+        return self._dedupe(normalized)
+
+    def build_page_summary(self, entities: list, pages=None) -> dict:
+        all_pages = self._normalize_pages(pages)
+        page_totals = Counter({page_url: 0 for page_url in all_pages})
+        page_type_totals = {page_url: Counter() for page_url in all_pages}
+
+        for entity in entities:
+            if not isinstance(entity, dict):
+                continue
+
+            page_url = self._pick_page_url(entity) or "UNKNOWN_PAGE"
+            entity_type = self._pick_primary_type(entity)
+
+            page_totals[page_url] += 1
+            if page_url not in page_type_totals:
+                page_type_totals[page_url] = Counter()
+            page_type_totals[page_url][entity_type] += 1
+
+        pages_by_entity_count = Counter(page_totals.values())
+        pages_without_entities = pages_by_entity_count.get(0, 0)
+
+        pages = []
+        for page_url, total in sorted(
+            page_totals.items(),
+            key=lambda item: (-item[1], item[0].lower())
+        ):
+            type_counts = dict(
+                sorted(
+                    page_type_totals[page_url].items(),
+                    key=lambda item: (-item[1], item[0].lower())
+                )
+            )
+            pages.append(
+                {
+                    "url": page_url,
+                    "entityCount": total,
+                    "entityTypeCounts": type_counts,
+                }
+            )
+
+        return {
+            "totalPages": len(page_totals),
+            "totalEntities": sum(page_totals.values()),
+            "pagesWithoutEntities": pages_without_entities,
+            "pagesWithEntities": len(page_totals) - pages_without_entities,
+            "pagesByEntityCount": {
+                str(entity_count): page_count
+                for entity_count, page_count in sorted(pages_by_entity_count.items())
+            },
+            "pages": pages,
+        }
+
     def entity_to_dict(self, entity: dict) -> dict:
         coords = self._extract_coordinates(entity)
         images = self._extract_images(entity)
@@ -238,8 +312,15 @@ class JSONExporter:
             "wikidataId": wikidata_id,
         }
 
-    def export(self, entities: list, output_path="entities.json"):
+    def export(self, entities: list, output_path="entities.json", pages=None):
         data = [self.entity_to_dict(e) for e in entities if isinstance(e, dict)]
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
+
+        output_file = Path(output_path)
+        summary_path = output_file.with_name(f"{output_file.stem}_page_counts.json")
+        summary = self.build_page_summary(data, pages=pages)
+        with open(summary_path, "w", encoding="utf-8") as f:
+            json.dump(summary, f, ensure_ascii=False, indent=2)
+
         return data
