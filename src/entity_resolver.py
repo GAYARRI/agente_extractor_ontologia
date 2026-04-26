@@ -8,6 +8,20 @@ from typing import Any, Dict, List, Set
 
 
 class EntityResolver:
+    LEADING_CLASS_OVERRIDES = {
+        "plaza ": "Square",
+        "hotel ": "Hotel",
+        "restaurante ": "Restaurant",
+        "museo ": "Museum",
+        "catedral ": "Cathedral",
+        "iglesia ": "Church",
+        "palacio ": "Palace",
+        "ayuntamiento ": "TownHall",
+        "jardines ": "Garden",
+        "parque ": "Garden",
+        "puente ": "Bridge",
+    }
+
     SPECIFIC_CLASS_PRIORITY = {
         "Alcazar": 100,
         "Cathedral": 98,
@@ -160,6 +174,16 @@ class EntityResolver:
         if not cls:
             return 0
         return self.SPECIFIC_CLASS_PRIORITY.get(cls, 0)
+
+    def infer_name_implied_class(self, name: str) -> str:
+        canonical = self.canonicalize(name)
+        if not canonical:
+            return ""
+        for prefix, target in self.LEADING_CLASS_OVERRIDES.items():
+            prefix = self.canonicalize(prefix.strip())
+            if canonical == prefix or canonical.startswith(prefix + " "):
+                return target
+        return ""
 
     def extract_aliases(self, entity: Dict[str, Any]) -> Set[str]:
         aliases: Set[str] = set()
@@ -457,6 +481,12 @@ class EntityResolver:
         return sorted(candidates, key=score_name, reverse=True)[0]
 
     def choose_best_class(self, e1: Dict[str, Any], e2: Dict[str, Any]) -> Any:
+        implied = self.infer_name_implied_class(
+            self.choose_best_name(e1, e2)
+        )
+        if implied:
+            return implied
+
         c1 = self.normalize_class_name(e1.get("class") or e1.get("type"))
         c2 = self.normalize_class_name(e2.get("class") or e2.get("type"))
 

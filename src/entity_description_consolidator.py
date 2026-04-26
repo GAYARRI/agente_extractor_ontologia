@@ -3,6 +3,20 @@ import unicodedata
 
 
 class EntityDescriptionConsolidator:
+    LEADING_CLASS_OVERRIDES = {
+        "plaza ": "Square",
+        "hotel ": "Hotel",
+        "restaurante ": "Restaurant",
+        "museo ": "Museum",
+        "catedral ": "Cathedral",
+        "iglesia ": "Church",
+        "palacio ": "Palace",
+        "ayuntamiento ": "TownHall",
+        "jardines ": "Garden",
+        "parque ": "Garden",
+        "puente ": "Bridge",
+    }
+
     PORTAL_EMAIL_BLOCKLIST = {
         "visitasevilla@sevillacityoffice.es",
     }
@@ -278,9 +292,24 @@ class EntityDescriptionConsolidator:
         cls = self._safe_text(cls)
         return self.SPECIFIC_CLASS_PRIORITY.get(cls, 0)
 
+    def _infer_name_implied_class(self, name):
+        normalized = self._canonical_key(name)
+        if not normalized:
+            return ""
+        for prefix, target in self.LEADING_CLASS_OVERRIDES.items():
+            prefix = prefix.strip()
+            if normalized == prefix or normalized.startswith(prefix + " "):
+                return target
+        return ""
+
     def _choose_best_class(self, current_class, candidate_class, entity_name=""):
         current_class = self._normalize_class(entity_name, current_class)
         candidate_class = self._normalize_class(entity_name, candidate_class)
+        implied_class = self._infer_name_implied_class(entity_name)
+
+        if implied_class:
+            if current_class == implied_class or candidate_class == implied_class:
+                return implied_class
 
         if not current_class:
             return candidate_class or "Thing"

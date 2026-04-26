@@ -47,6 +47,7 @@ from src.entity_evidence_builder import EntityEvidenceBuilder
 from src.ontology_reasoner import OntologyReasoner
 from src.entities.entity_final_filter import EntityFinalFilter
 from src.kg_postprocessor import KGPostProcessor
+from src.nominatim_resolver import HybridGeoResolver
 from src.entities.type_normalizer import TypeNormalizer
 from src.ontology_distance import OntologyDistance
 from src.ontology_taxonomy import PARENT_MAP
@@ -204,6 +205,11 @@ class TourismPipeline:
         self.description_extractor = _safe_build(DescriptionExtractor, default=None)
         self.property_enricher = _safe_build(PropertyEnricher, default=None)
         self.wikidata_linker = _safe_build(WikidataLinker, default=None)
+        self.geo_resolver = _safe_build(
+            HybridGeoResolver,
+            default=None,
+            default_city=kwargs.get("geo_default_city", "Pamplona"),
+        )
         self.tourism_property_extractor = _safe_build(TourismPropertyExtractor, default=None)
         self.dom_image_resolver = _safe_build(DOMImageResolver, default=None)
 
@@ -2434,6 +2440,103 @@ class TourismPipeline:
 
         return {"lat": lat, "lng": lng}
 
+    def _has_valid_coordinates(self, coords: Any) -> bool:
+        if not isinstance(coords, dict):
+            return False
+        return coords.get("lat") is not None and coords.get("lng") is not None
+
+    def _geo_resolver_class_hint(self, entity_type: str) -> str:
+        value = str(entity_type or "").strip().lower()
+        if value in {"hotel", "restaurant", "bar", "traditionalmarket", "shop"}:
+            return "Organization"
+        if value in {"route", "event", "person", "concept", "thing", "unknown", ""}:
+            return ""
+        return "Place"
+
+    def _is_geo_candidate_entity(self, entity: Dict[str, Any]) -> bool:
+        entity_type = str(entity.get("class") or entity.get("type") or "").strip().lower()
+        allowed_types = {
+            "townhall",
+            "cathedral",
+            "church",
+            "museum",
+            "palace",
+            "castle",
+            "square",
+            "garden",
+            "stadium",
+            "hotel",
+            "restaurant",
+            "traditionalmarket",
+            "monument",
+            "bridge",
+            "wall",
+            "gate",
+            "naturalresource",
+            "historicalorculturalresource",
+        }
+        if entity_type not in allowed_types:
+            return False
+        name = str(entity.get("name") or entity.get("entity_name") or "").strip()
+        if not name:
+            return False
+        return True
+
+    def _resolve_missing_coordinates(
+        self,
+        item: Dict[str, Any],
+        props: Dict[str, Any],
+        fallback_url: str,
+    ) -> Dict[str, Any]:
+        coords = item.get("coordinates")
+        if self._has_valid_coordinates(coords):
+            return coords
+        if not self.geo_resolver or not self._is_geo_candidate_entity(item):
+            return coords if isinstance(coords, dict) else {"lat": None, "lng": None}
+
+        name = str(item.get("name") or item.get("entity_name") or item.get("label") or "").strip()
+        if not name:
+            return {"lat": None, "lng": None}
+
+        address = ""
+        if isinstance(props, dict):
+            address = str(
+                props.get("address")
+                or props.get("streetAddress")
+                or props.get("location")
+                or ""
+            ).strip()
+
+        try:
+            resolved = self.geo_resolver.resolve(
+                entity_name=name,
+                address=address,
+                source_url=item.get("sourceUrl") or fallback_url,
+                entity_class=self._geo_resolver_class_hint(item.get("class") or item.get("type")),
+            )
+        except Exception:
+            resolved = {}
+
+        lat = resolved.get("lat")
+        lng = resolved.get("lng")
+        if lat is None or lng is None:
+            return coords if isinstance(coords, dict) else {"lat": None, "lng": None}
+
+        merged = {"lat": float(lat), "lng": float(lng)}
+
+        if resolved.get("wikidata_id") and not item.get("wikidata_id"):
+            item["wikidata_id"] = resolved["wikidata_id"]
+
+        existing_props = item.get("properties")
+        if not isinstance(existing_props, dict):
+            existing_props = {}
+        existing_props["geo_source"] = resolved.get("source") or "hybrid_geo_resolver"
+        if resolved.get("query"):
+            existing_props["geo_query"] = resolved.get("query")
+        item["properties"] = existing_props
+
+        return merged
+
     def _build_enriched_entity(self, entity: Dict[str, Any], html: str, page_text: str, url: str) -> Dict[str, Any]:
         item = dict(entity)
 
@@ -2535,6 +2638,17 @@ class TourismPipeline:
             item["longitude"] = coordinates["lng"]
 
         item["sourceUrl"] = item.get("sourceUrl") or url
+
+        if not self._has_valid_coordinates(item.get("coordinates")):
+            item["coordinates"] = self._resolve_missing_coordinates(
+                item=item,
+                props=item.get("properties") if isinstance(item.get("properties"), dict) else props,
+                fallback_url=url,
+            )
+            if item["coordinates"].get("lat") is not None:
+                item["latitude"] = item["coordinates"]["lat"]
+            if item["coordinates"].get("lng") is not None:
+                item["longitude"] = item["coordinates"]["lng"]
 
         return item
 

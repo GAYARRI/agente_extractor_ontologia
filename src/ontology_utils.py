@@ -150,6 +150,20 @@ LEXICAL_HINTS: Dict[str, str] = {
     "oficina de turismo": "TouristInformationOffice",
 }
 
+LEADING_CLASS_OVERRIDES: Dict[str, str] = {
+    "plaza ": "Square",
+    "hotel ": "Hotel",
+    "restaurante ": "Restaurant",
+    "museo ": "Museum",
+    "catedral ": "Cathedral",
+    "iglesia ": "Church",
+    "palacio ": "Palace",
+    "ayuntamiento ": "TownHall",
+    "jardines ": "Garden",
+    "parque ": "Garden",
+    "puente ": "Bridge",
+}
+
 
 def _strip_accents(text: str) -> str:
     return "".join(
@@ -388,6 +402,13 @@ def _guess_lexical_hint(entity: dict, valid_classes: Set[str]) -> Optional[str]:
     if not name_ascii:
         return None
 
+    for prefix, mapped in LEADING_CLASS_OVERRIDES.items():
+        prefix = prefix.strip()
+        if name_ascii == prefix or name_ascii.startswith(prefix + " "):
+            normalized = normalize_class_candidate(mapped, valid_classes)
+            if normalized:
+                return normalized
+
     route_cls = choose_route_like_class(valid_classes)
     event_cls = choose_event_class(valid_classes)
 
@@ -426,7 +447,10 @@ def enforce_closed_world_types(
 
     lexical_hint = _guess_lexical_hint(entity, valid_classes)
     if lexical_hint and lexical_hint not in candidates:
-        candidates.insert(0, lexical_hint)
+        if candidates:
+            candidates.append(lexical_hint)
+        else:
+            candidates.insert(0, lexical_hint)
 
     valid_specific = [
         candidate

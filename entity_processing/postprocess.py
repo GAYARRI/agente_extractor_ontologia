@@ -4,7 +4,13 @@ from .candidate_filter import should_keep_candidate
 from .classify import entity_all_classes, entity_primary_class
 from .dedupe import dedupe_entities
 from .family_classifier import classify_entity_family
-from .name_cleaner import clean_entity_name, extract_raw_name
+from .name_cleaner import (
+    canonicalize_entity_name,
+    clean_entity_name,
+    extract_raw_name,
+    infer_name_implied_class,
+    infer_monument_replacement_class,
+)
 from .normalize import clean_type, sanitize_types
 from .page_classifier import classify_page
 from .rules import apply_rescue_rules
@@ -33,6 +39,13 @@ def enrich_entity_classification(entity: Dict) -> Dict:
             cleaned = clean_type(original_type)
             item["type"] = cleaned if cleaned else original_type
 
+    implied_class = infer_name_implied_class(item.get("name", ""))
+    current_class = clean_type(item.get("class"))
+    if implied_class and implied_class != current_class:
+        item["class"] = implied_class
+        item["type"] = implied_class
+        item["nameClassOverride"] = implied_class
+
     item["pageType"] = classify_page(
         url=item.get("url") or item.get("sourceUrl") or "",
         entity=item,
@@ -43,6 +56,9 @@ def enrich_entity_classification(entity: Dict) -> Dict:
     item["allClasses"] = entity_all_classes(item)
     item["primaryClass"] = entity_primary_class(item)
 
+    if item.get("nameClassOverride"):
+        item["primaryClass"] = item["nameClassOverride"]
+
     rescued_class, rescued, reason = apply_rescue_rules(item, item["primaryClass"])
     item["primaryClass"] = rescued_class
     item["classificationRescued"] = rescued
@@ -50,9 +66,25 @@ def enrich_entity_classification(entity: Dict) -> Dict:
     if rescued:
         item["classificationRescueReason"] = reason
 
+    if item["primaryClass"] == "Monument":
+        replacement_class = infer_monument_replacement_class(
+            item.get("name", ""),
+            item.get("url") or item.get("sourceUrl") or "",
+        )
+        if replacement_class:
+            item["primaryClass"] = replacement_class
+            item["class"] = replacement_class
+            item["type"] = replacement_class
+            item["monumentReclassifiedTo"] = replacement_class
+
     keep, reason = should_keep_candidate(item, item["pageType"])
     item["postprocessKeep"] = keep
     item["postprocessDecisionReason"] = reason
+
+    canonical_name = canonicalize_entity_name(item.get("name", ""), item["primaryClass"])
+    item["canonicalName"] = canonical_name
+    if canonical_name:
+        item["name"] = canonical_name
 
     return item
 

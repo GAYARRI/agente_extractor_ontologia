@@ -3,6 +3,7 @@ import os
 import re
 import time
 import hashlib
+import unicodedata
 from typing import Optional, Dict, Any, List, Tuple
 
 import requests
@@ -28,7 +29,7 @@ class HybridGeoResolver:
         min_delay_seconds: float = 1.1,
         timeout_seconds: int = 15,
         countrycodes: str = "es",
-        default_city: str = "Sevilla",
+        default_city: str = "Pamplona",
     ):
         self.cache_path = cache_path
         self.user_agent = user_agent
@@ -36,6 +37,7 @@ class HybridGeoResolver:
         self.timeout_seconds = timeout_seconds
         self.countrycodes = countrycodes
         self.default_city = default_city
+        self.default_city_normalized = self._normalize_ascii(default_city)
         self._last_call_ts = 0.0
 
         cache_dir = os.path.dirname(self.cache_path)
@@ -76,6 +78,11 @@ class HybridGeoResolver:
         text = re.sub(r"\s+", " ", text)
         text = re.sub(r"^\d+[_\-\.\)]\s*", "", text)
         return text.strip(" ,;:")
+
+    def _normalize_ascii(self, text: str) -> str:
+        value = self._normalize_query(text).lower()
+        value = unicodedata.normalize("NFD", value)
+        return "".join(ch for ch in value if unicodedata.category(ch) != "Mn")
 
     def _respect_rate_limit(self) -> None:
         elapsed = time.time() - self._last_call_ts

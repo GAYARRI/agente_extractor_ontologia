@@ -30,7 +30,7 @@ TOWNHALL_EQUIVALENTS = {
 
 
 def canonical_entity_name(entity: Dict[str, Any]) -> str:
-    name = normalize_text(entity.get("name"))
+    name = normalize_text(entity.get("canonicalName") or entity.get("name"))
     primary = str(entity.get("primaryClass") or entity.get("class") or entity.get("type") or "").strip()
 
     if primary == "TownHall":
@@ -92,9 +92,11 @@ def choose_best_entity(items: List[Dict[str, Any]]) -> Dict[str, Any]:
         )
         primary = entity.get("primaryClass") or entity.get("class") or entity.get("type") or ""
         is_specific = primary not in GENERIC_FINAL_CLASSES
+        page_type = entity.get("pageType") or ""
 
         return (
             1 if is_specific else 0,
+            1 if page_type == "place_detail" else 0,
             1 if bool(entity.get("description") or entity.get("shortDescription") or entity.get("longDescription")) else 0,
             1 if has_coords else 0,
             1 if has_image else 0,
