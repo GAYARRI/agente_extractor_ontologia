@@ -167,6 +167,122 @@ class KGPostProcessor:
             "sostenible",
         }
 
+        self.generic_noise_tokens = {
+            "about",
+            "read",
+            "enjoy",
+            "going",
+            "out",
+            "shopping",
+            "eating",
+            "what",
+            "where",
+            "during",
+            "about",
+            "prepare",
+            "preparer",
+            "preparez",
+            "preparacion",
+            "guides",
+            "maps",
+            "monuments",
+            "museums",
+            "tourist",
+            "information",
+            "points",
+            "flamenco",
+            "culture",
+            "cultura",
+            "gastronomy",
+            "gastronomie",
+            "gastronomia",
+            "artisanat",
+            "artigianato",
+            "ceramica",
+            "ceramique",
+            "guitare",
+            "chitarra",
+            "trinken",
+            "hebergement",
+            "itineraires",
+            "fuseau",
+            "posteingang",
+            "melden",
+            "pendant",
+            "sejour",
+            "soggiorno",
+            "durante",
+            "propos",
+            "juridique",
+            "confidentialite",
+            "connectivite",
+            "konnektivitat",
+        }
+
+        self.strong_entity_tokens = {
+            "hotel",
+            "hostal",
+            "restaurante",
+            "bar",
+            "taberna",
+            "mercado",
+            "museo",
+            "catedral",
+            "iglesia",
+            "basilica",
+            "capilla",
+            "monasterio",
+            "convento",
+            "castillo",
+            "alcazar",
+            "palacio",
+            "torre",
+            "puente",
+            "plaza",
+            "jardin",
+            "parque",
+            "monumento",
+            "estatua",
+            "escultura",
+            "teatro",
+            "auditorio",
+            "estadio",
+            "aeropuerto",
+            "estacion",
+            "ayuntamiento",
+            "archivo",
+            "barrio",
+            "acuario",
+            "centro",
+            "deportivo",
+        }
+
+        self.generic_noise_url_fragments = {
+            "/fr/",
+            "/en/",
+            "/de/",
+            "/it/",
+            "/sharm-",
+            "/legal",
+            "/contact",
+            "/contacto",
+            "/about",
+            "/rechtlicher",
+            "/avis-juridique",
+            "/politique-de-confidentialite",
+            "/connectivite",
+            "/konnektivitat",
+            "/preparez",
+            "/preparare",
+            "/wahrend-",
+            "/durante-",
+            "/what-to-do-",
+            "/que-faire-",
+            "/guide-",
+            "/guides-",
+            "/map",
+        }
+
     # =========================================================
     # Helpers
     # =========================================================
@@ -307,8 +423,10 @@ class KGPostProcessor:
         
     
     def _canonicalize_type_alias(self, value: str) -> str:
-        t = str(value or "").strip()
-        if not t:
+        if value is None:
+            return ""
+        t = str(value).strip()
+        if not t or t.lower() in {"none", "null"}:
             return ""
         return self.type_aliases.get(t.lower(), t)
 
@@ -517,6 +635,64 @@ class KGPostProcessor:
         entity["properties"] = props
         return entity
 
+    def _looks_like_person_name(self, label: str) -> bool:
+        raw = str(label or "").strip()
+        if not raw:
+            return False
+        parts = [p for p in re.split(r"\s+", raw) if p]
+        if len(parts) < 2 or len(parts) > 4:
+            return False
+        uppercase_like = 0
+        for p in parts:
+            if re.match(r"^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ'-]+$", p):
+                uppercase_like += 1
+        return uppercase_like >= 2
+
+    def _is_generic_unresolved_noise(self, entity: dict) -> bool:
+        current_class = self._canonicalize_type_alias(str(entity.get("class", "")).strip())
+        if current_class not in {"", "Unknown", "Place", "Location", "Organization", "Service", "Concept"}:
+            return False
+
+        label_raw = self._entity_name(entity)
+        label = self._normalize(label_raw)
+        if not label:
+            return True
+
+        tokens = self._tokenize(label)
+        if not tokens:
+            return True
+
+        url = self._normalize(entity.get("sourceUrl") or entity.get("url") or "")
+        has_strong_anchor = any(tok in self.strong_entity_tokens for tok in tokens)
+        generic_overlap = sum(1 for tok in tokens if tok in self.generic_noise_tokens)
+        has_coords = bool((entity.get("coordinates") or {}).get("lat") is not None and (entity.get("coordinates") or {}).get("lng") is not None)
+        has_related = bool(entity.get("relatedUrls"))
+        has_address = bool(self._clean_text(entity.get("address", "")))
+        is_event_url = any(fragment in url for fragment in {"/evento/", "/evento/", "/event/"})
+
+        if self._looks_like_person_name(label_raw) and not has_strong_anchor and (is_event_url or not has_coords):
+            return True
+
+        if generic_overlap >= 2 and not has_strong_anchor and (not has_coords or any(fragment in url for fragment in self.generic_noise_url_fragments)):
+            return True
+
+        if any(fragment in url for fragment in self.generic_noise_url_fragments):
+            if generic_overlap >= 1 and not has_strong_anchor:
+                return True
+            if len(tokens) >= 4 and not has_strong_anchor and not has_related and not has_address and not has_coords:
+                return True
+
+        if is_event_url and len(tokens) >= 3 and not has_strong_anchor:
+            return True
+
+        if len(tokens) >= 5 and not has_strong_anchor and not has_related and not has_address and not has_coords:
+            return True
+
+        if len(tokens) <= 3 and generic_overlap >= 1 and not has_strong_anchor:
+            return True
+
+        return False
+
     # =========================================================
     # Tipado final preservando el ranker
     # =========================================================
@@ -646,6 +822,10 @@ class KGPostProcessor:
 
         if re.search(r"\b(pump track|skate park|skatepark|skate|rocodromo|rocopolis)\b", name):
             upgraded = "SportsCenter"
+        elif re.search(r"\b(centro deportivo)\b", name):
+            upgraded = "SportsCenter"
+        elif re.search(r"\b(tourist information|oficina de turismo|punto de informacion turistica)\b", name):
+            upgraded = "TouristInformationOffice"
         elif re.search(r"\b(archivo|archivo real|archivo general)\b", name):
             upgraded = "HistoricalOrCulturalResource"
 
@@ -803,6 +983,9 @@ class KGPostProcessor:
             # Resolver class/type final sin destruir normalized_type
             entity = self._resolve_final_class_and_types(entity)
             entity = self._upgrade_generic_class_from_name(entity)
+
+            if self._is_generic_unresolved_noise(entity):
+                continue
 
             entity = self._drop_global_email_for_non_org(entity)
 

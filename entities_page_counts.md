@@ -1,2080 +1,2692 @@
 # Conteo de Entidades por Pagina
 
-Total de paginas: 386
-Paginas con entidades: 182
-Paginas sin entidades: 204
-Total de entidades: 444
+Total de paginas: 501
+Paginas con entidades: 276
+Paginas sin entidades: 225
+Total de entidades: 592
 
 ## Resumen de procesamiento
 
-- Paginas con entidades vs total procesado: 182 / 386
-- Cobertura de paginas con entidades: 47.15%
+- Paginas con entidades vs total procesado: 276 / 501
+- Cobertura de paginas con entidades: 55.09%
 
 ## Entidades Totales por Grupo Clasificado
 
 | Grupo | Total |
 | --- | ---: |
-| Location | 118 |
-| HistoricalOrCulturalResource | 39 |
-| Hotel | 37 |
-| Route | 37 |
-| Garden | 32 |
-| Stadium | 30 |
-| Event | 26 |
-| FoodEstablishment | 19 |
-| TraditionalMarket | 14 |
-| Palace | 12 |
-| Square | 12 |
-| Church | 9 |
-| Museum | 9 |
-| Bridge | 7 |
-| Monument | 5 |
-| Restaurant | 5 |
-| Bar | 4 |
-| Cathedral | 4 |
-| Theater | 4 |
-| Wall | 4 |
-| PublicService | 3 |
-| Tour | 3 |
-| Castle | 2 |
-| Chapel | 2 |
-| Monastery | 2 |
+| Monument | 77 |
+| Hotel | 51 |
+| Garden | 50 |
+| Location | 40 |
+| Square | 36 |
+| Event | 35 |
+| Stadium | 33 |
+| HistoricalOrCulturalResource | 29 |
+| Museum | 27 |
+| Bar | 26 |
+| TraditionalMarket | 24 |
+| Palace | 22 |
+| Route | 21 |
+| Restaurant | 19 |
+| Theater | 14 |
+| Alcazar | 13 |
+| Chapel | 12 |
+| Tower | 11 |
+| Basilica | 7 |
+| Cathedral | 7 |
+| Airport | 6 |
+| Bridge | 6 |
+| Church | 6 |
+| Convent | 6 |
+| Monastery | 3 |
+| BullRing | 2 |
+| Unknown | 2 |
+| ArcheologicalSite | 1 |
 | BusStation | 1 |
-| Convent | 1 |
-| Hostel | 1 |
-| TouristInformationOffice | 1 |
+| Castle | 1 |
+| PublicService | 1 |
 | TownHall | 1 |
+| TrainStation | 1 |
+| Wall | 1 |
 
 ## Resumen global
 
-- Paginas con 0 entidades: 204
-- Paginas con 1 entidades: 73
-- Paginas con 2 entidades: 47
-- Paginas con 3 entidades: 25
-- Paginas con 4 entidades: 12
+- Paginas con 0 entidades: 225
+- Paginas con 1 entidades: 126
+- Paginas con 2 entidades: 70
+- Paginas con 3 entidades: 38
+- Paginas con 4 entidades: 19
 - Paginas con 5 entidades: 11
-- Paginas con 6 entidades: 5
-- Paginas con 7 entidades: 5
-- Paginas con 8 entidades: 3
-- Paginas con 10 entidades: 1
+- Paginas con 6 entidades: 8
+- Paginas con 7 entidades: 2
+- Paginas con 8 entidades: 1
+- Paginas con 11 entidades: 1
 
-## https://visitpamplonairuna.com/eventos-del-sector
+## https://visitasevilla.es/evento/morricone-y-otros-grandes-del-cine-un-tributo-sinfonico-a-las-bandas-sonoras-mas-inolvidables-de-la-historia
 
-- Entidades totales: 10
-- Event: 7
-- Location: 3
+- Entidades totales: 11
+- Monument: 11
 
-## https://visitpamplonairuna.com/en/lugar/jardines-de-la-taconera
+## https://visitasevilla.es/ruta-gastro-norte-sevilla
 
 - Entidades totales: 8
+- TraditionalMarket: 5
+- Bar: 2
+- Square: 1
+
+## https://visitasevilla.es/el-parque-de-maria-luisa-y-otros-jardines
+
+- Entidades totales: 7
 - Garden: 7
-- FoodEstablishment: 1
 
-## https://visitpamplonairuna.com/en/lugar/roncesvalles-orreaga-fabrica-de-armas-orbaizeta-eugi-zubiri
-
-- Entidades totales: 8
-- Church: 2
-- HistoricalOrCulturalResource: 2
-- Location: 2
-- Route: 2
-
-## https://visitpamplonairuna.com/tipo-lugar/hoteles-3
-
-- Entidades totales: 8
-- Hotel: 8
-
-## https://visitpamplonairuna.com/descubre-pamplona/gastronomia
+## https://visitasevilla.es/factoria-cruzcampo
 
 - Entidades totales: 7
-- Location: 4
-- HistoricalOrCulturalResource: 2
-- Bar: 1
+- Monument: 7
 
-## https://visitpamplonairuna.com/en/lugar/parque-fluvial-del-arga
+## https://visitasevilla.es/de-compras-donde-comprar
 
-- Entidades totales: 7
-- HistoricalOrCulturalResource: 4
-- Bridge: 1
-- Garden: 1
-- Museum: 1
-
-## https://visitpamplonairuna.com/en/lugar/ruta-de-parques-y-jardines
-
-- Entidades totales: 7
-- Garden: 4
-- Stadium: 2
-- Museum: 1
-
-## https://visitpamplonairuna.com/lugar/mercado-del-segundo-ensanche
-
-- Entidades totales: 7
-- TraditionalMarket: 7
-
-## https://visitpamplonairuna.com/tradiciones-san-fermin-cultura-costumbres
-
-- Entidades totales: 7
-- Location: 3
-- Event: 2
+- Entidades totales: 6
 - Square: 2
-
-## https://visitpamplonairuna.com/de-la-fiesta-a-la-calma-vive-sanfermines-y-descubre-el-descanso-en-los-alrededores-de-pamplona
-
-- Entidades totales: 6
-- Garden: 2
-- Monastery: 2
-- Bridge: 1
-- Square: 1
-
-## https://visitpamplonairuna.com/en/lugar/archivo-real-y-general-de-navarra
-
-- Entidades totales: 6
-- HistoricalOrCulturalResource: 6
-
-## https://visitpamplonairuna.com/grupo-motor
-
-- Entidades totales: 6
-- Location: 6
-
-## https://visitpamplonairuna.com/invierno-en-pamplona-que-hacer
-
-- Entidades totales: 6
-- Stadium: 6
-
-## https://visitpamplonairuna.com/noticias
-
-- Entidades totales: 6
-- Location: 6
-
-## https://visitpamplonairuna.com/area-profesional/noticias-pstd-sf365
-
-- Entidades totales: 5
-- Garden: 2
-- Location: 2
-- HistoricalOrCulturalResource: 1
-
-## https://visitpamplonairuna.com/ayuntamiento/en-familia
-
-- Entidades totales: 5
-- Stadium: 4
-- Palace: 1
-
-## https://visitpamplonairuna.com/en/lugar/ruta-hemingway
-
-- Entidades totales: 5
-- Hotel: 3
-- Route: 1
-- Theater: 1
-
-## https://visitpamplonairuna.com/evento/hey-kid
-
-- Entidades totales: 5
-- Location: 4
-- Square: 1
-
-## https://visitpamplonairuna.com/evento/pamplona-iruna-capital-de-la-pelota-2
-
-- Entidades totales: 5
-- HistoricalOrCulturalResource: 3
-- Garden: 1
-- Stadium: 1
-
-## https://visitpamplonairuna.com/pamplona-senior-como-disfrutar-de-la-ciudad-a-un-ritmo-tranquilo-y-lleno-de-cultura
-
-- Entidades totales: 5
-- HistoricalOrCulturalResource: 4
-- Cathedral: 1
-
-## https://visitpamplonairuna.com/plan-de-sostenibilidad-turistica
-
-- Entidades totales: 5
-- HistoricalOrCulturalResource: 3
-- Location: 2
-
-## https://visitpamplonairuna.com/planifica-tu-viaje/normativa
-
-- Entidades totales: 5
-- Location: 5
-
-## https://visitpamplonairuna.com/primavera-verano-festivales-mercados-eventos
-
-- Entidades totales: 5
-- Location: 2
-- Event: 1
-- HistoricalOrCulturalResource: 1
+- Tower: 2
+- Monument: 1
 - TraditionalMarket: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/cicloturismo
+## https://visitasevilla.es/empresas-sicted/vut-green-apartments-sierpes
+
+- Entidades totales: 6
+- Monument: 6
+
+## https://visitasevilla.es/huevo-de-colon
+
+- Entidades totales: 6
+- Stadium: 5
+- Route: 1
+
+## https://visitasevilla.es/los-escenarios-de-sevilla-aun-no-descubiertos
+
+- Entidades totales: 6
+- Garden: 4
+- Chapel: 1
+- Event: 1
+
+## https://visitasevilla.es/musan-museo-del-santo-angel
+
+- Entidades totales: 6
+- Museum: 6
+
+## https://visitasevilla.es/sharm-alojamientos
+
+- Entidades totales: 6
+- Hotel: 4
+- Palace: 2
+
+## https://visitasevilla.es/teatro-de-la-maestranza-2
+
+- Entidades totales: 6
+- Theater: 6
+
+## https://visitasevilla.es/un-oasis-en-la-ciudad-piscinas-en-las-que-puedes-refrescarte-en-sevilla
+
+- Entidades totales: 6
+- Hotel: 3
+- Stadium: 2
+- Tower: 1
+
+## https://visitasevilla.es/dia-internacional-de-la-cerveza-cual-es-la-mas-fria-de-sevilla
 
 - Entidades totales: 5
-- Route: 4
-- Garden: 1
+- Bar: 4
+- TraditionalMarket: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/hoteles-4
+## https://visitasevilla.es/empresas-sicted/restaurante-casa-robles
 
 - Entidades totales: 5
-- Hotel: 5
-
-## https://visitpamplonairuna.com/area-profesional/estrategias-y-planes-municipales
-
-- Entidades totales: 4
-- Location: 4
-
-## https://visitpamplonairuna.com/en/lugar/a-bardenas-reales-ribera
-
-- Entidades totales: 4
-- Cathedral: 1
-- Convent: 1
+- Restaurant: 4
 - HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/evento/experiencia-inmersiva-titanic-av-kansas-city-junto-al-mercadona-de-santa-justa-desde-17-euros
+
+- Entidades totales: 5
+- HistoricalOrCulturalResource: 4
+- Stadium: 1
+
+## https://visitasevilla.es/los-mercados-en-sevilla-un-viaje-a-la-esencia-andaluza
+
+- Entidades totales: 5
+- Event: 2
+- Museum: 1
 - Palace: 1
+- TraditionalMarket: 1
 
-## https://visitpamplonairuna.com/en/lugar/rincon-del-caballo-blanco
+## https://visitasevilla.es/plaza-de-america-y-museos
 
-- Entidades totales: 4
-- Wall: 3
+- Entidades totales: 5
+- Garden: 2
+- Square: 2
+- Museum: 1
+
+## https://visitasevilla.es/ruta-murales-grafitis-sevilla
+
+- Entidades totales: 5
+- Stadium: 5
+
+## https://visitasevilla.es/rutas-por-la-ciudad
+
+- Entidades totales: 5
+- Event: 2
+- Convent: 1
+- Location: 1
+- Route: 1
+
+## https://visitasevilla.es/sabias-que-en-sevilla-hay-una-ruta-que-cuenta-la-pasion-de-cristo-en-azulejos
+
+- Entidades totales: 5
+- Monument: 3
+- Event: 1
+- TraditionalMarket: 1
+
+## https://visitasevilla.es/sevilla-mastercard-impulsan-turismo-chino
+
+- Entidades totales: 5
+- Museum: 1
+- Restaurant: 1
+- Route: 1
+- Theater: 1
+- TraditionalMarket: 1
+
+## https://visitasevilla.es/sevilla-se-vive-en-familia
+
+- Entidades totales: 5
+- Museum: 2
+- Cathedral: 1
+- Garden: 1
 - Square: 1
 
-## https://visitpamplonairuna.com/evento/excursion-a-roncesvalles-camino-de-santiago
+## https://visitasevilla.es/una-ciudad-para-las-bicis
+
+- Entidades totales: 5
+- Stadium: 5
+
+## https://visitasevilla.es/alameda-de-hercules
+
+- Entidades totales: 4
+- Monument: 4
+
+## https://visitasevilla.es/bajo-el-cielo-de-sevilla
+
+- Entidades totales: 4
+- Hotel: 2
+- Monument: 1
+- Palace: 1
+
+## https://visitasevilla.es/barrio-de-santa-cruz
+
+- Entidades totales: 4
+- Alcazar: 1
+- Bar: 1
+- HistoricalOrCulturalResource: 1
+- Square: 1
+
+## https://visitasevilla.es/callejon-del-agua
+
+- Entidades totales: 4
+- Location: 2
+- Bar: 1
+- Square: 1
+
+## https://visitasevilla.es/ceramica
+
+- Entidades totales: 4
+- Monument: 4
+
+## https://visitasevilla.es/costurero-de-la-reina
+
+- Entidades totales: 4
+- Garden: 4
+
+## https://visitasevilla.es/el-arenal-gastrobarrio-con-historia
+
+- Entidades totales: 4
+- Bar: 3
+- Restaurant: 1
+
+## https://visitasevilla.es/el-museo-de-bellas-artes-y-otros-espacios
+
+- Entidades totales: 4
+- Museum: 3
+- ArcheologicalSite: 1
+
+## https://visitasevilla.es/empresas-sicted/hotel-only-you-sevilla
+
+- Entidades totales: 4
+- Hotel: 4
+
+## https://visitasevilla.es/empresas-sicted/hotel-silken-al-andalus
+
+- Entidades totales: 4
+- Hotel: 4
+
+## https://visitasevilla.es/empresas-sicted/teatro-palacio-andaluz
+
+- Entidades totales: 4
+- Theater: 3
+- Palace: 1
+
+## https://visitasevilla.es/jardines-de-las-delicias
+
+- Entidades totales: 4
+- Garden: 4
+
+## https://visitasevilla.es/plaza-de-toros-de-la-maestranza
+
+- Entidades totales: 4
+- Chapel: 1
+- Monument: 1
+- Museum: 1
+- Square: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/monumentos
 
 - Entidades totales: 4
 - Chapel: 2
+- Basilica: 1
+- Convent: 1
+
+## https://visitasevilla.es/ruta-por-la-sevilla-regionalista-redescubre-la-ciudad-a-traves-de-su-arquitectura
+
+- Entidades totales: 4
+- Bridge: 1
 - Location: 1
 - Route: 1
-
-## https://visitpamplonairuna.com/evento/festival-ecozine-shifting-baselines
-
-- Entidades totales: 4
-- Location: 3
 - Theater: 1
 
-## https://visitpamplonairuna.com/evento/funcion-escolar-ez-gara-azkenak-izango
-
-- Entidades totales: 4
-- Location: 3
-- Bar: 1
-
-## https://visitpamplonairuna.com/guia-de-festivales-en-pamplona
-
-- Entidades totales: 4
-- Event: 3
-- Route: 1
-
-## https://visitpamplonairuna.com/lugar/mercado-de-santo-domingo
-
-- Entidades totales: 4
-- TraditionalMarket: 4
-
-## https://visitpamplonairuna.com/lugar/pamplona-selva-del-irati-y-roncal
-
-- Entidades totales: 4
-- Location: 3
-- Church: 1
-
-## https://visitpamplonairuna.com/planifica-tu-viaje/donde-aparcar
-
-- Entidades totales: 4
-- Location: 2
-- BusStation: 1
-- Garden: 1
-
-## https://visitpamplonairuna.com/turismo-de-salud
+## https://visitasevilla.es/sede-de-la-real-maestranza-de-caballeria
 
 - Entidades totales: 4
 - Location: 4
 
-## https://visitpamplonairuna.com/visitas-guiadas-pamplona-historia-leyendas
+## https://visitasevilla.es/terrazas-y-diversion-al-sol
 
 - Entidades totales: 4
-- FoodEstablishment: 1
-- HistoricalOrCulturalResource: 1
-- Hotel: 1
-- Route: 1
+- Hotel: 2
+- Monument: 2
 
-## https://visitpamplonairuna.com/area-profesional
+## https://visitasevilla.es/visitas-nocturnas-en-la-catedral-e-iglesia-de-el-salvador
+
+- Entidades totales: 4
+- Monument: 4
+
+## UNKNOWN_PAGE
+
+- Entidades totales: 4
+- Unknown: 2
+- Bar: 1
+- Event: 1
+
+## https://visitasevilla.es/7-planes-sevilla-san-valentin
+
+- Entidades totales: 3
+- Garden: 1
+- Palace: 1
+- Square: 1
+
+## https://visitasevilla.es/8-consejos-para-disfrutar-de-la-feria-de-abril-como-un-autentico-sevillano
+
+- Entidades totales: 3
+- Event: 2
+- Garden: 1
+
+## https://visitasevilla.es/barrio-de-la-alfalfa-y-encarnacion
+
+- Entidades totales: 3
+- TraditionalMarket: 3
+
+## https://visitasevilla.es/casa-de-salinas
 
 - Entidades totales: 3
 - Location: 3
 
-## https://visitpamplonairuna.com/area-profesional/estudios-e-informes
+## https://visitasevilla.es/conoces-la-semana-santa-de-sevilla-8-curiosidades
 
 - Entidades totales: 3
-- Location: 3
+- Church: 1
+- Event: 1
+- Location: 1
 
-## https://visitpamplonairuna.com/arte-contemporaneo-pamplona
+## https://visitasevilla.es/disfruta-del-dia-mundial-de-los-museos-en-sevilla
+
+- Entidades totales: 3
+- Museum: 2
+- Monument: 1
+
+## https://visitasevilla.es/el-flamenco
 
 - Entidades totales: 3
 - Monument: 2
+- Event: 1
+
+## https://visitasevilla.es/empresas-sicted/city-sightseeing
+
+- Entidades totales: 3
+- Route: 2
 - Square: 1
 
-## https://visitpamplonairuna.com/descubre-pamplona/barrio-a-barrio
+## https://visitasevilla.es/empresas-sicted/hotel-casa-palacio-don-pedro
 
 - Entidades totales: 3
-- Garden: 1
-- Route: 1
-- Stadium: 1
-
-## https://visitpamplonairuna.com/descubre-pamplona/camino-de-santiago
-
-- Entidades totales: 3
-- Bridge: 1
-- Route: 1
-- Stadium: 1
-
-## https://visitpamplonairuna.com/en/lugar/abodi-alojamientos-hostelet
-
-- Entidades totales: 3
-- Hotel: 3
-
-## https://visitpamplonairuna.com/en/lugar/cicloturismo-eurovelo-3
-
-- Entidades totales: 3
-- Route: 3
-
-## https://visitpamplonairuna.com/en/lugar/skate-park-antoniutti
-
-- Entidades totales: 3
-- Stadium: 3
-
-## https://visitpamplonairuna.com/en/lugares
-
-- Entidades totales: 3
-- Hotel: 3
-
-## https://visitpamplonairuna.com/en/lugares/page/12
-
-- Entidades totales: 3
-- Hotel: 3
-
-## https://visitpamplonairuna.com/evento/mercado-de-producto-local-y-artesano-basotxoa
-
-- Entidades totales: 3
-- Location: 3
-
-## https://visitpamplonairuna.com/evento/vinofest-navarra
-
-- Entidades totales: 3
-- Location: 3
-
-## https://visitpamplonairuna.com/evento/visita-guiada-a-pamplona-tu-pones-el-precio
-
-- Entidades totales: 3
-- Cathedral: 1
-- Palace: 1
-- Wall: 1
-
-## https://visitpamplonairuna.com/lugar/camino-de-santiago-sur-urederra
-
-- Entidades totales: 3
-- Garden: 1
-- Museum: 1
+- Hotel: 2
 - Palace: 1
 
-## https://visitpamplonairuna.com/lugar/pamplona-bertiz-valle-de-baztan-zugarramurdi-urdax-bidasoa
+## https://visitasevilla.es/empresas-sicted/hotel-hilton-garden-inn-sevilla
 
 - Entidades totales: 3
+- Alcazar: 1
 - Garden: 1
-- Location: 1
-- Palace: 1
+- Hotel: 1
 
-## https://visitpamplonairuna.com/lugar/parque-de-la-media-luna-2
+## https://visitasevilla.es/empresas-sicted/hotel-ribera-de-triana
+
+- Entidades totales: 3
+- Hotel: 2
+- Square: 1
+
+## https://visitasevilla.es/empresas-sicted/past-view
+
+- Entidades totales: 3
+- Route: 2
+- Square: 1
+
+## https://visitasevilla.es/empresas-sicted/restaurante-robles-placentines
+
+- Entidades totales: 3
+- Restaurant: 3
+
+## https://visitasevilla.es/empresas-sicted/taberna-la-subasta
+
+- Entidades totales: 3
+- Bar: 3
+
+## https://visitasevilla.es/empresas-sicted/vut-lirio-alojateensevilla
+
+- Entidades totales: 3
+- Monument: 3
+
+## https://visitasevilla.es/espacio-santa-clara
+
+- Entidades totales: 3
+- Monument: 3
+
+## https://visitasevilla.es/fibes-palacio-de-exposiciones-y-congresos-de-sevilla
+
+- Entidades totales: 3
+- Palace: 2
+- Event: 1
+
+## https://visitasevilla.es/guias-mapas-y-monumentos
+
+- Entidades totales: 3
+- Monument: 3
+
+## https://visitasevilla.es/hospital-de-los-venerables-2
+
+- Entidades totales: 3
+- Chapel: 1
+- Monument: 1
+- Square: 1
+
+## https://visitasevilla.es/iglesia-del-salvador
+
+- Entidades totales: 3
+- Church: 2
+- Chapel: 1
+
+## https://visitasevilla.es/jardines-y-palacio-de-la-buhaira
 
 - Entidades totales: 3
 - Garden: 3
 
-## https://visitpamplonairuna.com/lugar/ruta-por-las-murallas-de-pamplona
+## https://visitasevilla.es/mercado-de-la-calle-feria
 
 - Entidades totales: 3
-- Bridge: 1
+- TraditionalMarket: 3
+
+## https://visitasevilla.es/museo-de-artes-y-costumbres-populares
+
+- Entidades totales: 3
+- Event: 2
+- Museum: 1
+
+## https://visitasevilla.es/parque-infanta-elena
+
+- Entidades totales: 3
+- Stadium: 2
 - Garden: 1
-- Route: 1
 
-## https://visitpamplonairuna.com/pamplona-la-gran-sorpresa-del-norte-de-espana-razones-por-las-que-no-querras-irte
+## https://visitasevilla.es/plaza-del-duque
 
 - Entidades totales: 3
-- Bridge: 1
-- Route: 1
-- TownHall: 1
+- Square: 2
+- Hotel: 1
 
-## https://visitpamplonairuna.com/planifica-tu-viaje/como-llegar
+## https://visitasevilla.es/prepara-tu-viaje
+
+- Entidades totales: 3
+- Airport: 1
+- Garden: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/puerta-de-jerez
+
+- Entidades totales: 3
+- Location: 1
+- Palace: 1
+- Square: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla
 
 - Entidades totales: 3
 - Stadium: 3
 
-## https://visitpamplonairuna.com/planifica-tu-viaje/consignas
+## https://visitasevilla.es/que-hacer-en-sevilla/museos/page/2
 
 - Entidades totales: 3
-- PublicService: 2
-- Location: 1
+- Convent: 1
+- Museum: 1
+- Palace: 1
 
-## https://visitpamplonairuna.com/profesional
-
-- Entidades totales: 3
-- Location: 3
-
-## https://visitpamplonairuna.com/que-hacer-en-pamplona-en-navidad
+## https://visitasevilla.es/real-alcazar-de-sevilla
 
 - Entidades totales: 3
-- Location: 2
-- Garden: 1
+- Alcazar: 2
+- Palace: 1
 
-## https://visitpamplonairuna.com/san-fermin-a-traves-de-los-siglos-un-recorrido-historico
+## https://visitasevilla.es/sabias-que-el-ayuntamiento-de-sevilla-esta-considerado-la-primera-obra-plateresca-de-espana
 
 - Entidades totales: 3
-- Location: 1
-- Monument: 1
-- Stadium: 1
+- Square: 2
+- TownHall: 1
 
-## https://visitpamplonairuna.com/secretos-que-solo-los-locales-conocen
+## https://visitasevilla.es/sabias-que-la-giralda-tiene-8-hermanas-en-el-mundo
+
+- Entidades totales: 3
+- Hotel: 1
+- Square: 1
+- Tower: 1
+
+## https://visitasevilla.es/setas-y-mercado-de-la-encarnacion
+
+- Entidades totales: 3
+- Alcazar: 2
+- TraditionalMarket: 1
+
+## https://visitasevilla.es/sevilla-a-traves-de-sus-parques
+
+- Entidades totales: 3
+- Garden: 3
+
+## https://visitasevilla.es/sevilla-el-rocio-la-pasion-que-une-dos-mundos
 
 - Entidades totales: 3
 - Route: 2
-- Palace: 1
+- Monument: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/pensiones-y-hostales/page/2
+## https://visitasevilla.es/sevilla-es-una-ciudad-para-el-deporte
 
 - Entidades totales: 3
-- Hotel: 2
-- Hostel: 1
+- Stadium: 3
 
-## https://visitpamplonairuna.com/contacto
+## https://visitasevilla.es/sevilla-fc-betis-hermanos-y-rivales
 
-- Entidades totales: 2
-- Location: 2
+- Entidades totales: 3
+- HistoricalOrCulturalResource: 1
+- Location: 1
+- TraditionalMarket: 1
 
-## https://visitpamplonairuna.com/descubre-pamplona
+## https://visitasevilla.es/torre-del-oro-2
+
+- Entidades totales: 3
+- Tower: 2
+- Museum: 1
+
+## https://visitasevilla.es/1864-el-ano-en-que-la-feria-de-sevilla-cambio-el-petroleo-por-la-luz-y-la-polvora
 
 - Entidades totales: 2
 - Bar: 1
-- Location: 1
+- Event: 1
 
-## https://visitpamplonairuna.com/descubre-pamplona/cultura
-
-- Entidades totales: 2
-- Event: 2
-
-## https://visitpamplonairuna.com/descubre-pamplona/verde-y-sostenible
+## https://visitasevilla.es/adentrate-en-los-callejones-de-sevilla
 
 - Entidades totales: 2
-- Location: 1
-- Route: 1
+- Convent: 1
+- Square: 1
 
-## https://visitpamplonairuna.com/en/lugar/ajoarriero
-
-- Entidades totales: 2
-- FoodEstablishment: 2
-
-## https://visitpamplonairuna.com/en/lugar/cuajada
+## https://visitasevilla.es/ahora-en-sevilla
 
 - Entidades totales: 2
-- FoodEstablishment: 2
+- Alcazar: 1
+- BullRing: 1
 
-## https://visitpamplonairuna.com/en/lugar/fritos
-
-- Entidades totales: 2
-- FoodEstablishment: 2
-
-## https://visitpamplonairuna.com/en/lugar/iglesia-san-saturnino
-
-- Entidades totales: 2
-- Church: 2
-
-## https://visitpamplonairuna.com/en/lugar/parque-de-la-media-luna
+## https://visitasevilla.es/archivo-de-indias
 
 - Entidades totales: 2
 - HistoricalOrCulturalResource: 2
 
-## https://visitpamplonairuna.com/en/lugar/plaza-de-toros
+## https://visitasevilla.es/barrio-de-cartuja
 
 - Entidades totales: 2
-- Square: 2
+- Garden: 2
 
-## https://visitpamplonairuna.com/en/lugar/plaza-del-castillo
+## https://visitasevilla.es/barrio-de-la-macarena
 
 - Entidades totales: 2
-- FoodEstablishment: 1
+- Basilica: 1
+- TraditionalMarket: 1
+
+## https://visitasevilla.es/barrio-de-nervion
+
+- Entidades totales: 2
+- Bar: 1
+- Garden: 1
+
+## https://visitasevilla.es/basilica-y-murallas-de-la-macarena
+
+- Entidades totales: 2
+- Basilica: 2
+
+## https://visitasevilla.es/betis-tour
+
+- Entidades totales: 2
+- HistoricalOrCulturalResource: 1
+- Stadium: 1
+
+## https://visitasevilla.es/caac
+
+- Entidades totales: 2
+- Chapel: 1
+- Location: 1
+
+## https://visitasevilla.es/calle-sierpes-y-ayuntamiento
+
+- Entidades totales: 2
+- HistoricalOrCulturalResource: 2
+
+## https://visitasevilla.es/capilla-de-los-marineros
+
+- Entidades totales: 2
+- Chapel: 1
+- Location: 1
+
+## https://visitasevilla.es/centro-de-interpretacion-de-la-juderia
+
+- Entidades totales: 2
+- Location: 2
+
+## https://visitasevilla.es/corpus-christi
+
+- Entidades totales: 2
+- Church: 2
+
+## https://visitasevilla.es/despierta-tu-pasion-por-las-compras-en-sevilla
+
+- Entidades totales: 2
+- Event: 1
 - Square: 1
 
-## https://visitpamplonairuna.com/en/lugar/puente-de-la-magdalena
+## https://visitasevilla.es/donde-comer-en-sevilla-durante-la-semana-santa
+
+- Entidades totales: 2
+- Bar: 2
+
+## https://visitasevilla.es/empresas-sicted/gestora-vut-misterhost-apartments
+
+- Entidades totales: 2
+- Location: 1
+- Square: 1
+
+## https://visitasevilla.es/empresas-sicted/hotel-abanico
+
+- Entidades totales: 2
+- Hotel: 2
+
+## https://visitasevilla.es/empresas-sicted/hotel-adriano
+
+- Entidades totales: 2
+- Hotel: 2
+
+## https://visitasevilla.es/empresas-sicted/hotel-boutique-casa-de-colon
+
+- Entidades totales: 2
+- Hotel: 2
+
+## https://visitasevilla.es/empresas-sicted/hotel-casual-de-las-letras-sevilla
+
+- Entidades totales: 2
+- Hotel: 2
+
+## https://visitasevilla.es/empresas-sicted/hotel-cetina-sevilla
 
 - Entidades totales: 2
 - Bridge: 1
-- Route: 1
+- Hotel: 1
 
-## https://visitpamplonairuna.com/en/lugar/ruta-camino-de-santiago
-
-- Entidades totales: 2
-- Route: 2
-
-## https://visitpamplonairuna.com/en/lugar/sidra
-
-- Entidades totales: 2
-- FoodEstablishment: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/en/lugares/page/13
+## https://visitasevilla.es/empresas-sicted/hotel-europa
 
 - Entidades totales: 2
 - Hotel: 2
 
-## https://visitpamplonairuna.com/en/lugares/page/16
+## https://visitasevilla.es/empresas-sicted/hotel-gravina-51
 
 - Entidades totales: 2
 - Hotel: 2
 
-## https://visitpamplonairuna.com/en/lugares/page/20
+## https://visitasevilla.es/empresas-sicted/hotel-san-gil
 
 - Entidades totales: 2
-- Restaurant: 1
-- TraditionalMarket: 1
+- Hotel: 2
 
-## https://visitpamplonairuna.com/en/lugares/page/6
+## https://visitasevilla.es/empresas-sicted/hotel-vincci-molviedro
 
 - Entidades totales: 2
 - Hotel: 1
 - Square: 1
 
-## https://visitpamplonairuna.com/en/tipo-lugar/que-visitar-desde-pamplona-iruna
+## https://visitasevilla.es/empresas-sicted/magno-apartments-apartamentos-turisticos
 
 - Entidades totales: 2
-- Garden: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/escapada-pamplona-puente-fin-de-semana
-
-- Entidades totales: 2
-- Bridge: 1
-- Garden: 1
-
-## https://visitpamplonairuna.com/evento/ciudadela-contemporanea
-
-- Entidades totales: 2
-- Location: 2
-
-## https://visitpamplonairuna.com/evento/excursion-al-nacedero-del-urederra
-
-- Entidades totales: 2
-- Location: 1
-- Tour: 1
-
-## https://visitpamplonairuna.com/evento/excursion-selva-de-irati-ochagavia-y-foces-naturales
-
-- Entidades totales: 2
-- Location: 1
-- Tour: 1
-
-## https://visitpamplonairuna.com/evento/gloria
-
-- Entidades totales: 2
-- Location: 2
-
-## https://visitpamplonairuna.com/evento/me-gusta-el-planeta-a
-
-- Entidades totales: 2
-- HistoricalOrCulturalResource: 1
-- Theater: 1
-
-## https://visitpamplonairuna.com/evento/visita-guiada-catedral-pamplona
-
-- Entidades totales: 2
-- HistoricalOrCulturalResource: 2
-
-## https://visitpamplonairuna.com/gastronomia-san-fermin
-
-- Entidades totales: 2
-- Location: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/guia-museos-pamplona-que-ver-visitar
-
-- Entidades totales: 2
-- Cathedral: 1
-- Museum: 1
-
-## https://visitpamplonairuna.com/lugar/iglesia-san-lorenzo-y-capilla-de-san-fermin
-
-- Entidades totales: 2
-- Church: 2
-
-## https://visitpamplonairuna.com/lugar/monumento-a-ernest-hemingway
-
-- Entidades totales: 2
-- Monument: 2
-
-## https://visitpamplonairuna.com/lugar/museo-jorge-oteiza
-
-- Entidades totales: 2
-- Event: 1
-- Museum: 1
-
-## https://visitpamplonairuna.com/lugar/pamplona-foz-de-lumbier-sanguesa-zangoza-javier-y-monasterio-de-leire
-
-- Entidades totales: 2
-- Castle: 1
+- Hotel: 1
 - Location: 1
 
-## https://visitpamplonairuna.com/momenticos-san-fermin
-
-- Entidades totales: 2
-- Event: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/pamplona-en-navidad-luces-mercadillos-festivales
-
-- Entidades totales: 2
-- Event: 1
-- Stadium: 1
-
-## https://visitpamplonairuna.com/planifica-tu-viaje/consigna-municipal-del-parking-de-bicicletas-calle-mayor
-
-- Entidades totales: 2
-- Location: 1
-- PublicService: 1
-
-## https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer
-
-- Entidades totales: 2
-- Location: 2
-
-## https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer/sidrerias
-
-- Entidades totales: 2
-- Location: 2
-
-## https://visitpamplonairuna.com/que-hacer-en-pamplona-en-verano-festivales-cultura-y-naturaleza
-
-- Entidades totales: 2
-- Route: 2
-
-## https://visitpamplonairuna.com/que-ver-en-pamplona-lugares-imprescindibles
-
-- Entidades totales: 2
-- Event: 1
-- Palace: 1
-
-## https://visitpamplonairuna.com/sanfermines-en-familia
-
-- Entidades totales: 2
-- Location: 2
-
-## https://visitpamplonairuna.com/semana-santa-en-pamplona
-
-- Entidades totales: 2
-- HistoricalOrCulturalResource: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/tipo-lugar/club-de-producto
-
-- Entidades totales: 2
-- Bar: 1
-- HistoricalOrCulturalResource: 1
-
-## https://visitpamplonairuna.com/tipo-lugar/deporte
-
-- Entidades totales: 2
-- Stadium: 2
-
-## https://visitpamplonairuna.com/tipo-lugar/museos-y-centros-de-interpretacion
+## https://visitasevilla.es/empresas-sicted/museo-del-baile-flamenco
 
 - Entidades totales: 2
 - Museum: 2
 
-## https://visitpamplonairuna.com/tipo-lugar/que-hacer
+## https://visitasevilla.es/empresas-sicted/palacio-buenavista-at-by-mistehost-apartamentos-turisticos
 
 - Entidades totales: 2
+- Hotel: 1
 - Palace: 1
+
+## https://visitasevilla.es/empresas-sicted/punto-de-informacion-turistica-paso-de-cristobal-colon
+
+- Entidades totales: 2
+- Route: 2
+
+## https://visitasevilla.es/empresas-sicted/restaurante-malandro
+
+- Entidades totales: 2
+- Restaurant: 2
+
+## https://visitasevilla.es/empresas-sicted/taxis-giralda-transfers
+
+- Entidades totales: 2
+- Airport: 1
+- Location: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-febo-by-misterhost
+
+- Entidades totales: 2
+- Cathedral: 2
+
+## https://visitasevilla.es/empresas-sicted/vut-pajaritos-alojateensevilla
+
+- Entidades totales: 2
+- Monument: 2
+
+## https://visitasevilla.es/empresas-sicted/vut-river-city-loft
+
+- Entidades totales: 2
+- Monument: 2
+
+## https://visitasevilla.es/empresas-sicted/vut-san-fernando-by-misterhost
+
+- Entidades totales: 2
+- Hotel: 1
+- Monument: 1
+
+## https://visitasevilla.es/estacion-de-autobuses-plaza-de-armas
+
+- Entidades totales: 2
+- BusStation: 1
+- Event: 1
+
+## https://visitasevilla.es/estadio-ramon-sanchez-pizjuan
+
+- Entidades totales: 2
+- Location: 1
 - Stadium: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/visitas-en-familia
+## https://visitasevilla.es/evento/500-anos-de-la-boda-real-carlos-v-isabel-de-portugal
+
+- Entidades totales: 2
+- Event: 1
+- Theater: 1
+
+## https://visitasevilla.es/evento/artilleria-del-color-en-el-arte-coloramas
+
+- Entidades totales: 2
+- Bar: 1
+- Square: 1
+
+## https://visitasevilla.es/fabrica-de-tabacos
+
+- Entidades totales: 2
+- HistoricalOrCulturalResource: 1
+- Location: 1
+
+## https://visitasevilla.es/guia-de-convivencia-en-la-ciudad
 
 - Entidades totales: 2
 - Stadium: 2
 
-## https://visitpamplonairuna.com/tradiciones-vivas-de-pamplona-historia-y-cultura
+## https://visitasevilla.es/guia-residente
+
+- Entidades totales: 2
+- Route: 2
+
+## https://visitasevilla.es/hospital-de-las-cinco-llagas
+
+- Entidades totales: 2
+- Location: 1
+- Monument: 1
+
+## https://visitasevilla.es/iglesia-de-san-luis-de-los-franceses-2
+
+- Entidades totales: 2
+- Chapel: 1
+- Location: 1
+
+## https://visitasevilla.es/iglesia-magdalena
+
+- Entidades totales: 2
+- Church: 1
+- Location: 1
+
+## https://visitasevilla.es/jardines-de-murillo-2
+
+- Entidades totales: 2
+- Garden: 1
+- Route: 1
+
+## https://visitasevilla.es/kit-viajero
+
+- Entidades totales: 2
+- Monument: 2
+
+## https://visitasevilla.es/la-feria-de-abril
+
+- Entidades totales: 2
+- Event: 2
+
+## https://visitasevilla.es/la-historia-vive-en-los-jardines-centenarios-de-sevilla
+
+- Entidades totales: 2
+- Alcazar: 1
+- Garden: 1
+
+## https://visitasevilla.es/lgtbiq
+
+- Entidades totales: 2
+- Event: 2
+
+## https://visitasevilla.es/mapas-feria-sevilla-para-movil
+
+- Entidades totales: 2
+- Event: 2
+
+## https://visitasevilla.es/pabellon-de-peru-museo-de-las-ciencias
+
+- Entidades totales: 2
+- Museum: 1
+- Palace: 1
+
+## https://visitasevilla.es/puente-de-triana
+
+- Entidades totales: 2
+- Bridge: 1
+- Monument: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/museos
+
+- Entidades totales: 2
+- Convent: 1
+- Museum: 1
+
+## https://visitasevilla.es/ruta-conventos-sevilla
+
+- Entidades totales: 2
+- Monastery: 1
+- Route: 1
+
+## https://visitasevilla.es/ruta-de-carlos-v
+
+- Entidades totales: 2
+- Alcazar: 1
+- Route: 1
+
+## https://visitasevilla.es/sabias-que-casco-historico-sevilla-conserva-trazado-edad-media
+
+- Entidades totales: 2
+- Bar: 2
+
+## https://visitasevilla.es/sabias-que-el-mercado-de-calle-feria-es-el-mas-antiguo-de-sevilla
+
+- Entidades totales: 2
+- TraditionalMarket: 2
+
+## https://visitasevilla.es/sabias-que-el-monasterio-de-la-cartuja-fue-el-primer-sepulcro-de-colon
+
+- Entidades totales: 2
+- Chapel: 1
+- Monastery: 1
+
+## https://visitasevilla.es/sabias-que-el-plato-mas-tipico-de-la-feria-nacio-por-una-casualidad-de-los-lunes
+
+- Entidades totales: 2
+- Event: 2
+
+## https://visitasevilla.es/sabias-que-en-sevilla-hay-lugares-que-hoy-representan-a-toda-andalucia
 
 - Entidades totales: 2
 - Event: 1
-- Museum: 1
-
-## https://visitpamplonairuna.com/area-profesional/licitaciones
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/blog/page/2
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/category/excursiones-desde-pamplona
-
-- Entidades totales: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/category/planes/page/2
-
-- Entidades totales: 1
-- Event: 1
-
-## https://visitpamplonairuna.com/ciudadela-pamplona-patrimonio-cultura
-
-- Entidades totales: 1
-- HistoricalOrCulturalResource: 1
-
-## https://visitpamplonairuna.com/descubre-pamplona/pelota-vasca-en-pamplona
-
-- Entidades totales: 1
-- Stadium: 1
-
-## https://visitpamplonairuna.com/en/lugar/belena-de-portalapea
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/en/lugar/catedral-de-santa-maria-la-real
-
-- Entidades totales: 1
-- Event: 1
-
-## https://visitpamplonairuna.com/en/lugar/chistorra
-
-- Entidades totales: 1
-- FoodEstablishment: 1
-
-## https://visitpamplonairuna.com/en/lugar/cicloturismo-eurovelo-1
-
-- Entidades totales: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/en/lugar/ciudadela-y-vuelta-del-castillo
-
-- Entidades totales: 1
-- HistoricalOrCulturalResource: 1
-
-## https://visitpamplonairuna.com/en/lugar/cordero-al-chilindron
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/en/lugar/espacios-culturales
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/en/lugar/esparragos-blancos-de-navarra
-
-- Entidades totales: 1
-- FoodEstablishment: 1
-
-## https://visitpamplonairuna.com/en/lugar/goxua
-
-- Entidades totales: 1
-- FoodEstablishment: 1
-
-## https://visitpamplonairuna.com/en/lugar/navarra-arena
-
-- Entidades totales: 1
-- Square: 1
-
-## https://visitpamplonairuna.com/en/lugar/palacio-del-condestable
-
-- Entidades totales: 1
 - Palace: 1
 
-## https://visitpamplonairuna.com/en/lugar/patxaran
+## https://visitasevilla.es/sabias-que-hay-una-cruz-en-el-centro-de-sevilla-donde-se-cerraban-los-acuerdos-comerciales-coloniales
 
-- Entidades totales: 1
-- FoodEstablishment: 1
+- Entidades totales: 2
+- HistoricalOrCulturalResource: 2
 
-## https://visitpamplonairuna.com/en/lugar/pimientos-del-piquillo
+## https://visitasevilla.es/sabias-que-junto-a-la-catedral-de-sevilla-hay-una-plaza-semicircular-con-muralla-medieval
 
-- Entidades totales: 1
-- FoodEstablishment: 1
+- Entidades totales: 2
+- Cathedral: 1
+- Wall: 1
 
-## https://visitpamplonairuna.com/en/lugar/pochas
+## https://visitasevilla.es/sabias-que-los-parques-de-sevilla-son-refugio-para-cientos-de-polinizadores
 
-- Entidades totales: 1
-- FoodEstablishment: 1
+- Entidades totales: 2
+- Garden: 2
 
-## https://visitpamplonairuna.com/en/lugar/pump-track
+## https://visitasevilla.es/sabias-que-sevilla-es-una-de-las-ciudades-con-mas-kilometros-de-carril-bici-de-europa
 
-- Entidades totales: 1
-- Stadium: 1
-
-## https://visitpamplonairuna.com/en/lugar/queso-idiazabal
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/en/lugar/queso-roncal
-
-- Entidades totales: 1
-- FoodEstablishment: 1
-
-## https://visitpamplonairuna.com/en/lugar/torta-de-txantxigorri
-
-- Entidades totales: 1
-- FoodEstablishment: 1
-
-## https://visitpamplonairuna.com/en/lugar/ultreia-centro-de-acogida-al-peregrino-e-interpretacion-del-camino-de-santiago
-
-- Entidades totales: 1
+- Entidades totales: 2
+- HistoricalOrCulturalResource: 1
 - Route: 1
 
-## https://visitpamplonairuna.com/en/lugares/page/10
+## https://visitasevilla.es/sevilla-de-opera
 
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/en/lugares/page/14
-
-- Entidades totales: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/en/lugares/page/15
-
-- Entidades totales: 1
-- Hotel: 1
-
-## https://visitpamplonairuna.com/en/lugares/page/18
-
-- Entidades totales: 1
-- FoodEstablishment: 1
-
-## https://visitpamplonairuna.com/en/lugares/page/19
-
-- Entidades totales: 1
-- Restaurant: 1
-
-## https://visitpamplonairuna.com/en/lugares/page/3
-
-- Entidades totales: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/en/lugares/page/9
-
-- Entidades totales: 1
+- Entidades totales: 2
+- Monument: 1
 - Palace: 1
 
-## https://visitpamplonairuna.com/espacio-sanfermin-espazioa
+## https://visitasevilla.es/sevilla-navidad
+
+- Entidades totales: 2
+- Stadium: 2
+
+## https://visitasevilla.es/sharm-experiencias
+
+- Entidades totales: 2
+- Alcazar: 1
+- Palace: 1
+
+## https://visitasevilla.es/torre-sevilla-y-mirador-torre-atalaya
+
+- Entidades totales: 2
+- Tower: 2
+
+## https://visitasevilla.es/10-lugares-para-vivir-una-experiencia-unica-en-semana-santa
 
 - Entidades totales: 1
-- Location: 1
+- Bridge: 1
 
-## https://visitpamplonairuna.com/evento/concierto-solidario-agao
+## https://visitasevilla.es/aeropuerto-de-sevilla
 
 - Entidades totales: 1
-- Location: 1
+- Airport: 1
 
-## https://visitpamplonairuna.com/evento/genealogias-femeninas-en-la-nueva-coleccion-pilar-citoler
+## https://visitasevilla.es/anibal-gonzalez-el-arquitecto-de-sevilla
+
+- Entidades totales: 1
+- Chapel: 1
+
+## https://visitasevilla.es/barrio-de-el-arenal
 
 - Entidades totales: 1
 - Theater: 1
 
-## https://visitpamplonairuna.com/evento/privilegio-de-la-union
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/evento/un-monstruo-viene-a-verme
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/eventos/page/2
-
-- Entidades totales: 1
-- Tour: 1
-
-## https://visitpamplonairuna.com/eventos/page/3
-
-- Entidades totales: 1
-- Event: 1
-
-## https://visitpamplonairuna.com/festival-de-las-murallas
-
-- Entidades totales: 1
-- Event: 1
-
-## https://visitpamplonairuna.com/festival-murallas-privilegio-union-pamplona
-
-- Entidades totales: 1
-- Event: 1
-
-## https://visitpamplonairuna.com/guia-de-san-fermin
-
-- Entidades totales: 1
-- TouristInformationOffice: 1
-
-## https://visitpamplonairuna.com/guia-festivales-pamplona
-
-- Entidades totales: 1
-- Event: 1
-
-## https://visitpamplonairuna.com/guia-visitar-pamplona-primera-vez
-
-- Entidades totales: 1
-- Museum: 1
-
-## https://visitpamplonairuna.com/lugar/pamplona-via-verde-plazaola-lekunberri-mendukilo-san-miguel-de-aralar-leitza
-
-- Entidades totales: 1
-- Church: 1
-
-## https://visitpamplonairuna.com/lugar/portal-de-francia-o-de-zumalacarregui
-
-- Entidades totales: 1
-- HistoricalOrCulturalResource: 1
-
-## https://visitpamplonairuna.com/mercados-imprescindibles-pamplona
-
-- Entidades totales: 1
-- TraditionalMarket: 1
-
-## https://visitpamplonairuna.com/pamplona-bajo-la-lluvia
-
-- Entidades totales: 1
-- HistoricalOrCulturalResource: 1
-
-## https://visitpamplonairuna.com/parques-jardines-pamplona
-
-- Entidades totales: 1
-- Garden: 1
-
-## https://visitpamplonairuna.com/planifica-tu-viaje/donde-comer/de-pintxos-y-cazuelicas
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/planifica-tu-viaje/moverse-por-pamplona
-
-- Entidades totales: 1
-- Hotel: 1
-
-## https://visitpamplonairuna.com/que-hacer/paseos-y-rutas
-
-- Entidades totales: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/que-ver-en-pamplona-en-1-2-o-3-dias
-
-- Entidades totales: 1
-- Castle: 1
-
-## https://visitpamplonairuna.com/ropa-san-fermin-que-llevar
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/ruta-hemingway-pamplona
-
-- Entidades totales: 1
-- Restaurant: 1
-
-## https://visitpamplonairuna.com/sanfermines-para-jovenes
-
-- Entidades totales: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/secretos-mejor-guardados-de-pamplona
-
-- Entidades totales: 1
-- Route: 1
-
-## https://visitpamplonairuna.com/solicitud-de-material-turistico
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/subvenciones
-
-- Entidades totales: 1
-- Location: 1
-
-## https://visitpamplonairuna.com/tipo-lugar/agroturismos-casa-rurales
+## https://visitasevilla.es/barrio-de-la-sevilla-del-29
 
 - Entidades totales: 1
 - Palace: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/agroturismos-casa-rurales/page/2
+## https://visitasevilla.es/barrio-de-sevilla-este
 
 - Entidades totales: 1
-- Location: 1
+- Airport: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/areas-de-autocaravanas
+## https://visitasevilla.es/barrio-de-triana-y-los-remedios
 
 - Entidades totales: 1
-- Location: 1
+- Event: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/donde-alojarse
+## https://visitasevilla.es/barrio-del-museo-y-plaza-nueva
 
 - Entidades totales: 1
 - Square: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/donde-comer
+## https://visitasevilla.es/basilica-del-cachorro
 
 - Entidades totales: 1
-- Restaurant: 1
+- Basilica: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/escape-room
+## https://visitasevilla.es/basilica-del-gran-poder
+
+- Entidades totales: 1
+- Basilica: 1
+
+## https://visitasevilla.es/buenas-practicas-barrio-santa-cruz
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/caixaforum-sevilla
 
 - Entidades totales: 1
 - Location: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/espacios-culturales
+## https://visitasevilla.es/calle-betis
 
 - Entidades totales: 1
-- Palace: 1
+- HistoricalOrCulturalResource: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/grupos
+## https://visitasevilla.es/cartuja-center-cite
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/casa-de-pilatos-2
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/casa-fabiola
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/castillo-de-san-jorge
+
+- Entidades totales: 1
+- Castle: 1
+
+## https://visitasevilla.es/catedral-de-sevilla-y-giralda
+
+- Entidades totales: 1
+- Cathedral: 1
+
+## https://visitasevilla.es/contacto
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/convento-del-santo-angel
+
+- Entidades totales: 1
+- Convent: 1
+
+## https://visitasevilla.es/culmina-la-temporada-taurina-en-sevilla-un-tributo-al-arte-de-torear
+
+- Entidades totales: 1
+- Event: 1
+
+## https://visitasevilla.es/descubre-sevilla-bajo-las-estrellas-running-nocturno-en-el-parque-del-alamillo
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/durante-tu-estancia
+
+- Entidades totales: 1
+- Airport: 1
+
+## https://visitasevilla.es/empresas-sicted/autocares-barrero-asp-group
+
+- Entidades totales: 1
+- Bar: 1
+
+## https://visitasevilla.es/empresas-sicted/autohispalis-van-driver
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/empresas-sicted/cac-travel
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/empresas-sicted/hommyhome-boutique-apartments-conteros-apartamentos-turisticos
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/empresas-sicted/hommyhome-boutique-apartments-triana-apartamentos-turisticos
+
+- Entidades totales: 1
+- TraditionalMarket: 1
+
+## https://visitasevilla.es/empresas-sicted/hotel-bellavista-sevilla
+
+- Entidades totales: 1
+- Hotel: 1
+
+## https://visitasevilla.es/empresas-sicted/hotel-goya
+
+- Entidades totales: 1
+- Hotel: 1
+
+## https://visitasevilla.es/empresas-sicted/hotel-vincci-seleccion-unuk-5-gl
+
+- Entidades totales: 1
+- Hotel: 1
+
+## https://visitasevilla.es/empresas-sicted/naturanda-rastro-12a
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/empresas-sicted/pabellon-de-la-navegacion
 
 - Entidades totales: 1
 - Route: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/hoteles
-
-- Entidades totales: 1
-- Hotel: 1
-
-## https://visitpamplonairuna.com/tipo-lugar/hoteles-3/page/2
-
-- Entidades totales: 1
-- Hotel: 1
-
-## https://visitpamplonairuna.com/tipo-lugar/iglesias-y-catedral
-
-- Entidades totales: 1
-- Church: 1
-
-## https://visitpamplonairuna.com/tipo-lugar/lugares-de-interes/page/2
-
-- Entidades totales: 1
-- Garden: 1
-
-## https://visitpamplonairuna.com/tipo-lugar/restaurantes-del-reyno
+## https://visitasevilla.es/empresas-sicted/restaurante-artilleria
 
 - Entidades totales: 1
 - Restaurant: 1
 
-## https://visitpamplonairuna.com/tipo-lugar/senderismo
+## https://visitasevilla.es/empresas-sicted/restaurante-bacao
+
+- Entidades totales: 1
+- Restaurant: 1
+
+## https://visitasevilla.es/empresas-sicted/restaurante-el-colmo
+
+- Entidades totales: 1
+- Restaurant: 1
+
+## https://visitasevilla.es/empresas-sicted/restaurante-pizzeria-dona-francisquita
+
+- Entidades totales: 1
+- Restaurant: 1
+
+## https://visitasevilla.es/empresas-sicted/restaurante-tia-consuelo-braseria
+
+- Entidades totales: 1
+- Restaurant: 1
+
+## https://visitasevilla.es/empresas-sicted/robles-laredo-bar
+
+- Entidades totales: 1
+- Bar: 1
+
+## https://visitasevilla.es/empresas-sicted/tablao-flamenco-el-patio-sevillano
+
+- Entidades totales: 1
+- Bar: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-alejo-by-misterhost
+
+- Entidades totales: 1
+- Alcazar: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-archeros-by-misterhost
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-becas-i-by-misterhost
+
+- Entidades totales: 1
+- Route: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-cano-y-cueto-by-mistehost
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-corral-del-rey-alojateensevilla
+
+- Entidades totales: 1
+- Cathedral: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-leoncillos-ii-alojateensevilla
+
+- Entidades totales: 1
+- PublicService: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-leoncillos-iii-alojateensevilla
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-procurador-by-misterhost
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-rastro-alojatenensevilla
+
+- Entidades totales: 1
+- TraditionalMarket: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-san-eloy-alojateensevilla
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/empresas-sicted/vut-torneo-l1-alojateensevilla
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/estacion-de-autobuses-prado-de-san-sebastian
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/estacion-de-tren-san-bernardo
+
+- Entidades totales: 1
+- TrainStation: 1
+
+## https://visitasevilla.es/evento/corridas-de-toros-en-sevilla
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/evento/el-mundo-por-montera-inauguracion-bienal-de-flamenco-en-real-maestranza
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/evento/espectaculo-infantil-ven-a-vivir-el-ritmo-flamenco-en-familia-con-tirititran
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/evento/exposicion-te-suena-africa-en-museo-artes-y-costumbres-populares
+
+- Entidades totales: 1
+- Museum: 1
+
+## https://visitasevilla.es/evento/sara-baras-infinita-bienal-de-flamenco-2026-11-12-y-13-sept
+
+- Entidades totales: 1
+- Bar: 1
+
+## https://visitasevilla.es/fiestas-de-sevilla
+
+- Entidades totales: 1
+- Event: 1
+
+## https://visitasevilla.es/guitarra-espanola
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/hospital-de-la-caridad-2
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/la-hora-del-brunch-en-sevilla
+
+- Entidades totales: 1
+- Restaurant: 1
+
+## https://visitasevilla.es/la-semana-santa-de-sevilla
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/la-vela-de-san-miguel-la-feria-de-otono-de-sevilla
+
+- Entidades totales: 1
+- Event: 1
+
+## https://visitasevilla.es/la-vela-de-santiago-y-santa-ana
+
+- Entidades totales: 1
+- Bridge: 1
+
+## https://visitasevilla.es/los-mejores-planes-culturales-de-sevilla-en-primavera
+
+- Entidades totales: 1
+- Event: 1
+
+## https://visitasevilla.es/lujo-y-disenadores-de-prestigio
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/mas-lugares-de-interes/patio-de-banderas
+
+- Entidades totales: 1
+- Alcazar: 1
+
+## https://visitasevilla.es/mercado-de-triana
+
+- Entidades totales: 1
+- TraditionalMarket: 1
+
+## https://visitasevilla.es/moda-flamenca
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/monumentos
+
+- Entidades totales: 1
+- Basilica: 1
+
+## https://visitasevilla.es/museo-de-las-ilusiones
+
+- Entidades totales: 1
+- Museum: 1
+
+## https://visitasevilla.es/museo-historico-militar
+
+- Entidades totales: 1
+- Tower: 1
+
+## https://visitasevilla.es/museo-taurino-de-la-plaza-de-toros
+
+- Entidades totales: 1
+- BullRing: 1
+
+## https://visitasevilla.es/museos
+
+- Entidades totales: 1
+- Museum: 1
+
+## https://visitasevilla.es/octubre-en-sevilla-descubre-todos-los-planes-que-ofrece-la-ciudad
 
 - Entidades totales: 1
 - Garden: 1
 
-## https://visitpamplonairuna.com/
+## https://visitasevilla.es/pabellon-de-la-navegacion-2
 
+- Entidades totales: 1
+- Tower: 1
+
+## https://visitasevilla.es/palacio-de-duenas
+
+- Entidades totales: 1
+- Palace: 1
+
+## https://visitasevilla.es/palacio-de-san-telmo-2
+
+- Entidades totales: 1
+- Palace: 1
+
+## https://visitasevilla.es/parque-de-maria-luisa
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/parroquia-de-santa-ana-2
+
+- Entidades totales: 1
+- Cathedral: 1
+
+## https://visitasevilla.es/planes-para-disfrutar-con-los-ninos-este-verano-en-sevilla
+
+- Entidades totales: 1
+- Theater: 1
+
+## https://visitasevilla.es/plaza-de-espana-2
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/plaza-de-santa-cruz-2
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/artesania
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/comer-y-salir
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/cultura/page/2
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/curiosidades/page/2
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/de-compras
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/deporte
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/en-familia
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla
+
+- Entidades totales: 1
+- Event: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/monumentos/page/2
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/ocio/page/2
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/ocio/page/5
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/parques
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/que-hacer-en-sevilla/semana-santa-cuaresma
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/real-alcazar-sevilla-palacio-real-en-uso-mas-antiguo-de-europa
+
+- Entidades totales: 1
+- Palace: 1
+
+## https://visitasevilla.es/real-fabrica-de-artilleria
+
+- Entidades totales: 1
+- Stadium: 1
+
+## https://visitasevilla.es/ruta-edificios-mas-emblematicos-sevilla-29
+
+- Entidades totales: 1
+- Palace: 1
+
+## https://visitasevilla.es/ruta-vegetariana-en-sevilla-un-recorrido-lleno-de-tradicion-y-sabor
+
+- Entidades totales: 1
+- Route: 1
+
+## https://visitasevilla.es/sabias-que-algunas-de-las-calles-de-sevilla-estan-entre-las-mas-estrechas-de-europa
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/sabias-que-cuando-pisas-la-feria-de-sevilla-lo-haces-sobre-una-antigua-playa-de-hace-millones-de-anos
+
+- Entidades totales: 1
+- Restaurant: 1
+
+## https://visitasevilla.es/sabias-que-el-hospital-de-las-cinco-llagas-fue-uno-de-los-mayores-de-europa
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/sabias-que-el-incienso-de-la-semana-santa-de-sevilla-no-es-solo-aroma-sino-un-simbolo-con-siglos-de-historia
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/sabias-que-el-pabellon-de-marruecos-fue-disenado-por-el-arquitecto-de-la-mezquita-de-casablanca
+
+- Entidades totales: 1
+- Event: 1
+
+## https://visitasevilla.es/sabias-que-en-sevilla-existe-un-david-de-miguel-angel
+
+- Entidades totales: 1
+- Monument: 1
+
+## https://visitasevilla.es/sabias-que-en-sevilla-hay-conventos-donde-aun-se-compran-dulces-sin-ver-a-quien-los-vende
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/sabias-que-esta-estatua-del-parque-de-maria-luisa-representa-el-amor-en-tres-fases
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/sabias-que-existia-una-segunda-plaza-de-toros-en-sevilla
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/sabias-que-isla-magica-fue-el-primer-parque-tematico-urbano-del-mundo
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/sabias-que-la-capilla-del-carmen-se-diseno-como-faro-ceramico-para-los-barcos-nocturnos
+
+- Entidades totales: 1
+- Chapel: 1
+
+## https://visitasevilla.es/sabias-que-las-torrijas-y-los-pestinos-tienen-su-origen-antes-del-cuatrocientos
+
+- Entidades totales: 1
+- Tower: 1
+
+## https://visitasevilla.es/sabias-que-no-estan-representadas-todas-las-provincia-en-los-bancos-de-la-plaza-de-espana
+
+- Entidades totales: 1
+- Square: 1
+
+## https://visitasevilla.es/sabias-que-origen-traje-de-flamenca
+
+- Entidades totales: 1
+- Event: 1
+
+## https://visitasevilla.es/sabias-que-san-jeronimo-esconde-algunos-de-los-secretos-mejor-guardados-de-sevilla
+
+- Entidades totales: 1
+- Garden: 1
+
+## https://visitasevilla.es/sabias-que-sevilla-cuenta-con-tres-patrimonios-de-la-humanidad-por-la-unesco-desde-1987
+
+- Entidades totales: 1
+- Alcazar: 1
+
+## https://visitasevilla.es/sabias-que-sevilla-ha-sido-escenario-de-algunas-de-las-historias-de-amor-mas-universales
+
+- Entidades totales: 1
+- Bridge: 1
+
+## https://visitasevilla.es/sabias-queel-archivo-general-de-indias-es-un-tesoro-documental-unico-en-el-mundo
+
+- Entidades totales: 1
+- HistoricalOrCulturalResource: 1
+
+## https://visitasevilla.es/sabores-de-cuaresma-una-ruta-por-los-bares-cofrades-de-la-ciudad
+
+- Entidades totales: 1
+- Hotel: 1
+
+## https://visitasevilla.es/sevilla-en-familia-planes-para-un-verano-inolvidable
+
+- Entidades totales: 1
+- Location: 1
+
+## https://visitasevilla.es/sevilla-fashion-outlet
+
+- Entidades totales: 1
+- Airport: 1
+
+## https://visitasevilla.es/sevilla-generacion-del-27
+
+- Entidades totales: 1
+- Hotel: 1
+
+## https://visitasevilla.es/sharm-restaurantes
+
+- Entidades totales: 1
+- Restaurant: 1
+
+## https://visitasevilla.es/tradicion-sabor-y-solidaridad-en-sevilla
+
+- Entidades totales: 1
+- Hotel: 1
+
+## https://visitasevilla.es/visitas-guiadas-sevilla
+
+- Entidades totales: 1
+- Monastery: 1
+
+## https://visitasevilla.es/
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/amalgama-sevilla
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/antiquarium
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/antiquarium-2
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/atarazanas
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/aviso-legal
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/ayuntamiento
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/azulejos-sevillanos
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/calle-asuncion
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/capilla-del-carmen
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/celebra-el-dia-mundial-del-flamenco-en-sevilla
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/cementerio-de-san-fernando
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/centro-andaluz-de-arte-contemporaneo
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/centro-ceramica-triana
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/centro-ceramica-triana-2
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/centros-comerciales-2
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/china-week-2024
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/comer-salir-sevilla
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/compras-calles-historicas
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/conectividad
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/conjuntos-escultoricos-emblematicos-sevilla
+
+- Entidades totales: 0
+- Sin entidades
+
+## https://visitasevilla.es/conoces-el-origen-del-nombre-de-la-giralda
+
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/?elementor_library=privilegio-de-la-union
+## https://visitasevilla.es/convento-de-santa-ines
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/aviso-legal
+## https://visitasevilla.es/cuaresma-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/ayuntamiento
+## https://visitasevilla.es/de-compras-artesania
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/blog
+## https://visitasevilla.es/descubre-sevilla-a-traves-de-sus-tapas
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/blog/page/3
+## https://visitasevilla.es/dia-todos-santos-sevillana
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/blog/page/4
+## https://visitasevilla.es/dibujo-oculto-alameda-hercules-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/blog/page/5
+## https://visitasevilla.es/el-adobo-y-el-pescaito-frito
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/camino-de-santiago
+## https://visitasevilla.es/el-gazpacho-plato-estrella-del-verano-en-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/cultura
+## https://visitasevilla.es/el-museo-arqueologico
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/cultura/page/2
+## https://visitasevilla.es/el-rectorado
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/familia
+## https://visitasevilla.es/el-sonido-de-la-cuaresma-las-marchas-procesionales
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/gastronomia
+## https://visitasevilla.es/empresas-sicted
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/parques-y-jardines
+## https://visitasevilla.es/empresas-sicted/adriano-grupo-agencia-de-viajes
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/pelota
+## https://visitasevilla.es/empresas-sicted/at-lanza-by-alojateensevilla-apartamentos-turisticos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/planes
+## https://visitasevilla.es/empresas-sicted/autocares-casal
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/san-fermin
+## https://visitasevilla.es/empresas-sicted/autocares-rosabus
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/category/san-fermin/page/2
+## https://visitasevilla.es/empresas-sicted/bodeguita-sierpes
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/cocina-tradicional-navarra-pamplona
+## https://visitasevilla.es/empresas-sicted/cyclotour
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/declaracion-de-accesibilidad
+## https://visitasevilla.es/empresas-sicted/enforex-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/descubre-pamplona/historia
+## https://visitasevilla.es/empresas-sicted/gestora-vut-alojateensevilla-com
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/descubre-pamplona/san-fermin
+## https://visitasevilla.es/empresas-sicted/gestora-vut-hommyhome
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/descubre-pamplona/san-fermin/carteles-de-san-fermin
+## https://visitasevilla.es/empresas-sicted/globotur
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/donde-comer/sidrerias
+## https://visitasevilla.es/empresas-sicted/gloobo-paseos-en-globo
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/donde-dormir-en-pamplona
+## https://visitasevilla.es/empresas-sicted/green-apartments-at-sierpes-luxury-suites-apartamentos-turisticos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en
+## https://visitasevilla.es/empresas-sicted/green-apartments-reales-atarazanas-suites-apartamentos-turisticos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/ayuntamiento
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-ana-lopez-guerra
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/bertiz-valle-de-baztan-zugarramurdi-urdax-bidasoa
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-clara-alarcon-de-francisco
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/camino-de-santiago-urederra
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-cloti-trips
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/capilla-de-san-fermin
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-isabel-angeles-puerto-molano
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/espacio-sanfermin-espazioa
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-julia-serrano-barberan
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/foz-lumbier-sanguesa-zangoza-javier-y-monasterio-leyre
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-luis-delgado-deturismo
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/fronton-labrit
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-manuel-pineda-costales
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/iglesia-san-nicolas
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-mercedes-miguez-de-borjas
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/menestra-de-verduras
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-passion-tours
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/museo-de-navarra
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-pilar-aparicio
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/pantxineta
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-rocio-llorca
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/parque-de-yamaguchi
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-sandra-de-castro-carrascosa
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/plazaola-lekunberri-mendukilo-san-miguel-aralar-leitza
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-virginia-vargas
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/portal-de-francia
+## https://visitasevilla.es/empresas-sicted/guia-de-turismo-viviana-coraini-sevilla-experiencias
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/refena
+## https://visitasevilla.es/empresas-sicted/herbolario-esencias-de-sevilla-calle-cordoba
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/ruta-de-san-fermin
+## https://visitasevilla.es/empresas-sicted/herbolario-esencias-de-sevilla-jamerdana-1
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/ruta-por-las-murallas
+## https://visitasevilla.es/empresas-sicted/hommyhome-boutique-apartments-tetuan-apartamentos-turisticos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/selva-del-irati-roncal
+## https://visitasevilla.es/empresas-sicted/hotel-inglaterra
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/teatro-gayarre
+## https://visitasevilla.es/empresas-sicted/hotel-las-casas-de-los-mercaderes
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/trucha-a-la-navarra
+## https://visitasevilla.es/empresas-sicted/hotel-vincci-la-rabida
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugar/zona-media-de-navarra-olite
+## https://visitasevilla.es/empresas-sicted/naturanda-alfonso-xii
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/11
+## https://visitasevilla.es/empresas-sicted/naturanda-arfe
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/17
+## https://visitasevilla.es/empresas-sicted/naturanda-francos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/2
+## https://visitasevilla.es/empresas-sicted/naturanda-trajano
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/21
+## https://visitasevilla.es/empresas-sicted/oficina-de-turismo-marques-de-contadero
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/22
+## https://visitasevilla.es/empresas-sicted/palacio-de-congresos-fibes
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/4
+## https://visitasevilla.es/empresas-sicted/punto-de-informacion-turistica-costurero-de-la-reina
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/5
+## https://visitasevilla.es/empresas-sicted/punto-informacion-turistica-castillo-de-san-jorge
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/7
+## https://visitasevilla.es/empresas-sicted/quiquecicle
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/lugares/page/8
+## https://visitasevilla.es/empresas-sicted/refinadores-boutique-at-by-misterhost-apartamentos-turisticos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/en/tipo-lugar/planifica-tu-viaje
+## https://visitasevilla.es/empresas-sicted/sevilla-congress-convention-bureau
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/escalerica-san-fermin
+## https://visitasevilla.es/empresas-sicted/sevirama
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento
+## https://visitasevilla.es/empresas-sicted/viajes-fuentes-plaza-de-la-juncal-2
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/excursion-ruta-medieval
+## https://visitasevilla.es/empresas-sicted/viajes-fuentes-plaza-de-la-juncal5
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/excursion-valle-de-baztan-urdax-y-zugarramurdi
+## https://visitasevilla.es/empresas-sicted/vut-boteros-alojateensevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/festival-de-las-murallas
+## https://visitasevilla.es/empresas-sicted/vut-castilla-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/festival-ecozine-all-birds-sing-beatifully
+## https://visitasevilla.es/empresas-sicted/vut-conde-de-ibarra-alojateensevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/pamplona-iruna-capital-de-la-pelota
+## https://visitasevilla.es/empresas-sicted/vut-conde-de-torrejon-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/taller-de-nociones-basicas-de-jardineria-domestica
+## https://visitasevilla.es/empresas-sicted/vut-la-estrella-de-triana-vivienda-uso-turistico
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/visita
+## https://visitasevilla.es/empresas-sicted/vut-la-florida-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/visita-guiada-pamplona-al-completo
+## https://visitasevilla.es/empresas-sicted/vut-leoncillos-i-alojateensevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/visita-guiada-ruta-por-la-historia-de-la-pelota-vasca-en-pamplona-espanol
+## https://visitasevilla.es/empresas-sicted/vut-magallanes-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/evento/visita-guiada-veladas-nocturnas-a-la-catedral
+## https://visitasevilla.es/empresas-sicted/vut-redes-i-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/eventos
+## https://visitasevilla.es/empresas-sicted/vut-redes-ii-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/a-bardenas-reales-ribera
+## https://visitasevilla.es/empresas-sicted/vut-redes-iii-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/abodi-alojamientos-hostelet
+## https://visitasevilla.es/empresas-sicted/vut-redes-iv-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ajoarriero
+## https://visitasevilla.es/empresas-sicted/vut-redes-v-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/archivo-real-y-general-de-navarra
+## https://visitasevilla.es/empresas-sicted/vut-rodrigo-de-triana-i-alojateensevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ayuntamiento
+## https://visitasevilla.es/empresas-sicted/vut-rodrigo-de-triana-ii-alojateensevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/belena-de-portalapea
+## https://visitasevilla.es/empresas-sicted/vut-rt74-calle-rodrigo-de-triana-con-opcion-de-parking
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/bertiz-valle-de-baztan-zugarramurdi-urdax-bidasoa
+## https://visitasevilla.es/empresas-sicted/vut-santiago-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/camino-de-santiago-urederra
+## https://visitasevilla.es/empresas-sicted/vut-sol-9-by-misterhost
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/capilla-de-san-fermin
+## https://visitasevilla.es/empresas-sicted/vut-torneo-l2-alojateensevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/catedral-de-santa-maria-la-real
+## https://visitasevilla.es/empresas-sicted/vut-torneo-l3-alojateensevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/catedral-santa-maria-la-real
+## https://visitasevilla.es/estacion-de-santa-justa-2
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/chistorra
+## https://visitasevilla.es/estadio-benito-villamarin
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/cicloturismo-eurovelo-1
+## https://visitasevilla.es/estudia-en-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/cicloturismo-eurovelo-3
+## https://visitasevilla.es/evento/antonio-rey-historia-de-un-flamenco-cante-guitarra-flauta-y-percusion
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ciudadela-y-vuelta-del-castillo
+## https://visitasevilla.es/evento/bad-gyal-tour-2026
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/cordero-al-chilindron
+## https://visitasevilla.es/evento/bienal-de-flamenco
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/cuajada
+## https://visitasevilla.es/evento/cantajuego-yo-quiero-ser-concierto-infantil
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/espacio-sanfermin-espazioa
+## https://visitasevilla.es/evento/cayetana-grande-de-espana
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/espacios-culturales
+## https://visitasevilla.es/evento/charlotte-de-witte
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/esparragos-blancos-de-navarra
+## https://visitasevilla.es/evento/conciertos-de-guitarra-alumnos-del-conservatorio-superior-de-musica-acceso-gratuito-museo-artes-y-costumbres
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/foz-lumbier-sanguesa-zangoza-javier-y-monasterio-leyre
+## https://visitasevilla.es/evento/dani-fernandez-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/fritos
+## https://visitasevilla.es/evento/el-arrebato-en-concierto-el-viaje-inesperado
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/fronton-labrit
+## https://visitasevilla.es/evento/en-el-limbo-arquitectura-en-espera
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/goxua
+## https://visitasevilla.es/evento/en-sevilla-hay-que-mori
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/iglesia-de-san-nicolas
+## https://visitasevilla.es/evento/exposicion-arte-y-misericordia-cuadros-de-la-iglesia-hospital-de-la-caridad-de-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/iglesia-de-san-saturnino-o-san-cernin
+## https://visitasevilla.es/evento/exposicion-arte-y-misericordia-la-santa-caridad-de-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/iglesia-san-nicolas
+## https://visitasevilla.es/evento/exposicion-fotografica-el-peru-en-la-antartida-en-casa-de-la-ciencia
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/iglesia-san-saturnino
+## https://visitasevilla.es/evento/feria-de-abril-de-sevilla-21-26-abril
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/jardines-de-la-taconera
+## https://visitasevilla.es/evento/isabel-pantoja-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/menestra-de-verduras
+## https://visitasevilla.es/evento/juan-amodeo-013
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/museo-de-navarra
+## https://visitasevilla.es/evento/julio-iglesias-jr-en-concierto
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/museo-pablo-sarasate
+## https://visitasevilla.es/evento/k-power-musica-k-pop
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/navarra-arena
+## https://visitasevilla.es/evento/kany-garcia-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/palacio-del-condestable
+## https://visitasevilla.es/evento/la-noche-es-comedia-monologos-humor
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/pamplona-bardenas-reales
+## https://visitasevilla.es/evento/la-oreja-de-van-gogh-tantas-cosas-que-contar-tour-2026
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/pantxineta
+## https://visitasevilla.es/evento/la-plazuela-califato-%c2%be-iconica-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/parque-de-la-media-luna
+## https://visitasevilla.es/evento/la-reina-del-flow-en-concierto
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/parque-de-yamaguchi
+## https://visitasevilla.es/evento/la-velada-ibai-cartuja-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/parque-fluvial-del-arga
+## https://visitasevilla.es/evento/lenny-kravitz-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/patxaran
+## https://visitasevilla.es/evento/lola-indigo-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/pimientos-del-piquillo
+## https://visitasevilla.es/evento/los-delinquentes-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/plaza-de-toros
+## https://visitasevilla.es/evento/mago-invisible-tempo-drakis-el-mago-invisible-premio-nacioal-de-magia
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/plaza-del-castillo
+## https://visitasevilla.es/evento/manu-sanchez-entregamos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/plazaola-lekunberri-mendukilo-san-miguel-aralar-leitza
+## https://visitasevilla.es/evento/marco-carola-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/pochas
+## https://visitasevilla.es/evento/marilyn-manson-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/portal-de-francia
+## https://visitasevilla.es/evento/maroon-5-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/puente-de-la-magdalena
+## https://visitasevilla.es/evento/moby-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/pump-track
+## https://visitasevilla.es/evento/mundial-de-remo-29-31-mayo-2026
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/queso-idiazabal
+## https://visitasevilla.es/evento/pablo-alboran-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/queso-roncal
+## https://visitasevilla.es/evento/psicomagia-un-arte-para-sanar-alejandro-jodorowsky
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/refena
+## https://visitasevilla.es/evento/raphael-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/rincon-del-caballo-blanco
+## https://visitasevilla.es/evento/robbie-williams-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/roncesvalles-orreaga-fabrica-de-armas-orbaizeta-eugi-zubiri
+## https://visitasevilla.es/evento/romeo-santos-y-prince-royce-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ruta-camino-de-santiago
+## https://visitasevilla.es/evento/sonrisas-y-lagrimas-el-musical-sesion-a-las-17-30h-y-a-las-20-30h
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ruta-de-parques-y-jardines
+## https://visitasevilla.es/evento/toon-story-de-film-symphony-orchestra
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ruta-de-san-fermin
+## https://visitasevilla.es/evento/velazquez-y-murillo-en-sala-capitular-del-ayuntamiento-fundacion-focus-loyola
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ruta-hemingway
+## https://visitasevilla.es/evento/viva-suecia-iconica-santalucia-sevilla-fest
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ruta-por-las-murallas
+## https://visitasevilla.es/gastronomia-sin-gluten
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/rutas-pamplona-es-verde
+## https://visitasevilla.es/guadalpark
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/selva-del-irati-roncal
+## https://visitasevilla.es/isla-magica
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/sidra
+## https://visitasevilla.es/joyeria
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/skate-park-antoniutti
+## https://visitasevilla.es/la-festividad-de-la-virgen-de-los-reyes-una-tradicion-sevillana-llena-de-pasion
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/teatro-gayarre
+## https://visitasevilla.es/la-mantilla-una-tradicion-con-300-anos-de-historia
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/torta-de-txantxigorri
+## https://visitasevilla.es/la-mejor-cerveza-para-tomar-al-sol
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/trucha-a-la-navarra
+## https://visitasevilla.es/las-tapas
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/ultreia-centro-de-acogida-al-peregrino-e-interpretacion-del-camino-de-santiago
+## https://visitasevilla.es/mapa-interactivo-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/zona-media-de-navarra-olite
+## https://visitasevilla.es/mas-de-2-500-personas-participan-en-la-chinaweek-2024
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugar/zona-media-de-navarra-olite-y-alrededores
+## https://visitasevilla.es/mercados-tradicionales
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares
+## https://visitasevilla.es/mes-de-la-diversidad
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares-con-encanto-escapadas-perfectas
+## https://visitasevilla.es/moda
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/10
+## https://visitasevilla.es/museo-casa-de-la-ciencia-csic
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/11
+## https://visitasevilla.es/museo-de-bellas-artes
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/12
+## https://visitasevilla.es/museo-de-bellas-artes-2
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/13
+## https://visitasevilla.es/museo-del-baile-flamenco
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/14
+## https://visitasevilla.es/museo-del-baile-flamenco-2
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/15
+## https://visitasevilla.es/naturaleza-encendida-arras-magia-en-el-real-alcazar
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/16
+## https://visitasevilla.es/naturaleza-encendida-corrientes-un-exito-que-volvera-en-octubre
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/17
+## https://visitasevilla.es/noche-de-copas-por-el-centro-2
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/18
+## https://visitasevilla.es/orgullo-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/19
+## https://visitasevilla.es/otono-es-sinonimo-de-cultura-en-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/2
+## https://visitasevilla.es/pabellon-de-la-navegacion
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/20
+## https://visitasevilla.es/parlamento-de-andalucia
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/21
+## https://visitasevilla.es/picnic-parques-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/22
+## https://visitasevilla.es/plaza-de-espana
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/3
+## https://visitasevilla.es/politica-de-cookies
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/4
+## https://visitasevilla.es/politica-de-privacidad
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/5
+## https://visitasevilla.es/puntos-de-informacion-turistica
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/6
+## https://visitasevilla.es/que-hacer-en-sevilla/cultura
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/7
+## https://visitasevilla.es/que-hacer-en-sevilla/cultura/page/3
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/8
+## https://visitasevilla.es/que-hacer-en-sevilla/cultura/page/5
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/lugares/page/9
+## https://visitasevilla.es/que-hacer-en-sevilla/cultura/page/6
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/otono-en-pamplona
+## https://visitasevilla.es/que-hacer-en-sevilla/curiosidades
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/pamplona-primera-del-camino-santiago
+## https://visitasevilla.es/que-hacer-en-sevilla/curiosidades/page/6
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/pamplona-slow-travel-la-ciudad-perfecta-para-una-escapada-sin-prisas
+## https://visitasevilla.es/que-hacer-en-sevilla/fiestas-en-sevilla/page/2
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/plan-perfecto-fin-de-semana-pamplona
+## https://visitasevilla.es/que-hacer-en-sevilla/monumentos/page/6
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/planifica-tu-viaje
+## https://visitasevilla.es/que-hacer-en-sevilla/ocio
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/planifica-tu-viaje/mapas-y-guias
+## https://visitasevilla.es/real-alcazar-unica-fuente-musical-espana
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/politica-de-cookies
+## https://visitasevilla.es/real-de-la-feria
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/politica-de-privacidad
+## https://visitasevilla.es/redescubre-la-catedral-de-sevilla-a-traves-de-sus-singularidades
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/profesional/convention-bureau
+## https://visitasevilla.es/rocio-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/que-hacer
+## https://visitasevilla.es/ruta-cuaresmal-por-los-templos-de-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/que-hacer/en-familia
+## https://visitasevilla.es/rutas-huellas-de-teresa-en-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/ruta-vino-navarra-pamplona
+## https://visitasevilla.es/sabias-el-origen-de-la-lluvia-en-sevilla-es-una-maravilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/sanfermines-para-todos
+## https://visitasevilla.es/sabias-que-a-traves-del-hueco-del-corazon-de-una-escultura-puedes-ver-uno-de-los-monumentos-mas-importantes-de-la-ciudad
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/actividades
+## https://visitasevilla.es/sabias-que-alrededor-de-las-catedral-de-sevilla-hay-157-cadenas-con-un-significado-legal
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/albergues
+## https://visitasevilla.es/sabias-que-bajo-el-patio-de-banderas-yace-una-calzada-romana-de-mas-de-2-000-anos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/campings
+## https://visitasevilla.es/sabias-que-bajo-el-real-alcazar-late-el-antiguo-puerto-romano-de-hispalis
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/enogastronomia
+## https://visitasevilla.es/sabias-que-curiosidades-e-historias-sorprendentes-de-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/estrellas-michelin
+## https://visitasevilla.es/sabias-que-el-rio-guadalquivir-fue-la-via-principal-por-donde-llegaron-las-riquezas-del-nuevo-mundo
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/excursiones-desde-pamplona
+## https://visitasevilla.es/sabias-que-en-sevilla-se-alza-la-escultura-mas-grande-de-espana
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/grupos/page/2
+## https://visitasevilla.es/sabias-que-este-barrio-fue-historicamente-la-puerta-norte-de-la-ciudad
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/hoteles-1
+## https://visitasevilla.es/sabias-que-existe-una-ruta-de-opera-por-las-calles-de-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/hoteles-2
+## https://visitasevilla.es/sabias-que-la-cabalgata-de-reyes-de-sevilla-se-organiza-desde-1918-por-el-ateneo
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/hoteles-4/page/2
+## https://visitasevilla.es/sabias-que-la-catedral-de-sevilla-es-uno-de-los-templos-con-mas-campanas-de-espana-y-que-cada-una-tiene-nombre-propio
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/hoteles-5
+## https://visitasevilla.es/sabias-que-la-navidad-en-sevilla-esconde-tradiciones-con-siglos-de-historia
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/individual
+## https://visitasevilla.es/sabias-que-la-portada-de-la-feria-de-sevilla-tiene-mas-bombillas-que-la-torre-eiffel
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/juegos
+## https://visitasevilla.es/sabias-que-la-vela-de-triana-en-honor-a-santa-ana-es-la-fiesta-mas-antigua-de-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/lugares-de-interes
+## https://visitasevilla.es/sabias-que-las-campanas-de-sevilla-avisaban-de-emergencias-y-cambios-del-tiempo
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/mercados
+## https://visitasevilla.es/sabias-que-las-naranjas-de-sevilla-tienen-su-origen-en-china
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/monumentos
+## https://visitasevilla.es/sabias-que-los-leones-del-congreso-tienen-su-origen-en-la-fabrica-de-artilleria
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/museos
+## https://visitasevilla.es/sabias-que-muchos-visitantes-creen-que-la-catedral-de-sevilla-tuvo-una-carcel-pero-la-prision-mas-famosa-estaba-a-unos-pasos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/paseos-y-rutas
+## https://visitasevilla.es/sabias-que-sevilla-tiene-uno-de-los-cascos-antiguos-mas-grandes-de-europa
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/pensiones-y-hostales
+## https://visitasevilla.es/sabias-quepasaje-inquisicion
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/planifica-tu-viaje
+## https://visitasevilla.es/salidas-procesionales
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/que-ver
+## https://visitasevilla.es/semana-santa-sevillana-con-ninos
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/que-visitar-desde-pamplona-iruna
+## https://visitasevilla.es/sevilla-entre-aguas-un-paseo-historico-a-traves-del-guadalquivir
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/restaurantes
+## https://visitasevilla.es/sevilla-fc-stadium-club-tour
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/tipo-lugar/visitas-guiadas
+## https://visitasevilla.es/sevilla-florece-por-que-hay-tantos-naranjos-en-la-ciudad
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/un-dia-en-pamplona
+## https://visitasevilla.es/sharm-servicios-profesionales
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/viajar-a-pamplona-en-temporada-baja
+## https://visitasevilla.es/sharm-sevilla
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/visita-catedral-pamplona
+## https://visitasevilla.es/sharm-shopping
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/visita-pamplona/barrio-a-barrio
+## https://visitasevilla.es/suscripcion
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/visita-pamplona/historia
+## https://visitasevilla.es/torre-del-oro
 
 - Entidades totales: 0
 - Sin entidades
 
-## https://visitpamplonairuna.com/visita-pamplona/verde-y-sostenible
+## https://visitasevilla.es/una-ruta-por-la-sevilla-mas-dulce
 
 - Entidades totales: 0
 - Sin entidades

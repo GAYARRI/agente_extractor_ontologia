@@ -14,6 +14,13 @@ class SiteCrawler:
         self.start_url = start_url.rstrip("/")
         self.max_pages = max_pages
         self.timeout = timeout
+        self.blocked_language_prefixes = {
+            "de",
+            "en",
+            "fr",
+            "it",
+            "pt",
+        }
 
         parsed = urlparse(self.start_url)
         self.base_domain = parsed.netloc.lower()
@@ -209,6 +216,14 @@ class SiteCrawler:
 
     def _should_skip_url(self, url: str) -> bool:
         low = url.lower()
+        parsed = urlparse(url)
+        path_segments = [segment for segment in (parsed.path or "/").split("/") if segment]
+
+        # Evitar versiones del sitio en otros idiomas para no duplicar ruido
+        if path_segments:
+            first_segment = path_segments[0].lower()
+            if first_segment in self.blocked_language_prefixes:
+                return True
 
         # Evitar archivos binarios/medios
         bad_exts = [
