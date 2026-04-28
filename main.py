@@ -276,7 +276,7 @@ def build_parser():
         description="Proyecto de extracción ontológica turística"
     )
 
-    parser.add_argument("--start_url", type=str, default="https://visitasevilla.es/")
+    parser.add_argument("--start_url", type=str, default="https://www.info.valladolid.es/")
     parser.add_argument("--url", type=str, default=None)
     parser.add_argument("--max_pages", type=int, default=None)
     parser.add_argument("--ontology_path", type=str, default="src/ontology/core.rdf", help="Ruta local, URL RDF/OWL o alias segittur/segittur_core")

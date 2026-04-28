@@ -244,6 +244,7 @@ class TourismPipeline:
             "viaje", "planifica", "salud", "familias", "mapas",
             "excursiones", "visitas", "monumentos", "rutas", "agenda",
             "noticias", "programa", "experiencias", "planes", "descubre",
+            "disfruta", "ven", "profesionales",
         }
 
         self.ui_noise_patterns = {
@@ -1633,7 +1634,12 @@ class TourismPipeline:
             direct = cleaned.strip(" ,.;:-|")
             if direct and len(direct.split()) <= 18:
                 direct_key = self._canonical_key(direct)
-                if direct_key and direct_key not in seen and not self._is_contextual_noise_entity(direct):
+                if (
+                    direct_key
+                    and direct_key not in seen
+                    and not self._is_contextual_noise_entity(direct)
+                    and not self._looks_like_ui_or_category_name(direct)
+                ):
                     seen.add(direct_key)
                     candidates.append(direct)
 
@@ -1643,6 +1649,8 @@ class TourismPipeline:
                 if not key or key in seen:
                     continue
                 if self._is_contextual_noise_entity(candidate):
+                    continue
+                if self._looks_like_ui_or_category_name(candidate):
                     continue
                 seen.add(key)
                 candidates.append(candidate)
