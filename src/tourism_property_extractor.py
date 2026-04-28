@@ -57,6 +57,9 @@ class TourismPropertyExtractor:
 
     EMAIL_RE = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
 
+    def __init__(self):
+        self._seen_coord_warnings = set()
+
     def _clean(self, text: str) -> str:
         text = text or ""
         text = re.sub(r"\s+", " ", text)
@@ -266,7 +269,7 @@ class TourismPropertyExtractor:
 
             # 3️⃣ guardar resultado
             if coords:
-                coords = self._normalize_coords(coords.get("lat"), coords.get("lng"))
+                coords = self._normalize_coords(coords.get("lat"), coords.get("lng"), source="best")
                 props["coordinates"] = coords
                 props["latitude"] = coords.get("lat")
                 props["longitude"] = coords.get("lng")
@@ -342,7 +345,7 @@ class TourismPropertyExtractor:
             return None
 
 
-    def _normalize_coords(self, lat, lng):
+    def _normalize_coords(self, lat, lng, source: str = "unknown"):
         try:
             # soportar strings tipo "37,38"
             if isinstance(lat, str):
@@ -354,16 +357,27 @@ class TourismPropertyExtractor:
             lng = float(lng)
 
         except (TypeError, ValueError):
-            print(f"⚠️ Invalid coords format: lat={lat}, lng={lng}")
+            self._warn_invalid_coords("format", lat, lng, source)
             return None
 
-        # validación geográfica
+        # validacion geografica
         if not (-90 <= lat <= 90 and -180 <= lng <= 180):
-            print(f"⚠️ Out-of-range coords: lat={lat}, lng={lng}")
+            self._warn_invalid_coords("range", lat, lng, source)
             return None
 
-        return {"lat": lat, "lng": lng}    
-        
+        return {"lat": lat, "lng": lng}
+
+    def _warn_invalid_coords(self, kind: str, lat, lng, source: str) -> None:
+        key = (kind, str(lat), str(lng), source or "unknown")
+        if key in self._seen_coord_warnings:
+            return
+        self._seen_coord_warnings.add(key)
+
+        if kind == "format":
+            print(f"Warning coords format [{source}]: lat={lat}, lng={lng}")
+        elif kind == "range":
+            print(f"Warning coords range [{source}]: lat={lat}, lng={lng}")
+
 
     def _extract_geo_from_jsonld(self, html: str):
         out = []
@@ -400,7 +414,8 @@ class TourismPropertyExtractor:
                 if isinstance(geo, dict):
                     coords = self._normalize_coords(
                         geo.get("latitude"),
-                        geo.get("longitude")
+                        geo.get("longitude"),
+                        source="jsonld",
                     )
                     if coords:
                         out.append({
@@ -439,7 +454,7 @@ class TourismPropertyExtractor:
                 else:
                     lng, lat = m
 
-                coords = self._normalize_coords(lat, lng)
+                coords = self._normalize_coords(lat, lng, source="data-attrs")
                 if coords:
                     out.append({
                         "lat": coords["lat"],
@@ -468,7 +483,7 @@ class TourismPropertyExtractor:
             m = re.search(r'@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)', src_decoded)
             if m:
                 lat, lng = m.groups()
-                coords = self._normalize_coords(lat,lng)
+                coords = self._normalize_coords(lat, lng, source="iframe")
                 if coords:
                     out.append({
                         "lat": coords["lat"],
@@ -481,7 +496,7 @@ class TourismPropertyExtractor:
             m = re.search(r'[?&]q=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)', src_decoded)
             if m:
                 lat, lng = m.groups()
-                coords = self._normalize_coords(lat, lng)
+                coords = self._normalize_coords(lat, lng, source="iframe")
                 if coords:
                     out.append({
                         "lat": coords["lat"],
@@ -501,14 +516,14 @@ class TourismPropertyExtractor:
             re.compile(r'@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)'),
             re.compile(r'[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)'),
             re.compile(r'lat(?:itude)?["\':=\s]+(-?\d+(?:\.\d+)?)', re.IGNORECASE),
-            re.compile(r'lng|lon|longitude["\':=\s]+(-?\d+(?:\.\d+)?)', re.IGNORECASE),
+            re.compile(r'(?:lng|lon|longitude)["\':=\s]+(-?\d+(?:\.\d+)?)', re.IGNORECASE),
         ]
 
         # pares directos
         for pattern in patterns[:2]:
             for m in pattern.findall(text):
                 lat, lng = m
-                coords = self._normalize_coords(lat, lng)
+                coords = self._normalize_coords(lat, lng, source="regex")
                 if coords:
                     out.append({
                         "lat": coords["lat"],
@@ -521,7 +536,7 @@ class TourismPropertyExtractor:
         lon_matches = patterns[3].findall(text)
 
         if lat_matches and lon_matches:
-            coords = self._normalize_coords(lat_matches[0], lon_matches[0])
+            coords = self._normalize_coords(lat_matches[0], lon_matches[0], source="regex")
             if coords:
                 out.append({
                     "lat": coords["lat"],
@@ -600,7 +615,7 @@ class TourismPropertyExtractor:
         for pattern in patterns:
             for m in pattern.findall(html):
                 lat, lng = m
-                coords = self._normalize_coords(lat, lng)
+                coords = self._normalize_coords(lat, lng, source="map-js")
                 if coords:
                     out.append({
                         "lat": coords["lat"],
