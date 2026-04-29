@@ -15,6 +15,7 @@ class KnowledgeGraphBuilder:
         self.EX = Namespace("http://example.org/resource/")
         self.TOUR = Namespace("http://example.org/tourism/")
         self.wikidata_linker = WikidataLinker()
+        self.max_images = 3
 
         self.generic_types = {
             "",
@@ -389,7 +390,7 @@ class KnowledgeGraphBuilder:
             if txt and txt not in self.generic_types:
                 cleaned.append(txt)
 
-        return self._dedupe_preserve_order(cleaned)
+        return self._dedupe_preserve_order(cleaned)[:self.max_images]
 
     def _extract_best_entity_type(self, entity: dict) -> str:
         candidates = []
@@ -650,15 +651,22 @@ class KnowledgeGraphBuilder:
 
             candidate_images = self._extract_candidate_images(entity)
             if candidate_images:
-                self._add_literal_if_value(g, subject, self.TOUR.image, candidate_images[0])
-                self._add_literal_if_value(g, subject, self.TOUR.mainImage, candidate_images[0])
+                primary_image = entity.get("image") or candidate_images[0]
+                main_image = entity.get("mainImage") or (
+                    candidate_images[1] if len(candidate_images) > 1 else candidate_images[0]
+                )
+                if main_image == primary_image and len(candidate_images) > 1:
+                    main_image = candidate_images[1]
+
+                self._add_literal_if_value(g, subject, self.TOUR.image, primary_image)
+                self._add_literal_if_value(g, subject, self.TOUR.mainImage, main_image)
 
                 if len(candidate_images) > 1:
                     self._add_unique_string_list(
                         g,
                         subject,
                         self.TOUR.additionalImages,
-                        candidate_images[1:4],
+                        candidate_images[1:self.max_images],
                     )
 
         return g

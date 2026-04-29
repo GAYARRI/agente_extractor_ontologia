@@ -562,6 +562,39 @@ class PageEntityResolver:
 
         return self._dedupe_preserve_order(flat)
 
+    def _assign_ranked_images(self, entity: dict, images: list):
+        props = entity.get("properties", {}) or {}
+        ranked = self._dedupe_preserve_order([str(img).strip() for img in images if str(img).strip()])[:3]
+
+        if not ranked:
+            entity["image"] = ""
+            entity["mainImage"] = ""
+            props.pop("image", None)
+            props.pop("mainImage", None)
+            props.pop("additionalImages", None)
+            entity["properties"] = props
+            return entity
+
+        entity["image"] = ranked[0]
+        props["image"] = ranked[0]
+
+        if len(ranked) > 1:
+            entity["mainImage"] = ranked[1]
+            props["mainImage"] = ranked[1]
+            props["additionalImages"] = ranked[2:] if len(ranked) > 2 else []
+        else:
+            current_main = str(entity.get("mainImage") or props.get("mainImage") or "").strip()
+            if current_main and current_main != ranked[0]:
+                entity["mainImage"] = current_main
+                props["mainImage"] = current_main
+            else:
+                entity["mainImage"] = ranked[0]
+                props["mainImage"] = ranked[0]
+            props.pop("additionalImages", None)
+
+        entity["properties"] = props
+        return entity
+
     def remove_repeated_global_images(self, entities: list, threshold: int = 5) -> list:
         counter = {}
 
@@ -584,14 +617,7 @@ class PageEntityResolver:
             filtered = self._dedupe_preserve_order(filtered)
 
             if filtered:
-                e["image"] = filtered[0]
-                e["mainImage"] = filtered[0]
-                props["image"] = filtered[0]
-                props["mainImage"] = filtered[0]
-                if len(filtered) > 1:
-                    props["additionalImages"] = filtered[1:]
-                else:
-                    props.pop("additionalImages", None)
+                e = self._assign_ranked_images(e, filtered)
             else:
                 e["image"] = ""
                 e["mainImage"] = ""
@@ -599,7 +625,7 @@ class PageEntityResolver:
                 props.pop("mainImage", None)
                 props.pop("additionalImages", None)
 
-            e["properties"] = props
+            e["properties"] = e.get("properties", {}) or {}
 
         return entities
 
@@ -635,9 +661,7 @@ class PageEntityResolver:
 
             if candidate_counts.get(cand, 0) == 1:
                 e["image"] = cand
-                e["mainImage"] = cand
                 props["image"] = cand
-                props["mainImage"] = cand
 
             e["properties"] = props
 
@@ -869,8 +893,6 @@ class PageEntityResolver:
                 g["properties"]["image"] = best_image
                 if not g.get("image"):
                     g["image"] = best_image
-                if not g.get("mainImage"):
-                    g["mainImage"] = best_image
 
             try:
                 g = self.repair_name_fields(g)

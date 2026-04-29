@@ -16,16 +16,23 @@ class SiteCrawler:
         self.start_url = self.raw_start_url.rstrip("/")
         self.max_pages = max_pages or 10
         self.timeout = timeout
+        self.default_request_delay = 0.6
         self.blocked_language_prefixes = {
             "de",
             "en",
             "fr",
             "it",
             "pt",
+            "ja",
+            "ko",
+            "zh",
+            "zh-hans",
+            "zh-hant",
         }
 
         parsed = urlparse(self.start_url)
         self.base_domain = parsed.netloc.lower()
+        self.base_path_prefix = self._normalize_scope_path(parsed.path or "/")
         self.allowed_domains: Set[str] = set()
         if self.base_domain:
             bare_domain = self._strip_www(self.base_domain)
@@ -40,6 +47,8 @@ class SiteCrawler:
 
         # Si un dominio falla por SSL una vez, seguimos sin verify para ese dominio
         self.insecure_domains: Set[str] = set()
+        self.domain_request_delay: dict[str, float] = {}
+        self.domain_last_request_ts: dict[str, float] = {}
 
     # ------------------------------------------------------------------
     # API publica
@@ -97,9 +106,6 @@ class SiteCrawler:
             except Exception as e:
                 print(f"Error extrayendo enlaces desde {effective_url}: {e}")
 
-            # Pequena pausa amable para no machacar el servidor
-            time.sleep(0.15)
-
         return results
 
     # ------------------------------------------------------------------
@@ -147,6 +153,7 @@ class SiteCrawler:
             return None, url
 
     def _request(self, url: str, verify: bool = True) -> tuple[str, str]:
+        self._respect_crawl_delay(url)
         response = requests.get(
             url,
             headers=self.headers,
@@ -156,6 +163,50 @@ class SiteCrawler:
         )
         response.raise_for_status()
         return response.text, response.url
+
+    def _respect_crawl_delay(self, url: str) -> None:
+        domain = urlparse(url).netloc.lower()
+        if not domain:
+            return
+
+        delay = self.domain_request_delay.get(domain, self.default_request_delay)
+        last_ts = self.domain_last_request_ts.get(domain, 0.0)
+        wait_seconds = delay - (time.time() - last_ts)
+        if wait_seconds > 0:
+            time.sleep(wait_seconds)
+        self.domain_last_request_ts[domain] = time.time()
+
+    def _register_crawl_delay(self, domain: str, robots_text: str) -> None:
+        domain = (domain or "").strip().lower()
+        if not domain or not robots_text:
+            return
+
+        matched_delay = None
+        active_user_agent = None
+
+        for raw_line in robots_text.splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#") or ":" not in line:
+                continue
+
+            key, value = line.split(":", 1)
+            key = key.strip().lower()
+            value = value.strip()
+
+            if key == "user-agent":
+                active_user_agent = value.lower()
+                continue
+
+            if key == "crawl-delay" and active_user_agent in {"*", self.headers["User-Agent"].lower()}:
+                try:
+                    parsed_delay = float(value)
+                    if parsed_delay > 0:
+                        matched_delay = parsed_delay
+                except ValueError:
+                    pass
+
+        if matched_delay is not None:
+            self.domain_request_delay[domain] = max(self.default_request_delay, matched_delay)
 
     def _handle_http_error(
         self,
@@ -232,6 +283,8 @@ class SiteCrawler:
             return
         if not self._is_same_domain(normalized):
             return
+        if not self._is_in_allowed_scope(normalized):
+            return
         if self._should_skip_url(normalized):
             return
 
@@ -243,19 +296,60 @@ class SiteCrawler:
 
         candidates: List[str] = []
         patterns = [
-            r'''"(?:href|url|as|pathname|canonical|slug)"\s*:\s*"([^"#][^"]*)"''',
-            r"""'(?:href|url|as|pathname|canonical|slug)'\s*:\s*'([^'#][^']*)'""",
-            r'''"(\/[^"\s<>]+)"''',
-            r"""'(\/[^'\s<>]+)'""",
+            r'''"(?:href|url|as|canonical)"\s*:\s*"([^"#][^"]*)"''',
+            r"""'(?:href|url|as|canonical)'\s*:\s*'([^'#][^']*)'""",
         ]
 
         for pattern in patterns:
             for match in re.findall(pattern, html):
                 value = (match or "").strip()
-                if value and value not in candidates:
+                if self._looks_like_plausible_raw_link(value) and value not in candidates:
                     candidates.append(value)
 
         return candidates
+
+    def _looks_like_plausible_raw_link(self, value: str) -> bool:
+        value = (value or "").strip()
+        if not value:
+            return False
+
+        # Evita tokens internos del frontend que suelen producir URLs truncadas.
+        if value.startswith("{") or value.startswith("["):
+            return False
+        if " " in value:
+            return False
+
+        parsed = urlparse(value)
+        path = parsed.path if parsed.scheme else value
+        if not path.startswith("/"):
+            return False
+
+        path = path.strip("/")
+        if not path:
+            return False
+
+        segments = [segment for segment in path.split("/") if segment]
+        if len(segments) < 2:
+            return False
+
+        # Finales sospechosos que suelen venir de slugs cortados.
+        suspicious_tails = {
+            "em",
+            "en",
+            "os",
+            "as",
+            "do",
+            "da",
+            "de",
+            "del",
+            "para",
+            "pela",
+            "por",
+        }
+        if segments[-1].lower() in suspicious_tails:
+            return False
+
+        return True
 
     # ------------------------------------------------------------------
     # Normalizacion / filtros
@@ -297,6 +391,13 @@ class SiteCrawler:
         netloc = urlparse(url).netloc.lower()
         return netloc in self.allowed_domains
 
+    def _is_in_allowed_scope(self, url: str) -> bool:
+        parsed = urlparse(url)
+        path = self._normalize_scope_path(parsed.path or "/")
+        if self.base_path_prefix == "/":
+            return True
+        return path == self.base_path_prefix or path.startswith(self.base_path_prefix + "/")
+
     def _should_skip_url(self, url: str) -> bool:
         low = url.lower()
         parsed = urlparse(url)
@@ -305,7 +406,10 @@ class SiteCrawler:
         # Evitar versiones del sitio en otros idiomas para no duplicar ruido
         if path_segments:
             first_segment = path_segments[0].lower()
-            if first_segment in self.blocked_language_prefixes:
+            if (
+                first_segment in self.blocked_language_prefixes
+                or any(first_segment.startswith(prefix + "-") for prefix in self.blocked_language_prefixes)
+            ):
                 return True
 
         # Evitar archivos binarios/medios
@@ -339,11 +443,11 @@ class SiteCrawler:
         candidates: List[str] = []
         for candidate in self._fallback_urls_for_error(self.raw_start_url or self.start_url, status_code=None):
             normalized = self._normalize_url(candidate)
-            if normalized and normalized not in candidates:
+            if normalized and self._is_in_allowed_scope(normalized) and normalized not in candidates:
                 candidates.append(normalized)
         for candidate in self._discover_seed_urls(candidates):
             normalized = self._normalize_url(candidate)
-            if normalized and normalized not in candidates:
+            if normalized and self._is_in_allowed_scope(normalized) and normalized not in candidates:
                 candidates.append(normalized)
         return candidates
 
@@ -409,6 +513,7 @@ class SiteCrawler:
             robots_url = urljoin(host_root, "/robots.txt")
             robots_text, _ = self._fetch(robots_url)
             if robots_text:
+                self._register_crawl_delay(parsed.netloc, robots_text)
                 for line in robots_text.splitlines():
                     line = line.strip()
                     if not line or ":" not in line:
@@ -438,7 +543,7 @@ class SiteCrawler:
                 "/profesionales",
             ]:
                 fallback_url = self._normalize_url(urljoin(host_root, fallback_path))
-                if fallback_url and fallback_url not in seeds:
+                if fallback_url and self._is_in_allowed_scope(fallback_url) and fallback_url not in seeds:
                     seeds.append(fallback_url)
 
         return seeds[: max(self.max_pages * 4, 20)]
@@ -474,6 +579,8 @@ class SiteCrawler:
                     continue
                 if not self._is_same_domain_or_alias(loc_url, effective_sitemap):
                     continue
+                if not self._is_in_allowed_scope(loc_url):
+                    continue
                 if self._should_skip_url(loc_url):
                     continue
                 if loc_url not in extracted:
@@ -489,6 +596,13 @@ class SiteCrawler:
         if not ref_host or not url_host:
             return False
         return self._strip_www(ref_host) == self._strip_www(url_host)
+
+    def _normalize_scope_path(self, path: str) -> str:
+        value = (path or "/").strip()
+        if not value or value == "/":
+            return "/"
+        value = "/" + value.strip("/")
+        return value.rstrip("/")
 
     def _is_priority_detail_link(self, current_url: str, link_url: str) -> bool:
         current_path = (urlparse(current_url).path or "/").strip("/")

@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 
 class ImageEnricher:
     def __init__(self):
-        pass
+        self.max_images = 3
 
     # =========================================================
     # Helpers
@@ -35,6 +35,7 @@ class ImageEnricher:
             "iconos",
             "sprite",
             "banner",
+            "menu-navegacion",
             "placeholder",
             "default",
             "avatar",
@@ -58,7 +59,6 @@ class ImageEnricher:
         if any(p in u for p in bad_patterns):
             return True
 
-        # En tu caso, la mayoría de SVGs están siendo recursos decorativos/UI
         if ".svg" in u:
             return True
 
@@ -79,10 +79,10 @@ class ImageEnricher:
             rf'{attr}\s*=\s*"([^"]+)"',
             rf"{attr}\s*=\s*'([^']+)'",
         ]
-        for p in patterns:
-            m = re.search(p, tag, re.IGNORECASE)
-            if m:
-                return m.group(1).strip()
+        for pattern in patterns:
+            match = re.search(pattern, tag, re.IGNORECASE)
+            if match:
+                return match.group(1).strip()
 
         return ""
 
@@ -128,17 +128,17 @@ class ImageEnricher:
         if any(x in src_l for x in ["_next/static/", "_next/image?", "/static/media/", "financion"]):
             score -= 6
 
-        if any(t in alt_l for t in entity_tokens):
+        if any(token in alt_l for token in entity_tokens):
             score += 6
 
-        if any(t in title_l for t in entity_tokens):
+        if any(token in title_l for token in entity_tokens):
             score += 5
 
-        if any(t in src_l for t in entity_tokens):
+        if any(token in src_l for token in entity_tokens):
             score += 3
 
-        if entity_tokens and any(t in text_l for t in entity_tokens):
-            score += 2
+        if (alt_l or title_l or any(token in src_l for token in entity_tokens)) and entity_tokens and any(token in text_l for token in entity_tokens):
+            score += 1
 
         if alt_l:
             score += 1
@@ -149,19 +149,13 @@ class ImageEnricher:
         if src_l.endswith((".jpg", ".jpeg", ".webp", ".png", ".avif")):
             score += 2
 
-        # Bonus para rutas con pinta de repositorio real de imágenes
         if any(x in src_l for x in ["/sites/default/files/", "/migration/", "/images/"]):
             score += 2
 
-        generic_hits = [
-            "home",
-            "portada",
-            "hero",
-            "cabecera",
-            "header",
-            "cover",
-        ]
-        if any(g in src_l for g in generic_hits):
+        if any(x in src_l for x in ["home", "portada", "hero", "cabecera", "header", "cover"]):
+            score -= 3
+
+        if any(x in src_l for x in ["thumbnail", "thumb", "menu", "nav", "mapa"]):
             score -= 3
 
         if len(src_l) < 15:
@@ -169,110 +163,211 @@ class ImageEnricher:
 
         return score
 
-    def _dedupe_images(self, images):
-        out = []
-        seen = set()
+    def _context_relevance_score(
+        self,
+        src: str,
+        alt: str = "",
+        title: str = "",
+        text: str = "",
+    ) -> int:
+        score = 0
 
-        for img in images:
-            if not img:
-                continue
-            key = img.strip()
-            if not key or key in seen:
-                continue
-            seen.add(key)
-            out.append(key)
+        src_l = self._normalize(src)
+        alt_l = self._normalize(alt)
+        title_l = self._normalize(title)
+        text_l = self._normalize(text)
 
-        return out
+        if self._is_probably_logo(src):
+            score -= 10
+
+        if alt_l:
+            score += 2
+
+        if title_l:
+            score += 1
+
+        if src_l.endswith((".jpg", ".jpeg", ".webp", ".png", ".avif")):
+            score += 2
+
+        if any(x in src_l for x in ["/sites/default/files/", "/migration/", "/images/"]):
+            score += 2
+
+        if any(x in src_l for x in ["hero", "cover", "cabecera", "header", "portada", "featured", "gallery", "slide"]):
+            score += 2
+
+        if any(x in alt_l for x in ["foto", "imagen", "vista", "fachada", "interior"]):
+            score += 1
+
+        if any(x in src_l for x in ["thumbnail", "thumb", "menu", "nav", "mapa"]):
+            score -= 2
+
+        alt_tokens = self._tokens(alt_l or title_l)
+        if text_l and alt_tokens and any(token in text_l for token in alt_tokens):
+            score += 1
+
+        if len(src_l) < 15:
+            score -= 2
+
+        return score
 
     def _extract_text_image_urls(self, text: str):
         if not text:
             return []
 
         urls = re.findall(r'https?://[^\s<>"\']+', text)
-        return [u for u in urls if self._is_probably_image_url(u)]
+        return [url for url in urls if self._is_probably_image_url(url)]
 
-    def _extract_candidates_from_html(self, html: str, entity: str, base_url: str = "", text: str = ""):
-        candidates = []
-        img_tags = self._extract_img_tags(html)
+    def _collect_candidate_records(self, entity: str, text: str = "", html: str = "", url: str = ""):
+        records = []
 
-        for tag in img_tags:
-            src = self._get_img_src(tag, base_url=base_url)
-            if not src:
-                continue
-            if not self._is_probably_image_url(src):
+        for img in self._extract_text_image_urls(text):
+            entity_score = self._image_relevance_score(entity, img, text=text) + 2
+            context_score = self._context_relevance_score(img, text=text) + 1
+            records.append(
+                {
+                    "src": img,
+                    "entity_score": entity_score,
+                    "context_score": context_score,
+                    "combined_score": entity_score + context_score,
+                }
+            )
+
+        for tag in self._extract_img_tags(html):
+            src = self._get_img_src(tag, base_url=url)
+            if not src or not self._is_probably_image_url(src) or self._is_probably_logo(src):
                 continue
 
             alt = self._extract_attr(tag, "alt")
             title = self._extract_attr(tag, "title")
-            score = self._image_relevance_score(entity, src, alt=alt, title=title, text=text)
-            candidates.append((src, score))
-
-        return candidates
-
-    def _best_candidate(self, candidates):
-        if not candidates:
-            return "", 0
+            entity_score = self._image_relevance_score(entity, src, alt=alt, title=title, text=text)
+            context_score = self._context_relevance_score(src, alt=alt, title=title, text=text)
+            records.append(
+                {
+                    "src": src,
+                    "entity_score": entity_score,
+                    "context_score": context_score,
+                    "combined_score": entity_score + context_score,
+                }
+            )
 
         best_by_src = {}
-        for src, score in candidates:
-            if src not in best_by_src or score > best_by_src[src]:
-                best_by_src[src] = score
+        for record in records:
+            src = record["src"]
+            if src not in best_by_src or record["combined_score"] > best_by_src[src]["combined_score"]:
+                best_by_src[src] = record
 
-        ordered = sorted(best_by_src.items(), key=lambda x: x[1], reverse=True)
-        return ordered[0]
+        return sorted(
+            best_by_src.values(),
+            key=lambda item: (item["combined_score"], item["entity_score"], item["context_score"]),
+            reverse=True,
+        )
+
+    def _is_entity_representative(self, record) -> bool:
+        return (
+            record["entity_score"] >= 4
+            and record["combined_score"] >= 5
+        )
+
+    def _is_context_representative(self, record) -> bool:
+        return (
+            record["context_score"] >= 3
+            and record["combined_score"] >= 5
+        )
+
+    def _choose_distinct_images(self, records):
+        if not records:
+            return "", "", []
+
+        relevant = [
+            record for record in records
+            if record["combined_score"] >= 5
+            and (record["entity_score"] >= 3 or record["context_score"] >= 3)
+        ]
+        if not relevant:
+            relevant = records[:1]
+
+        entity_ranked = sorted(
+            [record for record in relevant if self._is_entity_representative(record)] or relevant,
+            key=lambda item: (item["entity_score"], item["combined_score"], item["context_score"]),
+            reverse=True,
+        )
+        context_ranked = sorted(
+            [record for record in relevant if self._is_context_representative(record)] or relevant,
+            key=lambda item: (item["context_score"], item["combined_score"], item["entity_score"]),
+            reverse=True,
+        )
+
+        primary_record = entity_ranked[0] if entity_ranked else relevant[0]
+        image = primary_record["src"] if primary_record else ""
+        main_image = image
+        context_threshold = min(max(primary_record["combined_score"] - 3, 5), 9)
+        support_threshold = min(max(primary_record["combined_score"] - 2, 5), 10)
+
+        for item in context_ranked:
+            if item["src"] == image:
+                continue
+            if (
+                self._is_context_representative(item)
+                and item["combined_score"] >= context_threshold
+            ):
+                main_image = item["src"]
+                break
+
+        ordered = []
+        seen = set()
+
+        for src in [image, main_image]:
+            if src and src not in seen:
+                seen.add(src)
+                ordered.append(src)
+
+        for item in relevant:
+            if len(ordered) >= self.max_images:
+                break
+
+            src = item["src"]
+            if src and src not in seen:
+                if item["combined_score"] < support_threshold:
+                    continue
+                if item["entity_score"] < 4 and item["context_score"] < 4:
+                    continue
+                seen.add(src)
+                ordered.append(src)
+
+        return image, main_image or image, ordered
 
     # =========================================================
-    # API pública
+    # API publica
     # =========================================================
 
     def enrich(self, entity, text="", html="", url=""):
-        """
-        Conservador, pero menos restrictivo:
-        - usa imágenes explícitas en el texto si existen
-        - usa imágenes del HTML si tienen evidencia razonable
-        - NO usa og:image como fallback global
-        """
+        records = self._collect_candidate_records(entity=entity, text=text, html=html, url=url)
 
-        candidates = []
-
-        # 1) URLs de imagen explícitas en el texto
-        text_images = self._extract_text_image_urls(text)
-        for img in text_images:
-            score = self._image_relevance_score(entity, img, text=text) + 2
-            candidates.append((img, score))
-
-        # 2) Imágenes del HTML con scoring semántico
-        html_candidates = self._extract_candidates_from_html(html, entity, base_url=url, text=text)
-        candidates.extend(html_candidates)
-
-        # 3) limpiar
-        cleaned = []
-        for src, score in candidates:
-            if not src:
-                continue
-            if self._is_probably_logo(src):
-                continue
-            cleaned.append((src, score))
-
-        if not cleaned:
+        if not records:
             return {}
 
-        src, score = self._best_candidate(cleaned)
+        image, main_image, ordered_images = self._choose_distinct_images(records)
+        best = ordered_images[0] if ordered_images else ""
+        best_record = next((item for item in records if item["src"] == best), None)
+        score = best_record["combined_score"] if best_record else 0
 
         if score >= 2:
             return {
-                "image": src,
-                "mainImage": src,
-                "images": [src],
+                "image": image,
+                "mainImage": main_image,
+                "images": ordered_images,
+                "additionalImages": ordered_images[1:] if len(ordered_images) > 1 else [],
                 "debug": {
                     "image_score": score,
-                    "image_reason": "best_candidate_from_html_or_text",
+                    "image_reason": "ranked_entity_and_context_candidates",
+                    "image_entity_score": best_record["entity_score"] if best_record else 0,
+                    "image_context_score": best_record["context_score"] if best_record else 0,
                 },
             }
 
         if score == 1:
             return {
-                "candidateImage": src,
+                "candidateImage": best,
                 "debug": {
                     "image_score": score,
                     "image_reason": "weak_candidate_from_html_or_text",

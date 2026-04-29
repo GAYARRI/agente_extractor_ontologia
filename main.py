@@ -657,10 +657,13 @@ def _merge_back_enrichment(global_entities: List[Dict[str, Any]], all_results: L
         candidate_images = _extract_images_from_entity(raw)
         valid_images = [img for img in candidate_images if _is_valid_image_url(img)]
         if valid_images:
+            valid_images = valid_images[:3]
             if not out.get("image"):
                 out["image"] = valid_images[0]
             if not out.get("mainImage"):
-                out["mainImage"] = valid_images[0]
+                out["mainImage"] = valid_images[1] if len(valid_images) > 1 else valid_images[0]
+            elif out.get("mainImage") == out.get("image") and len(valid_images) > 1:
+                out["mainImage"] = valid_images[1]
 
             existing_images = out.get("images")
             if not isinstance(existing_images, list):
@@ -670,6 +673,7 @@ def _merge_back_enrichment(global_entities: List[Dict[str, Any]], all_results: L
                 if img not in existing_images:
                     existing_images.append(img)
 
+            existing_images = existing_images[:3]
             out["images"] = existing_images
             if len(existing_images) > 1:
                 out["additionalImages"] = existing_images[1:]
@@ -677,7 +681,9 @@ def _merge_back_enrichment(global_entities: List[Dict[str, Any]], all_results: L
             if not props.get("image"):
                 props["image"] = valid_images[0]
             if not props.get("mainImage"):
-                props["mainImage"] = valid_images[0]
+                props["mainImage"] = valid_images[1] if len(valid_images) > 1 else valid_images[0]
+            elif props.get("mainImage") == props.get("image") and len(valid_images) > 1:
+                props["mainImage"] = valid_images[1]
             if len(existing_images) > 1 and not props.get("additionalImages"):
                 props["additionalImages"] = existing_images[1:]
 

@@ -7,7 +7,7 @@ from pathlib import Path
 
 class JSONExporter:
     def __init__(self):
-        pass
+        self.max_images = 3
 
     def _normalize_space(self, text: str) -> str:
         return re.sub(r"\s+", " ", str(text or "")).strip()
@@ -144,7 +144,44 @@ class JSONExporter:
                 continue
             seen.add(img)
             cleaned.append(img)
-        return cleaned
+        return cleaned[:self.max_images]
+
+    def _pick_image_roles(self, entity, images):
+        props = entity.get("properties", {}) or {}
+
+        def _valid(value):
+            value = self._clean_text(value)
+            return value if self._is_valid_image_url(value) else ""
+
+        explicit_image = _valid(entity.get("image") or props.get("image"))
+        explicit_main = _valid(entity.get("mainImage") or props.get("mainImage"))
+
+        image = explicit_image or (images[0] if images else "")
+        main_image = explicit_main or ""
+
+        if not main_image:
+            if len(images) > 1 and images[1] != image:
+                main_image = images[1]
+            else:
+                main_image = image
+        elif main_image == image and len(images) > 1 and images[1] != image:
+            main_image = images[1]
+
+        return image, main_image
+
+    def _pick_additional_images(self, images, image, main_image):
+        extras = []
+        seen = set()
+
+        for img in images:
+            if img == image or img == main_image:
+                continue
+            if img in seen:
+                continue
+            seen.add(img)
+            extras.append(img)
+
+        return extras[:1]
 
     def _extract_types(self, entity):
         types = []
@@ -276,8 +313,8 @@ class JSONExporter:
     def entity_to_dict(self, entity: dict) -> dict:
         coords = self._extract_coordinates(entity)
         images = self._extract_images(entity)
-        primary_image = images[0] if images else ""
-        additional_images = images[1:] if len(images) > 1 else []
+        primary_image, main_image = self._pick_image_roles(entity, images)
+        additional_images = self._pick_additional_images(images, primary_image, main_image)
         wikidata_id = self._clean_text(entity.get("wikidata_id") or entity.get("wikidataId"))
         final_class = self._clean_text(entity.get("class"))
         return {
@@ -306,8 +343,8 @@ class JSONExporter:
             "longDescription": self._clean_text(entity.get("long_description") or entity.get("longDescription")),
             "description": self._clean_text(entity.get("description")),
             "image": primary_image,
-            "mainImage": primary_image,
-            "images": images,
+            "mainImage": main_image,
+            "images": additional_images,
             "additionalImages": additional_images,
             "wikidataId": wikidata_id,
         }

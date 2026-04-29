@@ -212,6 +212,7 @@ class TourismPipeline:
         )
         self.tourism_property_extractor = _safe_build(TourismPropertyExtractor, default=None)
         self.dom_image_resolver = _safe_build(DOMImageResolver, default=None)
+        self.image_enricher = _safe_build(ImageEnricher, default=None)
 
         self.llm_supervisor = _safe_build(
             LLMSupervisor,
@@ -2383,7 +2384,38 @@ class TourismPipeline:
 
         return ""
 
-    def _extract_entity_image(self, entity_name: str, html: str, url: str, block_text: str = "") -> str:
+    def _extract_entity_images(self, entity_name: str, html: str, url: str, block_text: str = "") -> Dict[str, Any]:
+        payload: Dict[str, Any] = {}
+
+        enriched = self._safe_call_component(
+            self.image_enricher,
+            ["enrich"],
+            entity=entity_name,
+            text=block_text,
+            html=html,
+            url=url,
+        )
+
+        if isinstance(enriched, dict):
+            image = str(enriched.get("image") or "").strip()
+            main_image = str(enriched.get("mainImage") or "").strip()
+            images = enriched.get("images") if isinstance(enriched.get("images"), list) else []
+            images = [str(img).strip() for img in images if str(img).strip()]
+
+            if image:
+                payload["image"] = image
+            if main_image:
+                payload["mainImage"] = main_image
+            if images:
+                payload["images"] = images
+            if isinstance(enriched.get("additionalImages"), list):
+                payload["additionalImages"] = [str(img).strip() for img in enriched.get("additionalImages") if str(img).strip()]
+            if enriched.get("candidateImage"):
+                payload["candidateImage"] = str(enriched.get("candidateImage")).strip()
+
+            if payload:
+                return payload
+
         img = ""
 
         result = self._safe_call_component(
@@ -2413,7 +2445,14 @@ class TourismPipeline:
             if isinstance(result, str):
                 img = result.strip()
 
-        return img
+        if not img:
+            return {}
+
+        return {
+            "image": img,
+            "mainImage": img,
+            "images": [img],
+        }
 
     def _extract_coordinates_from_props(self, props: Dict[str, Any]) -> Dict[str, Any]:
         lat = None
@@ -2601,7 +2640,7 @@ class TourismPipeline:
             url=url,
         )
 
-        image = self._extract_entity_image(
+        image_data = self._extract_entity_images(
             entity_name=name,
             html=html,
             url=url,
@@ -2610,9 +2649,16 @@ class TourismPipeline:
 
         coordinates = self._extract_coordinates_from_props(props)
 
-        if image:
-            item["image"] = image
-            item["mainImage"] = image
+        if image_data.get("image"):
+            item["image"] = image_data["image"]
+        if image_data.get("mainImage"):
+            item["mainImage"] = image_data["mainImage"]
+        if image_data.get("images"):
+            item["images"] = image_data["images"]
+        if image_data.get("additionalImages"):
+            item["additionalImages"] = image_data["additionalImages"]
+        if image_data.get("candidateImage"):
+            item["candidateImage"] = image_data["candidateImage"]
 
         if description_data:
             for k, v in description_data.items():
@@ -2631,6 +2677,15 @@ class TourismPipeline:
                 existing_props = {}
             existing_props.update(props)
             item["properties"] = existing_props
+
+            if image_data.get("image") and not existing_props.get("image"):
+                existing_props["image"] = image_data["image"]
+            if image_data.get("mainImage") and not existing_props.get("mainImage"):
+                existing_props["mainImage"] = image_data["mainImage"]
+            if image_data.get("additionalImages") and not existing_props.get("additionalImages"):
+                existing_props["additionalImages"] = image_data["additionalImages"]
+            if image_data.get("candidateImage") and not existing_props.get("candidateImage"):
+                existing_props["candidateImage"] = image_data["candidateImage"]
 
             prop_type = str(existing_props.get("type") or "").strip()
             if prop_type and not str(item.get("class") or "").strip():

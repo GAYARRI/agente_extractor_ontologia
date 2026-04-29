@@ -90,6 +90,27 @@ Ejemplo con salida JSON por stdout:
 python main.py --url "https://visitasevilla.es/" --json_stdout
 ```
 
+Estimacion rapida del tamano potencial de un sitio a partir de `robots.txt` y `sitemaps`:
+
+```bash
+python scripts/estimate_site_size.py --start_url "https://www.spain.info/es/"
+```
+
+Por defecto, tanto el estimador como el crawler restringen el alcance a la rama del `start_url`.
+Si arrancas en `https://www.spain.info/es/`, se contaran y rastrearan solo URLs bajo `/es/`.
+
+Agrupacion por prefijos de URL para ver que secciones pesan mas:
+
+```bash
+python scripts/estimate_site_size.py --start_url "https://www.spain.info/es/" --prefix_depth 2 --top_prefixes 20
+```
+
+Calculo rapido del porcentaje de entidades fisicas con coordenadas:
+
+```bash
+python scripts/coords_pct.py
+```
+
 Argumentos importantes:
 
 - `--ontology_path`: ontologia local o alias

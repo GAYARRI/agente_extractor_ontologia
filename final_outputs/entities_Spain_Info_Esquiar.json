@@ -1,0 +1,1841 @@
+[
+  {
+    "name": "Parque Nacional de Aigüestortes",
+    "class": "Garden",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Garden",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Garden",
+      "Location"
+    ],
+    "typesRaw": [
+      "Garden"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-espot-esqui",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.5712715,
+      "lng": 0.9599368
+    },
+    "shortDescription": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mundo de la nieve en familia lejos de las aglomeraciones",
+    "longDescription": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mu",
+    "description": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mu",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-espot-esqui.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-espot-esqui.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-espot-esqui.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Plaza de Andalucía",
+    "class": "Square",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Square",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Square",
+      "Location"
+    ],
+    "typesRaw": [
+      "Square"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-sierra-nevada",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 37.15817893412624,
+      "lng": -5.9244042634964
+    },
+    "shortDescription": "Estación de esquí de Sierra Nevada Estación de esquí de Sierra Nevada © Atudem Monachil Granada Monachil La Estación de Esquí y Montaña de Sierra Nevada es la más meridional de Europa",
+    "longDescription": "Estación de esquí de Sierra Nevada Estación de esquí de Sierra Nevada © Atudem Monachil Granada Monachil La Estación de Esquí y Montaña de Sierra Nevada es la más meridional de Europa. Enclavada en el Sistema Penibético y a 32 km de Granada , dispone de más de 110 km esquiables repartidos en 131 pis",
+    "description": "Estación de esquí de Sierra Nevada Estación de esquí de Sierra Nevada © Atudem Monachil Granada Monachil La Estación de Esquí y Montaña de Sierra Nevada es la más meridional de Europa. Enclavada en el Sistema Penibético y a 32 km de Granada , dispone de más de 110 km esquiables repartidos en 131 pis",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-nevada-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-nevada-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-nevada-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q101045147"
+  },
+  {
+    "name": "Parque Natural Posets-Maladeta Estación",
+    "class": "Garden",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Garden",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Garden",
+      "Location"
+    ],
+    "typesRaw": [
+      "Garden"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-llanos-hospital-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, etc",
+    "longDescription": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, et",
+    "description": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, et",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Camino Real de Francia",
+    "class": "Route",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Route",
+    "classParents": [
+      "Place",
+      "TourismResource"
+    ],
+    "classAncestors": [
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Route",
+      "Location"
+    ],
+    "typesRaw": [
+      "Route"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-llanos-hospital-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, etc",
+    "longDescription": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, et",
+    "description": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, et",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Camino de Santiago 21",
+    "class": "Route",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Route",
+    "classParents": [
+      "Place",
+      "TourismResource"
+    ],
+    "classAncestors": [
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Route",
+      "Location"
+    ],
+    "typesRaw": [
+      "Route"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España Deporte y aventura Con la llegada del buen tiempo, despierta tu espíritu aventurero Naturaleza Pueblos en los que observarás las estrellas como nunca antes Ven a practicar turismo regenerativo",
+    "longDescription": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España",
+    "description": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg_617812622.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg_617812622.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg_617812622.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Boí Taüll Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-boi-taull-resort",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Boí Taüll Estación de esquí de Boí Taüll © Atudem Vall de Boí, La Lleida Vall de Boí, La Estación de esquí ubicada en el Pirineo de Lleida, en la Vall de Boí",
+    "longDescription": "Estación de esquí de Boí Taüll Estación de esquí de Boí Taüll © Atudem Vall de Boí, La Lleida Vall de Boí, La Estación de esquí ubicada en el Pirineo de Lleida, en la Vall de Boí. Dispone de las cotas más altas de los Pirineos (cota base 2.035 y cota máxima 2.751) donde el esquiador disfrutará de un",
+    "description": "Estación de esquí de Boí Taüll Estación de esquí de Boí Taüll © Atudem Vall de Boí, La Lleida Vall de Boí, La Estación de esquí ubicada en el Pirineo de Lleida, en la Vall de Boí. Dispone de las cotas más altas de los Pirineos (cota base 2.035 y cota máxima 2.751) donde el esquiador disfrutará de un",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-boi-taull-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-boi-taull-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-boi-taull-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Oca Nova Manzaneda",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-oca-nova-manzaneda",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año",
+    "longDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "description": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Sierra Nevada Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-sierra-nevada",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Sierra Nevada Estación de esquí de Sierra Nevada © Atudem Monachil Granada Monachil La Estación de Esquí y Montaña de Sierra Nevada es la más meridional de Europa",
+    "longDescription": "Estación de esquí de Sierra Nevada Estación de esquí de Sierra Nevada © Atudem Monachil Granada Monachil La Estación de Esquí y Montaña de Sierra Nevada es la más meridional de Europa. Enclavada en el Sistema Penibético y a 32 km de Granada , dispone de más de 110 km esquiables repartidos en 131 pis",
+    "description": "Estación de esquí de Sierra Nevada Estación de esquí de Sierra Nevada © Atudem Monachil Granada Monachil La Estación de Esquí y Montaña de Sierra Nevada es la más meridional de Europa. Enclavada en el Sistema Penibético y a 32 km de Granada , dispone de más de 110 km esquiables repartidos en 131 pis",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-nevada-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-nevada-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-nevada-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pajares Estación Invernal",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-valgrande-pajares",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Valgrande-Pajares Estación de esquí de Valgrande-Pajares © Atudem Lena Asturias Lena Una completa estación, perfectamente comunicada con los núcleos de población más importantes de Asturias y la provincia de León (a 40 minutos de Oviedo y León , a 50 minutos de Gijón y Avilés )",
+    "longDescription": "Estación de esquí de Valgrande-Pajares Estación de esquí de Valgrande-Pajares © Atudem Lena Asturias Lena Una completa estación, perfectamente comunicada con los núcleos de población más importantes de Asturias y la provincia de León (a 40 minutos de Oviedo y León , a 50 minutos de Gijón y Avilés ).",
+    "description": "Estación de esquí de Valgrande-Pajares Estación de esquí de Valgrande-Pajares © Atudem Lena Asturias Lena Una completa estación, perfectamente comunicada con los núcleos de población más importantes de Asturias y la provincia de León (a 40 minutos de Oviedo y León , a 50 minutos de Gijón y Avilés ).",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valgrande-pajares.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valgrande-pajares.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valgrande-pajares.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Candanchú Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-candanchu",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Candanchú Estación de esquí de Candanchú © Atudem Benasque Huesca Benasque Candanchú, de singular belleza, se encuentra enclavada en pleno corazón del Pirineo Aragonés , en la cabecera del río Aragón, junto al puerto de Somport, por la N-330 a 28 kilómetros de Jaca y 111 de Huesca",
+    "longDescription": "Estación de esquí de Astún Estación de esquí de Astún © Atudem Jaca Huesca Jaca Situada en el Pirineo Aragonés, más concretamente en el Valle del Aragón, con acceso por la N-330 en dirección a la frontera franco-española de Somport a 33 km de Jaca y 115 km de Huesca . Entre sus cotas 1.658 m y 2.300",
+    "description": "Estación de esquí de Astún Estación de esquí de Astún © Atudem Jaca Huesca Jaca Situada en el Pirineo Aragonés, más concretamente en el Valle del Aragón, con acceso por la N-330 en dirección a la frontera franco-española de Somport a 33 km de Jaca y 115 km de Huesca . Entre sus cotas 1.658 m y 2.300",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-candanchu-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-candanchu-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-candanchu-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Invierno Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-fuentes-invierno",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Fuentes de Invierno Estación de esquí de Fuentes de Invierno © Atudem Aller Asturias Situada en Asturias , en el Puerto de San Isidro (municipio de Aller), goza de una magnífica orientación en todas sus pistas lo que garantiza una buena calidad de nieve",
+    "longDescription": "Estación de esquí de Fuentes de Invierno Estación de esquí de Fuentes de Invierno © Atudem Aller Asturias Situada en Asturias , en el Puerto de San Isidro (municipio de Aller), goza de una magnífica orientación en todas sus pistas lo que garantiza una buena calidad de nieve. La estación es fácilment",
+    "description": "Estación de esquí de Fuentes de Invierno Estación de esquí de Fuentes de Invierno © Atudem Aller Asturias Situada en Asturias , en el Puerto de San Isidro (municipio de Aller), goza de una magnífica orientación en todas sus pistas lo que garantiza una buena calidad de nieve. La estación es fácilment",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-fuentes-de-invierno-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-fuentes-de-invierno-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-fuentes-de-invierno-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Valdelinares Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-aramon-javalambre",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Aramón Javalambre-Valdelinares Estación de esquí de Aramon Javalambre © Atudem Teruel Teruel Aramón Javalambre-Valdelinares se encuentra al sur de la provincia aragonesa de Teruel",
+    "longDescription": "Estación de esquí de Aramón Javalambre-Valdelinares Estación de esquí de Aramon Javalambre © Atudem Teruel Teruel Aramón Javalambre-Valdelinares se encuentra al sur de la provincia aragonesa de Teruel . En realidad, bajo ese nombre se agrupan dos estaciones similares pero bastante lejanas entre sí,",
+    "description": "Estación de esquí de Aramón Javalambre-Valdelinares Estación de esquí de Aramon Javalambre © Atudem Teruel Teruel Aramón Javalambre-Valdelinares se encuentra al sur de la provincia aragonesa de Teruel . En realidad, bajo ese nombre se agrupan dos estaciones similares pero bastante lejanas entre sí,",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-aramon-javalambre.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-aramon-javalambre.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-aramon-javalambre.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Montaña Manzaneda",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-oca-nova-manzaneda",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.2725094,
+      "lng": -7.2880567
+    },
+    "shortDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año",
+    "longDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "description": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Atudem Pobra",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-oca-nova-manzaneda",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año",
+    "longDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "description": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Navacerrada Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-puerto-navacerrada",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Puerto de Navacerrada Estación de esquí de Puerto de Navacerrada © Atudem Cercedilla Madrid Se trata de la estación de esquí más próxima a Madrid (60 km) y a Segovia (28 km)",
+    "longDescription": "Estación de esquí de Puerto de Navacerrada Estación de esquí de Puerto de Navacerrada © Atudem Cercedilla Madrid Se trata de la estación de esquí más próxima a Madrid (60 km) y a Segovia (28 km). Está dividida en dos zonas diferenciadas: zona alta, con pistas de niveles medio-alto, y zona baja, con",
+    "description": "Estación de esquí de Puerto de Navacerrada Estación de esquí de Puerto de Navacerrada © Atudem Cercedilla Madrid Se trata de la estación de esquí más próxima a Madrid (60 km) y a Segovia (28 km). Está dividida en dos zonas diferenciadas: zona alta, con pistas de niveles medio-alto, y zona baja, con",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-navacerrada.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-navacerrada.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-navacerrada.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Tavascán Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-tavascan",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Tavascán Estación de esquí de Tavascán © Atudem Lladorre Lleida Un centro de alta montaña ubicado en un paraje de gran belleza en una zona privilegiada para la práctica de todas las actividades relacionadas con la nieve",
+    "longDescription": "Estación de esquí de Tavascán Estación de esquí de Tavascán © Atudem Lladorre Lleida Un centro de alta montaña ubicado en un paraje de gran belleza en una zona privilegiada para la práctica de todas las actividades relacionadas con la nieve. Una filosofía que huye de las grandes instalaciones, y de",
+    "description": "Estación de esquí de Tavascán Estación de esquí de Tavascán © Atudem Lladorre Lleida Un centro de alta montaña ubicado en un paraje de gran belleza en una zona privilegiada para la práctica de todas las actividades relacionadas con la nieve. Una filosofía que huye de las grandes instalaciones, y de",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-tavascan-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-tavascan-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-tavascan-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Valdesquí Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-valdesqui",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Valdesquí Estación de esquí de Valdesquí © Atudem Rascafría Madrid Rascafría La estación de Valdesquí, situada en plena sierra madrileña, al abrigo de la Bola del Mundo, Valdemartín y Peñalara, es un destino muy apreciado por los aficionados al esquí alpino",
+    "longDescription": "Estación de esquí de Valdesquí Estación de esquí de Valdesquí © Atudem Rascafría Madrid Rascafría La estación de Valdesquí, situada en plena sierra madrileña, al abrigo de la Bola del Mundo, Valdemartín y Peñalara, es un destino muy apreciado por los aficionados al esquí alpino. Compartir Guardar fa",
+    "description": "Estación de esquí de Valdesquí Estación de esquí de Valdesquí © Atudem Rascafría Madrid Rascafría La estación de Valdesquí, situada en plena sierra madrileña, al abrigo de la Bola del Mundo, Valdemartín y Peñalara, es un destino muy apreciado por los aficionados al esquí alpino. Compartir Guardar fa",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valdesqui-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valdesqui-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valdesqui-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Valdezcaray Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-valdezcaray",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Valdezcaray Estación de esquí de Valdezcaray © Atudem Ezcaray La Rioja Ezcaray Estación ubicada en la Sierra de la Demanda, a 14 kilómetros de la villa de Ezcaray",
+    "longDescription": "Estación de esquí de Valdezcaray Estación de esquí de Valdezcaray © Atudem Ezcaray La Rioja Ezcaray Estación ubicada en la Sierra de la Demanda, a 14 kilómetros de la villa de Ezcaray. Se trata de un paraíso de la naturaleza, entre cuyos frondosos bosques y manantiales nace el río Oja, donde los ama",
+    "description": "Estación de esquí de Valdezcaray Estación de esquí de Valdezcaray © Atudem Ezcaray La Rioja Ezcaray Estación ubicada en la Sierra de la Demanda, a 14 kilómetros de la villa de Ezcaray. Se trata de un paraíso de la naturaleza, entre cuyos frondosos bosques y manantiales nace el río Oja, donde los ama",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valdezcaray.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valdezcaray.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-valdezcaray.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Núria Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-vall-nuria",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Vall de Núria Estación de esquí de Vall de Núria © Atudem Queralbs Girona Vall de Núria es una estación de esquí familiar y acogedora dotada de todos los servicios necesarios para ofrecer todo el confort en plena montaña",
+    "longDescription": "Estación de esquí de Vall de Núria Estación de esquí de Vall de Núria © Atudem Queralbs Girona Vall de Núria es una estación de esquí familiar y acogedora dotada de todos los servicios necesarios para ofrecer todo el confort en plena montaña. Situada en el Pirineo Oriental a 2.000 m de altitud, rode",
+    "description": "Estación de esquí de Vall de Núria Estación de esquí de Vall de Núria © Atudem Queralbs Girona Vall de Núria es una estación de esquí familiar y acogedora dotada de todos los servicios necesarios para ofrecer todo el confort en plena montaña. Situada en el Pirineo Oriental a 2.000 m de altitud, rode",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/esqui-pirineo-catalan-vall-nuria-c-atudem.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/esqui-pirineo-catalan-vall-nuria-c-atudem.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/esqui-pirineo-catalan-vall-nuria-c-atudem.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Ourense Se",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-oca-nova-manzaneda",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 41.4097252,
+      "lng": 2.1764852
+    },
+    "shortDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año",
+    "longDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "description": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "image": "https://www.spain.info/export/sites/segtur/.content/mapas/mapa-cabecera/ourense_mapa-mini-cabecera.png",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/mapas/mapa-cabecera/ourense_mapa-mini-cabecera.png",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/mapas/mapa-cabecera/ourense_mapa-mini-cabecera.png"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Festival 09 may",
+    "class": "Event",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Event",
+    "classParents": [
+      "TourismEntity"
+    ],
+    "classAncestors": [
+      "TourismEntity"
+    ],
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "typesRaw": [
+      "Event"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España Deporte y aventura Con la llegada del buen tiempo, despierta tu espíritu aventurero Naturaleza Pueblos en los que observarás las estrellas como nunca antes Ven a practicar turismo regenerativo",
+    "longDescription": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España",
+    "description": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/eventos-fiestas/extremadura/womad-caceres-festival-c-womad.jpg_696440398.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/eventos-fiestas/extremadura/womad-caceres-festival-c-womad.jpg_696440398.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/eventos-fiestas/extremadura/womad-caceres-festival-c-womad.jpg_696440398.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Pirineo Aragonés Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-candanchu",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Candanchú Estación de esquí de Candanchú © Atudem Benasque Huesca Benasque Candanchú, de singular belleza, se encuentra enclavada en pleno corazón del Pirineo Aragonés , en la cabecera del río Aragón, junto al puerto de Somport, por la N-330 a 28 kilómetros de Jaca y 111 de Huesca",
+    "longDescription": "Estación de esquí de Candanchú Estación de esquí de Candanchú © Atudem Benasque Huesca Benasque Candanchú, de singular belleza, se encuentra enclavada en pleno corazón del Pirineo Aragonés , en la cabecera del río Aragón, junto al puerto de Somport, por la N-330 a 28 kilómetros de Jaca y 111 de Hues",
+    "description": "Estación de esquí de Candanchú Estación de esquí de Candanchú © Atudem Benasque Huesca Benasque Candanchú, de singular belleza, se encuentra enclavada en pleno corazón del Pirineo Aragonés , en la cabecera del río Aragón, junto al puerto de Somport, por la N-330 a 28 kilómetros de Jaca y 111 de Hues",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-candanchu-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-candanchu-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-candanchu-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aramon Cerler Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-aramon-cerler",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Aramón Cerler Estación de esquí de Aramon Cerler © Atudem Benasque Huesca Benasque Aramón Cerler es la estación más alta del Pirineo aragonés",
+    "longDescription": "Estación de esquí de Aramón Cerler Estación de esquí de Aramon Cerler © Atudem Benasque Huesca Benasque Aramón Cerler es la estación más alta del Pirineo aragonés . Situada en el valle de Benasque, alcanza los 2.630 metros de altura en su mítica cima de Gallinero, lo que la convierte en la estación",
+    "description": "Estación de esquí de Aramón Cerler Estación de esquí de Aramon Cerler © Atudem Benasque Huesca Benasque Aramón Cerler es la estación más alta del Pirineo aragonés . Situada en el valle de Benasque, alcanza los 2.630 metros de altura en su mítica cima de Gallinero, lo que la convierte en la estación",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-cerler-c-atudem.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-cerler-c-atudem.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-cerler-c-atudem.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Gállego Panticosa Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-aramon-formigal",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de distintos niveles",
+    "longDescription": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de",
+    "description": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aramon Formigal Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-aramon-formigal",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de distintos niveles",
+    "longDescription": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de",
+    "description": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Sant Maurici Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-espot-esqui",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mundo de la nieve en familia lejos de las aglomeraciones",
+    "longDescription": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mu",
+    "description": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mu",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-espot-esqui.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-espot-esqui.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-espot-esqui.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aramon Javalambre Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-aramon-javalambre",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Aramón Javalambre-Valdelinares Estación de esquí de Aramon Javalambre © Atudem Teruel Teruel Aramón Javalambre-Valdelinares se encuentra al sur de la provincia aragonesa de Teruel",
+    "longDescription": "Estación de esquí de Aramón Javalambre-Valdelinares Estación de esquí de Aramon Javalambre © Atudem Teruel Teruel Aramón Javalambre-Valdelinares se encuentra al sur de la provincia aragonesa de Teruel . En realidad, bajo ese nombre se agrupan dos estaciones similares pero bastante lejanas entre sí,",
+    "description": "Estación de esquí de Aramón Javalambre-Valdelinares Estación de esquí de Aramon Javalambre © Atudem Teruel Teruel Aramón Javalambre-Valdelinares se encuentra al sur de la provincia aragonesa de Teruel . En realidad, bajo ese nombre se agrupan dos estaciones similares pero bastante lejanas entre sí,",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-aramon-javalambre.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-aramon-javalambre.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-aramon-javalambre.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Atudem Manzaneda Estación",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-oca-nova-manzaneda",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año",
+    "longDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "description": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Esquí Masella Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-masella",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Masella Estación de esquí de Masella © Atudem Alp Girona La Estación de esquí de Masella, situada en la ladera norte de la montaña de la Tosa, es un privilegiado balcón del soleado valle de la Cerdaña",
+    "longDescription": "Estación de esquí de Masella Estación de esquí de Masella © Atudem Alp Girona La Estación de esquí de Masella, situada en la ladera norte de la montaña de la Tosa, es un privilegiado balcón del soleado valle de la Cerdaña. Masella tiene la particularidad de estar en medio de un espeso bosque de pino",
+    "description": "Estación de esquí de Masella Estación de esquí de Masella © Atudem Alp Girona La Estación de esquí de Masella, situada en la ladera norte de la montaña de la Tosa, es un privilegiado balcón del soleado valle de la Cerdaña. Masella tiene la particularidad de estar en medio de un espeso bosque de pino",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-masella.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-masella.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-masella.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Sierra Mágina Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-puerto-ragua-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre dos comarcas bien diferenciadas que han sabido conservar intactas, pese al paso de los siglos, sus costumbres, sus tradiciones y su estilo de vida",
+    "longDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "description": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Atudem Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-sierra-bejar-covatilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre dos comarcas bien diferenciadas que han sabido conservar intactas, pese al paso de los siglos, sus costumbres, sus tradiciones y su estilo de vida",
+    "longDescription": "Estación de esquí de Baqueira Beret Estación de esquí de Baqueira Beret © Atudem Naut Aran Lleida Naut Aran Situada en el Pirineo de Lleida, en la Val d´Aran, está formada por cuatro grandes zonas: Baqueira, Beret, Bonaigua y Baciver. Todas ellas de superficie esquiable, cuentan con pistas para todo",
+    "description": "Estación de esquí de Baqueira Beret Estación de esquí de Baqueira Beret © Atudem Naut Aran Lleida Naut Aran Situada en el Pirineo de Lleida, en la Val d´Aran, está formada por cuatro grandes zonas: Baqueira, Beret, Bonaigua y Baciver. Todas ellas de superficie esquiable, cuentan con pistas para todo",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-de-bejar-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-de-bejar-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-de-bejar-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Cataluña Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-boi-taull-resort",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Boí Taüll Estación de esquí de Boí Taüll © Atudem Vall de Boí, La Lleida Vall de Boí, La Estación de esquí ubicada en el Pirineo de Lleida, en la Vall de Boí",
+    "longDescription": "Estación de esquí de Boí Taüll Estación de esquí de Boí Taüll © Atudem Vall de Boí, La Lleida Vall de Boí, La Estación de esquí ubicada en el Pirineo de Lleida, en la Vall de Boí. Dispone de las cotas más altas de los Pirineos (cota base 2.035 y cota máxima 2.751) donde el esquiador disfrutará de un",
+    "description": "Estación de esquí de Boí Taüll Estación de esquí de Boí Taüll © Atudem Vall de Boí, La Lleida Vall de Boí, La Estación de esquí ubicada en el Pirineo de Lleida, en la Vall de Boí. Dispone de las cotas más altas de los Pirineos (cota base 2.035 y cota máxima 2.751) donde el esquiador disfrutará de un",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-boi-taull-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-boi-taull-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-boi-taull-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aragón Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-aramon-formigal",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de distintos niveles",
+    "longDescription": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de",
+    "description": "Estación de esquí de Aramón Formigal-Panticosa Estación de esquí de Aramon Formigal © Atudem Huesca Huesca La estación conjunta de Aramón Formigal-Panticosa, en el valle de Tena (pleno Pirineo oscense), presume de ser el mayor destino de nieve de España, con 182 kilómetros esquiables y 147 pistas de",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-formigal-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Tickets Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-vallter-2000",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mundo de la nieve en familia lejos de las aglomeraciones",
+    "longDescription": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mu",
+    "description": "Estación de esquí de Espot Esquí Estación de esquí de Espot Esquí © Atudem Espot Lleida Espot Situada en un entorno privilegiado, en la comarca del Pallars Sobirà y junto al Parque Nacional de Aigüestortes y Sant Maurici , la Estación de Espot Esquí es ideal para aquellos que deseen disfrutar del mu",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-vallter2000-c-atudem.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-vallter2000-c-atudem.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-vallter2000-c-atudem.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Roncalia Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-larra-belagua-roncalia-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Larra - Belagua (Fondo) Estación de esquí de Larra - Belagua",
+    "longDescription": "Estación de esquí de Larra - Belagua (Fondo) Estación de esquí de Larra - Belagua. Roncalia Isaba-Izaba Navarra Es una estación para la práctica exclusiva del esquí de fondo que ha remodelado completamente sus instalaciones. Está situada en la cabecera del Valle del Roncal (Navarra), término municip",
+    "description": "Estación de esquí de Larra - Belagua (Fondo) Estación de esquí de Larra - Belagua. Roncalia Isaba-Izaba Navarra Es una estación para la práctica exclusiva del esquí de fondo que ha remodelado completamente sus instalaciones. Está situada en la cabecera del Valle del Roncal (Navarra), término municip",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-larra-belagua.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-larra-belagua.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-larra-belagua.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Hospital Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-llanos-hospital-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, etc",
+    "longDescription": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, et",
+    "description": "Estación de esquí de Llanos del Hospital (Fondo) Estación de esquí de Llanos del Hospital (Fondo) © Atudem Benasque Huesca Benasque Situada en el centro del Parque Natural Posets-Maladeta , permite disfrutar de una gran riqueza paisajística: glaciares, bosques de pino negro con su habitat propio, et",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-llanos-del-hospital.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Cerdanya Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-lles-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Lles (Fondo) Estación de esquí de Lles (Fondo) © Atudem Lles de Cerdanya Lleida Pistas variadas para todos los niveles, con panorámicas excepcionales sobre el Pirineo",
+    "longDescription": "Estación de esquí de Lles (Fondo) Estación de esquí de Lles (Fondo) © Atudem Lles de Cerdanya Lleida Pistas variadas para todos los niveles, con panorámicas excepcionales sobre el Pirineo. Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Reservar https://lles.axess.shop/es/Products/Ti",
+    "description": "Estación de esquí de Lles (Fondo) Estación de esquí de Lles (Fondo) © Atudem Lles de Cerdanya Lleida Pistas variadas para todos los niveles, con panorámicas excepcionales sobre el Pirineo. Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Reservar https://lles.axess.shop/es/Products/Ti",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-de-lles.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-de-lles.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-de-lles.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Montaña Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-lles-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de San Isidro Estación de esquí de San Isidro © Atudem Puebla de Lillo León Situada en la Cordillera Cantábrica, al norte de la provincia de León , términos municipales de Puebla de Lillo y Valdelugueros y con unas cotas esquiables desde 1",
+    "longDescription": "Estación de esquí de Lles (Fondo) Estación de esquí de Lles (Fondo) © Atudem Lles de Cerdanya Lleida Pistas variadas para todos los niveles, con panorámicas excepcionales sobre el Pirineo. Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Reservar https://lles.axess.shop/es/Products/Ti",
+    "description": "Estación de esquí de Lles (Fondo) Estación de esquí de Lles (Fondo) © Atudem Lles de Cerdanya Lleida Pistas variadas para todos los niveles, con panorámicas excepcionales sobre el Pirineo. Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Reservar https://lles.axess.shop/es/Products/Ti",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-de-lles.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-de-lles.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-de-lles.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Cercedilla Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-puerto-navacerrada",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Puerto de Navacerrada Estación de esquí de Puerto de Navacerrada © Atudem Cercedilla Madrid Se trata de la estación de esquí más próxima a Madrid (60 km) y a Segovia (28 km)",
+    "longDescription": "Estación de esquí de Puerto de Navacerrada Estación de esquí de Puerto de Navacerrada © Atudem Cercedilla Madrid Se trata de la estación de esquí más próxima a Madrid (60 km) y a Segovia (28 km). Está dividida en dos zonas diferenciadas: zona alta, con pistas de niveles medio-alto, y zona baja, con",
+    "description": "Estación de esquí de Puerto de Navacerrada Estación de esquí de Puerto de Navacerrada © Atudem Cercedilla Madrid Se trata de la estación de esquí más próxima a Madrid (60 km) y a Segovia (28 km). Está dividida en dos zonas diferenciadas: zona alta, con pistas de niveles medio-alto, y zona baja, con",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-navacerrada.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-navacerrada.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-navacerrada.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Cerrar Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-puerto-ragua-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre dos comarcas bien diferenciadas que han sabido conservar intactas, pese al paso de los siglos, sus costumbres, sus tradiciones y su estilo de vida",
+    "longDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "description": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Villas Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-puerto-ragua-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre dos comarcas bien diferenciadas que han sabido conservar intactas, pese al paso de los siglos, sus costumbres, sus tradiciones y su estilo de vida",
+    "longDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "description": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Húetor Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-puerto-ragua-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre dos comarcas bien diferenciadas que han sabido conservar intactas, pese al paso de los siglos, sus costumbres, sus tradiciones y su estilo de vida",
+    "longDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "description": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Ragua Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-puerto-ragua-fondo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre dos comarcas bien diferenciadas que han sabido conservar intactas, pese al paso de los siglos, sus costumbres, sus tradiciones y su estilo de vida",
+    "longDescription": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "description": "Estación de esquí de Puerto de la Ragua (Fondo) Estación de esquí de Puerto de la Ragua (Fondo) © Atudem Nevada Granada Situado dentro del macizo de Sierra Nevada, pero en su parte más desconocida, a caballo entre las provincias de Granada y Almería , el Puerto de la Ragua es un paso natural entre d",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-puerto-de-la-ragua-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Salamanca Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-sierra-bejar-covatilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Sierra de Béjar-La Covatilla Estación de esquí de Sierra de Béjar-La Covatilla © Atudem Hoya, La Salamanca La estación de esquí Sierra de Béjar-La Covatilla está situada al sur de la provincia de Salamanca , en la parte más occidental del Sistema Central",
+    "longDescription": "Estación de esquí de Sierra de Béjar-La Covatilla Estación de esquí de Sierra de Béjar-La Covatilla © Atudem Hoya, La Salamanca La estación de esquí Sierra de Béjar-La Covatilla está situada al sur de la provincia de Salamanca , en la parte más occidental del Sistema Central. Su orientación norte y",
+    "description": "Estación de esquí de Sierra de Béjar-La Covatilla Estación de esquí de Sierra de Béjar-La Covatilla © Atudem Hoya, La Salamanca La estación de esquí Sierra de Béjar-La Covatilla está situada al sur de la provincia de Salamanca , en la parte más occidental del Sistema Central. Su orientación norte y",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-de-bejar-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-de-bejar-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-sierra-de-bejar-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Madrid Estación",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-valdesqui",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Estación de esquí de Valdesquí Estación de esquí de Valdesquí © Atudem Rascafría Madrid Rascafría La estación de Valdesquí, situada en plena sierra madrileña, al abrigo de la Bola del Mundo, Valdemartín y Peñalara, es un destino muy apreciado por los aficionados al esquí alpino",
+    "longDescription": "Estación de esquí de Valdesquí Estación de esquí de Valdesquí © Atudem Rascafría Madrid Rascafría La estación de Valdesquí, situada en plena sierra madrileña, al abrigo de la Bola del Mundo, Valdemartín y Peñalara, es un destino muy apreciado por los aficionados al esquí alpino. Compartir Guardar fa",
+    "description": "Estación de esquí de Valdesquí Estación de esquí de Valdesquí © Atudem Rascafría Madrid Rascafría La estación de Valdesquí, situada en plena sierra madrileña, al abrigo de la Bola del Mundo, Valdemartín y Peñalara, es un destino muy apreciado por los aficionados al esquí alpino. Compartir Guardar fa",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/madrid/pn-guadarrama-lago-penalara-madrid-s1951802257.jpg_428131509.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/madrid/pn-guadarrama-lago-penalara-madrid-s1951802257.jpg_428131509.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/madrid/pn-guadarrama-lago-penalara-madrid-s1951802257.jpg_428131509.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Estación de esquí de Alto Campoo",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "",
+    "longDescription": "",
+    "description": "",
+    "image": "",
+    "mainImage": "",
+    "images": [],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Manzaneda Estación de Esquí",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/esquiar/estacion-esqui-oca-nova-manzaneda",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año",
+    "longDescription": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "description": "Manzaneda Estación de Esquí Estación de esquí de Oca Nova Manzaneda © Atudem Pobra de Trives, A Ourense Se trata de una estación de montaña turístico-deportiva, con diversas actividades que permiten su funcionamiento durante todo el año. Además del esquí, dispone de campos de fútbol de hierba, pista",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/estaciones-esqui/estacion-esqui-oca-nova-manzaneda-c.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  }
+]

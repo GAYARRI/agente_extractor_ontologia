@@ -270,9 +270,13 @@ class TourismPropertyExtractor:
             # 3️⃣ guardar resultado
             if coords:
                 coords = self._normalize_coords(coords.get("lat"), coords.get("lng"), source="best")
-                props["coordinates"] = coords
-                props["latitude"] = coords.get("lat")
-                props["longitude"] = coords.get("lng")
+                if coords and self._coords_plausible_for_url(coords, url):
+                    props["coordinates"] = coords
+                    props["latitude"] = coords.get("lat")
+                    props["longitude"] = coords.get("lng")
+                elif coords:
+                    geo_debug = dict(geo_debug or {})
+                    geo_debug["geo_rejected"] = "outside_expected_region"
 
             if geo_debug:
                 props.setdefault("debug", {})
@@ -377,6 +381,26 @@ class TourismPropertyExtractor:
             print(f"Warning coords format [{source}]: lat={lat}, lng={lng}")
         elif kind == "range":
             print(f"Warning coords range [{source}]: lat={lat}, lng={lng}")
+
+    def _coords_plausible_for_url(self, coords: Dict[str, Any], url: str = "") -> bool:
+        if not isinstance(coords, dict):
+            return False
+
+        lat = coords.get("lat")
+        lng = coords.get("lng")
+        if lat is None or lng is None:
+            return False
+
+        host = (urlparse(url or "").netloc or "").lower()
+
+        # Para portales .es del proyecto, descartamos coordenadas claramente fuera de España.
+        # Incluye peninsula, Baleares, Canarias, Ceuta y Melilla con margen.
+        if host.endswith(".es") or ".es:" in host:
+            if not (27.0 <= float(lat) <= 44.5 and -18.5 <= float(lng) <= 5.5):
+                self._warn_invalid_coords("range", lat, lng, source="context")
+                return False
+
+        return True
 
 
     def _extract_geo_from_jsonld(self, html: str):
@@ -512,15 +536,28 @@ class TourismPropertyExtractor:
         if not text:
             return out
 
-        patterns = [
+        direct_pair_patterns = [
             re.compile(r'@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)'),
             re.compile(r'[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)'),
-            re.compile(r'lat(?:itude)?["\':=\s]+(-?\d+(?:\.\d+)?)', re.IGNORECASE),
-            re.compile(r'(?:lng|lon|longitude)["\':=\s]+(-?\d+(?:\.\d+)?)', re.IGNORECASE),
+        ]
+
+        paired_label_patterns = [
+            re.compile(
+                r'(?:lat|latitude)\b["\':=\s]*(-?\d+(?:\.\d+)?)'
+                r'.{0,80}?'
+                r'(?:lng|lon|longitude)\b["\':=\s]*(-?\d+(?:\.\d+)?)',
+                re.IGNORECASE | re.DOTALL,
+            ),
+            re.compile(
+                r'(?:lng|lon|longitude)\b["\':=\s]*(-?\d+(?:\.\d+)?)'
+                r'.{0,80}?'
+                r'(?:lat|latitude)\b["\':=\s]*(-?\d+(?:\.\d+)?)',
+                re.IGNORECASE | re.DOTALL,
+            ),
         ]
 
         # pares directos
-        for pattern in patterns[:2]:
+        for pattern in direct_pair_patterns:
             for m in pattern.findall(text):
                 lat, lng = m
                 coords = self._normalize_coords(lat, lng, source="regex")
@@ -531,18 +568,20 @@ class TourismPropertyExtractor:
                         "source": "regex"
                     })
 
-        # lat suelta + lon suelta
-        lat_matches = patterns[2].findall(text)
-        lon_matches = patterns[3].findall(text)
-
-        if lat_matches and lon_matches:
-            coords = self._normalize_coords(lat_matches[0], lon_matches[0], source="regex")
-            if coords:
-                out.append({
-                    "lat": coords["lat"],
-                    "lng": coords["lng"],
-                    "source": "regex"
-                })
+        # lat/lon etiquetados, pero solo si aparecen juntos en el mismo fragmento
+        for idx, pattern in enumerate(paired_label_patterns):
+            for m in pattern.findall(text):
+                if idx == 0:
+                    lat, lng = m
+                else:
+                    lng, lat = m
+                coords = self._normalize_coords(lat, lng, source="regex")
+                if coords:
+                    out.append({
+                        "lat": coords["lat"],
+                        "lng": coords["lng"],
+                        "source": "regex"
+                    })
 
         return out
 
