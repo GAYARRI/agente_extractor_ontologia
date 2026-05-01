@@ -93,13 +93,32 @@ def _strip_contextual_tail(cleaned_name: str, primary_class: str = "") -> str:
 
 
 def canonicalize_entity_name(name: str, primary_class: str = "") -> str:
-    cleaned = _strip_contextual_tail(clean_entity_name(name), primary_class)
-    normalized = normalized_token_text(cleaned)
+    cleaned_base = clean_entity_name(name)
     primary = str(primary_class or "").strip()
+    normalized_base = normalized_token_text(cleaned_base)
+    anchor_hints = CLASS_NAME_ANCHORS.get(primary, set())
+
+    if primary == "Route":
+        return cleaned_base
+
+    # Preserve canonical names like "Museo de la Evolución" or
+    # "Iglesia de San ..." that were being truncated by contextual-tail cleanup.
+    if anchor_hints and " de " in normalized_base:
+        for hint in anchor_hints:
+            hint = str(hint or "").strip()
+            if not hint:
+                continue
+            if (
+                normalized_base == hint
+                or normalized_base.startswith(hint + " ")
+                or f"{hint} de " in normalized_base
+            ):
+                return cleaned_base
+
+    cleaned = _strip_contextual_tail(cleaned_base, primary_class)
 
     if primary == "TownHall":
-        if "ayuntamiento" in normalized or "casa consistorial" in normalized:
-            return "Ayuntamiento de Pamplona"
+        return cleaned
 
     return cleaned
 

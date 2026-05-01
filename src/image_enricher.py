@@ -44,6 +44,14 @@ class ImageEnricher:
             "og-image",
             "share",
             "social",
+            "twitter",
+            "twitter+x",
+            "twitter%2bx",
+            "/x+1.",
+            "/x_1.",
+            "facebook",
+            "instagram",
+            "youtube",
             "separador",
             "separator",
             "feeling",
@@ -54,6 +62,10 @@ class ImageEnricher:
             "financion",
             "fav",
             "favicon",
+            "visita_burgos_fondo",
+            "burgos_fondo",
+            "_fondo",
+            "fondo.png",
         ]
 
         if any(p in u for p in bad_patterns):

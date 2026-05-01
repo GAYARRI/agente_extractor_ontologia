@@ -1,0 +1,2715 @@
+[
+  {
+    "name": "Plaza Espanya de Barcelona",
+    "class": "Square",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Square",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Square",
+      "Location"
+    ],
+    "typesRaw": [
+      "Square"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-barcelona",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Josep Tarradellas Barcelona-El Prat Avinguda de l'Aeroport, s/n 08820 Prat de Llobregat, El, Barcelona (Cataluña) Avinguda de l'Aeroport, s/n 08820 Prat de Llobregat, El, Barcelona (Cataluña) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Aeropuerto Josep Tarradellas Barcelona-E",
+    "description": "Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Aeropuerto Josep Tarradellas Barcelona-E",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Barcelona-vistas-s178539545.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Barcelona-vistas-s178539545.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Barcelona-vistas-s178539545.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Parque Nacional de Timanfaya",
+    "class": "Garden",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Garden",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Garden",
+      "Location"
+    ],
+    "typesRaw": [
+      "Garden"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-cesar-manrique-lanzarote",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 29.0216435,
+      "lng": -13.7812359
+    },
+    "shortDescription": "Aeropuerto César Manrique - Lanzarote Parque Nacional de Timanfaya, Lanzarote © Andrés Nieto Porras San Bartolomé Lanzarote San Bartolomé Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto César Manrique - Lanzarote Carretera LZ-2, salida 5 35500 San Bartolomé, Lanzarote (Canarias) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto César Manrique - Lanzarote Parque Nacional de Timanfaya, Lanzarote © Andrés Nieto Porras San Bartolomé Lanzarote San Bartolomé Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto César Manrique - Lanzarote Carretera LZ-2, salida 5 35500 San Bartolomé, Lanzarote (Can",
+    "description": "Aeropuerto César Manrique - Lanzarote Parque Nacional de Timanfaya, Lanzarote © Andrés Nieto Porras San Bartolomé Lanzarote San Bartolomé Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto César Manrique - Lanzarote Carretera LZ-2, salida 5 35500 San Bartolomé, Lanzarote (Can",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/PN-timanfaya-c-andres-nieto-porras.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/PN-timanfaya-c-andres-nieto-porras.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/PN-timanfaya-c-andres-nieto-porras.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Parque Nacional de Ordesa",
+    "class": "Garden",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Garden",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Garden",
+      "Location"
+    ],
+    "typesRaw": [
+      "Garden"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-huesca-pirineo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.6498935,
+      "lng": -0.101817
+    },
+    "shortDescription": "Aeropuerto de Huesca-Pirineos Parque Nacional de Ordesa y Monte Perdido Alcalá del Obispo Huesca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Huesca-Pirineos Carretera A-1217, km 3,5 22135 Alcalá del Obispo, Huesca (Aragón) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Huesca-Pirineos Parque Nacional de Ordesa y Monte Perdido Alcalá del Obispo Huesca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Huesca-Pirineos Carretera A-1217, km 3,5 22135 Alcalá del Obispo, Huesca (Aragón) Datos de contacto Tlf.: +34 913 211 000 Web",
+    "description": "Aeropuerto de Huesca-Pirineos Parque Nacional de Ordesa y Monte Perdido Alcalá del Obispo Huesca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Huesca-Pirineos Carretera A-1217, km 3,5 22135 Alcalá del Obispo, Huesca (Aragón) Datos de contacto Tlf.: +34 913 211 000 Web",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/pn-ordesa-monte-perdido-huesca-s160022255.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/pn-ordesa-monte-perdido-huesca-s160022255.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/pn-ordesa-monte-perdido-huesca-s160022255.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Catedral de Pamplona Noáin",
+    "class": "Cathedral",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Cathedral",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Cathedral",
+      "Location"
+    ],
+    "typesRaw": [
+      "Cathedral"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-pamplona",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Pamplona Carretera NA-6026 de acceso al aeropuerto, s/n 31110 Noáin (Valle de Elorz)-Noain (Elortzibar), Navarra (Comunidad Foral de Navarra) Carretera NA-6026 de acceso al aeropuerto, s/n 31110 Noáin (Valle de Elorz)-Noain (Elortzibar), Navarra (Comunidad Foral de Navarra) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Aeropuerto de Pamplona Catedral de Pamplona Noái",
+    "description": "Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Aeropuerto de Pamplona Catedral de Pamplona Noái",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/navarra/catedral-pamplona-calle-turia_s1754855081.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/navarra/catedral-pamplona-calle-turia_s1754855081.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/navarra/catedral-pamplona-calle-turia_s1754855081.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Plaza de Armas de Sevilla",
+    "class": "Square",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Square",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Square",
+      "Location"
+    ],
+    "typesRaw": [
+      "Square"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-sevilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.e",
+    "description": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.e",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Plaza Moyua Osaguna/Hacienda",
+    "class": "Square",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Square",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Square",
+      "Location"
+    ],
+    "typesRaw": [
+      "Square"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-bilbao",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao N-633, s/n 48180 Barrio Gaztañaga, Loiu, Bizkaia (País Vasco) 48180 Barrio Gaztañaga, Loiu, Bizkaia (País Vasco) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis fav",
+    "description": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis fav",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Torre de Hércules",
+    "class": "Tower",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Tower",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Tower",
+      "Location"
+    ],
+    "typesRaw": [
+      "Tower"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-a-coruna",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hércules, A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Avda",
+    "longDescription": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hér",
+    "description": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hér",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Catedral de Burgos",
+    "class": "Cathedral",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Cathedral",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Cathedral",
+      "Location"
+    ],
+    "typesRaw": [
+      "Cathedral"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-burgos",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.340805555555555,
+      "lng": -3.7044722222222224
+    },
+    "shortDescription": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/burgo",
+    "description": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/burgo",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q744420"
+  },
+  {
+    "name": "Puente de Piedra",
+    "class": "Bridge",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Bridge",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Bridge",
+      "Location"
+    ],
+    "typesRaw": [
+      "Bridge"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-logrono-agoncillo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 41.65722222,
+      "lng": -0.87527778
+    },
+    "shortDescription": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Carretera Logroño-Zaragoza (N-232), s/n 26160 Agoncillo, La Rioja (La Rioja) Carretera Logroño-Zaragoza (N-232), s/n 26160 Agoncillo, La Rioja (La Rioja) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agon",
+    "description": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agon",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q2638325"
+  },
+  {
+    "name": "Plaza de Cibeles",
+    "class": "Square",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Square",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Square",
+      "Location"
+    ],
+    "typesRaw": [
+      "Square"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-adolfo-suarez-madrid-barajas",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 40.41917,
+      "lng": -3.69306
+    },
+    "shortDescription": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Jorge Fernández Salas Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Avenida de la Hispanidad, s/n 28042 Madrid (Comunidad de Madrid) Avenida de la Hispanidad, s/n 28042 Madrid (Comunidad de Madrid) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adol",
+    "description": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adol",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q1537446"
+  },
+  {
+    "name": "Catedral de Sevilla",
+    "class": "Cathedral",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Cathedral",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Cathedral",
+      "Location"
+    ],
+    "typesRaw": [
+      "Cathedral"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-sevilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 37.3857421596313,
+      "lng": -5.9930955622969
+    },
+    "shortDescription": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.e",
+    "description": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.e",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q231606"
+  },
+  {
+    "name": "Coruña Torre",
+    "class": "Tower",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Tower",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Tower",
+      "Location"
+    ],
+    "typesRaw": [
+      "Tower"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-a-coruna",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hércules, A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Avda",
+    "longDescription": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hér",
+    "description": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hér",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Barrio Gaztañaga",
+    "class": "Bar",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Bar",
+    "classParents": [
+      "FoodEstablishment"
+    ],
+    "classAncestors": [
+      "FoodEstablishment",
+      "TourismOrRelatedFacility",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Bar",
+      "Location"
+    ],
+    "typesRaw": [
+      "Bar"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-bilbao",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao N-633, s/n 48180 Barrio Gaztañaga, Loiu, Bizkaia (País Vasco) 48180 Barrio Gaztañaga, Loiu, Bizkaia (País Vasco) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis fav",
+    "description": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis fav",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Agoncillo Puente",
+    "class": "Bridge",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Bridge",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Bridge",
+      "Location"
+    ],
+    "typesRaw": [
+      "Bridge"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-logrono-agoncillo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Carretera Logroño-Zaragoza (N-232), s/n 26160 Agoncillo, La Rioja (La Rioja) Carretera Logroño-Zaragoza (N-232), s/n 26160 Agoncillo, La Rioja (La Rioja) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agon",
+    "description": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agon",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Centro Alameda",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-malaga",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Málaga-Costa del Sol Málaga Málaga Málaga Málaga Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Málaga-Costa del Sol Málaga Málaga Málaga Aeropuerto de Málaga-Costa del Sol Málaga Málaga Aeropuerto de Málaga-Costa del Sol Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Málaga-Costa del Sol Avenida Comandante García Morato, s/n 29004 Málaga (Andalucía) Avenida Comandante García Morato, s/n 29004 Málaga (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Málaga-Costa del Sol Málaga Málaga Málaga Málaga Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Málaga-Costa del Sol Málaga Málaga Málaga Aeropuerto de Málaga-Costa del Sol Málaga Málaga Aeropuerto de Málaga-Costa del Sol Compartir Guardar favorito Elimin",
+    "description": "Aeropuerto de Málaga-Costa del Sol Málaga Málaga Málaga Málaga Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Málaga-Costa del Sol Málaga Málaga Málaga Aeropuerto de Málaga-Costa del Sol Málaga Málaga Aeropuerto de Málaga-Costa del Sol Compartir Guardar favorito Elimin",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/City-Hall-Alcazaba-Malaga-s234794812.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/City-Hall-Alcazaba-Malaga-s234794812.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/City-Hall-Alcazaba-Malaga-s234794812.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Mallorca Catedral",
+    "class": "Cathedral",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Cathedral",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Cathedral",
+      "Location"
+    ],
+    "typesRaw": [
+      "Cathedral"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-palma-mallorca",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 39.5674732,
+      "lng": 2.648168
+    },
+    "shortDescription": "Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Mallorca Palma Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Mallorca Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Palma de Mallorca Autopista de Llevant (Ma-19), s/n 07611 Palma, Mallorca (Illes Balears) Autopista de Llevant (Ma-19), s/n 07611 Palma, Mallorca (Illes Balears) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Mallorca Palma Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Mallorca Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Aeropuer",
+    "description": "Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Mallorca Palma Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Mallorca Aeropuerto de Palma de Mallorca Catedral de Palma de Mallorca Palma Aeropuer",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/catedral-palma-mallorca-s1473983906.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/catedral-palma-mallorca-s1473983906.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/catedral-palma-mallorca-s1473983906.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Plaza Prim",
+    "class": "Square",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Square",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Square",
+      "Location"
+    ],
+    "typesRaw": [
+      "Square"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-reus",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": -34.620796,
+      "lng": -58.441736
+    },
+    "shortDescription": "Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Reus Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Plaza Prim, Reus © Turismo de Reus Turismo de Reus Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Reus Avenida de Tarragona/Autovía de Reus (T-11), s/n 43204 Reus, Tarragona (Cataluña) Avenida de Tarragona/Autovía de Reus (T-11), s/n 43204 Reus, Tarragona (Cataluña) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Reus Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Aeropuerto de Reus Plaza Prim, Reu",
+    "description": "Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Reus Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Aeropuerto de Reus Plaza Prim, Reu",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/plaza-prim-reus-c-turismo-reus.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/plaza-prim-reus-c-turismo-reus.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/plaza-prim-reus-c-turismo-reus.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": "Q2917899"
+  },
+  {
+    "name": "Real Alcázar",
+    "class": "Alcazar",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Alcazar",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Alcazar",
+      "Location"
+    ],
+    "typesRaw": [
+      "Alcazar"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-sevilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.e",
+    "description": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.e",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Zaragoza Basílica",
+    "class": "Basilica",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Basilica",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Basilica",
+      "Location"
+    ],
+    "typesRaw": [
+      "Basilica"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-zaragoza",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Zaragoza Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Zaragoza Carretera Aeropuerto, s/n",
+    "longDescription": "Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Zaragoza Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Aeropuerto de Zaragoza Bas",
+    "description": "Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Zaragoza Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Aeropuerto de Zaragoza Bas",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_428131509.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_428131509.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_428131509.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Camino de Santiago 21",
+    "class": "Route",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Route",
+    "classParents": [
+      "Place",
+      "TourismResource"
+    ],
+    "classAncestors": [
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Route",
+      "Location"
+    ],
+    "typesRaw": [
+      "Route"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España Deporte y aventura Con la llegada del buen tiempo, despierta tu espíritu aventurero Naturaleza Pueblos en los que observarás las estrellas como nunca antes Ven a practicar turismo regenerativo",
+    "longDescription": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España",
+    "description": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg_617812622.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg_617812622.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg_617812622.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Taxi Suplemento Aeropuerto",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-a-coruna",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hércules, A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Avda",
+    "longDescription": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hér",
+    "description": "Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo A Coruña Aeropuerto de A Coruña Torre de Hércules, A Coruña Culleredo Aeropuerto de A Coruña Torre de Hér",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-coruna-s-214948549.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Corredor Barcelona",
+    "class": "Bar",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Bar",
+    "classParents": [
+      "FoodEstablishment"
+    ],
+    "classAncestors": [
+      "FoodEstablishment",
+      "TourismOrRelatedFacility",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Bar",
+      "Location"
+    ],
+    "typesRaw": [
+      "Bar"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-barcelona",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Josep Tarradellas Barcelona-El Prat Avinguda de l'Aeroport, s/n 08820 Prat de Llobregat, El, Barcelona (Cataluña) Avinguda de l'Aeroport, s/n 08820 Prat de Llobregat, El, Barcelona (Cataluña) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Aeropuerto Josep Tarradellas Barcelona-E",
+    "description": "Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Josep Tarradellas Barcelona-El Prat Vista de Barcelona Prat de Llobregat, El Barcelona Aeropuerto Josep Tarradellas Barcelona-E",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Barcelona-vistas-s178539545.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Barcelona-vistas-s178539545.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Barcelona-vistas-s178539545.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Barcelona El Prat",
+    "class": "Bar",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Bar",
+    "classParents": [
+      "FoodEstablishment"
+    ],
+    "classAncestors": [
+      "FoodEstablishment",
+      "TourismOrRelatedFacility",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Bar",
+      "Location"
+    ],
+    "typesRaw": [
+      "Bar"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-girona-costa-brava",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Girona-Costa Brava Aiguaviva, s/n 17185 Vilobí d'Onyar, Girona (Cataluña) Aiguaviva, s/n 17185 Vilobí d'Onyar, Girona (Cataluña) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Aeropuerto de Girona-Costa Bra",
+    "description": "Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Aeropuerto de Girona-Costa Bra",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/girona-s-379753051.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/girona-s-379753051.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/girona-s-379753051.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto Internacional",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-internacional-murcia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto Internacional de Murcia Murcia Murcia Murcia Murcia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Internacional de Murcia Avda",
+    "longDescription": "Aeropuerto Internacional de Murcia Murcia Murcia Murcia Murcia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Internacional de Murcia Avda. de España, 101 30154 Valladolises y Lo Jurado, Murcia (Región de Murcia) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.ae",
+    "description": "Aeropuerto Internacional de Murcia Murcia Murcia Murcia Murcia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Internacional de Murcia Avda. de España, 101 30154 Valladolises y Lo Jurado, Murcia (Región de Murcia) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.ae",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/murcia-s-215469907.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/murcia-s-215469907.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/murcia-s-215469907.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Barajas Avenida",
+    "class": "Bar",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Bar",
+    "classParents": [
+      "FoodEstablishment"
+    ],
+    "classAncestors": [
+      "FoodEstablishment",
+      "TourismOrRelatedFacility",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Bar",
+      "Location"
+    ],
+    "typesRaw": [
+      "Bar"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-adolfo-suarez-madrid-barajas",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Jorge Fernández Salas Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Avenida de la Hispanidad, s/n 28042 Madrid (Comunidad de Madrid) Avenida de la Hispanidad, s/n 28042 Madrid (Comunidad de Madrid) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adol",
+    "description": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adol",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Barajas Vista",
+    "class": "Bar",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Bar",
+    "classParents": [
+      "FoodEstablishment"
+    ],
+    "classAncestors": [
+      "FoodEstablishment",
+      "TourismOrRelatedFacility",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Bar",
+      "Location"
+    ],
+    "typesRaw": [
+      "Bar"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-adolfo-suarez-madrid-barajas",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Jorge Fernández Salas Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Avenida de la Hispanidad, s/n 28042 Madrid (Comunidad de Madrid) Avenida de la Hispanidad, s/n 28042 Madrid (Comunidad de Madrid) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adol",
+    "description": "Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Madrid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Adolfo Suárez Madrid-Barajas Vista de la Gran Vía, Madrid © Jorge Fernández Salas Madrid Madrid Aeropuerto Adol",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-madrid-gran-via-c-jorge-fernandez-salas-u1196175.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Camino La Bajita",
+    "class": "Route",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Route",
+    "classParents": [
+      "Place",
+      "TourismResource"
+    ],
+    "classAncestors": [
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Route",
+      "Location"
+    ],
+    "typesRaw": [
+      "Route"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-palma",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma Villa de Mazo La Palma Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma Villa de Mazo La Palma Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma Villa de Mazo Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma Playa en La Palma © Turismo de La Palma Turismo de La Palma Villa de Mazo Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de La Palma Camino La Bajita, s/n 38738 Villa de Mazo, La Palma (Canarias) Camino La Bajita, s/n 38738 Villa de Mazo, La Palma (Canarias) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma Villa de Mazo La Palma Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma Villa de Mazo La Palma Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma V",
+    "description": "Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma Villa de Mazo La Palma Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma Villa de Mazo La Palma Aeropuerto de La Palma Playa en La Palma © Turismo de La Palma V",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/LaPalma-Playa-MOMENTO5_1-c-turismo-de-la-palma.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/LaPalma-Playa-MOMENTO5_1-c-turismo-de-la-palma.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/LaPalma-Playa-MOMENTO5_1-c-turismo-de-la-palma.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto Norte",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-tenerife-sur",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Tenerife Sur Costa de Tenerife © Turismo de Tenerife Granadilla de Abona Tenerife Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Tenerife Sur Granadilla de Abona 38610 Granadilla de Abona, Tenerife (Canarias) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Tenerife Sur Costa de Tenerife © Turismo de Tenerife Granadilla de Abona Tenerife Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Tenerife Sur Granadilla de Abona 38610 Granadilla de Abona, Tenerife (Canarias) Datos de contacto Tlf.: +34 913 211 000 Web: h",
+    "description": "Aeropuerto de Tenerife Sur Costa de Tenerife © Turismo de Tenerife Granadilla de Abona Tenerife Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Tenerife Sur Granadilla de Abona 38610 Granadilla de Abona, Tenerife (Canarias) Datos de contacto Tlf.: +34 913 211 000 Web: h",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Senderismo-PR-Anaga-Tenerife-c-Turismo-Tenerife.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Senderismo-PR-Anaga-Tenerife-c-Turismo-Tenerife.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Senderismo-PR-Anaga-Tenerife-c-Turismo-Tenerife.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Festival 09 may",
+    "class": "Event",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Event",
+    "classParents": [
+      "TourismEntity"
+    ],
+    "classAncestors": [
+      "TourismEntity"
+    ],
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "typesRaw": [
+      "Event"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España Deporte y aventura Con la llegada del buen tiempo, despierta tu espíritu aventurero Naturaleza Pueblos en los que observarás las estrellas como nunca antes Ven a practicar turismo regenerativo",
+    "longDescription": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España",
+    "description": "Viaja sostenible Viaja feliz siendo responsable España none none none none none none none Think you know Spain? Think again Paisajes de mujeres que hicieron historia Cultura Explora la ruta de los festivales de música más vibrantes Naturaleza Increíbles floraciones para vivir la primavera en España",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/eventos-fiestas/extremadura/womad-caceres-festival-c-womad.jpg_696440398.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/eventos-fiestas/extremadura/womad-caceres-festival-c-womad.jpg_696440398.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/eventos-fiestas/extremadura/womad-caceres-festival-c-womad.jpg_696440398.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Monte Perdido Aeropuerto",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-huesca-pirineo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Huesca-Pirineos Parque Nacional de Ordesa y Monte Perdido Alcalá del Obispo Huesca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Huesca-Pirineos Carretera A-1217, km 3,5 22135 Alcalá del Obispo, Huesca (Aragón) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Huesca-Pirineos Parque Nacional de Ordesa y Monte Perdido Alcalá del Obispo Huesca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Huesca-Pirineos Carretera A-1217, km 3,5 22135 Alcalá del Obispo, Huesca (Aragón) Datos de contacto Tlf.: +34 913 211 000 Web",
+    "description": "Aeropuerto de Huesca-Pirineos Parque Nacional de Ordesa y Monte Perdido Alcalá del Obispo Huesca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Huesca-Pirineos Carretera A-1217, km 3,5 22135 Alcalá del Obispo, Huesca (Aragón) Datos de contacto Tlf.: +34 913 211 000 Web",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/pn-ordesa-monte-perdido-huesca-s160022255.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/pn-ordesa-monte-perdido-huesca-s160022255.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/pn-ordesa-monte-perdido-huesca-s160022255.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Jardoz Aeropuerto",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-burgos",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/burgo",
+    "description": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/burgo",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Córdoba Aeropuerto",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-cordoba",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Córdoba Vista de Córdoba Córdoba Córdoba Córdoba Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Córdoba Carretera Nacional 437, km 5,8 14005 Córdoba (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Córdoba Vista de Córdoba Córdoba Córdoba Córdoba Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Córdoba Carretera Nacional 437, km 5,8 14005 Córdoba (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/cordoba.html Web: https://",
+    "description": "Aeropuerto de Córdoba Vista de Córdoba Córdoba Córdoba Córdoba Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Córdoba Carretera Nacional 437, km 5,8 14005 Córdoba (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/cordoba.html Web: https://",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/mezquita-catedral-puente-cordoba-s241626148.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/mezquita-catedral-puente-cordoba-s241626148.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/mezquita-catedral-puente-cordoba-s241626148.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Girona Aeropuerto",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-girona-costa-brava",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Girona-Costa Brava Aiguaviva, s/n 17185 Vilobí d'Onyar, Girona (Cataluña) Aiguaviva, s/n 17185 Vilobí d'Onyar, Girona (Cataluña) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Aeropuerto de Girona-Costa Bra",
+    "description": "Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Girona Aeropuerto de Girona-Costa Brava Vista de Girona Vilobí d'Onyar Aeropuerto de Girona-Costa Bra",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/girona-s-379753051.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/girona-s-379753051.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/girona-s-379753051.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Salamanca Aeropuerto",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-salamanca",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Salamanca Vista de Salamanca Calvarrasa de Abajo Salamanca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Salamanca Carretera de Madrid (N-501), kilómetro 14 37181 Calvarrasa de Abajo, Salamanca (Castilla y León) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Salamanca Vista de Salamanca Calvarrasa de Abajo Salamanca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Salamanca Carretera de Madrid (N-501), kilómetro 14 37181 Calvarrasa de Abajo, Salamanca (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 We",
+    "description": "Aeropuerto de Salamanca Vista de Salamanca Calvarrasa de Abajo Salamanca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Salamanca Carretera de Madrid (N-501), kilómetro 14 37181 Calvarrasa de Abajo, Salamanca (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 We",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-salamanca-s250241470.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-salamanca-s250241470.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-salamanca-s250241470.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Tenerife Aeropuerto",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-tenerife-norte",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Tenerife Norte - Ciudad de La Laguna San Critóbal de la Laguna © Turismo de Tenerife San Cristóbal de la Laguna Tenerife San Cristóbal de la Laguna Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Tenerife Norte - Ciudad de La Laguna La Laguna 38297 San Cristóbal de la Laguna, Tenerife (Canarias) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Tenerife Norte - Ciudad de La Laguna San Critóbal de la Laguna © Turismo de Tenerife San Cristóbal de la Laguna Tenerife San Cristóbal de la Laguna Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Tenerife Norte - Ciudad de La Laguna La Laguna 38297 San Cri",
+    "description": "Aeropuerto de Tenerife Norte - Ciudad de La Laguna San Critóbal de la Laguna © Turismo de Tenerife San Cristóbal de la Laguna Tenerife San Cristóbal de la Laguna Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Tenerife Norte - Ciudad de La Laguna La Laguna 38297 San Cri",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Patio-Casa-La-Laguna-c-Turismo-Tenerife.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Patio-Casa-La-Laguna-c-Turismo-Tenerife.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Patio-Casa-La-Laguna-c-Turismo-Tenerife.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Albacete",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-albacete",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Albacete Fachadas de edificios en Albacete Albacete Albacete Albacete Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Albacete Carretera Peñas de San Pedro (CM-3203), km 3,9 02071 Albacete (Castilla-La Mancha) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Albacete Fachadas de edificios en Albacete Albacete Albacete Albacete Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Albacete Carretera Peñas de San Pedro (CM-3203), km 3,9 02071 Albacete (Castilla-La Mancha) Datos de contacto Tlf.: +34 913 211 000 Web: h",
+    "description": "Aeropuerto de Albacete Fachadas de edificios en Albacete Albacete Albacete Albacete Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Albacete Carretera Peñas de San Pedro (CM-3203), km 3,9 02071 Albacete (Castilla-La Mancha) Datos de contacto Tlf.: +34 913 211 000 Web: h",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/albacete_s761180662.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/albacete_s761180662.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/albacete_s761180662.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Almería",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropueto-almeria",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Almería Alcazaba de Almería Almería Almería Almería Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Almería Carretera Níjar-La Cañana, km 9 04130 El Alquián, Almería (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Almería Alcazaba de Almería Almería Almería Almería Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Almería Carretera Níjar-La Cañana, km 9 04130 El Alquián, Almería (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/almeria.ht",
+    "description": "Aeropuerto de Almería Alcazaba de Almería Almería Almería Almería Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Almería Carretera Níjar-La Cañana, km 9 04130 El Alquián, Almería (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/almeria.ht",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/alcazaba_almeria-s-628474310.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/alcazaba_almeria-s-628474310.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/alcazaba_almeria-s-628474310.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Asturias",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-asturias",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Asturias Catedral de Oviedo Castrillón Asturias Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Asturias Final de la autovía urbana AI-82 desde la salida 417 de la A-8 33459 Santiago del Monte, Castrillón, Asturias (Principado de Asturias) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Asturias Catedral de Oviedo Castrillón Asturias Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Asturias Final de la autovía urbana AI-82 desde la salida 417 de la A-8 33459 Santiago del Monte, Castrillón, Asturias (Principado de Asturias) Datos de contact",
+    "description": "Aeropuerto de Asturias Catedral de Oviedo Castrillón Asturias Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Asturias Final de la autovía urbana AI-82 desde la salida 417 de la A-8 33459 Santiago del Monte, Castrillón, Asturias (Principado de Asturias) Datos de contact",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/catedral-oviedo-s787405777.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/catedral-oviedo-s787405777.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/catedral-oviedo-s787405777.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Badajoz",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-badajoz",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Badajoz Vistas de Badajoz Badajoz Badajoz Badajoz Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Badajoz Vistas de Badajoz Badajoz Badajoz Aeropuerto de Badajoz Vistas de Badajoz Badajoz Aeropuerto de Badajoz Vistas de Badajoz Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Badajoz Carretera Badajoz-Balboa (EX-120), s/n 06195 Badajoz (Extremadura) Carretera Badajoz-Balboa (EX-120), s/n 06195 Badajoz (Extremadura) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Badajoz Vistas de Badajoz Badajoz Badajoz Badajoz Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Badajoz Vistas de Badajoz Badajoz Badajoz Aeropuerto de Badajoz Vistas de Badajoz Badajoz Aeropuerto de Badajoz Vistas de Badajoz Compartir Guardar favorito E",
+    "description": "Aeropuerto de Badajoz Vistas de Badajoz Badajoz Badajoz Badajoz Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Badajoz Vistas de Badajoz Badajoz Badajoz Aeropuerto de Badajoz Vistas de Badajoz Badajoz Aeropuerto de Badajoz Vistas de Badajoz Compartir Guardar favorito E",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/badajoz_vistas-s-391740163.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/badajoz_vistas-s-391740163.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/badajoz_vistas-s-391740163.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Bilbao",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-bilbao",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao N-633, s/n 48180 Barrio Gaztañaga, Loiu, Bizkaia (País Vasco) 48180 Barrio Gaztañaga, Loiu, Bizkaia (País Vasco) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis fav",
+    "description": "Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Bilbao Vista de Bilbao Loiu Bizkaia Aeropuerto de Bilbao Vista de Bilbao Loiu Aeropuerto de Bilbao Vista de Bilbao Compartir Guardar favorito Eliminar favorito Ir a mis fav",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/Vista-Bilbao-i537626052.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Burgos",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-burgos",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/burgo",
+    "description": "Aeropuerto de Burgos Vista de Burgos © Jardoz Burgos Burgos Burgos Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Burgos Carretera de Logroño (N-120), kilómetro 107 09007 Burgos (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/burgo",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/burgos-vistas-catedral-c-jardoz.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto César Manrique",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-cesar-manrique-lanzarote",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto César Manrique - Lanzarote Parque Nacional de Timanfaya, Lanzarote © Andrés Nieto Porras San Bartolomé Lanzarote San Bartolomé Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto César Manrique - Lanzarote Carretera LZ-2, salida 5 35500 San Bartolomé, Lanzarote (Canarias) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto César Manrique - Lanzarote Parque Nacional de Timanfaya, Lanzarote © Andrés Nieto Porras San Bartolomé Lanzarote San Bartolomé Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto César Manrique - Lanzarote Carretera LZ-2, salida 5 35500 San Bartolomé, Lanzarote (Can",
+    "description": "Aeropuerto César Manrique - Lanzarote Parque Nacional de Timanfaya, Lanzarote © Andrés Nieto Porras San Bartolomé Lanzarote San Bartolomé Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto César Manrique - Lanzarote Carretera LZ-2, salida 5 35500 San Bartolomé, Lanzarote (Can",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/PN-timanfaya-c-andres-nieto-porras.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/PN-timanfaya-c-andres-nieto-porras.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/PN-timanfaya-c-andres-nieto-porras.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Córdoba",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-cordoba",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Córdoba Vista de Córdoba Córdoba Córdoba Córdoba Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Córdoba Carretera Nacional 437, km 5,8 14005 Córdoba (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Córdoba Vista de Córdoba Córdoba Córdoba Córdoba Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Córdoba Carretera Nacional 437, km 5,8 14005 Córdoba (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/cordoba.html Web: https://",
+    "description": "Aeropuerto de Córdoba Vista de Córdoba Córdoba Córdoba Córdoba Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Córdoba Carretera Nacional 437, km 5,8 14005 Córdoba (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.es/es/cordoba.html Web: https://",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/mezquita-catedral-puente-cordoba-s241626148.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/mezquita-catedral-puente-cordoba-s241626148.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/mezquita-catedral-puente-cordoba-s241626148.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Fuerteventura",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-fuerteventura",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Fuerteventura Playa en Fuerteventura Puerto del Rosario Fuerteventura Puerto del Rosario Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Fuerteventura Carretera FV-2, km 3,8 35610 El Matorral, Puerto del Rosario, Fuerteventura (Canarias) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Fuerteventura Playa en Fuerteventura Puerto del Rosario Fuerteventura Puerto del Rosario Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Fuerteventura Carretera FV-2, km 3,8 35610 El Matorral, Puerto del Rosario, Fuerteventura (Canarias) Datos de contacto",
+    "description": "Aeropuerto de Fuerteventura Playa en Fuerteventura Puerto del Rosario Fuerteventura Puerto del Rosario Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Fuerteventura Carretera FV-2, km 3,8 35610 El Matorral, Puerto del Rosario, Fuerteventura (Canarias) Datos de contacto",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/fuerteventura-s-245616586.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/fuerteventura-s-245616586.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/fuerteventura-s-245616586.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Ibiza",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-ibiza",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Ibiza Sant Josep de sa Talaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Ibiza Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Ibiza Carretera de Sa Caleta, s/n 07817 Sant Jordi de ses Salines, Sant Josep de sa Talaia, Ibiza (Illes Balears) Carretera de Sa Caleta, s/n 07817 Sant Jordi de ses Salines, Sant Josep de sa Talaia, Ibiza (Illes Balears) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Ibiza Sant Josep de sa Talaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Ibiza Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Aeropuerto de Ibi",
+    "description": "Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Ibiza Sant Josep de sa Talaia Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Ibiza Aeropuerto de Ibiza Vista de Eivissa Sant Josep de sa Talaia Aeropuerto de Ibi",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/ibiza-20739918-istock.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/ibiza-20739918-istock.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/ibiza-20739918-istock.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Jerez",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-jerez",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Jerez Vista de Jerez de la Frontera Jerez de la Frontera Cádiz Jerez de la Frontera Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Jerez Carretera N-4, km 628,5 11401 Jerez de la Frontera, Cádiz (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Jerez Vista de Jerez de la Frontera Jerez de la Frontera Cádiz Jerez de la Frontera Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Jerez Carretera N-4, km 628,5 11401 Jerez de la Frontera, Cádiz (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: htt",
+    "description": "Aeropuerto de Jerez Vista de Jerez de la Frontera Jerez de la Frontera Cádiz Jerez de la Frontera Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Jerez Carretera N-4, km 628,5 11401 Jerez de la Frontera, Cádiz (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: htt",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jerez-s576704689.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jerez-s576704689.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jerez-s576704689.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de León",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-leon",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen León Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen León Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de León Carretera de la Ermita, s/n 24198 La Virgen del Camino, Valverde de la Virgen, León (Castilla y León) Carretera de la Ermita, s/n 24198 La Virgen del Camino, Valverde de la Virgen, León (Castilla y León) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen León Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen León Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen Aeropuerto de León Barrio Húmedo en L",
+    "description": "Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen León Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen León Aeropuerto de León Barrio Húmedo en León Valverde de la Virgen Aeropuerto de León Barrio Húmedo en L",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/barrio-humedo-leon-s333221870.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/barrio-humedo-leon-s333221870.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/barrio-humedo-leon-s333221870.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto Logroño-Agoncillo",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-logrono-agoncillo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Carretera Logroño-Zaragoza (N-232), s/n 26160 Agoncillo, La Rioja (La Rioja) Carretera Logroño-Zaragoza (N-232), s/n 26160 Agoncillo, La Rioja (La Rioja) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agon",
+    "description": "Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo La Rioja Aeropuerto Logroño-Agoncillo Puente de Piedra, Logroño Agoncillo Aeropuerto Logroño-Agon",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-logrono-44234620-istock.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Melilla",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-melilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Melilla Vista de Melilla Melilla Melilla Melilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Melilla Vista de Melilla Melilla Melilla Aeropuerto de Melilla Vista de Melilla Melilla Aeropuerto de Melilla Vista de Melilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Melilla Carretera de Yasinen, s/n 52005 Melilla (Melilla) Carretera de Yasinen, s/n 52005 Melilla (Melilla) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Melilla Vista de Melilla Melilla Melilla Melilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Melilla Vista de Melilla Melilla Melilla Aeropuerto de Melilla Vista de Melilla Melilla Aeropuerto de Melilla Vista de Melilla Compartir Guardar favorito Elimi",
+    "description": "Aeropuerto de Melilla Vista de Melilla Melilla Melilla Melilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Melilla Vista de Melilla Melilla Melilla Aeropuerto de Melilla Vista de Melilla Melilla Aeropuerto de Melilla Vista de Melilla Compartir Guardar favorito Elimi",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/melilla-s589530758.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/melilla-s589530758.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/melilla-s589530758.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Menorca",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-menorca",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Menorca Maó Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Menorca Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Menorca Carretera Me-14 de acceso al aeropuerto, s/n 07712 Sant Climent, Maó, Menorca (Illes Balears) Carretera Me-14 de acceso al aeropuerto, s/n 07712 Sant Climent, Maó, Menorca (Illes Balears) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Menorca Maó Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Menorca Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Aeropuerto de Menorca Ca",
+    "description": "Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Menorca Maó Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Menorca Aeropuerto de Menorca Cala Macarella, Ciutadella de Menorca Maó Aeropuerto de Menorca Ca",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/cala-macarella-ciutadella-menorca-65449423-istock.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/cala-macarella-ciutadella-menorca-65449423-istock.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/cala-macarella-ciutadella-menorca-65449423-istock.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Pamplona",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-pamplona",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Pamplona Carretera NA-6026 de acceso al aeropuerto, s/n 31110 Noáin (Valle de Elorz)-Noain (Elortzibar), Navarra (Comunidad Foral de Navarra) Carretera NA-6026 de acceso al aeropuerto, s/n 31110 Noáin (Valle de Elorz)-Noain (Elortzibar), Navarra (Comunidad Foral de Navarra) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Aeropuerto de Pamplona Catedral de Pamplona Noái",
+    "description": "Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Pamplona Catedral de Pamplona Noáin (Valle de Elorz)-Noain (Elortzibar) Navarra Aeropuerto de Pamplona Catedral de Pamplona Noái",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/navarra/catedral-pamplona-calle-turia_s1754855081.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/navarra/catedral-pamplona-calle-turia_s1754855081.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/navarra/catedral-pamplona-calle-turia_s1754855081.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Reus",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-reus",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Reus Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Plaza Prim, Reus © Turismo de Reus Turismo de Reus Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Reus Avenida de Tarragona/Autovía de Reus (T-11), s/n 43204 Reus, Tarragona (Cataluña) Avenida de Tarragona/Autovía de Reus (T-11), s/n 43204 Reus, Tarragona (Cataluña) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Reus Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Aeropuerto de Reus Plaza Prim, Reu",
+    "description": "Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Reus Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Tarragona Aeropuerto de Reus Plaza Prim, Reus © Turismo de Reus Reus Aeropuerto de Reus Plaza Prim, Reu",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/plaza-prim-reus-c-turismo-reus.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/plaza-prim-reus-c-turismo-reus.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/plaza-prim-reus-c-turismo-reus.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Salamanca",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-salamanca",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Salamanca Vista de Salamanca Calvarrasa de Abajo Salamanca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Salamanca Carretera de Madrid (N-501), kilómetro 14 37181 Calvarrasa de Abajo, Salamanca (Castilla y León) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Salamanca Vista de Salamanca Calvarrasa de Abajo Salamanca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Salamanca Carretera de Madrid (N-501), kilómetro 14 37181 Calvarrasa de Abajo, Salamanca (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 We",
+    "description": "Aeropuerto de Salamanca Vista de Salamanca Calvarrasa de Abajo Salamanca Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Salamanca Carretera de Madrid (N-501), kilómetro 14 37181 Calvarrasa de Abajo, Salamanca (Castilla y León) Datos de contacto Tlf.: +34 913 211 000 We",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-salamanca-s250241470.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-salamanca-s250241470.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vista-salamanca-s250241470.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Santiago",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-santiago",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Santiago - Rosalía de Castro Catedral de Santiago de Compostela Santiago de Compostela A Coruña Santiago de Compostela Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Santiago - Rosalía de Castro Catedral de Santiago de Compostela Santiago de Compostela A Coruña Aeropuerto de Santiago - Rosalía de Castro Catedral de Santiago de Compostela Santiago de Compostela Aeropuerto de Santiago - Rosalía de Castro Catedral de Santiago de Compostela Santiago de Compostela Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Santiago - Rosalía de Castro Carretera SC-21 de acceso al aeropuerto, s/n 15820 A Lavacolla (Sabugueira), Santiago de Compostela, A Coruña (Galicia) Carretera SC-21 de acceso al aeropuerto, s/n 15820 A Lavacolla (Sabugueira), Santiago de Compostela, A Coruña (Galicia) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Santiago - Rosalía de Castro Catedral de Santiago de Compostela Santiago de Compostela A Coruña Santiago de Compostela Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Santiago - Rosalía de Castro Catedral de Santiago de Compostela Santiago de Compostela A",
+    "description": "Aeropuerto de Santiago - Rosalía de Castro Catedral de Santiago de Compostela Santiago de Compostela A Coruña Santiago de Compostela Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Santiago - Rosalía de Castro Catedral de Santiago de Compostela Santiago de Compostela A",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-santiago-s1132467779.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-santiago-s1132467779.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vistas-santiago-s1132467779.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Sevilla",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-sevilla",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.e",
+    "description": "Aeropuerto de Sevilla Jardines del Real Alcázar de Sevilla Sevilla Sevilla Sevilla Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Sevilla Carretera A-4 Madrid-Cádiz, kilómetro 532 41020 Sevilla (Andalucía) Datos de contacto Tlf.: +34 913 211 000 Web: https://www.aena.e",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/jardines-real-alcazar-sevilla-s342325979-c-danor-aharon.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Valencia",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-valencia",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Valencia Valencia Manises Valencia-València Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Valencia Valencia Manises Valencia-València Aeropuerto de Valencia Valencia Manises Aeropuerto de Valencia Valencia-València Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Valencia Carretera del Aeropuerto, s/n",
+    "longDescription": "Aeropuerto de Valencia Valencia Manises Valencia-València Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Valencia Valencia Manises Valencia-València Aeropuerto de Valencia Valencia Manises Aeropuerto de Valencia Valencia-València Compartir Guardar favorito Eliminar fav",
+    "description": "Aeropuerto de Valencia Valencia Manises Valencia-València Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Valencia Valencia Manises Valencia-València Aeropuerto de Valencia Valencia Manises Aeropuerto de Valencia Valencia-València Compartir Guardar favorito Eliminar fav",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/valencia-janis-skribans-u414627.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/valencia-janis-skribans-u414627.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/valencia-janis-skribans-u414627.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Valladolid",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-valladolid",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Valladolid Valladolid Villanubla Valladolid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Valladolid Valladolid Villanubla Valladolid Aeropuerto de Valladolid Valladolid Villanubla Aeropuerto de Valladolid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Valladolid Carretera N-601 Adanero-Gijón, s/n 47620 Villanubla, Valladolid (Castilla y León) Carretera N-601 Adanero-Gijón, s/n 47620 Villanubla, Valladolid (Castilla y León) Datos de contacto Tlf",
+    "longDescription": "Aeropuerto de Valladolid Valladolid Villanubla Valladolid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Valladolid Valladolid Villanubla Valladolid Aeropuerto de Valladolid Valladolid Villanubla Aeropuerto de Valladolid Compartir Guardar favorito Eliminar favorito Ir",
+    "description": "Aeropuerto de Valladolid Valladolid Villanubla Valladolid Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Valladolid Valladolid Villanubla Valladolid Aeropuerto de Valladolid Valladolid Villanubla Aeropuerto de Valladolid Compartir Guardar favorito Eliminar favorito Ir",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/valladolid-s1377147983.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/valladolid-s1377147983.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/valladolid-s1377147983.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Vigo",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-vigo",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Vigo Puente de Vigo Vigo Pontevedra Vigo Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Vigo Puente de Vigo Vigo Pontevedra Aeropuerto de Vigo Puente de Vigo Vigo Aeropuerto de Vigo Puente de Vigo Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Vigo Av",
+    "longDescription": "Aeropuerto de Vigo Puente de Vigo Vigo Pontevedra Vigo Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Vigo Puente de Vigo Vigo Pontevedra Aeropuerto de Vigo Puente de Vigo Vigo Aeropuerto de Vigo Puente de Vigo Compartir Guardar favorito Eliminar favorito Ir a mis favo",
+    "description": "Aeropuerto de Vigo Puente de Vigo Vigo Pontevedra Vigo Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Vigo Puente de Vigo Vigo Pontevedra Aeropuerto de Vigo Puente de Vigo Vigo Aeropuerto de Vigo Puente de Vigo Compartir Guardar favorito Eliminar favorito Ir a mis favo",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-vigo_s1442453816.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-vigo_s1442453816.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/puente-vigo_s1442453816.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Vitoria",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-vitoria",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Araba-Álava Vitoria-Gasteiz Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Araba-Álava Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Aeropuerto de Vitoria Vitoria-Gasteiz Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Vitoria Carretera N-624 01196 Vitoria-Gasteiz, Araba-Álava (País Vasco) Carretera N-624 01196 Vitoria-Gasteiz, Araba-Álava (País Vasco) Datos de contacto vitceops@aena",
+    "longDescription": "Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Araba-Álava Vitoria-Gasteiz Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Araba-Álava Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Aeropuerto de Vitoria Vitoria-Gasteiz Compartir Guardar fa",
+    "description": "Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Araba-Álava Vitoria-Gasteiz Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Araba-Álava Aeropuerto de Vitoria Vitoria Vitoria-Gasteiz Aeropuerto de Vitoria Vitoria-Gasteiz Compartir Guardar fa",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vitoria-s567042511.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vitoria-s567042511.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/vitoria-s567042511.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "name": "Aeropuerto de Zaragoza",
+    "class": "Airport",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Airport",
+    "classParents": [
+      "TransportInfrastructure"
+    ],
+    "classAncestors": [
+      "TransportInfrastructure",
+      "Place",
+      "Thing",
+      "TourismEntity"
+    ],
+    "types": [
+      "Airport",
+      "Location"
+    ],
+    "typesRaw": [
+      "Airport"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/avion/aeropuerto-zaragoza",
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Zaragoza Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Ir a mis favoritos Guardar favorito Eliminar favorito Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Zaragoza Carretera Aeropuerto, s/n",
+    "longDescription": "Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Zaragoza Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Aeropuerto de Zaragoza Bas",
+    "description": "Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Zaragoza Compartir Guardar favorito Eliminar favorito Ir a mis favoritos Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Zaragoza Aeropuerto de Zaragoza Basílica del Pilar, Zaragoza Zaragoza Aeropuerto de Zaragoza Bas",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/basilica-pilar-s744141439.jpg_1014274486.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/basilica-pilar-s744141439.jpg_1014274486.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/aeropuertos/basilica-pilar-s744141439.jpg_1014274486.jpg"
+    ],
+    "additionalImages": [],
+    "wikidataId": ""
+  }
+]

@@ -9,6 +9,7 @@ import certifi
 import traceback
 import re
 import unicodedata
+import time
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from collections import Counter
@@ -70,6 +71,64 @@ def safe_json_output(data):
             "message": str(e),
         }
         print(json.dumps(error_output, ensure_ascii=False), flush=True)
+
+
+class ProgressReporter:
+    def __init__(self, total: int = 0, enabled: bool = True, interval_seconds: float = 10.0):
+        self.total = max(int(total or 0), 0)
+        self.enabled = enabled
+        self.interval_seconds = max(float(interval_seconds or 0), 0.0)
+        self.started_at = time.time()
+        self.last_emit_at = 0.0
+
+    def _format_seconds(self, seconds: float | None) -> str:
+        if seconds is None:
+            return "--:--:--"
+        seconds = max(int(seconds), 0)
+        hours, rem = divmod(seconds, 3600)
+        minutes, secs = divmod(rem, 60)
+        return f"{hours:02d}:{minutes:02d}:{secs:02d}"
+
+    def emit(
+        self,
+        stage: str,
+        current: int | None = None,
+        url: str = "",
+        entities_count: int | None = None,
+        errors_count: int | None = None,
+        force: bool = False,
+    ) -> None:
+        if not self.enabled:
+            return
+
+        now = time.time()
+        if not force and self.last_emit_at and (now - self.last_emit_at) < self.interval_seconds:
+            return
+
+        self.last_emit_at = now
+        elapsed = now - self.started_at
+        parts = [f"[PROGRESS] {stage}"]
+
+        if current is not None and self.total:
+            safe_current = min(max(int(current), 0), self.total)
+            percent = (safe_current / self.total) * 100
+            avg = elapsed / safe_current if safe_current else None
+            eta = (self.total - safe_current) * avg if avg else None
+            parts.append(f"page={safe_current}/{self.total}")
+            parts.append(f"{percent:.1f}%")
+            parts.append(f"elapsed={self._format_seconds(elapsed)}")
+            parts.append(f"eta={self._format_seconds(eta)}")
+        else:
+            parts.append(f"elapsed={self._format_seconds(elapsed)}")
+
+        if entities_count is not None:
+            parts.append(f"entities={entities_count}")
+        if errors_count is not None:
+            parts.append(f"errors={errors_count}")
+        if url:
+            parts.append(f"url={url}")
+
+        log(" | ".join(parts))
 
 
 def normalize_class_name(value):
@@ -292,6 +351,8 @@ def build_parser():
     parser.add_argument("--use_fewshots", action="store_true")
     parser.add_argument("--fewshot_file", type=str, default=None)
     parser.add_argument("--expected_type", type=str, default=None)
+    parser.add_argument("--no_progress", action="store_true", help="Desactiva las lineas de progreso en stderr")
+    parser.add_argument("--progress_interval", type=float, default=10.0, help="Segundos minimos entre actualizaciones de progreso")
 
     return parser
 
@@ -381,8 +442,27 @@ def process_pages(pages, pipeline, args, diagnostic=False):
     """
     results_ok: List[Dict[str, Any]] = []
     page_errors: List[Dict[str, Any]] = []
+    progress = ProgressReporter(
+        total=len(pages),
+        enabled=not getattr(args, "no_progress", False),
+        interval_seconds=getattr(args, "progress_interval", 10.0),
+    )
+
+    def _processed_entity_count() -> int:
+        return sum(len(block.get("entities", []) or []) for block in results_ok)
+
+    progress.emit("start_processing", current=0, force=True)
 
     for idx, (url, html) in enumerate(pages, start=1):
+        progress.emit(
+            "processing_page",
+            current=idx,
+            url=url,
+            entities_count=_processed_entity_count(),
+            errors_count=len(page_errors),
+            force=(idx == 1),
+        )
+
         if diagnostic:
             log(f"\n🔎 Procesando página: {url}")
 
@@ -425,6 +505,13 @@ def process_pages(pages, pipeline, args, diagnostic=False):
                 if not result:
                     log(f"ℹ️ Sin entidades finales para {url} (resultado válido tras filtrado)")
                     diag(diagnostic, f"pipeline.run devolvió lista vacía para {url}; se omite sin error")
+                    progress.emit(
+                        "page_done_empty",
+                        current=idx,
+                        url=url,
+                        entities_count=_processed_entity_count(),
+                        errors_count=len(page_errors),
+                    )
                     continue
 
                 results_ok.append({
@@ -437,6 +524,13 @@ def process_pages(pages, pipeline, args, diagnostic=False):
                     if not result["entities"]:
                         log(f"ℹ️ Sin entidades finales para {url} (dict con entities vacío, resultado válido tras filtrado)")
                         diag(diagnostic, f"pipeline.run devolvió dict con entities vacío para {url}; se omite sin error")
+                        progress.emit(
+                            "page_done_empty",
+                            current=idx,
+                            url=url,
+                            entities_count=_processed_entity_count(),
+                            errors_count=len(page_errors),
+                        )
                         continue
                     block = dict(result)
                     block.setdefault("url", url)
@@ -450,6 +544,15 @@ def process_pages(pages, pipeline, args, diagnostic=False):
 
             else:
                 raise TypeError(f"Tipo de retorno no soportado: {type(result).__name__}")
+
+            progress.emit(
+                "page_done",
+                current=idx,
+                url=url,
+                entities_count=_processed_entity_count(),
+                errors_count=len(page_errors),
+                force=(idx == len(pages)),
+            )
 
         except Exception as exc:
             tb = traceback.format_exc()
@@ -468,7 +571,22 @@ def process_pages(pages, pipeline, args, diagnostic=False):
             print("----- TRACEBACK END -----", file=sys.stderr)
 
             diag(diagnostic, f"Excepción detallada en process_pages(): {repr(exc)}")
+            progress.emit(
+                "page_error",
+                current=idx,
+                url=url,
+                entities_count=_processed_entity_count(),
+                errors_count=len(page_errors),
+                force=True,
+            )
 
+    progress.emit(
+        "processing_done",
+        current=len(pages),
+        entities_count=_processed_entity_count(),
+        errors_count=len(page_errors),
+        force=True,
+    )
     return results_ok, page_errors
 
 
@@ -699,9 +817,66 @@ def _merge_back_enrichment(global_entities: List[Dict[str, Any]], all_results: L
         else:
             out["properties"] = props
 
+        # Reinyectar metadatos estructurales perdidos durante consolidación/resolución
+        for field in [
+            "entityId",
+            "pageStructure",
+            "pageRole",
+            "parentEntityId",
+            "relationshipType",
+            "mentionRole",
+            "mentionRelation",
+        ]:
+            if out.get(field) in (None, "", []):
+                raw_value = raw.get(field)
+                if raw_value not in (None, "", []):
+                    out[field] = raw_value
+
+        if not out.get("sourceUrl") and raw.get("sourceUrl"):
+            out["sourceUrl"] = raw.get("sourceUrl")
+        if not out.get("url") and raw.get("url"):
+            out["url"] = raw.get("url")
+
         merged.append(out)
 
     return merged
+
+
+def _rescue_missing_route_parents(global_entities: List[Dict[str, Any]], all_results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    rescued = [dict(entity) for entity in global_entities if isinstance(entity, dict)]
+    existing_route_pages = {
+        str(entity.get("sourceUrl") or entity.get("url") or "").strip()
+        for entity in rescued
+        if str(entity.get("class") or entity.get("type") or "").strip().lower() == "route"
+    }
+
+    for block in all_results:
+        page_url = str(block.get("url") or "").strip()
+        if not page_url or page_url in existing_route_pages:
+            continue
+
+        route_candidates = []
+        for raw in block.get("entities", []) or []:
+            if not isinstance(raw, dict):
+                continue
+            raw_type = str(raw.get("class") or raw.get("type") or "").strip().lower()
+            if raw_type == "route" or raw.get("_route_parent_seed"):
+                route_candidates.append(raw)
+
+        if not route_candidates:
+            continue
+
+        route_candidates.sort(
+            key=lambda item: (
+                float(item.get("score") or 0.0),
+                len(str(item.get("name") or item.get("entity_name") or item.get("label") or "")),
+            ),
+            reverse=True,
+        )
+        rescued.append(dict(route_candidates[0]))
+        existing_route_pages.add(page_url)
+
+    return rescued
 
 
 def consolidate_entities(all_results, diagnostic=False):
@@ -722,11 +897,40 @@ def consolidate_entities(all_results, diagnostic=False):
 
     # Reinyectar enriquecimiento perdido desde resultados crudos
     global_entities = _merge_back_enrichment(global_entities, all_results)
+    global_entities = _rescue_missing_route_parents(global_entities, all_results)
 
     diag(diagnostic, f"Tras postprocess()+merge_back: {len(global_entities)} entidades")
     return global_entities
 
 def predict_from_pages(pages, pipeline, args, diagnostic=False):
+    if not pages:
+        payload = {
+            "status": "ok",
+            "mode": "single_url" if args.url else "crawl",
+            "start_url": args.start_url,
+            "url": args.url,
+            "max_pages": args.max_pages,
+            "expected_type": getattr(args, "expected_type", None),
+            "entity_count": 0,
+            "prediction": None,
+            "stats": {
+                "total_entities": 0,
+                "by_type": {},
+                "by_type_percent": {},
+                "entities_by_type": {},
+                "with_wikidata": 0,
+                "without_wikidata": 0,
+                "with_coordinates": 0,
+                "without_coordinates": 0,
+                "with_image": 0,
+                "without_image": 0,
+            },
+            "entities": [],
+            "message": "No se recuperaron paginas para procesar; revisa start_url, alcance del crawler o conectividad.",
+            "page_errors": [],
+        }
+        return payload, [], []
+
     all_results, page_errors = process_pages(
         pages=pages,
         pipeline=pipeline,
@@ -901,6 +1105,8 @@ def main():
         else:
             pages = get_pages(args, diagnostic=diagnostic)
             log(f"\n📄 Páginas encontradas: {len(pages)}")
+            if not pages:
+                log("\n⚠️ El crawler no recuperó páginas. No se inicia el procesamiento de entidades.")
 
             payload, all_results, global_entities = predict_from_pages(
                 pages=pages,

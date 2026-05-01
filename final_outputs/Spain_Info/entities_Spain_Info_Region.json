@@ -1,0 +1,991 @@
+[
+  {
+    "entityId": "",
+    "name": "Centro Gallego de Arte Contemporáneo",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destino/santiago-compostela",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Santiago de Compostela La deseada meta del Camino de Santiago Catedral de Santiago de Compostela (A Coruña) A Coruña Galicia A Coruña Max 20ºC / Min 10ºC A Coruña / Galicia Desde hace siglos, miles de peregrinos recorren el Camino de Santiago cada año con un sueño por cumplir: llegar a la capital de Galicia y entrar en su ya mítica Catedral",
+    "longDescription": "Santiago de Compostela La deseada meta del Camino de Santiago Catedral de Santiago de Compostela (A Coruña) A Coruña Galicia A Coruña Max 20ºC / Min 10ºC A Coruña / Galicia Desde hace siglos, miles de peregrinos recorren el Camino de Santiago cada año con un sueño por cumplir: llegar a la capital de",
+    "description": "A Coruña Santiago de Compostela La deseada meta del Camino de Santiago Catedral de Santiago de Compostela (A Coruña) A Coruña Galicia A Coruña Max 20ºC / Min 10ºC A Coruña / Galicia Desde hace siglos, miles de peregrinos recorren el Camino de Santiago cada año con un sueño por cumplir: llegar a la c",
+    "image": "https://www.spain.info/export/sites/segtur/.content/images/certificaciones/certificacion-patrimonio-mundial.png",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/galicia/santiago-de-compostela-catedral-s1292171812.jpg_604889389.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1224728085.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1224728085.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Catedral de Santiago de Compostela",
+    "class": "Cathedral",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Cathedral",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Cathedral",
+      "Location"
+    ],
+    "typesRaw": [
+      "Cathedral"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/arte-cultura",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.8804004,
+      "lng": -8.5446277
+    },
+    "shortDescription": "Ver las Ciudades Patrimonio Pórtico de la Gloria, Catedral de Santiago de Compostela Ver las Ciudades Patrimonio",
+    "longDescription": "Ver las Ciudades Patrimonio Pórtico de la Gloria, Catedral de Santiago de Compostela Ver las Ciudades Patrimonio",
+    "description": "Ver las Ciudades Patrimonio Pórtico de la Gloria, Catedral de Santiago de Compostela Ver las Ciudades Patrimonio",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/galicia/portico-gloria-004-c-programa-catedral-fundacion-barrie-y-fundacion-catedral-Pixi-Arnoso.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/castilla-leon/las-medulas-leon-s_1294609768.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/valencia/ciudad-artes-ciencias-valencia-c-linus-ekenstam-u254160.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/valencia/ciudad-artes-ciencias-valencia-c-linus-ekenstam-u254160.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Parque Nacional de Aigüestortes",
+    "class": "Garden",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Garden",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Garden",
+      "Location"
+    ],
+    "typesRaw": [
+      "Garden"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/naturaleza",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 42.5712715,
+      "lng": 0.9599368
+    },
+    "shortDescription": "Paisajes que conectan contigo DÓNDE IR Descubre los Parques Nacionales Selecciona en el mapa para obtener información del Parque Nacional que te interese",
+    "longDescription": "Paisajes que conectan contigo DÓNDE IR Descubre los Parques Nacionales Selecciona en el mapa para obtener información del Parque Nacional que te interese. Te va a encantar la variedad de paisajes. Parque Nacional de Aigüestortes i Estany de Sant Maurici Parque Nacional de Cabañeros Parque Nacional M",
+    "description": "Paisajes que conectan contigo Parque Nacional de Aigüestortes i Estany de Sant Maurici DÓNDE IR Descubre los Parques Nacionales Selecciona en el mapa para obtener información del Parque Nacional que te interese. Te va a encantar la variedad de paisajes. Parque Nacional de Aigüestortes i Estany de Sa",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/parques-nacionales/lince-iberico-pn-donana-s1540132259.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/images/cabeceras-grandes/extremadura/valle-jerte-pareja-cerezos-flor-c-t-extremadura.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/parques-nacionales/chica-montana-lagos-covadonga-s525778774-copia.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/parques-nacionales/chica-montana-lagos-covadonga-s525778774-copia.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Mercado de Abastos",
+    "class": "TraditionalMarket",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#TraditionalMarket",
+    "classParents": [
+      "AgrotourismFacility",
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "AgrotourismFacility",
+      "TourismOrRelatedFacility",
+      "Place",
+      "Thing",
+      "TourismEntity",
+      "HistoricalOrCulturalResource",
+      "TourismResource"
+    ],
+    "types": [
+      "TraditionalMarket",
+      "Location"
+    ],
+    "typesRaw": [
+      "TraditionalMarket"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destino/santiago-compostela",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 36.27938573409455,
+      "lng": -6.088795241629403
+    },
+    "shortDescription": "Santiago de Compostela La deseada meta del Camino de Santiago Catedral de Santiago de Compostela (A Coruña) A Coruña Galicia A Coruña Max 20ºC / Min 10ºC A Coruña / Galicia Desde hace siglos, miles de peregrinos recorren el Camino de Santiago cada año con un sueño por cumplir: llegar a la capital de Galicia y entrar en su ya mítica Catedral",
+    "longDescription": "Santiago de Compostela La deseada meta del Camino de Santiago Catedral de Santiago de Compostela (A Coruña) A Coruña Galicia A Coruña Max 20ºC / Min 10ºC A Coruña / Galicia Desde hace siglos, miles de peregrinos recorren el Camino de Santiago cada año con un sueño por cumplir: llegar a la capital de",
+    "description": "A Coruña Santiago de Compostela La deseada meta del Camino de Santiago Catedral de Santiago de Compostela (A Coruña) A Coruña Galicia A Coruña Max 20ºC / Min 10ºC A Coruña / Galicia Desde hace siglos, miles de peregrinos recorren el Camino de Santiago cada año con un sueño por cumplir: llegar a la c",
+    "image": "https://www.spain.info/export/sites/segtur/.content/images/certificaciones/certificacion-patrimonio-mundial.png",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/galicia/santiago-de-compostela-catedral-s1292171812.jpg_604889389.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1224728085.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1224728085.jpg"
+    ],
+    "wikidataId": "Q97619604"
+  },
+  {
+    "entityId": "",
+    "name": "Torre de Hércules",
+    "class": "Tower",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Tower",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Tower",
+      "Location"
+    ],
+    "typesRaw": [
+      "Tower"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destino/santiago-compostela",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Santiago de Compostela Qué hacer Otras ideas para tu viaje Los lugares más populares de España por el Camino de Santiago Entre las múltiples rutas para realizar el Camino de Santiago, hay una que te permitirá conocer el norte de España de una forma distinta",
+    "longDescription": "Santiago de Compostela Qué hacer Otras ideas para tu viaje Los lugares más populares de España por el Camino de Santiago Entre las múltiples rutas para realizar el Camino de Santiago, hay una que te permitirá conocer el norte de España de una forma distinta.…",
+    "description": "Santiago de Compostela",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1224728085.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/galicia/santiago-de-compostela-catedral-s1292171812.jpg_604889389.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1143197247.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1143197247.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Catedral Fundación Barrie",
+    "class": "Cathedral",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Cathedral",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Cathedral",
+      "Location"
+    ],
+    "typesRaw": [
+      "Cathedral"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/arte-cultura",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Viaja sostenible Viaja feliz siendo responsable Arte y cultura La cultura como estilo de vida none none none none none none Cultura 10 claves sobre las grandes civilizaciones de la historia de España Cultura Visitando la casa de genios Cultura Destinos para revivir el Imperio romano Cultura 12 increíbles ejemplos de arquitectura vanguardista Cultura Spain Screen Grand Tour: recorre los escenarios de tus historias favoritas Un país lleno de maravillas artísticas Conocer España significa viajar en",
+    "longDescription": "Viaja sostenible Viaja feliz siendo responsable Arte y cultura La cultura como estilo de vida none none none none none none Cultura 10 claves sobre las grandes civilizaciones de la historia de España Cultura Visitando la casa de genios Cultura Destinos para revivir el Imperio romano Cultura 12 incre",
+    "description": "Viaja sostenible Viaja feliz siendo responsable Viaja sostenible Viaja feliz siendo responsable Arte y cultura La cultura como estilo de vida none none none none none none Cultura 10 claves sobre las grandes civilizaciones de la historia de España Cultura Visitando la casa de genios Cultura Destinos",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/galicia/portico-gloria-004-c-programa-catedral-fundacion-barrie-y-fundacion-catedral-Pixi-Arnoso.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/mezquita-cordoba-s68752546.jpg",
+    "images": [],
+    "additionalImages": [],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Cabildo Palacio",
+    "class": "Palace",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Palace",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Palace",
+      "Location"
+    ],
+    "typesRaw": [
+      "Palace"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destino/santiago-compostela",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 40.4157013,
+      "lng": -3.7144084
+    },
+    "shortDescription": "Santiago de Compostela No te lo puedes perder Qué visitar Selecciona en la lista o navega por el mapa para descubrir los puntos de interés",
+    "longDescription": "Santiago de Compostela No te lo puedes perder Qué visitar Selecciona en la lista o navega por el mapa para descubrir los puntos de interés. San Lorenzo de Trasouto Catedral de Santiago de Compostela Casa do Cabildo Palacio de Raxoi Hostal de los Reyes Católicos Cidade da Cultura Centro Gallego de Ar",
+    "description": "Santiago de Compostela San Lorenzo de Trasouto No te lo puedes perder Qué visitar Selecciona en la lista o navega por el mapa para descubrir los puntos de interés. San Lorenzo de Trasouto Catedral de Santiago de Compostela Casa do Cabildo Palacio de Raxoi Hostal de los Reyes Católicos Cidade da Cult",
+    "image": "https://www.spain.info/export/sites/segtur/.content/images/certificaciones/certificacion-patrimonio-mundial.png",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/galicia/santiago-de-compostela-catedral-s1292171812.jpg_604889389.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1224728085.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/cultural-santiago-de-compostela/skyline-santiago-c-turismoDeSantiago.jpg_1224728085.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Catedral de San Salvador Zaragoza",
+    "class": "Cathedral",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Cathedral",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Cathedral",
+      "Location"
+    ],
+    "typesRaw": [
+      "Cathedral"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destino/zaragoza",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Zaragoza La Seo o Catedral de San Salvador Zaragoza",
+    "longDescription": "Zaragoza La Seo o Catedral de San Salvador Zaragoza",
+    "description": "Zaragoza La Seo o Catedral de San Salvador La Seo o Catedral de San Salvador Zaragoza",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1224728085.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/images/cabeceras-grandes/aragon/aljaferia-palacio-musulman_c-zaragoza_turismo.jpg_1259223088.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1143197247.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1143197247.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Parque de Atracciones Zaragoza",
+    "class": "Garden",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Garden",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Garden",
+      "Location"
+    ],
+    "typesRaw": [
+      "Garden"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destino/zaragoza",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Zaragoza en dos días Parque de Atracciones Zaragoza en dos días",
+    "longDescription": "Zaragoza en dos días Parque de Atracciones Zaragoza en dos días",
+    "description": "Zaragoza en dos días Parque de Atracciones Parque de Atracciones Zaragoza en dos días",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1224728085.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/images/cabeceras-grandes/aragon/aljaferia-palacio-musulman_c-zaragoza_turismo.jpg_1259223088.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1143197247.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1143197247.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Festival Internacional de Santander",
+    "class": "Event",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Event",
+    "classParents": [
+      "TourismEntity"
+    ],
+    "classAncestors": [
+      "TourismEntity"
+    ],
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "typesRaw": [
+      "Event"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destino/santander",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Festival Internacional de Santander agosto 2026 - 31 agosto 2026 Festival Internacional de Santander",
+    "longDescription": "Festival Internacional de Santander agosto 2026 - 31 agosto 2026 Festival Internacional de Santander",
+    "description": "Festival Internacional de Santander agosto 2026 - 31 agosto 2026 Festival Internacional de Santander",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/santander-dos-dias/vistas-santander-palacio-magdalena-c-willian-justen-de-vasconcellos-u572613.jpg_1224728085.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/images/cabecera/vista-santander-palacio-magdalena-desde-puntal-c-barbara-ferrer.jpg_1224728085.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/images/cabecera/vista-santander-palacio-magdalena-desde-puntal-c-barbara-ferrer.jpg_1143197247.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/images/cabecera/vista-santander-palacio-magdalena-desde-puntal-c-barbara-ferrer.jpg_1143197247.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Camino de Santiago 21",
+    "class": "Route",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Route",
+    "classParents": [
+      "Place",
+      "TourismResource"
+    ],
+    "classAncestors": [
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Route",
+      "Location"
+    ],
+    "typesRaw": [
+      "Route"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Descubre nuestros destinos MADRID La capital de las mil opciones 19º 8º BILBAO Una de las ciudades más vanguardistas de España 26º 9º ZARAGOZA Una gran ciudad con mucho por descubrir 21º 7º BARCELONA Al ritmo cosmopolita 17º 10º VALENCIA La esencia del Mediterráneo 18º 8º MÁLAGA La capital de la Costa del Sol se reinventa 20º 12º SEVILLA Un destino que inspira 24º 10º SANTIAGO DE COMPOSTELA La deseada meta del Camino de Santiago 21º 3º SALAMANCA La ciudad dorada de las mil leyendas 19º 5º SANTAN",
+    "longDescription": "Descubre nuestros destinos MADRID La capital de las mil opciones 19º 8º BILBAO Una de las ciudades más vanguardistas de España 26º 9º ZARAGOZA Una gran ciudad con mucho por descubrir 21º 7º BARCELONA Al ritmo cosmopolita 17º 10º VALENCIA La esencia del Mediterráneo 18º 8º MÁLAGA La capital de la Cos",
+    "description": "MADRID La capital de las mil opciones 19º 8º Descubre nuestros destinos MADRID La capital de las mil opciones 19º 8º BILBAO Una de las ciudades más vanguardistas de España 26º 9º ZARAGOZA Una gran ciudad con mucho por descubrir 21º 7º BARCELONA Al ritmo cosmopolita 17º 10º VALENCIA La esencia del Me",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/cerezo-valle-jerte-s1736642102.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg_1259223088.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg_1259223088.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Camino de Santiago Explora España",
+    "class": "Route",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Route",
+    "classParents": [
+      "Place",
+      "TourismResource"
+    ],
+    "classAncestors": [
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Route",
+      "Location"
+    ],
+    "typesRaw": [
+      "Route"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destinos",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Explora España La deseada meta del Camino de Santiago Explora España",
+    "longDescription": "Explora España La deseada meta del Camino de Santiago Explora España",
+    "description": "Explora España La deseada meta del Camino de Santiago Explora España Viaja sostenible Viaja feliz siendo responsable Destinos Aquí empiezan tus vacaciones Explora España Grandes ciudades conocidas en todo el mundo, destinos de interior llenos de encanto, pueblos en la costa para disfrutar del mar, l",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/thumbnail-mapas/catedral-santiago-s1523460782.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/andalucia/puente-ronda-noche-c-willian-justen-de-vasconcellos-u469291.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/andalucia/plaza_espana_sevilla_t4101062.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/andalucia/plaza_espana_sevilla_t4101062.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Festival 09 may",
+    "class": "Event",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Event",
+    "classParents": [
+      "TourismEntity"
+    ],
+    "classAncestors": [
+      "TourismEntity"
+    ],
+    "types": [
+      "Event",
+      "Location"
+    ],
+    "typesRaw": [
+      "Event"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Planificador de rutas AGENDA Disfruta de los mejores eventos Exposiciones, festivales, fiestas",
+    "longDescription": "Planificador de rutas AGENDA Disfruta de los mejores eventos Exposiciones, festivales, fiestas... No te pierdas nada 07 may. 07 mayo 2026 - 10 mayo 2026 Festival WOMAD Cáceres Cáceres Festival 04 may. 04 mayo 2026 - 17 mayo 2026 Festival de los patios cordobeses Córdoba Fiesta 09 may. 09 mayo 2026 T",
+    "description": "Planificador de rutas 07 may. 07 mayo 2026 - 10 mayo 2026 Festival WOMAD Cáceres Cáceres Festival AGENDA Disfruta de los mejores eventos Exposiciones, festivales, fiestas... No te pierdas nada 07 may. 07 mayo 2026 - 10 mayo 2026 Festival WOMAD Cáceres Cáceres Festival 04 may. 04 mayo 2026 - 17 mayo",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/eventos-fiestas/extremadura/womad-caceres-festival-c-womad.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/eventos-fiestas/castilla-leon/expo-yoko-ono-morning-beams-c-yoko-ono.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/concierto-u639172.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/concierto-u639172.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Estación Intermodal Zaragoza Delicias Zaragoza",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/destino/zaragoza",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Zaragoza en dos días Estación Intermodal Zaragoza Delicias Zaragoza en dos días",
+    "longDescription": "Zaragoza en dos días Estación Intermodal Zaragoza Delicias Zaragoza en dos días",
+    "description": "Zaragoza en dos días Estación Intermodal Zaragoza Delicias Estación Intermodal Zaragoza Delicias Zaragoza en dos días",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1224728085.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/images/cabeceras-grandes/aragon/aljaferia-palacio-musulman_c-zaragoza_turismo.jpg_1259223088.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1143197247.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/rutas/zaragoza-en-dos-dias/zaragoza-basilica-pilar-turista-s748265914.jpg_1143197247.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Parques Nacionales Paisajes",
+    "class": "Garden",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Garden",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Garden",
+      "Location"
+    ],
+    "typesRaw": [
+      "Garden"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/naturaleza",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Paisajes que conectan contigo Descubre los Parques Nacionales Paisajes que conectan contigo",
+    "longDescription": "Paisajes que conectan contigo Descubre los Parques Nacionales Paisajes que conectan contigo",
+    "description": "Paisajes que conectan contigo Descubre los Parques Nacionales Paisajes que conectan contigo",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/parques-nacionales/lince-iberico-pn-donana-s1540132259.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/images/cabeceras-grandes/extremadura/valle-jerte-pareja-cerezos-flor-c-t-extremadura.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/parques-nacionales/chica-montana-lagos-covadonga-s525778774-copia.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/parques-nacionales/chica-montana-lagos-covadonga-s525778774-copia.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Cultura Spain Screen Grand",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/arte-cultura",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Viaja sostenible Viaja feliz siendo responsable Arte y cultura La cultura como estilo de vida none none none none none none Cultura 10 claves sobre las grandes civilizaciones de la historia de España Cultura Visitando la casa de genios Cultura Destinos para revivir el Imperio romano Cultura 12 increíbles ejemplos de arquitectura vanguardista Cultura Spain Screen Grand Tour: recorre los escenarios de tus historias favoritas Un país lleno de maravillas artísticas Conocer España significa viajar en",
+    "longDescription": "Viaja sostenible Viaja feliz siendo responsable Arte y cultura La cultura como estilo de vida none none none none none none Cultura 10 claves sobre las grandes civilizaciones de la historia de España Cultura Visitando la casa de genios Cultura Destinos para revivir el Imperio romano Cultura 12 incre",
+    "description": "Viaja sostenible Viaja feliz siendo responsable Viaja sostenible Viaja feliz siendo responsable Arte y cultura La cultura como estilo de vida none none none none none none Cultura 10 claves sobre las grandes civilizaciones de la historia de España Cultura Visitando la casa de genios Cultura Destinos",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/mezquita-cordoba-s68752546.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/san-juan-gaztelugatxe-s434073643.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-fondos/mezquita-cordoba-c-perseomedusa-123rf-43188788.jpg_25397988.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-fondos/mezquita-cordoba-c-perseomedusa-123rf-43188788.jpg_25397988.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Ciudad Patrimonio",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 1.0,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/ciudades",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Visitas para conocer la auténtica Sevilla En 2026 Cuenca cumple 30 años como Ciudad Patrimonio Visitas para conocer la auténtica Sevilla",
+    "longDescription": "Visitas para conocer la auténtica Sevilla En 2026 Cuenca cumple 30 años como Ciudad Patrimonio Visitas para conocer la auténtica Sevilla",
+    "description": "Visitas para conocer la auténtica Sevilla En 2026 Cuenca cumple 30 años como Ciudad Patrimonio Visitas para conocer la auténtica Sevilla",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-fondos/ciudad-artes-ciencias-valenciapetr-suma-u370546.jpg_25397988.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/images/cabecera/madrid-vistas-cba-c-pedro-giraldez.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/burgos-s577439890.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/burgos-s577439890.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Costas y playas",
+    "class": null,
+    "classUri": "",
+    "classParents": [],
+    "classAncestors": [],
+    "types": [
+      "Location"
+    ],
+    "typesRaw": [
+      "Unknown"
+    ],
+    "ontologyMatch": false,
+    "ontologyRejectionReason": "no_matching_segittur_class",
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/costas-playas",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": null,
+      "lng": null
+    },
+    "shortDescription": "Costas y playas Playas de España",
+    "longDescription": "Costas y playas Playas de España. Principales destinos y ciudades de costa | spain.info",
+    "description": "Costas y playas Playas de España. Principales destinos y ciudades de costa | spain.info Viaja sostenible Viaja feliz siendo responsable Costas y playas Disfrutar al lado del mar none none none none none Costas y playas Destinos de playa con sello de turismo familiar Costas y playas Sol y playa todo",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/costas-playas/cala-moro-mallorca-i29548754.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabeceras-grandes/baleares/catedral-vistas-playa-palma-c-ftpm365-jan-marc-rameken.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/costas-playas/ribadesella-s1449963641.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-destacados/costas-playas/ribadesella-s1449963641.jpg"
+    ],
+    "wikidataId": ""
+  },
+  {
+    "entityId": "",
+    "name": "Turismo urbano",
+    "class": "Monument",
+    "classUri": "https://ontologia.segittur.es/turismo/def/core#Monument",
+    "classParents": [
+      "HistoricalOrCulturalResource"
+    ],
+    "classAncestors": [
+      "HistoricalOrCulturalResource",
+      "Place",
+      "Thing",
+      "TourismResource",
+      "TourismEntity"
+    ],
+    "types": [
+      "Monument",
+      "Location"
+    ],
+    "typesRaw": [
+      "Monument"
+    ],
+    "ontologyMatch": true,
+    "ontologyRejectionReason": null,
+    "sourceOntology": "https://ontologia.segittur.es/turismo/def/core/ontology.nt",
+    "score": 0.8,
+    "sourceUrl": "",
+    "url": "https://www.spain.info/es/ciudades",
+    "pageStructure": "",
+    "pageRole": "",
+    "parentEntityId": null,
+    "relationshipType": null,
+    "relatedUrls": [],
+    "address": "",
+    "phone": "",
+    "email": "",
+    "coordinates": {
+      "lat": 43.419085,
+      "lng": -2.7213505
+    },
+    "shortDescription": "Turismo urbano Ciudades de España",
+    "longDescription": "Turismo urbano Ciudades de España. Ven a visitarlas | spain.info",
+    "description": "Turismo urbano Ciudades de España. Ven a visitarlas | spain.info Viaja sostenible Viaja feliz siendo responsable Turismo urbano Destinos llenos de atractivos none none none none none Turismo urbano Tres city-break culturales en España que no son Madrid ni Barcelona Turismo urbano 4 viajes que te enc",
+    "image": "https://www.spain.info/export/sites/segtur/.content/imagenes/cabecera-completa/parque-retiro-madrid-s509081659.jpg",
+    "mainImage": "https://www.spain.info/export/sites/segtur/.content/images/cabecera/madrid-vistas-cba-c-pedro-giraldez.jpg",
+    "images": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-fondos/ciudad-artes-ciencias-valenciapetr-suma-u370546.jpg_25397988.jpg"
+    ],
+    "additionalImages": [
+      "https://www.spain.info/export/sites/segtur/.content/imagenes/galeria-fondos/ciudad-artes-ciencias-valenciapetr-suma-u370546.jpg_25397988.jpg"
+    ],
+    "wikidataId": ""
+  }
+]

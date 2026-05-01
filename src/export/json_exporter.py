@@ -79,12 +79,79 @@ class JSONExporter:
             "favicon",
             "avatar",
             "sprite",
+            "visita_burgos_fondo",
+            "burgos_fondo",
+            "_fondo",
+            "fondo.png",
         ]
         if any(b in low for b in bad_patterns):
             return False
         if ".svg" in low:
             return False
         return True
+
+    def _to_float(self, value):
+        try:
+            if value in (None, ""):
+                return None
+            return float(value)
+        except Exception:
+            return None
+
+    def _is_burgos_source(self, entity: dict) -> bool:
+        source = " ".join(
+            self._clean_text(entity.get(key))
+            for key in ("sourceUrl", "url")
+        ).lower()
+        return "visitaburgosciudad.es" in source
+
+    def _coords_in_burgos_scope(self, lat, lng) -> bool:
+        lat = self._to_float(lat)
+        lng = self._to_float(lng)
+        if lat is None or lng is None:
+            return False
+        return 41.2 <= lat <= 43.4 and -4.6 <= lng <= -2.5
+
+    def _canonical_key(self, text: str) -> str:
+        value = self._clean_text(text).lower()
+        value = re.sub(r"[^\wáéíóúñü]+", " ", value, flags=re.IGNORECASE)
+        return re.sub(r"\s+", " ", value).strip()
+
+    def _is_coordinate_name_safe(self, entity: dict) -> bool:
+        key = self._canonical_key(self._choose_name(entity))
+        if not key:
+            return False
+        tokens = [token for token in key.split() if token]
+        if len(tokens) < 2:
+            return False
+        trailing_fragments = {
+            "de", "del", "la", "el", "los", "las", "y", "en", "para", "por",
+            "paseo", "ruta", "rutas", "parque", "plaza", "mercado", "museo",
+            "palacio", "iglesia", "catedral", "convento", "albergues",
+            "apartamentos", "alojamientos", "eventos",
+        }
+        if tokens[-1] in trailing_fragments:
+            return False
+        generic_exact = {
+            "parque natural",
+            "plaza huerto",
+            "rutas urbanas",
+            "eventos en burgos",
+            "albergues",
+            "alojamientos en burgos",
+            "alojamientos hoteleros",
+            "apartamentos turisticos",
+            "centro de aves",
+            "cordillera cantabrica",
+            "sistema iberico",
+            "orientacion parque",
+            "espolon parque",
+            "quinta parque",
+            "mercado mayor",
+            "muralla la ciudad",
+            "iglesia en burgos",
+        }
+        return key not in generic_exact
 
     def _flatten_maybe_serialized_list(self, value):
         flat = []
@@ -233,6 +300,18 @@ class JSONExporter:
             lat = entity.get("latitude")
         if lng in (None, ""):
             lng = entity.get("longitude")
+        lat = self._to_float(lat)
+        lng = self._to_float(lng)
+        if lat is not None and not (-90 <= lat <= 90):
+            lat = None
+        if lng is not None and not (-180 <= lng <= 180):
+            lng = None
+        if not self._is_coordinate_name_safe(entity):
+            lat = None
+            lng = None
+        if self._is_burgos_source(entity) and not self._coords_in_burgos_scope(lat, lng):
+            lat = None
+            lng = None
         return {
             "lat": lat,
             "lng": lng,
@@ -247,6 +326,143 @@ class JSONExporter:
             return final_class
         types = self._extract_types(entity)
         return types[0] if types else "Unknown"
+
+    def _public_entity_payload(self, entity: dict) -> dict:
+        return {
+            "entityId": entity.get("entityId"),
+            "name": entity.get("name"),
+            "class": entity.get("class"),
+            "classUri": entity.get("classUri"),
+            "classParents": entity.get("classParents", []),
+            "classAncestors": entity.get("classAncestors", []),
+            "types": entity.get("types", []),
+            "typesRaw": entity.get("typesRaw", []),
+            "ontologyMatch": entity.get("ontologyMatch"),
+            "ontologyRejectionReason": entity.get("ontologyRejectionReason"),
+            "sourceOntology": entity.get("sourceOntology"),
+            "score": entity.get("score"),
+            "sourceUrl": entity.get("sourceUrl"),
+            "url": entity.get("url"),
+            "pageStructure": entity.get("pageStructure"),
+            "pageRole": entity.get("pageRole"),
+            "mentionRole": entity.get("mentionRole"),
+            "mentionRelation": entity.get("mentionRelation"),
+            "relatedUrls": entity.get("relatedUrls", []),
+            "address": entity.get("address"),
+            "phone": entity.get("phone"),
+            "email": entity.get("email"),
+            "coordinates": entity.get("coordinates", {"lat": None, "lng": None}),
+            "shortDescription": entity.get("shortDescription"),
+            "longDescription": entity.get("longDescription"),
+            "description": entity.get("description"),
+            "image": entity.get("image"),
+            "mainImage": entity.get("mainImage"),
+            "images": entity.get("images", []),
+            "additionalImages": entity.get("additionalImages", []),
+            "wikidataId": entity.get("wikidataId"),
+        }
+
+    def _nested_entity_node(self, entity: dict) -> dict:
+        node = self._public_entity_payload(entity)
+        node["relationshipType"] = entity.get("relationshipType")
+        node["children"] = []
+        return node
+
+    def build_hierarchical_export(self, entities: list, pages=None) -> dict:
+        normalized_entities = [entity for entity in entities or [] if isinstance(entity, dict)]
+        page_urls = self._normalize_pages(pages)
+        grouped: dict[str, list] = {}
+
+        for entity in normalized_entities:
+            page_url = self._pick_page_url(entity) or "UNKNOWN_PAGE"
+            grouped.setdefault(page_url, []).append(entity)
+
+        for page_url in page_urls:
+            grouped.setdefault(page_url, [])
+
+        page_groups = []
+        for page_url in sorted(grouped.keys(), key=lambda value: value.lower()):
+            page_entities = grouped.get(page_url, [])
+            id_map = {}
+            child_map = {}
+            roots = []
+            standalone = []
+            page_structure_value = self._clean_text(page_entities[0].get("pageStructure")) if page_entities else ""
+
+            for entity in page_entities:
+                entity_id = self._clean_text(entity.get("entityId"))
+                if entity_id:
+                    id_map[entity_id] = entity
+                parent_id = self._clean_text(entity.get("parentEntityId"))
+                if parent_id:
+                    child_map.setdefault(parent_id, []).append(entity)
+
+            used_root_ids = set()
+            for entity in page_entities:
+                entity_id = self._clean_text(entity.get("entityId"))
+                page_role = self._clean_text(entity.get("pageRole")).lower()
+                parent_id = self._clean_text(entity.get("parentEntityId"))
+                if parent_id:
+                    continue
+                if page_role in {"primary", "standalone"} or entity_id in child_map or not entity_id:
+                    if entity_id and entity_id in used_root_ids:
+                        continue
+                    roots.append(entity)
+                    if entity_id:
+                        used_root_ids.add(entity_id)
+
+            if page_structure_value == "hierarchical":
+                primary_roots = [
+                    entity
+                    for entity in roots
+                    if self._clean_text(entity.get("pageRole")).lower() == "primary"
+                ]
+                if primary_roots:
+                    standalone.extend(entity for entity in roots if entity not in primary_roots)
+                    roots = primary_roots
+
+            for entity in page_entities:
+                entity_id = self._clean_text(entity.get("entityId"))
+                parent_id = self._clean_text(entity.get("parentEntityId"))
+                if parent_id:
+                    continue
+                if entity not in roots:
+                    standalone.append(entity)
+                elif not entity_id:
+                    standalone.append(entity)
+
+            def build_node(entity: dict) -> dict:
+                node = self._nested_entity_node(entity)
+                entity_id = self._clean_text(entity.get("entityId"))
+                children = child_map.get(entity_id, []) if entity_id else []
+                node["children"] = [build_node(child) for child in children]
+                return node
+
+            root_nodes = [build_node(entity) for entity in roots]
+            standalone_nodes = []
+            seen_standalone = set()
+            for entity in standalone:
+                key = self._clean_text(entity.get("entityId")) or self._choose_name(entity)
+                if not key or key in seen_standalone:
+                    continue
+                seen_standalone.add(key)
+                standalone_nodes.append(self._nested_entity_node(entity))
+
+            page_groups.append(
+                {
+                    "url": page_url,
+                    "pageStructure": page_structure_value,
+                    "entityCount": len(page_entities),
+                    "rootEntities": root_nodes,
+                    "standaloneEntities": standalone_nodes,
+                }
+            )
+
+        return {
+            "totalPages": len(page_groups),
+            "totalEntities": len(normalized_entities),
+            "pages": page_groups,
+        }
 
     def _normalize_pages(self, pages) -> list:
         normalized = []
@@ -317,7 +533,15 @@ class JSONExporter:
         additional_images = self._pick_additional_images(images, primary_image, main_image)
         wikidata_id = self._clean_text(entity.get("wikidata_id") or entity.get("wikidataId"))
         final_class = self._clean_text(entity.get("class"))
+        entity_id = self._clean_text(entity.get("entityId"))
+        page_structure = self._clean_text(entity.get("pageStructure"))
+        page_role = self._clean_text(entity.get("pageRole"))
+        parent_entity_id = self._clean_text(entity.get("parentEntityId"))
+        relationship_type = self._clean_text(entity.get("relationshipType"))
+        mention_role = self._clean_text(entity.get("mentionRole"))
+        mention_relation = self._clean_text(entity.get("mentionRelation"))
         return {
+            "entityId": entity_id,
             "name": self._choose_name(entity),
             "class": final_class or None,
             "classUri": self._clean_text(entity.get("classUri")),
@@ -331,6 +555,12 @@ class JSONExporter:
             "score": entity.get("score"),
             "sourceUrl": self._clean_text(entity.get("sourceUrl")),
             "url": self._clean_text(entity.get("url")),
+            "pageStructure": page_structure,
+            "pageRole": page_role,
+            "parentEntityId": parent_entity_id or None,
+            "relationshipType": relationship_type or None,
+            "mentionRole": mention_role,
+            "mentionRelation": mention_relation or None,
             "relatedUrls": self._extract_related_urls(entity),
             "address": self._clean_text(entity.get("address")),
             "phone": self._clean_text(entity.get("phone")),
@@ -356,8 +586,16 @@ class JSONExporter:
 
         output_file = Path(output_path)
         summary_path = output_file.with_name(f"{output_file.stem}_page_counts.json")
+        hierarchical_path = output_file.with_name(f"{output_file.stem}_hierarchical.json")
+        base_hierarchical_path = Path("entities_hierarchical.json")
         summary = self.build_page_summary(data, pages=pages)
+        hierarchical = self.build_hierarchical_export(data, pages=pages)
         with open(summary_path, "w", encoding="utf-8") as f:
             json.dump(summary, f, ensure_ascii=False, indent=2)
+        with open(hierarchical_path, "w", encoding="utf-8") as f:
+            json.dump(hierarchical, f, ensure_ascii=False, indent=2)
+        if hierarchical_path.resolve() != base_hierarchical_path.resolve():
+            with open(base_hierarchical_path, "w", encoding="utf-8") as f:
+                json.dump(hierarchical, f, ensure_ascii=False, indent=2)
 
         return data

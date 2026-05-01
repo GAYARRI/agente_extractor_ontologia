@@ -2,17 +2,23 @@ from __future__ import annotations
 
 import argparse
 import json
+import warnings
 from collections import Counter, deque
 from typing import Any
 from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
+from urllib3.exceptions import InsecureRequestWarning
 
 
 DEFAULT_HEADERS = {
     "User-Agent": "TourismOntologyAgent/1.0",
 }
+
+warnings.filterwarnings("ignore", category=InsecureRequestWarning)
+
+INSECURE_DOMAINS: set[str] = set()
 
 
 def normalize_url(url: str) -> str:
@@ -54,16 +60,31 @@ def same_scope(url: str, base_domain: str, base_path_prefix: str) -> bool:
     return path == base_path_prefix or path.startswith(base_path_prefix + "/")
 
 
+def _request(url: str, timeout: int, verify: bool = True) -> tuple[str | None, str | None]:
+    response = requests.get(
+        url,
+        headers=DEFAULT_HEADERS,
+        timeout=timeout,
+        allow_redirects=True,
+        verify=verify,
+    )
+    response.raise_for_status()
+    return response.text, response.url
+
+
 def fetch_text(url: str, timeout: int) -> tuple[str | None, str | None]:
+    domain = urlparse(url).netloc.lower()
+    verify_ssl = domain not in INSECURE_DOMAINS
+
     try:
-        response = requests.get(
-            url,
-            headers=DEFAULT_HEADERS,
-            timeout=timeout,
-            allow_redirects=True,
-        )
-        response.raise_for_status()
-        return response.text, response.url
+        return _request(url, timeout=timeout, verify=verify_ssl)
+    except requests.exceptions.SSLError:
+        if domain:
+            INSECURE_DOMAINS.add(domain)
+        try:
+            return _request(url, timeout=timeout, verify=False)
+        except requests.RequestException:
+            return None, None
     except requests.RequestException:
         return None, None
 

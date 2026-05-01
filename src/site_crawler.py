@@ -401,6 +401,8 @@ class SiteCrawler:
     def _should_skip_url(self, url: str) -> bool:
         low = url.lower()
         parsed = urlparse(url)
+        path_low = (parsed.path or "").lower()
+        query_low = (parsed.query or "").lower()
         path_segments = [segment for segment in (parsed.path or "/").split("/") if segment]
 
         # Evitar versiones del sitio en otros idiomas para no duplicar ruido
@@ -418,9 +420,9 @@ class SiteCrawler:
             ".pdf", ".zip", ".rar", ".7z",
             ".mp4", ".mp3", ".avi", ".mov", ".wmv",
             ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx",
-            ".xml", ".json",
+            ".xml", ".json", ".css", ".js",
         ]
-        if any(low.endswith(ext) for ext in bad_exts):
+        if any(path_low.endswith(ext) for ext in bad_exts):
             return True
 
         # Evitar algunos endpoints comunes poco utiles para crawling semantico
@@ -431,10 +433,24 @@ class SiteCrawler:
             "/tag/",
             "/author/",
             "/search?",
+            "/documents/",
+            "/documentos/",
+            "/o/",
+            "/c/",
             "?s=",
             "/cdn-cgi/",
         ]
         if any(fragment in low for fragment in bad_fragments):
+            return True
+
+        bad_query_markers = [
+            "minifiertype=css",
+            "minifiertype=js",
+            "themeid=",
+            "browserid=",
+            "languageid=",
+        ]
+        if any(marker in query_low for marker in bad_query_markers):
             return True
 
         return False

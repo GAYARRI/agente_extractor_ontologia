@@ -117,6 +117,34 @@ def fix_encoding(text: str) -> str:
         return text or ""
 
 
+def compact_entity_description(text: str, entity_name: str = "") -> str:
+    value = strip_sitewide_footer_text(text or "")
+    value = re.sub(r"\s+", " ", value).strip()
+    if not value:
+        return ""
+
+    if entity_name:
+        escaped_name = re.escape(str(entity_name).strip())
+        if escaped_name:
+            value = re.sub(
+                rf"^(?:{escaped_name}\s+){{2,}}",
+                f"{entity_name} ",
+                value,
+                flags=re.IGNORECASE,
+            ).strip()
+            value = re.sub(
+                rf"\b({escaped_name})(?:\s+\1){{1,}}",
+                r"\1",
+                value,
+                flags=re.IGNORECASE,
+            ).strip()
+
+    value = re.sub(r"\b(compartir|guardar favorito|eliminar favorito|ir a mis favoritos)\b.*$", "", value, flags=re.IGNORECASE).strip()
+    value = re.sub(r"\b(qu[eé]\s+hacer|planes\s+para\s+inspirarte)\b.*$", "", value, flags=re.IGNORECASE).strip()
+    value = re.sub(r"\s+", " ", value).strip(" -|,;:")
+    return value
+
+
 class TourismPipeline:
     def __init__(
         self,
@@ -401,6 +429,23 @@ class TourismPipeline:
         t = re.sub(r"\s+", " ", t).strip()
         return t
 
+    def _normalize_candidate_type_name(self, value: str) -> str:
+        value = str(value or "").strip()
+        if not value:
+            return ""
+        if value in self.valid_classes:
+            return value
+
+        value_slug = re.sub(r"[^a-z0-9]+", "", value.lower())
+        if not value_slug:
+            return ""
+
+        for candidate in self.valid_classes:
+            candidate_slug = re.sub(r"[^a-z0-9]+", "", candidate.lower())
+            if value_slug == candidate_slug:
+                return candidate
+        return value
+
     def _tokenize_name(self, text: str) -> List[str]:
         return [t for t in re.split(r"[^\wáéíóúñü]+", self._normalized_for_match(text)) if t]
 
@@ -454,7 +499,12 @@ class TourismPipeline:
         for pat in self.trailing_noise_patterns:
             text = re.sub(pat, "", text, flags=re.IGNORECASE).strip()
 
-        text = re.sub(r"\b(PAGO RECOMENDADO|Ver|Más|Mas|También|Tambien|Comenzaremos)\b$", "", text, flags=re.IGNORECASE).strip()
+        text = re.sub(
+            r"\b(PAGO RECOMENDADO|Ver|Más|Mas|También|Tambien|Comenzaremos|Saber|Ir|Qué|Que|Tradiciones|Recomendaciones|Descubrir|Descubre)\b$",
+            "",
+            text,
+            flags=re.IGNORECASE,
+        ).strip()
         text = re.sub(
             r"^\s*Ayuntamiento\s+de\s+Pamplona\s+",
             "",
@@ -959,6 +1009,219 @@ class TourismPipeline:
             for candidate in (title, h1, slug)
             if candidate
         )
+
+    def _is_route_like_page(self, page_signals: Optional[Dict[str, Any]] = None, url: str = "") -> bool:
+        page_signals = page_signals or {}
+        merged = " ".join(
+            str(x or "")
+            for x in [
+                url or page_signals.get("url") or "",
+                page_signals.get("title") or "",
+                page_signals.get("h1") or "",
+                page_signals.get("breadcrumb") or "",
+                page_signals.get("slug") or "",
+            ]
+        )
+        merged = self._normalized_for_match(merged)
+        route_markers = ("ruta", "route", "camino", "itinerario", "sendero", "via verde")
+        return any(marker in merged for marker in route_markers)
+
+    def _is_structure_child_candidate(self, entity: Dict[str, Any]) -> bool:
+        entity_type = self._normalized_for_match(entity.get("class") or entity.get("type") or "")
+        if not entity_type or entity_type in {"unknown", "thing", "concept", "conceptscheme", "person", "event"}:
+            return False
+        if entity_type == "route":
+            return False
+        name = str(entity.get("name") or entity.get("entity_name") or entity.get("label") or "").strip()
+        return bool(name)
+
+    def _build_entity_stable_id(self, entity: Dict[str, Any], page_url: str, used_ids: set) -> str:
+        page_slug = self._extract_url_slug(page_url) or "page"
+        name = (
+            entity.get("name")
+            or entity.get("entity_name")
+            or entity.get("entity")
+            or entity.get("label")
+            or "entity"
+        )
+        base = f"{page_slug}__{self._canonical_key(name).replace(' ', '_') or 'entity'}"
+        entity_id = base
+        suffix = 2
+        while entity_id in used_ids:
+            entity_id = f"{base}_{suffix}"
+            suffix += 1
+        used_ids.add(entity_id)
+        return entity_id
+
+    def _pick_structural_primary_entity(
+        self,
+        entities: List[Dict[str, Any]],
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ) -> Optional[Dict[str, Any]]:
+        if not entities:
+            return None
+
+        page_signals = page_signals or {}
+        route_like_page = self._is_route_like_page(page_signals=page_signals, url=url)
+
+        def candidate_score(item: Dict[str, Any]) -> tuple:
+            name = str(item.get("name") or item.get("entity_name") or item.get("label") or "").strip()
+            entity_type = self._normalized_for_match(item.get("class") or item.get("type") or "")
+            score = float(item.get("score") or 0.0)
+            return (
+                1 if self._is_primary_page_candidate_name(name, page_signals=page_signals, url=url) else 0,
+                1 if route_like_page and entity_type == "route" else 0,
+                1 if item.get("_synthetic_primary_candidate") or item.get("_detail_priority_seed") else 0,
+                score,
+                len(name),
+            )
+
+        ordered = sorted((item for item in entities if isinstance(item, dict)), key=candidate_score, reverse=True)
+        best = ordered[0] if ordered else None
+        if not best:
+            return None
+
+        best_name = str(best.get("name") or best.get("entity_name") or best.get("label") or "").strip()
+        if not best_name:
+            return None
+
+        if route_like_page:
+            best_type = self._normalized_for_match(best.get("class") or best.get("type") or "")
+            if best_type == "route" or self._looks_like_route_entity_name(best_name):
+                return best
+            return None
+
+        if self._is_primary_page_candidate_name(best_name, page_signals=page_signals, url=url):
+            return best
+        return None
+
+    def _annotate_page_structure(
+        self,
+        entities: List[Dict[str, Any]],
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ) -> List[Dict[str, Any]]:
+        annotated = [dict(entity) for entity in entities if isinstance(entity, dict)]
+        if not annotated:
+            return annotated
+
+        page_signals = page_signals or {}
+        page_url = url or page_signals.get("url") or ""
+        used_ids = set()
+        primary = self._pick_structural_primary_entity(annotated, page_signals=page_signals, url=url)
+        primary_key = self._canonical_key(
+            primary.get("name") or primary.get("entity_name") or primary.get("label") or ""
+        ) if primary else ""
+
+        route_like_page = self._is_route_like_page(page_signals=page_signals, url=url)
+        child_count = 0
+
+        for entity in annotated:
+            entity["entityId"] = self._build_entity_stable_id(entity, page_url, used_ids)
+
+        if len(annotated) == 1:
+            structure = "single"
+        else:
+            structure = "flat"
+
+        if primary_key and route_like_page:
+            for entity in annotated:
+                name_key = self._canonical_key(entity.get("name") or entity.get("entity_name") or entity.get("label") or "")
+                if name_key and name_key != primary_key and self._is_structure_child_candidate(entity):
+                    child_count += 1
+            if child_count >= 1:
+                structure = "hierarchical"
+
+        primary_id = ""
+        if primary:
+            primary_id = str(primary.get("entityId") or "")
+
+        for entity in annotated:
+            name_key = self._canonical_key(entity.get("name") or entity.get("entity_name") or entity.get("label") or "")
+            entity["pageStructure"] = structure
+            entity["parentEntityId"] = None
+            entity["relationshipType"] = None
+
+            if structure == "single":
+                entity["pageRole"] = "primary"
+                continue
+
+            if structure == "hierarchical" and primary_id:
+                if name_key == primary_key:
+                    entity["pageRole"] = "primary"
+                elif self._is_structure_child_candidate(entity):
+                    entity["pageRole"] = "child"
+                    entity["parentEntityId"] = primary_id
+                    entity["relationshipType"] = "includesStop"
+                else:
+                    entity["pageRole"] = "secondary"
+                continue
+
+            if primary_key and name_key == primary_key:
+                entity["pageRole"] = "primary"
+            else:
+                entity["pageRole"] = "standalone"
+
+        return annotated
+
+    def _align_entities_with_page_subject(
+        self,
+        entities: List[Dict[str, Any]],
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ) -> List[Dict[str, Any]]:
+        aligned = [dict(entity) for entity in entities if isinstance(entity, dict)]
+        if not aligned:
+            return aligned
+
+        page_signals = page_signals or {}
+        subject_name = self._clean_candidate_name(page_signals.get("pageSubject") or "")
+        subject_norm = self._normalized_for_match(subject_name)
+        subject_class = str(page_signals.get("pageSubjectClass") or "").strip()
+        subject_confidence = float(page_signals.get("pageSubjectConfidence") or 0.0)
+        if not subject_name or subject_confidence < 0.8:
+            return aligned
+
+        transport_like_page = self._is_transport_like_page(page_signals=page_signals, url=url)
+        for entity in aligned:
+            name = self._clean_candidate_name(
+                entity.get("name")
+                or entity.get("entity_name")
+                or entity.get("entity")
+                or entity.get("label")
+                or ""
+            )
+            name_norm = self._normalized_for_match(name)
+            entity_class = str(entity.get("class") or entity.get("type") or "").strip()
+            page_role = str(entity.get("pageRole") or "").strip().lower()
+            if page_role and page_role != "primary":
+                continue
+
+            if subject_class and entity_class and subject_class != entity_class:
+                continue
+
+            generic_transport_name = name_norm in {
+                "estacion de autobuses",
+                "estación de autobuses",
+                "estacion de tren",
+                "estación de tren",
+                "aeropuerto",
+                "puerto",
+            }
+            weak_partial = bool(name_norm and name_norm in subject_norm and len(name_norm.split()) <= 3)
+            mixed_hybrid = transport_like_page and bool(name_norm) and any(
+                marker in name_norm for marker in ("estacion", "estación", "aeropuerto", "puerto")
+            ) and name_norm != subject_norm and subject_norm not in name_norm and name_norm not in subject_norm
+
+            if generic_transport_name or weak_partial or mixed_hybrid:
+                entity["name"] = subject_name
+                entity["entity_name"] = subject_name
+                entity["label"] = subject_name
+                entity["entity"] = subject_name
+                entity["_page_subject_aligned"] = True
+
+        return aligned
 
     def _is_detail_secondary_label(
         self,
@@ -1617,6 +1880,26 @@ class TourismPipeline:
 
         return self._clean_candidate_name(value)
 
+    def _clean_route_parent_name(self, text: str) -> str:
+        value = str(text or "").strip()
+        if not value:
+            return ""
+
+        value = re.sub(r"\s+", " ", value).strip()
+        for separator in (" | ", " - "):
+            if separator in value:
+                value = value.split(separator)[0].strip()
+
+        low = self._normalized_for_match(value)
+        for prefix in ("ir al contenido", "reserva tu actividad", "descubre pamplona", "planifica tu viaje"):
+            if low.startswith(prefix + " "):
+                value = value[len(prefix):].strip()
+                low = self._normalized_for_match(value)
+
+        value = re.sub(r"\b(Distancia|Tiempo recomendado)\b.*$", "", value, flags=re.IGNORECASE).strip()
+        value = re.sub(r"\s+", " ", value).strip(" -|,;:")
+        return value
+
     def _extract_primary_page_entity_candidates(self, title: str = "", h1: str = "") -> List[str]:
         anchor_pattern = re.compile(
             r"\b(?:Festival|Mercado|Feria|Ruta|Camino|Museo|Catedral|Iglesia|Capilla|Castillo|"
@@ -1657,6 +1940,149 @@ class TourismPipeline:
                 candidates.append(candidate)
 
         return candidates
+
+    def _is_transport_like_page(self, page_signals: Optional[Dict[str, Any]] = None, url: str = "") -> bool:
+        page_signals = page_signals or {}
+        merged = " ".join(
+            str(x or "")
+            for x in [
+                url or page_signals.get("url") or "",
+                page_signals.get("title") or "",
+                page_signals.get("h1") or "",
+                page_signals.get("breadcrumb") or "",
+                page_signals.get("slug") or "",
+            ]
+        )
+        merged = self._normalized_for_match(merged)
+        markers = (
+            "transporte",
+            "estacion de tren",
+            "estación de tren",
+            "estacion de autobuses",
+            "estación de autobuses",
+            "aeropuerto",
+            "puerto",
+        )
+        return any(marker in merged for marker in markers)
+
+    def _page_subject_match_score(
+        self,
+        candidate: str,
+        page_signals: Optional[Dict[str, Any]] = None,
+        page_text: str = "",
+        url: str = "",
+    ) -> float:
+        candidate_norm = self._normalized_for_match(candidate)
+        if not candidate_norm:
+            return 0.0
+
+        page_signals = page_signals or {}
+        title = self._normalized_for_match(page_signals.get("title") or "")
+        h1 = self._normalized_for_match(page_signals.get("h1") or "")
+        breadcrumb = self._normalized_for_match(page_signals.get("breadcrumb") or "")
+        slug = self._normalized_for_match(page_signals.get("slug") or self._extract_url_slug(url))
+        text = self._normalized_for_match((page_text or "")[:1800])
+
+        score = 0.0
+        if h1 and (candidate_norm == h1 or candidate_norm in h1 or h1 in candidate_norm):
+            score += 4.0
+        if title and (candidate_norm == title or candidate_norm in title or title in candidate_norm):
+            score += 3.0
+        if breadcrumb and (candidate_norm in breadcrumb or breadcrumb in candidate_norm):
+            score += 1.0
+        if slug and any(token in slug for token in self._tokenize_name(candidate_norm) if len(token) > 3):
+            score += 1.5
+        if text and candidate_norm in text:
+            score += 1.5
+
+        token_hits = sum(1 for token in self._tokenize_name(candidate_norm) if len(token) > 3 and token in text)
+        score += min(2.0, token_hits * 0.4)
+        return score
+
+    def _detect_page_subject(
+        self,
+        page_signals: Optional[Dict[str, Any]] = None,
+        page_text: str = "",
+        url: str = "",
+    ) -> Dict[str, Any]:
+        page_signals = page_signals or {}
+        candidates = self._extract_primary_page_entity_candidates(
+            title=page_signals.get("title") or "",
+            h1=page_signals.get("h1") or "",
+        )
+
+        if not candidates:
+            return {
+                "name": "",
+                "class": "",
+                "confidence": 0.0,
+                "evidence": [],
+            }
+
+        scored = []
+        for candidate in candidates:
+            score = self._page_subject_match_score(
+                candidate,
+                page_signals=page_signals,
+                page_text=page_text,
+                url=url,
+            )
+            scored.append((score, candidate))
+
+        transport_like_page = self._is_transport_like_page(page_signals=page_signals, url=url)
+        if transport_like_page:
+            direct_h1 = self._clean_heading_candidate(page_signals.get("h1") or "")
+            direct_title = self._clean_heading_candidate(page_signals.get("title") or "")
+            boosted = []
+            for score, candidate in scored:
+                extra = 0.0
+                candidate_norm = self._normalized_for_match(candidate)
+                if direct_h1 and candidate_norm == self._normalized_for_match(direct_h1):
+                    extra += 3.0
+                if direct_title and candidate_norm == self._normalized_for_match(direct_title):
+                    extra += 2.0
+                boosted.append((score + extra, candidate))
+            scored = boosted
+
+        scored.sort(key=lambda item: (item[0], len(item[1])), reverse=True)
+        best_score, best_candidate = scored[0]
+        if best_score <= 0:
+            return {
+                "name": "",
+                "class": "",
+                "confidence": 0.0,
+                "evidence": [],
+            }
+
+        guessed_class = self._normalize_candidate_type_name(
+            self._guess_type_from_name_and_context(
+                entity_name=best_candidate,
+                page_text=" ".join(
+                    x for x in [
+                        page_signals.get("h1") or "",
+                        page_signals.get("title") or "",
+                        page_signals.get("breadcrumb") or "",
+                        page_text[:1200] if page_text else "",
+                    ] if x
+                ),
+                current_type="",
+            )
+        )
+        guessed_class = self._normalize_unknown_family_type(
+            name=best_candidate,
+            current_type=guessed_class,
+            page_signals=page_signals,
+        )
+        guessed_class = self._normalize_candidate_type_name(guessed_class)
+
+        confidence = min(1.0, round(best_score / 8.0, 3))
+        evidence = [candidate for _, candidate in scored[:3]]
+        return {
+            "name": best_candidate,
+            "class": guessed_class or "",
+            "confidence": confidence,
+            "evidence": evidence,
+        }
 
     def _seed_detail_primary_candidates(
         self,
@@ -1745,6 +2171,144 @@ class TourismPipeline:
             )
             seen.add(key)
         return fallback
+
+    def _ensure_route_parent_entity(
+        self,
+        entities: List[Dict[str, Any]],
+        page_signals: Optional[Dict[str, Any]] = None,
+        page_text: str = "",
+        url: str = "",
+    ) -> List[Dict[str, Any]]:
+        seeded = [dict(entity) for entity in entities or [] if isinstance(entity, dict)]
+        page_signals = page_signals or {}
+        if not self._is_route_like_page(page_signals=page_signals, url=url):
+            return seeded
+
+        route_like_class = choose_route_like_class(self.valid_classes)
+        route_class = route_like_class if route_like_class != "Unknown" else "Route"
+        route_name_candidates: List[str] = []
+        for raw in (
+            page_signals.get("h1") or "",
+            page_signals.get("title") or "",
+            page_signals.get("pageSubject") or "",
+        ):
+            cleaned = self._clean_route_parent_name(raw)
+            if cleaned:
+                route_name_candidates.append(cleaned)
+
+        slug_candidate = self._extract_url_slug(url)
+        if slug_candidate:
+            route_name_candidates.append(self._clean_route_parent_name(slug_candidate.replace("-", " ").replace("_", " ")))
+
+        subject_name = ""
+        if route_name_candidates:
+            def _route_name_score(value: str) -> tuple:
+                norm = self._normalized_for_match(value)
+                has_anchor = 1 if any(term in norm for term in ("ruta", "camino", "itinerario", "via verde", "dias", "días")) else 0
+                return (has_anchor, len(value))
+
+            subject_name = sorted(route_name_candidates, key=_route_name_score, reverse=True)[0]
+
+        if not subject_name:
+            return seeded
+
+        subject_key = self._canonical_key(subject_name)
+        for entity in seeded:
+            name = self._clean_candidate_name(
+                entity.get("name")
+                or entity.get("entity_name")
+                or entity.get("entity")
+                or entity.get("label")
+                or ""
+            )
+            name_key = self._canonical_key(name)
+            entity_type = self._normalized_for_match(entity.get("class") or entity.get("type") or "")
+            if entity_type == "route" and (name_key == subject_key or subject_key in name_key or name_key in subject_key):
+                return seeded
+
+        seeded.insert(
+            0,
+            {
+                "name": subject_name,
+                "entity_name": subject_name,
+                "entity": subject_name,
+                "label": subject_name,
+                "type": route_class,
+                "class": route_class,
+                "score": 1.0,
+                "source_text": " ".join(
+                    x
+                    for x in [
+                        page_signals.get("h1") or "",
+                        page_signals.get("title") or "",
+                        (page_text or "")[:800],
+                    ]
+                    if x
+                ).strip(),
+                "_synthetic_primary_candidate": True,
+                "_route_parent_seed": True,
+                "sourceUrl": url,
+            },
+        )
+        return seeded
+
+    def _clean_route_child_name(self, name: str) -> str:
+        text = self._clean_candidate_name(name)
+        if not text:
+            return ""
+
+        text = re.sub(r"\s*/\s*(Derecha|Izquierda)\b.*$", "", text, flags=re.IGNORECASE).strip()
+        text = re.sub(r"\bDistancia\b.*$", "", text, flags=re.IGNORECASE).strip(" -|,;:")
+        text = re.sub(r"^(D[IÍ]A\s*\d+|Mañana|Tarde)\b[:\-]?\s*", "", text, flags=re.IGNORECASE).strip()
+        text = re.sub(
+            r"\b(Saber|Ir|Qué|Que|Tradiciones|Recomendaciones|Descubrir|Descubre)\b$",
+            "",
+            text,
+            flags=re.IGNORECASE,
+        ).strip(" -|,;:")
+
+        parts = [part.strip() for part in re.split(r"\s{2,}", text) if part.strip()]
+        if parts:
+            text = parts[0]
+
+        tokens = text.split()
+        if len(tokens) >= 2 and tokens[0].lower() == "de":
+            text = " ".join(tokens[1:]).strip()
+            tokens = text.split()
+        if len(tokens) >= 3 and tokens[-1].lower() in {"palacio", "parque", "catedral", "iglesia", "museo"}:
+            text = " ".join(tokens[:-1]).strip()
+
+        return text.strip(" -|,;:")
+
+    def _normalize_route_children(
+        self,
+        entities: List[Dict[str, Any]],
+        page_signals: Optional[Dict[str, Any]] = None,
+        url: str = "",
+    ) -> List[Dict[str, Any]]:
+        normalized = [dict(entity) for entity in entities or [] if isinstance(entity, dict)]
+        if not self._is_route_like_page(page_signals=page_signals, url=url):
+            return normalized
+
+        for entity in normalized:
+            entity_type = self._normalized_for_match(entity.get("class") or entity.get("type") or "")
+            if entity_type == "route":
+                continue
+
+            cleaned = self._clean_route_child_name(
+                entity.get("name")
+                or entity.get("entity_name")
+                or entity.get("entity")
+                or entity.get("label")
+                or ""
+            )
+            if cleaned:
+                entity["name"] = cleaned
+                entity["entity_name"] = cleaned
+                entity["label"] = cleaned
+                entity["entity"] = cleaned
+
+        return normalized
 
     def _looks_like_technical_noise_entity(self, entity_name: str) -> bool:
         name = self._normalized_for_match(entity_name)
@@ -2120,6 +2684,10 @@ class TourismPipeline:
             ),
             url=url,
         )
+        signals["pageSubject"] = ""
+        signals["pageSubjectClass"] = ""
+        signals["pageSubjectConfidence"] = 0.0
+        signals["pageSubjectEvidence"] = []
         return signals
 
     def _get_entity_context(self, entity: Dict[str, Any], page_text: str = "") -> str:
@@ -2131,6 +2699,151 @@ class TourismPipeline:
         ]
         context = " ".join(str(x).strip() for x in parts if str(x).strip())
         return context or page_text
+
+    def _looks_like_address_or_contact_name(self, name: str) -> bool:
+        value = self._normalized_for_match(name)
+        if not value:
+            return False
+        if any(value.startswith(prefix) for prefix in ("calle ", "plaza ", "avenida ", "avda ", "paseo ", "camino ")):
+            return True
+        if re.search(r"\b(s/?n|cp\s+\d{3,5}|\d{5})\b", value):
+            return True
+        return False
+
+    def _infer_relation_hint_from_context(self, entity: Dict[str, Any], page_text: str = "") -> str:
+        context = self._normalized_for_match(self._get_entity_context(entity, page_text=page_text))
+        if not context:
+            return ""
+
+        relation_markers = [
+            ("nearby", ("junto a ", "junto al ", "cerca de ", "a pocos kilometros de ")),
+            ("located_in", ("en la comarca de ", "en la provincia de ", "en el entorno de ")),
+            ("includes", ("incluye ", "incluyen ", "forma parte de ", "pertenece a ")),
+            ("editorial_reference", ("que hacer", "planes para inspirarte", "la historia de", "ruta del", "camino del")),
+        ]
+        for relation, markers in relation_markers:
+            if any(marker in context for marker in markers):
+                return relation
+        return ""
+
+    def _infer_mention_role(
+        self,
+        entity: Dict[str, Any],
+        page_signals: Optional[Dict[str, Any]] = None,
+        page_text: str = "",
+        url: str = "",
+    ) -> str:
+        page_signals = page_signals or {}
+        name = self._clean_candidate_name(
+            entity.get("name")
+            or entity.get("entity_name")
+            or entity.get("entity")
+            or entity.get("label")
+            or ""
+        )
+        if not name:
+            return "ui_noise"
+
+        if self._looks_like_ui_or_category_name(name) or self._is_contextual_noise_entity(name):
+            return "ui_noise"
+
+        if self._is_primary_page_candidate_name(name, page_signals=page_signals, url=url):
+            return "primary_resource"
+
+        if entity.get("_synthetic_primary_candidate") or entity.get("_detail_priority_seed") or entity.get("_detail_primary_fallback"):
+            return "primary_resource"
+
+        page_subject = self._clean_candidate_name(page_signals.get("pageSubject") or "")
+        subject_norm = self._normalized_for_match(page_subject)
+        name_norm = self._normalized_for_match(name)
+        if subject_norm and name_norm and (name_norm == subject_norm or name_norm in subject_norm or subject_norm in name_norm):
+            return "primary_resource"
+
+        relation_hint = self._infer_relation_hint_from_context(entity, page_text=page_text)
+        if relation_hint:
+            if relation_hint in {"nearby", "located_in"}:
+                return "related_entity"
+            if relation_hint == "editorial_reference":
+                return "related_entity"
+
+        if self._looks_like_address_or_contact_name(name):
+            return "location_context"
+
+        return "standalone_candidate"
+
+    def _annotate_mention_roles(
+        self,
+        entities: List[Dict[str, Any]],
+        page_signals: Optional[Dict[str, Any]] = None,
+        page_text: str = "",
+        url: str = "",
+    ) -> List[Dict[str, Any]]:
+        annotated = []
+        for entity in entities or []:
+            if not isinstance(entity, dict):
+                continue
+            item = dict(entity)
+            mention_role = self._infer_mention_role(item, page_signals=page_signals, page_text=page_text, url=url)
+            relation_hint = self._infer_relation_hint_from_context(item, page_text=page_text)
+            item["mentionRole"] = mention_role
+            item["mentionRelation"] = relation_hint or item.get("mentionRelation") or ""
+            annotated.append(item)
+        return annotated
+
+    def _is_subject_dominant_context_entity(
+        self,
+        entity: Dict[str, Any],
+        page_signals: Optional[Dict[str, Any]] = None,
+        page_text: str = "",
+        url: str = "",
+    ) -> bool:
+        page_signals = page_signals or {}
+        subject_name = self._normalized_for_match(page_signals.get("pageSubject") or "")
+        subject_confidence = float(page_signals.get("pageSubjectConfidence") or 0.0)
+        if not subject_name or subject_confidence < 0.75:
+            return False
+
+        name = self._normalized_for_match(
+            entity.get("name")
+            or entity.get("entity_name")
+            or entity.get("entity")
+            or entity.get("label")
+            or ""
+        )
+        if not name or name == subject_name or name in subject_name or subject_name in name:
+            return False
+
+        context = self._normalized_for_match(self._get_entity_context(entity, page_text=page_text))
+        if not context or subject_name not in context:
+            return False
+
+        strong_context_markers = (
+            "que hacer",
+            "planes para inspirarte",
+            "la historia de",
+            "camino del",
+            "ruta del",
+            "compartir",
+            "guardar favorito",
+            "eliminar favorito",
+            "ir a mis favoritos",
+        )
+        if not any(marker in context for marker in strong_context_markers):
+            return False
+
+        props_support = any(
+            entity.get(field)
+            for field in ("address", "phone", "email", "relatedUrls", "sourceUrl")
+        )
+        if props_support:
+            return False
+
+        coords = entity.get("coordinates") or {}
+        has_coords = isinstance(coords, dict) and coords.get("lat") is not None and coords.get("lng") is not None
+        if has_coords and not any(marker in (url or "").lower() for marker in ("ruta", "route", "camino")):
+            return False
+
+        return True
 
     def _apply_conservative_filter(
         self,
@@ -2333,6 +3046,46 @@ class TourismPipeline:
 
         return {}
 
+    def _build_entity_enrichment_context(self, entity: Dict[str, Any], page_text: str = "") -> str:
+        item = entity if isinstance(entity, dict) else {}
+        parts: List[str] = []
+        seen = set()
+
+        def add_part(value: Any) -> None:
+            text = strip_sitewide_footer_text(str(value or "").strip())
+            if not text:
+                return
+            key = self._canonical_key(text)
+            if key and key not in seen:
+                seen.add(key)
+                parts.append(text)
+
+        signals = item.get("html_context_signals")
+        if isinstance(signals, dict):
+            add_part(signals.get("heading"))
+            add_part(signals.get("link_text"))
+
+        add_part(item.get("source_text"))
+        add_part(item.get("context"))
+
+        merged = " ".join(parts).strip()
+        if len(merged) >= 140:
+            return merged
+
+        name = str(item.get("name") or item.get("entity_name") or item.get("label") or "").strip()
+        is_route_like_entity = self._looks_like_route_entity_name(name)
+        is_primary_seed = bool(
+            item.get("_synthetic_primary_candidate")
+            or item.get("_detail_priority_seed")
+            or item.get("_detail_primary_fallback")
+        )
+
+        if (is_route_like_entity or is_primary_seed) and page_text:
+            add_part(page_text[:1200])
+            return " ".join(parts).strip()
+
+        return merged or strip_sitewide_footer_text(page_text[:800] if page_text else "")
+
     def _extract_entity_properties(self, entity: Dict[str, Any], html: str, page_text: str, url: str) -> Dict[str, Any]:
         merged: Dict[str, Any] = {}
 
@@ -2492,6 +3245,74 @@ class TourismPipeline:
             return False
         return coords.get("lat") is not None and coords.get("lng") is not None
 
+    def _coords_in_expected_scope(self, lat: Any, lng: Any, source_url: str = "") -> bool:
+        try:
+            lat_f = float(lat)
+            lng_f = float(lng)
+        except Exception:
+            return False
+
+        if not (-90 <= lat_f <= 90 and -180 <= lng_f <= 180):
+            return False
+
+        source = str(source_url or "").lower()
+        if "visitaburgosciudad.es" in source:
+            return 41.2 <= lat_f <= 43.4 and -4.6 <= lng_f <= -2.5
+
+        return True
+
+    def _is_geocoding_name_safe(self, name: str, entity_type: str = "") -> bool:
+        text = self._clean_candidate_name(name)
+        key = self._canonical_key(text)
+        if not key:
+            return False
+
+        tokens = [tok for tok in key.split() if tok]
+        if len(tokens) < 2:
+            return False
+
+        trailing_fragments = {
+            "de", "del", "la", "el", "los", "las", "y", "en", "para", "por",
+            "paseo", "ruta", "rutas", "parque", "plaza", "mercado", "museo",
+            "palacio", "iglesia", "catedral", "convento", "albergues",
+            "apartamentos", "alojamientos", "eventos",
+        }
+        if tokens[-1] in trailing_fragments:
+            return False
+
+        generic_exact = {
+            "parque natural",
+            "plaza huerto",
+            "rutas urbanas",
+            "eventos en burgos",
+            "albergues",
+            "alojamientos en burgos",
+            "alojamientos hoteleros",
+            "apartamentos turisticos",
+            "apartamentos turÇðsticos",
+            "centro de aves",
+            "cordillera cantabrica",
+            "cordillera cantÇ­brica",
+            "sistema iberico",
+            "sistema ibÇ¸rico",
+            "orientacion parque",
+            "orientaciÇün parque",
+            "espolon parque",
+            "espolÇün parque",
+            "quinta parque",
+            "mercado mayor",
+            "muralla la ciudad",
+            "iglesia en burgos",
+        }
+        if key in generic_exact:
+            return False
+
+        entity_type_l = str(entity_type or "").strip().lower()
+        if entity_type_l in {"hotel", "restaurant", "traditionalmarket"}:
+            return any(marker in key for marker in ("hotel", "hostal", "restaurante", "mercado", "burgos"))
+
+        return True
+
     def _geo_resolver_class_hint(self, entity_type: str) -> str:
         value = str(entity_type or "").strip().lower()
         if value in {"hotel", "restaurant", "bar", "traditionalmarket", "shop"}:
@@ -2536,8 +3357,16 @@ class TourismPipeline:
         fallback_url: str,
     ) -> Dict[str, Any]:
         coords = item.get("coordinates")
+        source_url = item.get("sourceUrl") or fallback_url
         if self._has_valid_coordinates(coords):
-            return coords
+            if self._coords_in_expected_scope(coords.get("lat"), coords.get("lng"), source_url):
+                return coords
+            return {"lat": None, "lng": None}
+        if not self._is_geocoding_name_safe(
+            item.get("name") or item.get("entity_name") or item.get("label") or "",
+            item.get("class") or item.get("type") or "",
+        ):
+            return coords if isinstance(coords, dict) else {"lat": None, "lng": None}
         if not self.geo_resolver or not self._is_geo_candidate_entity(item):
             return coords if isinstance(coords, dict) else {"lat": None, "lng": None}
 
@@ -2568,6 +3397,8 @@ class TourismPipeline:
         lng = resolved.get("lng")
         if lat is None or lng is None:
             return coords if isinstance(coords, dict) else {"lat": None, "lng": None}
+        if not self._coords_in_expected_scope(lat, lng, source_url):
+            return {"lat": None, "lng": None}
 
         merged = {"lat": float(lat), "lng": float(lng)}
 
@@ -2613,9 +3444,13 @@ class TourismPipeline:
             item["class"] = entity_type
             item["type"] = entity_type
 
+        entity_context_text = self._build_entity_enrichment_context(item, page_text=page_text)
+        if entity_context_text:
+            item["context"] = entity_context_text
+
         description_data = self._extract_first_description(
             entity=item,
-            page_text=page_text,
+            page_text=entity_context_text,
         )
 
         description_text = (
@@ -2627,7 +3462,7 @@ class TourismPipeline:
         props = self._extract_entity_properties(
             entity=item,
             html=html,
-            page_text=page_text,
+            page_text=entity_context_text,
             url=url,
         )
 
@@ -2644,7 +3479,7 @@ class TourismPipeline:
             entity_name=name,
             html=html,
             url=url,
-            block_text=page_text[:1000],
+            block_text=entity_context_text[:1000],
         )
 
         coordinates = self._extract_coordinates_from_props(props)
@@ -2663,10 +3498,16 @@ class TourismPipeline:
         if description_data:
             for k, v in description_data.items():
                 if v not in (None, "", [], {}):
-                    item[k] = v
+                    if k in {"description", "short_description", "long_description"}:
+                        item[k] = compact_entity_description(v, entity_name=name)
+                    else:
+                        item[k] = v
 
-        if description_text and not item.get("description"):
+        description_text = compact_entity_description(description_text, entity_name=name)
+        if description_text:
             item["description"] = description_text
+        elif item.get("description"):
+            item["description"] = compact_entity_description(item.get("description"), entity_name=name)
 
         if wikidata_id:
             item["wikidata_id"] = wikidata_id
@@ -2747,6 +3588,7 @@ class TourismPipeline:
     ):
         prekept = []
         prerejected = []
+        route_like_page = self._is_route_like_page(page_signals=page_signals, url=url)
 
         for item in entities or []:
             if not isinstance(item, dict):
@@ -2777,6 +3619,15 @@ class TourismPipeline:
                 reasons.append("contextual_noise_name")
             if self._is_narrative_side_entity(name, page_signals=page_signals, url=url):
                 reasons.append("narrative_side_entity")
+            if self._is_subject_dominant_context_entity(item, page_signals=page_signals, page_text=page_text, url=url):
+                reasons.append("page_subject_context_reference")
+            mention_role = str(item.get("mentionRole") or "").strip().lower()
+            if mention_role == "ui_noise":
+                reasons.append("mention_role_ui_noise")
+            if mention_role == "location_context":
+                reasons.append("mention_role_location_context")
+            if mention_role == "related_entity" and not listing_like_page and not route_like_page:
+                reasons.append("mention_role_related_entity")
             if self._is_phrase_fragment(name):
                 reasons.append("phrase_fragment")
             if detail_priority_page and self._is_detail_secondary_label(name, page_signals=page_signals, url=url):
@@ -2789,10 +3640,38 @@ class TourismPipeline:
                 reasons.append("listing_page_long_compound")
 
             entity_type = str(item.get("class") or item.get("type") or "").strip().lower()
+            current_path = (urlparse(url).path or "/").rstrip("/") or "/"
+            homepage_like = current_path in {"/", "/es"}
             if entity_type in {"unknown", ""} and penalty >= 3:
                 reasons.append("weak_type_and_bad_name")
             if entity_type == "route" and not self._looks_like_route_entity_name(name):
                 reasons.append("weak_route_name")
+            if entity_type == "route" and homepage_like and not detail_priority_page:
+                reasons.append("homepage_context_route")
+
+            route_parent_candidate = (
+                route_like_page
+                and entity_type == "route"
+                and (
+                    primary_match
+                    or item.get("_synthetic_primary_candidate")
+                    or item.get("_route_parent_seed")
+                    or item.get("_detail_primary_fallback")
+                )
+            )
+            if route_parent_candidate:
+                reasons = [
+                    reason
+                    for reason in reasons
+                    if reason not in {
+                        "bad_compound_name",
+                        "phrase_fragment",
+                        "weak_type_and_bad_name",
+                        "weak_route_name",
+                        "mention_role_related_entity",
+                    }
+                ]
+                penalty = max(0.0, penalty - 4.0)
 
             if detail_priority_page and primary_match:
                 reasons = [
@@ -2869,6 +3748,15 @@ class TourismPipeline:
             page_text=page_text,
             url=url,
         )
+        page_subject = self._detect_page_subject(
+            page_signals=page_signals,
+            page_text=page_text,
+            url=url,
+        )
+        page_signals["pageSubject"] = page_subject.get("name") or ""
+        page_signals["pageSubjectClass"] = page_subject.get("class") or ""
+        page_signals["pageSubjectConfidence"] = float(page_subject.get("confidence") or 0.0)
+        page_signals["pageSubjectEvidence"] = page_subject.get("evidence") or []
 
         strict_listing_page = self._is_strict_listing_page(
             page_signals=page_signals,
@@ -2882,6 +3770,7 @@ class TourismPipeline:
             url=url,
         )
         detail_priority_page = self._is_detail_priority_page(page_signals=page_signals, url=url)
+        route_like_page = self._is_route_like_page(page_signals=page_signals, url=url)
 
         if self.entity_extractor is None:
             return []
@@ -2894,7 +3783,7 @@ class TourismPipeline:
         self._debug_stage("extract", entities)
 
         entities = self._coerce_entities_to_dicts(entities, url=url)
-        if detail_priority_page:
+        if detail_priority_page or route_like_page:
             entities = self._seed_detail_primary_candidates(
                 entities,
                 page_signals=page_signals,
@@ -3228,6 +4117,25 @@ class TourismPipeline:
         self._debug_stage("sanitize_flattened", clustered)
 
         try:
+            clustered = self._ensure_route_parent_entity(
+                clustered,
+                page_signals=page_signals,
+                page_text=page_text,
+                url=url,
+            )
+            clustered = self._normalize_route_children(
+                clustered,
+                page_signals=page_signals,
+                url=url,
+            )
+        except Exception:
+            pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
+        clustered = self._sanitize_entities_for_downstream(clustered)
+        self._debug_stage("route_parent_seeded", clustered)
+
+        try:
             clustered = self._enrich_final_entities(
                 entities=clustered,
                 html=html,
@@ -3240,6 +4148,20 @@ class TourismPipeline:
         clustered = self._coerce_entities_to_dicts(clustered, url=url)
         clustered = self._sanitize_entities_for_downstream(clustered)
         self._debug_stage("enriched_final", clustered)
+
+        try:
+            clustered = self._annotate_mention_roles(
+                clustered,
+                page_signals=page_signals,
+                page_text=page_text,
+                url=url,
+            )
+        except Exception:
+            pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
+        clustered = self._sanitize_entities_for_downstream(clustered)
+        self._debug_stage("mention_roles", clustered)
 
         if self.final_filter is not None and hasattr(self.final_filter, "filter"):
             try:
@@ -3313,5 +4235,31 @@ class TourismPipeline:
         clustered = self._coerce_entities_to_dicts(clustered, url=url)
         clustered = self._sanitize_entities_for_downstream(clustered)
         self._debug_stage("closed_world", clustered)
+
+        try:
+            clustered = self._align_entities_with_page_subject(
+                clustered,
+                page_signals=page_signals,
+                url=url,
+            )
+        except Exception:
+            pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
+        clustered = self._sanitize_entities_for_downstream(clustered)
+        self._debug_stage("page_subject_aligned", clustered)
+
+        try:
+            clustered = self._annotate_page_structure(
+                clustered,
+                page_signals=page_signals,
+                url=url,
+            )
+        except Exception:
+            pass
+
+        clustered = self._coerce_entities_to_dicts(clustered, url=url)
+        clustered = self._sanitize_entities_for_downstream(clustered)
+        self._debug_stage("page_structure", clustered)
 
         return clustered
