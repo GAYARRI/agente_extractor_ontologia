@@ -14,10 +14,12 @@ from .name_cleaner import (
 from .normalize import clean_type, sanitize_types
 from .page_classifier import classify_page
 from .rules import apply_rescue_rules
+from .scoring import apply_entity_scores, apply_scores
+from .text_cleaning import clean_entity_text_fields
 
 
 def enrich_entity_classification(entity: Dict) -> Dict:
-    item = dict(entity)
+    item = clean_entity_text_fields(entity)
 
     raw_name = extract_raw_name(item)
     cleaned_name = clean_entity_name(raw_name)
@@ -80,13 +82,16 @@ def enrich_entity_classification(entity: Dict) -> Dict:
     keep, reason = should_keep_candidate(item, item["pageType"])
     item["postprocessKeep"] = keep
     item["postprocessDecisionReason"] = reason
+    item["entityStatus"] = "final" if keep else "discarded"
+    if not keep:
+        item["discardReason"] = reason
 
     canonical_name = canonicalize_entity_name(item.get("name", ""), item["primaryClass"])
     item["canonicalName"] = canonical_name
     if canonical_name:
         item["name"] = canonical_name
 
-    return item
+    return apply_entity_scores(item)
 
 
 def postprocess_entities(entities: List[Dict], enable_dedupe: bool = True) -> List[Dict]:
@@ -100,6 +105,6 @@ def postprocess_entities(entities: List[Dict], enable_dedupe: bool = True) -> Li
         kept = enriched
 
     if enable_dedupe:
-        return dedupe_entities(kept)
+        return apply_scores(dedupe_entities(kept))
 
-    return kept
+    return apply_scores(kept)

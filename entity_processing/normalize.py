@@ -2,6 +2,7 @@ import re
 from typing import Any, List
 
 from .config import CANONICAL_TYPE_MAP, FORBIDDEN_TYPES
+from .text_cleaning import clean_text
 
 
 def as_list(value: Any) -> List[Any]:
@@ -45,13 +46,13 @@ def sanitize_types(value: Any) -> List[str]:
 
 
 def normalize_text(value: Any) -> str:
-    text = str(value or "").strip().lower()
+    text = clean_text(value).strip().lower()
     text = re.sub(r"\s+", " ", text)
     return text
 
 
 def normalized_token_text(value: Any) -> str:
     text = normalize_text(value)
-    text = re.sub(r"[^\wáéíóúñü\s/-]", " ", text, flags=re.IGNORECASE)
+    text = re.sub(r"[^\wÀ-ÿ\s/-]", " ", text, flags=re.IGNORECASE)
     text = re.sub(r"\s+", " ", text).strip()
     return text

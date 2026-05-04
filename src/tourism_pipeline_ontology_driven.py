@@ -163,6 +163,8 @@ class TourismPipeline:
         self.use_fewshots = use_fewshots
         self.benchmark_mode = benchmark_mode
         self.debug = kwargs.get("debug", False)
+        self.geo_default_city = kwargs.get("geo_default_city", "Burgos")
+        self.geo_expected_bbox = kwargs.get("geo_expected_bbox") or (41.2, 43.4, -4.6, -2.5)
 
         def _safe_build(factory, *args, default=None, **kws):
             try:
@@ -236,7 +238,7 @@ class TourismPipeline:
         self.geo_resolver = _safe_build(
             HybridGeoResolver,
             default=None,
-            default_city=kwargs.get("geo_default_city", "Pamplona"),
+            default_city=self.geo_default_city,
         )
         self.tourism_property_extractor = _safe_build(TourismPropertyExtractor, default=None)
         self.dom_image_resolver = _safe_build(DOMImageResolver, default=None)
@@ -3165,6 +3167,12 @@ class TourismPipeline:
                 payload["additionalImages"] = [str(img).strip() for img in enriched.get("additionalImages") if str(img).strip()]
             if enriched.get("candidateImage"):
                 payload["candidateImage"] = str(enriched.get("candidateImage")).strip()
+            if isinstance(enriched.get("candidateImages"), list):
+                payload["candidateImages"] = [str(img).strip() for img in enriched.get("candidateImages") if str(img).strip()]
+            if isinstance(enriched.get("rejectedImages"), list):
+                payload["rejectedImages"] = enriched.get("rejectedImages")
+            if isinstance(enriched.get("imageEvidence"), list):
+                payload["imageEvidence"] = enriched.get("imageEvidence")
 
             if payload:
                 return payload
@@ -3202,9 +3210,17 @@ class TourismPipeline:
             return {}
 
         return {
-            "image": img,
-            "mainImage": img,
-            "images": [img],
+            "candidateImage": img,
+            "candidateImages": [img],
+            "imageEvidence": [
+                {
+                    "src": img,
+                    "source": "dom_fallback",
+                    "score": 0,
+                    "accepted": False,
+                    "rejectionReason": "dom_fallback_without_affinity",
+                }
+            ],
         }
 
     def _extract_coordinates_from_props(self, props: Dict[str, Any]) -> Dict[str, Any]:
@@ -3255,11 +3271,21 @@ class TourismPipeline:
         if not (-90 <= lat_f <= 90 and -180 <= lng_f <= 180):
             return False
 
-        source = str(source_url or "").lower()
-        if "visitaburgosciudad.es" in source:
-            return 41.2 <= lat_f <= 43.4 and -4.6 <= lng_f <= -2.5
+        bbox = getattr(self, "geo_expected_bbox", None)
+        if bbox:
+            min_lat, max_lat, min_lng, max_lng = bbox
+            return min_lat <= lat_f <= max_lat and min_lng <= lng_f <= max_lng
 
         return True
+
+    def _set_geo_metadata(self, item: Dict[str, Any], **metadata) -> None:
+        props = item.get("properties")
+        if not isinstance(props, dict):
+            props = {}
+        for key, value in metadata.items():
+            if value not in (None, "", [], {}):
+                props[key] = value
+        item["properties"] = props
 
     def _is_geocoding_name_safe(self, name: str, entity_type: str = "") -> bool:
         text = self._clean_candidate_name(name)
@@ -3360,14 +3386,18 @@ class TourismPipeline:
         source_url = item.get("sourceUrl") or fallback_url
         if self._has_valid_coordinates(coords):
             if self._coords_in_expected_scope(coords.get("lat"), coords.get("lng"), source_url):
+                self._set_geo_metadata(item, geo_source="source_or_page_data", geo_confidence="source_validated")
                 return coords
+            self._set_geo_metadata(item, geo_rejected_reason="outside_expected_bbox")
             return {"lat": None, "lng": None}
         if not self._is_geocoding_name_safe(
             item.get("name") or item.get("entity_name") or item.get("label") or "",
             item.get("class") or item.get("type") or "",
         ):
+            self._set_geo_metadata(item, geo_rejected_reason="unsafe_geocoding_name")
             return coords if isinstance(coords, dict) else {"lat": None, "lng": None}
         if not self.geo_resolver or not self._is_geo_candidate_entity(item):
+            self._set_geo_metadata(item, geo_rejected_reason="not_geo_candidate")
             return coords if isinstance(coords, dict) else {"lat": None, "lng": None}
 
         name = str(item.get("name") or item.get("entity_name") or item.get("label") or "").strip()
@@ -3396,8 +3426,20 @@ class TourismPipeline:
         lat = resolved.get("lat")
         lng = resolved.get("lng")
         if lat is None or lng is None:
+            self._set_geo_metadata(
+                item,
+                geo_source=resolved.get("source") or "hybrid_geo_resolver",
+                geo_query=resolved.get("query"),
+                geo_rejected_reason="not_found",
+            )
             return coords if isinstance(coords, dict) else {"lat": None, "lng": None}
         if not self._coords_in_expected_scope(lat, lng, source_url):
+            self._set_geo_metadata(
+                item,
+                geo_source=resolved.get("source") or "hybrid_geo_resolver",
+                geo_query=resolved.get("query"),
+                geo_rejected_reason="outside_expected_bbox",
+            )
             return {"lat": None, "lng": None}
 
         merged = {"lat": float(lat), "lng": float(lng)}
@@ -3405,13 +3447,12 @@ class TourismPipeline:
         if resolved.get("wikidata_id") and not item.get("wikidata_id"):
             item["wikidata_id"] = resolved["wikidata_id"]
 
-        existing_props = item.get("properties")
-        if not isinstance(existing_props, dict):
-            existing_props = {}
-        existing_props["geo_source"] = resolved.get("source") or "hybrid_geo_resolver"
-        if resolved.get("query"):
-            existing_props["geo_query"] = resolved.get("query")
-        item["properties"] = existing_props
+        self._set_geo_metadata(
+            item,
+            geo_source=resolved.get("source") or "hybrid_geo_resolver",
+            geo_query=resolved.get("query"),
+            geo_confidence="resolved_validated",
+        )
 
         return merged
 
@@ -3494,6 +3535,12 @@ class TourismPipeline:
             item["additionalImages"] = image_data["additionalImages"]
         if image_data.get("candidateImage"):
             item["candidateImage"] = image_data["candidateImage"]
+        if image_data.get("candidateImages"):
+            item["candidateImages"] = image_data["candidateImages"]
+        if image_data.get("rejectedImages"):
+            item["rejectedImages"] = image_data["rejectedImages"]
+        if image_data.get("imageEvidence"):
+            item["imageEvidence"] = image_data["imageEvidence"]
 
         if description_data:
             for k, v in description_data.items():
@@ -3527,6 +3574,12 @@ class TourismPipeline:
                 existing_props["additionalImages"] = image_data["additionalImages"]
             if image_data.get("candidateImage") and not existing_props.get("candidateImage"):
                 existing_props["candidateImage"] = image_data["candidateImage"]
+            if image_data.get("candidateImages") and not existing_props.get("candidateImages"):
+                existing_props["candidateImages"] = image_data["candidateImages"]
+            if image_data.get("rejectedImages") and not existing_props.get("rejectedImages"):
+                existing_props["rejectedImages"] = image_data["rejectedImages"]
+            if image_data.get("imageEvidence") and not existing_props.get("imageEvidence"):
+                existing_props["imageEvidence"] = image_data["imageEvidence"]
 
             prop_type = str(existing_props.get("type") or "").strip()
             if prop_type and not str(item.get("class") or "").strip():

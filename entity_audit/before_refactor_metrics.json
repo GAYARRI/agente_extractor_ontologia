@@ -1,0 +1,115 @@
+{
+  "totalEntities": 160,
+  "emptyClass": 3,
+  "ontologyFalse": 3,
+  "missingCoordinates": 140,
+  "emptyDescription": 0,
+  "missingImage": 39,
+  "genericImage": 84,
+  "mojibakeText": 0,
+  "navigationNoise": 22,
+  "duplicateNameGroups": 4,
+  "topDuplicateNames": [
+    {
+      "name": "camino de santiago",
+      "count": 23
+    },
+    {
+      "name": "rutas urbanas",
+      "count": 2
+    },
+    {
+      "name": "la catedral y su entorno",
+      "count": 2
+    },
+    {
+      "name": "el camino de santiago",
+      "count": 2
+    }
+  ],
+  "classes": {
+    "Route": 46,
+    "Palace": 14,
+    "Garden": 12,
+    "Museum": 11,
+    "Church": 9,
+    "Cathedral": 9,
+    "Monastery": 7,
+    "Event": 7,
+    "Hotel": 5,
+    "Convent": 5,
+    "Bridge": 4,
+    "Square": 4,
+    "Monument": 4,
+    "Theater": 4,
+    "TownHall": 3,
+    "TraditionalMarket": 3,
+    "": 3,
+    "Chapel": 2,
+    "HistoricalOrCulturalResource": 2,
+    "Castle": 1,
+    "Wall": 1,
+    "Bar": 1,
+    "Hostel": 1,
+    "Camping": 1,
+    "ArcheologicalSite": 1
+  },
+  "topImages": [
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/32849/desliza.png",
+      "count": 83
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/34672/34674/Castillo-muralla.jpg/6d7ddbc5-33cb-2682-2d5b-a0b1dbef885f?version=1.0&amp;t=1731321328783",
+      "count": 14
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/42597/0/fusi%C3%B3n.jpg/f77ea42c-0300-49dd-6849-c08745cc4cd0?t=1774449876100",
+      "count": 5
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/0/Cartel+D%C3%ADa+Mundial+del+Turismo+2025.jpg/24efad25-3947-ba0f-c3d6-8abe9a734773?t=1758610295606",
+      "count": 4
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/47200/Monasterio+Santa+Maria+la+Real+general.jpg/81e63a88-0ab6-6c6a-12a7-4451dcb3d2ad?t=1727711423829",
+      "count": 3
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/0/ZaragozaTurismo-150.jpg/cfb8ee85-8c02-fff3-5b79-8b4dc27d107c?t=1774448494016",
+      "count": 2
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/34672/34674/DANCE-WORLD-CUP-catedral.jpg/512fb1d4-5a19-02ab-372b-574d78e6c512?version=1.0&amp;t=1750089978114",
+      "count": 2
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/174726/20220521_La Noche Blanca_Burgos_Promueve_RMR_2860.jpg",
+      "count": 2
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/168627/Catedral-Tumba-de-los-Condestables.jpg",
+      "count": 1
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/42597/0/1_Ciudades+Creativas_.jpg/619c95cc-7b55-0f3f-fbef-b5f22c793e02?t=1765377991964",
+      "count": 1
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/34672/34674/MonasterioSanJuan-vista-general.jpg/87004cf1-f878-886f-f034-7955a211b60b?version=1.0&amp;t=1728996241717",
+      "count": 1
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/52335/La_Merced_frontal.png",
+      "count": 1
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/32849/facebook.png",
+      "count": 1
+    },
+    {
+      "image": "https://visitaburgosciudad.es/documents/20117/41458/plaza-mayor.jpeg",
+      "count": 1
+    }
+  ]
+}

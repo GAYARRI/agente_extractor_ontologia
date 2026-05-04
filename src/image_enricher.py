@@ -5,6 +5,11 @@ from urllib.parse import urljoin
 class ImageEnricher:
     def __init__(self):
         self.max_images = 3
+        self.generic_entity_tokens = {
+            "burgos", "museo", "municipal", "catedral", "iglesia", "palacio",
+            "monasterio", "convento", "santa", "maria", "real", "casa",
+            "parque", "puente", "hotel", "ruta", "rutas", "camino",
+        }
 
     # =========================================================
     # Helpers
@@ -17,6 +22,9 @@ class ImageEnricher:
         text = self._normalize(text)
         return [t for t in re.split(r"[\s\-_/,.;:()]+", text) if len(t) > 3]
 
+    def _entity_tokens(self, text: str):
+        return [token for token in self._tokens(text) if token not in self.generic_entity_tokens]
+
     def _is_probably_image_url(self, url: str) -> bool:
         if not url:
             return False
@@ -24,57 +32,62 @@ class ImageEnricher:
         return any(ext in u for ext in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"])
 
     def _is_probably_logo(self, url: str) -> bool:
+        return bool(self._image_rejection_reason(url))
+
+    def _image_rejection_reason(self, url: str) -> str:
         if not url:
-            return True
+            return "missing_src"
 
         u = url.lower()
 
-        bad_patterns = [
-            "logo",
-            "icon",
-            "iconos",
-            "sprite",
-            "banner",
-            "menu-navegacion",
-            "placeholder",
-            "default",
-            "avatar",
-            "header",
-            "footer",
-            "og-image",
-            "share",
-            "social",
-            "twitter",
-            "twitter+x",
-            "twitter%2bx",
-            "/x+1.",
-            "/x_1.",
-            "facebook",
-            "instagram",
-            "youtube",
-            "separador",
-            "separator",
-            "feeling",
-            "negativo",
-            "_next/static/",
-            "_next/image?",
-            "/static/media/",
-            "financion",
-            "fav",
-            "favicon",
-            "visita_burgos_fondo",
-            "burgos_fondo",
-            "_fondo",
-            "fondo.png",
-        ]
-
-        if any(p in u for p in bad_patterns):
-            return True
-
         if ".svg" in u:
-            return True
+            return "svg_or_vector_asset"
 
-        return False
+        bad_patterns = {
+            "logo": "logo_or_brand_asset",
+            "icon": "icon_asset",
+            "iconos": "icon_asset",
+            "sprite": "sprite_asset",
+            "banner": "layout_asset",
+            "menu-navegacion": "navigation_asset",
+            "placeholder": "placeholder_asset",
+            "default": "default_asset",
+            "avatar": "avatar_asset",
+            "header": "layout_asset",
+            "footer": "layout_asset",
+            "og-image": "generic_open_graph_asset",
+            "share": "social_or_share_asset",
+            "social": "social_or_share_asset",
+            "twitter": "social_or_share_asset",
+            "twitter+x": "social_or_share_asset",
+            "twitter%2bx": "social_or_share_asset",
+            "/x+1.": "social_or_share_asset",
+            "/x_1.": "social_or_share_asset",
+            "facebook": "social_or_share_asset",
+            "instagram": "social_or_share_asset",
+            "youtube": "social_or_share_asset",
+            "separador": "decorative_asset",
+            "separator": "decorative_asset",
+            "feeling": "decorative_asset",
+            "negativo": "decorative_asset",
+            "_next/static/": "static_bundle_asset",
+            "_next/image?": "proxy_or_transformed_asset",
+            "/static/media/": "static_bundle_asset",
+            "financion": "sponsor_asset",
+            "fav": "favicon_asset",
+            "favicon": "favicon_asset",
+            "visita_burgos_fondo": "generic_background_asset",
+            "burgos_fondo": "generic_background_asset",
+            "_fondo": "generic_background_asset",
+            "fondo.png": "generic_background_asset",
+            "desliza.png": "generic_slider_placeholder",
+        }
+
+        for pattern, reason in bad_patterns.items():
+            if pattern in u:
+                return reason
+
+        return ""
 
     def _extract_img_tags(self, html: str):
         if not html:
@@ -125,7 +138,7 @@ class ImageEnricher:
     ) -> int:
         score = 0
 
-        entity_tokens = self._tokens(entity)
+        entity_tokens = self._entity_tokens(entity)
         src_l = self._normalize(src)
         alt_l = self._normalize(alt)
         title_l = self._normalize(title)
@@ -229,38 +242,81 @@ class ImageEnricher:
         urls = re.findall(r'https?://[^\s<>"\']+', text)
         return [url for url in urls if self._is_probably_image_url(url)]
 
+    def _extract_meta_image_urls(self, html: str, base_url: str = ""):
+        if not html:
+            return []
+        urls = []
+        meta_pattern = re.compile(
+            r"<meta\b[^>]*(?:property|name)\s*=\s*['\"](?:og:image|twitter:image|twitter:image:src)['\"][^>]*>",
+            re.IGNORECASE,
+        )
+        for tag in meta_pattern.findall(html):
+            src = self._extract_attr(tag, "content")
+            if src and base_url:
+                src = urljoin(base_url, src)
+            if src and self._is_probably_image_url(src):
+                urls.append(src)
+
+        json_image_pattern = re.compile(r'"image"\s*:\s*"([^"]+)"', re.IGNORECASE)
+        for src in json_image_pattern.findall(html):
+            if src and base_url:
+                src = urljoin(base_url, src)
+            if src and self._is_probably_image_url(src):
+                urls.append(src)
+        return urls
+
+    def _record(
+        self,
+        src: str,
+        entity_score: int,
+        context_score: int,
+        source: str,
+        alt: str = "",
+        title: str = "",
+    ):
+        reason = self._image_rejection_reason(src)
+        accepted = (
+            not reason
+            and entity_score + context_score >= 6
+            and entity_score >= 4
+        )
+        if not reason and not accepted:
+            reason = "weak_image_affinity"
+        return {
+            "src": src,
+            "source": source,
+            "alt": alt,
+            "title": title,
+            "entity_score": entity_score,
+            "context_score": context_score,
+            "combined_score": entity_score + context_score,
+            "accepted": accepted,
+            "rejectionReason": reason,
+        }
+
     def _collect_candidate_records(self, entity: str, text: str = "", html: str = "", url: str = ""):
         records = []
 
         for img in self._extract_text_image_urls(text):
             entity_score = self._image_relevance_score(entity, img, text=text) + 2
             context_score = self._context_relevance_score(img, text=text) + 1
-            records.append(
-                {
-                    "src": img,
-                    "entity_score": entity_score,
-                    "context_score": context_score,
-                    "combined_score": entity_score + context_score,
-                }
-            )
+            records.append(self._record(img, entity_score, context_score, source="text_url"))
+
+        for img in self._extract_meta_image_urls(html, base_url=url):
+            entity_score = self._image_relevance_score(entity, img, text=text)
+            context_score = self._context_relevance_score(img, text=text) + 1
+            records.append(self._record(img, entity_score, context_score, source="meta_or_jsonld"))
 
         for tag in self._extract_img_tags(html):
             src = self._get_img_src(tag, base_url=url)
-            if not src or not self._is_probably_image_url(src) or self._is_probably_logo(src):
+            if not src or not self._is_probably_image_url(src):
                 continue
 
             alt = self._extract_attr(tag, "alt")
             title = self._extract_attr(tag, "title")
             entity_score = self._image_relevance_score(entity, src, alt=alt, title=title, text=text)
             context_score = self._context_relevance_score(src, alt=alt, title=title, text=text)
-            records.append(
-                {
-                    "src": src,
-                    "entity_score": entity_score,
-                    "context_score": context_score,
-                    "combined_score": entity_score + context_score,
-                }
-            )
+            records.append(self._record(src, entity_score, context_score, source="img_tag", alt=alt, title=title))
 
         best_by_src = {}
         for record in records:
@@ -292,11 +348,12 @@ class ImageEnricher:
 
         relevant = [
             record for record in records
+            if record.get("accepted")
             if record["combined_score"] >= 5
             and (record["entity_score"] >= 3 or record["context_score"] >= 3)
         ]
         if not relevant:
-            relevant = records[:1]
+            return "", "", []
 
         entity_ranked = sorted(
             [record for record in relevant if self._is_entity_representative(record)] or relevant,
@@ -362,13 +419,40 @@ class ImageEnricher:
         best = ordered_images[0] if ordered_images else ""
         best_record = next((item for item in records if item["src"] == best), None)
         score = best_record["combined_score"] if best_record else 0
+        accepted_records = [record for record in records if record.get("accepted")]
+        rejected_records = [record for record in records if not record.get("accepted")]
+        candidate_images = [record["src"] for record in accepted_records[: self.max_images * 3]]
+        rejected_images = [
+            {
+                "src": record["src"],
+                "reason": record.get("rejectionReason") or "weak_or_invalid_candidate",
+                "source": record.get("source", ""),
+                "score": record.get("combined_score", 0),
+            }
+            for record in rejected_records[:10]
+        ]
+        image_evidence = [
+            {
+                "src": record["src"],
+                "source": record.get("source", ""),
+                "score": record.get("combined_score", 0),
+                "entityScore": record.get("entity_score", 0),
+                "contextScore": record.get("context_score", 0),
+                "accepted": bool(record.get("accepted")),
+                "rejectionReason": record.get("rejectionReason", ""),
+            }
+            for record in records[:12]
+        ]
 
-        if score >= 2:
+        if score >= 5:
             return {
                 "image": image,
                 "mainImage": main_image,
                 "images": ordered_images,
                 "additionalImages": ordered_images[1:] if len(ordered_images) > 1 else [],
+                "candidateImages": candidate_images,
+                "rejectedImages": rejected_images,
+                "imageEvidence": image_evidence,
                 "debug": {
                     "image_score": score,
                     "image_reason": "ranked_entity_and_context_candidates",
@@ -377,13 +461,19 @@ class ImageEnricher:
                 },
             }
 
-        if score == 1:
+        if accepted_records:
             return {
-                "candidateImage": best,
+                "candidateImage": accepted_records[0]["src"],
+                "candidateImages": candidate_images,
+                "rejectedImages": rejected_images,
+                "imageEvidence": image_evidence,
                 "debug": {
-                    "image_score": score,
+                    "image_score": accepted_records[0].get("combined_score", 0),
                     "image_reason": "weak_candidate_from_html_or_text",
                 },
             }
 
-        return {}
+        return {
+            "rejectedImages": rejected_images,
+            "imageEvidence": image_evidence,
+        }

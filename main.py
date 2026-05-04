@@ -29,8 +29,14 @@ from src.knowledge_graph_builder import KnowledgeGraphBuilder
 from src.report.markdown_report import EntitiesReporter
 from src.entity_description_consolidator import EntityDescriptionConsolidator
 from src.export.json_exporter import JSONExporter
-from src.visualization.tourism_graph_visualizer import TourismGraphVisualizer
-from src.visualization.tourism_map_visualizer import TourismMapVisualizer
+try:
+    from src.visualization.tourism_graph_visualizer import TourismGraphVisualizer
+except Exception:
+    TourismGraphVisualizer = None
+try:
+    from src.visualization.tourism_map_visualizer import TourismMapVisualizer
+except Exception:
+    TourismMapVisualizer = None
 from src.kg_postprocessor import KGPostProcessor
 from src.entity_resolver import EntityResolver
 from src.ontology_utils import (
@@ -351,6 +357,13 @@ def build_parser():
     parser.add_argument("--use_fewshots", action="store_true")
     parser.add_argument("--fewshot_file", type=str, default=None)
     parser.add_argument("--expected_type", type=str, default=None)
+    parser.add_argument("--geo_default_city", type=str, default="Burgos")
+    parser.add_argument(
+        "--geo_bbox",
+        type=str,
+        default="41.2,43.4,-4.6,-2.5",
+        help="Bounding box de geocoding: min_lat,max_lat,min_lng,max_lng",
+    )
     parser.add_argument("--no_progress", action="store_true", help="Desactiva las lineas de progreso en stderr")
     parser.add_argument("--progress_interval", type=float, default=10.0, help="Segundos minimos entre actualizaciones de progreso")
 
@@ -370,6 +383,19 @@ def load_fewshots(fewshot_file):
     return data
 
 
+def parse_geo_bbox(value):
+    try:
+        parts = [float(part.strip()) for part in str(value or "").split(",")]
+    except Exception:
+        return None
+    if len(parts) != 4:
+        return None
+    min_lat, max_lat, min_lng, max_lng = parts
+    if min_lat > max_lat or min_lng > max_lng:
+        return None
+    return (min_lat, max_lat, min_lng, max_lng)
+
+
 def build_pipeline(args):
     fewshots = []
     if args.use_fewshots:
@@ -380,6 +406,8 @@ def build_pipeline(args):
         use_fewshots=args.use_fewshots,
         fewshots=fewshots,
         benchmark_mode=args.benchmark,
+        geo_default_city=args.geo_default_city,
+        geo_expected_bbox=parse_geo_bbox(args.geo_bbox),
     )
 
 
@@ -898,6 +926,7 @@ def consolidate_entities(all_results, diagnostic=False):
     # Reinyectar enriquecimiento perdido desde resultados crudos
     global_entities = _merge_back_enrichment(global_entities, all_results)
     global_entities = _rescue_missing_route_parents(global_entities, all_results)
+    global_entities = resolver.deduplicate_entities(global_entities)
 
     diag(diagnostic, f"Tras postprocess()+merge_back: {len(global_entities)} entidades")
     return global_entities

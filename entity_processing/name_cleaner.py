@@ -19,6 +19,7 @@ from .config import (
     TOWNHALL_ALLOWED_NAME_TOKENS,
 )
 from .normalize import normalized_token_text
+from .text_cleaning import clean_text
 
 
 def extract_raw_name(entity: Dict[str, Any]) -> str:
@@ -34,7 +35,7 @@ def extract_raw_name(entity: Dict[str, Any]) -> str:
 
 
 def clean_entity_name(raw_name: str) -> str:
-    name = str(raw_name or "").strip()
+    name = clean_text(raw_name).strip()
 
     # cut obvious sentence continuation
     name = re.split(r"[.:;]\s+", name)[0].strip()

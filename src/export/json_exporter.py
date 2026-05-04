@@ -4,6 +4,9 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from entity_processing.scoring import apply_entity_scores
+from entity_processing.text_cleaning import clean_text
+
 
 class JSONExporter:
     def __init__(self):
@@ -13,7 +16,7 @@ class JSONExporter:
         return re.sub(r"\s+", " ", str(text or "")).strip()
 
     def _clean_text(self, value: str) -> str:
-        v = self._normalize_space(value)
+        v = self._normalize_space(clean_text(value))
         if not v:
             return ""
         for marker in [" Leer más", " leer más", " Mostrar más", " mostrar más"]:
@@ -83,10 +86,57 @@ class JSONExporter:
             "burgos_fondo",
             "_fondo",
             "fondo.png",
+            "desliza.png",
+            "whatsapp",
+            "facebook",
+            "instagram",
+            "youtube",
         ]
         if any(b in low for b in bad_patterns):
             return False
         if ".svg" in low:
+            return False
+        return True
+
+    def _image_quality(self, entity: dict, image: str) -> tuple[str, str]:
+        low = self._clean_text(image).lower()
+        if not low:
+            return "missing", ""
+        if "desliza.png" in low:
+            return "generic", "generic_slider_placeholder"
+        if any(x in low for x in ("whatsapp", "facebook", "instagram", "youtube", "share", "social")):
+            return "rejected", "social_or_share_asset"
+
+        evidence = self._extract_image_records(entity, "imageEvidence")
+        if any(item.get("src") == image and item.get("accepted") is True for item in evidence):
+            return "specific", ""
+
+        weak_tokens = {
+            "burgos", "museo", "municipal", "catedral", "iglesia", "palacio",
+            "monasterio", "convento", "santa", "maria", "real", "casa",
+            "parque", "puente", "hotel", "datos", "api",
+        }
+        name_tokens = [
+            token
+            for token in re.split(r"[^\w]+", self._canonical_key(self._choose_name(entity)))
+            if len(token) > 3 and token not in weak_tokens
+        ]
+        if name_tokens and any(token in low for token in name_tokens):
+            return "specific", ""
+
+        return "unverified", "no_entity_image_evidence"
+
+    def _is_exportable_entity(self, entity: dict) -> bool:
+        name = self._canonical_key(self._choose_name(entity))
+        if not name:
+            return False
+        if name.endswith((" de", " del", " la", " el", " los", " las", " y")):
+            return False
+        if name.startswith(("de ", "del ", "y ")):
+            return False
+        if any(token in name for token in ("datos api", "continuamos", "cruzando")):
+            return False
+        if " madrid" in f" {name} ":
             return False
         return True
 
@@ -212,6 +262,61 @@ class JSONExporter:
             seen.add(img)
             cleaned.append(img)
         return cleaned[:self.max_images]
+
+    def _extract_candidate_images(self, entity):
+        props = entity.get("properties", {}) or {}
+        if not isinstance(props, dict):
+            props = {}
+        candidates = [
+            entity.get("candidateImage", ""),
+            entity.get("candidateImages", []),
+            props.get("candidateImage", ""),
+            props.get("candidateImages", []),
+        ]
+        flat = []
+        for c in candidates:
+            flat.extend(self._flatten_maybe_serialized_list(c))
+        cleaned = []
+        seen = set()
+        for img in flat:
+            img = self._clean_text(img)
+            if not img or not img.startswith(("http://", "https://")):
+                continue
+            if img in seen:
+                continue
+            seen.add(img)
+            cleaned.append(img)
+        return cleaned[:10]
+
+    def _extract_image_records(self, entity, field):
+        props = entity.get("properties", {}) or {}
+        if not isinstance(props, dict):
+            props = {}
+        raw = entity.get(field) or props.get(field) or []
+        if not isinstance(raw, list):
+            return []
+        out = []
+        for item in raw[:20]:
+            if isinstance(item, dict):
+                src = self._clean_text(item.get("src"))
+                if not src:
+                    continue
+                out.append(
+                    {
+                        "src": src,
+                        "reason": self._clean_text(item.get("reason") or item.get("rejectionReason")),
+                        "source": self._clean_text(item.get("source")),
+                        "score": item.get("score"),
+                        "entityScore": item.get("entityScore"),
+                        "contextScore": item.get("contextScore"),
+                        "accepted": item.get("accepted"),
+                    }
+                )
+            else:
+                src = self._clean_text(item)
+                if src:
+                    out.append({"src": src})
+        return out
 
     def _pick_image_roles(self, entity, images):
         props = entity.get("properties", {}) or {}
@@ -540,7 +645,23 @@ class JSONExporter:
         relationship_type = self._clean_text(entity.get("relationshipType"))
         mention_role = self._clean_text(entity.get("mentionRole"))
         mention_relation = self._clean_text(entity.get("mentionRelation"))
-        return {
+        image_quality, image_rejection_reason = self._image_quality(entity, main_image or primary_image)
+        props = entity.get("properties", {}) or {}
+        if not isinstance(props, dict):
+            props = {}
+        geo_source = self._clean_text(entity.get("geoSource") or props.get("geo_source"))
+        geo_confidence = self._clean_text(entity.get("geoConfidence") or props.get("geo_confidence"))
+        if coords.get("lat") is not None and coords.get("lng") is not None and not geo_source:
+            geo_source = "existing_coordinates"
+            geo_confidence = geo_confidence or "existing_unannotated"
+        if image_quality in {"generic", "rejected", "unverified"}:
+            primary_image = ""
+            main_image = ""
+            additional_images = []
+            image_rejection_reason = image_rejection_reason or "not_verified_for_entity"
+            image_quality = "missing"
+
+        out = {
             "entityId": entity_id,
             "name": self._choose_name(entity),
             "class": final_class or None,
@@ -553,6 +674,12 @@ class JSONExporter:
             "ontologyRejectionReason": entity.get("ontologyRejectionReason"),
             "sourceOntology": self._clean_text(entity.get("sourceOntology")),
             "score": entity.get("score"),
+            "extractionScore": entity.get("extractionScore"),
+            "ontologyScore": entity.get("ontologyScore"),
+            "qualityScore": entity.get("qualityScore"),
+            "finalScore": entity.get("finalScore"),
+            "qualityDecision": self._clean_text(entity.get("qualityDecision")),
+            "qualityReasons": self._dedupe(self._as_list(entity.get("qualityReasons"))),
             "sourceUrl": self._clean_text(entity.get("sourceUrl")),
             "url": self._clean_text(entity.get("url")),
             "pageStructure": page_structure,
@@ -562,6 +689,7 @@ class JSONExporter:
             "mentionRole": mention_role,
             "mentionRelation": mention_relation or None,
             "relatedUrls": self._extract_related_urls(entity),
+            "sourceUrls": self._dedupe(self._as_list(entity.get("sourceUrls"))),
             "address": self._clean_text(entity.get("address")),
             "phone": self._clean_text(entity.get("phone")),
             "email": self._clean_text(entity.get("email")),
@@ -569,18 +697,32 @@ class JSONExporter:
                 "lat": coords.get("lat"),
                 "lng": coords.get("lng"),
             },
+            "geoSource": geo_source,
+            "geoConfidence": geo_confidence,
+            "geoQuery": self._clean_text(entity.get("geoQuery") or props.get("geo_query")),
+            "geoRejectedReason": self._clean_text(entity.get("geoRejectedReason") or props.get("geo_rejected_reason")),
             "shortDescription": self._clean_text(entity.get("short_description") or entity.get("shortDescription")),
             "longDescription": self._clean_text(entity.get("long_description") or entity.get("longDescription")),
             "description": self._clean_text(entity.get("description")),
             "image": primary_image,
             "mainImage": main_image,
+            "imageQuality": image_quality,
+            "imageRejectionReason": image_rejection_reason,
+            "candidateImages": self._extract_candidate_images(entity),
+            "rejectedImages": self._extract_image_records(entity, "rejectedImages"),
+            "imageEvidence": self._extract_image_records(entity, "imageEvidence"),
             "images": additional_images,
             "additionalImages": additional_images,
             "wikidataId": wikidata_id,
         }
+        return apply_entity_scores(out)
 
     def export(self, entities: list, output_path="entities.json", pages=None):
-        data = [self.entity_to_dict(e) for e in entities if isinstance(e, dict)]
+        data = [
+            self.entity_to_dict(e)
+            for e in entities
+            if isinstance(e, dict) and self._is_exportable_entity(e)
+        ]
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
 
@@ -594,7 +736,7 @@ class JSONExporter:
             json.dump(summary, f, ensure_ascii=False, indent=2)
         with open(hierarchical_path, "w", encoding="utf-8") as f:
             json.dump(hierarchical, f, ensure_ascii=False, indent=2)
-        if hierarchical_path.resolve() != base_hierarchical_path.resolve():
+        if output_file.name == "entities.json" and hierarchical_path.resolve() != base_hierarchical_path.resolve():
             with open(base_hierarchical_path, "w", encoding="utf-8") as f:
                 json.dump(hierarchical, f, ensure_ascii=False, indent=2)
 

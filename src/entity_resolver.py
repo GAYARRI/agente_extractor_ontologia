@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import re
+import json
 import unicodedata
 from copy import deepcopy
 from difflib import SequenceMatcher
 from typing import Any, Dict, List, Set
+from urllib.parse import unquote, urlsplit, urlunsplit
 
 
 class EntityResolver:
@@ -117,7 +119,7 @@ class EntityResolver:
         e["_aliases"] = sorted(self.extract_aliases(e))
         e["_canonical_aliases"] = sorted({self.canonicalize(a) for a in e["_aliases"] if a})
         e["_normalized_class"] = self.normalize_class_name(e.get("class") or e.get("type"))
-        e["_source_url"] = e.get("sourceUrl") or e.get("url") or ""
+        e["_source_url"] = self.canonical_source_url(e.get("sourceUrl") or e.get("url") or "")
         e["_wikidata_id"] = e.get("wikidata_id") or e.get("wikidataId") or self._extract_wikidata_from_properties(e)
 
         return e
@@ -151,6 +153,21 @@ class EntityResolver:
         text = re.sub(r"[^a-z0-9\s]", " ", text)
         text = re.sub(r"\s+", " ", text).strip()
         return text
+
+    def canonical_source_url(self, value: Any) -> str:
+        raw = str(value or "").strip()
+        if not raw:
+            return ""
+        try:
+            parts = urlsplit(raw)
+        except Exception:
+            return raw.rstrip("/")
+
+        path = unquote(parts.path or "").rstrip("/")
+        path = re.sub(r"^/(web/guest|es|en|fr|it|pt|de)(?=/)", "", path)
+        path = re.sub(r"^/(web/guest|es|en|fr|it|pt|de)$", "", path)
+        path = path or "/"
+        return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path, "", ""))
 
     def normalize_class_name(self, value: Any) -> str | None:
         if not value:
@@ -252,7 +269,7 @@ class EntityResolver:
             score -= 0.20
 
         if e1.get("_source_url") and e1.get("_source_url") == e2.get("_source_url"):
-            score += 0.05
+            score += 0.20
 
         if self.same_main_image(e1, e2):
             score += 0.05
@@ -448,7 +465,7 @@ class EntityResolver:
         merged["_primary_name"] = best_name
         merged["_canonical_name"] = self.canonicalize(best_name)
         merged["_normalized_class"] = self.normalize_class_name(merged.get("class") or merged.get("type"))
-        merged["_source_url"] = merged.get("sourceUrl") or merged.get("url") or ""
+        merged["_source_url"] = self.canonical_source_url(merged.get("sourceUrl") or merged.get("url") or "")
         merged["_wikidata_id"] = merged.get("wikidata_id") or self._extract_wikidata_from_properties(merged)
 
         return merged
@@ -524,7 +541,7 @@ class EntityResolver:
                 continue
 
             if isinstance(val1, list) and isinstance(val2, list):
-                merged[key] = list(dict.fromkeys(val1 + val2))
+                merged[key] = self.dedupe_mixed_list(val1 + val2)
                 continue
 
             if isinstance(val1, dict) and isinstance(val2, dict):
@@ -536,6 +553,20 @@ class EntityResolver:
                 continue
 
         return merged
+
+    def dedupe_mixed_list(self, values: List[Any]) -> List[Any]:
+        out = []
+        seen = set()
+        for value in values:
+            try:
+                key = json.dumps(value, ensure_ascii=False, sort_keys=True)
+            except TypeError:
+                key = str(value)
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(value)
+        return out
 
     # =========================
     # Poda de variantes débiles

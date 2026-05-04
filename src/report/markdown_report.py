@@ -2,6 +2,8 @@
 
 import re
 
+from entity_processing.text_cleaning import clean_text
+
 
 class EntitiesReporter:
     def __init__(self, ontology_index=None):
@@ -12,7 +14,7 @@ class EntitiesReporter:
     # =========================================================
 
     def _clean_text(self, text):
-        text = (text or "").strip()
+        text = clean_text(text).strip()
         text = re.sub(r"\s+", " ", text)
         return text
 
@@ -214,7 +216,6 @@ class EntitiesReporter:
 
     def generate_markdown_report(self, results, output_file):
         entities = self._flatten_results(results)
-        entities = self._dedupe_entities(entities)
 
         # ordenar por score desc y nombre
         entities = sorted(

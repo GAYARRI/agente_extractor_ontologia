@@ -8,6 +8,8 @@ from typing import Optional, Dict, Any, List, Tuple
 
 import requests
 
+from entity_processing.text_cleaning import clean_text
+
 
 class HybridGeoResolver:
     """
@@ -29,7 +31,7 @@ class HybridGeoResolver:
         min_delay_seconds: float = 1.1,
         timeout_seconds: int = 15,
         countrycodes: str = "es",
-        default_city: str = "Pamplona",
+        default_city: str = "Burgos",
     ):
         self.cache_path = cache_path
         self.user_agent = user_agent
@@ -185,17 +187,21 @@ class HybridGeoResolver:
         entity_class: str = "",
     ) -> float:
         score = 0.0
-        entity_name_l = (entity_name or "").lower()
+        entity_name_l = clean_text(entity_name).lower()
 
-        label = str(candidate.get("label", "")).lower()
-        desc = str(candidate.get("description", "")).lower()
+        label = clean_text(candidate.get("label", "")).lower()
+        desc = clean_text(candidate.get("description", "")).lower()
         qid = str(candidate.get("id", ""))
 
         if entity_name_l and entity_name_l in label:
             score += 5.0
 
-        if "sevilla" in label or "sevilla" in desc:
+        if self.default_city_normalized and (
+            self.default_city_normalized in self._normalize_ascii(label)
+            or self.default_city_normalized in self._normalize_ascii(desc)
+        ):
             score += 2.0
+
         if "andalucía" in desc or "andalucia" in desc:
             score += 1.0
         if "españa" in desc or "espana" in desc:
@@ -300,9 +306,9 @@ class HybridGeoResolver:
 
     def _score_nominatim_result(self, result: dict, entity_name: str, entity_class: str = "") -> float:
         score = 0.0
-        entity_name_l = (entity_name or "").lower()
+        entity_name_l = clean_text(entity_name).lower()
 
-        display_name = str(result.get("display_name", "")).lower()
+        display_name = clean_text(result.get("display_name", "")).lower()
         category = str(result.get("category", "")).lower()
         result_type = str(result.get("type", "")).lower()
         importance = float(result.get("importance", 0.0) or 0.0)
@@ -310,7 +316,7 @@ class HybridGeoResolver:
         if entity_name_l and entity_name_l in display_name:
             score += 5.0
 
-        if "sevilla" in display_name:
+        if self.default_city_normalized and self.default_city_normalized in self._normalize_ascii(display_name):
             score += 2.0
 
         score += importance

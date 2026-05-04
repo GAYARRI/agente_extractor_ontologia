@@ -1,0 +1,559 @@
+{
+  "totalPages": 72,
+  "totalEntities": 124,
+  "pagesWithoutEntities": 0,
+  "pagesWithEntities": 72,
+  "pagesByEntityCount": {
+    "1": 44,
+    "2": 15,
+    "3": 5,
+    "4": 5,
+    "5": 3
+  },
+  "pages": [
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/entre-las-huelgas-y-la-cartuja",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Bridge": 1,
+        "Convent": 1,
+        "Garden": 1,
+        "Monastery": 1,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/la-ciudad-de-la-vega",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Convent": 2,
+        "Church": 1,
+        "Monastery": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/centro-cultural-francisco-de-salinas-y-el-teatro-clunia",
+      "entityCount": 5,
+      "entityTypeCounts": {
+        "Theatre": 3,
+        "Garden": 2
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/blog?blog=Un%20tesoro%20patrimonial%20en%20el%20coraz%C3%B3n%20de%20Burgos",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Church": 1,
+        "Garden": 1,
+        "Museum": 1,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/paseos-plazas-y-recorridos-urbanos",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Palace": 2,
+        "Convent": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/gastronomycity/blog",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Event": 1,
+        "Hotel": 1,
+        "Square": 1,
+        "TraditionalMarket": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/centro-de-biodiversidad",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Garden": 4
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-saludables/riberas-del-arlanzon",
+      "entityCount": 4,
+      "entityTypeCounts": {
+        "Garden": 2,
+        "Bridge": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/que-ver/visitas-de-interes",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Monument": 1,
+        "Museum": 1,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/burgos-y-la-muralla",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Palace": 1,
+        "Route": 1,
+        "TraditionalMarket": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/la-ciudad-llana",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Cathedral": 1,
+        "Monastery": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/mercados-y-fiestas",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Museum": 1,
+        "Route": 1,
+        "TraditionalMarket": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/ruta-del-renacimiento",
+      "entityCount": 3,
+      "entityTypeCounts": {
+        "Chapel": 1,
+        "Church": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/blog?blog=Ruta%20tur%C3%ADstica%20%C2%ABTras%20la%20huella%20del%20mal%C2%BB",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Monastery": 1,
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/profesionales/espacio-para-profesionales/noticias-del-sector",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Palace": 1,
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/que-hacer/rutas-saludables",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Route": 2
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/que-hacer/rutas-urbanas",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Monument": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/que-ver/camino-de-santiago",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Chapel": 1,
+        "Wall": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/planifica-tu-viaje/informacion-practica/descarga-informacion",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Castle": 1,
+        "Cathedral": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/ocio-y-fiestas/san-pedro-y-san-pablo",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Event": 1,
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-saludables/circuitos-de-orientacion",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Garden": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-saludables/paseo-de-la-isla",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Palace": 1,
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/la-ciudad-ilustrada-y-la-ciudad-burguesa",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Palace": 2
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/miradores-de-la-catedral-de-burgos",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Bridge": 1,
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/casco-historico/arco-de-santa-maria",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Museum": 2
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/casco-historico/iglesia-de-san-gil",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Church": 1,
+        "Convent": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/iglesia-de-santa-agueda",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Bar": 1,
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/instituto-cardenal-lopez-de-mendoza",
+      "entityCount": 2,
+      "entityTypeCounts": {
+        "Museum": 1,
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/blog?blog=Burgos%20presenta%2024%20paquetes%20tur%C3%ADsticos%20que%20integran%20ciudad%20y%20provincia",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Garden": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/planifica-tu-viaje/alojamientos",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Hotel": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/profesionales/descarga-material-promocional1",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Cathedral": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/profesionales/turismo-mice",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/que-hacer/excursiones-cercanas",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "HistoricalOrCulturalResource": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/que-ver/casco-historico",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/es/web/guest/que-ver/catedral",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Cathedral": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/patrimonio",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/gastronomycity/burgos-rutas-gastron%C3%B3micas",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/blog/-/blogs/descubriendo-la-plaza-de-san-juan",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Square": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/eventos",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/planifica-tu-viaje/alojamientos/albergues",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Hostel": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/planifica-tu-viaje/alojamientos/alojamientos-hoteleros",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Hotel": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/planifica-tu-viaje/alojamientos/apartamentos-turisticos",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Hotel": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/planifica-tu-viaje/alojamientos/campings",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Camping": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/el-camino-de-santiago",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/ocio-y-fiestas/el-curpillos",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monastery": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/ocio-y-fiestas/semana-cidiana",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-saludables/circuitos-verdes",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/asedio-al-castillo-de-burgos",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/el-burgos-de-mio-cid",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/el-castillo-y-la-ciudad-alta",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/estatuas-y-murales",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-hacer/rutas-urbanas/la-catedral-y-su-entorno",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/camino-de-santiago",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/casa-consistorial",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "TownHall": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/casa-del-cordon",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Cathedral": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/convento-de-santa-dorotea",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/estatua-del-cid",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monument": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/facultad-de-teologia",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Event": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/hospital-de-barrantes",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monastery": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/hospital-del-rey-y-ermita-de-san-amaro",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Route": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/iglesia-de-las-salesas",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Church": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/iglesia-de-nuestra-senora-de-la-merced",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/monasterio-de-san-pedro-de-cardena",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Cathedral": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/museo-de-farmacia",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Museum": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/museo-historico-militar",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Palace": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/palacio-de-castilfale",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "HistoricalOrCulturalResource": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/paseo-del-espolon-y-del-espoloncillo",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Cathedral": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/real-monasterio-de-san-agustin",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Monastery": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/teatro-principal",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Theatre": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/que-ver/yacimientos-de-atapuerca",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "ArcheologicalSite": 1
+      }
+    },
+    {
+      "url": "https://visitaburgosciudad.es/web/guest/turismo-en-familia",
+      "entityCount": 1,
+      "entityTypeCounts": {
+        "Museum": 1
+      }
+    }
+  ]
+}
